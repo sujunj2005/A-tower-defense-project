@@ -21,7 +21,7 @@ func disable_cache() -> void:
 	_cache_enabled = false
 
 ## 获取缓存的资源
-func get(path: String) -> Resource:
+func get_resource(path: String) -> Resource:
 	if not _cache_enabled:
 		return null
 	

@@ -46,7 +46,7 @@ func load_resource(path: String) -> Resource:
 	var actual_path = _get_actual_path(path)
 	
 	# 检查缓存
-	var cached = _cache.get(actual_path)
+	var cached = _cache.get_resource(actual_path)
 	if cached:
 		return cached
 	
