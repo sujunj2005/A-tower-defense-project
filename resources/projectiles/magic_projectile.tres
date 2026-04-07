@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ProjectileConfig" format=3 uid="uid://dmovivmiwyw86"]
+
+[ext_resource type="Script" uid="uid://igfpi8elhafc" path="res://scripts/config/projectile_config.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+damage = 25.0
+damage_type = 1
+visual_type = 1
+use_particles = true
+particle_amount = 60
+particle_lifetime = 1.5
+particle_velocity_min = 120.0
+particle_velocity_max = 200.0
+particle_spread = 45.0
+particle_color = Color(1.0, 0.2, 1.0, 1.0)
+particle_scale = 2.0
+use_trail_particles = true
+trail_amount = 40
+trail_lifetime = 1.0
+trail_color = Color(1.0, 0.4, 1.0, 0.9)
+trail_scale = 1.5
+effect_damage_ratio = 0.6
+effect_max_targets = 5
+pierce_count = 0

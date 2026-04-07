@@ -1,0 +1,133 @@
+extends Control
+class_name PauseMenu
+
+signal pause_toggled(is_paused: bool)
+
+var is_paused: bool = false
+
+var _bg_gui_input_callable: Callable
+
+func _ready():
+	visible = false
+	setup_ui()
+	# 确保节点能够接收输入事件
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	# 启用输入处理
+	set_process_input(true)
+
+func setup_ui():
+	var bg = ColorRect.new()
+	bg.color = Color(0.0, 0.0, 0.0, 0.6)
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg.name = "Background"
+	bg.mouse_filter = Control.MOUSE_FILTER_STOP
+	_bg_gui_input_callable = _on_background_gui_input
+	bg.gui_input.connect(_bg_gui_input_callable)
+	add_child(bg)
+
+	var panel = PanelContainer.new()
+	panel.name = "Panel"
+	panel.anchor_left = 0.5
+	panel.anchor_top = 0.5
+	panel.anchor_right = 0.5
+	panel.anchor_bottom = 0.5
+	panel.offset_left = -300
+	panel.offset_top = -225
+	panel.offset_right = 300
+	panel.offset_bottom = 225
+	add_child(panel)
+
+	var vbox = VBoxContainer.new()
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	vbox.add_theme_constant_override("separation", 20)
+	vbox.add_theme_constant_override("margin_top", 40)
+	vbox.add_theme_constant_override("margin_bottom", 40)
+	vbox.add_theme_constant_override("margin_left", 40)
+	vbox.add_theme_constant_override("margin_right", 40)
+	panel.add_child(vbox)
+
+	var title = Label.new()
+	title.text = "暂停"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 48)
+	title.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
+	vbox.add_child(title)
+
+	var spacer_top = Control.new()
+	spacer_top.custom_minimum_size = Vector2(0, 40)
+	vbox.add_child(spacer_top)
+
+	var resume_btn = create_button("继续游戏", _on_resume_pressed)
+	vbox.add_child(resume_btn)
+
+	var menu_btn = create_button("返回主菜单", _on_main_menu_pressed)
+	vbox.add_child(menu_btn)
+
+	var quit_btn = create_button("退出游戏", _on_quit_pressed)
+	vbox.add_child(quit_btn)
+
+func create_button(text: String, callback: Callable) -> Button:
+	var btn = Button.new()
+	btn.text = text
+	btn.custom_minimum_size = Vector2(600, 60)
+	btn.pressed.connect(callback)
+	btn.add_theme_font_size_override("font_size", 28)
+	return btn
+
+func _exit_tree():
+	var bg = get_node_or_null("Background")
+	if bg and bg.gui_input.is_connected(_bg_gui_input_callable):
+		bg.gui_input.disconnect(_bg_gui_input_callable)
+
+func _input(event):
+	# 全局监听 ESC 键
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if is_paused:
+			resume_game()
+		else:
+			pause_game()
+
+func _on_background_gui_input(event: InputEvent):
+	if event is InputEventMouseButton and event.pressed:
+		resume_game()
+
+func pause_game():
+	is_paused = true
+	# 暂停整个场景树
+	var tree = get_tree()
+	tree.paused = true
+	# 确保当前节点（暂停菜单）不被暂停
+	set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	visible = true
+	pause_toggled.emit(true)
+
+func resume_game():
+	is_paused = false
+	# 恢复场景树
+	var tree = get_tree()
+	tree.paused = false
+	# 恢复正常处理模式
+	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	visible = false
+	pause_toggled.emit(false)
+
+func _on_resume_pressed():
+	resume_game()
+
+func _on_main_menu_pressed():
+	is_paused = false
+	visible = false
+	# 恢复场景树
+	var tree = get_tree()
+	tree.paused = false
+	# 恢复正常处理模式
+	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	# 尝试获取SceneManager节点
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		scene_manager.return_to_main_menu()
+	else:
+		tree.change_scene_to_file("res://scenes/menu.tscn")
+
+func _on_quit_pressed():
+	get_tree().quit()

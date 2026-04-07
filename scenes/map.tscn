@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://blh75te7bwqmf"]
+
+[ext_resource type="Script" uid="uid://di5236kaeh5ah" path="res://scripts/map_manager.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://b3voahe5cwtsl" path="res://scripts/camera_controller.gd" id="2_camera"]
+[ext_resource type="Shader" uid="uid://c016m3v66pdvt" path="res://shaders/grid_overlay.gdshader" id="3_0cso3"]
+[ext_resource type="TileSet" uid="uid://d2kxm2y3g5v7a" path="res://resources/tilesets/map_tileset.tres" id="3_tileset"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gldc4"]
+shader = ExtResource("3_0cso3")
+shader_parameter/grid_color = Color(1, 1, 1, 0.3)
+shader_parameter/grid_width = 1.0
+shader_parameter/tile_size = Vector2(16, 16)
+
+[node name="Map" type="Node2D" unique_id=1242457261]
+script = ExtResource("1_script")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2062373552]
+script = ExtResource("2_camera")
+
+[node name="MapTiles" type="Node2D" parent="." unique_id=886878880]
+
+[node name="PathMarkers" type="Node2D" parent="." unique_id=909986492]
+
+[node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1711892680]
+material = SubResource("ShaderMaterial_gldc4")
+tile_set = ExtResource("3_tileset")

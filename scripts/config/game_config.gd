@@ -1,0 +1,18 @@
+extends Resource
+class_name GameConfig
+
+@export var game_name: String = "Tower Defense"
+@export var start_gold: int = 100
+@export var start_lives: int = 20
+
+static var _instance: GameConfig
+
+static func get_instance() -> GameConfig:
+	if not _instance:
+		var config_path = "res://resources/game_config.tres"
+		if ResourceLoader.exists(config_path):
+			_instance = load(config_path) as GameConfig
+		else:
+			_instance = GameConfig.new()
+	return _instance
+

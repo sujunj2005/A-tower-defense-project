@@ -1,0 +1,395 @@
+extends Control
+class_name TowerSelectUI
+
+signal tower_selected(tower_type: String)
+signal cancel_pressed()
+
+var tower_configs: Dictionary = {}
+var tower_type_list: Array = []
+
+var panel: Panel
+var title_label: Label
+var tower_buttons_container: HBoxContainer
+var cancel_button: Button
+var tooltip_panel: PanelContainer
+var tooltip_label: Label
+var hovered_tower_type: String = ""
+var warning_panel: PanelContainer
+var warning_label: Label
+var warning_timer: float = 0.0
+var flashing_buttons: Dictionary = {}
+
+# 🆕 使用内嵌 get/set 管理面板状态 (包装 Control 的 visible 属性)
+var is_panel_visible: bool = false:
+	set(value):
+		if visible != value:  # 检查实际的 visible 状态
+			visible = value  # 直接设置 Control 的 visible
+			if visible:
+				_on_panel_shown()
+			else:
+				_on_panel_hidden()
+	get:
+		return visible  # 直接返回 Control 的 visible 值
+
+var is_locked: bool = false:
+	set(value):
+		if is_locked != value:
+			is_locked = value
+			# 锁定状态变化时更新 UI
+			if is_locked:
+				_lock_panel()
+			else:
+				_unlock_panel()
+	get:
+		return is_locked
+
+var hovered_tower: Tower = null:  # 🆕 当前悬停的防御塔实例
+	set(value):
+		if hovered_tower != value:
+			hovered_tower = value
+			if hovered_tower:
+				_on_tower_hovered(hovered_tower)
+			else:
+				_on_tower_hover_ended()
+	get:
+		return hovered_tower
+
+func _ready():
+	load_tower_configs()
+	setup_ui()
+	_connect_tower_signals()
+
+## 🆕 连接所有已存在防御塔的信号
+func _connect_tower_signals() -> void:
+	await get_tree().process_frame  # 等待一帧，确保所有塔已创建
+	var towers = get_tree().get_nodes_in_group("towers")
+	for tower_node in towers:
+		if tower_node is Tower:
+			tower_node.mouse_hover_started.connect(_on_tower_mouse_hover_started)
+			tower_node.mouse_hover_ended.connect(_on_tower_mouse_hover_ended)
+
+func load_tower_configs():
+	tower_type_list = TowerConfig.get_tower_types()
+	for tower_type in tower_type_list:
+		var config = TowerConfig.get_config(tower_type)
+		if config:
+			tower_configs[tower_type] = config
+
+func setup_ui():
+	panel = Panel.new()
+	panel.custom_minimum_size = Vector2(550, 280)
+	panel.position = Vector2(-275, -140)
+	add_child(panel)
+	
+	var vbox = VBoxContainer.new()
+	vbox.position = Vector2(20, 20)
+	vbox.custom_minimum_size = Vector2(510, 240)
+	panel.add_child(vbox)
+	
+	title_label = Label.new()
+	title_label.text = "选择防御塔类型"
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.add_theme_font_size_override("font_size", 20)
+	vbox.add_child(title_label)
+	
+	var title_spacer = Control.new()
+	title_spacer.custom_minimum_size.y = 15
+	vbox.add_child(title_spacer)
+	
+	tower_buttons_container = HBoxContainer.new()
+	tower_buttons_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	tower_buttons_container.add_theme_constant_override("separation", 30)
+	vbox.add_child(tower_buttons_container)
+	
+	for tower_type in tower_type_list:
+		if not tower_configs.has(tower_type):
+			push_error("[TowerSelectUI] 配置不存在：%s" % tower_type)
+			continue
+		var config = tower_configs[tower_type]
+		var button = create_tower_button(tower_type, config)
+		tower_buttons_container.add_child(button)
+	
+	var spacer = Control.new()
+	spacer.custom_minimum_size.y = 30
+	vbox.add_child(spacer)
+	
+	cancel_button = Button.new()
+	cancel_button.text = "取消"
+	cancel_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cancel_button.custom_minimum_size = Vector2(100, 30)
+	cancel_button.pressed.connect(_on_cancel_pressed)
+	vbox.add_child(cancel_button)
+	
+	setup_tooltip()
+	setup_warning()
+
+func setup_tooltip():
+	tooltip_panel = PanelContainer.new()
+	tooltip_panel.visible = false
+	tooltip_panel.z_index = 200
+	tooltip_panel.anchor_left = 0.5
+	tooltip_panel.anchor_top = 0.5
+	tooltip_panel.anchor_right = 0.5
+	tooltip_panel.anchor_bottom = 0.5
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.1, 0.1, 0.15, 0.95)
+	style.border_color = Color(0.8, 0.7, 0.3, 1.0)
+	style.border_width_left = 2
+	style.border_width_top = 2
+	style.border_width_right = 2
+	style.border_width_bottom = 2
+	style.set_corner_radius_all(6)
+	style.set_content_margin_all(12)
+	tooltip_panel.add_theme_stylebox_override("panel", style)
+	add_child(tooltip_panel)
+	
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
+	tooltip_panel.add_child(vbox)
+	
+	tooltip_label = Label.new()
+	tooltip_label.add_theme_font_size_override("font_size", 14)
+	tooltip_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	vbox.add_child(tooltip_label)
+
+func setup_warning():
+	warning_panel = PanelContainer.new()
+	warning_panel.visible = false
+	warning_panel.z_index = 300
+	warning_panel.anchor_left = 0.5
+	warning_panel.anchor_top = 0.5
+	warning_panel.anchor_right = 0.5
+	warning_panel.anchor_bottom = 0.5
+	warning_panel.offset_left = -120
+	warning_panel.offset_top = -25
+	warning_panel.offset_right = 120
+	warning_panel.offset_bottom = 25
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.6, 0.1, 0.1, 0.95)
+	style.border_color = Color(1, 0.3, 0.3, 1.0)
+	style.border_width_left = 2
+	style.border_width_top = 2
+	style.border_width_right = 2
+	style.border_width_bottom = 2
+	style.set_corner_radius_all(8)
+	style.set_content_margin_all(10)
+	warning_panel.add_theme_stylebox_override("panel", style)
+	add_child(warning_panel)
+	
+	warning_label = Label.new()
+	warning_label.text = "金币不足！"
+	warning_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	warning_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	warning_label.add_theme_font_size_override("font_size", 18)
+	warning_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	warning_panel.add_child(warning_label)
+
+func flash_button_red(button: Button):
+	if flashing_buttons.has(button):
+		flashing_buttons[button]["timer"] = 0.6
+		return
+	
+	var style_red = StyleBoxFlat.new()
+	style_red.bg_color = Color(0.5, 0.1, 0.1, 0.95)
+	style_red.border_color = Color(1, 0.2, 0.2, 1.0)
+	style_red.border_width_left = 3
+	style_red.border_width_top = 3
+	style_red.border_width_right = 3
+	style_red.border_width_bottom = 3
+	style_red.set_corner_radius_all(8)
+	style_red.set_content_margin_all(8)
+	
+	var original_normal = button.get_meta("original_normal_style")
+	var original_hover = button.get_meta("original_hover_style")
+	button.add_theme_stylebox_override("normal", style_red)
+	button.add_theme_stylebox_override("hover", style_red)
+	flashing_buttons[button] = {"timer": 0.6, "original": original_normal, "original_hover": original_hover, "red": style_red}
+
+func _process(delta):
+	if tooltip_panel.visible and (hovered_tower != null or hovered_tower_type != ""):
+		tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
+	
+	if warning_timer > 0:
+		warning_timer -= delta
+		warning_panel.visible = fmod(warning_timer * 6.0, 2.0) < 1.0
+		if warning_timer <= 0:
+			warning_panel.visible = false
+	
+	var to_remove = []
+	for button in flashing_buttons.keys():
+		var data = flashing_buttons[button]
+		data["timer"] -= delta
+		if data["timer"] <= 0:
+			button.add_theme_stylebox_override("normal", data["original"])
+			button.add_theme_stylebox_override("hover", data["original_hover"])
+			to_remove.append(button)
+		else:
+			if fmod(data["timer"] * 8.0, 2.0) < 1.0:
+				button.add_theme_stylebox_override("normal", data["red"])
+				button.add_theme_stylebox_override("hover", data["red"])
+			else:
+				button.add_theme_stylebox_override("normal", data["original"])
+				button.add_theme_stylebox_override("hover", data["original_hover"])
+	for btn in to_remove:
+		flashing_buttons.erase(btn)
+
+func create_tower_button(tower_type: String, config: TowerConfig) -> Button:
+	var button = Button.new()
+	button.custom_minimum_size = Vector2(130, 120)
+	
+	var style_normal = StyleBoxFlat.new()
+	style_normal.bg_color = Color(0.2, 0.2, 0.25, 0.8)
+	style_normal.set_corner_radius_all(8)
+	style_normal.set_content_margin_all(8)
+	
+	var style_hover = StyleBoxFlat.new()
+	style_hover.bg_color = Color(0.35, 0.35, 0.45, 0.95)
+	style_hover.border_color = Color(0.8, 0.7, 0.3, 1.0)
+	style_hover.border_width_bottom = 3
+	style_hover.set_corner_radius_all(8)
+	style_hover.set_content_margin_all(8)
+	
+	var style_pressed = StyleBoxFlat.new()
+	style_pressed.bg_color = Color(0.25, 0.25, 0.35, 0.9)
+	style_pressed.set_corner_radius_all(8)
+	style_pressed.set_content_margin_all(8)
+	
+	button.add_theme_stylebox_override("normal", style_normal)
+	button.add_theme_stylebox_override("hover", style_hover)
+	button.add_theme_stylebox_override("pressed", style_pressed)
+	button.set_meta("original_normal_style", style_normal)
+	button.set_meta("original_hover_style", style_hover)
+	
+	var vbox = VBoxContainer.new()
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	button.add_child(vbox)
+	
+	var texture_rect = TextureRect.new()
+	texture_rect.texture = load(config.texture_path)
+	texture_rect.custom_minimum_size = Vector2(80, 80)
+	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	vbox.add_child(texture_rect)
+	
+	var name_label = Label.new()
+	name_label.text = config.tower_name
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 14)
+	name_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	vbox.add_child(name_label)
+	
+	var cost_label = Label.new()
+	cost_label.text = "造价: " + str(config.cost)
+	cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cost_label.add_theme_font_size_override("font_size", 12)
+	cost_label.add_theme_color_override("font_color", Color(1, 0.84, 0))
+	vbox.add_child(cost_label)
+	
+	button.pressed.connect(_on_tower_button_pressed.bind(tower_type))
+	button.mouse_entered.connect(_on_tower_button_hovered.bind(tower_type, config))
+	button.mouse_exited.connect(_on_tower_button_exited)
+	
+	return button
+
+func _on_tower_button_hovered(tower_type: String, config: TowerConfig):
+	hovered_tower_type = tower_type
+	var info_text = "%s (Lv.%d)\n" % [config.tower_name, config.tower_level]
+	info_text += "━━━━━━━━━━━━━━━\n"
+	info_text += "💰 造价: %d\n" % config.cost
+	info_text += "⚔ 伤害: %.0f\n" % config.damage
+	info_text += "🎯 射程: %.0f\n" % config.attack_range
+	info_text += "⚡ 攻速: %.1f/s" % config.attack_speed
+	tooltip_label.text = info_text
+	tooltip_panel.visible = true
+	tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
+
+func _on_tower_button_exited():
+	hovered_tower_type = ""
+	# 只有在没有悬停实际塔实例时才隐藏 tooltip
+	if hovered_tower == null:
+		tooltip_panel.visible = false
+
+## 🆕 防御塔实例悬停开始
+func _on_tower_mouse_hover_started(tower: Tower):
+	hovered_tower = tower
+	hovered_tower_type = ""  # 清除按钮悬停状态
+	var info_text = tower.get_tower_info_text()
+	tooltip_label.text = info_text
+	tooltip_panel.visible = true
+	tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
+
+## 🆕 防御塔实例悬停结束
+func _on_tower_mouse_hover_ended(_tower: Tower):
+	hovered_tower = null
+	# 只有在没有悬停按钮时才隐藏 tooltip
+	if hovered_tower_type == "":
+		tooltip_panel.visible = false
+
+## 🆕 面板显示时的回调
+func _on_panel_shown() -> void:
+	# 可以在这里添加面板显示时的逻辑
+	pass
+
+## 🆕 面板隐藏时的回调
+func _on_panel_hidden() -> void:
+	tooltip_panel.visible = false
+	hovered_tower_type = ""
+	warning_panel.visible = false
+	warning_timer = 0.0
+	is_locked = false
+
+## 🆕 锁定面板
+func _lock_panel() -> void:
+	# 可以添加锁定时的视觉效果
+	pass
+
+## 🆕 解锁面板
+func _unlock_panel() -> void:
+	# 可以添加解锁时的视觉效果
+	pass
+
+## 🆕 塔悬停时的处理
+func _on_tower_hovered(_tower: Tower) -> void:
+	# 可以在这里添加塔悬停时的额外逻辑
+	pass
+
+## 🆕 塔悬停结束时的处理
+func _on_tower_hover_ended() -> void:
+	# 可以在这里添加塔悬停结束时的额外逻辑
+	pass
+
+func _on_tower_button_pressed(tower_type: String):
+	if is_locked:
+		return
+	is_locked = true
+	tooltip_panel.visible = false
+	hovered_tower_type = ""
+	emit_signal("tower_selected", tower_type)
+
+func _on_cancel_pressed():
+	emit_signal("cancel_pressed")
+	is_panel_visible = false
+
+func close_panel():
+	is_panel_visible = false
+
+func show_at_position(pos: Vector2):
+	is_locked = false
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 0)
+	panel.position = pos - panel.custom_minimum_size / 2.0
+	is_panel_visible = true
+
+func show_not_enough_gold(tower_type: String):
+	var config = tower_configs[tower_type]
+	warning_label.text = "金币不足！需要 %d 金币" % config.cost
+	warning_timer = 1.0
+	for child in tower_buttons_container.get_children():
+		if child is Button:
+			for sub in child.get_children():
+				if sub is VBoxContainer:
+					for label in sub.get_children():
+						if label is Label and label.text == config.tower_name:
+							flash_button_red(child)
+							break

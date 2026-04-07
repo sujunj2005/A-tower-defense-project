@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileConfig" format=3 uid="uid://bir4roo7lnx42"]
+
+[ext_resource type="Script" uid="uid://igfpi8elhafc" path="res://scripts/config/projectile_config.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cdta3etn011el" path="res://images/projectiles/arrow_projectile.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_script")
+damage = 15.0
+sprite_texture = ExtResource("2_texture")
+sprite_scale = Vector2(1.5, 1.5)
+use_trail_particles = false
+effect_damage_ratio = 0.0
+effect_max_targets = 1
+pierce_count = 0

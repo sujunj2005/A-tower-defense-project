@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dt3ave8pva73t"]
+
+[ext_resource type="PackedScene" path="res://scenes/map.tscn" id="1_map"]
+[ext_resource type="Script" uid="uid://o1kkoidml0ln" path="res://scripts/ui/pause_menu.gd" id="2_pause"]
+
+[node name="Main" type="Node2D" unique_id=408629742]
+
+[node name="Map" parent="." unique_id=1655078883 instance=ExtResource("1_map")]
+
+[node name="PauseCanvas" type="CanvasLayer" parent="." unique_id=1006230649]
+
+[node name="PauseMenu" type="Control" parent="PauseCanvas" unique_id=2026967325]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_pause")

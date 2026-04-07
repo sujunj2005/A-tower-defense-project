@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dio04il0suavf"]
+
+[ext_resource type="Script" uid="uid://dlo2dfvwp8drc" path="res://test/test_enemy.gd" id="1_1y8ct"]
+[ext_resource type="Script" uid="uid://dy4k2yuc2jmfc" path="res://test/test_performance.gd" id="1_mdd34"]
+
+[node name="PerformanceTest" type="Node2D" unique_id=1339255222]
+script = ExtResource("1_mdd34")
+
+[node name="Tower" type="Node2D" parent="." unique_id=1785600401]
+position = Vector2(400, 300)
+
+[node name="Enemy1" type="Node2D" parent="." unique_id=549538778]
+position = Vector2(500, 300)
+script = ExtResource("1_1y8ct")
+
+[node name="Enemy2" type="Node2D" parent="." unique_id=1118790518]
+position = Vector2(600, 300)
+script = ExtResource("1_1y8ct")
+
+[node name="Enemy3" type="Node2D" parent="." unique_id=781564550]
+position = Vector2(700, 300)
+script = ExtResource("1_1y8ct")
+
+[node name="Enemy4" type="Node2D" parent="." unique_id=1459301826]
+position = Vector2(800, 300)
+script = ExtResource("1_1y8ct")
+
+[node name="Enemy5" type="Node2D" parent="." unique_id=1990025053]
+position = Vector2(900, 300)
+script = ExtResource("1_1y8ct")
