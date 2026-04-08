@@ -1,0 +1,13 @@
+{
+  "tests": ["res://tests/unit/test_task4_battle.gd"],
+  "prefix": "test_",
+  "suffix": ".gd",
+  "log_level": 1,
+  "should_exit": false,
+  "should_exit_on_success": false,
+  "should_maximize": false,
+  "hide_orphans": false,
+  "disable_colors": false,
+  "junit_xml_file": "res://test/results_task4.xml",
+  "junit_xml_timestamp": true
+}

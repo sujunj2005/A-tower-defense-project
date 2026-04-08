@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://task4_auto_gut_runner"]
+
+[ext_resource type="Script" path="res://test/auto_run_task4_gut_tests.gd" id="1_runner"]
+
+[node name="Task4AutoGutRunner" type="Node"]
+script = ExtResource("1_runner")

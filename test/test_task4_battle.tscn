@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://test_task4_battle"]
+
+[ext_resource type="Script" path="res://addons/gut/gui/gut_gui.gd" id="1_gut_gui"]
+[ext_resource type="Script" path="res://addons/gut/gut.gd" id="2_gut"]
+
+[node name="GUT" type="Node"]
+script = ExtResource("2_gut")
+
+[node name="GUT_GUI" type="CanvasLayer" parent="." groups=["gut_gui"]]
+script = ExtResource("1_gut_gui")
