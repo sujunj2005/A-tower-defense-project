@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "towers": [
+    {
+      "tower_id": "tower_chinese_basic",
+      "tower_name": "语文之塔",
+      "tower_type": "学科塔",
+      "tier": "基础",
+      "stats": {
+        "damage": 15,
+        "attack_speed": 1.2,
+        "range": 120,
+        "projectile_speed": 300,
+        "damage_type": "magic"
+      },
+      "special_effect": {
+        "type": "slow",
+        "value": 0.20,
+        "duration": 1.5,
+        "probability": 1.0
+      },
+      "cost": {
+        "build_cost": 50,
+        "upgrade_cost": 30,
+        "sell_ratio": 0.7
+      },
+      "upgrade_per_level": {
+        "damage_increase": 0.10,
+        "attack_speed_increase": 0.05,
+        "special_probability_increase": 0.02,
+        "max_level": 10
+      }
+    }
+  ]
+}

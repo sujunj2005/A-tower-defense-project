@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "eras": [
+    {
+      "era_id": "china_modern",
+      "era_name": "中国现代",
+      "time_period": "1949-至今",
+      "region": "中国",
+      "culture_tags": ["东亚", "儒家", "社会主义"],
+      "growth_stages": ["幼儿园", "小学", "中学", "大学", "职场"],
+      "event_pool": ["event_gaokao", "event_996", "event_house_loan"],
+      "tower_pool": ["tower_math", "tower_programming", "tower_finance"],
+      "enemy_pool": ["enemy_exam", "enemy_kpi", "enemy_mortgage"],
+      "difficulty_modifier": 1.0
+    }
+  ]
+}

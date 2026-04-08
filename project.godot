@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 AssetsManager="*res://scripts/managers/assets_manager.gd"
 SceneManager="*res://scenes/scene_manager.tscn"
+Global="*res://autoload/global.gd"
 
 [display]
 
@@ -37,3 +38,9 @@ version="4.6"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg", "res://addons/gut/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://knowledge_base/": "green"
+}

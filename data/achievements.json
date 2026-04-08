@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "achievements": [
+    {
+      "achievement_id": "ach_first_blood",
+      "achievement_name": "第一滴血",
+      "description": "首次完成战斗",
+      "condition": {
+        "type": "battle_won",
+        "count": 1
+      },
+      "reward": {
+        "destiny_points": 10
+      }
+    }
+  ]
+}

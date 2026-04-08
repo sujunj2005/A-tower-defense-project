@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "family_backgrounds": [
+    {
+      "family_id": "family_cadre",
+      "family_name": "干部家庭",
+      "description": "父：公务员，母：教师",
+      "initial_resources": {
+        "gold": 80,
+        "towers": [],
+        "traits": []
+      },
+      "modifiers": {
+        "gold_bonus": 0.30,
+        "tower_cost_modifier": 0.0,
+        "health_bonus": 0,
+        "experience_bonus": 0.10
+      },
+      "event_bias": {
+        "preferred_events": ["体制内", "稳定工作"],
+        "avoided_events": ["创业", "个体户"]
+      }
+    }
+  ]
+}

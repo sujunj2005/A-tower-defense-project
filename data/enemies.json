@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "enemies": [
+    {
+      "enemy_id": "enemy_homework",
+      "enemy_name": "作业怪",
+      "enemy_type": "学业压力",
+      "tier": "基础",
+      "stats": {
+        "health": 30,
+        "speed": 50,
+        "armor": 0,
+        "armor_type": "none",
+        "damage": 5,
+        "attack_speed": 1.0,
+        "attack_range": 20
+      },
+      "kill_reward_gold": 5,
+      "special_abilities": [],
+      "spawn_stages": ["童年", "青年"],
+      "spawn_waves": [1, 2, 3, 4]
+    }
+  ]
+}

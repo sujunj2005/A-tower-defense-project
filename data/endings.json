@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "endings": [
+    {
+      "ending_id": "ending_s",
+      "ending_name": "完美一生",
+      "rating": "S",
+      "requirement": "final_boss_health_100",
+      "description": "你的一生完美无缺，所有目标都达成了！",
+      "reward": {
+        "life_wisdom": 100,
+        "destiny_points": 50
+      }
+    }
+  ]
+}

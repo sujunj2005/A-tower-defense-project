@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "events": [
+    {
+      "event_id": "event_kindergarten_show",
+      "event_name": "幼儿园表演",
+      "age": 6,
+      "stage": "童年",
+      "description": "幼儿园要举办六一表演，老师问你想参加什么节目。",
+      "options": [
+        {
+          "option_id": "A",
+          "text": "参加合唱团（需要：勇气≥30）",
+          "requirements": {"courage": 30},
+          "rewards": [
+            {"type": "tower", "id": "tower_chinese_basic", "count": 1},
+            {"type": "trait", "id": "little_singer"}
+          ],
+          "battle_trigger": null
+        }
+      ],
+      "is_deadly": false
+    }
+  ]
+}
