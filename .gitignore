@@ -1,9 +1,15 @@
-# 排除所有以.开头的文件夹（除了.godot）
+# 排除所有以.开头的文件夹
 .*
-!.godot/
+
+# Godot 4 缓存文件夹（需要被忽略）
+.godot/imported/
+.godot/shader_cache/
+.godot/scene_groups_cache.cfg
+.godot/uid_cache.bin
 
 # 排除知识库文件夹
 knowledge_base/
+docs/
 
 # 排除测试报告文件
 测试报告_暂停菜单功能.md
