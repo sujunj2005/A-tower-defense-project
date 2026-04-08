@@ -24,6 +24,13 @@ config/icon="res://icon.svg"
 AssetsManager="*res://scripts/managers/assets_manager.gd"
 SceneManager="*res://scenes/scene_manager.tscn"
 Global="*res://autoload/global.gd"
+ConfigManager="*res://scripts/core/config_manager.gd"
+EraSystem="*res://scripts/life_simulation/era_system.gd"
+AgeSystem="*res://scripts/life_simulation/age_system.gd"
+EventSystem="*res://scripts/life_simulation/event_system.gd"
+AttributeSystem="*res://scripts/life_simulation/attribute_system.gd"
+TraitSystem="*res://scripts/life_simulation/trait_system.gd"
+EndingSystem="*res://scripts/life_simulation/ending_system.gd"
 
 [display]
 

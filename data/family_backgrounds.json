@@ -20,6 +20,66 @@
         "preferred_events": ["体制内", "稳定工作"],
         "avoided_events": ["创业", "个体户"]
       }
+    },
+    {
+      "family_id": "family_merchant",
+      "family_name": "商人家庭",
+      "description": "父：企业家，母：会计",
+      "initial_resources": {
+        "gold": 100,
+        "towers": [],
+        "traits": []
+      },
+      "modifiers": {
+        "gold_bonus": 0.50,
+        "tower_cost_modifier": 0.10,
+        "health_bonus": 0,
+        "experience_bonus": 0.05
+      },
+      "event_bias": {
+        "preferred_events": ["商业", "创业"],
+        "avoided_events": ["体制内", "稳定工作"]
+      }
+    },
+    {
+      "family_id": "family_worker",
+      "family_name": "工人家庭",
+      "description": "父：工人，母：护士",
+      "initial_resources": {
+        "gold": 50,
+        "towers": [],
+        "traits": []
+      },
+      "modifiers": {
+        "gold_bonus": 0.20,
+        "tower_cost_modifier": 0.0,
+        "health_bonus": 10,
+        "experience_bonus": 0.05
+      },
+      "event_bias": {
+        "preferred_events": ["稳定工作", "技术工人"],
+        "avoided_events": ["高风险", "创业"]
+      }
+    },
+    {
+      "family_id": "family_farmer",
+      "family_name": "农民家庭",
+      "description": "父：农民，母：农民",
+      "initial_resources": {
+        "gold": 30,
+        "towers": [],
+        "traits": []
+      },
+      "modifiers": {
+        "gold_bonus": 0.10,
+        "tower_cost_modifier": -0.10,
+        "health_bonus": 20,
+        "experience_bonus": 0.0
+      },
+      "event_bias": {
+        "preferred_events": ["吃苦耐劳", "务实"],
+        "avoided_events": ["高消费", "奢侈品"]
+      }
     }
   ]
 }
