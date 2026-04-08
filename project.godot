@@ -31,6 +31,8 @@ EventSystem="*res://scripts/life_simulation/event_system.gd"
 AttributeSystem="*res://scripts/life_simulation/attribute_system.gd"
 TraitSystem="*res://scripts/life_simulation/trait_system.gd"
 EndingSystem="*res://scripts/life_simulation/ending_system.gd"
+GameState="*res://scripts/core/game_state.gd"
+SceneTransition="*res://scripts/core/scene_transition.gd"
 
 [display]
 
