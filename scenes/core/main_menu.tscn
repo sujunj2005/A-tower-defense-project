@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cwdjcy1e5mtt"]
+
+[ext_resource type="Script" uid="uid://d0vvwku701yeb" path="res://scripts/ui/menu.gd" id="1_nh5pa"]
+
+[node name="Node" type="Control" unique_id=1450646996]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_nh5pa")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1508488987]
+layout_mode = 0
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1966958702]
+layout_mode = 0
+text = "人生塔防"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="." unique_id=2092245064]
+layout_mode = 0
+text = "开始游戏"
+
+[node name="MetaButton" type="Button" parent="." unique_id=52569624]
+layout_mode = 0
+text = "长效成长"
+
+[node name="QuitButton" type="Button" parent="." unique_id=1154964812]
+layout_mode = 0
+text = "退出游戏"

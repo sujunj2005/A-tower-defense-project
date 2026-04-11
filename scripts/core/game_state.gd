@@ -1,4 +1,3 @@
-class_name GameState
 extends Node
 
 ## 游戏状态枚举
@@ -26,7 +25,7 @@ const SCENE_PATHS := {
 	State.ERA_SELECTION: "res://scenes/ui/era_selection.tscn",
 	State.STAGE: "res://scenes/core/game_session.tscn",
 	State.EVENT: "res://scenes/ui/event_screen.tscn",
-	State.BATTLE: "res://scenes/battle/battle_scene.tscn",
+	State.BATTLE: "res://scenes/map.tscn",
 	State.RESULT: "res://scenes/ui/result_screen.tscn",
 	State.META_PROGRESSION: "res://scenes/core/meta_progression.tscn",
 	State.ENDING: "res://scenes/ui/ending_screen.tscn"
@@ -35,8 +34,7 @@ const SCENE_PATHS := {
 var scene_manager: Node
 
 func _ready() -> void:
-	# 获取 SceneManager（已存在）
-	scene_manager = get_node("/root/SceneManager")
+	scene_manager = get_node_or_null("/root/SceneManager")
 
 ## 改变状态
 func change_state(new_state: State) -> void:

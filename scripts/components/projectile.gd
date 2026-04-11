@@ -100,18 +100,15 @@ func set_target(target: Node2D, dmg: float) -> void:
 	is_active = true
 
 ## 初始化弹道参数（由 TowerAttackComponent 调用）
-func setup(config: Dictionary) -> void:
-	# 基础属性
-	damage = config.get("damage", 10.0)
-	damage_type = config.get("damage_type", 0)
-	speed = config.get("speed", 300.0)
-	source_tower = config.get("source_tower", null)
+func setup(setup_data: Dictionary) -> void:
+	damage = setup_data.get("damage", 10.0)
+	damage_type = setup_data.get("damage_type", 0)
+	speed = setup_data.get("speed", 300.0)
+	source_tower = setup_data.get("source_tower", null)
 
-	# 弹道类型
-	projectile_type = config.get("projectile_type", ProjectileType.POSITION_FIXED)
+	projectile_type = setup_data.get("projectile_type", ProjectileType.POSITION_FIXED)
 
-	# 目标设置
-	var target = config.get("target", null)
+	var target = setup_data.get("target", null)
 	if target and is_instance_valid(target):
 		if projectile_type == ProjectileType.TARGET_LOCKED:
 			# 目标锁定型：保存弱引用
@@ -124,15 +121,14 @@ func setup(config: Dictionary) -> void:
 	start_position = global_position
 
 	# 穿透配置
-	pierce_enabled = config.get("pierce_enabled", false)
-	pierce_count = config.get("pierce_count", 2)
-	pierce_damage_decay = config.get("pierce_damage_decay", 0.7)
+	pierce_enabled = setup_data.get("pierce_enabled", false)
+	pierce_count = setup_data.get("pierce_count", 2)
+	pierce_damage_decay = setup_data.get("pierce_damage_decay", 0.7)
 
-	# 特效配置
-	effect_type = config.get("effect_type", EffectType.NONE)
-	effect_radius = config.get("effect_radius", 50.0)
-	effect_damage_ratio = config.get("effect_damage_ratio", 0.5)
-	effect_max_targets = config.get("effect_max_targets", 3)
+	effect_type = setup_data.get("effect_type", EffectType.NONE)
+	effect_radius = setup_data.get("effect_radius", 50.0)
+	effect_damage_ratio = setup_data.get("effect_damage_ratio", 0.5)
+	effect_max_targets = setup_data.get("effect_max_targets", 3)
 
 	# 激活弹道
 	is_active = true

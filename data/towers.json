@@ -1,35 +1,777 @@
 {
   "version": "1.0",
   "towers": [
-    {
-      "tower_id": "tower_chinese_basic",
-      "tower_name": "语文之塔",
-      "tower_type": "学科塔",
-      "tier": "基础",
-      "stats": {
-        "damage": 15,
-        "attack_speed": 1.2,
-        "range": 120,
-        "projectile_speed": 300,
-        "damage_type": "magic"
-      },
-      "special_effect": {
-        "type": "slow",
-        "value": 0.20,
-        "duration": 1.5,
-        "probability": 1.0
-      },
-      "cost": {
-        "build_cost": 50,
-        "upgrade_cost": 30,
-        "sell_ratio": 0.7
-      },
-      "upgrade_per_level": {
-        "damage_increase": 0.10,
-        "attack_speed_increase": 0.05,
-        "special_probability_increase": 0.02,
-        "max_level": 10
-      }
-    }
+	{
+	  "tower_id": "tower_chinese_basic",
+	  "tower_name": "语文之塔",
+	  "tower_type": "学科塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 15,
+		"attack_speed": 1.2,
+		"range": 120,
+		"projectile_speed": 300,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "slow",
+		"value": 0.20,
+		"duration": 1.5,
+		"probability": 1.0
+	  },
+	  "cost": {
+		"build_cost": 50,
+		"upgrade_cost": 30,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"attack_speed_increase": 0.05,
+		"special_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_chinese_advanced",
+	  "tower_name": "语文之塔·进阶",
+	  "tower_type": "学科塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 22,
+		"attack_speed": 1.4,
+		"range": 140,
+		"projectile_speed": 350,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "slow",
+		"value": 0.30,
+		"duration": 2.0,
+		"probability": 1.0,
+		"extra": {"type": "silence", "probability": 0.10, "duration": 1.0}
+	  },
+	  "cost": {
+		"build_cost": 80,
+		"upgrade_cost": 50,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"attack_speed_increase": 0.05,
+		"special_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_math_basic",
+	  "tower_name": "数学之塔",
+	  "tower_type": "学科塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 20,
+		"attack_speed": 1.0,
+		"range": 150,
+		"projectile_speed": 400,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "dot",
+		"value": 3,
+		"duration": 3.0,
+		"probability": 0.8
+	  },
+	  "cost": {
+		"build_cost": 60,
+		"upgrade_cost": 35,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"dot_value_increase": 0.5,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_math_advanced",
+	  "tower_name": "数学之塔·进阶",
+	  "tower_type": "学科塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 32,
+		"attack_speed": 1.0,
+		"range": 170,
+		"projectile_speed": 450,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "dot",
+		"value": 5,
+		"duration": 3.5,
+		"probability": 0.9
+	  },
+	  "cost": {
+		"build_cost": 100,
+		"upgrade_cost": 60,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"dot_value_increase": 0.5,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_math_master",
+	  "tower_name": "数学之塔·大师",
+	  "tower_type": "学科塔",
+	  "tier": "大师",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 50,
+		"attack_speed": 1.0,
+		"range": 200,
+		"projectile_speed": 500,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "dot",
+		"value": 8,
+		"duration": 4.0,
+		"probability": 1.0
+	  },
+	  "cost": {
+		"build_cost": 150,
+		"upgrade_cost": 80,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.12,
+		"dot_value_increase": 0.8,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_english_basic",
+	  "tower_name": "英语之塔",
+	  "tower_type": "学科塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 18,
+		"attack_speed": 1.1,
+		"range": 130,
+		"projectile_speed": 350,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "cultural_suppression",
+		"bonus_damage": 0.50,
+		"target_tags": ["foreign", "western"],
+		"probability": 0.15
+	  },
+	  "cost": {
+		"build_cost": 50,
+		"upgrade_cost": 30,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"bonus_damage_increase": 0.05,
+		"probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_science_basic",
+	  "tower_name": "理综之塔",
+	  "tower_type": "学科塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 25,
+		"attack_speed": 0.8,
+		"range": 100,
+		"projectile_speed": 250,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "aoe",
+		"shape": "circle",
+		"radius": 100,
+		"damage_ratio": 1.0,
+		"knockback_distance": 20,
+		"knockback_probability": 0.30
+	  },
+	  "cost": {
+		"build_cost": 80,
+		"upgrade_cost": 50,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.12,
+		"aoe_radius_increase": 5,
+		"knockback_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_science_advanced",
+	  "tower_name": "理综之塔·进阶",
+	  "tower_type": "学科塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 37,
+		"attack_speed": 0.8,
+		"range": 120,
+		"projectile_speed": 300,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "aoe",
+		"shape": "circle",
+		"radius": 150,
+		"damage_ratio": 1.0,
+		"knockback_distance": 30,
+		"knockback_probability": 0.50
+	  },
+	  "cost": {
+		"build_cost": 120,
+		"upgrade_cost": 70,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.12,
+		"aoe_radius_increase": 5,
+		"knockback_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_programming_basic",
+	  "tower_name": "编程之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 16,
+		"attack_speed": 1.3,
+		"range": 130,
+		"projectile_speed": 350,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "crit",
+		"crit_probability": 0.10,
+		"crit_multiplier": 2.0
+	  },
+	  "cost": {
+		"build_cost": 55,
+		"upgrade_cost": 35,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"crit_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_programming_advanced",
+	  "tower_name": "编程之塔·进阶",
+	  "tower_type": "技能塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 24,
+		"attack_speed": 1.5,
+		"range": 150,
+		"projectile_speed": 400,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "crit",
+		"crit_probability": 0.15,
+		"crit_multiplier": 2.5
+	  },
+	  "cost": {
+		"build_cost": 90,
+		"upgrade_cost": 55,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"crit_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_time_basic",
+	  "tower_name": "时间管理塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "none",
+	  "stats": {
+		"damage": 0,
+		"attack_speed": 0,
+		"range": 200,
+		"damage_type": "none"
+	  },
+	  "special_effect": {
+		"type": "slow_aura",
+		"shape": "circle",
+		"radius": 200,
+		"slow_value": 0.25
+	  },
+	  "cost": {
+		"build_cost": 70,
+		"upgrade_cost": 45,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"slow_value_increase": 0.02,
+		"range_increase": 10,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_time_advanced",
+	  "tower_name": "时间管理塔·进阶",
+	  "tower_type": "技能塔",
+	  "tier": "进阶",
+	  "attack_mode": "none",
+	  "stats": {
+		"damage": 0,
+		"attack_speed": 0,
+		"range": 250,
+		"damage_type": "none"
+	  },
+	  "special_effect": {
+		"type": "slow_aura",
+		"shape": "circle",
+		"radius": 250,
+		"slow_value": 0.35
+	  },
+	  "cost": {
+		"build_cost": 110,
+		"upgrade_cost": 65,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"slow_value_increase": 0.02,
+		"range_increase": 10,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_communication_basic",
+	  "tower_name": "沟通能力塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 12,
+		"attack_speed": 1.0,
+		"range": 140,
+		"projectile_speed": 320,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "single_control",
+		"control_type": "stun",
+		"duration": 3.0,
+		"probability": 0.20,
+		"cooldown": 8.0
+	  },
+	  "cost": {
+		"build_cost": 60,
+		"upgrade_cost": 40,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"probability_increase": 0.02,
+		"cooldown_decrease": 0.3,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_communication_advanced",
+	  "tower_name": "沟通能力塔·进阶",
+	  "tower_type": "技能塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 17,
+		"attack_speed": 1.0,
+		"range": 160,
+		"projectile_speed": 360,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "single_control",
+		"control_type": "stun",
+		"duration": 4.0,
+		"probability": 0.30,
+		"cooldown": 6.0
+	  },
+	  "cost": {
+		"build_cost": 95,
+		"upgrade_cost": 60,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"probability_increase": 0.02,
+		"cooldown_decrease": 0.3,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_network_basic",
+	  "tower_name": "人脉关系塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "none",
+	  "stats": {
+		"damage": 0,
+		"attack_speed": 0,
+		"range": 0,
+		"damage_type": "none"
+	  },
+	  "special_effect": {
+		"type": "summon",
+		"summon_tower_id": "tower_helper_temp",
+		"summon_count": 1,
+		"summon_duration": 30.0,
+		"summon_cooldown_per_wave": 10,
+		"summon_tower_stats": {
+		  "damage": 15,
+		  "attack_speed": 1.0,
+		  "range": 120,
+		  "lifetime": 30.0
+		}
+	  },
+	  "cost": {
+		"build_cost": 100,
+		"upgrade_cost": 70,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"summon_duration_increase": 5.0,
+		"summon_tower_damage_increase": 0.10,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_finance_basic",
+	  "tower_name": "理财能力塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 10,
+		"attack_speed": 1.5,
+		"range": 100,
+		"projectile_speed": 280,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "gold_bonus",
+		"gold_per_kill": 0.20
+	  },
+	  "passive_effect": {
+		"type": "global_gold_bonus",
+		"gold_bonus": 0.10
+	  },
+	  "cost": {
+		"build_cost": 80,
+		"upgrade_cost": 55,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"gold_per_kill_increase": 0.02,
+		"global_gold_bonus_increase": 0.01,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_sports_basic",
+	  "tower_name": "体育之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "melee",
+	  "stats": {
+		"damage": 14,
+		"attack_speed": 1.4,
+		"range": 90,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "aoe",
+		"shape": "circle",
+		"radius": 80,
+		"damage_ratio": 0.8,
+		"knockback_distance": 30,
+		"knockback_probability": 0.25
+	  },
+	  "cost": {
+		"build_cost": 45,
+		"upgrade_cost": 25,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"aoe_radius_increase": 5,
+		"knockback_probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_artist_basic",
+	  "tower_name": "艺术之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 12,
+		"attack_speed": 1.0,
+		"range": 140,
+		"projectile_speed": 280,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "confusion",
+		"duration": 2.0,
+		"probability": 0.15,
+		"effect": "敌人反向移动"
+	  },
+	  "cost": {
+		"build_cost": 55,
+		"upgrade_cost": 35,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"probability_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_engineer_basic",
+	  "tower_name": "工程之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "melee",
+	  "stats": {
+		"damage": 22,
+		"attack_speed": 0.7,
+		"range": 110,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "armor_break",
+		"value": 0.30,
+		"duration": 3.0,
+		"probability": 0.20
+	  },
+	  "cost": {
+		"build_cost": 70,
+		"upgrade_cost": 45,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"armor_break_increase": 0.05,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_profession_basic",
+	  "tower_name": "职业之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 18,
+		"attack_speed": 1.0,
+		"range": 130,
+		"projectile_speed": 320,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "gold_bonus",
+		"gold_per_kill": 0.10
+	  },
+	  "cost": {
+		"build_cost": 65,
+		"upgrade_cost": 40,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"gold_per_kill_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_business_basic",
+	  "tower_name": "商业之塔",
+	  "tower_type": "技能塔",
+	  "tier": "基础",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 14,
+		"attack_speed": 1.2,
+		"range": 120,
+		"projectile_speed": 300,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "gold_bonus",
+		"gold_per_kill": 0.30
+	  },
+	  "cost": {
+		"build_cost": 75,
+		"upgrade_cost": 50,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"gold_per_kill_increase": 0.03,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_business_advanced",
+	  "tower_name": "商业之塔·进阶",
+	  "tower_type": "技能塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 20,
+		"attack_speed": 1.3,
+		"range": 140,
+		"projectile_speed": 340,
+		"damage_type": "physical"
+	  },
+	  "special_effect": {
+		"type": "gold_bonus",
+		"gold_per_kill": 0.40
+	  },
+	  "passive_effect": {
+		"type": "global_gold_bonus",
+		"gold_bonus": 0.15
+	  },
+	  "cost": {
+		"build_cost": 120,
+		"upgrade_cost": 70,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.08,
+		"gold_per_kill_increase": 0.03,
+		"global_gold_bonus_increase": 0.01,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_history_advanced",
+	  "tower_name": "历史之塔·进阶",
+	  "tower_type": "学科塔",
+	  "tier": "进阶",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 20,
+		"attack_speed": 0.9,
+		"range": 160,
+		"projectile_speed": 300,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "debuff",
+		"debuff_type": "weakness",
+		"value": 0.15,
+		"duration": 3.0,
+		"probability": 0.25
+	  },
+	  "cost": {
+		"build_cost": 85,
+		"upgrade_cost": 55,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.10,
+		"debuff_value_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_history_master",
+	  "tower_name": "历史之塔·大师",
+	  "tower_type": "学科塔",
+	  "tier": "大师",
+	  "attack_mode": "ranged",
+	  "stats": {
+		"damage": 35,
+		"attack_speed": 0.9,
+		"range": 180,
+		"projectile_speed": 350,
+		"damage_type": "magic"
+	  },
+	  "special_effect": {
+		"type": "debuff",
+		"debuff_type": "weakness",
+		"value": 0.25,
+		"duration": 4.0,
+		"probability": 0.35
+	  },
+	  "cost": {
+		"build_cost": 140,
+		"upgrade_cost": 80,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_increase": 0.12,
+		"debuff_value_increase": 0.02,
+		"max_level": 10
+	  }
+	},
+	{
+	  "tower_id": "tower_leadership_advanced",
+	  "tower_name": "领导力之塔·进阶",
+	  "tower_type": "技能塔",
+	  "tier": "进阶",
+	  "attack_mode": "none",
+	  "stats": {
+		"damage": 0,
+		"attack_speed": 0,
+		"range": 200,
+		"damage_type": "none"
+	  },
+	  "special_effect": {
+		"type": "buff_aura",
+		"shape": "circle",
+		"radius": 200,
+		"damage_bonus": 0.15,
+		"attack_speed_bonus": 0.10
+	  },
+	  "cost": {
+		"build_cost": 130,
+		"upgrade_cost": 80,
+		"sell_ratio": 0.7
+	  },
+	  "upgrade_per_level": {
+		"damage_bonus_increase": 0.02,
+		"attack_speed_bonus_increase": 0.01,
+		"range_increase": 10,
+		"max_level": 10
+	  }
+	}
   ]
 }

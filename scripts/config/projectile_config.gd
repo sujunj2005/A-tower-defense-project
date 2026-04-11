@@ -91,33 +91,29 @@ func create_particle_system() -> GPUParticles2D:
 	# 4 = CIRCLE (圆形)
 	# 5 = POINT_TEXTURE (点纹理)
 	match particle_emission_shape:
-		0:  # 点
-			material.emission_shape = 0
-		1:  # 矩形（使用 BOX）
-			material.emission_shape = 2
+		0:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINT
+		1:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
 			material.emission_box_extents = Vector3(particle_emission_extents.x, particle_emission_extents.y, 0)
-		2:  # 圆形
-			material.emission_shape = 4
+		2:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
 			material.emission_sphere_radius = particle_emission_extents.x
-		3:  # 环
-			material.emission_shape = 3
+		3:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
 			material.emission_ring_radius = particle_emission_extents.x / 2.0
 			material.emission_ring_height = particle_emission_extents.y
 	
-	# 速度
-	material.direction = Vector3(0, -1, 0)  # 向上发射
+	material.direction = Vector3(0, -1, 0)
 	material.spread = particle_spread
 	material.initial_velocity_min = particle_velocity_min
 	material.initial_velocity_max = particle_velocity_max
 	
-	# 颜色
 	material.color = particle_color
 	
-	# 缩放
 	material.scale_min = particle_scale * 0.5
 	material.scale_max = particle_scale * 1.5
 	
-	# 应用材质
 	particles.process_material = material
 	
 	return particles
@@ -138,7 +134,7 @@ func create_trail_particles() -> GPUParticles2D:
 	var material = ParticleProcessMaterial.new()
 	
 	# 发射形状（点）
-	material.emission_shape = 0  # EMISSION_SHAPE_POINT
+	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINT
 	
 	# 速度（向后）
 	material.direction = Vector3(0, 1, 0)  # 向下（与运动方向相反）
@@ -213,16 +209,16 @@ func configure_particle_system(particles: GPUParticles2D) -> void:
 	# 4 = CIRCLE (圆形)
 	# 5 = POINT_TEXTURE (点纹理)
 	match particle_emission_shape:
-		0:  # 点
-			material.emission_shape = 0
-		1:  # 矩形（使用 BOX）
-			material.emission_shape = 2
+		0:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINT
+		1:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
 			material.emission_box_extents = Vector3(particle_emission_extents.x, particle_emission_extents.y, 0)
-		2:  # 圆形
-			material.emission_shape = 4
+		2:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
 			material.emission_sphere_radius = particle_emission_extents.x
-		3:  # 环
-			material.emission_shape = 3
+		3:
+			material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
 			material.emission_ring_radius = particle_emission_extents.x / 2.0
 			material.emission_ring_height = particle_emission_extents.y
 	
@@ -256,7 +252,7 @@ func configure_trail_particles(trail: GPUParticles2D) -> void:
 		trail.process_material = material
 	
 	# 发射形状（点）
-	material.emission_shape = 0  # EMISSION_SHAPE_POINT
+	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_POINT
 	
 	# 速度（向后）
 	material.direction = Vector3(0, 1, 0)  # 向下（与运动方向相反）

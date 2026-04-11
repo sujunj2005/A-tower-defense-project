@@ -32,15 +32,15 @@ func _run() -> void:
     print("Running tests...\n")
     gut.run_tests()
 
-func _on_gut_end_run(gut: Gut) -> void:
+func _on_gut_end_run(gut: Object) -> void:
     print("\n========================================")
     print("Task 4 Tests Completed")
     print("========================================")
     
-    var summary = gut.get_summary()
-    var total_tests := summary.get_test_count()
-    var passed_tests := summary.get_passing_test_count()
-    var failed_tests := summary.get_failing_test_count()
+    var totals = gut.get_summary().get_totals(gut)
+    var total_tests: int = totals.tests
+    var passed_tests: int = totals.passing_tests
+    var failed_tests: int = totals.failing_tests
     
     print("Total: %d" % total_tests)
     print("Passed: %d" % passed_tests)
@@ -48,14 +48,15 @@ func _on_gut_end_run(gut: Gut) -> void:
     
     if failed_tests > 0:
         print("\nFAILED TESTS:")
-        _print_failed_tests(summary)
+        _print_failed_tests(gut)
     else:
         print("\nALL TESTS PASSED!")
     
     gut.queue_free()
 
-func _print_failed_tests(summary: Object) -> void:
-    var test_results = summary.get_tests()
-    for test_result in test_results:
-        if test_result.get("result") != "passed":
-            print("  - " + str(test_result.get("name")) + ": " + str(test_result.get("assertion_failure_message", "")))
+func _print_failed_tests(gut: Object) -> void:
+    var tc = gut.get_test_collector()
+    for s in tc.scripts:
+        for t in s.tests:
+            if t.was_run and not t.is_passing():
+                print("  - " + str(t.name) + ": " + str(t.fail_texts))

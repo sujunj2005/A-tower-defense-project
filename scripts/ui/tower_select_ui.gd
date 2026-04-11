@@ -9,7 +9,7 @@ var tower_type_list: Array = []
 
 var panel: Panel
 var title_label: Label
-var tower_buttons_container: HBoxContainer
+var tower_buttons_container: GridContainer
 var cancel_button: Button
 var tooltip_panel: PanelContainer
 var tooltip_label: Label
@@ -68,22 +68,38 @@ func _connect_tower_signals() -> void:
 			tower_node.mouse_hover_started.connect(_on_tower_mouse_hover_started)
 			tower_node.mouse_hover_ended.connect(_on_tower_mouse_hover_ended)
 
+func _get_placed_tower_counts() -> Dictionary:
+	var counts: Dictionary = {}
+	for t: Node in get_tree().get_nodes_in_group("towers"):
+		if not is_instance_valid(t) or not t.has_meta("tower_id"):
+			continue
+		var tid: String = str(t.get_meta("tower_id"))
+		if tid != "":
+			counts[tid] = counts.get(tid, 0) + 1
+	return counts
+
 func load_tower_configs():
-	tower_type_list = TowerConfig.get_tower_types()
-	for tower_type in tower_type_list:
-		var config = TowerConfig.get_config(tower_type)
-		if config:
-			tower_configs[tower_type] = config
+	var session: GameSessionData = Global.get_game_session()
+	tower_configs.clear()
+	tower_type_list.clear()
+	var tower_ids: Array[String] = session.get_tower_ids()
+	var placed_counts: Dictionary = _get_placed_tower_counts()
+	for tower_id: String in tower_ids:
+		if session.towers.has(tower_id):
+			var config: TowerConfig = TowerConfig.get_config(tower_id)
+			if config:
+				tower_type_list.append(tower_id)
+				tower_configs[tower_id] = config
 
 func setup_ui():
 	panel = Panel.new()
-	panel.custom_minimum_size = Vector2(550, 280)
-	panel.position = Vector2(-275, -140)
+	panel.custom_minimum_size = Vector2(600, 400)
+	panel.position = Vector2(-300, -200)
 	add_child(panel)
 	
 	var vbox = VBoxContainer.new()
 	vbox.position = Vector2(20, 20)
-	vbox.custom_minimum_size = Vector2(510, 240)
+	vbox.custom_minimum_size = Vector2(560, 360)
 	panel.add_child(vbox)
 	
 	title_label = Label.new()
@@ -96,9 +112,10 @@ func setup_ui():
 	title_spacer.custom_minimum_size.y = 15
 	vbox.add_child(title_spacer)
 	
-	tower_buttons_container = HBoxContainer.new()
-	tower_buttons_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	tower_buttons_container.add_theme_constant_override("separation", 30)
+	tower_buttons_container = GridContainer.new()
+	tower_buttons_container.columns = 4
+	tower_buttons_container.add_theme_constant_override("h_separation", 10)
+	tower_buttons_container.add_theme_constant_override("v_separation", 10)
 	vbox.add_child(tower_buttons_container)
 	
 	for tower_type in tower_type_list:
@@ -267,7 +284,13 @@ func create_tower_button(tower_type: String, config: TowerConfig) -> Button:
 	button.add_child(vbox)
 	
 	var texture_rect = TextureRect.new()
-	texture_rect.texture = load(config.texture_path)
+	if config.texture_path != "" and ResourceLoader.exists(config.texture_path):
+		texture_rect.texture = AssetsManager.load_image(config.texture_path)
+	else:
+		var placeholder: Image = Image.create(80, 80, false, Image.FORMAT_RGBA8)
+		var fill_color: Color = Color(0.3, 0.5, 0.8, 1.0) if config.damage_type == 1 else Color(0.8, 0.4, 0.3, 1.0)
+		placeholder.fill(fill_color)
+		texture_rect.texture = ImageTexture.create_from_image(placeholder)
 	texture_rect.custom_minimum_size = Vector2(80, 80)
 	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -281,15 +304,47 @@ func create_tower_button(tower_type: String, config: TowerConfig) -> Button:
 	vbox.add_child(name_label)
 	
 	var cost_label = Label.new()
-	cost_label.text = "造价: " + str(config.cost)
+	var era_sys: Node = get_node_or_null("/root/EraSystem")
+	var display_cost: int = config.cost
+	if era_sys and era_sys.has_method("get_modified_tower_cost"):
+		display_cost = era_sys.get_modified_tower_cost(config.cost)
+	cost_label.text = "造价: " + str(display_cost)
 	cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cost_label.add_theme_font_size_override("font_size", 12)
 	cost_label.add_theme_color_override("font_color", Color(1, 0.84, 0))
 	vbox.add_child(cost_label)
+
+	var session: GameSessionData = Global.get_game_session()
+	var tower_max: int = session.towers.get(tower_type, 0)
+	var tower_placed: int = 0
+	for t: Node in get_tree().get_nodes_in_group("towers"):
+		if not is_instance_valid(t) or not t.has_meta("tower_id"):
+			continue
+		if str(t.get_meta("tower_id")) == tower_type:
+			tower_placed += 1
+	var tower_remaining: int = tower_max - tower_placed
+	var is_full: bool = tower_max >= 0 and tower_remaining <= 0
+	var count_label = Label.new()
+	if tower_max < 0:
+		count_label.text = "×∞"
+		count_label.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4))
+	else:
+		count_label.text = "%d/%d" % [tower_remaining, tower_max]
+		if is_full:
+			count_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+		else:
+			count_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.4))
+	count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	count_label.add_theme_font_size_override("font_size", 12)
+	vbox.add_child(count_label)
 	
-	button.pressed.connect(_on_tower_button_pressed.bind(tower_type))
-	button.mouse_entered.connect(_on_tower_button_hovered.bind(tower_type, config))
-	button.mouse_exited.connect(_on_tower_button_exited)
+	if is_full:
+		button.disabled = true
+		button.modulate = Color(0.5, 0.5, 0.5, 0.6)
+	else:
+		button.pressed.connect(_on_tower_button_pressed.bind(tower_type))
+		button.mouse_entered.connect(_on_tower_button_hovered.bind(tower_type, config))
+		button.mouse_exited.connect(_on_tower_button_exited)
 	
 	return button
 
@@ -380,10 +435,26 @@ func show_at_position(pos: Vector2):
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 0)
 	panel.position = pos - panel.custom_minimum_size / 2.0
 	is_panel_visible = true
+	_refresh_tower_buttons()
+
+func _refresh_tower_buttons() -> void:
+	load_tower_configs()
+	for child: Node in tower_buttons_container.get_children():
+		child.queue_free()
+	for tower_type: String in tower_type_list:
+		if not tower_configs.has(tower_type):
+			continue
+		var config: TowerConfig = tower_configs[tower_type]
+		var button: Button = create_tower_button(tower_type, config)
+		tower_buttons_container.add_child(button)
 
 func show_not_enough_gold(tower_type: String):
 	var config = tower_configs[tower_type]
-	warning_label.text = "金币不足！需要 %d 金币" % config.cost
+	var era_sys: Node = get_node_or_null("/root/EraSystem")
+	var actual_cost: int = config.cost
+	if era_sys and era_sys.has_method("get_modified_tower_cost"):
+		actual_cost = era_sys.get_modified_tower_cost(config.cost)
+	warning_label.text = "金币不足！需要 %d 金币" % actual_cost
 	warning_timer = 1.0
 	for child in tower_buttons_container.get_children():
 		if child is Button:

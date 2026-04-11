@@ -17,7 +17,7 @@ extends Resource
 @export var damage: float = 0.0
 @export var attack_speed: float = 1.0
 @export var attack_cooldown: float = 1.0
-@export var range: float = 100.0
+@export var attack_range: float = 100.0
 @export var projectile_speed: float = 300.0
 @export var damage_type: String = "none"  # none/physical/magic
 
@@ -38,7 +38,7 @@ func to_dict() -> Dictionary:
 		"damage": damage,
 		"attack_speed": attack_speed,
 		"attack_cooldown": attack_cooldown,
-		"range": range,
+		"range": attack_range,
 		"projectile_speed": projectile_speed,
 		"damage_type": damage_type,
 		"special_effect": special_effect,
@@ -56,7 +56,7 @@ static func from_dict(data: Dictionary) -> TowerData:
 	tower.damage = data.get("damage", 0.0)
 	tower.attack_speed = data.get("attack_speed", 1.0)
 	tower.attack_cooldown = data.get("attack_cooldown", 1.0)
-	tower.range = data.get("range", 100.0)
+	tower.attack_range = data.get("range", 100.0)
 	tower.projectile_speed = data.get("projectile_speed", 300.0)
 	tower.damage_type = data.get("damage_type", "none")
 	tower.special_effect = data.get("special_effect", {})

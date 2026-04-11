@@ -1,7 +1,6 @@
-class_name ConfigManager
 extends Node
 
-var _config_cache: Dictionary = {}
+var _config_cache: Dictionary[String, Dictionary] = {}
 
 func _ready() -> void:
 	pass
@@ -18,19 +17,18 @@ func load_json(file_path: String) -> Dictionary:
 		push_error("无法打开配置文件：%s" % file_path)
 		return {}
 	
-	var content = file.get_as_text()
+	var content: String = file.get_as_text()
 	file.close()
 	
-	# 解析 JSON
-	var json = JSON.new()
-	var error = json.parse(content)
+	var json: JSON = JSON.new()
+	var error: Error = json.parse(content)
 	if error != OK:
 		push_error("JSON 解析失败：%s 错误：%s" % [file_path, error])
 		return {}
 	
-	# 缓存并返回
-	_config_cache[file_path] = json.data
-	return json.data
+	var result: Dictionary = json.data
+	_config_cache[file_path] = result
+	return result
 
 ## 重新加载配置（清除缓存）
 func reload_config(file_path: String) -> Dictionary:
@@ -39,7 +37,7 @@ func reload_config(file_path: String) -> Dictionary:
 	return load_json(file_path)
 
 ## 获取特定配置项
-func get_config(file_path: String, key: String, default_value = null):
+func get_config(file_path: String, key: String, default_value: Variant = null) -> Variant:
 	var data = load_json(file_path)
 	if data.has(key):
 		return data[key]

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://qsb1il1bpp8b"]
+
+[ext_resource type="Script" uid="uid://dq4gx26f65yo6" path="res://scripts/ui/event_ui.gd" id="1_svy7i"]
+
+[node name="Node" type="Control" unique_id=185278280]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_svy7i")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=439594111]
+layout_mode = 0
+
+[node name="TitleLabel" type="Label" parent="." unique_id=17190540]
+layout_mode = 0
+text = "事件标题"
+
+[node name="DescLabel" type="Label" parent="." unique_id=1569255128]
+layout_mode = 0
+text = "事件描述"
+autowrap_mode = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="." unique_id=256129194]
+layout_mode = 0
+
+[node name="BackButton" type="Button" parent="." unique_id=42173349]
+layout_mode = 0
+text = "返回"

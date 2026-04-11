@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://j3ybashre4hp"]
+
+[ext_resource type="Script" uid="uid://boqipcnrxghic" path="res://scripts/ui/era_selection_ui.gd" id="1_rasgv"]
+
+[node name="Node" type="Control" unique_id=2039790102]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rasgv")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=706798837]
+layout_mode = 0
+
+[node name="EraSection" type="VBoxContainer" parent="." unique_id=1657348921]
+layout_mode = 0
+
+[node name="Label" type="Label" parent="." unique_id=708635484]
+layout_mode = 0
+text = "时代：中国现代"
+
+[node name="FamilySection" type="VBoxContainer" parent="." unique_id=1586619529]
+layout_mode = 0
+
+[node name="@Label@21042" type="Label" parent="." unique_id=1632416715]
+layout_mode = 0
+text = "家境：工人"
+
+[node name="RegionSection" type="VBoxContainer" parent="." unique_id=197619138]
+layout_mode = 0
+
+[node name="@Label@21043" type="Label" parent="." unique_id=1120161822]
+layout_mode = 0
+text = "地域：二线城市"
+
+[node name="StartButton" type="Button" parent="." unique_id=441722041]
+layout_mode = 0
+text = "开始游戏"

@@ -4,8 +4,9 @@
 ## 攻击模式枚举
 ## 定义塔的攻击方式：近战或远程
 enum AttackMode {
-	MELEE = 0,   # 近战：无弹道，直接判定
-	RANGED = 1   # 远程：有弹道，命中时判定
+	MELEE = 0,
+	RANGED = 1,
+	NONE = 2
 }
 
 ## 弹道类型枚举

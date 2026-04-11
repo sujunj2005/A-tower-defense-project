@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://m7uw8w00om18"]
+
+[ext_resource type="Script" uid="uid://bapqmaibx6ngw" path="res://scripts/battle/battle_scene_controller.gd" id="1_3hov6"]
+
+[node name="Node" type="Node2D" unique_id=290388993]
+script = ExtResource("1_3hov6")
+
+[node name="BattleManager" type="Node" parent="." unique_id=811950241]

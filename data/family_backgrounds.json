@@ -1,85 +1,89 @@
 {
   "version": "1.0",
   "family_backgrounds": [
-    {
-      "family_id": "family_cadre",
-      "family_name": "干部家庭",
-      "description": "父：公务员，母：教师",
-      "initial_resources": {
-        "gold": 80,
-        "towers": [],
-        "traits": []
-      },
-      "modifiers": {
-        "gold_bonus": 0.30,
-        "tower_cost_modifier": 0.0,
-        "health_bonus": 0,
-        "experience_bonus": 0.10
-      },
-      "event_bias": {
-        "preferred_events": ["体制内", "稳定工作"],
-        "avoided_events": ["创业", "个体户"]
-      }
-    },
-    {
-      "family_id": "family_merchant",
-      "family_name": "商人家庭",
-      "description": "父：企业家，母：会计",
-      "initial_resources": {
-        "gold": 100,
-        "towers": [],
-        "traits": []
-      },
-      "modifiers": {
-        "gold_bonus": 0.50,
-        "tower_cost_modifier": 0.10,
-        "health_bonus": 0,
-        "experience_bonus": 0.05
-      },
-      "event_bias": {
-        "preferred_events": ["商业", "创业"],
-        "avoided_events": ["体制内", "稳定工作"]
-      }
-    },
-    {
-      "family_id": "family_worker",
-      "family_name": "工人家庭",
-      "description": "父：工人，母：护士",
-      "initial_resources": {
-        "gold": 50,
-        "towers": [],
-        "traits": []
-      },
-      "modifiers": {
-        "gold_bonus": 0.20,
-        "tower_cost_modifier": 0.0,
-        "health_bonus": 10,
-        "experience_bonus": 0.05
-      },
-      "event_bias": {
-        "preferred_events": ["稳定工作", "技术工人"],
-        "avoided_events": ["高风险", "创业"]
-      }
-    },
-    {
-      "family_id": "family_farmer",
-      "family_name": "农民家庭",
-      "description": "父：农民，母：农民",
-      "initial_resources": {
-        "gold": 30,
-        "towers": [],
-        "traits": []
-      },
-      "modifiers": {
-        "gold_bonus": 0.10,
-        "tower_cost_modifier": -0.10,
-        "health_bonus": 20,
-        "experience_bonus": 0.0
-      },
-      "event_bias": {
-        "preferred_events": ["吃苦耐劳", "务实"],
-        "avoided_events": ["高消费", "奢侈品"]
-      }
-    }
+	{
+	  "family_id": "family_cadre",
+	  "family_name": "干部家庭",
+	  "description": "父：公务员，母：教师",
+	  "traits": [
+		{"type": "gold_bonus", "value": 0.30, "text": "金币获取+30%"},
+		{"type": "experience_bonus", "value": 0.10, "text": "经验获取+10%"}
+	  ],
+	  "initial_resources": {
+		"gold": 150,
+		"towers": [{"tower_chinese_basic": -1}, {"tower_math_basic": 2}],
+		"traits": []
+	  },
+	  "max_home_health": 100,
+	  "modifiers": {
+		"gold_bonus": 0.30,
+		"tower_cost_modifier": 0.0,
+		"health_bonus": 0,
+		"experience_bonus": 0.10
+	  }
+	},
+	{
+	  "family_id": "family_merchant",
+	  "family_name": "商人家庭",
+	  "description": "父：个体户，母：家庭主妇",
+	  "traits": [
+		{"type": "gold_bonus", "value": 0.50, "text": "金币获取+50%"},
+		{"type": "health_bonus", "value": -20, "text": "生命-20"}
+	  ],
+	  "initial_resources": {
+		"gold": 200,
+		"towers": [{"tower_math_basic": -1}, {"tower_english_basic": 2}],
+		"traits": []
+	  },
+	  "max_home_health": 100,
+	  "modifiers": {
+		"gold_bonus": 0.50,
+		"tower_cost_modifier": 0.0,
+		"health_bonus": -20,
+		"experience_bonus": 0.05
+	  }
+	},
+	{
+	  "family_id": "family_worker",
+	  "family_name": "工人家庭",
+	  "description": "父：工人，母：工人",
+	  "traits": [
+		{"type": "tower_cost_modifier", "value": -0.10, "text": "建造成本-10%"},
+		{"type": "health_bonus", "value": 30, "text": "生命+30"}
+	  ],
+	  "initial_resources": {
+		"gold": 120,
+		"towers": [{"tower_chinese_basic": -1}, {"tower_sports_basic": 3}],
+		"traits": []
+	  },
+	  "max_home_health": 100,
+	  "modifiers": {
+		"gold_bonus": 0.20,
+		"tower_cost_modifier": -0.10,
+		"health_bonus": 30,
+		"experience_bonus": 0.05
+	  }
+	},
+	{
+	  "family_id": "family_farmer",
+	  "family_name": "农民家庭",
+	  "description": "父：农民，母：农民",
+	  "traits": [
+		{"type": "tower_cost_modifier", "value": -0.15, "text": "建造成本-15%"},
+		{"type": "experience_bonus", "value": 0.15, "text": "经验获取+15%"}
+	  ],
+	  "initial_resources": {
+		"gold": 100,
+		"towers": [{"tower_sports_basic": -1}, {"tower_chinese_basic": 2}],
+		"traits": []
+	  },
+	  "max_home_health": 100,
+	  "modifiers": {
+		"gold_bonus": 0.10,
+		"tower_cost_modifier": -0.15,
+		"health_bonus": 0,
+		"experience_bonus": 0.15
+	  }
+	}
   ]
 }

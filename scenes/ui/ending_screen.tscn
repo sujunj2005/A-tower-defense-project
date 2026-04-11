@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bxjewu3k55vy"]
+
+[ext_resource type="Script" uid="uid://bip1kinih685u" path="res://scripts/ui/ending_ui.gd" id="1_802kv"]
+
+[node name="Node" type="Control" unique_id=958985686]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_802kv")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1501550554]
+layout_mode = 0
+
+[node name="RatingLabel" type="Label" parent="." unique_id=481839817]
+layout_mode = 0
+text = "结局评级"
+
+[node name="DescLabel" type="Label" parent="." unique_id=680387705]
+layout_mode = 0
+text = "结局描述"
+
+[node name="WisdomLabel" type="Label" parent="." unique_id=1103102261]
+layout_mode = 0
+text = "人生智慧：0"
+
+[node name="DestinyLabel" type="Label" parent="." unique_id=146282075]
+layout_mode = 0
+text = "命运点数：0"
+
+[node name="PlayAgainButton" type="Button" parent="." unique_id=134789530]
+layout_mode = 0
+text = "再来一局"
+
+[node name="MenuButton" type="Button" parent="." unique_id=1075385719]
+layout_mode = 0
+text = "返回主菜单"

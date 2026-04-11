@@ -1,8 +1,7 @@
 extends Node
-class_name Global
 
 ## 游戏版本
-const GAME_VERSION := "0.1.0-demo"
+const GAME_VERSION: String = "0.1.0-demo"
 
 ## 跨局持久化数据
 var player_save: PlayerSaveData = PlayerSaveData.new()
@@ -14,8 +13,9 @@ var game_session: GameSessionData = GameSessionData.new()
 var debug_mode: bool = true
 
 func _ready() -> void:
-	print("[Global] 全局单例初始化完成")
-	print("[Global] 游戏版本：%s" % GAME_VERSION)
+	if debug_mode:
+		print("[Global] 全局单例初始化完成")
+		print("[Global] 游戏版本：%s" % GAME_VERSION)
 
 ## 调试日志
 func debug_log(message: String) -> void:

@@ -1,4 +1,3 @@
-class_name SceneTransition
 extends CanvasLayer
 
 ## 过渡完成信号
@@ -11,10 +10,10 @@ signal transition_completed
 @export var fade_color: Color = Color(0, 0, 0, 1)
 
 var _color_rect: ColorRect
-var _tween: Tween
+var _tween: Tween = null
 
 func _ready() -> void:
-	layer = 100  # 确保在最上层
+	layer = 100
 	_create_fade_overlay()
 	hide()
 
@@ -22,7 +21,7 @@ func _create_fade_overlay() -> void:
 	_color_rect = ColorRect.new()
 	_color_rect.color = fade_color
 	_color_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE  # 不阻挡输入
+	_color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_color_rect)
 
 ## 淡入场景

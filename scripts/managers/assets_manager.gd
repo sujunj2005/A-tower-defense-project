@@ -45,6 +45,9 @@ func load_resource(path: String) -> Resource:
 	# 检查是否有热替换路径
 	var actual_path = _get_actual_path(path)
 	
+	if not ResourceLoader.exists(actual_path):
+		return null
+
 	# 检查缓存
 	var cached = _cache.get_resource(actual_path)
 	if cached:

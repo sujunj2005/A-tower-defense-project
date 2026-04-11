@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cc0n7oadhygvf"]
+
+[ext_resource type="Script" uid="uid://bp6ssx03flrr8" path="res://scripts/ui/meta_progression_ui.gd" id="1_oum17"]
+
+[node name="Node" type="Control" unique_id=922460422]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oum17")

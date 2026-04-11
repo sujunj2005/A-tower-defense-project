@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b3voahe5cwtsl" path="res://scripts/camera_controller.gd" id="2_camera"]
 [ext_resource type="Shader" uid="uid://c016m3v66pdvt" path="res://shaders/grid_overlay.gdshader" id="3_0cso3"]
 [ext_resource type="TileSet" uid="uid://d2kxm2y3g5v7a" path="res://resources/tilesets/map_tileset.tres" id="3_tileset"]
+[ext_resource type="Script" uid="uid://o1kkoidml0ln" path="res://scripts/ui/pause_menu.gd" id="4_pause"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gldc4"]
 shader = ExtResource("3_0cso3")
@@ -24,3 +25,14 @@ script = ExtResource("2_camera")
 [node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1711892680]
 material = SubResource("ShaderMaterial_gldc4")
 tile_set = ExtResource("3_tileset")
+
+[node name="PauseCanvas" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" type="Control" parent="PauseCanvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_pause")

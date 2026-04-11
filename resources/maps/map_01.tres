@@ -1,10 +1,6 @@
-[gd_resource type="Resource" script_class="MapConfig" load_steps=8 format=3 uid="uid://map_01_optimized"]
+[gd_resource type="Resource" script_class="MapConfig" load_steps=2 format=3 uid="uid://map_01_optimized"]
 
 [ext_resource type="Script" path="res://scripts/config/map_config.gd" id="1_map"]
-[ext_resource type="Resource" uid="uid://c4q8f3w6xh7yb" path="res://resources/enemies/heavy_armor.tres" id="2_heavy"]
-[ext_resource type="Resource" uid="uid://bqxm5n2k7pdwa" path="res://resources/enemies/magic_shield.tres" id="3_magic"]
-[ext_resource type="Resource" uid="uid://wave_1" path="res://resources/waves/wave_1.tres" id="4_wave1"]
-[ext_resource type="Resource" uid="uid://wave_2" path="res://resources/waves/wave_2.tres" id="5_wave2"]
 
 [resource]
 script = ExtResource("1_map")
@@ -27,8 +23,3 @@ road_texture_path = "res://images/Outside_A2.png"
 road_texture_region = Rect2(96, 0, 32, 32)
 edge_texture_path = "res://images/Outside_A2.png"
 edge_texture_region = Rect2(32, 0, 32, 32)
-waves = [ExtResource("4_wave1"), ExtResource("5_wave2")]
-enemy_registry = {
-"heavy_armor": ExtResource("2_heavy"),
-"magic_shield": ExtResource("3_magic")
-}

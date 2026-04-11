@@ -14,7 +14,7 @@ func _ready():
 	mesh_instance.mesh = mesh
 	
 	material = ShaderMaterial.new()
-	material.shader = preload("res://shaders/grid_overlay.gdshader")
+	material.shader = AssetsManager.load_resource("res://shaders/grid_overlay.gdshader")
 	shader_material = material
 	mesh_instance.material = material
 	

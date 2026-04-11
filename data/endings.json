@@ -2,14 +2,58 @@
   "version": "1.0",
   "endings": [
     {
-      "ending_id": "ending_s",
+      "ending_id": "ending_perfect_life",
       "ending_name": "完美一生",
       "rating": "S",
-      "requirement": "final_boss_health_100",
-      "description": "你的一生完美无缺，所有目标都达成了！",
+      "requirement": "boss_health_remaining >= 1.0",
+      "description": "你的一生堪称完美，名垂青史。",
       "reward": {
-        "life_wisdom": 100,
-        "destiny_points": 50
+        "life_wisdom": 1000,
+        "destiny_points": 5
+      }
+    },
+    {
+      "ending_id": "ending_successful_life",
+      "ending_name": "成功人生",
+      "rating": "A",
+      "requirement": "boss_health_remaining >= 0.8",
+      "description": "你度过了成功的一生，安享晚年。",
+      "reward": {
+        "life_wisdom": 600,
+        "destiny_points": 3
+      }
+    },
+    {
+      "ending_id": "ending_ordinary_life",
+      "ending_name": "普通人生",
+      "rating": "B",
+      "requirement": "boss_health_remaining >= 0.5",
+      "description": "平凡但充实的一生，无怨无悔。",
+      "reward": {
+        "life_wisdom": 300,
+        "destiny_points": 1
+      }
+    },
+    {
+      "ending_id": "ending_regretful_life",
+      "ending_name": "遗憾人生",
+      "rating": "C",
+      "requirement": "boss_defeated and boss_health_remaining < 0.5",
+      "description": "充满遗憾的一生，但也不算失败。",
+      "reward": {
+        "life_wisdom": 150,
+        "destiny_points": 0
+      }
+    },
+    {
+      "ending_id": "ending_failed_life",
+      "ending_name": "失败人生",
+      "rating": "D",
+      "requirement": "boss_defeated == false",
+      "description": "默默无闻地离开，无人记得。",
+      "reward": {
+        "life_wisdom": 50,
+        "destiny_points": 0
       }
     }
   ]

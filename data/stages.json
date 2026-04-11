@@ -1,0 +1,136 @@
+{
+  "version": "1.2",
+  "stages": {
+	"childhood": {
+	  "stage_name": "童年",
+	  "era_id": "china_modern",
+	  "age_range": {"start": 6, "end": 12},
+	  "description": "无忧无虑的童年时光，学习基础知识，培养兴趣。",
+	  "event_count": {"min": 3, "max": 4},
+	  "event_trigger_rate": 0.80,
+	  "battle_difficulty": 1.0,
+	  "gold_multiplier": 1.0,
+	  "available_towers": [
+		"tower_chinese_basic",
+		"tower_math_basic",
+		"tower_english_basic",
+		"tower_sports_basic",
+        "tower_artist_basic"
+	  ],
+	  "enemy_pool": [
+		{"id": "enemy_homework", "weight": 60},
+		{"id": "enemy_exam", "weight": 30},
+		{"id": "enemy_pressure_school", "weight": 10}
+	  ],
+	  "attribute_growth": {
+		"intelligence": 5,
+		"courage": 3,
+		"health": 10
+	  }
+	},
+	"youth": {
+	  "stage_name": "青年",
+	  "era_id": "china_modern",
+	  "age_range": {"start": 15, "end": 30},
+	  "description": "求学与初入社会的阶段，面临人生重大选择。",
+	  "event_count": {"min": 4, "max": 5},
+	  "event_trigger_rate": 0.70,
+	  "battle_difficulty": 1.5,
+	  "gold_multiplier": 1.2,
+	  "available_towers": [
+		"tower_chinese_basic",
+		"tower_chinese_advanced",
+		"tower_math_basic",
+		"tower_math_advanced",
+		"tower_math_master",
+		"tower_science_basic",
+		"tower_science_advanced",
+		"tower_english_basic",
+		"tower_programming_basic",
+		"tower_programming_advanced",
+		"tower_communication_basic",
+		"tower_communication_advanced",
+		"tower_time_basic",
+		"tower_network_basic",
+		"tower_finance_basic",
+		"tower_profession_basic",
+		"tower_business_basic",
+		"tower_engineer_basic",
+		"tower_history_advanced",
+        "tower_history_master"
+	  ],
+	  "enemy_pool": [
+		{"id": "enemy_homework", "weight": 30},
+		{"id": "enemy_exam", "weight": 25},
+		{"id": "enemy_bill", "weight": 20},
+		{"id": "enemy_996", "weight": 15},
+		{"id": "enemy_pressure_school", "weight": 5},
+		{"id": "enemy_involution", "weight": 5}
+	  ],
+	  "attribute_growth": {
+		"intelligence": 8,
+		"courage": 5,
+		"health": 5,
+		"work_ability": 5
+	  }
+	},
+	"middle_age": {
+	  "stage_name": "中年",
+	  "era_id": "china_modern",
+	  "age_range": {"start": 35, "end": 50},
+	  "description": "事业与家庭的双重压力，健康开始走下坡路。",
+	  "event_count": {"min": 2, "max": 3},
+	  "event_trigger_rate": 0.65,
+	  "battle_difficulty": 2.0,
+	  "gold_multiplier": 1.5,
+	  "available_towers": [
+		"tower_chinese_advanced",
+		"tower_math_advanced",
+		"tower_math_master",
+		"tower_science_advanced",
+		"tower_programming_advanced",
+		"tower_communication_advanced",
+		"tower_time_advanced",
+		"tower_network_basic",
+		"tower_finance_basic",
+		"tower_leadership_advanced",
+		"tower_business_advanced",
+        "tower_business_basic"
+	  ],
+	  "enemy_pool": [
+		{"id": "enemy_bill", "weight": 30},
+		{"id": "enemy_996", "weight": 25},
+		{"id": "enemy_involution", "weight": 20},
+		{"id": "enemy_pressure_school", "weight": 5},
+		{"id": "boss_midlife_crisis", "weight": 5}
+	  ],
+	  "attribute_growth": {
+		"intelligence": 3,
+		"courage": 2,
+		"health": -5,
+		"work_ability": 5
+	  }
+	},
+	"old_age": {
+	  "stage_name": "老年",
+	  "era_id": "china_modern",
+	  "age_range": {"start": 50, "end": 80},
+	  "description": "回顾一生，面对最终审判。属性逐年递减。",
+	  "event_count": {"min": 1, "max": 2},
+	  "event_trigger_rate": 0.60,
+	  "battle_difficulty": 3.0,
+	  "gold_multiplier": 1.0,
+	  "available_towers": [],
+	  "enemy_pool": [
+		{"id": "boss_final_judgment", "weight": 100}
+	  ],
+	  "attribute_growth": {
+		"intelligence": -3,
+		"courage": -2,
+		"health": -10,
+		"work_ability": -5
+	  },
+	  "penalty_rate_per_year": 0.01
+	}
+  }
+}

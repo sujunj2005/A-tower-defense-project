@@ -32,24 +32,26 @@ var current_wave: int = 1
 var total_waves: int = 1  # 垂直切片只有 1 波
 
 ## 敌人生成器
-var enemy_spawner: EnemySpawner
+var enemy_spawner: Node
 
 ## 游戏会话数据
 var session: GameSessionData
+
+@export var victory_delay_seconds: float = 2.0
 
 func _ready() -> void:
 	session = Global.get_game_session()
 	_initialize_battle()
 
 func _initialize_battle() -> void:
-	# 从会话数据初始化战斗
 	if session:
 		home_health = session.home_health
 		max_home_health = session.max_home_health
 		gold = session.gold
+		session.battle_start_health = home_health
 	
 	# 获取敌人生成器
-	enemy_spawner = get_node_or_null("EnemySpawner")
+	enemy_spawner = get_parent().get_node_or_null("EnemySpawner") if get_parent() else null
 	if not enemy_spawner:
 		push_warning("BattleManager: EnemySpawner not found")
 
@@ -69,6 +71,8 @@ func start_battle() -> void:
 func on_enemy_died(enemy: Enemy, reward_gold: int) -> void:
 	gold += reward_gold
 	enemy_died.emit(enemy, reward_gold)
+	if session:
+		session.gold = gold
 	
 	Global.debug_log("敌人死亡，获得金币：%d，当前金币：%d" % [reward_gold, gold])
 	
@@ -77,38 +81,61 @@ func on_enemy_died(enemy: Enemy, reward_gold: int) -> void:
 
 ## 老家受到伤害
 func home_take_damage(amount: float) -> void:
-	home_health = maxf(home_health - amount, 0.0)
+	var reduction: float = 0.0
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_damage_reduction"):
+		reduction = ts.get_damage_reduction()
+	var actual_damage: float = amount * (1.0 - reduction)
+	home_health = maxf(home_health - actual_damage, 0.0)
 	home_health_changed.emit(home_health, max_home_health)
 	
-	# 更新会话数据
 	if session:
 		session.home_health = home_health
 	
-	Global.debug_log("老家受到攻击！剩余生命：%d/%d" % [int(home_health), int(max_home_health)])
+	Global.debug_log("老家受到攻击！伤害：%.1f（减免%.0f%%），剩余生命：%d/%d" % [actual_damage, reduction * 100.0, int(home_health), int(max_home_health)])
 	
-	# 检查失败
 	if home_health <= 0.0:
 		_on_defeat()
 
 ## 检查波次完成
 func _check_wave_completion() -> void:
 	if not enemy_spawner:
+		_schedule_victory()
 		return
-	
-	# 检查是否还有活跃敌人
-	var active_enemies = enemy_spawner.get_active_enemies()
-	if active_enemies.is_empty() and enemy_spawner.is_wave_complete():
-		_on_victory()
+	var has_active: bool = false
+	if enemy_spawner.has_method("get_active_enemies"):
+		has_active = not enemy_spawner.get_active_enemies().is_empty()
+	elif "wave_in_progress" in enemy_spawner:
+		has_active = enemy_spawner.wave_in_progress
+	if not has_active:
+		if enemy_spawner.has_method("is_wave_complete"):
+			if enemy_spawner.is_wave_complete():
+				_schedule_victory()
+		elif "is_spawning" in enemy_spawner:
+			if not enemy_spawner.is_spawning:
+				_schedule_victory()
+
+func _schedule_victory() -> void:
+	if battle_state != BattleState.IN_PROGRESS:
+		return
+	battle_state = BattleState.WAITING
+	var delay: float = victory_delay_seconds
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	if cm and cm.has_method("load_json"):
+		var game_cfg = cm.load_json("res://data/game_config.json")
+		if game_cfg is Dictionary and game_cfg.has("victory_delay_seconds"):
+			delay = float(game_cfg.victory_delay_seconds)
+	var timer: SceneTreeTimer = get_tree().create_timer(delay)
+	timer.timeout.connect(_on_victory)
 
 ## 胜利
 func _on_victory() -> void:
-	if battle_state != BattleState.IN_PROGRESS:
+	if battle_state != BattleState.WAITING:
 		return
 	
 	battle_state = BattleState.VICTORY
 	Global.debug_log("战斗胜利！")
 	
-	# 更新会话数据
 	if session:
 		session.gold = gold
 		session.completed_battles.append("battle_wave_%d" % current_wave)
@@ -123,7 +150,6 @@ func _on_defeat() -> void:
 	battle_state = BattleState.DEFEAT
 	Global.debug_log("战斗失败！")
 	
-	# 更新会话数据
 	if session:
 		session.home_health = 0.0
 	
@@ -140,8 +166,11 @@ func place_tower(tower_scene: PackedScene, position: Vector2) -> Tower:
 		push_error("BattleManager: Failed to instantiate tower")
 		return null
 	
-	# 添加到场景
-	get_node("Towers").add_child(tower)
+	var towers_node: Node = get_node_or_null("Towers")
+	if not towers_node:
+		towers_node = get_parent()
+	if towers_node:
+		towers_node.add_child(tower)
 	tower.global_position = position
 	
 	Global.debug_log("放置防御塔：%s" % tower.name)

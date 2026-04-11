@@ -1,4 +1,3 @@
-class_name AgeSystem
 extends Node
 
 signal stage_changed(new_stage: String)
@@ -10,6 +9,13 @@ const STAGE_AGES := {
 	Stage.YOUTH: {"start": 15, "end": 30},
 	Stage.MIDDLE_AGE: {"start": 35, "end": 50},
 	Stage.OLD_AGE: {"start": 50, "end": 80}
+}
+
+const STAGE_IDS := {
+	Stage.CHILDHOOD: "childhood",
+	Stage.YOUTH: "youth",
+	Stage.MIDDLE_AGE: "middle_age",
+	Stage.OLD_AGE: "old_age"
 }
 
 const STAGE_NAMES := {
@@ -54,11 +60,14 @@ func _update_stage() -> void:
 ## 阶段转换回调
 func _on_stage_changed() -> void:
 	Global.debug_log("进入新阶段：%s" % get_stage_name())
-	session.current_stage = get_stage_name()
+	session.current_stage = get_stage_id()
 	session.current_age = current_age
-	stage_changed.emit(get_stage_name())
+	stage_changed.emit(get_stage_id())
 
 ## 获取阶段名称
+func get_stage_id() -> String:
+	return STAGE_IDS[current_stage]
+
 func get_stage_name() -> String:
 	return STAGE_NAMES[current_stage]
 
@@ -75,19 +84,31 @@ func can_continue() -> bool:
 	return current_age < 80
 
 ## 获取当前阶段可用的事件池
-func get_stage_event_pool() -> Array:
-	# 根据当前阶段返回对应的事件池
-	# 后续从配置中读取
-	return []
+func get_stage_event_pool() -> Array[Dictionary]:
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	var stages_data: Dictionary = {}
+	if cm and cm.has_method("load_json"):
+		stages_data = cm.load_json("res://data/stages.json")
+	if not stages_data.has("stages"):
+		return []
+	var stages: Dictionary = stages_data.stages
+	var sid: String = get_stage_id()
+	if not stages.has(sid):
+		return []
+	var pool: Array = stages[sid].get("enemy_pool", [])
+	var result: Array[Dictionary] = []
+	for entry: Dictionary in pool:
+		result.append(entry)
+	return result
 
 ## 应用老年属性递减
 func apply_old_age_penalty() -> void:
 	if current_stage == Stage.OLD_AGE:
 		# 每年属性 -1%
 		var years_old = current_age - STAGE_AGES[Stage.OLD_AGE].start
-		var penalty_rate = 1.0 - (years_old * 0.01)
+		var penalty_rate: float = 1.0 - (years_old * 0.01)
 		
 		for attr in session.attributes:
-			session.attributes[attr] = int(session.attributes[attr] * penalty_rate)
+			session.attributes[attr] = int(float(session.attributes[attr]) * penalty_rate)
 		
-		Global.debug_log("老年属性递减：%d%%" % int(penalty_rate * 100))
+		Global.debug_log("老年属性递减：%d%%" % int(penalty_rate * 100.0))

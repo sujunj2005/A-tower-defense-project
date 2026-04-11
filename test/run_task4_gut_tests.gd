@@ -7,8 +7,8 @@ extends Node
 var Gut = load("res://addons/gut/gut.gd")
 var GutConfig = load("res://addons/gut/gut_config.gd")
 
-var gut: Gut
-var gut_config: GutConfig
+var gut: Object
+var gut_config: Object
 
 func _ready() -> void:
 	print("\n========================================")
@@ -47,10 +47,10 @@ func _on_gut_end_run() -> void:
 	print("========================================")
 	
 	# 获取测试结果
-	var summary = gut.get_summary()
-	var total_tests := summary.get_test_count()
-	var passed_tests := summary.get_passing_test_count()
-	var failed_tests := summary.get_failing_test_count()
+	var totals = gut.get_summary().get_totals(gut)
+	var total_tests: int = totals.tests
+	var passed_tests: int = totals.passing_tests
+	var failed_tests: int = totals.failing_tests
 	
 	print("总测试数：%d" % total_tests)
 	print("通过测试数：%d" % passed_tests)
@@ -59,13 +59,13 @@ func _on_gut_end_run() -> void:
 	if failed_tests > 0:
 		print("\n❌ 有测试失败，请检查输出")
 		print("失败的测试:")
-		_print_failed_tests(summary)
+		_print_failed_tests(gut)
 	else:
 		print("\n✅ 所有测试通过！")
 
-func _print_failed_tests(summary: Object) -> void:
-	# 打印失败测试的详细信息
-	var test_results = summary.get_tests()
-	for test_result in test_results:
-		if test_result.get("result") != "passed":
-			print("  - %s: %s" % [test_result.get("name"), test_result.get("assertion_failure_message", "")])
+func _print_failed_tests(gut: Object) -> void:
+	var tc = gut.get_test_collector()
+	for s in tc.scripts:
+		for t in s.tests:
+			if t.was_run and not t.is_passing():
+				print("  - %s: %s" % [t.name, str(t.fail_texts)])

@@ -1,14 +1,13 @@
-class_name AttributeSystem
 extends Node
 
 const ATTRIBUTES := ["intelligence", "courage", "health", "reputation"]
 
 var session: GameSessionData
-var age_system: AgeSystem
+var age_system
 
 func _ready() -> void:
 	session = Global.get_game_session()
-	age_system = Global.get_node("AgeSystem") as AgeSystem
+	age_system = AgeSystem
 
 ## 增加属性
 func increase_attribute(attr_name: String, amount: int) -> void:
@@ -39,5 +38,5 @@ func check_requirement(attr_name: String, required_value: int) -> bool:
 
 ## 应用老年属性递减
 func apply_old_age_penalty() -> void:
-	if age_system and age_system.current_stage == AgeSystem.Stage.OLD_AGE:
+	if age_system and age_system.current_stage == 3:  # Stage.OLD_AGE
 		age_system.apply_old_age_penalty()

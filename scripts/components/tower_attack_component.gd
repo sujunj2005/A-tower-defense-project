@@ -38,15 +38,19 @@ func setup_timer():
 		push_error("[塔 %s] attack_speed 为 %.2f，无法启动攻击定时器！" % [config.tower_name, config.attack_speed])
 		return
 	
-	# 🆕 如果 timer 已存在，先移除旧的
 	if attack_timer:
 		attack_timer.stop()
 		attack_timer.queue_free()
 		attack_timer = null
 	
-	# 创建新的 timer
+	var effective_speed: float = config.attack_speed
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_attack_speed_bonus_for_tower"):
+		var tower_type: String = config.tower_id if config else ""
+		var speed_bonus: float = ts.get_attack_speed_bonus_for_tower(tower_type)
+		effective_speed = config.attack_speed * (1.0 + speed_bonus)
 	attack_timer = Timer.new()
-	attack_timer.wait_time = 1.0 / config.attack_speed
+	attack_timer.wait_time = 1.0 / effective_speed
 	attack_timer.autostart = true
 	attack_timer.timeout.connect(_on_attack_cycle)
 	add_child(attack_timer)
@@ -169,30 +173,25 @@ func execute_attack():
 
 ## 近战攻击：AOE 范围伤害（对所有范围内敌人造成伤害）
 func perform_melee_attack(attack_target: Node2D):
-	# 🆕 播放近战攻击动画
 	_play_melee_attack_animation()
-	
-	# 近战攻击对攻击范围内所有敌人造成伤害（AOE）
+	var trait_bonus: float = _get_trait_damage_bonus()
+	var final_damage: float = config.damage * (1.0 + trait_bonus)
 	var enemies_hit_count: int = 0
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
 	
 	for enemy in all_enemies:
 		if not is_instance_valid(enemy):
 			continue
-		
-		# 检查是否在攻击范围内
 		var distance_to_enemy: float = tower.global_position.distance_to(enemy.global_position)
 		if distance_to_enemy <= config.attack_range:
-			# 对该敌人造成伤害
 			if enemy.has_method("take_damage"):
-				enemy.take_damage(config.damage, config.damage_type, tower)
+				enemy.take_damage(final_damage, config.damage_type, tower)
 				enemies_hit_count += 1
 	
-	# 发射攻击执行信号（传递命中数量）
-	attack_executed.emit(attack_target, config.damage)
+	attack_executed.emit(attack_target, final_damage)
 	
 	if enemies_hit_count > 0:
-		print("[近战攻击] %s 攻击范围内命中 %d 个敌人，每个 %.0f 伤害" % [config.tower_name, enemies_hit_count, config.damage])
+		print("[近战攻击] %s 攻击范围内命中 %d 个敌人，每个 %.0f 伤害" % [config.tower_name, enemies_hit_count, final_damage])
 
 ## 🆕 播放近战攻击动画
 func _play_melee_attack_animation() -> void:
@@ -210,26 +209,32 @@ func _play_melee_attack_animation() -> void:
 
 ## 远程攻击：生成弹道实例
 func perform_ranged_attack(attack_target: Node2D):
-	# 🆕 优先使用 ProjectileConfig
+	_play_ranged_attack_animation()
+	var trait_bonus: float = _get_trait_damage_bonus()
+	var final_damage: float = config.damage * (1.0 + trait_bonus)
 	if config.projectile_config:
-		# 从 ProjectileConfig 创建弹道
-		var projectile = create_projectile_from_config(attack_target)
+		var projectile = create_projectile_from_config(attack_target, final_damage)
 		if projectile:
-			attack_executed.emit(attack_target, config.damage)
+			attack_executed.emit(attack_target, final_damage)
 	else:
-		# 使用旧的 PackedScene 方式
 		if config.projectile_scene:
 			var projectile = config.projectile_scene.instantiate()
 			if projectile:
-				setup_legacy_projectile(projectile, attack_target)
-				attack_executed.emit(attack_target, config.damage)
+				setup_legacy_projectile(projectile, attack_target, final_damage)
+				attack_executed.emit(attack_target, final_damage)
 		else:
-			# 如果没有配置弹道场景，降级为近战攻击
 			push_error("[塔 %s] 远程攻击未配置弹道场景或弹道配置！" % config.tower_name)
 			perform_melee_attack(attack_target)
 
+func _play_ranged_attack_animation() -> void:
+	if not tower or not tower.tower_sprite:
+		return
+	var tween: Tween = tower.create_tween()
+	tween.tween_property(tower.tower_sprite, "scale", Vector2(0.85, 1.15), 0.04)
+	tween.tween_property(tower.tower_sprite, "scale", Vector2(1.0, 1.0), 0.08)
+
 ## 🆕 从 ProjectileConfig 创建弹道
-func create_projectile_from_config(attack_target: Node2D) -> Projectile:
+func create_projectile_from_config(attack_target: Node2D, final_damage: float = -1.0) -> Projectile:
 	if not config.projectile_config:
 		return null
 	
@@ -267,12 +272,13 @@ func create_projectile_from_config(attack_target: Node2D) -> Projectile:
 	
 	# 设置弹道目标
 	if projectile.has_method("set_target"):
-		projectile.set_target(attack_target, config.damage)
+		var dmg: float = final_damage if final_damage >= 0.0 else config.damage
+		projectile.set_target(attack_target, dmg)
 	
 	return projectile
 
 ## 🆕 设置旧版弹道（兼容 PackedScene 方式）
-func setup_legacy_projectile(projectile: Projectile, attack_target: Node2D):
+func setup_legacy_projectile(projectile: Projectile, attack_target: Node2D, final_damage: float = -1.0):
 	# 设置弹道起始位置
 	projectile.global_position = tower.global_position
 	
@@ -295,9 +301,8 @@ func setup_legacy_projectile(projectile: Projectile, attack_target: Node2D):
 	
 	# 设置弹道目标
 	if projectile.has_method("set_target"):
-		projectile.set_target(attack_target, config.damage)
-	else:
-		push_error("[塔 %s] 弹道没有 set_target 方法！" % config.tower_name)
+		var dmg: float = final_damage if final_damage >= 0.0 else config.damage
+		projectile.set_target(attack_target, dmg)
 
 ## ==================== 特效系统（Effects System）====================
 
@@ -470,3 +475,12 @@ func debug_print_config():
 	print("  穿透启用: %s" % str(config.pierce_enabled))
 	print("  穿透数量: %d" % config.pierce_count)
 	print("  特效类型: %d" % config.effect_type)
+
+func _get_trait_damage_bonus() -> float:
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if not ts or not ts.has_method("get_trait_effects_for_tower"):
+		return 0.0
+	var tower_type: String = ""
+	if config:
+		tower_type = config.tower_id
+	return ts.get_trait_effects_for_tower(tower_type)

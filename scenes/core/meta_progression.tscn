@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dy4y7j7cxcohc"]
+
+[ext_resource type="Script" uid="uid://bp6ssx03flrr8" path="res://scripts/ui/meta_progression_ui.gd" id="1_dnrgg"]
+
+[node name="Node" type="Control" unique_id=487416399]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dnrgg")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1404717173]
+layout_mode = 0
+
+[node name="WisdomLabel" type="Label" parent="." unique_id=105944764]
+layout_mode = 0
+text = "人生智慧：0"
+
+[node name="DestinyLabel" type="Label" parent="." unique_id=1538757919]
+layout_mode = 0
+text = "命运点数：0"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1291428817]
+layout_mode = 0
+
+[node name="UnlocksList" type="VBoxContainer" parent="." unique_id=1427431986]
+layout_mode = 0
+
+[node name="BackButton" type="Button" parent="." unique_id=890782074]
+layout_mode = 0
+text = "返回主菜单"

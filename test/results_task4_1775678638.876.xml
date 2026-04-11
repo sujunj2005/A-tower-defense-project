@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="4" tests="10" >
+  <testsuite name="tests/unit/test_task4_battle.gd" tests="10" failures="7" skipped="0" time="0.002586" >
+      <testcase name="test_battle_manager_initialization" assertions="5" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000313" >
+      </testcase>
+      <testcase name="test_home_health_system" assertions="4" status="fail" classname="tests/unit/test_task4_battle.gd" time="0.000279" >
+      <failure message="failed"><![CDATA[[0.0] expected to equal [10.0]:  信号应触发
+            at line 56]]></failure></testcase>
+      <testcase name="test_gold_reward_system" assertions="6" status="fail" classname="tests/unit/test_task4_battle.gd" time="0.000393" >
+      <failure message="failed"><![CDATA[[0] expected to equal [5]:  信号应触发
+            at line 96]]></failure></testcase>
+      <testcase name="test_battle_state_transitions" assertions="5" status="fail" classname="tests/unit/test_task4_battle.gd" time="0.000251" >
+      <failure message="failed"><![CDATA[battle_ended 信号应触发
+            at line 135]]></failure></testcase>
+      <testcase name="test_defeat_condition" assertions="3" status="fail" classname="tests/unit/test_task4_battle.gd" time="0.000207" >
+      <failure message="failed"><![CDATA[battle_ended 信号应触发
+            at line 162]]></failure></testcase>
+      <testcase name="test_tower_data_validation" assertions="5" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000198" >
+      </testcase>
+      <testcase name="test_enemy_data_validation" assertions="6" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000194" >
+      </testcase>
+      <testcase name="test_home_health_percent" assertions="3" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000191" >
+      </testcase>
+      <testcase name="test_wave_completion" assertions="3" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000185" >
+      </testcase>
+      <testcase name="test_vertical_slice_full_flow" assertions="8" status="pass" classname="tests/unit/test_task4_battle.gd" time="0.000375" >
+      </testcase>
+  </testsuite>
+</testsuites>

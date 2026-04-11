@@ -8,6 +8,7 @@ var current_tower: Tower = null
 var panel: PanelContainer
 var tower_name_label: Label
 var sell_price_label: Label
+var ratio_label: Label
 var confirm_button: Button
 var cancel_button: Button
 
@@ -75,7 +76,7 @@ func setup_ui():
 	price_hbox.add_child(sell_price_label)
 	
 	# 返还比例说明
-	var ratio_label = Label.new()
+	ratio_label = Label.new()
 	ratio_label.text = "(返还 50% 造价)"
 	ratio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ratio_label.add_theme_font_size_override("font_size", 12)
@@ -126,16 +127,21 @@ func show_for_tower(tower: Tower):
 		hide()
 		return
 	
-	# 设置塔名称
 	tower_name_label.text = tower.config.tower_name
 	
-	# 计算出售价格
-	var sell_price = int(tower.config.cost * tower.config.sell_ratio)
-	sell_price_label.text = str(sell_price)
+	var sell_price: int = _calculate_sell_price(tower)
+	sell_price_label.text = "%d 金币" % sell_price
 	
-	# 显示 UI
+	var ratio_pct: int = int(tower.config.sell_ratio * 100.0)
+	ratio_label.text = "(返还 %d%% 造价，含等级加成)" % ratio_pct
+	
 	visible = true
 	global_position = tower.global_position + Vector2(0, -50)
+
+func _calculate_sell_price(tower: Tower) -> int:
+	var base_cost: int = tower.config.cost
+	var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.1
+	return int(float(base_cost) * tower.config.sell_ratio * level_bonus)
 
 func hide_ui():
 	visible = false

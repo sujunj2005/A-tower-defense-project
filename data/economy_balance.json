@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "interest": {
+	"formula": "floor(gold / 10) * 5",
+	"divisor": 10,
+	"multiplier": 5,
+	"max_interest": 50,
+	"timing": "每波结束时"
+  },
+  "rating_gold_rewards": {
+	"S": 100,
+	"A": 80,
+	"B": 60,
+	"C": 40,
+	"D": 0
+  },
+  "rating_tower_probabilities": {
+	"S": 1.0,
+	"A": 0.6,
+	"B": 0.4,
+	"C": 0.0,
+	"D": 0.0
+  },
+  "kill_rewards": {
+	"enemy_homework": 5,
+	"enemy_exam": 12,
+	"enemy_bill": 8,
+	"enemy_996": 15,
+	"enemy_pressure_school": 25,
+	"enemy_involution": 30,
+	"boss_midlife_crisis": 100,
+	"boss_final_judgment": 200
+  },
+  "expected_economy_curve": {
+	"wave_1_3": {
+	  "phase": "紧平衡",
+	  "expected_gold_min": 50,
+	  "expected_gold_max": 100,
+	  "strategy": "需要精打细算，优先建造基础塔"
+	},
+	"wave_4_6": {
+	  "phase": "宽松",
+	  "expected_gold_min": 150,
+	  "expected_gold_max": 250,
+	  "strategy": "可以建造高级塔，开始升级"
+	},
+	"wave_7_9": {
+	  "phase": "富裕",
+	  "expected_gold_min": 300,
+	  "expected_gold_max": 500,
+	  "strategy": "可以升级塔，补充功能塔"
+	},
+	"wave_10": {
+	  "phase": "充足",
+	  "expected_gold_min": 500,
+	  "expected_gold_max": 999,
+	  "strategy": "应对BOSS，最大化输出"
+	}
+  },
+  "ending_rewards": {
+	"S": {"life_wisdom": 1000, "destiny_points": 5},
+	"A": {"life_wisdom": 600, "destiny_points": 3},
+	"B": {"life_wisdom": 300, "destiny_points": 1},
+	"C": {"life_wisdom": 150, "destiny_points": 0},
+	"D": {"life_wisdom": 50, "destiny_points": 0}
+  },
+  "unlock_costs": {
+	"era_ancient_greece": {"destiny_points": 50},
+	"era_ming_qing": {"destiny_points": 50},
+	"profession_doctor": {"destiny_points": 30},
+	"profession_lawyer": {"destiny_points": 30},
+	"profession_programmer": {"destiny_points": 30},
+	"difficulty_easy": {"life_wisdom": 200},
+	"difficulty_hard": {"destiny_points": 20},
+	"difficulty_hell": {"destiny_points": 50},
+	"buff_tower_attack": {"life_wisdom": 100},
+	"buff_home_health": {"life_wisdom": 100},
+	"buff_gold_bonus": {"life_wisdom": 150}
+  },
+  "meta_currency_projection": {
+	"games_to_first_era_unlock": 3,
+	"games_to_all_professions": 8,
+	"games_to_all_buffs": 12,
+	"description": "基于平均B级结局（300智慧/局）的预估解锁进度"
+  }
+}

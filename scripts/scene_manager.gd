@@ -168,6 +168,13 @@ func return_to_main_menu() -> void:
 	_target_scene = ""
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
+func change_scene(scene_path: String) -> void:
+	"""
+	简单场景切换方法（供 GameState 使用）
+	不包含加载界面，直接切换
+	"""
+	get_tree().change_scene_to_file(scene_path)
+
 
 
 func _check_window_size() -> void:
