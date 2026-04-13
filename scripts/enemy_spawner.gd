@@ -145,14 +145,16 @@ func spawn_enemy_from_config(wave_enemy_config: WaveEnemyConfig) -> void:
 	var enemy: Enemy = Enemy.new()
 	enemy.initialize(enemy_cfg)
 
-	var spawn_pos: Vector2 = _calculate_spawn_position()
-	enemy.position = spawn_pos
-
 	var world_path: Array[Vector2] = _calculate_world_path()
+	enemy.lateral_offset = randf_range(-20.0, 20.0)
 	enemy.set_path(world_path)
 
 	enemy.reached_base.connect(_on_enemy_reached_base)
 	map_manager.add_child(enemy)
+	if enemy.path_points.size() > 1:
+		var spawn_offset: Vector2 = Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
+		enemy.global_position = enemy.path_points[0] + spawn_offset
+		enemy.current_path_index = 1
 
 func _calculate_spawn_position() -> Vector2:
 	return Vector2(map_config.spawn_point * map_config.tile_size) + Vector2(map_config.tile_size / 2.0, map_config.tile_size / 2.0)

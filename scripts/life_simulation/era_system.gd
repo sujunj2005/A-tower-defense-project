@@ -7,6 +7,13 @@ var session: GameSessionData
 
 func _ready() -> void:
 	session = Global.get_game_session()
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
+	current_era = {}
+	current_family = {}
+	current_region = "tier2_city"
 
 func _get_config_manager() -> Node:
 	return get_node_or_null("/root/ConfigManager")

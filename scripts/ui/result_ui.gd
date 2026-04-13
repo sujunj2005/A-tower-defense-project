@@ -179,17 +179,6 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 				var attr_text: String = "%s %+d" % [attr_disp, growth_val]
 				_add_reward_row("", attr_text, growth_color)
 
-		var age_row: HBoxContainer = HBoxContainer.new()
-		age_row.add_theme_constant_override("separation", 6)
-		var age_icon: Label = Label.new()
-		age_icon.text = "🎂"
-		age_row.add_child(age_icon)
-		var lbl_age: Label = Label.new()
-		lbl_age.text = "年龄 +1"
-		lbl_age.add_theme_color_override("font_color", Color(0.8, 0.9, 1.0, 1.0))
-		age_row.add_child(lbl_age)
-		_rewards_container.add_child(age_row)
-
 		if session.current_stage == "old_age":
 			var old_age_decline: Dictionary = _get_old_age_decline()
 			if not old_age_decline.is_empty():
@@ -209,11 +198,11 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 					_add_reward_row("", "%s %d" % [attr_disp, decline_val], Color(1.0, 0.4, 0.4, 1.0))
 
 	var session2: GameSessionData = Global.get_game_session()
-	var is_final_battle: bool = session2.current_stage == "old_age"
+	var should_show_ending: bool = session2.ending_reason != "" or session2.attributes.get("health", 0) <= 0
 	if _ending_button:
-		_ending_button.visible = is_final_battle
+		_ending_button.visible = should_show_ending
 	if _continue_button:
-		_continue_button.visible = not is_final_battle
+		_continue_button.visible = not should_show_ending
 
 func _add_reward_row(icon: String, text: String, color: Color) -> HBoxContainer:
 	var row: HBoxContainer = HBoxContainer.new()
@@ -346,11 +335,7 @@ func _format_effect(effect: Dictionary) -> String:
 			return "%s: %s" % [effect_type, str(val)]
 
 func _close_result() -> void:
-	var session: GameSessionData = Global.get_game_session()
-	if session.current_stage == "old_age":
-		GameState.change_state(GameState.State.ENDING)
-	else:
-		GameState.change_state(GameState.State.STAGE)
+	GameState.change_state(GameState.State.STAGE)
 
 func _on_continue() -> void:
 	continue_pressed.emit()

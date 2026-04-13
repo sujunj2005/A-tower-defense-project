@@ -52,6 +52,11 @@ func _process(delta: float) -> void:
 		_summon_countdown -= delta
 		if _summon_countdown <= 0.0:
 			force_start_next_wave()
+	if _wave_delay_timer.time_left > 0.0:
+		var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
+		if enemies.is_empty():
+			_wave_delay_timer.stop()
+			_on_wave_delay_timeout()
 
 func start_battle(stage_config: Dictionary, mode: WaveMode = WaveMode.STANDARD) -> void:
 	_stage_config = stage_config

@@ -2,34 +2,84 @@
 
 [ext_resource type="Script" uid="uid://bip1kinih685u" path="res://scripts/ui/ending_ui.gd" id="1_802kv"]
 
-[node name="Node" type="Control" unique_id=958985686]
+[node name="EndingScreen" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_802kv")
 
-[node name="VBox" type="VBoxContainer" parent="." unique_id=1501550554]
-layout_mode = 0
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.1, 0.95)
 
-[node name="RatingLabel" type="Label" parent="." unique_id=481839817]
-layout_mode = 0
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "人生结局"
+horizontal_alignment = 1
+custom_minimum_size = Vector2(0, 50)
+
+[node name="RatingLabel" type="Label" parent="VBox"]
+layout_mode = 2
 text = "结局评级"
+horizontal_alignment = 1
 
-[node name="DescLabel" type="Label" parent="." unique_id=680387705]
-layout_mode = 0
+[node name="DescLabel" type="Label" parent="VBox"]
+layout_mode = 2
 text = "结局描述"
+horizontal_alignment = 1
+autowrap_mode = 2
+custom_minimum_size = Vector2(400, 60)
 
-[node name="WisdomLabel" type="Label" parent="." unique_id=1103102261]
-layout_mode = 0
+[node name="SummaryLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+custom_minimum_size = Vector2(450, 100)
+
+[node name="WisdomLabel" type="Label" parent="VBox"]
+layout_mode = 2
 text = "人生智慧：0"
+horizontal_alignment = 1
 
-[node name="DestinyLabel" type="Label" parent="." unique_id=146282075]
-layout_mode = 0
+[node name="DestinyLabel" type="Label" parent="VBox"]
+layout_mode = 2
 text = "命运点数：0"
+horizontal_alignment = 1
 
-[node name="PlayAgainButton" type="Button" parent="." unique_id=134789530]
-layout_mode = 0
+[node name="ButtonContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="VBox/ButtonContainer"]
+layout_mode = 2
 text = "再来一局"
+custom_minimum_size = Vector2(120, 40)
 
-[node name="MenuButton" type="Button" parent="." unique_id=1075385719]
-layout_mode = 0
+[node name="MenuButton" type="Button" parent="VBox/ButtonContainer"]
+layout_mode = 2
 text = "返回主菜单"
+custom_minimum_size = Vector2(120, 40)

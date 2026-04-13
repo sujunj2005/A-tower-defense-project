@@ -29,6 +29,10 @@ const RATING_TOWER_PROBABILITIES: Dictionary = {
 func _ready() -> void:
 	session = Global.get_game_session()
 	_load_balance_config()
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
 
 func _get_config_manager() -> Node:
 	return get_node_or_null("/root/ConfigManager")

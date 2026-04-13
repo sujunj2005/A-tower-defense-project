@@ -100,8 +100,7 @@
 	  "enemy_pool": [
 		{"id": "enemy_bill", "weight": 30},
 		{"id": "enemy_996", "weight": 25},
-		{"id": "enemy_involution", "weight": 20},
-		{"id": "enemy_pressure_school", "weight": 5},
+		{"id": "enemy_involution", "weight": 25},
 		{"id": "boss_midlife_crisis", "weight": 5}
 	  ],
 	  "attribute_growth": {
@@ -120,9 +119,23 @@
 	  "event_trigger_rate": 0.60,
 	  "battle_difficulty": 3.0,
 	  "gold_multiplier": 1.0,
-	  "available_towers": [],
+	  "available_towers": [
+		"tower_chinese_advanced",
+		"tower_math_advanced",
+		"tower_science_advanced",
+		"tower_communication_advanced",
+		"tower_finance_basic",
+		"tower_business_advanced",
+		"tower_history_advanced",
+        "tower_history_master"
+	  ],
 	  "enemy_pool": [
-		{"id": "boss_final_judgment", "weight": 100}
+		{"id": "enemy_chronic_disease", "weight": 35},
+		{"id": "enemy_loneliness", "weight": 30},
+		{"id": "enemy_bill", "weight": 15},
+		{"id": "enemy_recession", "weight": 10},
+		{"id": "enemy_memory_loss", "weight": 5},
+		{"id": "boss_final_judgment", "weight": 5}
 	  ],
 	  "attribute_growth": {
 		"intelligence": -3,

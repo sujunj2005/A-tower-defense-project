@@ -8,25 +8,13 @@ radius = 12.0
 [node name="Projectile" type="Area2D" unique_id=614249525]
 collision_layer = 2
 collision_mask = 2
+z_index = 50
 script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772183212]
 modulate = Color(1, 1, 0, 1)
 scale = Vector2(1.5, 1.5)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1772183213]
-position = Vector2(0, 0)
-amount = 20
-lifetime = 1.0
-process_material = null
-draw_pass_1 = null
-
-[node name="TrailParticles" type="GPUParticles2D" parent="." unique_id=1772183214]
-position = Vector2(0, 0)
-amount = 10
-lifetime = 0.5
-emitting = true
-process_material = null
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=717510466]
 shape = SubResource("CircleShape2D_c8fcr")

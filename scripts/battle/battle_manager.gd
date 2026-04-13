@@ -42,6 +42,10 @@ var session: GameSessionData
 func _ready() -> void:
 	session = Global.get_game_session()
 	_initialize_battle()
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
 
 func _initialize_battle() -> void:
 	if session:

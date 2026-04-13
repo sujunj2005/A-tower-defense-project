@@ -1,11 +1,13 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "events": [
 	{
 	  "event_id": "event_kindergarten_show",
 	  "event_name": "幼儿园表演",
 	  "ages": [6, 7],
 	  "stage": "childhood",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "幼儿园要举办六一表演，老师问你想参加什么节目。",
 	  "options": [
 		{
@@ -46,6 +48,8 @@
 	  "event_name": "数学竞赛",
 	  "ages": [8, 9, 10],
 	  "stage": "childhood",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "学校举办数学竞赛，班主任鼓励你参加。",
 	  "options": [
 		{
@@ -99,6 +103,8 @@
 	  "event_name": "兴趣班选择",
 	  "ages": [9, 10, 11],
 	  "stage": "childhood",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "父母想给你报个兴趣班，但家里预算有限。",
 	  "options": [
 		{
@@ -151,6 +157,8 @@
 	  "event_name": "同伴冲突",
 	  "ages": [10, 11, 12],
 	  "stage": "childhood",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "班上的调皮鬼抢了你的文具，还嘲笑你。",
 	  "options": [
 		{
@@ -207,6 +215,8 @@
 	  "event_name": "家庭变故",
 	  "ages": [11, 12, 13],
 	  "stage": "childhood",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "爸爸失业了，家里气氛很压抑。",
 	  "options": [
 		{
@@ -268,8 +278,10 @@
 	{
 	  "event_id": "event_zhongkao",
 	  "event_name": "中考分流",
-	  "ages": [15, 16],
+	  "ages": [15],
 	  "stage": "youth",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "中考成绩出来了，你面临人生第一次重大分流。",
 	  "options": [
 		{
@@ -324,6 +336,8 @@
 	  "event_name": "高考志愿",
 	  "ages": [18],
 	  "stage": "youth",
+	  "chain_prerequisites": ["event_zhongkao"],
+	  "chain_excludes": ["event_first_job"],
 	  "description": "十二年寒窗苦读，只为今朝一搏。高考成绩出来了，你要填报哪个志愿？",
 	  "options": [
 		{
@@ -391,6 +405,8 @@
 	  "event_name": "大学恋爱",
 	  "ages": [19, 20, 21],
 	  "stage": "youth",
+	  "chain_prerequisites": ["event_gaokao_choice"],
+	  "chain_excludes": ["event_first_job"],
 	  "description": "大学里遇到了心动的人，你要不要表白？",
 	  "options": [
 		{
@@ -430,6 +446,8 @@
 	  "event_name": "人生岔路口",
 	  "ages": [22],
 	  "stage": "youth",
+	  "chain_prerequisites": ["event_college_love"],
+	  "chain_excludes": ["event_first_job"],
 	  "description": "大学毕业在即，你面临人生重大选择：考研还是工作？",
 	  "options": [
 		{
@@ -495,6 +513,8 @@
 	  "event_name": "第一份工作",
 	  "ages": [23],
 	  "stage": "youth",
+	  "chain_prerequisites": [],
+	  "chain_excludes": ["event_college_love"],
 	  "description": "你收到了几个Offer，要选哪个？",
 	  "options": [
 		{
@@ -552,6 +572,8 @@
 	  "event_name": "租房困境",
 	  "ages": [24],
 	  "stage": "youth",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "工作后要租房，你要选什么样的房子？",
 	  "options": [
 		{
@@ -592,6 +614,8 @@
 	  "event_name": "职场新人",
 	  "ages": [25, 26],
 	  "stage": "youth",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "刚入职场的你，遇到了老员工甩锅。",
 	  "options": [
 		{
@@ -645,6 +669,8 @@
 	  "event_name": "催婚",
 	  "ages": [27, 28, 29],
 	  "stage": "youth",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "过年回家，亲戚都在催婚。",
 	  "options": [
 		{
@@ -692,7 +718,9 @@
 	  "event_name": "买房",
 	  "ages": [30, 31, 32],
 	  "stage": "middle_age",
-	  "description": "结婚后要买房，你要怎么选择？",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "你考虑买一套属于自己的房子。",
 	  "options": [
 		{
 		  "option_id": "A",
@@ -747,6 +775,8 @@
 	  "event_name": "子女教育",
 	  "ages": [33, 34, 35, 36],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "孩子要上学了，你要怎么培养？",
 	  "options": [
 		{
@@ -796,6 +826,8 @@
 	  "event_name": "父母养老",
 	  "ages": [38, 39, 40, 41],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "父母年纪大了，需要人照顾。",
 	  "options": [
 		{
@@ -842,6 +874,8 @@
 	  "event_name": "晋升机会",
 	  "ages": [41, 42, 43],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "公司有个晋升机会，但需要付出大量时间。",
 	  "options": [
 		{
@@ -897,6 +931,8 @@
 	  "event_name": "健康预警",
 	  "ages": [43, 44, 45, 46],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "体检报告出来了，多项指标异常。",
 	  "options": [
 		{
@@ -936,6 +972,8 @@
 	  "event_name": "癌症早期",
 	  "ages": [45, 46, 47, 48],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "体检发现癌症早期，需要立即治疗。",
 	  "trigger_chance": 0.03,
 	  "options": [
@@ -988,6 +1026,8 @@
 	  "event_name": "车祸",
 	  "ages": [30, 35, 40, 45],
 	  "stage": "middle_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
 	  "description": "下班路上遭遇车祸。",
 	  "trigger_chance": 0.02,
 	  "options": [
@@ -1022,6 +1062,317 @@
 		}
 	  ],
 	  "is_deadly": true
+	},
+	{
+	  "event_id": "event_retirement_plan",
+	  "event_name": "退休规划",
+	  "ages": [50, 51, 52],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "到了退休的年纪，你开始思考如何度过余生。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "安享晚年，含饴弄孙",
+		  "requirements": {"trait": "!single_forever"},
+		  "rewards": [
+			{"type": "trait", "id": "peaceful_elder"},
+			{"type": "gold", "value": 100}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "B",
+		  "text": "发挥余热，做社区志愿者",
+		  "requirements": {"health": 30},
+		  "rewards": [
+			{"type": "tower", "id": "tower_communication_advanced", "count": 1},
+			{"type": "trait", "id": "community_elder"}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "开始学新东西，活到老学到老",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "tower", "id": "tower_programming_advanced", "count": 1},
+			{"type": "trait", "id": "lifelong_learner"}
+		  ],
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
+	},
+	{
+	  "event_id": "event_chronic_illness",
+	  "event_name": "慢性病困扰",
+	  "ages": [53, 55, 57, 59],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "年纪大了，身体开始出现各种慢性病，需要长期调养。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "坚持锻炼，积极对抗",
+		  "requirements": {"health": 25},
+		  "rewards": [
+			{"type": "trait", "id": "strong_will"}
+		  ],
+		  "cost": {"health": -5},
+		  "battle_trigger": {
+			"battle_id": "battle_chronic_illness",
+			"is_deadly": false,
+			"waves": [
+			  {"wave_number": 1, "enemies": [{"id": "enemy_bill", "count": 3}, {"id": "enemy_involution", "count": 2}], "spawn_interval": 1.2},
+			  {"wave_number": 2, "enemies": [{"id": "enemy_996", "count": 2}, {"id": "enemy_bill", "count": 2}], "spawn_interval": 1.0}
+			]
+		  }
+		},
+		{
+		  "option_id": "B",
+		  "text": "吃药调养，顺其自然",
+		  "requirements": {},
+		  "rewards": [],
+		  "cost": {"gold": -80, "health": -10},
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "不管了，该吃吃该喝喝",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "carefree_elder"}
+		  ],
+		  "cost": {"health": -15},
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
+	},
+	{
+	  "event_id": "event_family_reunion",
+	  "event_name": "家庭团聚",
+	  "ages": [54, 56, 58],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "节假日到了，你感慨万千。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "享受天伦之乐",
+		  "requirements": {"trait": "!single_forever"},
+		  "rewards": [
+			{"type": "trait", "id": "family_happiness"},
+			{"type": "gold", "value": 120}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "B",
+		  "text": "叮嘱晚辈好好工作",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "tower", "id": "tower_finance_basic", "count": 1},
+			{"type": "gold", "value": 60}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "和家人一起旅行",
+		  "requirements": {"gold": 100, "trait": "!single_forever"},
+		  "rewards": [
+			{"type": "trait", "id": "travel_elder"}
+		  ],
+		  "cost": {"gold": -100},
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "D",
+		  "text": "独自享受宁静时光",
+		  "requirements": {"trait": "single_forever"},
+		  "rewards": [
+			{"type": "trait", "id": "solitary_peace"},
+			{"type": "gold", "value": 80}
+		  ],
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
+	},
+	{
+	  "event_id": "event_old_friend",
+	  "event_name": "老友重逢",
+	  "ages": [52, 55, 58, 61],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "在公园遇到了多年未见的老朋友，你们聊起了往事。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "畅叙旧情，感慨人生",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "nostalgic"},
+			{"type": "gold", "value": 50}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "B",
+		  "text": "约好以后常聚",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "tower", "id": "tower_network_basic", "count": 1},
+			{"type": "trait", "id": "social_elder"}
+		  ],
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
+	},
+	{
+	  "event_id": "event_legacy",
+	  "event_name": "传承智慧",
+	  "ages": [60, 62, 64],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "你决定把自己一生的经验传授给年轻人。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "写回忆录",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "memoirist"},
+			{"type": "gold", "value": 150}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "B",
+		  "text": "当导师带徒弟",
+		  "requirements": {"intelligence": 40},
+		  "rewards": [
+			{"type": "tower", "id": "tower_business_basic", "count": 1},
+			{"type": "trait", "id": "mentor"}
+		  ],
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "默默看着就好",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "quiet_observer"}
+		  ],
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
+	},
+	{
+	  "event_id": "event_health_crisis",
+	  "event_name": "健康危机",
+	  "ages": [63, 66, 69],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "一次严重的身体警报让你意识到时间不多了。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "全力治疗",
+		  "requirements": {"gold": 200},
+		  "rewards": [],
+		  "cost": {"gold": -200},
+		  "battle_trigger": {
+			"battle_id": "battle_health_crisis",
+			"is_deadly": true,
+			"waves": [
+			  {"wave_number": 1, "enemies": [{"id": "enemy_involution", "count": 3}, {"id": "enemy_bill", "count": 3}], "spawn_interval": 0.8},
+			  {"wave_number": 2, "enemies": [{"id": "enemy_996", "count": 3}, {"id": "boss_midlife_crisis", "count": 1}], "spawn_interval": 0.6}
+			]
+		  }
+		},
+		{
+		  "option_id": "B",
+		  "text": "保守治疗，珍惜当下",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "accept_mortality"}
+		  ],
+		  "cost": {"health": -20},
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "放弃治疗",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "final_peace"}
+		  ],
+		  "cost": {"health": -30},
+		  "triggers_ending": true,
+		  "ending_reason": "gave_up_treatment",
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": true
+	},
+	{
+	  "event_id": "event_life_reflection",
+	  "event_name": "人生感悟",
+	  "ages": [65, 68, 70, 72, 75],
+	  "stage": "old_age",
+	  "chain_prerequisites": [],
+	  "chain_excludes": [],
+	  "description": "坐在窗前，你回望这一生，百感交集。",
+	  "options": [
+		{
+		  "option_id": "A",
+		  "text": "此生无憾",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "no_regrets"},
+			{"type": "gold", "value": 80}
+		  ],
+		  "triggers_ending": true,
+		  "ending_reason": "no_regrets",
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "B",
+		  "text": "有些遗憾，但已释然",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "at_peace"},
+			{"type": "gold", "value": 40}
+		  ],
+		  "triggers_ending": true,
+		  "ending_reason": "at_peace",
+		  "battle_trigger": null
+		},
+		{
+		  "option_id": "C",
+		  "text": "如果重来，一定不同",
+		  "requirements": {},
+		  "rewards": [
+			{"type": "trait", "id": "regretful"}
+		  ],
+		  "cost": {"health": -5},
+		  "triggers_ending": true,
+		  "ending_reason": "regretful",
+		  "battle_trigger": null
+		}
+	  ],
+	  "is_deadly": false
 	}
   ]
 }

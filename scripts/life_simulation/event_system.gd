@@ -8,6 +8,10 @@ var session: GameSessionData
 
 func _ready() -> void:
 	session = Global.get_game_session()
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
 
 func _get_config_manager() -> Node:
 	return get_node_or_null("/root/ConfigManager")
@@ -41,6 +45,14 @@ func _can_trigger(event: Dictionary, age_sys: Node) -> bool:
 	var event_id: String = event.get("event_id", "")
 	if event_id in session.completed_events:
 		return false
+	var chain_prerequisites: Array = event.get("chain_prerequisites", [])
+	for prereq_id: String in chain_prerequisites:
+		if not prereq_id in session.completed_events:
+			return false
+	var chain_excludes: Array = event.get("chain_excludes", [])
+	for exclude_id: String in chain_excludes:
+		if exclude_id in session.completed_events:
+			return false
 	return true
 
 func trigger_event(event: Dictionary) -> void:
@@ -53,19 +65,27 @@ func select_option(event: Dictionary, option: Dictionary) -> void:
 	session.last_event_towers.clear()
 	_apply_rewards(option.get("rewards", []))
 	_apply_costs(option.get("cost", {}))
-	_apply_stage_attribute_growth()
+	if GameState.current_state == GameState.State.ENDING:
+		return
 	var event_id: String = event.get("event_id", "")
 	session.completed_events.append(event_id)
+	var old_age: int = session.current_age
 	session.current_age += 1
 	Global.debug_log("年龄+1 → %d" % session.current_age)
+	if session.current_age != old_age:
+		_apply_stage_attribute_growth()
+		if GameState.current_state == GameState.State.ENDING:
+			return
 	_check_stage_transition()
 	var age_sys: Node = _get_age_system()
 	if age_sys and age_sys.has_method("increment_stage_events"):
 		age_sys.increment_stage_events()
 	if age_sys and "current_age" in age_sys:
 		age_sys.current_age = session.current_age
-	if option.has("battle_trigger") and option.battle_trigger:
+	if option.get("battle_trigger") is Dictionary:
 		_trigger_battle(option.battle_trigger)
+	elif option.get("triggers_ending", false) == true:
+		_trigger_life_ending(option.get("ending_reason", "player_choice"))
 	event_completed.emit(event_id, option.get("option_id", ""))
 
 func _apply_rewards(rewards: Array) -> void:
@@ -118,9 +138,14 @@ func _apply_costs(costs: Dictionary) -> void:
 		session.attributes["health"] += health_change
 		if health_change < 0:
 			Global.debug_log("消耗健康：%d" % (-health_change))
-	if session.attributes.get("health", 0) <= 0 and session.current_stage == "old_age":
-		Global.debug_log("老年健康归零，触发人生结局")
-		_trigger_life_ending("health_depleted")
+	if session.attributes.get("health", 0) <= 0:
+		var age_sys_check: Node = _get_age_system()
+		var is_old: bool = session.current_stage == "old_age"
+		if age_sys_check and age_sys_check.has_method("get_stage_id"):
+			is_old = is_old or age_sys_check.get_stage_id() == "old_age"
+		if is_old:
+			Global.debug_log("老年健康归零，触发人生结局（当前健康=%d，阶段=%s）" % [session.attributes.get("health", 0), session.current_stage])
+			_trigger_life_ending("health_depleted")
 
 func _apply_stage_attribute_growth() -> void:
 	var cm: Node = _get_config_manager()
@@ -155,9 +180,6 @@ func _apply_stage_attribute_growth() -> void:
 		session.max_home_health += float(health_growth)
 		session.home_health += float(health_growth)
 		Global.debug_log("生命值同步：max_home_health=%.0f, home_health=%.0f" % [session.max_home_health, session.home_health])
-	if stage_id == "old_age" and session.attributes.get("health", 0) <= 0:
-		Global.debug_log("老年健康归零，触发人生结局")
-		_trigger_life_ending("health_depleted")
 
 func _trigger_life_ending(reason: String) -> void:
 	session.ending_reason = reason

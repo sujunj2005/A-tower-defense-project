@@ -84,13 +84,105 @@
         {
           "ability_id": "split",
           "ability_name": "死亡分裂",
-          "split_enemy_id": "enemy_homework",
+          "split_enemy_id": "enemy_bill",
           "split_count": 2,
           "trigger_on": "death"
         }
       ],
       "spawn_stages": ["青年", "中年"],
       "spawn_waves": [4, 5, 6, 7, 8]
+    },
+    {
+      "enemy_id": "enemy_chronic_disease",
+      "enemy_name": "慢性病",
+      "enemy_type": "健康威胁",
+      "tier": "基础",
+      "stats": {
+        "health": 50,
+        "speed": 30,
+        "armor": 5,
+        "armor_type": "light",
+        "damage": 8,
+        "attack_speed": 0.8,
+        "attack_range": 20
+      },
+      "kill_reward_gold": 10,
+      "special_abilities": [],
+      "spawn_stages": ["老年"],
+      "spawn_waves": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "enemy_id": "enemy_loneliness",
+      "enemy_name": "孤独怪",
+      "enemy_type": "心理压力",
+      "tier": "基础",
+      "stats": {
+        "health": 35,
+        "speed": 60,
+        "armor": 0,
+        "armor_type": "none",
+        "damage": 6,
+        "attack_speed": 1.0,
+        "attack_range": 20
+      },
+      "kill_reward_gold": 8,
+      "special_abilities": [],
+      "spawn_stages": ["老年"],
+      "spawn_waves": [1, 2, 3, 4, 5]
+    },
+    {
+      "enemy_id": "enemy_recession",
+      "enemy_name": "经济衰退",
+      "enemy_type": "经济压力",
+      "tier": "精英",
+      "stats": {
+        "health": 90,
+        "speed": 35,
+        "armor": 15,
+        "armor_type": "light",
+        "damage": 12,
+        "attack_speed": 0.8,
+        "attack_range": 20
+      },
+      "kill_reward_gold": 25,
+      "special_abilities": [
+        {
+          "ability_id": "split",
+          "ability_name": "死亡分裂",
+          "split_enemy_id": "enemy_bill",
+          "split_count": 2,
+          "trigger_on": "death"
+        }
+      ],
+      "spawn_stages": ["老年"],
+      "spawn_waves": [5, 6, 7, 8, 9]
+    },
+    {
+      "enemy_id": "enemy_memory_loss",
+      "enemy_name": "记忆衰退",
+      "enemy_type": "健康威胁",
+      "tier": "精英",
+      "stats": {
+        "health": 80,
+        "speed": 25,
+        "armor": 20,
+        "armor_type": "light",
+        "damage": 10,
+        "attack_speed": 0.7,
+        "attack_range": 20
+      },
+      "kill_reward_gold": 20,
+      "special_abilities": [
+        {
+          "ability_id": "spawn_loneliness",
+          "ability_name": "召唤孤独",
+          "spawn_enemy_id": "enemy_loneliness",
+          "spawn_count": 2,
+          "cooldown": 6.0
+        }
+      ],
+      "spawn_stages": ["老年"],
+      "spawn_waves": [6, 7, 8, 9]
     },
     {
       "enemy_id": "enemy_pressure_school",
@@ -201,7 +293,7 @@
         {
           "ability_id": "memory_attack",
           "ability_name": "回忆杀",
-          "spawn_enemy_pool": ["enemy_homework", "enemy_exam", "enemy_996", "enemy_involution"],
+          "spawn_enemy_pool": ["enemy_chronic_disease", "enemy_loneliness", "enemy_bill", "enemy_involution"],
           "spawn_count": 5,
           "cooldown": 12.0
         },

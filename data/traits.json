@@ -50,6 +50,24 @@
 	{"trait_id": "fitness_habit", "name": "健身习惯", "description": "坚持锻炼身体", "effect": {"type": "health_bonus", "value": 15}},
 	{"trait_id": "supplement_user", "name": "保健品达人", "description": "各种保健品不断", "effect": {"type": "health_bonus", "value": 5}},
 	{"trait_id": "accept_fate", "name": "认命", "description": "接受命运的安排", "effect": {"type": "damage_reduction", "value": 0.1}},
-	{"trait_id": "career_focus", "name": "事业为重", "description": "没有家庭牵绊，全力投入事业", "effect": {"type": "gold_per_wave", "value": 8}}
+	{"trait_id": "career_focus", "name": "事业为重", "description": "没有家庭牵绊，全力投入事业", "effect": {"type": "gold_per_wave", "value": 8}},
+	{"trait_id": "peaceful_elder", "name": "安享晚年", "description": "含饴弄孙，岁月静好——但收入减少", "effect": {"type": "health_bonus", "value": 15}, "side_effects": [{"type": "gold_per_wave", "value": -3}]},
+	{"trait_id": "community_elder", "name": "社区长者", "description": "在社区中受人尊敬，人脉广泛——但精力不济", "effect": {"type": "tower_attack_speed_bonus", "value": 0.08, "tower_types": ["tower_communication_basic", "tower_communication_advanced"]}, "side_effects": [{"type": "health_bonus", "value": -5}]},
+	{"trait_id": "lifelong_learner", "name": "终身学习", "description": "活到老学到老，智慧日增——但学费不菲", "effect": {"type": "attribute_bonus", "attribute": "intelligence", "value": 10}, "side_effects": [{"type": "gold_per_wave", "value": -3}]},
+	{"trait_id": "strong_will", "name": "坚韧意志", "description": "面对病痛依然坚强，意志力转化为防御", "effect": {"type": "damage_reduction", "value": 0.08}, "side_effects": []},
+	{"trait_id": "carefree_elder", "name": "洒脱老人", "description": "看淡一切，自在生活——代价是忽视健康", "effect": {"type": "attribute_bonus", "attribute": "courage", "value": 8}, "side_effects": [{"type": "health_bonus", "value": -8}]},
+	{"trait_id": "family_happiness", "name": "天伦之乐", "description": "儿孙绕膝，情感支持让你更坚韧——但开销也大", "effect": {"type": "damage_reduction", "value": 0.06}, "side_effects": [{"type": "gold_per_wave", "value": -4}]},
+	{"trait_id": "travel_elder", "name": "旅行老人", "description": "晚年走遍大好河山，见闻转化为智慧", "effect": {"type": "attribute_bonus", "attribute": "intelligence", "value": 5}, "side_effects": [{"type": "gold_per_wave", "value": -2}]},
+	{"trait_id": "nostalgic", "name": "怀旧", "description": "常常回忆往昔岁月，沉淀出智慧——但勇气渐消", "effect": {"type": "attribute_bonus", "attribute": "intelligence", "value": 5}, "side_effects": [{"type": "attribute_bonus", "attribute": "courage", "value": -3}]},
+	{"trait_id": "social_elder", "name": "社交达人", "description": "老年社交圈广泛，信息灵通——但应酬花费不少", "effect": {"type": "tower_attack_speed_bonus", "value": 0.08, "tower_types": ["tower_network_basic"]}, "side_effects": [{"type": "gold_per_wave", "value": -2}]},
+	{"trait_id": "memoirist", "name": "回忆录作者", "description": "将一生经历写成文字，稿费可观——但写作伤神", "effect": {"type": "gold_bonus", "value": 30}, "side_effects": [{"type": "attribute_bonus", "attribute": "intelligence", "value": -3}]},
+	{"trait_id": "mentor", "name": "导师", "description": "将经验传授给后辈，桃李满天下——但操劳伤身", "effect": {"type": "tower_damage_bonus", "tower_damage_bonus": 0.1, "tower_types": ["tower_business_basic", "tower_business_advanced"]}, "side_effects": [{"type": "health_bonus", "value": -5}]},
+	{"trait_id": "quiet_observer", "name": "默默旁观", "description": "静静看着世界变化，内心平和", "effect": {"type": "damage_reduction", "value": 0.05}, "side_effects": []},
+	{"trait_id": "solitary_peace", "name": "独处安宁", "description": "独自享受宁静时光，内心澄澈——但偶尔孤独", "effect": {"type": "damage_reduction", "value": 0.08}, "side_effects": [{"type": "attribute_bonus", "attribute": "courage", "value": -3}]},
+	{"trait_id": "accept_mortality", "name": "接受死亡", "description": "坦然面对生命的终点，无所畏惧", "effect": {"type": "damage_reduction", "value": 0.1}, "side_effects": []},
+	{"trait_id": "final_peace", "name": "最终安宁", "description": "放弃治疗，内心彻底平静——但身体加速衰弱", "effect": {"type": "damage_reduction", "value": 0.15}, "side_effects": [{"type": "health_bonus", "value": -10}]},
+	{"trait_id": "no_regrets", "name": "此生无憾", "description": "回首一生没有遗憾，自信化为力量——但挥金如土", "effect": {"type": "tower_damage_bonus", "tower_damage_bonus": 0.1, "tower_types": []}, "side_effects": [{"type": "gold_per_wave", "value": -3}]},
+	{"trait_id": "at_peace", "name": "释然", "description": "虽有遗憾，但已放下——内心平和带来微弱的身心恢复", "effect": {"type": "damage_reduction", "value": 0.05}, "side_effects": [{"type": "health_bonus", "value": 5}]},
+	{"trait_id": "regretful", "name": "遗憾", "description": "如果重来一定不同——遗憾催生反思，但也消磨勇气", "effect": {"type": "attribute_bonus", "attribute": "intelligence", "value": 5}, "side_effects": [{"type": "attribute_bonus", "attribute": "courage", "value": -5}]}
   ]
 }

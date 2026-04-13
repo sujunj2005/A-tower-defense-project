@@ -117,12 +117,10 @@ func _on_resume_pressed():
 func _on_main_menu_pressed():
 	is_paused = false
 	visible = false
-	# 恢复场景树
 	var tree = get_tree()
 	tree.paused = false
-	# 恢复正常处理模式
 	set_process_mode(Node.PROCESS_MODE_INHERIT)
-	# 尝试获取SceneManager节点
+	Global.reset_game_session()
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager:
 		scene_manager.return_to_main_menu()

@@ -28,6 +28,9 @@ var level_label: Label
 var hover_area: Area2D
 var collision_shape: CollisionShape2D
 
+var is_selected: bool = false
+var _selection_indicator: ColorRect = null
+
 signal target_changed(new_target: Node2D)
 signal tower_placed(tower: Tower)
 signal level_changed(new_level: int)
@@ -188,9 +191,17 @@ func update_tower_stats() -> void:
 	if not attack_component or not config:
 		return
 
-	attack_component.config.damage = config.get_damage_at_level(current_level)
-	attack_component.config.attack_speed = config.get_attack_speed_at_level(current_level)
-	attack_component.config.attack_range = config.get_attack_range_at_level(current_level)
+	var new_damage: float = config.get_damage_at_level(current_level)
+	var new_attack_speed: float = config.get_attack_speed_at_level(current_level)
+	var new_attack_range: float = config.get_attack_range_at_level(current_level)
+
+	config.damage = new_damage
+	config.attack_speed = new_attack_speed
+	config.attack_range = new_attack_range
+
+	attack_component.config.damage = new_damage
+	attack_component.config.attack_speed = new_attack_speed
+	attack_component.config.attack_range = new_attack_range
 
 	attack_component.setup_timer()
 
@@ -200,24 +211,41 @@ func setup_hover_area() -> void:
 	hover_area = Area2D.new()
 	hover_area.name = "HoverArea"
 	hover_area.z_index = 20
-
 	hover_area.collision_layer = 1
 	hover_area.collision_mask = 1
-
 	collision_shape = CollisionShape2D.new()
 	collision_shape.name = "CollisionShape"
 	var shape: RectangleShape2D = RectangleShape2D.new()
 	shape.size = Vector2(40, 40)
 	collision_shape.shape = shape
 	collision_shape.position = Vector2.ZERO
-
 	hover_area.add_child(collision_shape)
 	add_child(hover_area)
-
 	hover_area.mouse_entered.connect(_on_hover_area_mouse_entered)
 	hover_area.mouse_exited.connect(_on_hover_area_mouse_exited)
-
 	hover_area.input_event.connect(_on_hover_area_input_event)
+
+func set_selected(selected: bool) -> void:
+	if is_selected == selected:
+		return
+	is_selected = selected
+	if is_selected:
+		if not _selection_indicator:
+			_selection_indicator = ColorRect.new()
+			_selection_indicator.size = Vector2(80, 80)
+			_selection_indicator.position = Vector2(-40, -40)
+			_selection_indicator.z_index = 9
+			_selection_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var shader_mat: ShaderMaterial = ShaderMaterial.new()
+			var shader: Shader = Shader.new()
+			shader.code = "shader_type canvas_item;\nvoid fragment() {\n	vec2 uv = UV;\n	float border = 0.06;\n	float alpha = 0.0;\n	if (uv.x < border || uv.x > 1.0 - border || uv.y < border || uv.y > 1.0 - border) {\n		alpha = 0.9;\n	}\n	float pulse = 0.5 + 0.5 * sin(TIME * 4.0);\n	alpha *= (0.6 + 0.4 * pulse);\n	COLOR = vec4(1.0, 0.85, 0.2, alpha);\n}"
+			shader_mat.shader = shader
+			_selection_indicator.material = shader_mat
+			add_child(_selection_indicator)
+		_selection_indicator.visible = true
+	else:
+		if _selection_indicator:
+			_selection_indicator.visible = false
 
 func _on_hover_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

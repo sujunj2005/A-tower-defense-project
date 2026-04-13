@@ -54,17 +54,15 @@ signal hit_target(target: Node2D, damage: float)
 signal projectile_destroyed(projectile: Projectile)
 
 func _ready():
-	# 设置碰撞层（用于碰撞检测）
-	collision_layer = 2  # 弹道层
-	collision_mask = 4   # 敌人群组层
+	collision_layer = 2
+	collision_mask = 4
 	monitoring = true
 	monitorable = true
+	z_index = 50
 
-	# 连接信号
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
 
-	# 根据配置初始化视觉和属性
 	if config:
 		setup_from_config()
 	else:

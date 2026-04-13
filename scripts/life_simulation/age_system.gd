@@ -33,6 +33,13 @@ var session: GameSessionData
 
 func _ready() -> void:
 	session = Global.get_game_session()
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
+	current_age = session.current_age
+	current_stage = Stage.CHILDHOOD
+	stage_events_count = 0
 
 ## 增加年龄
 func increase_age(years: int = 1) -> void:

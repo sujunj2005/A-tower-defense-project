@@ -26,6 +26,9 @@ var tower_info_label: Label
 var hovered_tower: Tower = null
 var range_circle: Node2D
 var highlight_rect: ColorRect
+var target_info_panel: TargetInfoPanel
+var _selected_tower: Tower = null
+var _selected_enemy: Enemy = null
 
 var dash_markers: Array[ColorRect] = []
 
@@ -90,6 +93,7 @@ func _setup_ui_components() -> void:
 	_create_game_hud()
 	_create_tower_hover_ui()
 	_create_battle_hud()
+	_create_target_info_panel()
 
 func _start_battle() -> void:
 	_battle_active = true
@@ -161,14 +165,18 @@ func _on_enemy_spawn_requested(enemy_id: String) -> void:
 		return
 	var enemy: Enemy = Enemy.new()
 	enemy.initialize(enemy_cfg)
-	enemy.position = _get_tile_center_position(map_config.spawn_point)
 	var world_path: Array[Vector2] = []
 	for point: Vector2i in map_config.path_points:
 		world_path.append(Vector2(point * map_config.tile_size) + Vector2(map_config.tile_size / 2.0, map_config.tile_size / 2.0))
+	enemy.lateral_offset = randf_range(-20.0, 20.0)
 	enemy.set_path(world_path)
 	enemy.reached_base.connect(_on_enemy_reached_base)
 	enemy.died.connect(_on_enemy_killed)
 	add_child(enemy)
+	if enemy.path_points.size() > 1:
+		var spawn_offset: Vector2 = Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
+		enemy.global_position = enemy.path_points[0] + spawn_offset
+		enemy.current_path_index = 1
 
 func _on_wave_completed(wave_number: int) -> void:
 	Global.debug_log("波次 %d 完成" % wave_number)
@@ -242,11 +250,6 @@ func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 		wave_manager.stop_battle()
 	var result_text: String = "胜利" if victory else "失败"
 	Global.debug_log("战斗结束：%s，评级：%s" % [result_text, rating])
-	session.current_age += 1
-	Global.debug_log("战斗结束，年龄+1 → %d" % session.current_age)
-	var age_sys: Node = get_node_or_null("/root/AgeSystem")
-	if age_sys and "current_age" in age_sys:
-		age_sys.current_age = session.current_age
 	var es_node: Node = get_node_or_null("/root/EventSystem")
 	if es_node and es_node.has_method("_check_stage_transition"):
 		es_node._check_stage_transition()
@@ -587,8 +590,11 @@ func _on_tower_sell_cancelled() -> void:
 	pass
 
 func _on_tower_mouse_clicked(tower: Tower) -> void:
-	if tower_sell_ui:
-		tower_sell_ui.show_for_tower(tower)
+	_clear_selection()
+	_selected_tower = tower
+	tower.set_selected(true)
+	if target_info_panel:
+		target_info_panel.show_tower_info(tower)
 
 func _on_tower_stats_updated(tower: Tower) -> void:
 	if hovered_tower == tower and tower_info_panel and tower_info_panel.visible:
@@ -601,6 +607,20 @@ func _handle_left_click() -> void:
 		if not panel_rect.has_point(local_pos):
 			tower_select_ui.close_panel()
 			current_tower_slot_index = -1
+		return
+	var clicked_enemy: Enemy = _find_enemy_at_position(get_global_mouse_position())
+	if clicked_enemy:
+		_clear_selection()
+		_selected_enemy = clicked_enemy
+		clicked_enemy.set_selected(true)
+		if target_info_panel:
+			target_info_panel.show_enemy_info(clicked_enemy)
+		return
+	if target_info_panel and target_info_panel.visible:
+		var panel_rect: Rect2 = Rect2(target_info_panel.global_position, target_info_panel.size)
+		if not panel_rect.has_point(get_global_mouse_position()):
+			_clear_selection()
+			target_info_panel.hide_panel()
 
 func _initialize_camera() -> void:
 	if camera and camera.has_method("initialize"):
@@ -609,6 +629,36 @@ func _initialize_camera() -> void:
 func _create_game_hud() -> void:
 	game_hud = GameHUD.new()
 	add_child(game_hud)
+
+func _create_target_info_panel() -> void:
+	var canvas: CanvasLayer = CanvasLayer.new()
+	canvas.layer = 30
+	add_child(canvas)
+	target_info_panel = TargetInfoPanel.new()
+	canvas.add_child(target_info_panel)
+	target_info_panel.sell_tower_requested.connect(_on_tower_sold)
+
+func _find_enemy_at_position(mouse_pos: Vector2) -> Enemy:
+	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
+	var closest: Enemy = null
+	var closest_dist: float = 40.0
+	for enemy_node: Node in enemies:
+		if not is_instance_valid(enemy_node) or not enemy_node is Enemy:
+			continue
+		var enemy: Enemy = enemy_node as Enemy
+		var dist: float = mouse_pos.distance_to(enemy.global_position)
+		if dist < closest_dist:
+			closest_dist = dist
+			closest = enemy
+	return closest
+
+func _clear_selection() -> void:
+	if _selected_tower and is_instance_valid(_selected_tower):
+		_selected_tower.set_selected(false)
+	_selected_tower = null
+	if _selected_enemy and is_instance_valid(_selected_enemy):
+		_selected_enemy.set_selected(false)
+	_selected_enemy = null
 
 func _create_tower_hover_ui() -> void:
 	range_circle = Node2D.new()

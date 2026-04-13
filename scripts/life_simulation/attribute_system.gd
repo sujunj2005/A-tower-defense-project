@@ -8,6 +8,10 @@ var age_system
 func _ready() -> void:
 	session = Global.get_game_session()
 	age_system = AgeSystem
+	Global.session_reset.connect(_on_session_reset)
+
+func _on_session_reset() -> void:
+	session = Global.get_game_session()
 
 ## 增加属性
 func increase_attribute(attr_name: String, amount: int) -> void:

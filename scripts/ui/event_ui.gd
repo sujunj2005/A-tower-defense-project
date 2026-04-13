@@ -107,13 +107,42 @@ func _get_events_for_stage() -> Array[Dictionary]:
 	var age_matched: Array[Dictionary] = []
 	var stage_matched: Array[Dictionary] = []
 	for event: Dictionary in events_data.events:
-		if event.get("stage", "") == stage_id and not event.get("event_id", "") in session.completed_events:
-			if not event.get("is_deadly", false):
-				var event_ages: Array = event.get("ages", [])
-				if current_age in event_ages:
-					age_matched.append(event)
-				else:
-					stage_matched.append(event)
+		if event.get("stage", "") != stage_id:
+			continue
+		var event_id: String = event.get("event_id", "")
+		if event_id in session.completed_events:
+			continue
+		var chain_prerequisites: Array = event.get("chain_prerequisites", [])
+		var prereq_met: bool = true
+		for prereq_id: String in chain_prerequisites:
+			if not prereq_id in session.completed_events:
+				prereq_met = false
+				break
+		if not prereq_met:
+			continue
+		var chain_excludes: Array = event.get("chain_excludes", [])
+		var excluded: bool = false
+		for exclude_id: String in chain_excludes:
+			if exclude_id in session.completed_events:
+				excluded = true
+				break
+		if excluded:
+			continue
+		if event.get("is_deadly", false):
+			continue
+		var event_ages: Array = event.get("ages", [])
+		if current_age in event_ages:
+			age_matched.append(event)
+		else:
+			var min_age: int = 999
+			var max_age: int = 0
+			for a: int in event_ages:
+				if a < min_age:
+					min_age = a
+				if a > max_age:
+					max_age = a
+			if current_age >= min_age - 3 and current_age <= max_age + 3:
+				stage_matched.append(event)
 	if not age_matched.is_empty():
 		return age_matched
 	return stage_matched
@@ -130,15 +159,24 @@ func display_event(event: Dictionary) -> void:
 		var option: Dictionary = options[i]
 		var btn: Button = Button.new()
 		var req_text: String = _format_requirements(option.get("requirements", {}))
+		var btn_text: String = option.get("text", "选项 %d" % (i + 1))
 		if req_text != "":
-			btn.text = option.get("text", "选项 %d" % (i + 1)) + "\n[需要: " + req_text + "]"
-		else:
-			btn.text = option.get("text", "选项 %d" % (i + 1))
+			btn_text += "\n[需要: " + req_text + "]"
+		var has_ending: bool = option.get("triggers_ending", false) == true
+		var has_battle: bool = option.get("battle_trigger") is Dictionary
+		if has_ending:
+			btn_text += "\n[💀 触发结局]"
+		elif has_battle:
+			btn_text += "\n[⚔️ 触发战斗]"
+		btn.text = btn_text
 		btn.custom_minimum_size = Vector2(0, 40)
 		var can_select: bool = _check_requirements(option.get("requirements", {}))
 		btn.disabled = not can_select
 		if not can_select:
 			btn.add_theme_color_override("font_disabled_color", Color(0.5, 0.5, 0.5, 1.0))
+		elif has_ending:
+			btn.add_theme_color_override("font_color", Color(1.0, 0.2, 0.2, 1.0))
+			btn.add_theme_color_override("font_hover_color", Color(1.0, 0.4, 0.4, 1.0))
 		btn.pressed.connect(_on_option_pressed.bind(i))
 		_options_container.add_child(btn)
 		_option_buttons.append(btn)
@@ -250,6 +288,8 @@ func _check_requirements(requirements: Dictionary) -> bool:
 	return true
 
 func _on_option_pressed(index: int) -> void:
+	if not is_inside_tree():
+		return
 	var options: Array = _current_event.get("options", [])
 	if index < 0 or index >= options.size():
 		return
@@ -257,6 +297,8 @@ func _on_option_pressed(index: int) -> void:
 	var es: Node = get_node_or_null("/root/EventSystem")
 	if es and es.has_method("select_option"):
 		es.select_option(_current_event, selected_option)
+	if not is_inside_tree():
+		return
 	var rewards: Array = selected_option.get("rewards", [])
 	for reward: Dictionary in rewards:
 		if reward.get("type", "") == "trait":
@@ -447,7 +489,18 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 	age_row.add_child(lbl_age)
 	vbox.add_child(age_row)
 
-	if selected_option.has("battle_trigger") and selected_option.battle_trigger:
+	var has_ending_popup: bool = selected_option.get("triggers_ending", false) == true
+	var has_battle_popup: bool = selected_option.get("battle_trigger") is Dictionary
+	if has_ending_popup:
+		var sep_ending: HSeparator = HSeparator.new()
+		vbox.add_child(sep_ending)
+		var ending_label: Label = Label.new()
+		ending_label.text = "💀 触发结局"
+		ending_label.add_theme_font_size_override("font_size", 24)
+		ending_label.add_theme_color_override("font_color", Color(1.0, 0.1, 0.1, 1.0))
+		ending_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		vbox.add_child(ending_label)
+	elif has_battle_popup:
 		var sep_battle: HSeparator = HSeparator.new()
 		vbox.add_child(sep_battle)
 		var battle_label: Label = Label.new()
@@ -468,7 +521,13 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 		overlay.queue_free()
 		popup.queue_free()
 		event_completed.emit()
-		if selected_option.has("battle_trigger") and selected_option.battle_trigger:
+		if selected_option.get("triggers_ending", false) == true:
+			var es: Node = get_node_or_null("/root/EventSystem")
+			if es and es.has_method("_trigger_life_ending"):
+				es._trigger_life_ending(selected_option.get("ending_reason", "player_choice"))
+			else:
+				GameState.change_state(GameState.State.ENDING)
+		elif selected_option.get("battle_trigger") is Dictionary:
 			GameState.change_state(GameState.State.BATTLE)
 		else:
 			GameState.change_state(GameState.State.STAGE)

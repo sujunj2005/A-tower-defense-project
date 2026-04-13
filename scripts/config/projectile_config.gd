@@ -168,9 +168,8 @@ func setup_visuals(node: Node2D) -> void:
 			sprite_node.scale = sprite_scale
 			sprite_node.modulate = sprite_modulate
 			sprite_node.position = sprite_offset
-	elif sprite_node:
-		# 隐藏 Sprite
-		sprite_node.visible = false
+		elif sprite_node:
+			_create_fallback_visual(sprite_node)
 	
 	# 创建/配置粒子系统（如果需要）
 	if visual_type == 1 or visual_type == 2:  # PARTICLES 或 BOTH
@@ -183,6 +182,30 @@ func setup_visuals(node: Node2D) -> void:
 			configure_trail_particles(trail_node)
 		elif trail_node:
 			trail_node.visible = false
+	else:
+		if use_trail_particles and trail_node:
+			configure_trail_particles(trail_node)
+		elif trail_node:
+			trail_node.visible = false
+
+func _create_fallback_visual(sprite_node: Sprite2D) -> void:
+	var img_size: int = 16
+	var image: Image = Image.create(img_size, img_size, false, Image.FORMAT_RGBA8)
+	image.fill(sprite_modulate)
+	var center: int = floori(img_size / 2.0)
+	var radius: float = 6.0
+	for y: int in range(img_size):
+		for x: int in range(img_size):
+			var dx: float = float(x - center)
+			var dy: float = float(y - center)
+			if dx * dx + dy * dy <= radius * radius:
+				image.set_pixel(x, y, sprite_modulate)
+			else:
+				image.set_pixel(x, y, Color(0, 0, 0, 0))
+	var tex: ImageTexture = ImageTexture.create_from_image(image)
+	sprite_node.texture = tex
+	sprite_node.scale = Vector2(1.5, 1.5)
+	sprite_node.modulate = Color(1, 1, 1, 1)
 
 ## 配置粒子系统
 func configure_particle_system(particles: GPUParticles2D) -> void:

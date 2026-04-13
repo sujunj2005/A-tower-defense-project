@@ -133,6 +133,22 @@ func _show_attributes_popup() -> void:
 	outer_vbox.add_child(title)
 
 	var session: GameSessionData = Global.get_game_session()
+	var stage_display: String = session.current_stage
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	if cm and cm.has_method("load_json"):
+		var stages_data: Dictionary = cm.load_json("res://data/stages.json")
+		if stages_data.has("stages") and stages_data.stages.has(session.current_stage):
+			stage_display = stages_data.stages[session.current_stage].get("stage_name", session.current_stage)
+	var age_info: String = "🎂 年龄：%d  |  📌 阶段：%s" % [session.current_age, stage_display]
+	var age_label: Label = Label.new()
+	age_label.text = age_info
+	age_label.add_theme_font_size_override("font_size", 16)
+	age_label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.6, 1.0))
+	outer_vbox.add_child(age_label)
+
+	var sep_age: HSeparator = HSeparator.new()
+	outer_vbox.add_child(sep_age)
+
 	var attrs: Dictionary = session.attributes
 	var ac: Node = get_node_or_null("/root/AttributeConfig")
 	var attr_text: String = ""

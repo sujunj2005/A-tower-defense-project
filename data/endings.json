@@ -1,60 +1,85 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "endings": [
     {
-      "ending_id": "ending_perfect_life",
-      "ending_name": "完美一生",
+      "ending_id": "legendary_life",
+      "ending_name": "传奇人生",
       "rating": "S",
-      "requirement": "boss_health_remaining >= 1.0",
-      "description": "你的一生堪称完美，名垂青史。",
-      "reward": {
-        "life_wisdom": 1000,
-        "destiny_points": 5
-      }
+      "description": "你的一生堪称传奇，智慧与勇气兼备，此生无憾。",
+      "ending_phrase": "成为了后人传颂的传奇",
+      "reward": {"life_wisdom": 1000, "destiny_points": 5}
     },
     {
-      "ending_id": "ending_successful_life",
+      "ending_id": "extraordinary_life",
+      "ending_name": "精彩人生",
+      "rating": "A",
+      "description": "你的人生经历丰富多彩，积累了深厚的智慧，堪称精彩。",
+      "ending_phrase": "留下了一段精彩的故事",
+      "reward": {"life_wisdom": 700, "destiny_points": 3}
+    },
+    {
+      "ending_id": "successful_life",
       "ending_name": "成功人生",
       "rating": "A",
-      "requirement": "boss_health_remaining >= 0.8",
-      "description": "你度过了成功的一生，安享晚年。",
-      "reward": {
-        "life_wisdom": 600,
-        "destiny_points": 3
-      }
+      "description": "你凭借智慧和勇气，度过了成功的一生。",
+      "ending_phrase": "安详地闭上了眼睛",
+      "reward": {"life_wisdom": 600, "destiny_points": 3}
     },
     {
-      "ending_id": "ending_ordinary_life",
-      "ending_name": "普通人生",
+      "ending_id": "brave_life",
+      "ending_name": "勇敢人生",
       "rating": "B",
-      "requirement": "boss_health_remaining >= 0.5",
-      "description": "平凡但充实的一生，无怨无悔。",
-      "reward": {
-        "life_wisdom": 300,
-        "destiny_points": 1
-      }
+      "description": "你的一生充满勇气，敢于面对一切挑战。",
+      "ending_phrase": "无惧地走完了最后一程",
+      "reward": {"life_wisdom": 400, "destiny_points": 2}
     },
     {
-      "ending_id": "ending_regretful_life",
+      "ending_id": "peaceful_departure",
+      "ending_name": "安详离去",
+      "rating": "B",
+      "description": "虽然健康不再，但你此生无憾，平静地接受了命运的安排。",
+      "ending_phrase": "带着满足的微笑离开了",
+      "reward": {"life_wisdom": 350, "destiny_points": 1}
+    },
+    {
+      "ending_id": "ordinary_life",
+      "ending_name": "平凡人生",
+      "rating": "C",
+      "description": "平凡但充实的一生，虽无大起大落，但也有自己的小确幸。",
+      "ending_phrase": "平静地画上了句号",
+      "reward": {"life_wisdom": 200, "destiny_points": 1}
+    },
+    {
+      "ending_id": "fading_away",
+      "ending_name": "渐渐消逝",
+      "rating": "C",
+      "description": "健康每况愈下，你感到生命力在一点点流逝。",
+      "ending_phrase": "在病榻上缓缓闭上了眼",
+      "reward": {"life_wisdom": 150, "destiny_points": 0}
+    },
+    {
+      "ending_id": "regretful_life",
       "ending_name": "遗憾人生",
       "rating": "C",
-      "requirement": "boss_defeated and boss_health_remaining < 0.5",
-      "description": "充满遗憾的一生，但也不算失败。",
-      "reward": {
-        "life_wisdom": 150,
-        "destiny_points": 0
-      }
+      "description": "如果重来一次，你一定会做出不同的选择。",
+      "ending_phrase": "带着遗憾离开了这个世界",
+      "reward": {"life_wisdom": 100, "destiny_points": 0}
     },
     {
-      "ending_id": "ending_failed_life",
-      "ending_name": "失败人生",
+      "ending_id": "humble_life",
+      "ending_name": "朴实人生",
       "rating": "D",
-      "requirement": "boss_defeated == false",
-      "description": "默默无闻地离开，无人记得。",
-      "reward": {
-        "life_wisdom": 50,
-        "destiny_points": 0
-      }
+      "description": "你的一生朴实无华，默默无闻地走完了全程。",
+      "ending_phrase": "悄无声息地离开了",
+      "reward": {"life_wisdom": 50, "destiny_points": 0}
+    },
+    {
+      "ending_id": "suffering_end",
+      "ending_name": "痛苦终局",
+      "rating": "D",
+      "description": "病痛折磨着你最后的时光，你带着痛苦离开了。",
+      "ending_phrase": "在痛苦中挣扎着走完了最后一程",
+      "reward": {"life_wisdom": 30, "destiny_points": 0}
     }
   ]
 }
