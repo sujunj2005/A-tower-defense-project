@@ -1,6 +1,6 @@
 extends Node2D
 
-const TowerConfig = preload("res://scripts/config/tower_config.gd")
+const TowerConfig = preload("res://scripts/logic/tower_defense/tower_config.gd")
 
 func _ready():
 	print("\n========== 防御塔攻击系统 V2.1 兼容性测试 ==========\n")
@@ -44,8 +44,8 @@ func test_attack_types():
 	print("\n[测试] 测试攻击类型配置文件加载...")
 	
 	try:
-		const AttackMode = preload("res://scripts/config/attack_types.gd").AttackMode
-		const ProjectileType = preload("res://scripts/config/attack_types.gd").ProjectileType
+		const AttackMode = GameConfig.AttackMode
+		const ProjectileType = GameConfig.ProjectileType
 		print("[测试] ✅ 攻击类型配置文件加载成功")
 		print("  AttackMode.MELEE: %d" % AttackMode.MELEE)
 		print("  AttackMode.RANGED: %d" % AttackMode.RANGED)
@@ -58,7 +58,7 @@ func test_attack_effects():
 	print("\n[测试] 测试攻击特效配置文件加载...")
 	
 	try:
-		const EffectType = preload("res://scripts/config/attack_effects.gd").EffectType
+		const EffectType = GameConfig.EffectType
 		print("[测试] ✅ 攻击特效配置文件加载成功")
 		print("  EffectType.NONE: %d" % EffectType.NONE)
 		print("  EffectType.PIERCE: %d" % EffectType.PIERCE)

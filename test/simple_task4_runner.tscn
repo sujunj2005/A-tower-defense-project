@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://ckneiqp0ys7mm"]
-
-[ext_resource type="Script" path="res://test/simple_task4_runner.gd" id="1_augr3"]
-
-[node name="SimpleTask4Runner" type="Node" unique_id=57397295]
-script = ExtResource("1_augr3")

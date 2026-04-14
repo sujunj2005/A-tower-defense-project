@@ -1,13 +1,12 @@
 extends GutTest
 
-const TowerConfig = preload("res://scripts/config/tower_config.gd")
-const MapConfig = preload("res://scripts/config/map_config.gd")
+const TowerConfig = preload("res://scripts/logic/tower_defense/tower_config.gd")
+const MapConfig = preload("res://scripts/logic/tower_defense/map_config.gd")
 const GameHUD = preload("res://scripts/ui/game_hud.gd")
-const Tower = preload("res://scripts/tower.gd")
+const Tower = preload("res://scripts/view/tower/tower.gd")
 const PauseMenu = preload("res://scripts/ui/pause_menu.gd")
-const EnemyConfig = preload("res://scripts/config/enemy_config.gd")
-const Enemy = preload("res://scripts/enemy.gd")
-const DamageTypes = preload("res://scripts/damage_types.gd")
+const EnemyConfig = preload("res://scripts/logic/tower_defense/enemy_config.gd")
+const Enemy = preload("res://scripts/view/enemy/enemy.gd")
 
 func before_all():
 	var map_cfg = MapConfig.load_map("map_01")

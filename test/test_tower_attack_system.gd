@@ -1,15 +1,14 @@
 extends GutTest
 
-const TowerConfig = preload("res://scripts/config/tower_config.gd")
-const Tower = preload("res://scripts/tower.gd")
-const TowerAttackComponent = preload("res://scripts/components/tower_attack_component.gd")
-const Projectile = preload("res://scripts/components/projectile.gd")
-const AttackMode = preload("res://scripts/config/attack_types.gd").AttackMode
-const ProjectileType = preload("res://scripts/config/attack_types.gd").ProjectileType
-const EffectType = preload("res://scripts/config/attack_effects.gd").EffectType
-const DetectionState = preload("res://scripts/config/detection_states.gd").DetectionState
-const WindupState = preload("res://scripts/config/detection_states.gd").WindupState
-const DamageTypes = preload("res://scripts/damage_types.gd")
+const TowerConfig = preload("res://scripts/logic/tower_defense/tower_config.gd")
+const Tower = preload("res://scripts/view/tower/tower.gd")
+const TowerAttackComponent = preload("res://scripts/view/tower/tower_attack_component.gd")
+const Projectile = preload("res://scripts/view/projectile/projectile.gd")
+const AttackMode = GameConfig.AttackMode
+const ProjectileType = GameConfig.ProjectileType
+const EffectType = GameConfig.EffectType
+const DetectionState = GameConfig.DetectionState
+const WindupState = GameConfig.WindupState
 
 # 模拟敌人节点
 class MockEnemy extends Node2D:

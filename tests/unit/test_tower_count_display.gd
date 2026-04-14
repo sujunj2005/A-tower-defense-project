@@ -4,7 +4,7 @@ var _map_manager: Node2D
 var _tower_select_ui: Control
 
 func before_all():
-	var map_mgr_script: GDScript = load("res://scripts/map_manager.gd")
+	var map_mgr_script: GDScript = load("res://scripts/managers/map_manager.gd")
 	_map_manager = Node2D.new()
 	_map_manager.set_script(map_mgr_script)
 	_map_manager.built_towers = {}

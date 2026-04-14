@@ -5,7 +5,7 @@ func _ready():
 	
 	# 测试加载 TowerConfig
 	print("[测试] 测试加载 TowerConfig 脚本...")
-	var tower_config_script = load("res://scripts/config/tower_config.gd")
+	var tower_config_script = load("res://scripts/logic/tower_defense/tower_config.gd")
 	if tower_config_script:
 		print("[测试] ✅ TowerConfig 脚本加载成功")
 	else:
@@ -13,7 +13,7 @@ func _ready():
 	
 	# 测试加载 attack_types.gd
 	print("\n[测试] 测试加载 attack_types.gd 脚本...")
-	var attack_types_script = load("res://scripts/config/attack_types.gd")
+	var attack_types_script = load("res://scripts/config/game_config.gd")
 	if attack_types_script:
 		print("[测试] ✅ attack_types.gd 脚本加载成功")
 	else:
@@ -21,7 +21,7 @@ func _ready():
 	
 	# 测试加载 attack_effects.gd
 	print("\n[测试] 测试加载 attack_effects.gd 脚本...")
-	var attack_effects_script = load("res://scripts/config/attack_effects.gd")
+	var attack_effects_script = load("res://scripts/config/game_config.gd")
 	if attack_effects_script:
 		print("[测试] ✅ attack_effects.gd 脚本加载成功")
 	else:

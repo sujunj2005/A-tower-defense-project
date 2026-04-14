@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 class_name TowerSelectUI
 
 signal tower_selected(tower_type: String)
@@ -86,7 +86,7 @@ func load_tower_configs():
 	var placed_counts: Dictionary = _get_placed_tower_counts()
 	for tower_id: String in tower_ids:
 		if session.towers.has(tower_id):
-			var config: TowerConfig = TowerConfig.get_config(tower_id)
+			var config: TowerBean = TowerConfig.get_config(tower_id)
 			if config:
 				tower_type_list.append(tower_id)
 				tower_configs[tower_id] = config
@@ -252,7 +252,7 @@ func _process(delta):
 	for btn in to_remove:
 		flashing_buttons.erase(btn)
 
-func create_tower_button(tower_type: String, config: TowerConfig) -> Button:
+func create_tower_button(tower_type: String, config: TowerBean) -> Button:
 	var button = Button.new()
 	button.custom_minimum_size = Vector2(130, 120)
 	
@@ -348,7 +348,7 @@ func create_tower_button(tower_type: String, config: TowerConfig) -> Button:
 	
 	return button
 
-func _on_tower_button_hovered(tower_type: String, config: TowerConfig):
+func _on_tower_button_hovered(tower_type: String, config: TowerBean):
 	hovered_tower_type = tower_type
 	var info_text = "%s (Lv.%d)\n" % [config.tower_name, config.tower_level]
 	info_text += "━━━━━━━━━━━━━━━\n"
@@ -444,7 +444,7 @@ func _refresh_tower_buttons() -> void:
 	for tower_type: String in tower_type_list:
 		if not tower_configs.has(tower_type):
 			continue
-		var config: TowerConfig = tower_configs[tower_type]
+		var config: TowerBean = tower_configs[tower_type]
 		var button: Button = create_tower_button(tower_type, config)
 		tower_buttons_container.add_child(button)
 

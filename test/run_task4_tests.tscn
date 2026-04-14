@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://task4_test_runner"]
-
-[ext_resource type="Script" path="res://test/run_task4_tests.gd" id="1_runner"]
-
-[node name="Task4TestRunner" type="Node"]
-script = ExtResource("1_runner")

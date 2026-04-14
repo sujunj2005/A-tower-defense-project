@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="WaveEnemyConfig" load_steps=2 format=3 uid="uid://wave_enemy_magic_1"]
-
-[ext_resource type="Script" path="res://scripts/config/wave_enemy_config.gd" id="1_magic"]
-
-[resource]
-script = ExtResource("1_magic")
-count = 5
-delay = 0.0
-enemy_type = "magic_shield"

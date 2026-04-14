@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://blh75te7bwqmf"]
 
-[ext_resource type="Script" uid="uid://di5236kaeh5ah" path="res://scripts/map_manager.gd" id="1_script"]
-[ext_resource type="Script" uid="uid://b3voahe5cwtsl" path="res://scripts/camera_controller.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://bhul3rydk0nou" path="res://scripts/managers/map_manager.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cpv4r0wq30muq" path="res://scripts/logic/camera_controller.gd" id="2_camera"]
 [ext_resource type="Shader" uid="uid://c016m3v66pdvt" path="res://shaders/grid_overlay.gdshader" id="3_0cso3"]
 [ext_resource type="TileSet" uid="uid://d2kxm2y3g5v7a" path="res://resources/tilesets/map_tileset.tres" id="3_tileset"]
 [ext_resource type="Script" uid="uid://o1kkoidml0ln" path="res://scripts/ui/pause_menu.gd" id="4_pause"]

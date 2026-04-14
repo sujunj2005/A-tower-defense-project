@@ -1,6 +1,6 @@
 extends Node2D
 
-const TowerConfig = preload("res://scripts/config/tower_config.gd")
+const TowerConfig = preload("res://scripts/logic/tower_defense/tower_config.gd")
 
 func _ready():
 	print("\n========== 防御塔攻击系统 V2.1 测试 ==========\n")

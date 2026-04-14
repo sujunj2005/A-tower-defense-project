@@ -3,7 +3,7 @@ extends Control
 signal option_selected(option_index: int)
 signal event_completed
 
-var _current_event: Dictionary = {}
+var _current_event: EventData = null
 var _option_buttons: Array[Button] = []
 var _title_label: Label
 var _desc_label: Label
@@ -80,11 +80,11 @@ func _load_current_event() -> void:
 		_display_quiet_year()
 		return
 	var es: Node = get_node_or_null("/root/EventSystem")
-	var events: Array[Dictionary] = []
+	var events: Array[EventData] = []
 	if es and es.has_method("get_events_for_current_age"):
 		events = es.get_events_for_current_age()
 	if events.is_empty():
-		var all_events: Array[Dictionary] = _get_events_for_stage()
+		var all_events: Array[EventData] = _get_events_for_stage()
 		if all_events.is_empty():
 			_display_quiet_year()
 			return
@@ -94,7 +94,7 @@ func _load_current_event() -> void:
 		var random_index: int = randi() % events.size()
 		display_event(events[random_index])
 
-func _get_events_for_stage() -> Array[Dictionary]:
+func _get_events_for_stage() -> Array[EventData]:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
 	var events_data: Dictionary = {}
 	if cm and cm.has_method("load_json"):
@@ -104,33 +104,32 @@ func _get_events_for_stage() -> Array[Dictionary]:
 	var session: GameSessionData = Global.get_game_session()
 	var stage_id: String = session.current_stage
 	var current_age: int = session.current_age
-	var age_matched: Array[Dictionary] = []
-	var stage_matched: Array[Dictionary] = []
-	for event: Dictionary in events_data.events:
-		if event.get("stage", "") != stage_id:
-			continue
-		var event_id: String = event.get("event_id", "")
+	var age_matched: Array[EventData] = []
+	var stage_matched: Array[EventData] = []
+	for event_raw: Dictionary in events_data.events:
+		var event := EventData.from_dict(event_raw)
+		var event_id: String = event.event_id
 		if event_id in session.completed_events:
 			continue
-		var chain_prerequisites: Array = event.get("chain_prerequisites", [])
 		var prereq_met: bool = true
-		for prereq_id: String in chain_prerequisites:
+		for prereq_id: String in event.chain_prerequisites:
 			if not prereq_id in session.completed_events:
 				prereq_met = false
 				break
 		if not prereq_met:
 			continue
-		var chain_excludes: Array = event.get("chain_excludes", [])
 		var excluded: bool = false
-		for exclude_id: String in chain_excludes:
+		for exclude_id: String in event.chain_excludes:
 			if exclude_id in session.completed_events:
 				excluded = true
 				break
 		if excluded:
 			continue
-		if event.get("is_deadly", false):
+		if event.is_deadly:
 			continue
-		var event_ages: Array = event.get("ages", [])
+		if event.stage != stage_id:
+			continue
+		var event_ages: Array = event.ages
 		if current_age in event_ages:
 			age_matched.append(event)
 		else:
@@ -147,14 +146,14 @@ func _get_events_for_stage() -> Array[Dictionary]:
 		return age_matched
 	return stage_matched
 
-func display_event(event: Dictionary) -> void:
+func display_event(event: EventData) -> void:
 	_current_event = event
 	if _title_label:
-		_title_label.text = event.get("event_name", "")
+		_title_label.text = event.event_name
 	if _desc_label:
-		_desc_label.text = event.get("description", "")
+		_desc_label.text = event.description
 	_clear_options()
-	var options: Array = event.get("options", [])
+	var options: Array = event.options
 	for i: int in range(options.size()):
 		var option: Dictionary = options[i]
 		var btn: Button = Button.new()
@@ -290,13 +289,13 @@ func _check_requirements(requirements: Dictionary) -> bool:
 func _on_option_pressed(index: int) -> void:
 	if not is_inside_tree():
 		return
-	var options: Array = _current_event.get("options", [])
+	var options: Array = _current_event.options
 	if index < 0 or index >= options.size():
 		return
 	var selected_option: Dictionary = options[index]
 	var es: Node = get_node_or_null("/root/EventSystem")
 	if es and es.has_method("select_option"):
-		es.select_option(_current_event, selected_option)
+		es.select_option(_current_event.to_dict(), selected_option)
 	if not is_inside_tree():
 		return
 	var rewards: Array = selected_option.get("rewards", [])

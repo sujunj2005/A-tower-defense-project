@@ -1,9 +1,9 @@
 extends SceneTree
 
-const MapConfig = preload("res://scripts/config/map_config.gd")
-const EnemyConfig = preload("res://scripts/config/enemy_config.gd")
-const WaveConfig = preload("res://scripts/config/wave_config.gd")
-const WaveEnemyConfig = preload("res://scripts/config/wave_enemy_config.gd")
+const MapConfig = preload("res://scripts/logic/tower_defense/map_config.gd")
+const EnemyConfig = preload("res://scripts/logic/tower_defense/enemy_config.gd")
+const WaveConfig = preload("res://scripts/logic/tower_defense/wave_config.gd")
+const WaveEnemyConfig = preload("res://scripts/logic/tower_defense/wave_enemy_config.gd")
 
 func _init():
 	print("\n========== 配置系统验证测试 ==========\n")

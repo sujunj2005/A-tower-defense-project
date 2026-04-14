@@ -10,6 +10,7 @@
 # 排除知识库文件夹
 knowledge_base/
 docs/
+node_modules/
 
 # 排除测试报告文件
 测试报告_暂停菜单功能.md

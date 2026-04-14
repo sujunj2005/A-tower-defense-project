@@ -1,4 +1,4 @@
-extends CanvasLayer
+﻿extends CanvasLayer
 class_name GameHUD
 
 signal gold_changed(new_gold: int)
@@ -295,7 +295,7 @@ func _on_trait_unhovered() -> void:
 		tm.hide_tooltip()
 
 func _get_tower_display_name(tower_id: String) -> String:
-	var cfg: TowerConfig = TowerConfig.get_config(tower_id)
+	var cfg: TowerBean = TowerConfig.get_config(tower_id)
 	if cfg and cfg.tower_name != "":
 		return cfg.tower_name
 	return tower_id

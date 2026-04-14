@@ -1,4 +1,4 @@
-extends PanelContainer
+﻿extends PanelContainer
 class_name TargetInfoPanel
 
 signal sell_tower_requested(tower: Tower)
@@ -120,7 +120,7 @@ func get_current_enemy() -> Enemy:
 	return _current_enemy
 
 func _build_tower_info_text(tower: Tower) -> String:
-	var cfg: TowerConfig = tower.config
+	var cfg: TowerBean = tower.config
 	var dmg: float = cfg.damage
 	var aspeed: float = cfg.attack_speed
 	var rng: float = cfg.attack_range

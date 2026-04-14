@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 signal era_selected(era_id: String)
 signal family_selected(family_id: String)
@@ -190,7 +190,7 @@ func _update_selection_display() -> void:
 		for tower_entry: Dictionary in towers_config:
 			for tid: String in tower_entry:
 				var count: int = int(tower_entry[tid])
-				var cfg: TowerConfig = TowerConfig.get_config(tid)
+				var cfg: TowerBean = TowerConfig.get_config(tid)
 				var display_name: String = cfg.tower_name if cfg else tid
 				var count_text: String = "×∞" if count < 0 else "×%d" % count
 				tower_names.append(display_name + count_text)
