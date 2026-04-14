@@ -37,3 +37,4 @@ bld/
 [Oo]bj/
 build/
 .gitnexus
+.gdignore
