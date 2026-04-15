@@ -1,317 +1,432 @@
 {
-  "version": "1.0",
-  "enemies": [
-    {
-      "enemy_id": "enemy_homework",
-      "enemy_name": "作业怪",
-      "enemy_type": "学业压力",
-      "tier": "基础",
-      "stats": {
-        "health": 30,
-        "speed": 50,
-        "armor": 0,
-        "armor_type": "none",
-        "damage": 5,
-        "attack_speed": 1.0,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 5,
-      "special_abilities": [],
-      "spawn_stages": ["童年", "青年"],
-      "spawn_waves": [1, 2, 3, 4]
-    },
-    {
-      "enemy_id": "enemy_exam",
-      "enemy_name": "考试怪",
-      "enemy_type": "学业压力",
-      "tier": "精英",
-      "stats": {
-        "health": 60,
-        "speed": 35,
-        "armor": 15,
-        "armor_type": "light",
-        "damage": 8,
-        "attack_speed": 0.8,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 12,
-      "special_abilities": [
-        {
-          "ability_id": "dodge",
-          "ability_name": "概率闪避",
-          "dodge_probability": 0.15,
-          "trigger_on": "physical_damage"
-        }
-      ],
-      "spawn_stages": ["童年", "青年"],
-      "spawn_waves": [3, 4, 5, 6]
-    },
-    {
-      "enemy_id": "enemy_bill",
-      "enemy_name": "账单怪",
-      "enemy_type": "经济压力",
-      "tier": "基础",
-      "stats": {
-        "health": 40,
-        "speed": 70,
-        "armor": 0,
-        "armor_type": "none",
-        "damage": 6,
-        "attack_speed": 1.2,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 8,
-      "special_abilities": [],
-      "spawn_stages": ["青年", "中年"],
-      "spawn_waves": [1, 2, 3, 4, 5, 6]
-    },
-    {
-      "enemy_id": "enemy_996",
-      "enemy_name": "996怪",
-      "enemy_type": "社会压力",
-      "tier": "精英",
-      "stats": {
-        "health": 70,
-        "speed": 45,
-        "armor": 10,
-        "armor_type": "light",
-        "damage": 10,
-        "attack_speed": 1.0,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 15,
-      "special_abilities": [
-        {
-          "ability_id": "split",
-          "ability_name": "死亡分裂",
-          "split_enemy_id": "enemy_bill",
-          "split_count": 2,
-          "trigger_on": "death"
-        }
-      ],
-      "spawn_stages": ["青年", "中年"],
-      "spawn_waves": [4, 5, 6, 7, 8]
-    },
-    {
-      "enemy_id": "enemy_chronic_disease",
-      "enemy_name": "慢性病",
-      "enemy_type": "健康威胁",
-      "tier": "基础",
-      "stats": {
-        "health": 50,
-        "speed": 30,
-        "armor": 5,
-        "armor_type": "light",
-        "damage": 8,
-        "attack_speed": 0.8,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 10,
-      "special_abilities": [],
-      "spawn_stages": ["老年"],
-      "spawn_waves": [1, 2, 3, 4, 5, 6]
-    },
-    {
-      "enemy_id": "enemy_loneliness",
-      "enemy_name": "孤独怪",
-      "enemy_type": "心理压力",
-      "tier": "基础",
-      "stats": {
-        "health": 35,
-        "speed": 60,
-        "armor": 0,
-        "armor_type": "none",
-        "damage": 6,
-        "attack_speed": 1.0,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 8,
-      "special_abilities": [],
-      "spawn_stages": ["老年"],
-      "spawn_waves": [1, 2, 3, 4, 5]
-    },
-    {
-      "enemy_id": "enemy_recession",
-      "enemy_name": "经济衰退",
-      "enemy_type": "经济压力",
-      "tier": "精英",
-      "stats": {
-        "health": 90,
-        "speed": 35,
-        "armor": 15,
-        "armor_type": "light",
-        "damage": 12,
-        "attack_speed": 0.8,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 25,
-      "special_abilities": [
-        {
-          "ability_id": "split",
-          "ability_name": "死亡分裂",
-          "split_enemy_id": "enemy_bill",
-          "split_count": 2,
-          "trigger_on": "death"
-        }
-      ],
-      "spawn_stages": ["老年"],
-      "spawn_waves": [5, 6, 7, 8, 9]
-    },
-    {
-      "enemy_id": "enemy_memory_loss",
-      "enemy_name": "记忆衰退",
-      "enemy_type": "健康威胁",
-      "tier": "精英",
-      "stats": {
-        "health": 80,
-        "speed": 25,
-        "armor": 20,
-        "armor_type": "light",
-        "damage": 10,
-        "attack_speed": 0.7,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 20,
-      "special_abilities": [
-        {
-          "ability_id": "spawn_loneliness",
-          "ability_name": "召唤孤独",
-          "spawn_enemy_id": "enemy_loneliness",
-          "spawn_count": 2,
-          "cooldown": 6.0
-        }
-      ],
-      "spawn_stages": ["老年"],
-      "spawn_waves": [6, 7, 8, 9]
-    },
-    {
-      "enemy_id": "enemy_pressure_school",
-      "enemy_name": "升学压力",
-      "enemy_type": "学业压力",
-      "tier": "精英",
-      "stats": {
-        "health": 120,
-        "speed": 30,
-        "armor": 20,
-        "armor_type": "light",
-        "damage": 12,
-        "attack_speed": 0.7,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 25,
-      "special_abilities": [
-        {
-          "ability_id": "spawn_homework",
-          "ability_name": "召唤作业",
-          "spawn_enemy_id": "enemy_homework",
-          "spawn_count": 1,
-          "cooldown": 5.0
-        }
-      ],
-      "spawn_stages": ["童年", "青年"],
-      "spawn_waves": [6, 7, 8, 9]
-    },
-    {
-      "enemy_id": "enemy_involution",
-      "enemy_name": "内卷怪",
-      "enemy_type": "社会压力",
-      "tier": "精英",
-      "stats": {
-        "health": 100,
-        "speed": 40,
-        "armor": 15,
-        "armor_type": "light",
-        "damage": 11,
-        "attack_speed": 0.9,
-        "attack_range": 20
-      },
-      "kill_reward_gold": 30,
-      "special_abilities": [
-        {
-          "ability_id": "self_buff",
-          "ability_name": "自我强化",
-          "buff_interval": 3.0,
-          "damage_increase_per_buff": 0.05,
-          "speed_increase_per_buff": 0.03,
-          "max_stacks": 10
-        }
-      ],
-      "spawn_stages": ["青年", "中年"],
-      "spawn_waves": [5, 6, 7, 8, 9]
-    },
-    {
-      "enemy_id": "boss_midlife_crisis",
-      "enemy_name": "中年危机",
-      "enemy_type": "BOSS",
-      "tier": "BOSS",
-      "stats": {
-        "health": 500,
-        "speed": 25,
-        "armor": 35,
-        "armor_type": "heavy",
-        "damage": 20,
-        "attack_speed": 0.6,
-        "attack_range": 25
-      },
-      "kill_reward_gold": 100,
-      "special_abilities": [
-        {
-          "ability_id": "destroy_tower",
-          "ability_name": "随机消灭",
-          "cooldown": 15.0,
-          "target_count": 1
-        },
-        {
-          "ability_id": "summon_stress",
-          "ability_name": "召唤压力",
-          "spawn_enemies": [
-            {"id": "enemy_996", "count": 2},
-            {"id": "enemy_bill", "count": 3}
-          ],
-          "cooldown": 10.0
-        }
-      ],
-      "spawn_stages": ["中年"],
-      "spawn_waves": [10]
-    },
-    {
-      "enemy_id": "boss_final_judgment",
-      "enemy_name": "最终审判",
-      "enemy_type": "BOSS",
-      "tier": "终极BOSS",
-      "stats": {
-        "health": 800,
-        "speed": 20,
-        "armor": 40,
-        "armor_type": "heavy",
-        "damage": 25,
-        "attack_speed": 0.5,
-        "attack_range": 30
-      },
-      "kill_reward_gold": 200,
-      "special_abilities": [
-        {
-          "ability_id": "memory_attack",
-          "ability_name": "回忆杀",
-          "spawn_enemy_pool": ["enemy_chronic_disease", "enemy_loneliness", "enemy_bill", "enemy_involution"],
-          "spawn_count": 5,
-          "cooldown": 12.0
-        },
-        {
-          "ability_id": "regret_damage",
-          "ability_name": "遗憾攻击",
-          "bonus_damage": 2.0,
-          "target_condition": "incomplete_events"
-        },
-        {
-          "ability_id": "achievement_shield",
-          "ability_name": "成就护盾",
-          "damage_reduction_per_achievement": 0.02,
-          "max_reduction": 0.50
-        }
-      ],
-      "spawn_stages": ["老年"],
-      "spawn_waves": [10]
-    }
-  ]
+	"version": "1.0",
+	"enemies": [
+		{
+			"enemy_id": "enemy_homework",
+			"enemy_name": "作业怪",
+			"enemy_type": "学业压力",
+			"tier": "基础",
+			"stats": {
+				"health": 30,
+				"speed": 50,
+				"armor": 0,
+				"armor_type": "none",
+				"damage": 5,
+				"attack_speed": 1,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 5,
+			"special_abilities": [],
+			"spawn_stages": [
+				"童年",
+				"青年"
+			],
+			"spawn_waves": [
+				1,
+				2,
+				3,
+				4
+			],
+			"texture_path": "res://images/enemies/marble_0_0.png"
+		},
+		{
+			"enemy_id": "enemy_exam",
+			"enemy_name": "考试怪",
+			"enemy_type": "学业压力",
+			"tier": "精英",
+			"stats": {
+				"health": 60,
+				"speed": 35,
+				"armor": 15,
+				"armor_type": "light",
+				"damage": 8,
+				"attack_speed": 0.8,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 12,
+			"spawn_stages": [
+				"童年",
+				"青年"
+			],
+			"spawn_waves": [
+				3,
+				4,
+				5,
+				6
+			],
+			"texture_path": "res://images/enemies/marble_0_1.png",
+			"special_abilities": [
+				{
+					"ability_id": "dodge",
+					"ability_name": "概率闪避",
+					"dodge_probability": 0.15,
+					"trigger_on": "physical_damage"
+				}
+			]
+		},
+		{
+			"enemy_id": "enemy_bill",
+			"enemy_name": "账单怪",
+			"enemy_type": "经济压力",
+			"tier": "基础",
+			"stats": {
+				"health": 40,
+				"speed": 70,
+				"armor": 0,
+				"armor_type": "none",
+				"damage": 6,
+				"attack_speed": 1.2,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 8,
+			"special_abilities": [],
+			"spawn_stages": [
+				"青年",
+				"中年"
+			],
+			"spawn_waves": [
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			],
+			"texture_path": "res://images/enemies/marble_0_2.png"
+		},
+		{
+			"enemy_id": "enemy_996",
+			"enemy_name": "996怪",
+			"enemy_type": "社会压力",
+			"tier": "精英",
+			"stats": {
+				"health": 70,
+				"speed": 45,
+				"armor": 10,
+				"armor_type": "light",
+				"damage": 10,
+				"attack_speed": 1,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 15,
+			"spawn_stages": [
+				"青年",
+				"中年"
+			],
+			"spawn_waves": [
+				4,
+				5,
+				6,
+				7,
+				8
+			],
+			"texture_path": "res://images/enemies/marble_0_3.png",
+			"special_abilities": [
+				{
+					"ability_id": "split",
+					"ability_name": "死亡分裂",
+					"trigger_on": "death",
+					"split_enemy_id": "enemy_bill",
+					"split_count": 2
+				}
+			]
+		},
+		{
+			"enemy_id": "enemy_chronic_disease",
+			"enemy_name": "慢性病",
+			"enemy_type": "健康威胁",
+			"tier": "基础",
+			"stats": {
+				"health": 50,
+				"speed": 30,
+				"armor": 5,
+				"armor_type": "light",
+				"damage": 8,
+				"attack_speed": 0.8,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 10,
+			"special_abilities": [],
+			"spawn_stages": [
+				"老年"
+			],
+			"spawn_waves": [
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			],
+			"texture_path": "res://images/enemies/marble_1_0.png"
+		},
+		{
+			"enemy_id": "enemy_loneliness",
+			"enemy_name": "孤独怪",
+			"enemy_type": "心理压力",
+			"tier": "基础",
+			"stats": {
+				"health": 35,
+				"speed": 60,
+				"armor": 0,
+				"armor_type": "none",
+				"damage": 6,
+				"attack_speed": 1,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 8,
+			"special_abilities": [],
+			"spawn_stages": [
+				"老年"
+			],
+			"spawn_waves": [
+				1,
+				2,
+				3,
+				4,
+				5
+			],
+			"texture_path": "res://images/enemies/marble_1_1.png"
+		},
+		{
+			"enemy_id": "enemy_recession",
+			"enemy_name": "经济衰退",
+			"enemy_type": "经济压力",
+			"tier": "精英",
+			"stats": {
+				"health": 90,
+				"speed": 35,
+				"armor": 15,
+				"armor_type": "light",
+				"damage": 12,
+				"attack_speed": 0.8,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 25,
+			"spawn_stages": [
+				"老年"
+			],
+			"spawn_waves": [
+				5,
+				6,
+				7,
+				8,
+				9
+			],
+			"texture_path": "res://images/enemies/marble_1_2.png",
+			"special_abilities": [
+				{
+					"ability_id": "split",
+					"ability_name": "死亡分裂",
+					"trigger_on": "death",
+					"split_enemy_id": "enemy_bill",
+					"split_count": 2
+				}
+			]
+		},
+		{
+			"enemy_id": "enemy_memory_loss",
+			"enemy_name": "记忆衰退",
+			"enemy_type": "健康威胁",
+			"tier": "精英",
+			"stats": {
+				"health": 80,
+				"speed": 25,
+				"armor": 20,
+				"armor_type": "light",
+				"damage": 10,
+				"attack_speed": 0.7,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 20,
+			"spawn_stages": [
+				"老年"
+			],
+			"spawn_waves": [
+				6,
+				7,
+				8,
+				9
+			],
+			"texture_path": "res://images/enemies/marble_2_0.png",
+			"special_abilities": [
+				{
+					"ability_id": "spawn_loneliness",
+					"ability_name": "召唤孤独",
+					"spawn_enemy_id": "enemy_loneliness",
+					"spawn_count": 2,
+					"cooldown": 6
+				}
+			]
+		},
+		{
+			"enemy_id": "enemy_pressure_school",
+			"enemy_name": "升学压力",
+			"enemy_type": "学业压力",
+			"tier": "精英",
+			"stats": {
+				"health": 120,
+				"speed": 30,
+				"armor": 20,
+				"armor_type": "light",
+				"damage": 12,
+				"attack_speed": 0.7,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 25,
+			"spawn_stages": [
+				"童年",
+				"青年"
+			],
+			"spawn_waves": [
+				6,
+				7,
+				8,
+				9
+			],
+			"texture_path": "res://images/enemies/marble_2_1.png",
+			"special_abilities": [
+				{
+					"ability_id": "spawn_homework",
+					"ability_name": "召唤作业",
+					"spawn_enemy_id": "enemy_homework",
+					"spawn_count": 1,
+					"cooldown": 5
+				}
+			]
+		},
+		{
+			"enemy_id": "enemy_involution",
+			"enemy_name": "内卷怪",
+			"enemy_type": "社会压力",
+			"tier": "精英",
+			"stats": {
+				"health": 100,
+				"speed": 40,
+				"armor": 15,
+				"armor_type": "light",
+				"damage": 11,
+				"attack_speed": 0.9,
+				"attack_range": 20
+			},
+			"kill_reward_gold": 30,
+			"spawn_stages": [
+				"青年",
+				"中年"
+			],
+			"spawn_waves": [
+				5,
+				6,
+				7,
+				8,
+				9
+			],
+			"texture_path": "res://images/enemies/marble_2_2.png",
+			"special_abilities": [
+				{
+					"ability_id": "self_buff",
+					"ability_name": "自我强化",
+					"buff_interval": 3,
+					"damage_increase_per_buff": 0.05,
+					"speed_increase_per_buff": 0.03,
+					"max_stacks": 10
+				}
+			]
+		},
+		{
+			"enemy_id": "boss_midlife_crisis",
+			"enemy_name": "中年危机",
+			"enemy_type": "BOSS",
+			"tier": "BOSS",
+			"stats": {
+				"health": 500,
+				"speed": 25,
+				"armor": 35,
+				"armor_type": "heavy",
+				"damage": 20,
+				"attack_speed": 0.6,
+				"attack_range": 25
+			},
+			"kill_reward_gold": 100,
+			"spawn_stages": [
+				"中年"
+			],
+			"spawn_waves": [
+				10
+			],
+			"texture_path": "res://images/enemies/marble_3_0.png",
+			"special_abilities": [
+				{
+					"ability_id": "destroy_tower",
+					"ability_name": "随机消灭",
+					"cooldown": 15,
+					"target_count": 1
+				},
+				{
+					"ability_id": "summon_stress",
+					"ability_name": "召唤压力",
+					"spawn_enemies": [
+						{
+							"id": "enemy_996",
+							"count": 2
+						},
+						{
+							"id": "enemy_bill",
+							"count": 3
+						}
+					],
+					"cooldown": 10
+				}
+			]
+		},
+		{
+			"enemy_id": "boss_final_judgment",
+			"enemy_name": "最终审判",
+			"enemy_type": "BOSS",
+			"tier": "终极BOSS",
+			"stats": {
+				"health": 800,
+				"speed": 20,
+				"armor": 40,
+				"armor_type": "heavy",
+				"damage": 25,
+				"attack_speed": 0.5,
+				"attack_range": 30
+			},
+			"kill_reward_gold": 200,
+			"spawn_stages": [
+				"老年"
+			],
+			"spawn_waves": [
+				10
+			],
+			"texture_path": "res://images/enemies/marble_3_1.png",
+			"special_abilities": [
+				{
+					"ability_id": "memory_attack",
+					"ability_name": "回忆杀",
+					"spawn_count": 5,
+					"cooldown": 12,
+					"spawn_enemy_pool": [
+						"enemy_chronic_disease",
+						"enemy_loneliness",
+						"enemy_bill",
+						"enemy_involution"
+					]
+				},
+				{
+					"ability_id": "regret_damage",
+					"ability_name": "遗憾攻击",
+					"bonus_damage": 2,
+					"target_condition": "incomplete_events"
+				},
+				{
+					"ability_id": "achievement_shield",
+					"ability_name": "成就护盾",
+					"damage_reduction_per_achievement": 0.02,
+					"max_reduction": 0.5
+				}
+			]
+		}
+	]
 }

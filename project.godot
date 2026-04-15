@@ -42,6 +42,7 @@ TooltipManager="*res://scripts/ui/components/tooltip_manager.gd"
 AttributeConfig="*res://scripts/logic/life_simulation/attribute_config.gd"
 BattleRating="*res://scripts/logic/tower_defense/battle_rating.gd"
 WaveManager="*res://scripts/logic/tower_defense/wave_manager.gd"
+OptionSystem="*res://scripts/logic/life_simulation/option_system.gd"
 
 [display]
 

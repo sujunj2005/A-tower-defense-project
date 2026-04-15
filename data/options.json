@@ -1,0 +1,4506 @@
+{
+	"version": "1.2",
+	"options": [
+		{
+			"event_id": "event_kindergarten_show",
+			"option_id": "A",
+			"text": "参加合唱团",
+			"requirements": {
+				"courage": 30
+			},
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_chinese_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "little_singer"
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_kindergarten_show",
+			"option_id": "B",
+			"text": "参加朗诵比赛",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_chinese_basic",
+					"count": 1
+				},
+				{
+					"type": "gold",
+					"value": 20
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_kindergarten_show",
+			"option_id": "C",
+			"text": "当观众就好",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "happy_childhood"
+				},
+				{
+					"type": "gold",
+					"value": 10
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_math_contest",
+			"option_id": "A",
+			"text": "努力准备，冲刺名次",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_math_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "math_talent"
+				}
+			],
+			"requirements": {
+				"intelligence": 40
+			},
+			"battle_trigger": {
+				"battle_id": "battle_math_contest",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 3
+							}
+						],
+						"spawn_interval": 1.5
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 2
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.9
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_math_contest",
+			"option_id": "B",
+			"text": "随便参加，重在参与",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 30
+				},
+				{
+					"type": "trait",
+					"id": "participation_spirit"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_math_contest_easy",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 3
+							}
+						],
+						"spawn_interval": 2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.5
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_math_contest",
+			"option_id": "C",
+			"text": "放弃参加，去踢球",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "sports_youth"
+				},
+				{
+					"type": "tower",
+					"id": "tower_sports_basic",
+					"count": 1
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_hobby_class",
+			"option_id": "A",
+			"text": "学钢琴",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_artist_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "music_culture"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"family_background": "!farmer"
+			},
+			"cost": {
+				"gold": -20
+			}
+		},
+		{
+			"event_id": "event_hobby_class",
+			"option_id": "B",
+			"text": "学编程",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_programming_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "coding_talent"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 50
+			},
+			"cost": {
+				"gold": -15
+			}
+		},
+		{
+			"event_id": "event_hobby_class",
+			"option_id": "C",
+			"text": "自学，不花钱",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 30
+				},
+				{
+					"type": "trait",
+					"id": "self_learning"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_hobby_class",
+			"option_id": "D",
+			"text": "帮家里干活",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 80
+				},
+				{
+					"type": "trait",
+					"id": "early_responsibility"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"family_background": "farmer_or_worker"
+			}
+		},
+		{
+			"event_id": "event_peer_conflict",
+			"option_id": "A",
+			"text": "告诉老师",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "follow_rules"
+				},
+				{
+					"type": "gold",
+					"value": 15
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_peer_conflict",
+			"option_id": "B",
+			"text": "自己解决，打回去",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_communication_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "tough_guy"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_fight",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.5
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 3
+							},
+							{
+								"id": "enemy_exam",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1.2
+					}
+				]
+			},
+			"cost": {
+				"health": -10
+			}
+		},
+		{
+			"event_id": "event_peer_conflict",
+			"option_id": "C",
+			"text": "忍气吞声",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "patience"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_peer_conflict",
+			"option_id": "D",
+			"text": "告诉家长，让家长处理",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 40
+				},
+				{
+					"type": "trait",
+					"id": "has_backing"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_family_crisis",
+			"option_id": "A",
+			"text": "努力学习，不让爸妈操心",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_math_advanced",
+					"count": 1
+				},
+				{
+					"type": "tower",
+					"id": "tower_chinese_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "sensible_child"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_xiaoshengchu_hard",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 4
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_family_crisis",
+			"option_id": "B",
+			"text": "帮家里找兼职",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 150
+				},
+				{
+					"type": "trait",
+					"id": "early_worker"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -20
+			}
+		},
+		{
+			"event_id": "event_family_crisis",
+			"option_id": "C",
+			"text": "像往常一样玩耍",
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_xiaoshengchu_normal",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 3
+							},
+							{
+								"id": "enemy_exam",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1.5
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 2
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					}
+				]
+			},
+			"rewards": []
+		},
+		{
+			"event_id": "event_family_crisis",
+			"option_id": "D",
+			"text": "问爸妈要不要辍学",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 100
+				},
+				{
+					"type": "trait",
+					"id": "dropout"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_zhongkao",
+			"option_id": "A",
+			"text": "冲刺重点高中",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_science_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "key_high_school"
+				}
+			],
+			"requirements": {
+				"intelligence": 60
+			},
+			"battle_trigger": {
+				"battle_id": "battle_zhongkao_hard",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.7
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_zhongkao",
+			"option_id": "B",
+			"text": "读普通高中",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_science_basic",
+					"count": 1
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_zhongkao_normal",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_homework",
+								"count": 3
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.5
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 2
+							},
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 1
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 1
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_zhongkao",
+			"option_id": "C",
+			"text": "读职高，学技术",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_engineer_basic",
+					"count": 1
+				},
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_gaokao_choice",
+			"option_id": "A",
+			"text": "冲刺清华北大",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_math_master",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "top_university"
+				},
+				{
+					"type": "trait",
+					"id": "bachelor"
+				}
+			],
+			"requirements": {
+				"intelligence": 80,
+				"trait": "key_high_school"
+			},
+			"battle_trigger": {
+				"battle_id": "battle_gaokao_top",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 4
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_gaokao_choice",
+			"option_id": "B",
+			"text": "正常发挥，考个一本",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_math_advanced",
+					"count": 1
+				},
+				{
+					"type": "gold",
+					"value": 80
+				},
+				{
+					"type": "trait",
+					"id": "bachelor"
+				}
+			],
+			"requirements": {
+				"intelligence": 60
+			},
+			"battle_trigger": {
+				"battle_id": "battle_gaokao_normal",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 3
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_exam",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 1
+							},
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_gaokao_choice",
+			"option_id": "C",
+			"text": "二本也行，选个好专业",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_programming_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "bachelor"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_gaokao_choice",
+			"option_id": "D",
+			"text": "放弃高考，直接工作",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 150
+				},
+				{
+					"type": "trait",
+					"id": "early_starter"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_college_love",
+			"option_id": "A",
+			"text": "勇敢表白",
+			"requirements": {
+				"courage": 50
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "lover"
+				},
+				{
+					"type": "gold",
+					"value": -20
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_college_love",
+			"option_id": "B",
+			"text": "暗恋，不说破",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "secret_crush"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_college_love",
+			"option_id": "C",
+			"text": "恋爱哪有学习重要",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_history_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "study_focus"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_master_or_work",
+			"option_id": "A",
+			"text": "考研深造",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_history_master",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "master_student"
+				}
+			],
+			"requirements": {
+				"intelligence": 70
+			},
+			"battle_trigger": {
+				"battle_id": "battle_kaoyan",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_exam",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_exam",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_pressure_school",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					}
+				]
+			},
+			"cost": {
+				"gold": -50
+			}
+		},
+		{
+			"event_id": "event_master_or_work",
+			"option_id": "B",
+			"text": "直接工作，积累经验",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 200
+				},
+				{
+					"type": "tower",
+					"id": "tower_profession_basic",
+					"count": 1
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_job_hunt",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_master_or_work",
+			"option_id": "C",
+			"text": "创业！改变世界！",
+			"requirements": {
+				"courage": 70
+			},
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_business_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "entrepreneur"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_startup",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "boss_midlife_crisis",
+								"count": 1
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"gold": -80
+			}
+		},
+		{
+			"event_id": "event_first_job",
+			"option_id": "A",
+			"text": "大厂Offer，996但钱多",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 300
+				},
+				{
+					"type": "tower",
+					"id": "tower_programming_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "big_tech"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_996",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 4
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"health": -15
+			},
+			"requirements": {
+				"trait": "bachelor"
+			}
+		},
+		{
+			"event_id": "event_first_job",
+			"option_id": "B",
+			"text": "国企，稳定但工资一般",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 150
+				},
+				{
+					"type": "trait",
+					"id": "stable_job"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_first_job",
+			"option_id": "C",
+			"text": "创业公司，有风险但可能暴富",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 100
+				},
+				{
+					"type": "tower",
+					"id": "tower_business_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "startup_employee"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_startup_life",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 2
+							},
+							{
+								"id": "enemy_homework",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_rent_house",
+			"option_id": "A",
+			"text": "市中心，贵但方便",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "city_center"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -50
+			},
+			"requirements": {
+				"gold": 100
+			}
+		},
+		{
+			"event_id": "event_rent_house",
+			"option_id": "B",
+			"text": "郊区，便宜但远",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"gold": -15
+			}
+		},
+		{
+			"event_id": "event_rent_house",
+			"option_id": "C",
+			"text": "跟别人合租",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "roommate"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"gold": -25
+			}
+		},
+		{
+			"event_id": "event_workplace_newbie",
+			"option_id": "A",
+			"text": "默默接受，多干活",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "hard_worker"
+				},
+				{
+					"type": "gold",
+					"value": 30
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_workplace_newbie",
+			"option_id": "B",
+			"text": "找领导说明情况",
+			"requirements": {
+				"courage": 50
+			},
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_communication_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "speak_up"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_workplace_conflict",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_workplace_newbie",
+			"option_id": "C",
+			"text": "以牙还牙，甩回去",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "tit_for_tat"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_office_war",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_marriage_pressure",
+			"option_id": "A",
+			"text": "顺从父母，去相亲",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 100
+				},
+				{
+					"type": "trait",
+					"id": "blind_date"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_marriage_pressure",
+			"option_id": "B",
+			"text": "坚持不婚主义",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_time_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "single_forever"
+				}
+			],
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_family_pressure",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_marriage_pressure",
+			"option_id": "C",
+			"text": "已有对象，带回家见父母",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "married"
+				},
+				{
+					"type": "gold",
+					"value": -50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"trait": "lover"
+			}
+		},
+		{
+			"event_id": "event_career_breakthrough",
+			"option_id": "A",
+			"text": "主动请缨，承担核心项目",
+			"requirements": {
+				"courage": 40
+			},
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 80
+				},
+				{
+					"type": "trait",
+					"id": "career_focus"
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_career_breakthrough",
+			"option_id": "B",
+			"text": "稳扎稳打，做好本职工作",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 30
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_career_breakthrough",
+			"option_id": "C",
+			"text": "跳槽到更好的平台",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 60
+				},
+				{
+					"type": "tower",
+					"id": "tower_fire_advanced",
+					"count": 1
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 40
+			}
+		},
+		{
+			"event_id": "event_friend_wedding",
+			"option_id": "A",
+			"text": "送上厚礼，真心祝福",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 5
+				},
+				{
+					"type": "gold",
+					"value": -50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_friend_wedding",
+			"option_id": "B",
+			"text": "趁机社交，拓展人脉",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 8
+				},
+				{
+					"type": "tower",
+					"id": "tower_ice_advanced",
+					"count": 1
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"charm": 35
+			}
+		},
+		{
+			"event_id": "event_friend_wedding",
+			"option_id": "C",
+			"text": "独自喝闷酒",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": -3
+				},
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_side_hustle",
+			"option_id": "A",
+			"text": "投入积蓄全力做",
+			"requirements": {
+				"courage": 45
+			},
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 120
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": -5
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_side_hustle",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 1
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					}
+				]
+			}
+		},
+		{
+			"event_id": "event_side_hustle",
+			"option_id": "B",
+			"text": "小规模试水",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 40
+				},
+				{
+					"type": "tower",
+					"id": "tower_fire_advanced",
+					"count": 1
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_side_hustle",
+			"option_id": "C",
+			"text": "婉拒，专注本职",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 3
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_career_switch",
+			"option_id": "A",
+			"text": "辞职去创业",
+			"requirements": {
+				"courage": 55
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "entrepreneur"
+				},
+				{
+					"type": "gold",
+					"value": 100
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_entrepreneur",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.9
+					}
+				]
+			},
+			"cost": {
+				"gold": -60
+			}
+		},
+		{
+			"event_id": "event_career_switch",
+			"option_id": "B",
+			"text": "先兼职试试水",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 50
+				},
+				{
+					"type": "attribute",
+					"id": "work_ability",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_career_switch",
+			"option_id": "C",
+			"text": "算了，稳定最重要",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 2
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_home_purchase",
+			"option_id": "A",
+			"text": "咬咬牙，贷款买",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "homeowner"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -80
+			},
+			"requirements": {
+				"gold": 80
+			}
+		},
+		{
+			"event_id": "event_home_purchase",
+			"option_id": "B",
+			"text": "先租着吧，不急",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 30
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_home_purchase",
+			"option_id": "C",
+			"text": "回老家买房",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "hometown_return"
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -40
+			},
+			"requirements": {
+				"gold": 40
+			}
+		},
+		{
+			"event_id": "event_pet_companion",
+			"option_id": "A",
+			"text": "带它回家！",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "pet_owner"
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 5
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 2
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"gold": -20
+			}
+		},
+		{
+			"event_id": "event_pet_companion",
+			"option_id": "B",
+			"text": "经常来看看它",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 2
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_pet_companion",
+			"option_id": "C",
+			"text": "算了，养宠物太麻烦",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 20
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_house_loan",
+			"option_id": "A",
+			"text": "贷款买大房子",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "big_house"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_mortgage",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 4
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"gold": -150
+			},
+			"requirements": {
+				"gold": 150
+			}
+		},
+		{
+			"event_id": "event_house_loan",
+			"option_id": "B",
+			"text": "买个小点的，压力小",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "small_house"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_mortgage_light",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					}
+				]
+			},
+			"cost": {
+				"gold": -80
+			},
+			"requirements": {
+				"gold": 80
+			}
+		},
+		{
+			"event_id": "event_house_loan",
+			"option_id": "C",
+			"text": "不买了，租房住",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 200
+				},
+				{
+					"type": "trait",
+					"id": "rent_forever"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_children_education",
+			"option_id": "A",
+			"text": "报各种补习班",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "tiger_parent"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -100
+			},
+			"requirements": {
+				"trait": "married",
+				"gold": 100
+			}
+		},
+		{
+			"event_id": "event_children_education",
+			"option_id": "B",
+			"text": "快乐教育，顺其自然",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "relaxed_parent"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"trait": "married"
+			}
+		},
+		{
+			"event_id": "event_children_education",
+			"option_id": "C",
+			"text": "送孩子出国",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "overseas_child"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -250
+			},
+			"requirements": {
+				"trait": "married",
+				"gold": 250
+			}
+		},
+		{
+			"event_id": "event_children_education",
+			"option_id": "D",
+			"text": "还没孩子，专注事业",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 80
+				},
+				{
+					"type": "trait",
+					"id": "career_focus"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_parents_care",
+			"option_id": "A",
+			"text": "接来同住",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "filial_child"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_care_parents",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					}
+				]
+			},
+			"requirements": {
+				"trait": "big_house"
+			}
+		},
+		{
+			"event_id": "event_parents_care",
+			"option_id": "B",
+			"text": "送养老院",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -80
+			},
+			"requirements": {
+				"gold": 80
+			}
+		},
+		{
+			"event_id": "event_parents_care",
+			"option_id": "C",
+			"text": "请保姆照顾",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "hire_nanny"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -50
+			},
+			"requirements": {
+				"gold": 50
+			}
+		},
+		{
+			"event_id": "event_career_promotion",
+			"option_id": "A",
+			"text": "争取晋升",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_leadership_advanced",
+					"count": 1
+				},
+				{
+					"type": "gold",
+					"value": 200
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_promotion",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					},
+					{
+						"wave_number": 7,
+						"enemies": [
+							{
+								"id": "boss_midlife_crisis",
+								"count": 1
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"health": -20
+			},
+			"requirements": {
+				"work_ability": 70
+			}
+		},
+		{
+			"event_id": "event_career_promotion",
+			"option_id": "B",
+			"text": "保持现状，工作生活平衡",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "work_life_balance"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_career_promotion",
+			"option_id": "C",
+			"text": "跳槽去对手公司",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 300
+				},
+				{
+					"type": "trait",
+					"id": "job_hopper"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_job_change",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					}
+				]
+			},
+			"requirements": {
+				"work_ability": 60
+			}
+		},
+		{
+			"event_id": "event_health_warning",
+			"option_id": "A",
+			"text": "重视健康，开始锻炼",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "fitness_habit"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -50
+			},
+			"requirements": {
+				"gold": 50
+			}
+		},
+		{
+			"event_id": "event_health_warning",
+			"option_id": "B",
+			"text": "吃保健品",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "supplement_user"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"gold": -25
+			}
+		},
+		{
+			"event_id": "event_health_warning",
+			"option_id": "C",
+			"text": "工作太忙，没时间管",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_serious_disease",
+			"option_id": "A",
+			"text": "积极治疗",
+			"battle_trigger": {
+				"battle_id": "battle_cancer",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 4
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					},
+					{
+						"wave_number": 7,
+						"enemies": [
+							{
+								"id": "boss_midlife_crisis",
+								"count": 1
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"gold": -250
+			},
+			"rewards": [],
+			"requirements": {
+				"gold": 250
+			}
+		},
+		{
+			"event_id": "event_serious_disease",
+			"option_id": "B",
+			"text": "保守治疗",
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_cancer_light",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "boss_midlife_crisis",
+								"count": 1
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					}
+				]
+			},
+			"cost": {
+				"gold": -100
+			},
+			"rewards": []
+		},
+		{
+			"event_id": "event_serious_disease",
+			"option_id": "C",
+			"text": "放弃治疗，享受余生",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "accept_fate"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_accident",
+			"option_id": "A",
+			"text": "手术抢救",
+			"battle_trigger": {
+				"battle_id": "battle_car_accident",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 2
+							},
+							{
+								"id": "enemy_bill",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"gold": -150
+			},
+			"rewards": [],
+			"requirements": {
+				"gold": 150
+			}
+		},
+		{
+			"event_id": "event_accident",
+			"option_id": "B",
+			"text": "听天由命",
+			"requirements": {},
+			"battle_trigger": {
+				"battle_id": "battle_accident_fate",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 2
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_involution",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "boss_midlife_crisis",
+								"count": 1
+							},
+							{
+								"id": "enemy_996",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"rewards": []
+		},
+		{
+			"event_id": "event_work_burnout",
+			"option_id": "A",
+			"text": "请个长假，出去走走",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 10
+				},
+				{
+					"type": "trait",
+					"id": "traveler"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -60
+			},
+			"requirements": {
+				"gold": 60
+			}
+		},
+		{
+			"event_id": "event_work_burnout",
+			"option_id": "B",
+			"text": "咬牙坚持，习惯就好",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 80
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -8
+			}
+		},
+		{
+			"event_id": "event_work_burnout",
+			"option_id": "C",
+			"text": "考虑换个方向",
+			"requirements": {
+				"courage": 45
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "career_changer"
+				},
+				{
+					"type": "attribute",
+					"id": "courage",
+					"value": 3
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_investment",
+			"option_id": "A",
+			"text": "投入大量资金",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 200
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_investment_risk",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_bill",
+								"count": 3
+							},
+							{
+								"id": "enemy_involution",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_996",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					}
+				]
+			},
+			"cost": {
+				"gold": -100
+			},
+			"requirements": {
+				"gold": 100
+			}
+		},
+		{
+			"event_id": "event_investment",
+			"option_id": "B",
+			"text": "小试牛刀，投一点",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 60
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -30
+			},
+			"requirements": {
+				"gold": 30
+			}
+		},
+		{
+			"event_id": "event_investment",
+			"option_id": "C",
+			"text": "不碰，稳妥为上",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 2
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_neighbor_dispute",
+			"option_id": "A",
+			"text": "找物业投诉",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 30
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_neighbor_dispute",
+			"option_id": "B",
+			"text": "直接上门理论",
+			"requirements": {
+				"courage": 40
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "confrontational"
+				},
+				{
+					"type": "attribute",
+					"id": "courage",
+					"value": 3
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_neighbor_dispute",
+			"option_id": "C",
+			"text": "忍了，搬家算了",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "peace_seeker"
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -80
+			},
+			"requirements": {
+				"gold": 80
+			}
+		},
+		{
+			"event_id": "event_children_growing",
+			"option_id": "A",
+			"text": "尊重孩子的选择",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "open_parent"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 50
+			}
+		},
+		{
+			"event_id": "event_children_growing",
+			"option_id": "B",
+			"text": "严格要求，不能走弯路",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 40
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -5
+			}
+		},
+		{
+			"event_id": "event_children_growing",
+			"option_id": "C",
+			"text": "顺其自然吧",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_midlife_skill",
+			"option_id": "A",
+			"text": "学烹饪，犒劳家人",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "home_chef"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_midlife_skill",
+			"option_id": "B",
+			"text": "学编程，跟上时代",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_programming_advanced",
+					"count": 1
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 45
+			}
+		},
+		{
+			"event_id": "event_midlife_skill",
+			"option_id": "C",
+			"text": "学太极，强身健体",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 8
+				},
+				{
+					"type": "trait",
+					"id": "tai_chi"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_retirement_plan",
+			"option_id": "A",
+			"text": "安享晚年，含饴弄孙",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "peaceful_elder"
+				},
+				{
+					"type": "gold",
+					"value": 100
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"trait": "!single_forever"
+			}
+		},
+		{
+			"event_id": "event_retirement_plan",
+			"option_id": "B",
+			"text": "发挥余热，做社区志愿者",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_communication_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "community_elder"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"health": 30
+			}
+		},
+		{
+			"event_id": "event_retirement_plan",
+			"option_id": "C",
+			"text": "开始学新东西，活到老学到老",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_programming_advanced",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "lifelong_learner"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_retirement_plan",
+			"option_id": "D",
+			"text": "这一生已经足够了",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "no_regrets"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 40
+			},
+			"triggers_ending": true,
+			"ending_reason": "peaceful_retirement"
+		},
+		{
+			"event_id": "event_chronic_illness",
+			"option_id": "A",
+			"text": "坚持锻炼，积极对抗",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "strong_will"
+				}
+			],
+			"battle_trigger": {
+				"battle_id": "battle_chronic_illness",
+				"is_deadly": false,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							},
+							{
+								"id": "enemy_loneliness",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1.2
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_loneliness",
+								"count": 3
+							},
+							{
+								"id": "enemy_chronic_disease",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							},
+							{
+								"id": "enemy_recession",
+								"count": 1
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_recession",
+								"count": 2
+							},
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.7
+					}
+				]
+			},
+			"cost": {
+				"health": -5
+			},
+			"requirements": {
+				"health": 25
+			}
+		},
+		{
+			"event_id": "event_chronic_illness",
+			"option_id": "B",
+			"text": "吃药调养，顺其自然",
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"gold": -80,
+				"health": -10
+			},
+			"rewards": []
+		},
+		{
+			"event_id": "event_chronic_illness",
+			"option_id": "C",
+			"text": "不管了，该吃吃该喝喝",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "carefree_elder"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -15
+			},
+			"triggers_ending": true,
+			"ending_reason": "carefree_end"
+		},
+		{
+			"event_id": "event_family_reunion",
+			"option_id": "A",
+			"text": "享受天伦之乐",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "family_happiness"
+				},
+				{
+					"type": "gold",
+					"value": 120
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"trait": "!single_forever"
+			}
+		},
+		{
+			"event_id": "event_family_reunion",
+			"option_id": "B",
+			"text": "叮嘱晚辈好好工作",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_finance_basic",
+					"count": 1
+				},
+				{
+					"type": "gold",
+					"value": 60
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_family_reunion",
+			"option_id": "C",
+			"text": "和家人一起旅行",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "travel_elder"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -100
+			},
+			"requirements": {
+				"trait": "!single_forever",
+				"gold": 100
+			}
+		},
+		{
+			"event_id": "event_family_reunion",
+			"option_id": "D",
+			"text": "独自享受宁静时光",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "solitary_peace"
+				},
+				{
+					"type": "gold",
+					"value": 80
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"trait": "single_forever"
+			}
+		},
+		{
+			"event_id": "event_family_reunion",
+			"option_id": "E",
+			"text": "此生足矣，无憾了",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "no_regrets"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"triggers_ending": true,
+			"ending_reason": "family_fulfillment"
+		},
+		{
+			"event_id": "event_old_friend",
+			"option_id": "A",
+			"text": "畅叙旧情，感慨人生",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "nostalgic"
+				},
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_old_friend",
+			"option_id": "B",
+			"text": "约好以后常聚",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_network_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "social_elder"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_old_friend",
+			"option_id": "C",
+			"text": "看淡生死，坦然面对",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "at_peace"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 50
+			},
+			"triggers_ending": true,
+			"ending_reason": "peaceful_acceptance"
+		},
+		{
+			"event_id": "event_legacy",
+			"option_id": "A",
+			"text": "写回忆录",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "memoirist"
+				},
+				{
+					"type": "gold",
+					"value": 150
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_legacy",
+			"option_id": "B",
+			"text": "当导师带徒弟",
+			"rewards": [
+				{
+					"type": "tower",
+					"id": "tower_business_basic",
+					"count": 1
+				},
+				{
+					"type": "trait",
+					"id": "mentor"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 40
+			}
+		},
+		{
+			"event_id": "event_legacy",
+			"option_id": "C",
+			"text": "默默看着就好",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "quiet_observer"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"triggers_ending": true,
+			"ending_reason": "quiet_departure"
+		},
+		{
+			"event_id": "event_health_crisis",
+			"option_id": "A",
+			"text": "全力治疗",
+			"battle_trigger": {
+				"battle_id": "battle_health_crisis",
+				"is_deadly": true,
+				"waves": [
+					{
+						"wave_number": 1,
+						"enemies": [
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							},
+							{
+								"id": "enemy_loneliness",
+								"count": 2
+							}
+						],
+						"spawn_interval": 1
+					},
+					{
+						"wave_number": 2,
+						"enemies": [
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							},
+							{
+								"id": "enemy_bill",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.9
+					},
+					{
+						"wave_number": 3,
+						"enemies": [
+							{
+								"id": "enemy_loneliness",
+								"count": 3
+							},
+							{
+								"id": "enemy_chronic_disease",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.8
+					},
+					{
+						"wave_number": 4,
+						"enemies": [
+							{
+								"id": "enemy_recession",
+								"count": 2
+							},
+							{
+								"id": "enemy_chronic_disease",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 5,
+						"enemies": [
+							{
+								"id": "enemy_memory_loss",
+								"count": 1
+							},
+							{
+								"id": "enemy_loneliness",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.7
+					},
+					{
+						"wave_number": 6,
+						"enemies": [
+							{
+								"id": "enemy_recession",
+								"count": 2
+							},
+							{
+								"id": "enemy_memory_loss",
+								"count": 1
+							},
+							{
+								"id": "enemy_chronic_disease",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.6
+					},
+					{
+						"wave_number": 7,
+						"enemies": [
+							{
+								"id": "enemy_memory_loss",
+								"count": 2
+							},
+							{
+								"id": "enemy_recession",
+								"count": 2
+							},
+							{
+								"id": "enemy_loneliness",
+								"count": 3
+							}
+						],
+						"spawn_interval": 0.5
+					},
+					{
+						"wave_number": 8,
+						"enemies": [
+							{
+								"id": "boss_final_judgment",
+								"count": 1
+							},
+							{
+								"id": "enemy_memory_loss",
+								"count": 2
+							},
+							{
+								"id": "enemy_recession",
+								"count": 2
+							}
+						],
+						"spawn_interval": 0.5
+					}
+				]
+			},
+			"cost": {
+				"gold": -200
+			},
+			"rewards": [],
+			"requirements": {
+				"gold": 200
+			}
+		},
+		{
+			"event_id": "event_health_crisis",
+			"option_id": "B",
+			"text": "保守治疗，珍惜当下",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "accept_mortality"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -20
+			}
+		},
+		{
+			"event_id": "event_health_crisis",
+			"option_id": "C",
+			"text": "放弃治疗",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "final_peace"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -30
+			},
+			"triggers_ending": true,
+			"ending_reason": "gave_up_treatment"
+		},
+		{
+			"event_id": "event_life_reflection",
+			"option_id": "A",
+			"text": "此生无憾",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "no_regrets"
+				},
+				{
+					"type": "gold",
+					"value": 80
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_life_reflection",
+			"option_id": "B",
+			"text": "有些遗憾，但已释然",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "at_peace"
+				},
+				{
+					"type": "gold",
+					"value": 40
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_life_reflection",
+			"option_id": "C",
+			"text": "如果重来，一定不同",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "regretful"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -5
+			}
+		},
+		{
+			"event_id": "event_puberty_rebellion",
+			"option_id": "A",
+			"text": "跟父母大吵一架，离家出走",
+			"requirements": {
+				"courage": 40
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "rebel"
+				},
+				{
+					"type": "attribute",
+					"id": "courage",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"health": -10
+			}
+		},
+		{
+			"event_id": "event_puberty_rebellion",
+			"option_id": "B",
+			"text": "沉默对抗，写日记发泄",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "diarist"
+				},
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_puberty_rebellion",
+			"option_id": "C",
+			"text": "试着理解父母的苦心",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "empathy"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"intelligence": 40
+			}
+		},
+		{
+			"event_id": "event_first_love",
+			"option_id": "A",
+			"text": "偷偷递纸条表白",
+			"requirements": {
+				"courage": 35
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "first_love"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 5
+				}
+			],
+			"battle_trigger": null
+		},
+		{
+			"event_id": "event_first_love",
+			"option_id": "B",
+			"text": "把心思放在学习上",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 5
+				},
+				{
+					"type": "gold",
+					"value": 20
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_first_love",
+			"option_id": "C",
+			"text": "默默关注，享受心动的感觉",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "secret_crush"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_midlife_confusion",
+			"option_id": "A",
+			"text": "报名心理咨询，正视内心",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "self_aware"
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -50
+			},
+			"requirements": {
+				"gold": 50
+			}
+		},
+		{
+			"event_id": "event_midlife_confusion",
+			"option_id": "B",
+			"text": "买辆摩托车，去远方",
+			"requirements": {
+				"courage": 50
+			},
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "freedom_seeker"
+				},
+				{
+					"type": "attribute",
+					"id": "courage",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"cost": {
+				"gold": -80
+			}
+		},
+		{
+			"event_id": "event_midlife_confusion",
+			"option_id": "C",
+			"text": "继续过日子，迷茫就迷茫吧",
+			"rewards": [
+				{
+					"type": "gold",
+					"value": 50
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -5
+			}
+		},
+		{
+			"event_id": "event_retirement_hobby",
+			"option_id": "A",
+			"text": "学书法，修身养性",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "calligraphy"
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 5
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_retirement_hobby",
+			"option_id": "B",
+			"text": "跳广场舞，交朋友",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "dancer"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_retirement_hobby",
+			"option_id": "C",
+			"text": "养花种菜，享受田园",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "gardener"
+				},
+				{
+					"type": "attribute",
+					"id": "health",
+					"value": 8
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_retirement_hobby",
+			"option_id": "D",
+			"text": "心满意足，安享天年",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "no_regrets"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"triggers_ending": true,
+			"ending_reason": "content_elder"
+		},
+		{
+			"event_id": "event_old_friend_passing",
+			"option_id": "A",
+			"text": "写一篇文章纪念他",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "memorialist"
+				},
+				{
+					"type": "gold",
+					"value": 60
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_old_friend_passing",
+			"option_id": "B",
+			"text": "更加珍惜身边的人",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "cherish_people"
+				},
+				{
+					"type": "attribute",
+					"id": "charm",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_old_friend_passing",
+			"option_id": "C",
+			"text": "独自沉默了很久",
+			"rewards": [
+				{
+					"type": "attribute",
+					"id": "intelligence",
+					"value": 3
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"cost": {
+				"health": -5
+			}
+		},
+		{
+			"event_id": "event_old_friend_passing",
+			"option_id": "D",
+			"text": "随他而去吧，我也该走了",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "at_peace"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"health": 20
+			},
+			"triggers_ending": true,
+			"ending_reason": "following_friend"
+		},
+		{
+			"event_id": "event_twilight_wisdom",
+			"option_id": "A",
+			"text": "把感悟告诉年轻人",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "wise_elder"
+				},
+				{
+					"type": "gold",
+					"value": 80
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {
+				"charm": 25
+			}
+		},
+		{
+			"event_id": "event_twilight_wisdom",
+			"option_id": "B",
+			"text": "写下来，留给后人",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "memoirist"
+				},
+				{
+					"type": "gold",
+					"value": 100
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {}
+		},
+		{
+			"event_id": "event_twilight_wisdom",
+			"option_id": "C",
+			"text": "微笑着，什么都不说",
+			"rewards": [
+				{
+					"type": "trait",
+					"id": "quiet_observer"
+				}
+			],
+			"battle_trigger": null,
+			"requirements": {},
+			"triggers_ending": true,
+			"ending_reason": "silent_wisdom"
+		}
+	]
+}

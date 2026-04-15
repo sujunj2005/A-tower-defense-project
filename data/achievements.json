@@ -1,150 +1,160 @@
 {
-  "version": "1.0",
-  "achievements": [
-    {
-      "achievement_id": "ach_first_blood",
-      "achievement_name": "第一滴血",
-      "description": "首次完成战斗",
-      "condition": {
-        "type": "battle_won",
-        "count": 1
-      },
-      "reward": {
-        "destiny_points": 10
-      }
-    },
-    {
-      "achievement_id": "ach_perfect_life",
-      "achievement_name": "完美一生",
-      "description": "达成S级结局",
-      "condition": {
-        "type": "ending_reached",
-        "rating": "S"
-      },
-      "reward": {
-        "destiny_points": 20
-      }
-    },
-    {
-      "achievement_id": "ach_successful_life",
-      "achievement_name": "成功人生",
-      "description": "达成A级结局",
-      "condition": {
-        "type": "ending_reached",
-        "rating": "A"
-      },
-      "reward": {
-        "destiny_points": 15
-      }
-    },
-    {
-      "achievement_id": "ach_battle_master",
-      "achievement_name": "百战百胜",
-      "description": "累计赢得10场战斗",
-      "condition": {
-        "type": "battle_won",
-        "count": 10
-      },
-      "reward": {
-        "destiny_points": 15
-      }
-    },
-    {
-      "achievement_id": "ach_s_rank_battle",
-      "achievement_name": "无伤通关",
-      "description": "以S级评价完成一场战斗",
-      "condition": {
-        "type": "battle_rating",
-        "rating": "S"
-      },
-      "reward": {
-        "destiny_points": 10
-      }
-    },
-    {
-      "achievement_id": "ach_top_university",
-      "achievement_name": "名校出身",
-      "description": "考入顶尖大学",
-      "condition": {
-        "type": "trait_acquired",
-        "trait_id": "top_university"
-      },
-      "reward": {
-        "destiny_points": 10
-      }
-    },
-    {
-      "achievement_id": "ach_entrepreneur",
-      "achievement_name": "创业先锋",
-      "description": "选择创业路线",
-      "condition": {
-        "type": "trait_acquired",
-        "trait_id": "entrepreneur"
-      },
-      "reward": {
-        "destiny_points": 10
-      }
-    },
-    {
-      "achievement_id": "ach_married",
-      "achievement_name": "修成正果",
-      "description": "步入婚姻殿堂",
-      "condition": {
-        "type": "trait_acquired",
-        "trait_id": "married"
-      },
-      "reward": {
-        "destiny_points": 5
-      }
-    },
-    {
-      "achievement_id": "ach_all_stages",
-      "achievement_name": "人生百态",
-      "description": "经历所有人生阶段",
-      "condition": {
-        "type": "stages_completed",
-        "stages": ["童年", "青年", "中年", "老年"]
-      },
-      "reward": {
-        "destiny_points": 15
-      }
-    },
-    {
-      "achievement_id": "ach_survive_deadly",
-      "achievement_name": "死里逃生",
-      "description": "在致命事件中存活",
-      "condition": {
-        "type": "deadly_event_survived",
-        "count": 1
-      },
-      "reward": {
-        "destiny_points": 20
-      }
-    },
-    {
-      "achievement_id": "ach_farmer_to_rich",
-      "achievement_name": "寒门贵子",
-      "description": "以农民家庭出身达成A级以上结局",
-      "condition": {
-        "type": "family_ending_combo",
-        "family": "farmer",
-        "min_rating": "A"
-      },
-      "reward": {
-        "destiny_points": 25
-      }
-    },
-    {
-      "achievement_id": "ach_all_families",
-      "achievement_name": "百味人生",
-      "description": "以所有家庭背景各完成一次游戏",
-      "condition": {
-        "type": "families_completed",
-        "families": ["cadre", "merchant", "worker", "farmer"]
-      },
-      "reward": {
-        "destiny_points": 30
-      }
-    }
-  ]
+	"version": "1.0",
+	"achievements": [
+		{
+			"achievement_id": "ach_first_blood",
+			"achievement_name": "第一滴血",
+			"description": "首次完成战斗",
+			"condition": {
+				"type": "battle_won",
+				"count": 1
+			},
+			"reward": {
+				"destiny_points": 10
+			}
+		},
+		{
+			"achievement_id": "ach_perfect_life",
+			"achievement_name": "完美一生",
+			"description": "达成S级结局",
+			"condition": {
+				"type": "ending_reached",
+				"rating": "S"
+			},
+			"reward": {
+				"destiny_points": 20
+			}
+		},
+		{
+			"achievement_id": "ach_successful_life",
+			"achievement_name": "成功人生",
+			"description": "达成A级结局",
+			"condition": {
+				"type": "ending_reached",
+				"rating": "A"
+			},
+			"reward": {
+				"destiny_points": 15
+			}
+		},
+		{
+			"achievement_id": "ach_battle_master",
+			"achievement_name": "百战百胜",
+			"description": "累计赢得10场战斗",
+			"condition": {
+				"type": "battle_won",
+				"count": 10
+			},
+			"reward": {
+				"destiny_points": 15
+			}
+		},
+		{
+			"achievement_id": "ach_s_rank_battle",
+			"achievement_name": "无伤通关",
+			"description": "以S级评价完成一场战斗",
+			"condition": {
+				"type": "battle_rating",
+				"rating": "S"
+			},
+			"reward": {
+				"destiny_points": 10
+			}
+		},
+		{
+			"achievement_id": "ach_top_university",
+			"achievement_name": "名校出身",
+			"description": "考入顶尖大学",
+			"condition": {
+				"type": "trait_acquired",
+				"trait_id": "top_university"
+			},
+			"reward": {
+				"destiny_points": 10
+			}
+		},
+		{
+			"achievement_id": "ach_entrepreneur",
+			"achievement_name": "创业先锋",
+			"description": "选择创业路线",
+			"condition": {
+				"type": "trait_acquired",
+				"trait_id": "entrepreneur"
+			},
+			"reward": {
+				"destiny_points": 10
+			}
+		},
+		{
+			"achievement_id": "ach_married",
+			"achievement_name": "修成正果",
+			"description": "步入婚姻殿堂",
+			"condition": {
+				"type": "trait_acquired",
+				"trait_id": "married"
+			},
+			"reward": {
+				"destiny_points": 5
+			}
+		},
+		{
+			"achievement_id": "ach_all_stages",
+			"achievement_name": "人生百态",
+			"description": "经历所有人生阶段",
+			"condition": {
+				"type": "stages_completed",
+				"stages": [
+					"童年",
+					"青年",
+					"中年",
+					"老年"
+				]
+			},
+			"reward": {
+				"destiny_points": 15
+			}
+		},
+		{
+			"achievement_id": "ach_survive_deadly",
+			"achievement_name": "死里逃生",
+			"description": "在致命事件中存活",
+			"condition": {
+				"type": "deadly_event_survived",
+				"count": 1
+			},
+			"reward": {
+				"destiny_points": 20
+			}
+		},
+		{
+			"achievement_id": "ach_farmer_to_rich",
+			"achievement_name": "寒门贵子",
+			"description": "以农民家庭出身达成A级以上结局",
+			"condition": {
+				"type": "family_ending_combo",
+				"family": "farmer",
+				"min_rating": "A"
+			},
+			"reward": {
+				"destiny_points": 25
+			}
+		},
+		{
+			"achievement_id": "ach_all_families",
+			"achievement_name": "百味人生",
+			"description": "以所有家庭背景各完成一次游戏",
+			"condition": {
+				"type": "families_completed",
+				"families": [
+					"cadre",
+					"merchant",
+					"worker",
+					"farmer"
+				]
+			},
+			"reward": {
+				"destiny_points": 30
+			}
+		}
+	]
 }

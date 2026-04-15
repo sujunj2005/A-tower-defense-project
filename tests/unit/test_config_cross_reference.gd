@@ -1,6 +1,7 @@
 extends GutTest
 
 var _events_data: Dictionary
+var _options_data: Dictionary
 var _traits_data: Dictionary
 var _towers_data: Dictionary
 var _enemies_data: Dictionary
@@ -9,6 +10,7 @@ var _stages_data: Dictionary
 
 func before_all() -> void:
 	_events_data = ConfigManager.load_json("res://data/events.json")
+	_options_data = ConfigManager.load_json("res://data/options.json")
 	_traits_data = ConfigManager.load_json("res://data/traits.json")
 	_towers_data = ConfigManager.load_json("res://data/towers.json")
 	_enemies_data = ConfigManager.load_json("res://data/enemies.json")
@@ -45,6 +47,13 @@ func _get_event_ids() -> Dictionary:
 		ids[e.event_id] = true
 	return ids
 
+func _get_options_for_event(event_id: String) -> Array:
+	var result: Array = []
+	for opt: Dictionary in _options_data.get("options", []):
+		if opt.get("event_id", "") == event_id:
+			result.append(opt)
+	return result
+
 func _get_stage_ranges() -> Dictionary:
 	var ranges: Dictionary = {}
 	for sid: String in _stages_data.stages:
@@ -67,7 +76,7 @@ func test_event_ages_match_stage_range() -> void:
 func test_event_trait_rewards_exist() -> void:
 	var trait_ids: Dictionary = _get_trait_ids()
 	for ev: Dictionary in _events_data.events:
-		for opt: Dictionary in ev.options:
+		for opt: Dictionary in _get_options_for_event(ev.event_id):
 			for r: Dictionary in opt.get("rewards", []):
 				if r.type == "trait":
 					assert_true(trait_ids.has(r.id),
@@ -76,7 +85,7 @@ func test_event_trait_rewards_exist() -> void:
 func test_event_tower_rewards_exist() -> void:
 	var tower_ids: Dictionary = _get_tower_ids()
 	for ev: Dictionary in _events_data.events:
-		for opt: Dictionary in ev.options:
+		for opt: Dictionary in _get_options_for_event(ev.event_id):
 			for r: Dictionary in opt.get("rewards", []):
 				if r.type == "tower":
 					assert_true(tower_ids.has(r.id),
@@ -85,7 +94,7 @@ func test_event_tower_rewards_exist() -> void:
 func test_event_attribute_rewards_exist() -> void:
 	var attr_ids: Dictionary = _get_attribute_ids()
 	for ev: Dictionary in _events_data.events:
-		for opt: Dictionary in ev.options:
+		for opt: Dictionary in _get_options_for_event(ev.event_id):
 			for r: Dictionary in opt.get("rewards", []):
 				if r.type == "attribute":
 					assert_true(attr_ids.has(r.id),
@@ -94,7 +103,7 @@ func test_event_attribute_rewards_exist() -> void:
 func test_event_battle_enemies_exist() -> void:
 	var enemy_ids: Dictionary = _get_enemy_ids()
 	for ev: Dictionary in _events_data.events:
-		for opt: Dictionary in ev.options:
+		for opt: Dictionary in _get_options_for_event(ev.event_id):
 			var bt: Dictionary = opt.get("battle_trigger", {})
 			if bt and bt.get("waves", []):
 				for wave: Dictionary in bt.waves:
@@ -105,7 +114,7 @@ func test_event_battle_enemies_exist() -> void:
 func test_event_trait_requirements_exist() -> void:
 	var trait_ids: Dictionary = _get_trait_ids()
 	for ev: Dictionary in _events_data.events:
-		for opt: Dictionary in ev.options:
+		for opt: Dictionary in _get_options_for_event(ev.event_id):
 			var reqs: Dictionary = opt.get("requirements", {})
 			if reqs.has("trait"):
 				var tname: String = reqs.trait.lstrip("!")

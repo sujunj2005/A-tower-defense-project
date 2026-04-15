@@ -76,7 +76,9 @@ const QUIET_YEAR_TEXTS: Array[String] = [
 ]
 
 func _load_current_event() -> void:
+	var session: GameSessionData = Global.get_game_session()
 	if not _roll_event_trigger():
+		Global.debug_log("[事件系统] 年龄=%d, 阶段=%s, 事件掷骰未通过（无事发生）" % [session.current_age, session.current_stage])
 		_display_quiet_year()
 		return
 	var es: Node = get_node_or_null("/root/EventSystem")
@@ -155,21 +157,30 @@ func display_event(event: EventData) -> void:
 	_clear_options()
 	var options: Array = event.options
 	for i: int in range(options.size()):
-		var option: Dictionary = options[i]
+		var option: OptionData = options[i]
 		var btn: Button = Button.new()
-		var req_text: String = _format_requirements(option.get("requirements", {}))
-		var btn_text: String = option.get("text", "选项 %d" % (i + 1))
+		var os: Node = get_node_or_null("/root/OptionSystem")
+		var req_text: String = ""
+		if os and os.has_method("format_requirements"):
+			req_text = os.format_requirements(option.requirements)
+		else:
+			req_text = _format_requirements(option.requirements)
+		var btn_text: String = option.text if option.text != "" else "选项 %d" % (i + 1)
 		if req_text != "":
 			btn_text += "\n[需要: " + req_text + "]"
-		var has_ending: bool = option.get("triggers_ending", false) == true
-		var has_battle: bool = option.get("battle_trigger") is Dictionary
+		var has_ending: bool = option.triggers_ending
+		var has_battle: bool = option.battle_trigger is Dictionary
 		if has_ending:
 			btn_text += "\n[💀 触发结局]"
 		elif has_battle:
 			btn_text += "\n[⚔️ 触发战斗]"
 		btn.text = btn_text
 		btn.custom_minimum_size = Vector2(0, 40)
-		var can_select: bool = _check_requirements(option.get("requirements", {}))
+		var can_select: bool = false
+		if os and os.has_method("check_requirements"):
+			can_select = os.check_requirements(option)
+		else:
+			can_select = _check_requirements(option.requirements)
 		btn.disabled = not can_select
 		if not can_select:
 			btn.add_theme_color_override("font_disabled_color", Color(0.5, 0.5, 0.5, 1.0))
@@ -187,8 +198,9 @@ func _format_requirements(requirements: Dictionary) -> String:
 		"intelligence": "智力",
 		"courage": "勇气",
 		"health": "健康",
-		"charisma": "魅力",
-		"creativity": "创造力"
+		"charm": "魅力",
+		"work_ability": "工作能力",
+		"luck": "运气"
 	}
 	var bg_names: Dictionary = {
 		"farmer": "农民",
@@ -292,13 +304,13 @@ func _on_option_pressed(index: int) -> void:
 	var options: Array = _current_event.options
 	if index < 0 or index >= options.size():
 		return
-	var selected_option: Dictionary = options[index]
+	var selected_option: OptionData = options[index]
 	var es: Node = get_node_or_null("/root/EventSystem")
 	if es and es.has_method("select_option"):
-		es.select_option(_current_event.to_dict(), selected_option)
+		es.select_option(_current_event.to_dict(), selected_option.to_dict())
 	if not is_inside_tree():
 		return
-	var rewards: Array = selected_option.get("rewards", [])
+	var rewards: Array = selected_option.rewards
 	for reward: Dictionary in rewards:
 		if reward.get("type", "") == "trait":
 			var ach_sys: Node = get_node_or_null("/root/AchievementSystem")
@@ -307,7 +319,7 @@ func _on_option_pressed(index: int) -> void:
 	option_selected.emit(index)
 	_show_consequence_popup(selected_option)
 
-func _show_consequence_popup(selected_option: Dictionary) -> void:
+func _show_consequence_popup(selected_option: OptionData) -> void:
 	var overlay: ColorRect = ColorRect.new()
 	overlay.color = Color(0.0, 0.0, 0.0, 0.5)
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -345,8 +357,8 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 	var sep0: HSeparator = HSeparator.new()
 	vbox.add_child(sep0)
 
-	var rewards: Array = selected_option.get("rewards", [])
-	var costs: Dictionary = selected_option.get("cost", {})
+	var rewards: Array = selected_option.rewards
+	var costs: Dictionary = selected_option.cost
 	var has_gold_section: bool = false
 	var has_trait_section: bool = false
 	var has_tower_section: bool = false
@@ -364,11 +376,11 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 					_add_popup_row(vbox, "💰", "金币 %d" % gold_val, Color(1.0, 0.4, 0.4, 1.0))
 			"attribute":
 				var ac: Node = get_node_or_null("/root/AttributeConfig")
-				var attr_id: String = reward.get("attribute", "")
+				var attr_id: String = reward.get("attribute", reward.get("id", ""))
 				var attr_display: String = attr_id
 				if ac and ac.has_method("get_display_with_icon"):
 					attr_display = ac.get_display_with_icon(attr_id)
-				var count_val: int = reward.get("count", 0)
+				var count_val: int = reward.get("value", reward.get("count", 0))
 				if count_val >= 0:
 					_add_popup_row(vbox, "", "%s +%d" % [attr_display, count_val], Color(0.4, 1.0, 0.4, 1.0))
 				else:
@@ -488,8 +500,8 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 	age_row.add_child(lbl_age)
 	vbox.add_child(age_row)
 
-	var has_ending_popup: bool = selected_option.get("triggers_ending", false) == true
-	var has_battle_popup: bool = selected_option.get("battle_trigger") is Dictionary
+	var has_ending_popup: bool = selected_option.triggers_ending
+	var has_battle_popup: bool = selected_option.battle_trigger is Dictionary
 	if has_ending_popup:
 		var sep_ending: HSeparator = HSeparator.new()
 		vbox.add_child(sep_ending)
@@ -520,13 +532,13 @@ func _show_consequence_popup(selected_option: Dictionary) -> void:
 		overlay.queue_free()
 		popup.queue_free()
 		event_completed.emit()
-		if selected_option.get("triggers_ending", false) == true:
+		if selected_option.triggers_ending:
 			var es: Node = get_node_or_null("/root/EventSystem")
 			if es and es.has_method("_trigger_life_ending"):
-				es._trigger_life_ending(selected_option.get("ending_reason", "player_choice"))
+				es._trigger_life_ending(selected_option.ending_reason if selected_option.ending_reason != "" else "player_choice")
 			else:
 				GameState.change_state(GameState.State.ENDING)
-		elif selected_option.get("battle_trigger") is Dictionary:
+		elif selected_option.battle_trigger is Dictionary:
 			GameState.change_state(GameState.State.BATTLE)
 		else:
 			GameState.change_state(GameState.State.STAGE)

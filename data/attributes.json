@@ -1,11 +1,29 @@
 {
-  "version": "1.0",
-  "attributes": {
-    "intelligence": {"display_name": "智力", "icon": "🧠"},
-    "courage": {"display_name": "勇气", "icon": "⚔"},
-    "health": {"display_name": "健康", "icon": "❤"},
-    "work_ability": {"display_name": "工作能力", "icon": "💼"},
-    "charm": {"display_name": "魅力", "icon": "✨"},
-    "luck": {"display_name": "运气", "icon": "🍀"}
-  }
+	"attributes": {
+		"charm": {
+			"display_name": "魅力",
+			"icon": "✨"
+		},
+		"courage": {
+			"display_name": "勇气",
+			"icon": "⚔"
+		},
+		"health": {
+			"display_name": "健康",
+			"icon": "❤"
+		},
+		"intelligence": {
+			"display_name": "智力",
+			"icon": "🧠"
+		},
+		"luck": {
+			"display_name": "运气",
+			"icon": "🍀"
+		},
+		"work_ability": {
+			"display_name": "工作能力",
+			"icon": "💼"
+		}
+	},
+	"version": "1.0"
 }

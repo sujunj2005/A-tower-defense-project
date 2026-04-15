@@ -15,6 +15,7 @@ CONFIG_FILES = [
     "towers.json",
     "enemies.json",
     "events.json",
+    "options.json",
     "stages.json",
     "traits.json",
     "endings.json",
@@ -260,10 +261,13 @@ def validate_import(xlsx_path, original_data):
         if list_key in original_data and isinstance(original_data[list_key], list):
             for item in original_data[list_key]:
                 if isinstance(item, dict):
-                    for k in item:
-                        if k.endswith("_id"):
-                            original_ids.add(item[k])
-                            break
+                    if id_column and id_column in item:
+                        original_ids.add(str(item[id_column]))
+                    else:
+                        for k in item:
+                            if k.endswith("_id"):
+                                original_ids.add(str(item[k]))
+                                break
 
         imported_ids = set()
         for row in rows[2:]:

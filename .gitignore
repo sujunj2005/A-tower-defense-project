@@ -32,6 +32,7 @@ xlsx/
 *.user
 *.userosscache
 *.sln.docstates
+*.md
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -42,3 +43,5 @@ bld/
 build/
 .gitnexus
 .gdignore
+__pycache__/
+*.bak
