@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://d0c76axn8w6jr"]
-
-[ext_resource type="Script" path="res://test/test_pause_menu_comprehensive.gd" id="1_kj6r1"]
-
-[node name="PauseMenuTestScene" type="Node" unique_id=59870117]
-
-[node name="TestRunner" type="Node" parent="." unique_id=401922555]
-script = ExtResource("1_kj6r1")

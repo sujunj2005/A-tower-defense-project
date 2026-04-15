@@ -15,7 +15,6 @@ stable/
 addons/
 images/
 xlsx/
-tests/
 
 # 排除测试报告文件
 测试报告_暂停菜单功能.md

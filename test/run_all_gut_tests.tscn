@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bxjn7hkxlmvks"]
-
-[ext_resource type="Script" path="res://test/run_all_gut_tests.gd" id="1_ckql6"]
-
-[node name="RunAllGutTests" type="Node" unique_id=79748874]
-script = ExtResource("1_ckql6")
