@@ -88,10 +88,13 @@ static func from_dict(data: Dictionary) -> TowerBean:
 			bean.pierce_damage_decay = float(special.get("decay", 0.7))
 		_:
 			bean.effect_type = GameConfig.EffectType.NONE
-	var tower_idx: int = bean.tower_id.hash() % 16
-	var t_row: int = floori(tower_idx / 4.0)
-	var t_col: int = tower_idx % 4
-	bean.texture_path = "res://images/towers/Black - Plastic 1 128x128-%d-%d.png" % [t_row, t_col]
+	if data.has("texture_path") and str(data.texture_path) != "":
+		bean.texture_path = str(data.texture_path)
+	else:
+		var tower_idx: int = bean.tower_id.hash() % 16
+		var t_row: int = floori(tower_idx / 4.0)
+		var t_col: int = tower_idx % 4
+		bean.texture_path = "res://images/towers/Black - Plastic 1 128x128-%d-%d.png" % [t_row, t_col]
 	return bean
 
 func to_dict() -> Dictionary:

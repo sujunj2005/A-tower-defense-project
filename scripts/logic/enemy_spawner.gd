@@ -131,7 +131,7 @@ func spawn_enemy(enemy_type: String) -> void:
 	enemy.position = spawn_pos
 
 	var world_path: Array[Vector2] = _calculate_world_path()
-	enemy.set_path(world_path)
+	enemy.set_waypoints(world_path)
 
 	enemy.reached_base.connect(_on_enemy_reached_base)
 	map_manager.add_child(enemy)
@@ -146,8 +146,8 @@ func spawn_enemy_from_config(wave_enemy_config: WaveEnemyConfig) -> void:
 	enemy.initialize(enemy_cfg)
 
 	var world_path: Array[Vector2] = _calculate_world_path()
-	enemy.lateral_offset = randf_range(-20.0, 20.0)
-	enemy.set_path(world_path)
+	enemy.spawn_offset = Vector2(randf_range(-20.0, 20.0), randf_range(-20.0, 20.0))
+	enemy.set_waypoints(world_path)
 
 	enemy.reached_base.connect(_on_enemy_reached_base)
 	map_manager.add_child(enemy)

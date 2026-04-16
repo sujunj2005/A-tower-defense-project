@@ -1,4 +1,4 @@
-﻿extends PanelContainer
+extends PanelContainer
 class_name TargetInfoPanel
 
 signal sell_tower_requested(tower: Tower)
@@ -90,11 +90,13 @@ func show_tower_info(tower: Tower) -> void:
 	_last_tower_level = tower.current_level
 	_last_tower_exp = tower.current_experience
 	_title_label.text = "🏰 " + tower.config.tower_name + "  Lv." + str(tower.current_level)
-	var info: String = _build_tower_info_text(tower)
-	_info_label.text = info
-	var sell_price: int = _calculate_sell_price(tower)
-	_sell_button.text = "💰 出售（返还 %d 金币）" % sell_price
-	_sell_button.visible = true
+	_info_label.text = _build_tower_info_text(tower)
+	if tower.config.sell_ratio > 0.0:
+		var sell_price: int = _calculate_sell_price(tower)
+		_sell_button.text = "💰 出售（返还 %d 金币）" % sell_price
+		_sell_button.visible = true
+	else:
+		_sell_button.visible = false
 	visible = true
 
 func show_enemy_info(enemy: Enemy) -> void:
@@ -151,6 +153,7 @@ func _build_enemy_info_text(enemy: Enemy) -> String:
 	var text: String = ""
 	text += "❤ 血量：%.0f/%.0f" % [max(0.0, enemy.current_health), cfg.max_health]
 	text += "    🏃 速度：%.0f" % enemy.base_move_speed
+	text += "    ⚔ 伤害：%d" % cfg.damage
 	text += "    💰 击杀奖励：%d" % cfg.gold_drop
 	var phys_res: float = cfg.physical_resistance * 100.0
 	var mag_res: float = cfg.magical_resistance * 100.0
@@ -187,5 +190,5 @@ func _process(_delta: float) -> void:
 			_last_tower_exp = tower.current_experience
 			_title_label.text = "🏰 " + tower.config.tower_name + "  Lv." + str(tower.current_level)
 			_info_label.text = _build_tower_info_text(tower)
-		if _sell_button.visible:
+		if _sell_button.visible and tower.config.sell_ratio > 0.0:
 			_sell_button.text = "💰 出售（返还 %d 金币）" % _calculate_sell_price(tower)

@@ -38,8 +38,9 @@ var ability_component: Node
 var is_spawned: bool = false
 var is_selected: bool = false
 var _selection_indicator: ColorRect = null
-var lateral_offset: float = 0.0
-var original_path_points: Array[Vector2] = []
+var spawn_offset: Vector2 = Vector2.ZERO
+var secondary_offset: Vector2 = Vector2.ZERO
+var waypoints: Array[Vector2] = []
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -121,36 +122,35 @@ func setup_health_bar() -> void:
 
 	add_child(health_bar)
 
-func set_path(points: Array[Vector2], set_position: bool = false) -> void:
-	original_path_points = points
-	path_points = points.duplicate()
+func set_waypoints(wps: Array[Vector2], set_position: bool = false) -> void:
+	waypoints = wps
+	_rebuild_path_from_waypoints()
 	current_path_index = 0
-	if lateral_offset != 0.0:
-		_apply_lateral_offset()
 	if set_position and path_points.size() > 0:
 		global_position = path_points[0]
 
-func _apply_lateral_offset() -> void:
-	if path_points.size() < 2 or lateral_offset == 0.0:
+func set_path(points: Array[Vector2], set_position: bool = false) -> void:
+	waypoints = points
+	path_points = points.duplicate()
+	current_path_index = 0
+	if set_position and path_points.size() > 0:
+		global_position = path_points[0]
+
+func _rebuild_path_from_waypoints() -> void:
+	path_points.clear()
+	if waypoints.size() < 2:
+		if waypoints.size() == 1:
+			path_points.append(waypoints[0] + spawn_offset + secondary_offset)
 		return
-	var offset_points: Array[Vector2] = []
-	for i: int in range(path_points.size()):
-		var dir: Vector2
-		if i == 0:
-			dir = (path_points[1] - path_points[0]).normalized()
-		elif i == path_points.size() - 1:
-			dir = (path_points[i] - path_points[i - 1]).normalized()
-		else:
-			var dir_in: Vector2 = (path_points[i] - path_points[i - 1]).normalized()
-			var dir_out: Vector2 = (path_points[i + 1] - path_points[i]).normalized()
-			dir = (dir_in + dir_out).normalized()
-			if dir.length() < 0.01:
-				dir = dir_in
-		var perp: Vector2 = Vector2(-dir.y, dir.x)
-		offset_points.append(path_points[i] + perp * lateral_offset)
-	path_points = offset_points
+	var total_offset: Vector2 = spawn_offset + secondary_offset
+	for i: int in range(waypoints.size()):
+		path_points.append(waypoints[i] + total_offset)
+
+
 
 func _process(delta: float) -> void:
+	if Global.soft_paused:
+		return
 	update_effect_states(delta)
 
 	if is_being_knocked_back:
@@ -486,21 +486,27 @@ func _setup_abilities() -> void:
 			break
 
 func _find_forward_path_index(from_pos: Vector2) -> int:
-	if path_points.is_empty():
+	if path_points.size() <= 1:
 		return 0
-	var closest_idx: int = 0
-	var closest_dist: float = from_pos.distance_to(path_points[0])
-	for idx: int in range(1, path_points.size()):
-		var d: float = from_pos.distance_to(path_points[idx])
-		if d < closest_dist:
-			closest_dist = d
-			closest_idx = idx
-	if closest_idx < path_points.size() - 1:
-		var seg_dir: Vector2 = path_points[closest_idx + 1] - path_points[closest_idx]
-		var to_pos: Vector2 = from_pos - path_points[closest_idx]
-		if seg_dir.dot(to_pos) > 0:
-			return closest_idx + 1
-	return closest_idx
+	var best_seg: int = 0
+	var best_dist: float = INF
+	for idx: int in range(path_points.size() - 1):
+		var a: Vector2 = path_points[idx]
+		var b: Vector2 = path_points[idx + 1]
+		var ab: Vector2 = b - a
+		var ap: Vector2 = from_pos - a
+		var ab_len_sq: float = ab.length_squared()
+		if ab_len_sq < 0.001:
+			continue
+		var t: float = clampf(ap.dot(ab) / ab_len_sq, 0.0, 1.0)
+		var proj: Vector2 = a + ab * t
+		var d: float = from_pos.distance_to(proj)
+		if d < best_dist:
+			best_dist = d
+			best_seg = idx
+			if t > 0.5:
+				best_seg = idx + 1
+	return mini(best_seg, path_points.size() - 1)
 
 func _on_split_requested(split_enemy_id: String, count: int, pos: Vector2) -> void:
 	Global.debug_log("[分裂] %s 死亡分裂为 %d 个 %s" % [config.enemy_name, count, split_enemy_id])
@@ -510,11 +516,12 @@ func _on_split_requested(split_enemy_id: String, count: int, pos: Vector2) -> vo
 		if split_config:
 			var split_enemy: Enemy = Enemy.new()
 			split_enemy.initialize(split_config)
-			split_enemy.lateral_offset = lateral_offset + randf_range(-15.0, 15.0)
-			if original_path_points.size() > 0:
-				split_enemy.set_path(original_path_points)
-			var angle: float = TAU * float(i) / float(count) + randf_range(-0.3, 0.3)
-			var dist: float = spawn_radius + randf_range(-5.0, 10.0)
+			split_enemy.spawn_offset = spawn_offset
+			split_enemy.secondary_offset = secondary_offset + Vector2(randf_range(-20.0, 20.0), randf_range(-20.0, 20.0))
+			if waypoints.size() > 0:
+				split_enemy.set_waypoints(waypoints)
+			var angle: float = TAU * float(i) / float(count) + randf_range(-0.8, 0.8)
+			var dist: float = spawn_radius + randf_range(-10.0, 15.0)
 			var spawn_pos: Vector2 = pos + Vector2(cos(angle) * dist, sin(angle) * dist)
 			split_enemy._mark_as_spawned()
 			var mm: Node = get_node_or_null("/root/MapManager")
@@ -525,9 +532,7 @@ func _on_split_requested(split_enemy_id: String, count: int, pos: Vector2) -> vo
 			get_parent().add_child(split_enemy)
 			split_enemy.global_position = spawn_pos
 			if split_enemy.path_points.size() > 1:
-				split_enemy.current_path_index = split_enemy._find_forward_path_index(spawn_pos)
-				if split_enemy.current_path_index < 1:
-					split_enemy.current_path_index = 1
+				split_enemy.current_path_index = current_path_index
 
 func _on_summon_requested(summon_configs: Array, pos: Vector2) -> void:
 	var spawn_radius: float = 55.0
@@ -543,9 +548,10 @@ func _on_summon_requested(summon_configs: Array, pos: Vector2) -> void:
 			if summon_config:
 				var summon_enemy: Enemy = Enemy.new()
 				summon_enemy.initialize(summon_config)
-				summon_enemy.lateral_offset = lateral_offset + randf_range(-15.0, 15.0)
-				if original_path_points.size() > 0:
-					summon_enemy.set_path(original_path_points)
+				summon_enemy.spawn_offset = spawn_offset
+				summon_enemy.secondary_offset = secondary_offset + Vector2(randf_range(-20.0, 20.0), randf_range(-20.0, 20.0))
+				if waypoints.size() > 0:
+					summon_enemy.set_waypoints(waypoints)
 				var angle: float = TAU * float(global_idx) / float(total_count) + randf_range(-0.3, 0.3)
 				var dist: float = spawn_radius + randf_range(-5.0, 10.0)
 				var spawn_pos: Vector2 = pos + Vector2(cos(angle) * dist, sin(angle) * dist)
@@ -558,25 +564,21 @@ func _on_summon_requested(summon_configs: Array, pos: Vector2) -> void:
 				get_parent().add_child(summon_enemy)
 				summon_enemy.global_position = spawn_pos
 				if summon_enemy.path_points.size() > 1:
-					summon_enemy.current_path_index = summon_enemy._find_forward_path_index(spawn_pos)
-					if summon_enemy.current_path_index < 1:
-						summon_enemy.current_path_index = 1
+					summon_enemy.current_path_index = current_path_index
 			global_idx += 1
 
 func _on_tower_destroy_requested(target_count: int) -> void:
 	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
 	var valid_towers: Array[Node] = []
 	for t: Node in towers:
-		if is_instance_valid(t) and t is Tower:
-			valid_towers.append(t)
-	var mm: Node = get_node_or_null("/root/MapManager")
+		if is_instance_valid(t) and t is Tower and not t.is_destroyed:
+			if t.config and t.config.tower_id != "tower_ruins":
+				valid_towers.append(t)
 	for i: int in range(mini(target_count, valid_towers.size())):
 		if valid_towers.is_empty():
 			break
 		var idx: int = randi() % valid_towers.size()
-		var target_tower: Node = valid_towers[idx]
+		var target_tower: Tower = valid_towers[idx] as Tower
 		Global.debug_log("[BOSS] %s 消灭了塔：%s" % [config.enemy_name, target_tower.name])
-		if mm and mm.has_method("remove_built_tower"):
-			mm.remove_built_tower(target_tower)
-		target_tower.queue_free()
+		target_tower.destroy()
 		valid_towers.remove_at(idx)

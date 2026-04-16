@@ -29,6 +29,7 @@ var hover_area: Area2D
 var collision_shape: CollisionShape2D
 
 var is_selected: bool = false
+var is_destroyed: bool = false
 var _selection_indicator: ColorRect = null
 
 signal target_changed(new_target: Node2D)
@@ -73,14 +74,9 @@ func setup_tower() -> void:
 		tower_sprite.z_index = 10
 		add_child(tower_sprite)
 
-	if config.texture_path != "":
-		var texture: Texture2D = AssetsManager.load_image(config.texture_path) as Texture2D
-		if texture:
-			tower_sprite.texture = texture
-			tower_sprite.scale = Vector2(0.78, 0.78)
-		else:
-			tower_sprite.texture = _create_placeholder_texture()
-			tower_sprite.scale = Vector2(0.78, 0.78)
+	var texture: Texture2D = AssetsManager.load_image(config.texture_path) as Texture2D
+	tower_sprite.texture = texture
+	tower_sprite.scale = Vector2(0.78, 0.78)
 
 	if not attack_component:
 		attack_component = TowerAttackComponent.new()
@@ -166,10 +162,11 @@ func add_experience(exp_amount: int) -> void:
 
 	current_experience += exp_amount
 	Global.debug_log("[Tower] 获得经验：%d (当前：%d/%d)" % [exp_amount, current_experience, experience_required])
-	experience_changed.emit(current_experience, experience_required)
 
 	while current_experience >= experience_required and current_level < config.max_level:
 		level_up()
+
+	experience_changed.emit(current_experience, experience_required)
 
 func level_up() -> void:
 	if current_level >= config.max_level:
@@ -257,27 +254,29 @@ func _on_hover_area_mouse_entered() -> void:
 func _on_hover_area_mouse_exited() -> void:
 	is_mouse_hovering = false
 
-func _create_placeholder_texture() -> ImageTexture:
-	var img_size: int = 64
-	var image: Image = Image.create(img_size, img_size, false, Image.FORMAT_RGBA8)
-	var fill_color: Color = Color(0.3, 0.6, 0.9, 1.0) if config and config.damage_type == 1 else Color(0.9, 0.5, 0.3, 1.0)
-	image.fill(fill_color)
-	var border: int = 4
-	for y: int in range(img_size):
-		for x: int in range(img_size):
-			if x < border or x >= img_size - border or y < border or y >= img_size - border:
-				image.set_pixel(x, y, Color(1.0, 1.0, 1.0, 0.8))
-	var center: int = floori(img_size / 2.0)
-	var inner_size: int = 20
-	var half_inner: int = floori(inner_size / 2.0)
-	for y: int in range(center - half_inner, center + half_inner):
-		for x: int in range(center - half_inner, center + half_inner):
-			if x >= 0 and x < img_size and y >= 0 and y < img_size:
-				image.set_pixel(x, y, Color(1.0, 1.0, 1.0, 0.9))
-	return ImageTexture.create_from_image(image)
+func destroy() -> void:
+	if is_destroyed:
+		return
+	is_destroyed = true
+	var slot_idx: int = -1
+	if has_meta("slot_index"):
+		slot_idx = get_meta("slot_index")
+	Global.debug_log("[Tower] %s 开始销毁流程，slot_index=%d" % [(config.tower_name if config else "未知"), slot_idx])
+	var mm: Node = get_node_or_null("/root/MapManager")
+	if mm and mm.has_method("remove_built_tower"):
+		mm.remove_built_tower(self)
+	if mm and mm.has_method("build_ruins_at_slot") and slot_idx >= 0:
+		mm.build_ruins_at_slot(slot_idx)
+		Global.debug_log("[Tower] 已请求在 slot %d 创建废墟" % slot_idx)
+	else:
+		Global.debug_log("[Tower] 无法创建废墟：mm=%s, slot_idx=%d" % [str(mm != null), slot_idx])
+	queue_free()
 
 func get_tower_info_text() -> String:
-	if not config or not attack_component:
+	if not config:
+		return ""
+
+	if not attack_component:
 		return ""
 
 	var info_text: String = "%s (Lv.%d)\n" % [config.tower_name, current_level]

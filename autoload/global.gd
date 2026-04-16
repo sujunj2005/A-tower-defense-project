@@ -10,6 +10,8 @@ var game_session: GameSessionData = GameSessionData.new()
 
 var debug_mode: bool = true
 
+var soft_paused: bool = false
+
 func _ready() -> void:
 	if debug_mode:
 		print("[Global] 全局单例初始化完成")

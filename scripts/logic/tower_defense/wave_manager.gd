@@ -35,6 +35,7 @@ var _current_spawn_interval: float = 1.5
 var _waiting_for_summon: bool = false
 var _summon_countdown: float = 0.0
 var _is_first_wave: bool = true
+var _pending_show_summon: bool = false
 
 func _ready() -> void:
 	_spawn_timer = Timer.new()
@@ -48,6 +49,11 @@ func _ready() -> void:
 	add_child(_wave_delay_timer)
 
 func _process(delta: float) -> void:
+	if Global.soft_paused:
+		return
+	if _pending_show_summon:
+		_pending_show_summon = false
+		_show_summon_button()
 	if _waiting_for_summon and not _is_first_wave:
 		_summon_countdown -= delta
 		if _summon_countdown <= 0.0:
@@ -205,6 +211,8 @@ func _start_event_wave() -> void:
 	_spawn_timer.start()
 
 func _on_spawn_timer_timeout() -> void:
+	if Global.soft_paused:
+		return
 	if _enemies_spawned >= _enemies_to_spawn:
 		_spawn_timer.stop()
 		_on_all_enemies_spawned()
@@ -251,6 +259,9 @@ func _check_wave_complete() -> void:
 			is_active = false
 
 func _on_wave_delay_timeout() -> void:
+	if Global.soft_paused:
+		_pending_show_summon = true
+		return
 	_show_summon_button()
 
 func _pick_enemy_from_pool() -> String:

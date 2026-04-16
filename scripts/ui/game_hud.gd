@@ -1,4 +1,4 @@
-﻿extends CanvasLayer
+extends CanvasLayer
 class_name GameHUD
 
 signal gold_changed(new_gold: int)

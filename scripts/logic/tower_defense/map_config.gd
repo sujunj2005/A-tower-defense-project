@@ -11,6 +11,8 @@ class_name MapConfig
 
 @export var path_points: Array[Vector2i] = []
 
+@export var waypoints: Array[Vector2i] = []
+
 @export var tower_positions: Array[Vector2i] = []
 @export var max_towers: int = 10
 
@@ -50,6 +52,25 @@ func _cache_enemy_configs():
 
 func get_cached_enemy_config(enemy_type: String) -> EnemyConfig:
 	return _enemy_cache.get(enemy_type)
+
+static func compute_path_from_waypoints(wps: Array[Vector2i]) -> Array[Vector2i]:
+	if wps.size() < 2:
+		return wps.duplicate()
+	var result: Array[Vector2i] = []
+	for i in range(wps.size() - 1):
+		var start: Vector2i = wps[i]
+		var end: Vector2i = wps[i + 1]
+		var dx: int = end.x - start.x
+		var dy: int = end.y - start.y
+		var steps: int = maxi(absi(dx), absi(dy))
+		if steps == 0:
+			continue
+		var step_x: int = 0 if dx == 0 else (1 if dx > 0 else -1)
+		var step_y: int = 0 if dy == 0 else (1 if dy > 0 else -1)
+		for s in range(steps):
+			result.append(Vector2i(start.x + step_x * s, start.y + step_y * s))
+	result.append(wps[-1])
+	return result
 
 static var _map_registry: Dictionary = {}
 

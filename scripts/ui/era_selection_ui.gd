@@ -1,4 +1,4 @@
-﻿extends Control
+extends Control
 
 signal era_selected(era_id: String)
 signal family_selected(family_id: String)

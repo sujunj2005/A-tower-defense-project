@@ -5,7 +5,7 @@
 
 [node name="Main" type="Node2D" unique_id=408629742]
 
-[node name="Map" parent="." unique_id=1655078883 instance=ExtResource("1_map")]
+[node name="MapManager" parent="." unique_id=1655078883 instance=ExtResource("1_map")]
 
 [node name="PauseCanvas" type="CanvasLayer" parent="." unique_id=1006230649]
 

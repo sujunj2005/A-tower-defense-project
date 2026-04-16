@@ -17,6 +17,8 @@ func initialize(enemy_node: Enemy, enemy_abilities: Array[Dictionary]) -> void:
 			_ability_timers[ability.ability_id] = 0.0
 
 func _process(delta: float) -> void:
+	if Global.soft_paused:
+		return
 	if not enemy or not is_instance_valid(enemy):
 		return
 	for ability: Dictionary in abilities:
@@ -93,6 +95,12 @@ func _process_destroy_tower(ability: Dictionary, delta: float) -> void:
 	if _ability_timers[ability_id] <= 0.0:
 		_ability_timers[ability_id] = ability.get("cooldown", 15.0)
 		var target_count: int = ability.get("target_count", 1)
+		var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
+		var valid_count: int = 0
+		for t: Node in towers:
+			if is_instance_valid(t) and t is Tower and not t.is_destroyed:
+				valid_count += 1
+		Global.debug_log("[BOSS能力] destroy_tower 冷却完成，目标数=%d，场上可用塔=%d" % [target_count, valid_count])
 		tower_destroy_requested.emit(target_count)
 		ability_triggered.emit(ability_id)
 

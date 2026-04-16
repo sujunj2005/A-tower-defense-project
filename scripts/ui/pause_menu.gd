@@ -80,12 +80,12 @@ func _exit_tree():
 		bg.gui_input.disconnect(_bg_gui_input_callable)
 
 func _input(event):
-	# 全局监听 ESC 键
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		if is_paused:
-			resume_game()
-		else:
-			pause_game()
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			if is_paused:
+				resume_game()
+			else:
+				pause_game()
 
 func _on_background_gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:

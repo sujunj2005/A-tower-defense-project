@@ -1,4 +1,4 @@
-﻿extends Node2D
+extends Node2D
 
 const TERRAIN_SET: int = 0
 const TERRAIN_GRASS: int = 0
@@ -46,6 +46,15 @@ var _wave_announcement_timer: float = 0.0
 var _summon_button: Button
 var _summon_progress: ProgressBar
 var _summon_canvas: CanvasLayer
+var _battle_timer_label: Label
+
+var _soft_paused: bool = false
+var _pause_label: Label
+var _pause_canvas: CanvasLayer
+
+var _battle_speed: float = 1.0
+var _speed_buttons: Array[Button] = []
+
 
 @onready var camera: Camera2D = $Camera2D
 @onready var path_markers: Node2D = $PathMarkers
@@ -58,15 +67,30 @@ func _ready() -> void:
 	_start_battle()
 
 func _process(delta: float) -> void:
-	game_time += delta
-	_update_path_markers(delta)
+	if not _soft_paused and _battle_active and wave_manager:
+		var is_waiting_first: bool = wave_manager._waiting_for_summon and wave_manager._is_first_wave
+		if not is_waiting_first:
+			game_time += delta
+		_update_path_markers(delta)
+		_check_battle_end()
+		_update_wave_announcement(delta)
+		_update_summon_button(delta)
+	_update_battle_timer()
 	_update_tower_hover()
-	_check_battle_end()
-	_update_wave_announcement(delta)
-	_update_summon_button(delta)
 
 func _exit_tree() -> void:
 	_cleanup_signals()
+	_reset_battle_speed()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_SPACE:
+			if _soft_paused:
+				_resume_soft_pause()
+			else:
+				_start_soft_pause()
+			get_viewport().set_input_as_handled()
+			return
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -77,7 +101,10 @@ func _load_map_data(map_id: String) -> void:
 	if not map_config:
 		push_error("Failed to load map config: %s" % map_id)
 		return
-	path_points = map_config.path_points.duplicate()
+	if map_config.waypoints.size() >= 2:
+		path_points = MapConfig.compute_path_from_waypoints(map_config.waypoints)
+	else:
+		path_points = map_config.path_points.duplicate()
 	tower_positions = map_config.tower_positions.duplicate()
 	EnemyConfig.set_map_config(map_config)
 
@@ -165,17 +192,17 @@ func _on_enemy_spawn_requested(enemy_id: String) -> void:
 		return
 	var enemy: Enemy = Enemy.new()
 	enemy.initialize(enemy_cfg)
-	var world_path: Array[Vector2] = []
-	for point: Vector2i in map_config.path_points:
-		world_path.append(Vector2(point * map_config.tile_size) + Vector2(map_config.tile_size / 2.0, map_config.tile_size / 2.0))
-	enemy.lateral_offset = randf_range(-20.0, 20.0)
-	enemy.set_path(world_path)
+	var world_waypoints: Array[Vector2] = []
+	var wps: Array[Vector2i] = map_config.waypoints if map_config.waypoints.size() >= 2 else map_config.path_points
+	for point: Vector2i in wps:
+		world_waypoints.append(Vector2(point * map_config.tile_size) + Vector2(map_config.tile_size / 2.0, map_config.tile_size / 2.0))
+	enemy.spawn_offset = Vector2(randf_range(-20.0, 20.0), randf_range(-20.0, 20.0))
+	enemy.set_waypoints(world_waypoints)
 	enemy.reached_base.connect(_on_enemy_reached_base)
 	enemy.died.connect(_on_enemy_killed)
 	add_child(enemy)
 	if enemy.path_points.size() > 1:
-		var spawn_offset: Vector2 = Vector2(randf_range(-30.0, 30.0), randf_range(-30.0, 30.0))
-		enemy.global_position = enemy.path_points[0] + spawn_offset
+		enemy.global_position = enemy.path_points[0]
 		enemy.current_path_index = 1
 
 func _on_wave_completed(wave_number: int) -> void:
@@ -218,6 +245,7 @@ func _check_battle_end() -> void:
 
 func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 	_battle_active = false
+	_reset_battle_speed()
 	var session: GameSessionData = Global.get_game_session()
 	session.current_battle_victory = victory
 	if game_hud:
@@ -453,6 +481,7 @@ func build_tower(slot_index: int, tower_type: String) -> void:
 	var tower: Tower = Tower.new()
 	tower.position = _get_tile_center_position(tower_positions[slot_index])
 	tower.z_index = 10
+	tower.set_meta("slot_index", slot_index)
 	add_child(tower)
 	tower.initialize(tower_config)
 	if tower_select_ui:
@@ -737,6 +766,53 @@ func remove_built_tower(tower: Tower) -> void:
 		hovered_tower = null
 		_hide_tower_hover_ui()
 
+func _start_soft_pause() -> void:
+	_soft_paused = true
+	Global.soft_paused = true
+	if not _pause_canvas:
+		_pause_canvas = CanvasLayer.new()
+		_pause_canvas.layer = 200
+		add_child(_pause_canvas)
+		_pause_label = Label.new()
+		_pause_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_pause_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_pause_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+		_pause_label.add_theme_font_size_override("font_size", 64)
+		_pause_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 0.8))
+		_pause_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+		_pause_label.add_theme_constant_override("shadow_offset_x", 3)
+		_pause_label.add_theme_constant_override("shadow_offset_y", 3)
+		_pause_canvas.add_child(_pause_label)
+	_pause_label.text = "暂停"
+	_pause_label.visible = true
+	Global.debug_log("[软暂停] 游戏已暂停")
+
+func _resume_soft_pause() -> void:
+	_soft_paused = false
+	Global.soft_paused = false
+	if _pause_label:
+		_pause_label.visible = false
+	Global.debug_log("[软暂停] 游戏已恢复")
+
+func build_ruins_at_slot(slot_index: int) -> void:
+	var tower_config: TowerBean = TowerConfig.get_config("tower_ruins")
+	if not tower_config:
+		Global.debug_log("[废墟] tower_ruins 配置不存在！")
+		return
+	var tower: Tower = Tower.new()
+	tower.position = _get_tile_center_position(tower_positions[slot_index])
+	tower.z_index = 10
+	tower.set_meta("slot_index", slot_index)
+	add_child(tower)
+	tower.initialize(tower_config)
+	Global.debug_log("[废墟] 在 slot %d 创建废墟塔，纹理路径=%s" % [slot_index, tower_config.texture_path])
+	if tower_select_ui:
+		tower.mouse_hover_started.connect(tower_select_ui._on_tower_mouse_hover_started)
+		tower.mouse_hover_ended.connect(tower_select_ui._on_tower_mouse_hover_ended)
+	if tower_sell_ui:
+		tower.mouse_clicked.connect(_on_tower_mouse_clicked)
+	built_towers[slot_index] = tower
+
 func _find_tower_at_position(mouse_pos: Vector2) -> Tower:
 	var tile_size_half: float = map_config.tile_size / 2.0
 	var tile_size_full: float = map_config.tile_size
@@ -853,6 +929,8 @@ func _hide_tower_hover_ui() -> void:
 func _on_enemy_reached_base(_enemy: Node2D) -> void:
 	if game_hud and game_hud.base_hp > 0:
 		var base_damage: float = 1.0
+		if _enemy is Enemy and _enemy.config:
+			base_damage = float(_enemy.config.damage)
 		var ts: Node = get_node_or_null("/root/TraitSystem")
 		if ts and ts.has_method("get_damage_reduction"):
 			base_damage = base_damage * (1.0 - ts.get_damage_reduction())
@@ -901,6 +979,33 @@ func _create_battle_hud() -> void:
 	_summon_progress.value = 100.0
 	_summon_progress.visible = false
 	_summon_canvas.add_child(_summon_progress)
+	_battle_timer_label = Label.new()
+	_battle_timer_label.add_theme_font_size_override("font_size", 20)
+	_battle_timer_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 0.9))
+	_battle_timer_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	_battle_timer_label.add_theme_constant_override("shadow_offset_x", 2)
+	_battle_timer_label.add_theme_constant_override("shadow_offset_y", 2)
+	_battle_timer_label.position = Vector2(20, 160)
+	_battle_timer_label.text = "00:00"
+	_summon_canvas.add_child(_battle_timer_label)
+
+	var speed_container: HBoxContainer = HBoxContainer.new()
+	speed_container.position = Vector2(20, 270)
+	speed_container.add_theme_constant_override("separation", 4)
+	var speeds: Array[float] = [1.0, 2.0, 4.0]
+	var speed_labels: Array[String] = ["1x", "2x", "4x"]
+	for idx: int in range(speeds.size()):
+		var btn: Button = Button.new()
+		btn.text = speed_labels[idx]
+		btn.custom_minimum_size = Vector2(44, 32)
+		btn.add_theme_font_size_override("font_size", 14)
+		btn.toggle_mode = true
+		if idx == 0:
+			btn.button_pressed = true
+		btn.pressed.connect(_on_speed_button_pressed.bind(idx))
+		speed_container.add_child(btn)
+		_speed_buttons.append(btn)
+	_summon_canvas.add_child(speed_container)
 
 func _on_summon_button_requested(show: bool, countdown: float, is_first_wave: bool) -> void:
 	if _summon_button:
@@ -912,14 +1017,38 @@ func _on_summon_button_requested(show: bool, countdown: float, is_first_wave: bo
 			_summon_progress.value = countdown
 
 func _update_summon_button(delta: float) -> void:
-	if not _summon_progress or not _summon_progress.visible:
+	if not _summon_progress:
 		return
 	if wave_manager and "_summon_countdown" in wave_manager:
 		_summon_progress.value = wave_manager._summon_countdown
 
+func _update_battle_timer() -> void:
+	if not _battle_timer_label:
+		return
+	var minutes: int = int(game_time) / 60
+	var seconds: int = int(game_time) % 60
+	_battle_timer_label.text = "%02d:%02d" % [minutes, seconds]
+
 func _on_summon_pressed() -> void:
 	if wave_manager and wave_manager.has_method("force_start_next_wave"):
 		wave_manager.force_start_next_wave()
+
+func _on_speed_button_pressed(idx: int) -> void:
+	var speeds: Array[float] = [1.0, 2.0, 4.0]
+	if idx < 0 or idx >= speeds.size():
+		return
+	_battle_speed = speeds[idx]
+	Engine.time_scale = _battle_speed
+	for i: int in range(_speed_buttons.size()):
+		_speed_buttons[i].button_pressed = (i == idx)
+	Global.debug_log("[速度] 战斗速度设为 %.0fx" % _battle_speed)
+
+func _reset_battle_speed() -> void:
+	_battle_speed = 1.0
+	Engine.time_scale = 1.0
+	for i: int in range(_speed_buttons.size()):
+		if _speed_buttons[i]:
+			_speed_buttons[i].button_pressed = (i == 0)
 
 func _show_wave_announcement(text: String) -> void:
 	if not _wave_announcement:

@@ -1,4 +1,4 @@
-﻿extends Control
+extends Control
 class_name TowerSelectUI
 
 signal tower_selected(tower_type: String)

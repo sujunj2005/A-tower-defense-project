@@ -12,7 +12,7 @@ shader_parameter/grid_color = Color(1, 1, 1, 0.3)
 shader_parameter/grid_width = 1.0
 shader_parameter/tile_size = Vector2(16, 16)
 
-[node name="Map" type="Node2D" unique_id=1242457261]
+[node name="MapManager" type="Node2D" unique_id=1242457261]
 script = ExtResource("1_script")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2062373552]
@@ -26,9 +26,9 @@ script = ExtResource("2_camera")
 material = SubResource("ShaderMaterial_gldc4")
 tile_set = ExtResource("3_tileset")
 
-[node name="PauseCanvas" type="CanvasLayer" parent="."]
+[node name="PauseCanvas" type="CanvasLayer" parent="." unique_id=487313103]
 
-[node name="PauseMenu" type="Control" parent="PauseCanvas"]
+[node name="PauseMenu" type="Control" parent="PauseCanvas" unique_id=301939531]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

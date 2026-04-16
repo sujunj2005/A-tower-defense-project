@@ -131,7 +131,7 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 	session.gold = data.get("gold", 50)
 	session.home_health = data.get("home_health", 100.0)
 	session.max_home_health = data.get("max_home_health", 100.0)
-	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100})
+	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100, "charm": 30, "work_ability": 0, "luck": 30})
 	session.completed_events = data.get("completed_events", [])
 	session.completed_battles = data.get("completed_battles", [])
 	session.current_battle_id = data.get("current_battle_id", "")

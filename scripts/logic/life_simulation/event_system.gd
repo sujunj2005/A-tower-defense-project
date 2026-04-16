@@ -30,27 +30,49 @@ func get_events_for_current_age() -> Array[EventData]:
 	if not age_sys:
 		return []
 	var available_events: Array[EventData] = []
+	var skipped_details: Array[String] = []
 	for event_raw: Dictionary in events_data.events:
 		var event := EventData.from_dict(event_raw)
 		if _can_trigger(event, age_sys):
 			available_events.append(event)
+		else:
+			if event.event_id != "event_nothing" and age_sys.current_age in event.ages:
+				var reason: String = ""
+				if event.stage != session.current_stage:
+					reason = "阶段不匹配(event=%s, session=%s)" % [event.stage, session.current_stage]
+				elif event.event_id in session.completed_events:
+					reason = "已完成"
+				elif event.trigger_chance < 1.0:
+					reason = "概率未通过(%.0f%%)" % (event.trigger_chance * 100.0)
+				else:
+					reason = "前置/互斥条件不满足"
+				skipped_details.append("%s(%s): %s" % [event.event_id, event.event_name, reason])
+	Global.debug_log("[事件系统] 年龄=%d, 阶段=%s, 可触发事件=%d, 跳过(年龄匹配但不可触发)=%d" % [age_sys.current_age, session.current_stage, available_events.size(), skipped_details.size()])
+	for detail: String in skipped_details:
+		Global.debug_log("[事件系统]   跳过: %s" % detail)
 	return available_events
 
 func _can_trigger(event: EventData, age_sys: Node) -> bool:
 	if not age_sys.current_age in event.ages:
 		return false
 	if event.stage != session.current_stage:
+		Global.debug_log("[事件系统] %s 阶段不匹配: event.stage=%s, session=%s" % [event.event_id, event.stage, session.current_stage])
 		return false
 	if event.event_id in session.completed_events:
 		return false
 	var chain_prerequisites: Array = event.chain_prerequisites
 	for prereq_id: String in chain_prerequisites:
 		if not prereq_id in session.completed_events:
+			Global.debug_log("[事件系统] %s 前置未满足: %s" % [event.event_id, prereq_id])
 			return false
 	var chain_excludes: Array = event.chain_excludes
 	for exclude_id: String in chain_excludes:
 		if exclude_id in session.completed_events:
+			Global.debug_log("[事件系统] %s 互斥事件已完成: %s" % [event.event_id, exclude_id])
 			return false
+	if event.trigger_chance < 1.0 and randf() > event.trigger_chance:
+		Global.debug_log("[事件系统] %s 概率未通过: %.0f%%" % [event.event_id, event.trigger_chance * 100.0])
+		return false
 	return true
 
 func trigger_event(event: EventData) -> void:
@@ -103,8 +125,10 @@ func _apply_rewards(rewards: Array) -> void:
 				session.gold += actual_gold
 				Global.debug_log("金币变化：%d（基础：%d，加成后：%d）" % [actual_gold, base_gold, actual_gold])
 			"attribute":
-				var attr: String = reward.attribute if reward.attribute != "" else "intelligence"
-				var count: int = reward.count
+				var attr: String = reward.attribute if reward.attribute != "" else reward.id
+				if attr == "":
+					attr = "intelligence"
+				var count: int = reward.value if reward.value != 0 else reward.count
 				if session.attributes.has(attr):
 					session.attributes[attr] += count
 					var ac: Node = get_node_or_null("/root/AttributeConfig")

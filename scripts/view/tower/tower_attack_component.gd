@@ -57,12 +57,15 @@ func setup_timer():
 
 ## 每帧更新（用于前摇计时）
 func _process(delta):
-	# 仅在前摇激活状态下处理计时
+	if Global.soft_paused:
+		return
 	if windup_state == WindupState.WINDUP_ACTIVE:
 		update_windup(delta)
 
 ## ==================== 攻击周期主循环 ====================
 func _on_attack_cycle():
+	if Global.soft_paused:
+		return
 	# 阶段 1: 索敌（Detection）
 	find_target()
 
