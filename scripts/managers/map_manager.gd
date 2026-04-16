@@ -55,6 +55,9 @@ var _pause_canvas: CanvasLayer
 var _battle_speed: float = 1.0
 var _speed_buttons: Array[Button] = []
 
+var damage_tracker: Node
+var damage_stats_panel: Node
+
 
 @onready var camera: Camera2D = $Camera2D
 @onready var path_markers: Node2D = $PathMarkers
@@ -121,6 +124,7 @@ func _setup_ui_components() -> void:
 	_create_tower_hover_ui()
 	_create_battle_hud()
 	_create_target_info_panel()
+	_create_damage_stats()
 
 func _start_battle() -> void:
 	_battle_active = true
@@ -184,7 +188,7 @@ func _on_wave_started(wave_number: int, total_waves: int) -> void:
 	Global.debug_log("波次 %d/%d 开始" % [wave_number, total_waves])
 	if game_hud:
 		game_hud.update_wave(wave_number, total_waves)
-	_show_wave_announcement("⚔ 波次 %d/%d" % [wave_number, total_waves])
+	_show_wave_announcement(tr("WAVE_ANNOUNCEMENT") % [wave_number, total_waves])
 
 func _on_enemy_spawn_requested(enemy_id: String) -> void:
 	var enemy_cfg: EnemyConfig = EnemyConfig.get_config(enemy_id)
@@ -276,7 +280,7 @@ func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 	session.last_battle_rewards = rewards
 	if wave_manager and wave_manager.has_method("stop_battle"):
 		wave_manager.stop_battle()
-	var result_text: String = "胜利" if victory else "失败"
+	var result_text: String = tr("BATTLE_VICTORY") if victory else tr("BATTLE_DEFEAT")
 	Global.debug_log("战斗结束：%s，评级：%s" % [result_text, rating])
 	var es_node: Node = get_node_or_null("/root/EventSystem")
 	if es_node and es_node.has_method("_check_stage_transition"):
@@ -441,8 +445,8 @@ func _create_tower_slot_button(index: int) -> Button:
 	var button: Button = Button.new()
 	button.custom_minimum_size = Vector2(100, 100)
 	button.position = Vector2(pos * map_config.tile_size)
-	button.text = "塔位"
-	button.tooltip_text = "点击建造防御塔"
+	button.text = tr("TOWER_SLOT")
+	button.tooltip_text = tr("TOWER_SLOT_TOOLTIP")
 	return button
 
 func _connect_tower_slot_signal(button: Button, index: int) -> void:
@@ -513,7 +517,7 @@ func _can_place_tower(tower_type: String, session: GameSessionData) -> bool:
 
 func _show_tower_limit_warning(tower_type: String) -> void:
 	var config: TowerBean = TowerConfig.get_config(tower_type)
-	var tname: String = config.tower_name if config else tower_type
+	var tname: String = config.get_display_name() if config else tower_type
 	Global.debug_log("[建塔] %s 已达摆放上限" % tname)
 	var viewport: Viewport = get_viewport()
 	if not viewport:
@@ -601,6 +605,8 @@ func _on_tower_sold(tower: Tower) -> void:
 	if _tower_stats_update_callables.has(tower):
 		tower.stats_updated.disconnect(_tower_stats_update_callables[tower])
 		_tower_stats_update_callables.erase(tower)
+	if damage_tracker:
+		damage_tracker.mark_tower_sold(tower)
 	var base_cost: int = tower.config.cost
 	var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.1
 	var sell_price: int = int(float(base_cost) * tower.config.sell_ratio * level_bonus)
@@ -658,6 +664,22 @@ func _initialize_camera() -> void:
 func _create_game_hud() -> void:
 	game_hud = GameHUD.new()
 	add_child(game_hud)
+
+func _create_damage_stats() -> void:
+	var tracker_script: GDScript = load("res://scripts/logic/battle/damage_tracker.gd")
+	damage_tracker = Node.new()
+	damage_tracker.name = "DamageTracker"
+	damage_tracker.set_script(tracker_script)
+	add_child(damage_tracker)
+	var canvas: CanvasLayer = CanvasLayer.new()
+	canvas.layer = 35
+	add_child(canvas)
+	var panel_script: GDScript = load("res://scripts/ui/damage_stats_panel.gd")
+	damage_stats_panel = Control.new()
+	damage_stats_panel.name = "DamageStatsPanel"
+	damage_stats_panel.set_script(panel_script)
+	canvas.add_child(damage_stats_panel)
+	damage_stats_panel.setup(damage_tracker)
 
 func _create_target_info_panel() -> void:
 	var canvas: CanvasLayer = CanvasLayer.new()
@@ -783,7 +805,7 @@ func _start_soft_pause() -> void:
 		_pause_label.add_theme_constant_override("shadow_offset_x", 3)
 		_pause_label.add_theme_constant_override("shadow_offset_y", 3)
 		_pause_canvas.add_child(_pause_label)
-	_pause_label.text = "暂停"
+	_pause_label.text = tr("PAUSED")
 	_pause_label.visible = true
 	Global.debug_log("[软暂停] 游戏已暂停")
 
@@ -898,12 +920,12 @@ func _show_tower_info(tower: Tower) -> void:
 	var final_attack_speed: float = base_attack_speed * (1.0 + attack_speed_bonus)
 	var info: String = "%s (Lv.%d)\n" % [cfg.tower_name, tower.current_level]
 	info += "━━━━━━━━━━━━━━━\n"
-	info += "⚔ 伤害：%.0f" % final_damage
+	info += tr("TOWER_INFO_DAMAGE") % final_damage
 	if damage_bonus > 0.0:
 		info += " (+%.0f%%)" % (damage_bonus * 100.0)
 	info += "\n"
-	info += "🎯 射程：%.0f\n" % base_range
-	info += "⚡ 攻速：%.1f/s" % final_attack_speed
+	info += tr("TOWER_INFO_RANGE") % base_range + "\n"
+	info += tr("TOWER_INFO_SPEED") % final_attack_speed
 	if attack_speed_bonus > 0.0:
 		info += " (+%.0f%%)" % (attack_speed_bonus * 100.0)
 	tower_info_label.text = info
@@ -965,7 +987,7 @@ func _create_battle_hud() -> void:
 	_summon_canvas.layer = 25
 	add_child(_summon_canvas)
 	_summon_button = Button.new()
-	_summon_button.text = "立即召唤"
+	_summon_button.text = tr("BTN_SUMMON")
 	_summon_button.custom_minimum_size = Vector2(140, 50)
 	_summon_button.add_theme_font_size_override("font_size", 18)
 	_summon_button.visible = false

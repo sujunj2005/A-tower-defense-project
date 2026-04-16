@@ -4,7 +4,7 @@
 		{
 			"event_id": "event_kindergarten_show",
 			"option_id": "A",
-			"text": "参加合唱团",
+			"text": "OPTION_KINDERGARTEN_SHOW_A_TEXT",
 			"requirements": {
 				"courage": 30
 			},
@@ -24,7 +24,7 @@
 		{
 			"event_id": "event_kindergarten_show",
 			"option_id": "B",
-			"text": "参加朗诵比赛",
+			"text": "OPTION_KINDERGARTEN_SHOW_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -42,7 +42,7 @@
 		{
 			"event_id": "event_kindergarten_show",
 			"option_id": "C",
-			"text": "当观众就好",
+			"text": "OPTION_KINDERGARTEN_SHOW_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -59,7 +59,7 @@
 		{
 			"event_id": "event_math_contest",
 			"option_id": "A",
-			"text": "努力准备，冲刺名次",
+			"text": "OPTION_MATH_CONTEST_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -136,7 +136,7 @@
 		{
 			"event_id": "event_math_contest",
 			"option_id": "B",
-			"text": "随便参加，重在参与",
+			"text": "OPTION_MATH_CONTEST_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -178,7 +178,7 @@
 		{
 			"event_id": "event_math_contest",
 			"option_id": "C",
-			"text": "放弃参加，去踢球",
+			"text": "OPTION_MATH_CONTEST_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -196,7 +196,7 @@
 		{
 			"event_id": "event_hobby_class",
 			"option_id": "A",
-			"text": "学钢琴",
+			"text": "OPTION_HOBBY_CLASS_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -219,7 +219,7 @@
 		{
 			"event_id": "event_hobby_class",
 			"option_id": "B",
-			"text": "学编程",
+			"text": "OPTION_HOBBY_CLASS_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -242,7 +242,7 @@
 		{
 			"event_id": "event_hobby_class",
 			"option_id": "C",
-			"text": "自学，不花钱",
+			"text": "OPTION_HOBBY_CLASS_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -259,7 +259,7 @@
 		{
 			"event_id": "event_hobby_class",
 			"option_id": "D",
-			"text": "帮家里干活",
+			"text": "OPTION_HOBBY_CLASS_D_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -278,7 +278,7 @@
 		{
 			"event_id": "event_peer_conflict",
 			"option_id": "A",
-			"text": "告诉老师",
+			"text": "OPTION_PEER_CONFLICT_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -295,7 +295,7 @@
 		{
 			"event_id": "event_peer_conflict",
 			"option_id": "B",
-			"text": "自己解决，打回去",
+			"text": "OPTION_PEER_CONFLICT_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -345,7 +345,7 @@
 		{
 			"event_id": "event_peer_conflict",
 			"option_id": "C",
-			"text": "忍气吞声",
+			"text": "OPTION_PEER_CONFLICT_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -358,7 +358,7 @@
 		{
 			"event_id": "event_peer_conflict",
 			"option_id": "D",
-			"text": "告诉家长，让家长处理",
+			"text": "OPTION_PEER_CONFLICT_D_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -375,7 +375,7 @@
 		{
 			"event_id": "event_family_crisis",
 			"option_id": "A",
-			"text": "努力学习，不让爸妈操心",
+			"text": "OPTION_FAMILY_CRISIS_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -459,7 +459,7 @@
 		{
 			"event_id": "event_family_crisis",
 			"option_id": "B",
-			"text": "帮家里找兼职",
+			"text": "OPTION_FAMILY_CRISIS_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -479,7 +479,7 @@
 		{
 			"event_id": "event_family_crisis",
 			"option_id": "C",
-			"text": "像往常一样玩耍",
+			"text": "OPTION_FAMILY_CRISIS_C_TEXT",
 			"requirements": {},
 			"battle_trigger": {
 				"battle_id": "battle_xiaoshengchu_normal",
@@ -534,7 +534,7 @@
 		{
 			"event_id": "event_family_crisis",
 			"option_id": "D",
-			"text": "问爸妈要不要辍学",
+			"text": "OPTION_FAMILY_CRISIS_D_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -551,7 +551,7 @@
 		{
 			"event_id": "event_zhongkao",
 			"option_id": "A",
-			"text": "冲刺重点高中",
+			"text": "OPTION_ZHONGKAO_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -650,7 +650,7 @@
 		{
 			"event_id": "event_zhongkao",
 			"option_id": "B",
-			"text": "读普通高中",
+			"text": "OPTION_ZHONGKAO_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -711,7 +711,7 @@
 		{
 			"event_id": "event_zhongkao",
 			"option_id": "C",
-			"text": "读职高，学技术",
+			"text": "OPTION_ZHONGKAO_C_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -729,7 +729,7 @@
 		{
 			"event_id": "event_gaokao_choice",
 			"option_id": "A",
-			"text": "冲刺清华北大",
+			"text": "OPTION_GAOKAO_CHOICE_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -847,7 +847,7 @@
 		{
 			"event_id": "event_gaokao_choice",
 			"option_id": "B",
-			"text": "正常发挥，考个一本",
+			"text": "OPTION_GAOKAO_CHOICE_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -932,7 +932,7 @@
 		{
 			"event_id": "event_gaokao_choice",
 			"option_id": "C",
-			"text": "二本也行，选个好专业",
+			"text": "OPTION_GAOKAO_CHOICE_C_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -950,7 +950,7 @@
 		{
 			"event_id": "event_gaokao_choice",
 			"option_id": "D",
-			"text": "放弃高考，直接工作",
+			"text": "OPTION_GAOKAO_CHOICE_D_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -967,7 +967,7 @@
 		{
 			"event_id": "event_college_love",
 			"option_id": "A",
-			"text": "勇敢表白",
+			"text": "OPTION_COLLEGE_LOVE_A_TEXT",
 			"requirements": {
 				"courage": 50
 			},
@@ -986,7 +986,7 @@
 		{
 			"event_id": "event_college_love",
 			"option_id": "B",
-			"text": "暗恋，不说破",
+			"text": "OPTION_COLLEGE_LOVE_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -999,7 +999,7 @@
 		{
 			"event_id": "event_college_love",
 			"option_id": "C",
-			"text": "恋爱哪有学习重要",
+			"text": "OPTION_COLLEGE_LOVE_C_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -1017,7 +1017,7 @@
 		{
 			"event_id": "event_master_or_work",
 			"option_id": "A",
-			"text": "考研深造",
+			"text": "OPTION_MASTER_OR_WORK_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -1115,7 +1115,7 @@
 		{
 			"event_id": "event_master_or_work",
 			"option_id": "B",
-			"text": "直接工作，积累经验",
+			"text": "OPTION_MASTER_OR_WORK_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1194,7 +1194,7 @@
 		{
 			"event_id": "event_master_or_work",
 			"option_id": "C",
-			"text": "创业！改变世界！",
+			"text": "OPTION_MASTER_OR_WORK_C_TEXT",
 			"requirements": {
 				"courage": 70
 			},
@@ -1310,7 +1310,7 @@
 		{
 			"event_id": "event_first_job",
 			"option_id": "A",
-			"text": "大厂Offer，996但钱多",
+			"text": "OPTION_FIRST_JOB_A_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1398,7 +1398,7 @@
 		{
 			"event_id": "event_first_job",
 			"option_id": "B",
-			"text": "国企，稳定但工资一般",
+			"text": "OPTION_FIRST_JOB_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1415,7 +1415,7 @@
 		{
 			"event_id": "event_first_job",
 			"option_id": "C",
-			"text": "创业公司，有风险但可能暴富",
+			"text": "OPTION_FIRST_JOB_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1484,7 +1484,7 @@
 		{
 			"event_id": "event_rent_house",
 			"option_id": "A",
-			"text": "市中心，贵但方便",
+			"text": "OPTION_RENT_HOUSE_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -1502,7 +1502,7 @@
 		{
 			"event_id": "event_rent_house",
 			"option_id": "B",
-			"text": "郊区，便宜但远",
+			"text": "OPTION_RENT_HOUSE_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1518,7 +1518,7 @@
 		{
 			"event_id": "event_rent_house",
 			"option_id": "C",
-			"text": "跟别人合租",
+			"text": "OPTION_RENT_HOUSE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -1534,7 +1534,7 @@
 		{
 			"event_id": "event_workplace_newbie",
 			"option_id": "A",
-			"text": "默默接受，多干活",
+			"text": "OPTION_WORKPLACE_NEWBIE_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -1551,7 +1551,7 @@
 		{
 			"event_id": "event_workplace_newbie",
 			"option_id": "B",
-			"text": "找领导说明情况",
+			"text": "OPTION_WORKPLACE_NEWBIE_B_TEXT",
 			"requirements": {
 				"courage": 50
 			},
@@ -1618,7 +1618,7 @@
 		{
 			"event_id": "event_workplace_newbie",
 			"option_id": "C",
-			"text": "以牙还牙，甩回去",
+			"text": "OPTION_WORKPLACE_NEWBIE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -1692,7 +1692,7 @@
 		{
 			"event_id": "event_marriage_pressure",
 			"option_id": "A",
-			"text": "顺从父母，去相亲",
+			"text": "OPTION_MARRIAGE_PRESSURE_A_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1709,7 +1709,7 @@
 		{
 			"event_id": "event_marriage_pressure",
 			"option_id": "B",
-			"text": "坚持不婚主义",
+			"text": "OPTION_MARRIAGE_PRESSURE_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -1774,7 +1774,7 @@
 		{
 			"event_id": "event_marriage_pressure",
 			"option_id": "C",
-			"text": "已有对象，带回家见父母",
+			"text": "OPTION_MARRIAGE_PRESSURE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -1793,7 +1793,7 @@
 		{
 			"event_id": "event_career_breakthrough",
 			"option_id": "A",
-			"text": "主动请缨，承担核心项目",
+			"text": "OPTION_CAREER_BREAKTHROUGH_A_TEXT",
 			"requirements": {
 				"courage": 40
 			},
@@ -1812,7 +1812,7 @@
 		{
 			"event_id": "event_career_breakthrough",
 			"option_id": "B",
-			"text": "稳扎稳打，做好本职工作",
+			"text": "OPTION_CAREER_BREAKTHROUGH_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1830,7 +1830,7 @@
 		{
 			"event_id": "event_career_breakthrough",
 			"option_id": "C",
-			"text": "跳槽到更好的平台",
+			"text": "OPTION_CAREER_BREAKTHROUGH_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1850,7 +1850,7 @@
 		{
 			"event_id": "event_friend_wedding",
 			"option_id": "A",
-			"text": "送上厚礼，真心祝福",
+			"text": "OPTION_FRIEND_WEDDING_A_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -1868,7 +1868,7 @@
 		{
 			"event_id": "event_friend_wedding",
 			"option_id": "B",
-			"text": "趁机社交，拓展人脉",
+			"text": "OPTION_FRIEND_WEDDING_B_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -1889,7 +1889,7 @@
 		{
 			"event_id": "event_friend_wedding",
 			"option_id": "C",
-			"text": "独自喝闷酒",
+			"text": "OPTION_FRIEND_WEDDING_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -1908,7 +1908,7 @@
 		{
 			"event_id": "event_side_hustle",
 			"option_id": "A",
-			"text": "投入积蓄全力做",
+			"text": "OPTION_SIDE_HUSTLE_A_TEXT",
 			"requirements": {
 				"courage": 45
 			},
@@ -1975,7 +1975,7 @@
 		{
 			"event_id": "event_side_hustle",
 			"option_id": "B",
-			"text": "小规模试水",
+			"text": "OPTION_SIDE_HUSTLE_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -1993,7 +1993,7 @@
 		{
 			"event_id": "event_side_hustle",
 			"option_id": "C",
-			"text": "婉拒，专注本职",
+			"text": "OPTION_SIDE_HUSTLE_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -2012,7 +2012,7 @@
 		{
 			"event_id": "event_career_switch",
 			"option_id": "A",
-			"text": "辞职去创业",
+			"text": "OPTION_CAREER_SWITCH_A_TEXT",
 			"requirements": {
 				"courage": 55
 			},
@@ -2067,7 +2067,7 @@
 		{
 			"event_id": "event_career_switch",
 			"option_id": "B",
-			"text": "先兼职试试水",
+			"text": "OPTION_CAREER_SWITCH_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2085,7 +2085,7 @@
 		{
 			"event_id": "event_career_switch",
 			"option_id": "C",
-			"text": "算了，稳定最重要",
+			"text": "OPTION_CAREER_SWITCH_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -2099,7 +2099,7 @@
 		{
 			"event_id": "event_home_purchase",
 			"option_id": "A",
-			"text": "咬咬牙，贷款买",
+			"text": "OPTION_HOME_PURCHASE_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2122,7 +2122,7 @@
 		{
 			"event_id": "event_home_purchase",
 			"option_id": "B",
-			"text": "先租着吧，不急",
+			"text": "OPTION_HOME_PURCHASE_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2135,7 +2135,7 @@
 		{
 			"event_id": "event_home_purchase",
 			"option_id": "C",
-			"text": "回老家买房",
+			"text": "OPTION_HOME_PURCHASE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2158,7 +2158,7 @@
 		{
 			"event_id": "event_pet_companion",
 			"option_id": "A",
-			"text": "带它回家！",
+			"text": "OPTION_PET_COMPANION_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2184,7 +2184,7 @@
 		{
 			"event_id": "event_pet_companion",
 			"option_id": "B",
-			"text": "经常来看看它",
+			"text": "OPTION_PET_COMPANION_B_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -2198,7 +2198,7 @@
 		{
 			"event_id": "event_pet_companion",
 			"option_id": "C",
-			"text": "算了，养宠物太麻烦",
+			"text": "OPTION_PET_COMPANION_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2211,7 +2211,7 @@
 		{
 			"event_id": "event_house_loan",
 			"option_id": "A",
-			"text": "贷款买大房子",
+			"text": "OPTION_HOUSE_LOAN_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2314,7 +2314,7 @@
 		{
 			"event_id": "event_house_loan",
 			"option_id": "B",
-			"text": "买个小点的，压力小",
+			"text": "OPTION_HOUSE_LOAN_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2389,7 +2389,7 @@
 		{
 			"event_id": "event_house_loan",
 			"option_id": "C",
-			"text": "不买了，租房住",
+			"text": "OPTION_HOUSE_LOAN_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2406,7 +2406,7 @@
 		{
 			"event_id": "event_children_education",
 			"option_id": "A",
-			"text": "报各种补习班",
+			"text": "OPTION_CHILDREN_EDUCATION_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2425,7 +2425,7 @@
 		{
 			"event_id": "event_children_education",
 			"option_id": "B",
-			"text": "快乐教育，顺其自然",
+			"text": "OPTION_CHILDREN_EDUCATION_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2440,7 +2440,7 @@
 		{
 			"event_id": "event_children_education",
 			"option_id": "C",
-			"text": "送孩子出国",
+			"text": "OPTION_CHILDREN_EDUCATION_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2459,7 +2459,7 @@
 		{
 			"event_id": "event_children_education",
 			"option_id": "D",
-			"text": "还没孩子，专注事业",
+			"text": "OPTION_CHILDREN_EDUCATION_D_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2476,7 +2476,7 @@
 		{
 			"event_id": "event_parents_care",
 			"option_id": "A",
-			"text": "接来同住",
+			"text": "OPTION_PARENTS_CARE_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2552,7 +2552,7 @@
 		{
 			"event_id": "event_parents_care",
 			"option_id": "B",
-			"text": "送养老院",
+			"text": "OPTION_PARENTS_CARE_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2570,7 +2570,7 @@
 		{
 			"event_id": "event_parents_care",
 			"option_id": "C",
-			"text": "请保姆照顾",
+			"text": "OPTION_PARENTS_CARE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2588,7 +2588,7 @@
 		{
 			"event_id": "event_career_promotion",
 			"option_id": "A",
-			"text": "争取晋升",
+			"text": "OPTION_CAREER_PROMOTION_A_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -2714,7 +2714,7 @@
 		{
 			"event_id": "event_career_promotion",
 			"option_id": "B",
-			"text": "保持现状，工作生活平衡",
+			"text": "OPTION_CAREER_PROMOTION_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2727,7 +2727,7 @@
 		{
 			"event_id": "event_career_promotion",
 			"option_id": "C",
-			"text": "跳槽去对手公司",
+			"text": "OPTION_CAREER_PROMOTION_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2807,7 +2807,7 @@
 		{
 			"event_id": "event_health_warning",
 			"option_id": "A",
-			"text": "重视健康，开始锻炼",
+			"text": "OPTION_HEALTH_WARNING_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2825,7 +2825,7 @@
 		{
 			"event_id": "event_health_warning",
 			"option_id": "B",
-			"text": "吃保健品",
+			"text": "OPTION_HEALTH_WARNING_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -2841,7 +2841,7 @@
 		{
 			"event_id": "event_health_warning",
 			"option_id": "C",
-			"text": "工作太忙，没时间管",
+			"text": "OPTION_HEALTH_WARNING_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -2854,7 +2854,7 @@
 		{
 			"event_id": "event_serious_disease",
 			"option_id": "A",
-			"text": "积极治疗",
+			"text": "OPTION_SERIOUS_DISEASE_A_TEXT",
 			"battle_trigger": {
 				"battle_id": "battle_cancer",
 				"is_deadly": true,
@@ -2974,7 +2974,7 @@
 		{
 			"event_id": "event_serious_disease",
 			"option_id": "B",
-			"text": "保守治疗",
+			"text": "OPTION_SERIOUS_DISEASE_B_TEXT",
 			"requirements": {},
 			"battle_trigger": {
 				"battle_id": "battle_cancer_light",
@@ -3060,7 +3060,7 @@
 		{
 			"event_id": "event_serious_disease",
 			"option_id": "C",
-			"text": "放弃治疗，享受余生",
+			"text": "OPTION_SERIOUS_DISEASE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3073,7 +3073,7 @@
 		{
 			"event_id": "event_accident",
 			"option_id": "A",
-			"text": "手术抢救",
+			"text": "OPTION_ACCIDENT_A_TEXT",
 			"battle_trigger": {
 				"battle_id": "battle_car_accident",
 				"is_deadly": true,
@@ -3161,7 +3161,7 @@
 		{
 			"event_id": "event_accident",
 			"option_id": "B",
-			"text": "听天由命",
+			"text": "OPTION_ACCIDENT_B_TEXT",
 			"requirements": {},
 			"battle_trigger": {
 				"battle_id": "battle_accident_fate",
@@ -3230,7 +3230,7 @@
 		{
 			"event_id": "event_work_burnout",
 			"option_id": "A",
-			"text": "请个长假，出去走走",
+			"text": "OPTION_WORK_BURNOUT_A_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -3253,7 +3253,7 @@
 		{
 			"event_id": "event_work_burnout",
 			"option_id": "B",
-			"text": "咬牙坚持，习惯就好",
+			"text": "OPTION_WORK_BURNOUT_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -3269,7 +3269,7 @@
 		{
 			"event_id": "event_work_burnout",
 			"option_id": "C",
-			"text": "考虑换个方向",
+			"text": "OPTION_WORK_BURNOUT_C_TEXT",
 			"requirements": {
 				"courage": 45
 			},
@@ -3289,7 +3289,7 @@
 		{
 			"event_id": "event_investment",
 			"option_id": "A",
-			"text": "投入大量资金",
+			"text": "OPTION_INVESTMENT_A_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -3340,7 +3340,7 @@
 		{
 			"event_id": "event_investment",
 			"option_id": "B",
-			"text": "小试牛刀，投一点",
+			"text": "OPTION_INVESTMENT_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -3358,7 +3358,7 @@
 		{
 			"event_id": "event_investment",
 			"option_id": "C",
-			"text": "不碰，稳妥为上",
+			"text": "OPTION_INVESTMENT_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -3372,7 +3372,7 @@
 		{
 			"event_id": "event_neighbor_dispute",
 			"option_id": "A",
-			"text": "找物业投诉",
+			"text": "OPTION_NEIGHBOR_DISPUTE_A_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -3385,7 +3385,7 @@
 		{
 			"event_id": "event_neighbor_dispute",
 			"option_id": "B",
-			"text": "直接上门理论",
+			"text": "OPTION_NEIGHBOR_DISPUTE_B_TEXT",
 			"requirements": {
 				"courage": 40
 			},
@@ -3405,7 +3405,7 @@
 		{
 			"event_id": "event_neighbor_dispute",
 			"option_id": "C",
-			"text": "忍了，搬家算了",
+			"text": "OPTION_NEIGHBOR_DISPUTE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3428,7 +3428,7 @@
 		{
 			"event_id": "event_children_growing",
 			"option_id": "A",
-			"text": "尊重孩子的选择",
+			"text": "TRAIT_OPEN_PARENT_DESC",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3448,7 +3448,7 @@
 		{
 			"event_id": "event_children_growing",
 			"option_id": "B",
-			"text": "严格要求，不能走弯路",
+			"text": "OPTION_CHILDREN_GROWING_B_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -3464,7 +3464,7 @@
 		{
 			"event_id": "event_children_growing",
 			"option_id": "C",
-			"text": "顺其自然吧",
+			"text": "OPTION_CHILDREN_GROWING_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -3478,7 +3478,7 @@
 		{
 			"event_id": "event_midlife_skill",
 			"option_id": "A",
-			"text": "学烹饪，犒劳家人",
+			"text": "OPTION_MIDLIFE_SKILL_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3496,7 +3496,7 @@
 		{
 			"event_id": "event_midlife_skill",
 			"option_id": "B",
-			"text": "学编程，跟上时代",
+			"text": "OPTION_MIDLIFE_SKILL_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3512,7 +3512,7 @@
 		{
 			"event_id": "event_midlife_skill",
 			"option_id": "C",
-			"text": "学太极，强身健体",
+			"text": "OPTION_MIDLIFE_SKILL_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -3530,7 +3530,7 @@
 		{
 			"event_id": "event_retirement_plan",
 			"option_id": "A",
-			"text": "安享晚年，含饴弄孙",
+			"text": "OPTION_RETIREMENT_PLAN_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3549,7 +3549,7 @@
 		{
 			"event_id": "event_retirement_plan",
 			"option_id": "B",
-			"text": "发挥余热，做社区志愿者",
+			"text": "OPTION_RETIREMENT_PLAN_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3569,7 +3569,7 @@
 		{
 			"event_id": "event_retirement_plan",
 			"option_id": "C",
-			"text": "开始学新东西，活到老学到老",
+			"text": "OPTION_RETIREMENT_PLAN_C_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3587,7 +3587,7 @@
 		{
 			"event_id": "event_retirement_plan",
 			"option_id": "D",
-			"text": "这一生已经足够了",
+			"text": "OPTION_RETIREMENT_PLAN_D_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3604,7 +3604,7 @@
 		{
 			"event_id": "event_chronic_illness",
 			"option_id": "A",
-			"text": "坚持锻炼，积极对抗",
+			"text": "OPTION_CHRONIC_ILLNESS_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3697,7 +3697,7 @@
 		{
 			"event_id": "event_chronic_illness",
 			"option_id": "B",
-			"text": "吃药调养，顺其自然",
+			"text": "OPTION_CHRONIC_ILLNESS_B_TEXT",
 			"battle_trigger": null,
 			"requirements": {},
 			"cost": {
@@ -3709,7 +3709,7 @@
 		{
 			"event_id": "event_chronic_illness",
 			"option_id": "C",
-			"text": "不管了，该吃吃该喝喝",
+			"text": "OPTION_CHRONIC_ILLNESS_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3727,7 +3727,7 @@
 		{
 			"event_id": "event_family_reunion",
 			"option_id": "A",
-			"text": "享受天伦之乐",
+			"text": "OPTION_FAMILY_REUNION_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3746,7 +3746,7 @@
 		{
 			"event_id": "event_family_reunion",
 			"option_id": "B",
-			"text": "叮嘱晚辈好好工作",
+			"text": "OPTION_FAMILY_REUNION_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3764,7 +3764,7 @@
 		{
 			"event_id": "event_family_reunion",
 			"option_id": "C",
-			"text": "和家人一起旅行",
+			"text": "OPTION_FAMILY_REUNION_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3783,7 +3783,7 @@
 		{
 			"event_id": "event_family_reunion",
 			"option_id": "D",
-			"text": "独自享受宁静时光",
+			"text": "OPTION_FAMILY_REUNION_D_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3802,7 +3802,7 @@
 		{
 			"event_id": "event_family_reunion",
 			"option_id": "E",
-			"text": "此生足矣，无憾了",
+			"text": "OPTION_FAMILY_REUNION_E_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3817,7 +3817,7 @@
 		{
 			"event_id": "event_old_friend",
 			"option_id": "A",
-			"text": "畅叙旧情，感慨人生",
+			"text": "OPTION_OLD_FRIEND_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3834,7 +3834,7 @@
 		{
 			"event_id": "event_old_friend",
 			"option_id": "B",
-			"text": "约好以后常聚",
+			"text": "OPTION_OLD_FRIEND_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3852,7 +3852,7 @@
 		{
 			"event_id": "event_old_friend",
 			"option_id": "C",
-			"text": "看淡生死，坦然面对",
+			"text": "OPTION_OLD_FRIEND_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3869,7 +3869,7 @@
 		{
 			"event_id": "event_legacy",
 			"option_id": "A",
-			"text": "写回忆录",
+			"text": "OPTION_LEGACY_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3886,7 +3886,7 @@
 		{
 			"event_id": "event_legacy",
 			"option_id": "B",
-			"text": "当导师带徒弟",
+			"text": "OPTION_LEGACY_B_TEXT",
 			"rewards": [
 				{
 					"type": "tower",
@@ -3906,7 +3906,7 @@
 		{
 			"event_id": "event_legacy",
 			"option_id": "C",
-			"text": "默默看着就好",
+			"text": "OPTION_LEGACY_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -3921,7 +3921,7 @@
 		{
 			"event_id": "event_health_crisis",
 			"option_id": "A",
-			"text": "全力治疗",
+			"text": "OPTION_HEALTH_CRISIS_A_TEXT",
 			"battle_trigger": {
 				"battle_id": "battle_health_crisis",
 				"is_deadly": true,
@@ -4063,7 +4063,7 @@
 		{
 			"event_id": "event_health_crisis",
 			"option_id": "B",
-			"text": "保守治疗，珍惜当下",
+			"text": "OPTION_HEALTH_CRISIS_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4079,7 +4079,7 @@
 		{
 			"event_id": "event_health_crisis",
 			"option_id": "C",
-			"text": "放弃治疗",
+			"text": "OPTION_HEALTH_CRISIS_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4097,7 +4097,7 @@
 		{
 			"event_id": "event_life_reflection",
 			"option_id": "A",
-			"text": "此生无憾",
+			"text": "TRAIT_NO_REGRETS_NAME",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4114,7 +4114,7 @@
 		{
 			"event_id": "event_life_reflection",
 			"option_id": "B",
-			"text": "有些遗憾，但已释然",
+			"text": "OPTION_LIFE_REFLECTION_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4131,7 +4131,7 @@
 		{
 			"event_id": "event_life_reflection",
 			"option_id": "C",
-			"text": "如果重来，一定不同",
+			"text": "OPTION_LIFE_REFLECTION_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4147,7 +4147,7 @@
 		{
 			"event_id": "event_puberty_rebellion",
 			"option_id": "A",
-			"text": "跟父母大吵一架，离家出走",
+			"text": "OPTION_PUBERTY_REBELLION_A_TEXT",
 			"requirements": {
 				"courage": 40
 			},
@@ -4170,7 +4170,7 @@
 		{
 			"event_id": "event_puberty_rebellion",
 			"option_id": "B",
-			"text": "沉默对抗，写日记发泄",
+			"text": "OPTION_PUBERTY_REBELLION_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4188,7 +4188,7 @@
 		{
 			"event_id": "event_puberty_rebellion",
 			"option_id": "C",
-			"text": "试着理解父母的苦心",
+			"text": "OPTION_PUBERTY_REBELLION_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4208,7 +4208,7 @@
 		{
 			"event_id": "event_first_love",
 			"option_id": "A",
-			"text": "偷偷递纸条表白",
+			"text": "OPTION_FIRST_LOVE_A_TEXT",
 			"requirements": {
 				"courage": 35
 			},
@@ -4228,7 +4228,7 @@
 		{
 			"event_id": "event_first_love",
 			"option_id": "B",
-			"text": "把心思放在学习上",
+			"text": "OPTION_FIRST_LOVE_B_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -4246,7 +4246,7 @@
 		{
 			"event_id": "event_first_love",
 			"option_id": "C",
-			"text": "默默关注，享受心动的感觉",
+			"text": "OPTION_FIRST_LOVE_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4259,7 +4259,7 @@
 		{
 			"event_id": "event_midlife_confusion",
 			"option_id": "A",
-			"text": "报名心理咨询，正视内心",
+			"text": "OPTION_MIDLIFE_CONFUSION_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4277,7 +4277,7 @@
 		{
 			"event_id": "event_midlife_confusion",
 			"option_id": "B",
-			"text": "买辆摩托车，去远方",
+			"text": "OPTION_MIDLIFE_CONFUSION_B_TEXT",
 			"requirements": {
 				"courage": 50
 			},
@@ -4300,7 +4300,7 @@
 		{
 			"event_id": "event_midlife_confusion",
 			"option_id": "C",
-			"text": "继续过日子，迷茫就迷茫吧",
+			"text": "OPTION_MIDLIFE_CONFUSION_C_TEXT",
 			"rewards": [
 				{
 					"type": "gold",
@@ -4316,7 +4316,7 @@
 		{
 			"event_id": "event_retirement_hobby",
 			"option_id": "A",
-			"text": "学书法，修身养性",
+			"text": "OPTION_RETIREMENT_HOBBY_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4334,7 +4334,7 @@
 		{
 			"event_id": "event_retirement_hobby",
 			"option_id": "B",
-			"text": "跳广场舞，交朋友",
+			"text": "OPTION_RETIREMENT_HOBBY_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4352,7 +4352,7 @@
 		{
 			"event_id": "event_retirement_hobby",
 			"option_id": "C",
-			"text": "养花种菜，享受田园",
+			"text": "OPTION_RETIREMENT_HOBBY_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4370,7 +4370,7 @@
 		{
 			"event_id": "event_retirement_hobby",
 			"option_id": "D",
-			"text": "心满意足，安享天年",
+			"text": "OPTION_RETIREMENT_HOBBY_D_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4385,7 +4385,7 @@
 		{
 			"event_id": "event_old_friend_passing",
 			"option_id": "A",
-			"text": "写一篇文章纪念他",
+			"text": "OPTION_OLD_FRIEND_PASSING_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4402,7 +4402,7 @@
 		{
 			"event_id": "event_old_friend_passing",
 			"option_id": "B",
-			"text": "更加珍惜身边的人",
+			"text": "OPTION_OLD_FRIEND_PASSING_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4420,7 +4420,7 @@
 		{
 			"event_id": "event_old_friend_passing",
 			"option_id": "C",
-			"text": "独自沉默了很久",
+			"text": "OPTION_OLD_FRIEND_PASSING_C_TEXT",
 			"rewards": [
 				{
 					"type": "attribute",
@@ -4437,7 +4437,7 @@
 		{
 			"event_id": "event_old_friend_passing",
 			"option_id": "D",
-			"text": "随他而去吧，我也该走了",
+			"text": "OPTION_OLD_FRIEND_PASSING_D_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4454,7 +4454,7 @@
 		{
 			"event_id": "event_twilight_wisdom",
 			"option_id": "A",
-			"text": "把感悟告诉年轻人",
+			"text": "OPTION_TWILIGHT_WISDOM_A_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4473,7 +4473,7 @@
 		{
 			"event_id": "event_twilight_wisdom",
 			"option_id": "B",
-			"text": "写下来，留给后人",
+			"text": "OPTION_TWILIGHT_WISDOM_B_TEXT",
 			"rewards": [
 				{
 					"type": "trait",
@@ -4490,7 +4490,7 @@
 		{
 			"event_id": "event_twilight_wisdom",
 			"option_id": "C",
-			"text": "微笑着，什么都不说",
+			"text": "OPTION_TWILIGHT_WISDOM_C_TEXT",
 			"rewards": [
 				{
 					"type": "trait",

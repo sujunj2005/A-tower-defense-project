@@ -10,6 +10,15 @@ var _sell_button: Button
 var _title_label: Label
 var _close_button: Button
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		if visible and _current_tower and is_instance_valid(_current_tower):
+			_title_label.text = "🏰 " + _current_tower.config.get_display_name() + "  Lv." + str(_current_tower.current_level)
+			_info_label.text = _build_tower_info_text(_current_tower)
+		elif visible and _current_enemy and is_instance_valid(_current_enemy):
+			_title_label.text = "👹 " + _current_enemy.config.get_display_name()
+			_info_label.text = _build_enemy_info_text(_current_enemy)
+
 func _ready() -> void:
 	visible = false
 	_setup_ui()
@@ -65,7 +74,7 @@ func _setup_ui() -> void:
 	vbox.add_child(_info_label)
 
 	_sell_button = Button.new()
-	_sell_button.text = "💰 出售防御塔"
+	_sell_button.text = tr("SELL_TOWER")
 	_sell_button.custom_minimum_size = Vector2(0, 36)
 	_sell_button.add_theme_font_size_override("font_size", 15)
 	_sell_button.visible = false
@@ -89,11 +98,11 @@ func show_tower_info(tower: Tower) -> void:
 	_current_enemy = null
 	_last_tower_level = tower.current_level
 	_last_tower_exp = tower.current_experience
-	_title_label.text = "🏰 " + tower.config.tower_name + "  Lv." + str(tower.current_level)
+	_title_label.text = "🏰 " + tower.config.get_display_name() + "  Lv." + str(tower.current_level)
 	_info_label.text = _build_tower_info_text(tower)
 	if tower.config.sell_ratio > 0.0:
 		var sell_price: int = _calculate_sell_price(tower)
-		_sell_button.text = "💰 出售（返还 %d 金币）" % sell_price
+		_sell_button.text = tr("SELL_RETURN") % sell_price
 		_sell_button.visible = true
 	else:
 		_sell_button.visible = false
@@ -104,7 +113,7 @@ func show_enemy_info(enemy: Enemy) -> void:
 		return
 	_current_enemy = enemy
 	_current_tower = null
-	_title_label.text = "👹 " + enemy.config.enemy_name
+	_title_label.text = "👹 " + enemy.config.get_display_name()
 	var info: String = _build_enemy_info_text(enemy)
 	_info_label.text = info
 	_sell_button.visible = false
@@ -135,34 +144,41 @@ func _build_tower_info_text(tower: Tower) -> String:
 		as_bonus = ts.get_attack_speed_bonus_for_tower(cfg.tower_id)
 	var final_dmg: float = dmg * (1.0 + dmg_bonus)
 	var final_as: float = aspeed * (1.0 + as_bonus)
-	var dmg_type_name: String = "🔮 魔法" if cfg.damage_type == 1 else "⚔ 物理"
+	var dmg_type_name: String = tr("DAMAGE_TYPE_MAGIC") if cfg.damage_type == 1 else tr("DAMAGE_TYPE_PHYSICAL")
 	var text: String = ""
-	text += "⚔ 伤害：%.0f" % final_dmg
+	text += tr("TOWER_INFO_DAMAGE") % final_dmg
 	if dmg_bonus > 0.0:
 		text += "  [color=green](+%.0f%%)[/color]" % (dmg_bonus * 100.0)
 	text += "    %s" % dmg_type_name
-	text += "\n🎯 射程：%.0f" % rng
-	text += "    ⚡ 攻速：%.1f/s" % final_as
+	if tower.config.effect_id != "":
+		text += "\n" + tower.config.effect_icon + " " + tower.config.get_display_effect_name() + " — " + tower.config.get_display_effect_desc()
+	for sub: Dictionary in tower.config.sub_effects:
+		var sub_eid: String = sub.get("effect_id", "")
+		if sub_eid != "":
+			var sec: SpecialEffectConfig = SpecialEffectConfig.new()
+			text += "\n" + sec.get_effect_icon(sub_eid) + " " + sec.get_display_name(sub_eid) + " — " + sec.get_display_desc(sub_eid)
+	text += "\n" + tr("TOWER_INFO_RANGE") % rng
+	text += "    " + tr("TOWER_INFO_SPEED") % final_as
 	if as_bonus > 0.0:
 		text += "  [color=green](+%.0f%%)[/color]" % (as_bonus * 100.0)
-	text += "\n⭐ 经验：%d/%d    💰 造价：%d" % [tower.current_experience, tower.experience_required, cfg.cost]
+	text += "\n" + tr("TOWER_EXP") % [tower.current_experience, tower.experience_required, cfg.cost]
 	return text
 
 func _build_enemy_info_text(enemy: Enemy) -> String:
 	var cfg: EnemyConfig = enemy.config
 	var text: String = ""
-	text += "❤ 血量：%.0f/%.0f" % [max(0.0, enemy.current_health), cfg.max_health]
-	text += "    🏃 速度：%.0f" % enemy.base_move_speed
-	text += "    ⚔ 伤害：%d" % cfg.damage
-	text += "    💰 击杀奖励：%d" % cfg.gold_drop
+	text += tr("ENEMY_HP") % [max(0.0, enemy.current_health), cfg.max_health]
+	text += "    " + tr("ENEMY_SPEED") % enemy.base_move_speed
+	text += "    " + tr("ENEMY_DAMAGE") % cfg.damage
+	text += "    " + tr("ENEMY_GOLD") % cfg.gold_drop
 	var phys_res: float = cfg.physical_resistance * 100.0
 	var mag_res: float = cfg.magical_resistance * 100.0
-	text += "\n🛡 物抗：%.0f%%" % phys_res
-	text += "    🔮 魔抗：%.0f%%" % mag_res
+	text += "\n" + tr("ENEMY_PHYS_RES") % phys_res
+	text += "    " + tr("ENEMY_MAG_RES") % mag_res
 	if enemy.is_slowed:
-		text += "\n🐌 减速中（-%.0f%%，%.1fs）" % [enemy.slow_amount * 100.0, enemy.slow_timer]
+		text += "\n" + tr("ENEMY_SLOWED") % [enemy.slow_amount * 100.0, enemy.slow_timer]
 	if enemy.is_dot_active:
-		text += "\n🔥 持续伤害（%.1f/s，%.1fs）" % [enemy.dot_damage_per_second, max(0.0, enemy.dot_duration - enemy.dot_elapsed)]
+		text += "\n" + tr("ENEMY_DOT") % [enemy.dot_damage_per_second, max(0.0, enemy.dot_duration - enemy.dot_elapsed)]
 	return text
 
 func _calculate_sell_price(tower: Tower) -> int:
@@ -188,7 +204,7 @@ func _process(_delta: float) -> void:
 		if tower.current_level != _last_tower_level or tower.current_experience != _last_tower_exp:
 			_last_tower_level = tower.current_level
 			_last_tower_exp = tower.current_experience
-			_title_label.text = "🏰 " + tower.config.tower_name + "  Lv." + str(tower.current_level)
+			_title_label.text = "🏰 " + tower.config.get_display_name() + "  Lv." + str(tower.current_level)
 			_info_label.text = _build_tower_info_text(tower)
 		if _sell_button.visible and tower.config.sell_ratio > 0.0:
-			_sell_button.text = "💰 出售（返还 %d 金币）" % _calculate_sell_price(tower)
+			_sell_button.text = tr("SELL_RETURN") % _calculate_sell_price(tower)

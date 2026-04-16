@@ -19,10 +19,10 @@ const STAGE_IDS := {
 }
 
 const STAGE_NAMES := {
-	Stage.CHILDHOOD: "童年",
-	Stage.YOUTH: "青年",
-	Stage.MIDDLE_AGE: "中年",
-	Stage.OLD_AGE: "老年"
+	Stage.CHILDHOOD: "STAGE_CHILDHOOD_NAME",
+	Stage.YOUTH: "STAGE_YOUTH_NAME",
+	Stage.MIDDLE_AGE: "STAGE_MIDDLE_AGE_NAME",
+	Stage.OLD_AGE: "STAGE_OLD_AGE_NAME"
 }
 
 var current_age: int = 6
@@ -76,7 +76,7 @@ func get_stage_id() -> String:
 	return STAGE_IDS[current_stage]
 
 func get_stage_name() -> String:
-	return STAGE_NAMES[current_stage]
+	return tr(STAGE_NAMES[current_stage])
 
 ## 获取阶段进度（第几个事件）
 func get_stage_progress() -> int:

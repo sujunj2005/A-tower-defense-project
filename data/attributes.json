@@ -1,27 +1,27 @@
 {
 	"attributes": {
 		"charm": {
-			"display_name": "魅力",
+			"display_name": "ATTR_CHARM_DISPLAY_NAME",
 			"icon": "✨"
 		},
 		"courage": {
-			"display_name": "勇气",
+			"display_name": "ATTR_COURAGE_DISPLAY_NAME",
 			"icon": "⚔"
 		},
 		"health": {
-			"display_name": "健康",
+			"display_name": "ATTR_HEALTH_DISPLAY_NAME",
 			"icon": "❤"
 		},
 		"intelligence": {
-			"display_name": "智力",
+			"display_name": "ATTR_INTELLIGENCE_DISPLAY_NAME",
 			"icon": "🧠"
 		},
 		"luck": {
-			"display_name": "运气",
+			"display_name": "ATTR_LUCK_DISPLAY_NAME",
 			"icon": "🍀"
 		},
 		"work_ability": {
-			"display_name": "工作能力",
+			"display_name": "ATTR_WORK_ABILITY_DISPLAY_NAME",
 			"icon": "💼"
 		}
 	},

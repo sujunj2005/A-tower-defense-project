@@ -141,3 +141,6 @@ static func get_enemies_for_stage(stage_id: String) -> Array[Dictionary]:
 
 static func register_enemy(reg_id: String, path: String):
 	_registry[reg_id] = path
+
+func get_display_name() -> String:
+	return tr(enemy_name)

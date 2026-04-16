@@ -3,8 +3,8 @@
 	"traits": [
 		{
 			"trait_id": "little_singer",
-			"name": "小歌唱家",
-			"description": "幼儿园表演表现出色",
+			"name": "TRAIT_LITTLE_SINGER_NAME",
+			"description": "TRAIT_LITTLE_SINGER_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -16,8 +16,8 @@
 		},
 		{
 			"trait_id": "happy_childhood",
-			"name": "快乐童年",
-			"description": "无忧无虑的童年时光",
+			"name": "TRAIT_HAPPY_CHILDHOOD_NAME",
+			"description": "TRAIT_HAPPY_CHILDHOOD_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 10
@@ -25,8 +25,8 @@
 		},
 		{
 			"trait_id": "math_talent",
-			"name": "数学天赋",
-			"description": "对数学有天然直觉",
+			"name": "TRAIT_MATH_TALENT_NAME",
+			"description": "TRAIT_MATH_TALENT_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.15,
@@ -39,8 +39,8 @@
 		},
 		{
 			"trait_id": "participation_spirit",
-			"name": "参与精神",
-			"description": "积极参与集体活动",
+			"name": "TRAIT_PARTICIPATION_SPIRIT_NAME",
+			"description": "TRAIT_PARTICIPATION_SPIRIT_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -49,8 +49,8 @@
 		},
 		{
 			"trait_id": "sports_youth",
-			"name": "运动少年",
-			"description": "热爱运动，体魄强健",
+			"name": "TRAIT_SPORTS_YOUTH_NAME",
+			"description": "TRAIT_SPORTS_YOUTH_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 15
@@ -58,8 +58,8 @@
 		},
 		{
 			"trait_id": "music_culture",
-			"name": "音乐素养",
-			"description": "受过良好的音乐教育",
+			"name": "TRAIT_MUSIC_CULTURE_NAME",
+			"description": "TRAIT_MUSIC_CULTURE_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [
@@ -70,8 +70,8 @@
 		},
 		{
 			"trait_id": "coding_talent",
-			"name": "编程天赋",
-			"description": "对编程有浓厚兴趣",
+			"name": "TRAIT_CODING_TALENT_NAME",
+			"description": "TRAIT_CODING_TALENT_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.15,
@@ -83,8 +83,8 @@
 		},
 		{
 			"trait_id": "self_learning",
-			"name": "自学能力",
-			"description": "善于独立学习新知识",
+			"name": "TRAIT_SELF_LEARNING_NAME",
+			"description": "TRAIT_SELF_LEARNING_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 8,
@@ -93,8 +93,8 @@
 		},
 		{
 			"trait_id": "early_responsibility",
-			"name": "早当家",
-			"description": "从小承担家庭责任",
+			"name": "TRAIT_EARLY_RESPONSIBILITY_NAME",
+			"description": "TRAIT_EARLY_RESPONSIBILITY_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 20
@@ -102,8 +102,8 @@
 		},
 		{
 			"trait_id": "follow_rules",
-			"name": "循规蹈矩",
-			"description": "遵守规则，不越雷池",
+			"name": "TRAIT_FOLLOW_RULES_NAME",
+			"description": "TRAIT_FOLLOW_RULES_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -111,8 +111,8 @@
 		},
 		{
 			"trait_id": "tough_guy",
-			"name": "硬汉",
-			"description": "吃得了苦，扛得住压",
+			"name": "TRAIT_TOUGH_GUY_NAME",
+			"description": "TRAIT_TOUGH_GUY_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 20
@@ -120,8 +120,8 @@
 		},
 		{
 			"trait_id": "patience",
-			"name": "耐心",
-			"description": "遇事不急，沉稳应对",
+			"name": "TRAIT_PATIENCE_NAME",
+			"description": "TRAIT_PATIENCE_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [],
@@ -130,8 +130,8 @@
 		},
 		{
 			"trait_id": "has_backing",
-			"name": "有人撑腰",
-			"description": "背后有贵人相助",
+			"name": "TRAIT_HAS_BACKING_NAME",
+			"description": "TRAIT_HAS_BACKING_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 30
@@ -139,8 +139,8 @@
 		},
 		{
 			"trait_id": "sensible_child",
-			"name": "懂事的孩子",
-			"description": "从小就很懂事",
+			"name": "TRAIT_SENSIBLE_CHILD_NAME",
+			"description": "TRAIT_SENSIBLE_CHILD_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -149,8 +149,8 @@
 		},
 		{
 			"trait_id": "early_worker",
-			"name": "早早打工",
-			"description": "提前进入社会磨练",
+			"name": "TRAIT_EARLY_WORKER_NAME",
+			"description": "TRAIT_EARLY_WORKER_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 25
@@ -158,8 +158,8 @@
 		},
 		{
 			"trait_id": "dropout",
-			"name": "辍学",
-			"description": "中途辍学，但社会经验丰富",
+			"name": "TRAIT_DROPOUT_NAME",
+			"description": "TRAIT_DROPOUT_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 10,
@@ -168,8 +168,8 @@
 		},
 		{
 			"trait_id": "key_high_school",
-			"name": "重点高中",
-			"description": "考入重点高中",
+			"name": "TRAIT_KEY_HIGH_SCHOOL_NAME",
+			"description": "TRAIT_KEY_HIGH_SCHOOL_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -181,8 +181,8 @@
 		},
 		{
 			"trait_id": "top_university",
-			"name": "名校出身",
-			"description": "考入顶尖大学",
+			"name": "TRAIT_TOP_UNIVERSITY_NAME",
+			"description": "TRAIT_TOP_UNIVERSITY_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.2,
@@ -191,8 +191,8 @@
 		},
 		{
 			"trait_id": "bachelor",
-			"name": "本科学历",
-			"description": "获得大学本科学历",
+			"name": "TRAIT_BACHELOR_NAME",
+			"description": "TRAIT_BACHELOR_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 10,
@@ -201,8 +201,8 @@
 		},
 		{
 			"trait_id": "early_starter",
-			"name": "提前起跑",
-			"description": "比同龄人更早进入职场",
+			"name": "TRAIT_EARLY_STARTER_NAME",
+			"description": "TRAIT_EARLY_STARTER_DESC",
 			"effect": {
 				"type": "gold_per_wave",
 				"value": 5
@@ -210,8 +210,8 @@
 		},
 		{
 			"trait_id": "lover",
-			"name": "恋人",
-			"description": "拥有一段美好的恋情",
+			"name": "TRAIT_LOVER_NAME",
+			"description": "TRAIT_LOVER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -220,8 +220,8 @@
 		},
 		{
 			"trait_id": "secret_crush",
-			"name": "暗恋",
-			"description": "心中默默喜欢着某人",
+			"name": "TRAIT_SECRET_CRUSH_NAME",
+			"description": "TRAIT_SECRET_CRUSH_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -230,8 +230,8 @@
 		},
 		{
 			"trait_id": "study_focus",
-			"name": "专注学业",
-			"description": "心无旁骛地投入学习",
+			"name": "TRAIT_STUDY_FOCUS_NAME",
+			"description": "TRAIT_STUDY_FOCUS_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [
@@ -243,8 +243,8 @@
 		},
 		{
 			"trait_id": "master_student",
-			"name": "研究生",
-			"description": "继续深造获得硕士学位",
+			"name": "TRAIT_MASTER_STUDENT_NAME",
+			"description": "TRAIT_MASTER_STUDENT_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.15,
@@ -253,8 +253,8 @@
 		},
 		{
 			"trait_id": "entrepreneur",
-			"name": "创业先锋",
-			"description": "选择创业路线",
+			"name": "TRAIT_ENTREPRENEUR_NAME",
+			"description": "TRAIT_ENTREPRENEUR_DESC",
 			"effect": {
 				"type": "gold_per_wave",
 				"value": 10
@@ -262,8 +262,8 @@
 		},
 		{
 			"trait_id": "big_tech",
-			"name": "大厂员工",
-			"description": "进入互联网大厂工作",
+			"name": "TRAIT_BIG_TECH_NAME",
+			"description": "TRAIT_BIG_TECH_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.15,
@@ -274,8 +274,8 @@
 		},
 		{
 			"trait_id": "stable_job",
-			"name": "铁饭碗",
-			"description": "获得稳定的工作",
+			"name": "TRAIT_STABLE_JOB_NAME",
+			"description": "TRAIT_STABLE_JOB_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 15
@@ -283,8 +283,8 @@
 		},
 		{
 			"trait_id": "startup_employee",
-			"name": "创业公司员工",
-			"description": "在创业公司打拼",
+			"name": "TRAIT_STARTUP_EMPLOYEE_NAME",
+			"description": "TRAIT_STARTUP_EMPLOYEE_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 8,
@@ -293,8 +293,8 @@
 		},
 		{
 			"trait_id": "city_center",
-			"name": "市中心",
-			"description": "住在城市中心地带",
+			"name": "TRAIT_CITY_CENTER_NAME",
+			"description": "TRAIT_CITY_CENTER_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 20
@@ -302,8 +302,8 @@
 		},
 		{
 			"trait_id": "roommate",
-			"name": "合租",
-			"description": "与人合租节省开支",
+			"name": "TRAIT_ROOMMATE_NAME",
+			"description": "TRAIT_ROOMMATE_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 10
@@ -311,8 +311,8 @@
 		},
 		{
 			"trait_id": "hard_worker",
-			"name": "拼命三郎",
-			"description": "工作拼命，不惧加班",
+			"name": "TRAIT_HARD_WORKER_NAME",
+			"description": "TRAIT_HARD_WORKER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 8,
@@ -321,8 +321,8 @@
 		},
 		{
 			"trait_id": "speak_up",
-			"name": "敢于发声",
-			"description": "勇于表达自己的观点",
+			"name": "TRAIT_SPEAK_UP_NAME",
+			"description": "TRAIT_SPEAK_UP_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -334,8 +334,8 @@
 		},
 		{
 			"trait_id": "tit_for_tat",
-			"name": "以牙还牙",
-			"description": "绝不忍气吞声",
+			"name": "TRAIT_TIT_FOR_TAT_NAME",
+			"description": "TRAIT_TIT_FOR_TAT_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -344,8 +344,8 @@
 		},
 		{
 			"trait_id": "blind_date",
-			"name": "相亲",
-			"description": "通过相亲认识另一半",
+			"name": "TRAIT_BLIND_DATE_NAME",
+			"description": "TRAIT_BLIND_DATE_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -354,8 +354,8 @@
 		},
 		{
 			"trait_id": "single_forever",
-			"name": "单身万岁",
-			"description": "享受单身生活",
+			"name": "TRAIT_SINGLE_FOREVER_NAME",
+			"description": "TRAIT_SINGLE_FOREVER_DESC",
 			"effect": {
 				"type": "gold_per_wave",
 				"value": 8
@@ -363,8 +363,8 @@
 		},
 		{
 			"trait_id": "married",
-			"name": "已婚",
-			"description": "步入婚姻殿堂",
+			"name": "TRAIT_MARRIED_NAME",
+			"description": "TRAIT_MARRIED_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 10
@@ -372,8 +372,8 @@
 		},
 		{
 			"trait_id": "big_house",
-			"name": "大房子",
-			"description": "拥有宽敞的住房",
+			"name": "TRAIT_BIG_HOUSE_NAME",
+			"description": "TRAIT_BIG_HOUSE_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 15
@@ -381,8 +381,8 @@
 		},
 		{
 			"trait_id": "small_house",
-			"name": "小房子",
-			"description": "拥有自己的小窝",
+			"name": "TRAIT_SMALL_HOUSE_NAME",
+			"description": "TRAIT_SMALL_HOUSE_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 8
@@ -390,8 +390,8 @@
 		},
 		{
 			"trait_id": "rent_forever",
-			"name": "永远租房",
-			"description": "一直在租房生活",
+			"name": "TRAIT_RENT_FOREVER_NAME",
+			"description": "TRAIT_RENT_FOREVER_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": -10
@@ -399,8 +399,8 @@
 		},
 		{
 			"trait_id": "tiger_parent",
-			"name": "虎妈狼爸",
-			"description": "对孩子严格教育",
+			"name": "TRAIT_TIGER_PARENT_NAME",
+			"description": "TRAIT_TIGER_PARENT_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [],
@@ -409,8 +409,8 @@
 		},
 		{
 			"trait_id": "relaxed_parent",
-			"name": "佛系家长",
-			"description": "对孩子放养式教育",
+			"name": "TRAIT_RELAXED_PARENT_NAME",
+			"description": "TRAIT_RELAXED_PARENT_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -419,8 +419,8 @@
 		},
 		{
 			"trait_id": "overseas_child",
-			"name": "海外留学",
-			"description": "送孩子出国留学",
+			"name": "TRAIT_OVERSEAS_CHILD_NAME",
+			"description": "TRAIT_OVERSEAS_CHILD_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -429,8 +429,8 @@
 		},
 		{
 			"trait_id": "filial_child",
-			"name": "孝顺子女",
-			"description": "子女孝顺，晚年幸福",
+			"name": "TRAIT_FILIAL_CHILD_NAME",
+			"description": "TRAIT_FILIAL_CHILD_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 20
@@ -438,8 +438,8 @@
 		},
 		{
 			"trait_id": "hire_nanny",
-			"name": "请保姆",
-			"description": "请保姆照顾家庭",
+			"name": "TRAIT_HIRE_NANNY_NAME",
+			"description": "TRAIT_HIRE_NANNY_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": -15
@@ -447,8 +447,8 @@
 		},
 		{
 			"trait_id": "work_life_balance",
-			"name": "工作生活平衡",
-			"description": "成功平衡工作与生活",
+			"name": "TRAIT_WORK_LIFE_BALANCE_NAME",
+			"description": "TRAIT_WORK_LIFE_BALANCE_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 15
@@ -456,8 +456,8 @@
 		},
 		{
 			"trait_id": "job_hopper",
-			"name": "跳槽达人",
-			"description": "频繁跳槽积累经验",
+			"name": "TRAIT_JOB_HOPPER_NAME",
+			"description": "TRAIT_JOB_HOPPER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -466,8 +466,8 @@
 		},
 		{
 			"trait_id": "fitness_habit",
-			"name": "健身习惯",
-			"description": "坚持锻炼身体",
+			"name": "TRAIT_FITNESS_HABIT_NAME",
+			"description": "TRAIT_FITNESS_HABIT_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 15
@@ -475,8 +475,8 @@
 		},
 		{
 			"trait_id": "supplement_user",
-			"name": "保健品达人",
-			"description": "各种保健品不断",
+			"name": "TRAIT_SUPPLEMENT_USER_NAME",
+			"description": "TRAIT_SUPPLEMENT_USER_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 5
@@ -484,8 +484,8 @@
 		},
 		{
 			"trait_id": "accept_fate",
-			"name": "认命",
-			"description": "接受命运的安排",
+			"name": "TRAIT_ACCEPT_FATE_NAME",
+			"description": "TRAIT_ACCEPT_FATE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.1
@@ -493,8 +493,8 @@
 		},
 		{
 			"trait_id": "career_focus",
-			"name": "事业为重",
-			"description": "没有家庭牵绊，全力投入事业",
+			"name": "TRAIT_CAREER_FOCUS_NAME",
+			"description": "TRAIT_CAREER_FOCUS_DESC",
 			"effect": {
 				"type": "gold_per_wave",
 				"value": 8
@@ -502,8 +502,8 @@
 		},
 		{
 			"trait_id": "peaceful_elder",
-			"name": "安享晚年",
-			"description": "含饴弄孙，岁月静好——但收入减少",
+			"name": "TRAIT_PEACEFUL_ELDER_NAME",
+			"description": "TRAIT_PEACEFUL_ELDER_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 15
@@ -517,8 +517,8 @@
 		},
 		{
 			"trait_id": "community_elder",
-			"name": "社区长者",
-			"description": "在社区中受人尊敬，人脉广泛——但精力不济",
+			"name": "TRAIT_COMMUNITY_ELDER_NAME",
+			"description": "TRAIT_COMMUNITY_ELDER_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [
@@ -536,8 +536,8 @@
 		},
 		{
 			"trait_id": "lifelong_learner",
-			"name": "终身学习",
-			"description": "活到老学到老，智慧日增——但学费不菲",
+			"name": "TRAIT_LIFELONG_LEARNER_NAME",
+			"description": "TRAIT_LIFELONG_LEARNER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 10,
@@ -552,8 +552,8 @@
 		},
 		{
 			"trait_id": "strong_will",
-			"name": "坚韧意志",
-			"description": "面对病痛依然坚强，意志力转化为防御",
+			"name": "TRAIT_STRONG_WILL_NAME",
+			"description": "TRAIT_STRONG_WILL_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.08
@@ -562,8 +562,8 @@
 		},
 		{
 			"trait_id": "carefree_elder",
-			"name": "洒脱老人",
-			"description": "看淡一切，自在生活——代价是忽视健康",
+			"name": "TRAIT_CAREFREE_ELDER_NAME",
+			"description": "TRAIT_CAREFREE_ELDER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 8,
@@ -578,8 +578,8 @@
 		},
 		{
 			"trait_id": "family_happiness",
-			"name": "天伦之乐",
-			"description": "儿孙绕膝，情感支持让你更坚韧——但开销也大",
+			"name": "TRAIT_FAMILY_HAPPINESS_NAME",
+			"description": "TRAIT_FAMILY_HAPPINESS_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.06
@@ -593,8 +593,8 @@
 		},
 		{
 			"trait_id": "travel_elder",
-			"name": "旅行老人",
-			"description": "晚年走遍大好河山，见闻转化为智慧",
+			"name": "TRAIT_TRAVEL_ELDER_NAME",
+			"description": "TRAIT_TRAVEL_ELDER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -609,8 +609,8 @@
 		},
 		{
 			"trait_id": "nostalgic",
-			"name": "怀旧",
-			"description": "常常回忆往昔岁月，沉淀出智慧——但勇气渐消",
+			"name": "TRAIT_NOSTALGIC_NAME",
+			"description": "TRAIT_NOSTALGIC_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -626,8 +626,8 @@
 		},
 		{
 			"trait_id": "social_elder",
-			"name": "社交达人",
-			"description": "老年社交圈广泛，信息灵通——但应酬花费不少",
+			"name": "TRAIT_SOCIAL_ELDER_NAME",
+			"description": "TRAIT_SOCIAL_ELDER_DESC",
 			"effect": {
 				"type": "tower_attack_speed_bonus",
 				"tower_types": [
@@ -644,8 +644,8 @@
 		},
 		{
 			"trait_id": "memoirist",
-			"name": "回忆录作者",
-			"description": "将一生经历写成文字，稿费可观——但写作伤神",
+			"name": "TRAIT_MEMOIRIST_NAME",
+			"description": "TRAIT_MEMOIRIST_DESC",
 			"effect": {
 				"type": "gold_bonus",
 				"value": 30
@@ -660,8 +660,8 @@
 		},
 		{
 			"trait_id": "mentor",
-			"name": "导师",
-			"description": "将经验传授给后辈，桃李满天下——但操劳伤身",
+			"name": "TRAIT_MENTOR_NAME",
+			"description": "TRAIT_MENTOR_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -679,8 +679,8 @@
 		},
 		{
 			"trait_id": "quiet_observer",
-			"name": "默默旁观",
-			"description": "静静看着世界变化，内心平和",
+			"name": "TRAIT_QUIET_OBSERVER_NAME",
+			"description": "TRAIT_QUIET_OBSERVER_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -689,8 +689,8 @@
 		},
 		{
 			"trait_id": "solitary_peace",
-			"name": "独处安宁",
-			"description": "独自享受宁静时光，内心澄澈——但偶尔孤独",
+			"name": "TRAIT_SOLITARY_PEACE_NAME",
+			"description": "TRAIT_SOLITARY_PEACE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.08
@@ -705,8 +705,8 @@
 		},
 		{
 			"trait_id": "accept_mortality",
-			"name": "接受死亡",
-			"description": "坦然面对生命的终点，无所畏惧",
+			"name": "TRAIT_ACCEPT_MORTALITY_NAME",
+			"description": "TRAIT_ACCEPT_MORTALITY_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.1
@@ -715,8 +715,8 @@
 		},
 		{
 			"trait_id": "final_peace",
-			"name": "最终安宁",
-			"description": "放弃治疗，内心彻底平静——但身体加速衰弱",
+			"name": "TRAIT_FINAL_PEACE_NAME",
+			"description": "TRAIT_FINAL_PEACE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.15
@@ -730,8 +730,8 @@
 		},
 		{
 			"trait_id": "no_regrets",
-			"name": "此生无憾",
-			"description": "回首一生没有遗憾，自信化为力量——但挥金如土",
+			"name": "TRAIT_NO_REGRETS_NAME",
+			"description": "TRAIT_NO_REGRETS_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -746,8 +746,8 @@
 		},
 		{
 			"trait_id": "at_peace",
-			"name": "释然",
-			"description": "虽有遗憾，但已放下——内心平和带来微弱的身心恢复",
+			"name": "TRAIT_AT_PEACE_NAME",
+			"description": "TRAIT_AT_PEACE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -761,8 +761,8 @@
 		},
 		{
 			"trait_id": "regretful",
-			"name": "遗憾",
-			"description": "如果重来一定不同——遗憾催生反思，但也消磨勇气",
+			"name": "TRAIT_REGRETFUL_NAME",
+			"description": "TRAIT_REGRETFUL_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -778,8 +778,8 @@
 		},
 		{
 			"trait_id": "rebel",
-			"name": "叛逆者",
-			"description": "敢于挑战权威，勇气倍增",
+			"name": "TRAIT_REBEL_NAME",
+			"description": "TRAIT_REBEL_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 8,
@@ -789,8 +789,8 @@
 		},
 		{
 			"trait_id": "diarist",
-			"name": "日记达人",
-			"description": "用文字记录内心，智慧渐增",
+			"name": "TRAIT_DIARIST_NAME",
+			"description": "TRAIT_DIARIST_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -800,8 +800,8 @@
 		},
 		{
 			"trait_id": "empathy",
-			"name": "共情力",
-			"description": "善于理解他人，魅力提升",
+			"name": "TRAIT_EMPATHY_NAME",
+			"description": "TRAIT_EMPATHY_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -811,8 +811,8 @@
 		},
 		{
 			"trait_id": "first_love",
-			"name": "初恋",
-			"description": "青涩的初恋让你更懂得感情",
+			"name": "TRAIT_FIRST_LOVE_NAME",
+			"description": "TRAIT_FIRST_LOVE_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -822,8 +822,8 @@
 		},
 		{
 			"trait_id": "self_aware",
-			"name": "自我觉察",
-			"description": "通过心理咨询更了解自己",
+			"name": "TRAIT_SELF_AWARE_NAME",
+			"description": "TRAIT_SELF_AWARE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -832,8 +832,8 @@
 		},
 		{
 			"trait_id": "freedom_seeker",
-			"name": "自由追寻者",
-			"description": "不甘平庸，追求自由",
+			"name": "TRAIT_FREEDOM_SEEKER_NAME",
+			"description": "TRAIT_FREEDOM_SEEKER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -848,8 +848,8 @@
 		},
 		{
 			"trait_id": "calligraphy",
-			"name": "书法爱好者",
-			"description": "修身养性，内心平和",
+			"name": "TRAIT_CALLIGRAPHY_NAME",
+			"description": "TRAIT_CALLIGRAPHY_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -858,8 +858,8 @@
 		},
 		{
 			"trait_id": "dancer",
-			"name": "广场舞达人",
-			"description": "社交广泛，身心活跃",
+			"name": "TRAIT_DANCER_NAME",
+			"description": "TRAIT_DANCER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -874,8 +874,8 @@
 		},
 		{
 			"trait_id": "gardener",
-			"name": "园艺爱好者",
-			"description": "亲近自然，身心愉悦",
+			"name": "TRAIT_GARDENER_NAME",
+			"description": "TRAIT_GARDENER_DESC",
 			"effect": {
 				"type": "health_bonus",
 				"value": 10
@@ -884,8 +884,8 @@
 		},
 		{
 			"trait_id": "memorialist",
-			"name": "纪念者",
-			"description": "用文字留住记忆",
+			"name": "TRAIT_MEMORIALIST_NAME",
+			"description": "TRAIT_MEMORIALIST_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -895,8 +895,8 @@
 		},
 		{
 			"trait_id": "cherish_people",
-			"name": "珍惜身边人",
-			"description": "更加重视人际关系",
+			"name": "TRAIT_CHERISH_PEOPLE_NAME",
+			"description": "TRAIT_CHERISH_PEOPLE_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -906,8 +906,8 @@
 		},
 		{
 			"trait_id": "wise_elder",
-			"name": "智慧长者",
-			"description": "人生阅历化为智慧",
+			"name": "TRAIT_WISE_ELDER_NAME",
+			"description": "TRAIT_WISE_ELDER_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.1,
@@ -917,8 +917,8 @@
 		},
 		{
 			"trait_id": "traveler",
-			"name": "旅行者",
-			"description": "在旅途中找回自我",
+			"name": "TRAIT_TRAVELER_NAME",
+			"description": "TRAIT_TRAVELER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -928,8 +928,8 @@
 		},
 		{
 			"trait_id": "career_changer",
-			"name": "转型者",
-			"description": "敢于改变职业方向",
+			"name": "TRAIT_CAREER_CHANGER_NAME",
+			"description": "TRAIT_CAREER_CHANGER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -939,8 +939,8 @@
 		},
 		{
 			"trait_id": "confrontational",
-			"name": "直面冲突",
-			"description": "不怕与人争执",
+			"name": "TRAIT_CONFRONTATIONAL_NAME",
+			"description": "TRAIT_CONFRONTATIONAL_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -956,8 +956,8 @@
 		},
 		{
 			"trait_id": "peace_seeker",
-			"name": "和平主义者",
-			"description": "避免冲突，追求安宁",
+			"name": "TRAIT_PEACE_SEEKER_NAME",
+			"description": "TRAIT_PEACE_SEEKER_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -966,8 +966,8 @@
 		},
 		{
 			"trait_id": "open_parent",
-			"name": "开明家长",
-			"description": "尊重孩子的选择",
+			"name": "TRAIT_OPEN_PARENT_NAME",
+			"description": "TRAIT_OPEN_PARENT_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -977,8 +977,8 @@
 		},
 		{
 			"trait_id": "home_chef",
-			"name": "家庭大厨",
-			"description": "用美食温暖家人",
+			"name": "TRAIT_HOME_CHEF_NAME",
+			"description": "TRAIT_HOME_CHEF_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,
@@ -993,8 +993,8 @@
 		},
 		{
 			"trait_id": "tai_chi",
-			"name": "太极修习者",
-			"description": "以柔克刚，身心合一",
+			"name": "TRAIT_TAI_CHI_NAME",
+			"description": "TRAIT_TAI_CHI_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.08
@@ -1002,9 +1002,9 @@
 			"side_effects": []
 		},
 		{
-			"trait_id": "entrepreneur",
-			"name": "创业者",
-			"description": "敢于创业，追逐梦想",
+			"trait_id": "entrepreneur_2",
+			"name": "TRAIT_ENTREPRENEUR_2_NAME",
+			"description": "TRAIT_ENTREPRENEUR_2_DESC",
 			"effect": {
 				"type": "gold_per_wave",
 				"value": 5
@@ -1013,8 +1013,8 @@
 		},
 		{
 			"trait_id": "homeowner",
-			"name": "有房一族",
-			"description": "有了自己的窝",
+			"name": "TRAIT_HOMEOWNER_NAME",
+			"description": "TRAIT_HOMEOWNER_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
@@ -1023,8 +1023,8 @@
 		},
 		{
 			"trait_id": "hometown_return",
-			"name": "返乡者",
-			"description": "回到故乡，安居乐业",
+			"name": "TRAIT_HOMETOWN_RETURN_NAME",
+			"description": "TRAIT_HOMETOWN_RETURN_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 5,
@@ -1034,8 +1034,8 @@
 		},
 		{
 			"trait_id": "pet_owner",
-			"name": "铲屎官",
-			"description": "毛茸茸的治愈力量",
+			"name": "TRAIT_PET_OWNER_NAME",
+			"description": "TRAIT_PET_OWNER_DESC",
 			"effect": {
 				"type": "attribute_bonus",
 				"value": 3,

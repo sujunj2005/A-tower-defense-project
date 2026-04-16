@@ -47,9 +47,9 @@ func setup(trait_id: String) -> void:
 	if ts and ts.has_method("get_trait_config"):
 		var config: Dictionary = ts.get_trait_config(trait_id)
 		if _title_label:
-			_title_label.text = config.get("name", trait_id)
+			_title_label.text = tr(config.get("name", trait_id))
 		if _desc_label:
-			var desc: String = config.get("description", "")
+			var desc: String = tr(config.get("description", ""))
 			var effects = config.get("effects", config.get("effect", []))
 			if not effects.is_empty():
 				var effect_texts: Array[String] = []
@@ -59,7 +59,7 @@ func setup(trait_id: String) -> void:
 				elif effects is Dictionary:
 					effect_texts.append(_format_effect(effects))
 				if not effect_texts.is_empty():
-					desc += "\n" + "；".join(effect_texts)
+					desc += "\n" + tr("SEPARATOR_SEMICOLON").join(effect_texts)
 			_desc_label.text = desc
 	else:
 		if _title_label:
@@ -97,10 +97,10 @@ func _format_effect(effect: Dictionary) -> String:
 	match effect_type:
 		"tower_damage_bonus":
 			var val: float = float(effect.get("tower_damage_bonus", effect.get("value", 0)))
-			return "塔伤害+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_DAMAGE") % (val * 100.0)
 		"tower_attack_speed_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "塔攻速+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_SPEED") % (val * 100.0)
 		"attribute_bonus":
 			var ac: Node = get_node_or_null("/root/AttributeConfig")
 			var attr_name: String = effect.get("attribute", "")
@@ -108,22 +108,22 @@ func _format_effect(effect: Dictionary) -> String:
 			if ac and ac.has_method("get_display_with_icon"):
 				display = ac.get_display_with_icon(attr_name)
 			var val: int = int(effect.get("value", 0))
-			return "%s%+d" % [display, val]
+			return tr("ATTR_FORMAT") % [display, val]
 		"gold_bonus":
 			var val: int = int(effect.get("value", 0))
-			return "金币%+d" % val
+			return tr("EFFECT_GOLD_BONUS") % val
 		"health_bonus":
 			var val: int = int(effect.get("value", 0))
-			return "生命%+d" % val
+			return tr("EFFECT_HEALTH_BONUS") % val
 		"gold_per_wave":
 			var val: int = int(effect.get("value", 0))
-			return "每波金币+%d" % val
+			return tr("EFFECT_GOLD_PER_WAVE") % val
 		"damage_reduction":
 			var val: float = float(effect.get("value", 0))
-			return "伤害减免%.0f%%" % (val * 100.0)
+			return tr("EFFECT_DAMAGE_REDUCTION") % (val * 100.0)
 		"event_trigger_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "事件触发率%+.0f%%" % (val * 100.0)
+			return tr("EFFECT_EVENT_TRIGGER") % (val * 100.0)
 		_:
 			var val = effect.get("value", effect.get("tower_damage_bonus", ""))
 			return "%s: %s" % [effect_type, str(val)]

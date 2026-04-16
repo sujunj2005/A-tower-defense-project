@@ -46,7 +46,7 @@ func _resolve_trait_name(trait_id: String) -> void:
 	if ts and ts.has_method("get_trait_config"):
 		var config: Dictionary = ts.get_trait_config(trait_id)
 		if _name_label:
-			_name_label.text = config.get("name", trait_id)
+			_name_label.text = tr(config.get("name", trait_id))
 	else:
 		if _name_label:
 			_name_label.text = trait_id

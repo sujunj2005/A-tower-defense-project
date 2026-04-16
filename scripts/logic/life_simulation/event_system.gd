@@ -140,7 +140,7 @@ func _apply_rewards(rewards: Array) -> void:
 func _grant_tower(tower_id: String, _count: int) -> void:
 	session.add_tower(tower_id, _count if _count > 0 else -1)
 	session.last_event_towers.append({"tower_id": tower_id, "count": _count})
-	var count_text: String = "无限数量" if _count < 0 else "%d次" % _count
+	var count_text: String = tr("TOWER_INFINITE") if _count < 0 else tr("TOWER_COUNT_FORMAT") % _count
 	Global.debug_log("获得防御塔：%s（%s）" % [tower_id, count_text])
 
 func _grant_trait(trait_id: String) -> void:

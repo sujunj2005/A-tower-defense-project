@@ -9,6 +9,16 @@ var _title_label: Label
 var _desc_label: Label
 var _options_container: VBoxContainer
 
+func _get_quiet_year_texts() -> Array[String]:
+	return [
+		tr("QUIET_YEAR_1"),
+		tr("QUIET_YEAR_2"),
+		tr("QUIET_YEAR_3"),
+		tr("QUIET_YEAR_4"),
+		tr("QUIET_YEAR_5"),
+		tr("QUIET_YEAR_6")
+	]
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_build_ui()
@@ -38,7 +48,7 @@ func _build_ui() -> void:
 	panel.add_child(vbox)
 
 	_title_label = Label.new()
-	_title_label.text = "事件标题"
+	_title_label.text = tr("EVENT_TITLE")
 	_title_label.add_theme_font_size_override("font_size", 26)
 	_title_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -48,7 +58,7 @@ func _build_ui() -> void:
 	vbox.add_child(separator)
 
 	_desc_label = Label.new()
-	_desc_label.text = "事件描述"
+	_desc_label.text = tr("EVENT_DESC")
 	_desc_label.add_theme_font_size_override("font_size", 18)
 	_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_desc_label.custom_minimum_size = Vector2(520, 80)
@@ -66,14 +76,6 @@ func _build_ui() -> void:
 	spacer2.custom_minimum_size = Vector2(0, 10)
 	vbox.add_child(spacer2)
 
-const QUIET_YEAR_TEXTS: Array[String] = [
-	"平淡的一年，没有特别的事情发生。",
-	"岁月静好，一切如常。",
-	"波澜不惊的一年，平平淡淡才是真。",
-	"日子就这样一天天过去了。",
-	"这一年，你只是安静地生活着。",
-	"没有惊喜，也没有意外。"
-]
 
 func _load_current_event() -> void:
 	var session: GameSessionData = Global.get_game_session()
@@ -151,9 +153,9 @@ func _get_events_for_stage() -> Array[EventData]:
 func display_event(event: EventData) -> void:
 	_current_event = event
 	if _title_label:
-		_title_label.text = event.event_name
+		_title_label.text = event.get_display_name()
 	if _desc_label:
-		_desc_label.text = event.description
+		_desc_label.text = event.get_display_desc()
 	_clear_options()
 	var options: Array = event.options
 	for i: int in range(options.size()):
@@ -163,17 +165,15 @@ func display_event(event: EventData) -> void:
 		var req_text: String = ""
 		if os and os.has_method("format_requirements"):
 			req_text = os.format_requirements(option.requirements)
-		else:
-			req_text = _format_requirements(option.requirements)
-		var btn_text: String = option.text if option.text != "" else "选项 %d" % (i + 1)
+		var btn_text: String = option.get_display_text() if option.text != "" else tr("OPTION_LABEL") % (i + 1)
 		if req_text != "":
-			btn_text += "\n[需要: " + req_text + "]"
+			btn_text += "\n" + tr("REQUIREMENT_NEED") % req_text + "]"
 		var has_ending: bool = option.triggers_ending
 		var has_battle: bool = option.battle_trigger is Dictionary
 		if has_ending:
-			btn_text += "\n[💀 触发结局]"
+			btn_text += "\n" + tr("TRIGGER_ENDING")
 		elif has_battle:
-			btn_text += "\n[⚔️ 触发战斗]"
+			btn_text += "\n" + tr("TRIGGER_BATTLE")
 		btn.text = btn_text
 		btn.custom_minimum_size = Vector2(0, 40)
 		var can_select: bool = false
@@ -190,65 +190,6 @@ func display_event(event: EventData) -> void:
 		btn.pressed.connect(_on_option_pressed.bind(i))
 		_options_container.add_child(btn)
 		_option_buttons.append(btn)
-
-func _format_requirements(requirements: Dictionary) -> String:
-	var parts: Array[String] = []
-	var session: GameSessionData = Global.get_game_session()
-	var attr_names: Dictionary = {
-		"intelligence": "智力",
-		"courage": "勇气",
-		"health": "健康",
-		"charm": "魅力",
-		"work_ability": "工作能力",
-		"luck": "运气"
-	}
-	var bg_names: Dictionary = {
-		"farmer": "农民",
-		"worker": "工人",
-		"merchant": "商人",
-		"cadre": "干部",
-		"farmer_or_worker": "农民或工人"
-	}
-	for key: String in requirements:
-		var val: Variant = requirements[key]
-		match key:
-			"trait":
-				var trait_id: String = str(val)
-				if trait_id.begins_with("!"):
-					var neg_id: String = trait_id.substr(1)
-					var neg_name: String = neg_id
-					var ts: Node = get_node_or_null("/root/TraitSystem")
-					if ts and ts.has_method("get_trait_config"):
-						var tc: Dictionary = ts.get_trait_config(neg_id)
-						neg_name = tc.get("name", neg_id)
-					parts.append("非「%s」" % neg_name)
-				else:
-					var ts2: Node = get_node_or_null("/root/TraitSystem")
-					var tname: String = trait_id
-					if ts2 and ts2.has_method("get_trait_config"):
-						var tc2: Dictionary = ts2.get_trait_config(trait_id)
-						tname = tc2.get("name", trait_id)
-					parts.append("拥有「%s」" % tname)
-			"gold":
-				parts.append("金币≥%d" % int(val))
-			"family_background":
-				var bg_val: String = str(val)
-				if bg_names.has(bg_val):
-					parts.append("家庭背景：%s" % bg_names[bg_val])
-				elif bg_val.begins_with("!"):
-					var neg_bg: String = bg_val.substr(1)
-					var neg_name2: String = bg_names.get(neg_bg, neg_bg)
-					parts.append("非%s家庭" % neg_name2)
-				else:
-					parts.append("家庭背景：%s" % bg_val)
-			"education":
-				parts.append("学历：%s" % str(val))
-			"work_ability":
-				parts.append("工作能力≥%d" % int(val))
-			_:
-				var display_name: String = attr_names.get(key, key)
-				parts.append("%s≥%d" % [display_name, int(val)])
-	return "、".join(parts)
 
 func _clear_options() -> void:
 	for btn: Button in _option_buttons:
@@ -348,7 +289,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 	scroll.add_child(vbox)
 
 	var title: Label = Label.new()
-	title.text = "你获得"
+	title.text = tr("YOU_RECEIVED")
 	title.add_theme_font_size_override("font_size", 24)
 	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -371,9 +312,9 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 					has_gold_section = true
 				var gold_val: int = reward.get("value", reward.get("count", 0))
 				if gold_val >= 0:
-					_add_popup_row(vbox, "💰", "金币 +%d" % gold_val, Color(1.0, 0.85, 0.0, 1.0))
+					_add_popup_row(vbox, "💰", tr("GOLD_PLUS") % gold_val, Color(1.0, 0.85, 0.0, 1.0))
 				else:
-					_add_popup_row(vbox, "💰", "金币 %d" % gold_val, Color(1.0, 0.4, 0.4, 1.0))
+					_add_popup_row(vbox, "💰", tr("GOLD_MINUS") % gold_val, Color(1.0, 0.4, 0.4, 1.0))
 			"attribute":
 				var ac: Node = get_node_or_null("/root/AttributeConfig")
 				var attr_id: String = reward.get("attribute", reward.get("id", ""))
@@ -382,15 +323,15 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 					attr_display = ac.get_display_with_icon(attr_id)
 				var count_val: int = reward.get("value", reward.get("count", 0))
 				if count_val >= 0:
-					_add_popup_row(vbox, "", "%s +%d" % [attr_display, count_val], Color(0.4, 1.0, 0.4, 1.0))
+					_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, count_val], Color(0.4, 1.0, 0.4, 1.0))
 				else:
-					_add_popup_row(vbox, "", "%s %d" % [attr_display, count_val], Color(1.0, 0.4, 0.4, 1.0))
+					_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, count_val], Color(1.0, 0.4, 0.4, 1.0))
 
 	if costs.has("gold"):
 		var cost_val: int = costs.gold
 		if cost_val < 0:
 			has_gold_section = true
-			_add_popup_row(vbox, "💰", "金币 %d" % cost_val, Color(1.0, 0.4, 0.4, 1.0))
+			_add_popup_row(vbox, "💰", tr("GOLD_MINUS") % cost_val, Color(1.0, 0.4, 0.4, 1.0))
 	if costs.has("health"):
 		var health_cost: int = costs.health
 		if health_cost < 0:
@@ -398,7 +339,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 			var health_display: String = "health"
 			if ac2 and ac2.has_method("get_display_with_icon"):
 				health_display = ac2.get_display_with_icon("health")
-			_add_popup_row(vbox, "", "%s %d" % [health_display, health_cost], Color(1.0, 0.4, 0.4, 1.0))
+			_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [health_display, health_cost], Color(1.0, 0.4, 0.4, 1.0))
 
 	var trait_rewards: Array[String] = []
 	for reward: Dictionary in rewards:
@@ -410,14 +351,14 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		var sep_traits: HSeparator = HSeparator.new()
 		vbox.add_child(sep_traits)
 		var traits_title: Label = Label.new()
-		traits_title.text = "——新获得词条——"
+		traits_title.text = tr("NEW_TRAITS")
 		traits_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		traits_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 		vbox.add_child(traits_title)
 		var ts: Node = get_node_or_null("/root/TraitSystem")
 		for trait_id: String in trait_rewards:
 			var config: Dictionary = ts.get_trait_config(trait_id) if ts and ts.has_method("get_trait_config") else {}
-			var trait_name: String = config.get("name", trait_id)
+			var trait_name: String = tr(tr(config.get("name", trait_id)))
 			var effects = config.get("effects", config.get("effect", []))
 			var effect_text: String = ""
 			if effects is Array and not effects.is_empty():
@@ -425,7 +366,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 				for eff in effects:
 					if eff is Dictionary:
 						parts.append(_format_trait_effect(eff))
-				effect_text = "；".join(parts)
+				effect_text = tr("SEPARATOR_SEMICOLON").join(parts)
 			elif effects is Dictionary:
 				effect_text = _format_trait_effect(effects)
 			var trait_row: HBoxContainer = HBoxContainer.new()
@@ -435,7 +376,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 			trait_icon.add_theme_color_override("font_color", Color(0.8, 0.6, 1.0, 1.0))
 			trait_row.add_child(trait_icon)
 			var lbl: Label = Label.new()
-			lbl.text = "%s：%s" % [trait_name, effect_text] if effect_text != "" else trait_name
+			lbl.text = tr("TRAIT_EFFECT_FORMAT") % [trait_name, effect_text] if effect_text != "" else trait_name
 			lbl.add_theme_color_override("font_color", Color(0.8, 0.85, 1.0, 1.0))
 			lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			lbl.custom_minimum_size = Vector2(480, 0)
@@ -452,7 +393,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		var sep_towers: HSeparator = HSeparator.new()
 		vbox.add_child(sep_towers)
 		var towers_title: Label = Label.new()
-		towers_title.text = "——新获得防御塔——"
+		towers_title.text = tr("NEW_TOWERS")
 		towers_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		towers_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 		vbox.add_child(towers_title)
@@ -475,7 +416,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		var sep_growth: HSeparator = HSeparator.new()
 		vbox.add_child(sep_growth)
 		var growth_title: Label = Label.new()
-		growth_title.text = "—— 阶段属性增长 ——"
+		growth_title.text = tr("STAGE_GROWTH")
 		growth_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		growth_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 		vbox.add_child(growth_title)
@@ -495,7 +436,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 	age_icon.add_theme_font_size_override("font_size", 18)
 	age_row.add_child(age_icon)
 	var lbl_age: Label = Label.new()
-	lbl_age.text = "年龄 +1"
+	lbl_age.text = tr("AGE_PLUS_ONE")
 	lbl_age.add_theme_color_override("font_color", Color(0.8, 0.9, 1.0, 1.0))
 	age_row.add_child(lbl_age)
 	vbox.add_child(age_row)
@@ -506,7 +447,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		var sep_ending: HSeparator = HSeparator.new()
 		vbox.add_child(sep_ending)
 		var ending_label: Label = Label.new()
-		ending_label.text = "💀 触发结局"
+		ending_label.text = tr("TRIGGER_ENDING")
 		ending_label.add_theme_font_size_override("font_size", 24)
 		ending_label.add_theme_color_override("font_color", Color(1.0, 0.1, 0.1, 1.0))
 		ending_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -515,14 +456,14 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		var sep_battle: HSeparator = HSeparator.new()
 		vbox.add_child(sep_battle)
 		var battle_label: Label = Label.new()
-		battle_label.text = "⚔️ 触发战斗！"
+		battle_label.text = tr("TRIGGER_BATTLE")
 		battle_label.add_theme_font_size_override("font_size", 22)
 		battle_label.add_theme_color_override("font_color", Color(1.0, 0.2, 0.2, 1.0))
 		battle_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		vbox.add_child(battle_label)
 
 	var hint: Label = Label.new()
-	hint.text = "点击任意地方关闭"
+	hint.text = tr("HINT_CLICK_CLOSE")
 	hint.add_theme_font_size_override("font_size", 14)
 	hint.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -572,10 +513,10 @@ func _format_trait_effect(effect: Dictionary) -> String:
 	match effect_type:
 		"tower_damage_bonus":
 			var val: float = float(effect.get("tower_damage_bonus", effect.get("value", 0)))
-			return "塔伤害+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_DAMAGE") % (val * 100.0)
 		"tower_attack_speed_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "塔攻速+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_SPEED") % (val * 100.0)
 		"attribute_bonus":
 			var ac: Node = get_node_or_null("/root/AttributeConfig")
 			var attr_name: String = effect.get("attribute", "")
@@ -586,23 +527,23 @@ func _format_trait_effect(effect: Dictionary) -> String:
 			return "%s%+d" % [display, val]
 		"gold_bonus":
 			var val: int = int(effect.get("value", 0))
-			return "金币%+d" % val
+			return tr("EFFECT_GOLD_BONUS") % val
 		"health_bonus":
 			var ac2: Node = get_node_or_null("/root/AttributeConfig")
-			var hdisplay: String = "健康"
+			var hdisplay: String = tr("ATTR_HEALTH")
 			if ac2 and ac2.has_method("get_display_name"):
 				hdisplay = ac2.get_display_name("health")
 			var hval: int = int(effect.get("value", 0))
 			return "%s%+d" % [hdisplay, hval]
 		"gold_per_wave":
 			var val: int = int(effect.get("value", 0))
-			return "每波金币+%d" % val
+			return tr("EFFECT_GOLD_PER_WAVE") % val
 		"damage_reduction":
 			var val: float = float(effect.get("value", 0))
-			return "伤害减免%.0f%%" % (val * 100.0)
+			return tr("EFFECT_DAMAGE_REDUCTION") % (val * 100.0)
 		"event_trigger_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "事件触发率%+.0f%%" % (val * 100.0)
+			return tr("EFFECT_EVENT_TRIGGER") % (val * 100.0)
 		_:
 			var val = effect.get("value", effect.get("tower_damage_bonus", ""))
 			return "%s: %s" % [effect_type, str(val)]
@@ -618,10 +559,10 @@ func _get_tower_display_name(tower_id: String) -> String:
 	if towers is Array:
 		for tower in towers:
 			if tower.get("tower_id", "") == tower_id:
-				return tower.get("tower_name", tower.get("name", tower_id))
+				return tr(tower.get("tower_name", tower.get("name", tower_id)))
 		return tower_id
 	if towers is Dictionary and towers.has(tower_id):
-		return towers[tower_id].get("name", towers[tower_id].get("tower_name", tower_id))
+		return tr(towers[tower_id].get("name", towers[tower_id].get("tower_name", tower_id)))
 	return tower_id
 
 func _get_trait_display_name(trait_id: String) -> String:
@@ -653,7 +594,7 @@ func _get_tower_stats_display(tower_id: String) -> String:
 	var damage: int = stats.get("damage", tower_config.get("damage", 0))
 	var attack_speed: float = stats.get("attack_speed", tower_config.get("attack_speed", 1.0))
 	var attack_range: float = stats.get("range", tower_config.get("range", 100.0))
-	return "伤害：%d  攻速：%.1f  射程：%.0f" % [damage, attack_speed, attack_range]
+	return tr("TOWER_STATS_FORMAT") % [damage, attack_speed, attack_range]
 
 func _get_stage_attribute_growth() -> Dictionary:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
@@ -692,8 +633,8 @@ func _setup_tower_hover(control: Control, tower_id: String) -> void:
 		if tower_config.is_empty():
 			return
 		var stats: Dictionary = tower_config.get("stats", tower_config)
-		var tower_name: String = tower_config.get("tower_name", tower_config.get("name", tower_id))
-		var desc: String = "伤害：%d  攻速：%.1f  射程：%.0f" % [
+		var tower_name: String = tr(tower_config.get("tower_name", tower_config.get("name", tower_id)))
+		var desc: String = tr("TOWER_STATS_FORMAT") % [
 			stats.get("damage", tower_config.get("damage", 0)),
 			stats.get("attack_speed", tower_config.get("attack_speed", 1.0)),
 			stats.get("range", tower_config.get("range", 100.0))
@@ -751,9 +692,10 @@ func _roll_event_trigger() -> bool:
 
 func _display_quiet_year() -> void:
 	if _title_label:
-		_title_label.text = "今年无事发生"
+		_title_label.text = tr("QUIET_YEAR_TITLE")
 	if _desc_label:
-		_desc_label.text = QUIET_YEAR_TEXTS[randi() % QUIET_YEAR_TEXTS.size()]
+		var texts: Array[String] = _get_quiet_year_texts()
+		_desc_label.text = texts[randi() % texts.size()]
 	_clear_options()
 	var growth: Dictionary = _get_stage_attribute_growth()
 	if not growth.is_empty():
@@ -767,12 +709,12 @@ func _display_quiet_year() -> void:
 			growth_parts.append("%s%+d" % [attr_disp, growth_val])
 		if not growth_parts.is_empty():
 			var growth_label: Label = Label.new()
-			growth_label.text = "年龄 +1 | " + "  ".join(growth_parts)
+			growth_label.text = tr("AGE_PLUS_ONE") + " | " + "  ".join(growth_parts)
 			growth_label.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4, 1.0))
 			growth_label.add_theme_font_size_override("font_size", 16)
 			_options_container.add_child(growth_label)
 	var btn: Button = Button.new()
-	btn.text = "继续"
+	btn.text = tr("BTN_CONTINUE")
 	btn.custom_minimum_size = Vector2(0, 40)
 	btn.pressed.connect(_on_quiet_year_continue)
 	_options_container.add_child(btn)

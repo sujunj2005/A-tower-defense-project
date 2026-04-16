@@ -15,7 +15,7 @@ func _load_configs() -> void:
 
 func get_display_name(attr_id: String) -> String:
 	if _configs.has(attr_id):
-		return _configs[attr_id].get("display_name", attr_id)
+		return tr(_configs[attr_id].get("display_name", attr_id))
 	return attr_id
 
 func get_icon(attr_id: String) -> String:

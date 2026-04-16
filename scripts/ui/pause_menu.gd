@@ -15,6 +15,21 @@ func _ready():
 	# 启用输入处理
 	set_process_input(true)
 
+var _title_label: Label
+var _resume_btn: Button
+var _menu_btn: Button
+var _quit_btn: Button
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_refresh_texts()
+
+func _refresh_texts() -> void:
+	if _title_label: _title_label.text = tr("PAUSE_TITLE")
+	if _resume_btn: _resume_btn.text = tr("BTN_RESUME")
+	if _menu_btn: _menu_btn.text = tr("BTN_MAIN_MENU")
+	if _quit_btn: _quit_btn.text = tr("BTN_QUIT")
+
 func setup_ui():
 	var bg = ColorRect.new()
 	bg.color = Color(0.0, 0.0, 0.0, 0.6)
@@ -46,25 +61,25 @@ func setup_ui():
 	vbox.add_theme_constant_override("margin_right", 40)
 	panel.add_child(vbox)
 
-	var title = Label.new()
-	title.text = "暂停"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 48)
-	title.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
-	vbox.add_child(title)
+	_title_label = Label.new()
+	_title_label.text = tr("PAUSE_TITLE")
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.add_theme_font_size_override("font_size", 48)
+	_title_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
+	vbox.add_child(_title_label)
 
 	var spacer_top = Control.new()
 	spacer_top.custom_minimum_size = Vector2(0, 40)
 	vbox.add_child(spacer_top)
 
-	var resume_btn = create_button("继续游戏", _on_resume_pressed)
-	vbox.add_child(resume_btn)
+	_resume_btn = create_button(tr("BTN_RESUME"), _on_resume_pressed)
+	vbox.add_child(_resume_btn)
 
-	var menu_btn = create_button("返回主菜单", _on_main_menu_pressed)
-	vbox.add_child(menu_btn)
+	_menu_btn = create_button(tr("BTN_MAIN_MENU"), _on_main_menu_pressed)
+	vbox.add_child(_menu_btn)
 
-	var quit_btn = create_button("退出游戏", _on_quit_pressed)
-	vbox.add_child(quit_btn)
+	_quit_btn = create_button(tr("BTN_QUIT"), _on_quit_pressed)
+	vbox.add_child(_quit_btn)
 
 func create_button(text: String, callback: Callable) -> Button:
 	var btn = Button.new()

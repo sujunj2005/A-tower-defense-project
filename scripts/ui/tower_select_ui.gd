@@ -103,7 +103,7 @@ func setup_ui():
 	panel.add_child(vbox)
 	
 	title_label = Label.new()
-	title_label.text = "选择防御塔类型"
+	title_label.text = tr("TOWER_SELECT_TITLE")
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.add_theme_font_size_override("font_size", 20)
 	vbox.add_child(title_label)
@@ -131,7 +131,7 @@ func setup_ui():
 	vbox.add_child(spacer)
 	
 	cancel_button = Button.new()
-	cancel_button.text = "取消"
+	cancel_button.text = tr("BTN_CANCEL")
 	cancel_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cancel_button.custom_minimum_size = Vector2(100, 30)
 	cancel_button.pressed.connect(_on_cancel_pressed)
@@ -196,7 +196,7 @@ func setup_warning():
 	add_child(warning_panel)
 	
 	warning_label = Label.new()
-	warning_label.text = "金币不足！"
+	warning_label.text = tr("NOT_ENOUGH_GOLD")
 	warning_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	warning_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	warning_label.add_theme_font_size_override("font_size", 18)
@@ -236,6 +236,9 @@ func _process(delta):
 	
 	var to_remove = []
 	for button in flashing_buttons.keys():
+		if not is_instance_valid(button):
+			to_remove.append(button)
+			continue
 		var data = flashing_buttons[button]
 		data["timer"] -= delta
 		if data["timer"] <= 0:
@@ -297,7 +300,8 @@ func create_tower_button(tower_type: String, config: TowerBean) -> Button:
 	vbox.add_child(texture_rect)
 	
 	var name_label = Label.new()
-	name_label.text = config.tower_name
+	name_label.text = config.get_display_name()
+	name_label.set_meta("tower_id", tower_type)
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name_label.add_theme_font_size_override("font_size", 14)
 	name_label.add_theme_color_override("font_color", Color(1, 1, 1))
@@ -308,7 +312,7 @@ func create_tower_button(tower_type: String, config: TowerBean) -> Button:
 	var display_cost: int = config.cost
 	if era_sys and era_sys.has_method("get_modified_tower_cost"):
 		display_cost = era_sys.get_modified_tower_cost(config.cost)
-	cost_label.text = "造价: " + str(display_cost)
+	cost_label.text = tr("TOWER_COST") % display_cost
 	cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cost_label.add_theme_font_size_override("font_size", 12)
 	cost_label.add_theme_color_override("font_color", Color(1, 0.84, 0))
@@ -326,7 +330,7 @@ func create_tower_button(tower_type: String, config: TowerBean) -> Button:
 	var is_full: bool = tower_max >= 0 and tower_remaining <= 0
 	var count_label = Label.new()
 	if tower_max < 0:
-		count_label.text = "×∞"
+		count_label.text = tr("TOWER_INFINITE")
 		count_label.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4))
 	else:
 		count_label.text = "%d/%d" % [tower_remaining, tower_max]
@@ -350,12 +354,19 @@ func create_tower_button(tower_type: String, config: TowerBean) -> Button:
 
 func _on_tower_button_hovered(tower_type: String, config: TowerBean):
 	hovered_tower_type = tower_type
-	var info_text = "%s (Lv.%d)\n" % [config.tower_name, config.tower_level]
+	var info_text = "%s (Lv.%d)\n" % [config.get_display_name(), config.tower_level]
 	info_text += "━━━━━━━━━━━━━━━\n"
-	info_text += "💰 造价: %d\n" % config.cost
-	info_text += "⚔ 伤害: %.0f\n" % config.damage
-	info_text += "🎯 射程: %.0f\n" % config.attack_range
-	info_text += "⚡ 攻速: %.1f/s" % config.attack_speed
+	info_text += tr("TOWER_INFO_COST") % config.cost + "\n"
+	info_text += tr("TOWER_INFO_DAMAGE") % config.damage + "\n"
+	info_text += tr("TOWER_INFO_RANGE") % config.attack_range + "\n"
+	info_text += tr("TOWER_INFO_SPEED") % config.attack_speed
+	if config.effect_id != "":
+		info_text += "\n" + config.effect_icon + " " + config.get_display_effect_name() + " — " + config.get_display_effect_desc()
+	for sub: Dictionary in config.sub_effects:
+		var sub_eid: String = sub.get("effect_id", "")
+		if sub_eid != "":
+			var sec: SpecialEffectConfig = SpecialEffectConfig.new()
+			info_text += "\n" + sec.get_effect_icon(sub_eid) + " " + sec.get_display_name(sub_eid) + " — " + sec.get_display_desc(sub_eid)
 	tooltip_label.text = info_text
 	tooltip_panel.visible = true
 	tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
@@ -454,13 +465,13 @@ func show_not_enough_gold(tower_type: String):
 	var actual_cost: int = config.cost
 	if era_sys and era_sys.has_method("get_modified_tower_cost"):
 		actual_cost = era_sys.get_modified_tower_cost(config.cost)
-	warning_label.text = "金币不足！需要 %d 金币" % actual_cost
+	warning_label.text = tr("NOT_ENOUGH_GOLD_NEED") % actual_cost
 	warning_timer = 1.0
 	for child in tower_buttons_container.get_children():
 		if child is Button:
 			for sub in child.get_children():
 				if sub is VBoxContainer:
 					for label in sub.get_children():
-						if label is Label and label.text == config.tower_name:
+						if label is Label and label.get_meta("tower_id", "") == config.tower_id:
 							flash_button_red(child)
 							break

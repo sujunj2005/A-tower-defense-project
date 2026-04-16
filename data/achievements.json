@@ -3,11 +3,12 @@
 	"achievements": [
 		{
 			"achievement_id": "ach_first_blood",
-			"achievement_name": "第一滴血",
-			"description": "首次完成战斗",
+			"achievement_name": "ACHIEVEMENT_ACH_FIRST_BLOOD_NAME",
+			"description": "ACHIEVEMENT_ACH_FIRST_BLOOD_DESC",
 			"condition": {
 				"type": "battle_won",
-				"count": 1
+				"count": 1,
+				"stages": []
 			},
 			"reward": {
 				"destiny_points": 10
@@ -15,10 +16,11 @@
 		},
 		{
 			"achievement_id": "ach_perfect_life",
-			"achievement_name": "完美一生",
-			"description": "达成S级结局",
+			"achievement_name": "ACHIEVEMENT_ACH_PERFECT_LIFE_NAME",
+			"description": "ACHIEVEMENT_ACH_PERFECT_LIFE_DESC",
 			"condition": {
 				"type": "ending_reached",
+				"stages": [],
 				"rating": "S"
 			},
 			"reward": {
@@ -27,10 +29,11 @@
 		},
 		{
 			"achievement_id": "ach_successful_life",
-			"achievement_name": "成功人生",
-			"description": "达成A级结局",
+			"achievement_name": "ACHIEVEMENT_ACH_SUCCESSFUL_LIFE_NAME",
+			"description": "ACHIEVEMENT_ACH_SUCCESSFUL_LIFE_DESC",
 			"condition": {
 				"type": "ending_reached",
+				"stages": [],
 				"rating": "A"
 			},
 			"reward": {
@@ -39,11 +42,12 @@
 		},
 		{
 			"achievement_id": "ach_battle_master",
-			"achievement_name": "百战百胜",
-			"description": "累计赢得10场战斗",
+			"achievement_name": "ACHIEVEMENT_ACH_BATTLE_MASTER_NAME",
+			"description": "ACHIEVEMENT_ACH_BATTLE_MASTER_DESC",
 			"condition": {
 				"type": "battle_won",
-				"count": 10
+				"count": 10,
+				"stages": []
 			},
 			"reward": {
 				"destiny_points": 15
@@ -51,10 +55,11 @@
 		},
 		{
 			"achievement_id": "ach_s_rank_battle",
-			"achievement_name": "无伤通关",
-			"description": "以S级评价完成一场战斗",
+			"achievement_name": "ACHIEVEMENT_ACH_S_RANK_BATTLE_NAME",
+			"description": "ACHIEVEMENT_ACH_S_RANK_BATTLE_DESC",
 			"condition": {
 				"type": "battle_rating",
+				"stages": [],
 				"rating": "S"
 			},
 			"reward": {
@@ -63,10 +68,11 @@
 		},
 		{
 			"achievement_id": "ach_top_university",
-			"achievement_name": "名校出身",
-			"description": "考入顶尖大学",
+			"achievement_name": "ACHIEVEMENT_ACH_TOP_UNIVERSITY_NAME",
+			"description": "ACHIEVEMENT_ACH_TOP_UNIVERSITY_DESC",
 			"condition": {
 				"type": "trait_acquired",
+				"stages": [],
 				"trait_id": "top_university"
 			},
 			"reward": {
@@ -75,10 +81,11 @@
 		},
 		{
 			"achievement_id": "ach_entrepreneur",
-			"achievement_name": "创业先锋",
-			"description": "选择创业路线",
+			"achievement_name": "ACHIEVEMENT_ACH_ENTREPRENEUR_NAME",
+			"description": "ACHIEVEMENT_ACH_ENTREPRENEUR_DESC",
 			"condition": {
 				"type": "trait_acquired",
+				"stages": [],
 				"trait_id": "entrepreneur"
 			},
 			"reward": {
@@ -87,10 +94,11 @@
 		},
 		{
 			"achievement_id": "ach_married",
-			"achievement_name": "修成正果",
-			"description": "步入婚姻殿堂",
+			"achievement_name": "ACHIEVEMENT_ACH_MARRIED_NAME",
+			"description": "ACHIEVEMENT_ACH_MARRIED_DESC",
 			"condition": {
 				"type": "trait_acquired",
+				"stages": [],
 				"trait_id": "married"
 			},
 			"reward": {
@@ -99,15 +107,15 @@
 		},
 		{
 			"achievement_id": "ach_all_stages",
-			"achievement_name": "人生百态",
-			"description": "经历所有人生阶段",
+			"achievement_name": "ACHIEVEMENT_ACH_ALL_STAGES_NAME",
+			"description": "ACHIEVEMENT_ACH_ALL_STAGES_DESC",
 			"condition": {
 				"type": "stages_completed",
 				"stages": [
-					"童年",
-					"青年",
-					"中年",
-					"老年"
+					"childhood",
+					"youth",
+					"middle_age",
+					"old_age"
 				]
 			},
 			"reward": {
@@ -116,11 +124,12 @@
 		},
 		{
 			"achievement_id": "ach_survive_deadly",
-			"achievement_name": "死里逃生",
-			"description": "在致命事件中存活",
+			"achievement_name": "ACHIEVEMENT_ACH_SURVIVE_DEADLY_NAME",
+			"description": "ACHIEVEMENT_ACH_SURVIVE_DEADLY_DESC",
 			"condition": {
 				"type": "deadly_event_survived",
-				"count": 1
+				"count": 1,
+				"stages": []
 			},
 			"reward": {
 				"destiny_points": 20
@@ -128,10 +137,11 @@
 		},
 		{
 			"achievement_id": "ach_farmer_to_rich",
-			"achievement_name": "寒门贵子",
-			"description": "以农民家庭出身达成A级以上结局",
+			"achievement_name": "ACHIEVEMENT_ACH_FARMER_TO_RICH_NAME",
+			"description": "ACHIEVEMENT_ACH_FARMER_TO_RICH_DESC",
 			"condition": {
 				"type": "family_ending_combo",
+				"stages": [],
 				"family": "farmer",
 				"min_rating": "A"
 			},
@@ -141,10 +151,11 @@
 		},
 		{
 			"achievement_id": "ach_all_families",
-			"achievement_name": "百味人生",
-			"description": "以所有家庭背景各完成一次游戏",
+			"achievement_name": "ACHIEVEMENT_ACH_ALL_FAMILIES_NAME",
+			"description": "ACHIEVEMENT_ACH_ALL_FAMILIES_DESC",
 			"condition": {
 				"type": "families_completed",
+				"stages": [],
 				"families": [
 					"cadre",
 					"merchant",

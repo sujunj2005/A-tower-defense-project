@@ -80,19 +80,19 @@ func check_requirements(option: OptionData) -> bool:
 func format_requirements(requirements: Dictionary) -> String:
 	var parts: Array[String] = []
 	var attr_names: Dictionary = {
-		"intelligence": "智力",
-		"courage": "勇气",
-		"health": "健康",
-		"charm": "魅力",
-		"work_ability": "工作能力",
-		"luck": "运气"
+		"intelligence": tr("ATTR_INTELLIGENCE"),
+		"courage": tr("ATTR_COURAGE"),
+		"health": tr("ATTR_HEALTH"),
+		"charm": tr("ATTR_CHARM"),
+		"work_ability": tr("ATTR_WORK_ABILITY"),
+		"luck": tr("ATTR_LUCK")
 	}
 	var bg_names: Dictionary = {
-		"farmer": "农民",
-		"worker": "工人",
-		"merchant": "商人",
-		"cadre": "干部",
-		"farmer_or_worker": "农民或工人"
+		"farmer": tr("BG_FARMER"),
+		"worker": tr("BG_WORKER"),
+		"merchant": tr("BG_MERCHANT"),
+		"cadre": tr("BG_CADRE"),
+		"farmer_or_worker": tr("BG_FARMER_OR_WORKER")
 	}
 	for key: String in requirements:
 		var val: Variant = requirements[key]
@@ -105,32 +105,32 @@ func format_requirements(requirements: Dictionary) -> String:
 					var ts: Node = get_node_or_null("/root/TraitSystem")
 					if ts and ts.has_method("get_trait_config"):
 						var tc: Dictionary = ts.get_trait_config(neg_id)
-						neg_name = tc.get("name", neg_id)
-					parts.append("非「%s」" % neg_name)
+						neg_name = tr(tc.get("name", neg_id))
+					parts.append(tr("REQ_NOT_TRAIT") % neg_name)
 				else:
 					var ts2: Node = get_node_or_null("/root/TraitSystem")
 					var tname: String = trait_id
 					if ts2 and ts2.has_method("get_trait_config"):
 						var tc2: Dictionary = ts2.get_trait_config(trait_id)
-						tname = tc2.get("name", trait_id)
-					parts.append("拥有「%s」" % tname)
+						tname = tr(tc2.get("name", trait_id))
+					parts.append(tr("REQ_HAS_TRAIT") % tname)
 			"gold":
-				parts.append("金币≥%d" % int(val))
+				parts.append(tr("REQ_GOLD") % int(val))
 			"family_background":
 				var bg_val: String = str(val)
 				if bg_names.has(bg_val):
-					parts.append("家庭背景：%s" % bg_names[bg_val])
+					parts.append(tr("REQ_FAMILY") % bg_names[bg_val])
 				elif bg_val.begins_with("!"):
 					var neg_bg: String = bg_val.substr(1)
 					var neg_name2: String = bg_names.get(neg_bg, neg_bg)
-					parts.append("非%s家庭" % neg_name2)
+					parts.append(tr("REQ_NOT_FAMILY") % neg_name2)
 				else:
-					parts.append("家庭背景：%s" % bg_val)
+					parts.append(tr("REQ_FAMILY") % bg_val)
 			"education":
-				parts.append("学历：%s" % str(val))
+				parts.append(tr("REQ_EDUCATION") % str(val))
 			"work_ability":
-				parts.append("工作能力≥%d" % int(val))
+				parts.append(tr("REQ_WORK_ABILITY") % int(val))
 			_:
 				var display_name: String = attr_names.get(key, key)
-				parts.append("%s≥%d" % [display_name, int(val)])
-	return "、".join(parts)
+				parts.append(tr("REQUIREMENT_FORMAT") % [display_name, int(val)])
+	return tr("SEPARATOR_DUN").join(parts)

@@ -10,11 +10,23 @@ signal return_to_menu
 @onready var _play_again_button: Button = $VBox/ButtonContainer/PlayAgainButton
 @onready var _menu_button: Button = $VBox/ButtonContainer/MenuButton
 
+var _current_rating: String = "C"
+var _current_ending_name: String = ""
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_refresh_ending_texts()
+
+func _get_display_ending_name() -> String:
+	return _current_ending_name if _current_ending_name != "" else tr("UNKNOWN_ENDING")
+
 func _ready() -> void:
 	if _play_again_button:
-		_play_again_button.pressed.connect(_on_play_again)
+		_play_again_button.text = tr("BTN_PLAY_AGAIN")
+	_play_again_button.pressed.connect(_on_play_again)
 	if _menu_button:
 		_menu_button.pressed.connect(_on_return_menu)
+	_menu_button.text = tr("BTN_MAIN_MENU")
 	_display_ending()
 
 func _get_ending_system() -> Node:
@@ -32,7 +44,7 @@ func _get_save_system() -> Node:
 func _display_ending() -> void:
 	var es: Node = _get_ending_system()
 	var rating: String = "C"
-	var ending_name: String = "未知结局"
+	var ending_name: String = ""
 	var description: String = ""
 	var life_summary: String = ""
 	var reward: Dictionary = {}
@@ -41,8 +53,8 @@ func _display_ending() -> void:
 		if es.has_method("generate_life_summary"):
 			var summary: Dictionary = es.generate_life_summary()
 			rating = summary.get("rating", "C")
-			ending_name = summary.get("ending_name", "未知结局")
-			description = summary.get("description", "")
+			ending_name = tr(summary.get("ending_name", ""))
+			description = tr(summary.get("description", ""))
 			life_summary = summary.get("summary", "")
 			reward = summary.get("reward", {})
 		else:
@@ -54,9 +66,12 @@ func _display_ending() -> void:
 				rating = es.determine_ending(health_percent)
 			if es.has_method("get_ending_config"):
 				var ending_config: Dictionary = es.get_ending_config(rating)
-				ending_name = ending_config.get("ending_name", "结局 " + rating)
-				description = ending_config.get("description", "")
+				ending_name = tr(ending_config.get("ending_name", ""))
+				description = tr(ending_config.get("description", ""))
 				reward = ending_config.get("reward", {})
+
+	_current_rating = rating
+	_current_ending_name = ending_name
 
 	if _rating_label:
 		var rating_colors: Dictionary = {
@@ -66,7 +81,7 @@ func _display_ending() -> void:
 			"C": Color(1.0, 1.0, 0.4),
 			"D": Color(0.8, 0.4, 0.4)
 		}
-		_rating_label.text = "结局评级：%s — %s" % [rating, ending_name]
+		_rating_label.text = tr("ENDING_RATING") % [rating, _get_display_ending_name()]
 		_rating_label.add_theme_color_override("font_color", rating_colors.get(rating, Color.WHITE))
 		_rating_label.add_theme_font_size_override("font_size", 28)
 
@@ -96,13 +111,26 @@ func _display_ending() -> void:
 
 	var player_save: PlayerSaveData = Global.get_player_save()
 	if _wisdom_label:
-		_wisdom_label.text = "人生智慧：%d" % player_save.currencies.get("life_wisdom", 0)
+		_wisdom_label.text = tr("ENDING_WISDOM") % player_save.currencies.get("life_wisdom", 0)
 	if _destiny_label:
-		_destiny_label.text = "命运点数：%d" % player_save.currencies.get("destiny_points", 0)
+		_destiny_label.text = tr("ENDING_DESTINY") % player_save.currencies.get("destiny_points", 0)
 
 	var ss: Node = _get_save_system()
 	if ss and ss.has_method("auto_save"):
 		ss.auto_save()
+
+func _refresh_ending_texts() -> void:
+	if _rating_label:
+		_rating_label.text = tr("ENDING_RATING") % [_current_rating, _get_display_ending_name()]
+	var player_save: PlayerSaveData = Global.get_player_save()
+	if _wisdom_label:
+		_wisdom_label.text = tr("ENDING_WISDOM") % player_save.currencies.get("life_wisdom", 0)
+	if _destiny_label:
+		_destiny_label.text = tr("ENDING_DESTINY") % player_save.currencies.get("destiny_points", 0)
+	if _play_again_button:
+		_play_again_button.text = tr("BTN_PLAY_AGAIN")
+	if _menu_button:
+		_menu_button.text = tr("BTN_MAIN_MENU")
 
 func _on_play_again() -> void:
 	Global.reset_game_session()

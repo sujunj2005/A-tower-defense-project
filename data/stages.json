@@ -19,7 +19,7 @@
 				"tower_artist_basic"
 			],
 			"battle_difficulty": 1,
-			"description": "无忧无虑的童年时光，学习基础知识，培养兴趣。",
+			"description": "STAGE_CHILDHOOD_DESC",
 			"enemy_pool": [
 				{
 					"id": "enemy_homework",
@@ -41,7 +41,7 @@
 			},
 			"event_trigger_rate": 0.8,
 			"gold_multiplier": 1,
-			"stage_name": "童年"
+			"stage_name": "STAGE_CHILDHOOD_NAME"
 		},
 		"middle_age": {
 			"age_range": {
@@ -70,7 +70,7 @@
 				"tower_business_basic"
 			],
 			"battle_difficulty": 2,
-			"description": "事业与家庭的双重压力，健康开始走下坡路。",
+			"description": "STAGE_MIDDLE_AGE_DESC",
 			"enemy_pool": [
 				{
 					"id": "enemy_bill",
@@ -96,7 +96,7 @@
 			},
 			"event_trigger_rate": 0.65,
 			"gold_multiplier": 1.5,
-			"stage_name": "中年"
+			"stage_name": "STAGE_MIDDLE_AGE_NAME"
 		},
 		"old_age": {
 			"age_range": {
@@ -121,7 +121,7 @@
 				"tower_history_master"
 			],
 			"battle_difficulty": 3,
-			"description": "回顾一生，面对最终审判。属性逐年递减。",
+			"description": "STAGE_OLD_AGE_DESC",
 			"enemy_pool": [
 				{
 					"id": "enemy_chronic_disease",
@@ -156,7 +156,7 @@
 			"event_trigger_rate": 0.6,
 			"gold_multiplier": 1,
 			"penalty_rate_per_year": 0.01,
-			"stage_name": "老年"
+			"stage_name": "STAGE_OLD_AGE_NAME"
 		},
 		"youth": {
 			"age_range": {
@@ -193,7 +193,7 @@
 				"tower_history_master"
 			],
 			"battle_difficulty": 1.5,
-			"description": "求学与初入社会的阶段，面临人生重大选择。",
+			"description": "STAGE_YOUTH_DESC",
 			"enemy_pool": [
 				{
 					"id": "enemy_homework",
@@ -227,7 +227,7 @@
 			},
 			"event_trigger_rate": 0.7,
 			"gold_multiplier": 1.2,
-			"stage_name": "青年"
+			"stage_name": "STAGE_YOUTH_NAME"
 		}
 	},
 	"version": "1.2"

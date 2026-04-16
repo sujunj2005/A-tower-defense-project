@@ -1,0 +1,193 @@
+{
+	"version": "1.0",
+	"special_effects": [
+		{
+			"effect_id": "slow",
+			"effect_name": "SE_SLOW_NAME",
+			"description": "SE_SLOW_DESC",
+			"icon": "🐌",
+			"effect_type": "slow",
+			"default_params": {
+				"value": 0.2,
+				"duration": 1.5,
+				"probability": 1
+			}
+		},
+		{
+			"effect_id": "dot",
+			"effect_name": "SE_DOT_NAME",
+			"description": "SE_DOT_DESC",
+			"icon": "🔥",
+			"effect_type": "dot",
+			"default_params": {
+				"value": 3,
+				"duration": 3,
+				"probability": 0.8
+			}
+		},
+		{
+			"effect_id": "cultural_suppression",
+			"effect_name": "SE_CULTURAL_SUPPRESSION_NAME",
+			"description": "SE_CULTURAL_SUPPRESSION_DESC",
+			"icon": "🌍",
+			"effect_type": "cultural_suppression",
+			"default_params": {
+				"probability": 0.15,
+				"bonus_damage": 0.5,
+				"target_tags": [
+					"foreign",
+					"western"
+				]
+			}
+		},
+		{
+			"effect_id": "aoe",
+			"effect_name": "SE_AOE_NAME",
+			"description": "SE_AOE_DESC",
+			"icon": "💥",
+			"effect_type": "aoe",
+			"default_params": {
+				"shape": "circle",
+				"radius": 100,
+				"damage_ratio": 1,
+				"knockback_distance": 20,
+				"knockback_probability": 0.3
+			}
+		},
+		{
+			"effect_id": "crit",
+			"effect_name": "SE_CRIT_NAME",
+			"description": "SE_CRIT_DESC",
+			"icon": "⚡",
+			"effect_type": "crit",
+			"default_params": {
+				"crit_probability": 0.1,
+				"crit_multiplier": 2
+			}
+		},
+		{
+			"effect_id": "slow_aura",
+			"effect_name": "SE_SLOW_AURA_NAME",
+			"description": "SE_SLOW_AURA_DESC",
+			"icon": "🕐",
+			"effect_type": "slow_aura",
+			"default_params": {
+				"shape": "circle",
+				"radius": 200,
+				"slow_value": 0.25
+			}
+		},
+		{
+			"effect_id": "single_control",
+			"effect_name": "SE_SINGLE_CONTROL_NAME",
+			"description": "SE_SINGLE_CONTROL_DESC",
+			"icon": "💫",
+			"effect_type": "single_control",
+			"default_params": {
+				"duration": 3,
+				"probability": 0.2,
+				"control_type": "stun",
+				"cooldown": 8
+			}
+		},
+		{
+			"effect_id": "summon",
+			"effect_name": "SE_SUMMON_NAME",
+			"description": "SE_SUMMON_DESC",
+			"icon": "👻",
+			"effect_type": "summon",
+			"default_params": {
+				"summon_tower_id": "tower_helper_temp",
+				"summon_count": 1,
+				"summon_duration": 30,
+				"summon_cooldown_per_wave": 10,
+				"summon_tower_stats": {
+					"damage": 15,
+					"attack_speed": 1,
+					"range": 120,
+					"lifetime": 30
+				}
+			}
+		},
+		{
+			"effect_id": "gold_bonus",
+			"effect_name": "SE_GOLD_BONUS_NAME",
+			"description": "SE_GOLD_BONUS_DESC",
+			"icon": "💰",
+			"effect_type": "gold_bonus",
+			"default_params": {
+				"gold_per_kill": 0.2
+			}
+		},
+		{
+			"effect_id": "confusion",
+			"effect_name": "SE_CONFUSION_NAME",
+			"description": "SE_CONFUSION_DESC",
+			"icon": "🌀",
+			"effect_type": "confusion",
+			"default_params": {
+				"duration": 2,
+				"probability": 0.15
+			}
+		},
+		{
+			"effect_id": "armor_break",
+			"effect_name": "SE_ARMOR_BREAK_NAME",
+			"description": "SE_ARMOR_BREAK_DESC",
+			"icon": "🛡",
+			"effect_type": "armor_break",
+			"default_params": {
+				"value": 0.3,
+				"duration": 3,
+				"probability": 0.2
+			}
+		},
+		{
+			"effect_id": "debuff",
+			"effect_name": "SE_DEBUFF_NAME",
+			"description": "SE_DEBUFF_DESC",
+			"icon": "📉",
+			"effect_type": "debuff",
+			"default_params": {
+				"value": 0.15,
+				"duration": 3,
+				"probability": 0.25,
+				"debuff_type": "weakness"
+			}
+		},
+		{
+			"effect_id": "buff_aura",
+			"effect_name": "SE_BUFF_AURA_NAME",
+			"description": "SE_BUFF_AURA_DESC",
+			"icon": "📈",
+			"effect_type": "buff_aura",
+			"default_params": {
+				"shape": "circle",
+				"radius": 200,
+				"damage_bonus": 0.15,
+				"attack_speed_bonus": 0.1
+			}
+		},
+		{
+			"effect_id": "burn",
+			"effect_name": "SE_BURN_NAME",
+			"description": "SE_BURN_DESC",
+			"icon": "🔥",
+			"effect_type": "burn",
+			"default_params": {
+				"value": 8
+			}
+		},
+		{
+			"effect_id": "silence",
+			"effect_name": "SE_SILENCE_NAME",
+			"description": "SE_SILENCE_DESC",
+			"icon": "🤐",
+			"effect_type": "silence",
+			"default_params": {
+				"duration": 1,
+				"probability": 0.1
+			}
+		}
+	]
+}

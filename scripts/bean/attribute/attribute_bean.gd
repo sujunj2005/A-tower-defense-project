@@ -14,5 +14,5 @@ static func from_dict(attr_id: String, data: Dictionary) -> AttributeBean:
 
 func get_display_with_icon() -> String:
 	if icon != "":
-		return "%s %s" % [icon, display_name]
-	return display_name
+		return "%s %s" % [icon, tr(display_name)]
+	return tr(display_name)

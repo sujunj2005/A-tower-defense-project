@@ -248,7 +248,7 @@ func update_dot_effect(delta: float) -> void:
 		is_dot_active = false
 		dot_damage_per_second = 0.0
 		dot_elapsed = 0.0
-		Global.debug_log("[敌人 %s] DOT效果结束" % [config.enemy_name if config else "未知"])
+		Global.debug_log("[敌人 %s] DOT效果结束" % [config.get_display_name() if config else "未知"])
 
 func apply_knockback(direction: Vector2, distance: float) -> void:
 	if not config:
@@ -299,7 +299,11 @@ func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null
 		damage_dealers[attacker] += actual_damage
 		last_hit_tower = attacker
 
-		Global.debug_log("[伤害记录] %s 对 %s 造成 %.1f 伤害，累计 %.1f" % [attacker.config.tower_name, config.enemy_name, actual_damage, damage_dealers[attacker]])
+		var dt: Node = get_tree().get_first_node_in_group("damage_tracker")
+		if dt and dt.has_method("record_damage"):
+			dt.record_damage(attacker, actual_damage)
+
+		Global.debug_log("[伤害记录] %s 对 %s 造成 %.1f 伤害，累计 %.1f" % [attacker.config.get_display_name(), config.get_display_name(), actual_damage, damage_dealers[attacker]])
 
 		if attacker.config and attacker.config.experience_on_hit > 0:
 			attacker.add_experience(attacker.config.experience_on_hit)
@@ -405,7 +409,7 @@ func distribute_experience(game_hud: Node) -> void:
 		var tower: Tower = entry.tower as Tower
 		if is_instance_valid(tower) and tower.config:
 			var damage_ratio: float = entry.damage / total_damage
-			Global.debug_log("[经验分配]   - %s: 累计伤害 %.1f (占总伤害 %.1f%%)" % [tower.config.tower_name, entry.damage, damage_ratio * 100.0])
+			Global.debug_log("[经验分配]   - %s: 累计伤害 %.1f (占总伤害 %.1f%%)" % [tower.config.get_display_name(), entry.damage, damage_ratio * 100.0])
 
 	var last_hitter: Node2D = last_hit_tower
 	var killing_bonus: float = 0.2
@@ -443,8 +447,8 @@ func distribute_experience(game_hud: Node) -> void:
 			if tower:
 				var final_exp: int = int(max(1, exp_reward))
 				tower.add_experience(final_exp)
-				var bonus_text: String = "，经验获取提升%.0f%%" % (exp_bonus * 100.0) if exp_bonus > 0.0 else ""
-				Global.debug_log("[经验分配] %s 获得经验 %d (伤害占比 %.1f%%%s)" % [tower.config.tower_name if tower.config else "未知塔", final_exp, damage_ratio * 100.0, bonus_text])
+				var bonus_text: String = tr("EXP_BONUS_FORMAT") % (exp_bonus * 100.0) if exp_bonus > 0.0 else ""
+				Global.debug_log("[经验分配] %s 获得经验 %d (伤害占比 %.1f%%%s)" % [tower.config.get_display_name() if tower.config else "未知塔", final_exp, damage_ratio * 100.0, bonus_text])
 
 func get_current_health() -> float:
 	return current_health
@@ -509,7 +513,7 @@ func _find_forward_path_index(from_pos: Vector2) -> int:
 	return mini(best_seg, path_points.size() - 1)
 
 func _on_split_requested(split_enemy_id: String, count: int, pos: Vector2) -> void:
-	Global.debug_log("[分裂] %s 死亡分裂为 %d 个 %s" % [config.enemy_name, count, split_enemy_id])
+	Global.debug_log("[分裂] %s 死亡分裂为 %d 个 %s" % [config.get_display_name(), count, split_enemy_id])
 	var spawn_radius: float = 45.0
 	for i: int in range(count):
 		var split_config: EnemyConfig = EnemyConfig.get_config(split_enemy_id)
@@ -579,6 +583,6 @@ func _on_tower_destroy_requested(target_count: int) -> void:
 			break
 		var idx: int = randi() % valid_towers.size()
 		var target_tower: Tower = valid_towers[idx] as Tower
-		Global.debug_log("[BOSS] %s 消灭了塔：%s" % [config.enemy_name, target_tower.name])
+		Global.debug_log("[BOSS] %s 消灭了塔：%s" % [config.get_display_name(), target_tower.name])
 		target_tower.destroy()
 		valid_towers.remove_at(idx)

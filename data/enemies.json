@@ -3,9 +3,9 @@
 	"enemies": [
 		{
 			"enemy_id": "enemy_homework",
-			"enemy_name": "作业怪",
-			"enemy_type": "学业压力",
-			"tier": "基础",
+			"enemy_name": "ENEMY_HOMEWORK_NAME",
+			"enemy_type": "academic",
+			"tier": "basic",
 			"stats": {
 				"health": 30,
 				"speed": 50,
@@ -18,8 +18,8 @@
 			"kill_reward_gold": 5,
 			"special_abilities": [],
 			"spawn_stages": [
-				"童年",
-				"青年"
+				"childhood",
+				"youth"
 			],
 			"spawn_waves": [
 				1,
@@ -31,9 +31,9 @@
 		},
 		{
 			"enemy_id": "enemy_exam",
-			"enemy_name": "考试怪",
-			"enemy_type": "学业压力",
-			"tier": "精英",
+			"enemy_name": "ENEMY_EXAM_NAME",
+			"enemy_type": "academic",
+			"tier": "elite",
 			"stats": {
 				"health": 60,
 				"speed": 35,
@@ -45,8 +45,8 @@
 			},
 			"kill_reward_gold": 12,
 			"spawn_stages": [
-				"童年",
-				"青年"
+				"childhood",
+				"youth"
 			],
 			"spawn_waves": [
 				3,
@@ -66,9 +66,9 @@
 		},
 		{
 			"enemy_id": "enemy_bill",
-			"enemy_name": "账单怪",
-			"enemy_type": "经济压力",
-			"tier": "基础",
+			"enemy_name": "ENEMY_BILL_NAME",
+			"enemy_type": "economic",
+			"tier": "basic",
 			"stats": {
 				"health": 40,
 				"speed": 70,
@@ -81,8 +81,8 @@
 			"kill_reward_gold": 8,
 			"special_abilities": [],
 			"spawn_stages": [
-				"青年",
-				"中年"
+				"youth",
+				"middle_age"
 			],
 			"spawn_waves": [
 				1,
@@ -96,9 +96,9 @@
 		},
 		{
 			"enemy_id": "enemy_996",
-			"enemy_name": "996怪",
-			"enemy_type": "社会压力",
-			"tier": "精英",
+			"enemy_name": "ENEMY_996_NAME",
+			"enemy_type": "social",
+			"tier": "elite",
 			"stats": {
 				"health": 70,
 				"speed": 45,
@@ -110,8 +110,8 @@
 			},
 			"kill_reward_gold": 15,
 			"spawn_stages": [
-				"青年",
-				"中年"
+				"youth",
+				"middle_age"
 			],
 			"spawn_waves": [
 				4,
@@ -133,9 +133,9 @@
 		},
 		{
 			"enemy_id": "enemy_chronic_disease",
-			"enemy_name": "慢性病",
-			"enemy_type": "健康威胁",
-			"tier": "基础",
+			"enemy_name": "ENEMY_CHRONIC_DISEASE_NAME",
+			"enemy_type": "health",
+			"tier": "basic",
 			"stats": {
 				"health": 50,
 				"speed": 30,
@@ -148,7 +148,7 @@
 			"kill_reward_gold": 10,
 			"special_abilities": [],
 			"spawn_stages": [
-				"老年"
+				"old_age"
 			],
 			"spawn_waves": [
 				1,
@@ -162,9 +162,9 @@
 		},
 		{
 			"enemy_id": "enemy_loneliness",
-			"enemy_name": "孤独怪",
-			"enemy_type": "心理压力",
-			"tier": "基础",
+			"enemy_name": "ENEMY_LONELINESS_NAME",
+			"enemy_type": "mental",
+			"tier": "basic",
 			"stats": {
 				"health": 35,
 				"speed": 60,
@@ -177,7 +177,7 @@
 			"kill_reward_gold": 8,
 			"special_abilities": [],
 			"spawn_stages": [
-				"老年"
+				"old_age"
 			],
 			"spawn_waves": [
 				1,
@@ -190,9 +190,9 @@
 		},
 		{
 			"enemy_id": "enemy_recession",
-			"enemy_name": "经济衰退",
-			"enemy_type": "经济压力",
-			"tier": "精英",
+			"enemy_name": "ENEMY_RECESSION_NAME",
+			"enemy_type": "economic",
+			"tier": "elite",
 			"stats": {
 				"health": 90,
 				"speed": 35,
@@ -204,7 +204,7 @@
 			},
 			"kill_reward_gold": 25,
 			"spawn_stages": [
-				"老年"
+				"old_age"
 			],
 			"spawn_waves": [
 				5,
@@ -226,9 +226,9 @@
 		},
 		{
 			"enemy_id": "enemy_memory_loss",
-			"enemy_name": "记忆衰退",
-			"enemy_type": "健康威胁",
-			"tier": "精英",
+			"enemy_name": "ENEMY_MEMORY_LOSS_NAME",
+			"enemy_type": "health",
+			"tier": "elite",
 			"stats": {
 				"health": 80,
 				"speed": 25,
@@ -240,7 +240,7 @@
 			},
 			"kill_reward_gold": 20,
 			"spawn_stages": [
-				"老年"
+				"old_age"
 			],
 			"spawn_waves": [
 				6,
@@ -261,9 +261,9 @@
 		},
 		{
 			"enemy_id": "enemy_pressure_school",
-			"enemy_name": "升学压力",
-			"enemy_type": "学业压力",
-			"tier": "精英",
+			"enemy_name": "ENEMY_PRESSURE_SCHOOL_NAME",
+			"enemy_type": "academic",
+			"tier": "elite",
 			"stats": {
 				"health": 120,
 				"speed": 30,
@@ -275,8 +275,8 @@
 			},
 			"kill_reward_gold": 25,
 			"spawn_stages": [
-				"童年",
-				"青年"
+				"childhood",
+				"youth"
 			],
 			"spawn_waves": [
 				6,
@@ -297,9 +297,9 @@
 		},
 		{
 			"enemy_id": "enemy_involution",
-			"enemy_name": "内卷怪",
-			"enemy_type": "社会压力",
-			"tier": "精英",
+			"enemy_name": "ENEMY_INVOLUTION_NAME",
+			"enemy_type": "social",
+			"tier": "elite",
 			"stats": {
 				"health": 100,
 				"speed": 40,
@@ -311,8 +311,8 @@
 			},
 			"kill_reward_gold": 30,
 			"spawn_stages": [
-				"青年",
-				"中年"
+				"youth",
+				"middle_age"
 			],
 			"spawn_waves": [
 				5,
@@ -335,7 +335,7 @@
 		},
 		{
 			"enemy_id": "boss_midlife_crisis",
-			"enemy_name": "中年危机",
+			"enemy_name": "ENEMY_BOSS_MIDLIFE_CRISIS_NAME",
 			"enemy_type": "BOSS",
 			"tier": "BOSS",
 			"stats": {
@@ -349,7 +349,7 @@
 			},
 			"kill_reward_gold": 100,
 			"spawn_stages": [
-				"中年"
+				"middle_age"
 			],
 			"spawn_waves": [
 				10
@@ -381,9 +381,9 @@
 		},
 		{
 			"enemy_id": "boss_final_judgment",
-			"enemy_name": "最终审判",
+			"enemy_name": "ENEMY_BOSS_FINAL_JUDGMENT_NAME",
 			"enemy_type": "BOSS",
-			"tier": "终极BOSS",
+			"tier": "ultimate_boss",
 			"stats": {
 				"health": 800,
 				"speed": 20,
@@ -395,7 +395,7 @@
 			},
 			"kill_reward_gold": 200,
 			"spawn_stages": [
-				"老年"
+				"old_age"
 			],
 			"spawn_waves": [
 				10

@@ -48,7 +48,7 @@ func setup_ui():
 	
 	# 标题
 	tower_name_label = Label.new()
-	tower_name_label.text = "防御塔名称"
+	tower_name_label.text = ""
 	tower_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	tower_name_label.add_theme_font_size_override("font_size", 18)
 	tower_name_label.add_theme_color_override("font_color", Color(1, 1, 1))
@@ -64,7 +64,7 @@ func setup_ui():
 	vbox.add_child(price_hbox)
 	
 	var price_label = Label.new()
-	price_label.text = "出售价格："
+	price_label.text = tr("SELL_PRICE_LABEL")
 	price_label.add_theme_font_size_override("font_size", 16)
 	price_label.add_theme_color_override("font_color", Color(1, 1, 1))
 	price_hbox.add_child(price_label)
@@ -77,7 +77,7 @@ func setup_ui():
 	
 	# 返还比例说明
 	ratio_label = Label.new()
-	ratio_label.text = "(返还 50% 造价)"
+	ratio_label.text = tr("SELL_RATIO") % 50
 	ratio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ratio_label.add_theme_font_size_override("font_size", 12)
 	ratio_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
@@ -91,7 +91,7 @@ func setup_ui():
 	
 	# 出售按钮
 	confirm_button = Button.new()
-	confirm_button.text = "出售"
+	confirm_button.text = tr("BTN_SELL")
 	confirm_button.custom_minimum_size = Vector2(80, 35)
 	var confirm_style = StyleBoxFlat.new()
 	confirm_style.bg_color = Color(0.2, 0.6, 0.2, 0.9)
@@ -107,7 +107,7 @@ func setup_ui():
 	
 	# 取消按钮
 	cancel_button = Button.new()
-	cancel_button.text = "取消"
+	cancel_button.text = tr("BTN_CANCEL")
 	cancel_button.custom_minimum_size = Vector2(80, 35)
 	var cancel_style = StyleBoxFlat.new()
 	cancel_style.bg_color = Color(0.6, 0.2, 0.2, 0.9)
@@ -127,13 +127,13 @@ func show_for_tower(tower: Tower):
 		hide()
 		return
 	
-	tower_name_label.text = tower.config.tower_name
+	tower_name_label.text = tower.config.get_display_name()
 	
 	var sell_price: int = _calculate_sell_price(tower)
-	sell_price_label.text = "%d 金币" % sell_price
+	sell_price_label.text = tr("SELL_GOLD") % sell_price
 	
 	var ratio_pct: int = int(tower.config.sell_ratio * 100.0)
-	ratio_label.text = "(返还 %d%% 造价，含等级加成)" % ratio_pct
+	ratio_label.text = tr("SELL_RATIO") % ratio_pct
 	
 	visible = true
 	global_position = tower.global_position + Vector2(0, -50)

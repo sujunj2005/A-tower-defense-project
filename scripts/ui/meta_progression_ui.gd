@@ -10,6 +10,10 @@ var _tab_bar: HBoxContainer
 var _back_button: Button
 var _scroll_container: ScrollContainer
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_refresh_meta_texts()
+
 func _ready() -> void:
 	_build_ui()
 	_update_currency_display()
@@ -43,7 +47,7 @@ func _build_ui() -> void:
 	_tab_bar.alignment = BoxContainer.ALIGNMENT_CENTER
 	main_vbox.add_child(_tab_bar)
 
-	var tab_names: Array[String] = ["解锁商店", "成就", "已解锁"]
+	var tab_names: Array[String] = [tr("TAB_SHOP"), tr("TAB_ACHIEVEMENTS"), tr("TAB_UNLOCKED")]
 	for i: int in range(tab_names.size()):
 		var btn: Button = Button.new()
 		btn.text = tab_names[i]
@@ -63,7 +67,7 @@ func _build_ui() -> void:
 	_scroll_container.add_child(_content_container)
 
 	_back_button = Button.new()
-	_back_button.text = "返回主菜单"
+	_back_button.text = tr("BTN_BACK_MENU")
 	_back_button.custom_minimum_size = Vector2(200, 45)
 	_back_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_back_button.pressed.connect(_on_back)
@@ -94,9 +98,9 @@ func _refresh_content() -> void:
 func _update_currency_display() -> void:
 	var save: PlayerSaveData = Global.get_player_save()
 	if _wisdom_label:
-		_wisdom_label.text = "人生智慧：%d" % save.currencies.get("life_wisdom", 0)
+		_wisdom_label.text = tr("META_WISDOM") % save.currencies.get("life_wisdom", 0)
 	if _destiny_label:
-		_destiny_label.text = "命运点数：%d" % save.currencies.get("destiny_points", 0)
+		_destiny_label.text = tr("META_DESTINY") % save.currencies.get("destiny_points", 0)
 
 func _show_unlock_shop() -> void:
 	var unlock_sys: Node = get_node_or_null("/root/UnlockSystem")
@@ -107,7 +111,7 @@ func _show_unlock_shop() -> void:
 	var available: Array[Dictionary] = unlock_sys.get_available_unlocks()
 
 	if not available.is_empty():
-		var header: Label = _create_section_header("可购买内容")
+		var header: Label = _create_section_header(tr("SHOP_AVAILABLE"))
 		_content_container.add_child(header)
 		for unlock_info: Dictionary in available:
 			_add_unlock_item(unlock_info)
@@ -120,7 +124,7 @@ func _show_unlock_shop() -> void:
 			locked_items.append(config)
 
 	if not locked_items.is_empty():
-		var header2: Label = _create_section_header("未满足条件")
+		var header2: Label = _create_section_header(tr("SHOP_LOCKED"))
 		_content_container.add_child(header2)
 		for locked_info: Dictionary in locked_items:
 			_add_locked_item(locked_info)
@@ -145,13 +149,13 @@ func _add_unlock_item(unlock_info: Dictionary) -> void:
 	hbox.add_child(info_vbox)
 
 	var name_label: Label = Label.new()
-	name_label.text = unlock_info.get("name", "未知")
+	name_label.text = unlock_info.get("name", tr("NO_DATA"))
 	name_label.add_theme_font_size_override("font_size", 16)
 	info_vbox.add_child(name_label)
 
 	var type_label: Label = Label.new()
-	var type_map: Dictionary = {"era": "时代", "profession": "职业", "difficulty": "难度", "buff": "增益"}
-	type_label.text = "类型：%s" % type_map.get(unlock_info.get("type", ""), unlock_info.get("type", ""))
+	var type_map: Dictionary = {"era": tr("TYPE_ERA"), "profession": tr("TYPE_PROFESSION"), "difficulty": tr("TYPE_DIFFICULTY"), "buff": tr("TYPE_BUFF")}
+	type_label.text = tr("TYPE_LABEL") % type_map.get(unlock_info.get("type", ""), unlock_info.get("type", ""))
 	type_label.add_theme_font_size_override("font_size", 12)
 	type_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 	info_vbox.add_child(type_label)
@@ -159,7 +163,7 @@ func _add_unlock_item(unlock_info: Dictionary) -> void:
 	var cost: Dictionary = unlock_info.get("cost", {})
 	var cost_text: String = ""
 	for currency_id: String in cost:
-		var currency_name: Dictionary = {"life_wisdom": "人生智慧", "destiny_points": "命运点数"}
+		var currency_name: Dictionary = {"life_wisdom": tr("CURRENCY_WISDOM"), "destiny_points": tr("CURRENCY_DESTINY")}
 		cost_text += "%s：%d  " % [currency_name.get(currency_id, currency_id), cost[currency_id]]
 	var cost_label: Label = Label.new()
 	cost_label.text = cost_text.strip_edges()
@@ -167,7 +171,7 @@ func _add_unlock_item(unlock_info: Dictionary) -> void:
 	info_vbox.add_child(cost_label)
 
 	var buy_btn: Button = Button.new()
-	buy_btn.text = "购买"
+	buy_btn.text = tr("BTN_BUY")
 	buy_btn.custom_minimum_size = Vector2(80, 35)
 	var unlock_id: String = unlock_info.get("unlock_id", "")
 	buy_btn.pressed.connect(_on_buy_unlock.bind(unlock_id))
@@ -191,7 +195,7 @@ func _add_locked_item(locked_info: Dictionary) -> void:
 	hbox.add_child(info_vbox)
 
 	var name_label: Label = Label.new()
-	name_label.text = locked_info.get("name", "未知")
+	name_label.text = locked_info.get("name", tr("NO_DATA"))
 	name_label.add_theme_font_size_override("font_size", 16)
 	name_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
 	info_vbox.add_child(name_label)
@@ -199,7 +203,7 @@ func _add_locked_item(locked_info: Dictionary) -> void:
 	var prereq: String = locked_info.get("prerequisite", "")
 	if prereq != "":
 		var prereq_label: Label = Label.new()
-		prereq_label.text = "需要成就：%s" % prereq
+		prereq_label.text = tr("PREREQ_ACHIEVEMENT") % prereq
 		prereq_label.add_theme_font_size_override("font_size", 12)
 		prereq_label.add_theme_color_override("font_color", Color(0.8, 0.4, 0.4))
 		info_vbox.add_child(prereq_label)
@@ -207,7 +211,7 @@ func _add_locked_item(locked_info: Dictionary) -> void:
 	var cost: Dictionary = locked_info.get("cost", {})
 	var cost_text: String = ""
 	for currency_id: String in cost:
-		var currency_name: Dictionary = {"life_wisdom": "人生智慧", "destiny_points": "命运点数"}
+		var currency_name: Dictionary = {"life_wisdom": tr("CURRENCY_WISDOM"), "destiny_points": tr("CURRENCY_DESTINY")}
 		cost_text += "%s：%d  " % [currency_name.get(currency_id, currency_id), cost[currency_id]]
 	var cost_label: Label = Label.new()
 	cost_label.text = cost_text.strip_edges()
@@ -215,7 +219,7 @@ func _add_locked_item(locked_info: Dictionary) -> void:
 	info_vbox.add_child(cost_label)
 
 	var lock_label: Label = Label.new()
-	lock_label.text = "未满足"
+	lock_label.text = tr("LOCKED")
 	lock_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
 	hbox.add_child(lock_label)
 
@@ -228,7 +232,7 @@ func _show_achievements() -> void:
 	var unlocked: Array[String] = ach_sys.get_unlocked_achievements()
 
 	if not unlocked.is_empty():
-		var header1: Label = _create_section_header("已解锁成就 (%d)" % unlocked.size())
+		var header1: Label = _create_section_header(tr("UNLOCKED_ACHIEVEMENTS") % unlocked.size())
 		_content_container.add_child(header1)
 		for ach_id: String in unlocked:
 			var config: Dictionary = all_achs.get(ach_id, {})
@@ -242,7 +246,7 @@ func _show_achievements() -> void:
 			locked_achs.append({"id": ach_id, "config": all_achs[ach_id]})
 
 	if locked_count > 0:
-		var header2: Label = _create_section_header("未解锁成就 (%d)" % locked_count)
+		var header2: Label = _create_section_header(tr("LOCKED_ACHIEVEMENTS") % locked_count)
 		_content_container.add_child(header2)
 		for entry: Dictionary in locked_achs:
 			_add_achievement_item(entry.id, entry.config, false)
@@ -266,13 +270,13 @@ func _add_achievement_item(ach_id: String, config: Dictionary, is_unlocked: bool
 	panel.add_child(vbox)
 
 	var name_label: Label = Label.new()
-	name_label.text = config.get("achievement_name", ach_id)
+	name_label.text = tr(config.get("achievement_name", ach_id))
 	name_label.add_theme_font_size_override("font_size", 16)
 	if not is_unlocked:
 		name_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
 	vbox.add_child(name_label)
 
-	var desc: String = config.get("description", "")
+	var desc: String = tr(config.get("description", ""))
 	if desc != "":
 		var desc_label: Label = Label.new()
 		desc_label.text = desc
@@ -282,9 +286,9 @@ func _add_achievement_item(ach_id: String, config: Dictionary, is_unlocked: bool
 
 	var reward: Dictionary = config.get("reward", {})
 	if not reward.is_empty():
-		var reward_text: String = "奖励："
+		var reward_text: String = tr("REWARD_LABEL")
 		for currency_id: String in reward:
-			var currency_name: Dictionary = {"life_wisdom": "人生智慧", "destiny_points": "命运点数"}
+			var currency_name: Dictionary = {"life_wisdom": tr("CURRENCY_WISDOM"), "destiny_points": tr("CURRENCY_DESTINY")}
 			reward_text += "%s+%d  " % [currency_name.get(currency_id, currency_id), reward[currency_id]]
 		var reward_label: Label = Label.new()
 		reward_label.text = reward_text.strip_edges()
@@ -297,7 +301,7 @@ func _show_unlocked_content() -> void:
 	var unlock_sys: Node = get_node_or_null("/root/UnlockSystem")
 
 	if not save.unlocked_eras.is_empty():
-		var header1: Label = _create_section_header("已解锁时代")
+		var header1: Label = _create_section_header(tr("UNLOCKED_ERAS"))
 		_content_container.add_child(header1)
 		for era_id: String in save.unlocked_eras:
 			var name_str: String = era_id
@@ -307,7 +311,7 @@ func _show_unlocked_content() -> void:
 			_add_content_label("  %s" % name_str, Color(0.4, 0.7, 1.0))
 
 	if not save.unlocked_professions.is_empty():
-		var header2: Label = _create_section_header("已解锁职业")
+		var header2: Label = _create_section_header(tr("UNLOCKED_PROFESSIONS"))
 		_content_container.add_child(header2)
 		for prof_id: String in save.unlocked_professions:
 			var name_str: String = prof_id
@@ -317,7 +321,7 @@ func _show_unlocked_content() -> void:
 			_add_content_label("  %s" % name_str, Color(0.4, 1.0, 0.4))
 
 	if not save.unlocked_buffs.is_empty():
-		var header3: Label = _create_section_header("已解锁增益")
+		var header3: Label = _create_section_header(tr("UNLOCKED_BUFFS"))
 		_content_container.add_child(header3)
 		for buff_id: String in save.unlocked_buffs:
 			var name_str: String = buff_id
@@ -327,7 +331,7 @@ func _show_unlocked_content() -> void:
 			_add_content_label("  %s" % name_str, Color(1.0, 0.84, 0.0))
 
 	if not save.achievements.is_empty():
-		var header4: Label = _create_section_header("已获得成就 (%d)" % save.achievements.size())
+		var header4: Label = _create_section_header(tr("ACHIEVEMENTS_COUNT") % save.achievements.size())
 		_content_container.add_child(header4)
 		for ach_id: String in save.achievements:
 			_add_content_label("  %s" % ach_id, Color(0.8, 0.7, 0.3))
@@ -344,6 +348,16 @@ func _create_section_header(text: String) -> Label:
 	label.add_theme_font_size_override("font_size", 18)
 	label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0))
 	return label
+
+func _refresh_meta_texts() -> void:
+	_update_currency_display()
+	if _tab_buttons.size() >= 3:
+		_tab_buttons[0].text = tr("TAB_SHOP")
+		_tab_buttons[1].text = tr("TAB_ACHIEVEMENTS")
+		_tab_buttons[2].text = tr("TAB_UNLOCKED")
+	if _back_button:
+		_back_button.text = tr("BTN_BACK_MENU")
+	_refresh_content()
 
 func _on_buy_unlock(unlock_id: String) -> void:
 	var unlock_sys: Node = get_node_or_null("/root/UnlockSystem")

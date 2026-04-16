@@ -36,6 +36,12 @@ extends Resource
 @export var windup_animation: String = ""
 @export var attack_animation: String = ""
 
+var effect_id: String = ""
+var effect_name: String = ""
+var effect_desc: String = ""
+var effect_icon: String = ""
+var sub_effects: Array = []
+
 static func from_dict(data: Dictionary) -> TowerBean:
 	var bean := TowerBean.new()
 	bean.tower_id = data.get("tower_id", "")
@@ -67,27 +73,7 @@ static func from_dict(data: Dictionary) -> TowerBean:
 	bean.max_level = int(upgrade.get("max_level", 10))
 	bean.damage_growth = float(upgrade.get("damage_increase", 0.1))
 	bean.attack_speed_growth = float(upgrade.get("attack_speed_increase", 0.05))
-	var special: Dictionary = data.get("special_effect", {})
-	var effect_type_str: String = special.get("type", "")
-	match effect_type_str:
-		"slow":
-			bean.effect_type = GameConfig.EffectType.SLOW
-			bean.effect_value = float(special.get("value", 0.2))
-		"dot", "burn":
-			bean.effect_type = GameConfig.EffectType.DOT
-			bean.effect_value = float(special.get("value", 5.0))
-		"splash", "aoe":
-			bean.effect_type = GameConfig.EffectType.SPLASH
-			bean.effect_radius = float(special.get("radius", 50.0))
-		"crit":
-			bean.effect_type = GameConfig.EffectType.NONE
-			bean.effect_value = float(special.get("multiplier", 2.0))
-		"pierce":
-			bean.pierce_enabled = true
-			bean.pierce_count = int(special.get("count", 2))
-			bean.pierce_damage_decay = float(special.get("decay", 0.7))
-		_:
-			bean.effect_type = GameConfig.EffectType.NONE
+	_parse_special_effect(bean, data.get("special_effect", {}))
 	if data.has("texture_path") and str(data.texture_path) != "":
 		bean.texture_path = str(data.texture_path)
 	else:
@@ -96,6 +82,44 @@ static func from_dict(data: Dictionary) -> TowerBean:
 		var t_col: int = tower_idx % 4
 		bean.texture_path = "res://images/towers/Black - Plastic 1 128x128-%d-%d.png" % [t_row, t_col]
 	return bean
+
+static func _parse_special_effect(bean: TowerBean, special: Dictionary) -> void:
+	var eid: String = special.get("effect_id", "")
+	if eid == "":
+		return
+	bean.effect_id = eid
+	var sec: SpecialEffectConfig = SpecialEffectConfig.new()
+	bean.effect_name = sec.get_effect_name(eid)
+	bean.effect_desc = sec.get_effect_desc(eid)
+	bean.effect_icon = sec.get_effect_icon(eid)
+	var effect_type_str: String = sec.get_effect_type(eid)
+	var defaults: Dictionary = sec.get_default_params(eid)
+	var overrides: Dictionary = special.get("overrides", {})
+	var params: Dictionary = defaults.duplicate()
+	for k: String in overrides:
+		params[k] = overrides[k]
+	match effect_type_str:
+		"slow":
+			bean.effect_type = GameConfig.EffectType.SLOW
+			bean.effect_value = float(params.get("value", 0.2))
+		"dot", "burn":
+			bean.effect_type = GameConfig.EffectType.DOT
+			bean.effect_value = float(params.get("value", 5.0))
+		"splash", "aoe":
+			bean.effect_type = GameConfig.EffectType.SPLASH
+			bean.effect_radius = float(params.get("radius", 50.0))
+		"crit":
+			bean.effect_type = GameConfig.EffectType.NONE
+			bean.effect_value = float(params.get("crit_multiplier", 2.0))
+		"pierce":
+			bean.pierce_enabled = true
+			bean.pierce_count = int(params.get("count", 2))
+			bean.pierce_damage_decay = float(params.get("decay", 0.7))
+		_:
+			bean.effect_type = GameConfig.EffectType.NONE
+	var sub_arr: Array = special.get("sub_effects", [])
+	for sub: Dictionary in sub_arr:
+		bean.sub_effects.append(sub)
 
 func to_dict() -> Dictionary:
 	return {
@@ -117,3 +141,12 @@ func to_dict() -> Dictionary:
 		"range_growth": range_growth,
 		"texture_path": texture_path
 	}
+
+func get_display_name() -> String:
+	return tr(tower_name)
+
+func get_display_effect_name() -> String:
+	return tr(effect_name)
+
+func get_display_effect_desc() -> String:
+	return tr(effect_desc)

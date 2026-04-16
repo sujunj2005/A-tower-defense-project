@@ -7,7 +7,7 @@
 				"社会主义"
 			],
 			"difficulty_modifier": 1,
-			"era_name": "中国现代",
+			"era_name": "ERA_CHINA_MODERN_NAME",
 			"region": "中国",
 			"stage_ids": [
 				"childhood",
@@ -15,7 +15,7 @@
 				"middle_age",
 				"old_age"
 			],
-			"time_period": "1949-至今"
+			"time_period": "ERA_CHINA_MODERN_TIME_PERIOD"
 		}
 	},
 	"version": "1.1"

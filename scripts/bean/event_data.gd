@@ -73,3 +73,9 @@ static func _load_options_fallback(event_id: String) -> Array[OptionData]:
 		if opt_raw.get("event_id", "") == event_id:
 			result.append(OptionData.from_dict(opt_raw))
 	return result
+
+func get_display_name() -> String:
+	return tr(event_name)
+
+func get_display_desc() -> String:
+	return tr(description)

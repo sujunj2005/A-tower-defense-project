@@ -13,69 +13,69 @@ func _load_unlock_configs() -> void:
 	unlock_configs = {
 		"era_ancient_greece": {
 			"type": "era",
-			"name": "古希腊",
+			"name": tr("UNLOCK_ERA_ANCIENT_GREECE"),
 			"cost": {"destiny_points": 50},
 			"prerequisite": ""
 		},
 		"era_ming_qing": {
 			"type": "era",
-			"name": "中国明清",
+			"name": tr("UNLOCK_ERA_MING_QING"),
 			"cost": {"destiny_points": 50},
 			"prerequisite": ""
 		},
 		"profession_doctor": {
 			"type": "profession",
-			"name": "医生",
+			"name": tr("UNLOCK_PROFESSION_DOCTOR"),
 			"cost": {"destiny_points": 30},
 			"prerequisite": ""
 		},
 		"profession_lawyer": {
 			"type": "profession",
-			"name": "律师",
+			"name": tr("UNLOCK_PROFESSION_LAWYER"),
 			"cost": {"destiny_points": 30},
 			"prerequisite": ""
 		},
 		"profession_programmer": {
 			"type": "profession",
-			"name": "程序员",
+			"name": tr("UNLOCK_PROFESSION_PROGRAMMER"),
 			"cost": {"destiny_points": 30},
 			"prerequisite": ""
 		},
 		"difficulty_easy": {
 			"type": "difficulty",
-			"name": "简单模式",
+			"name": tr("UNLOCK_DIFFICULTY_EASY"),
 			"cost": {"life_wisdom": 200},
 			"prerequisite": ""
 		},
 		"difficulty_hard": {
 			"type": "difficulty",
-			"name": "困难模式",
+			"name": tr("UNLOCK_DIFFICULTY_HARD"),
 			"cost": {"destiny_points": 20},
 			"prerequisite": "ach_perfect_life"
 		},
 		"difficulty_hell": {
 			"type": "difficulty",
-			"name": "地狱模式",
+			"name": tr("UNLOCK_DIFFICULTY_HELL"),
 			"cost": {"destiny_points": 50},
 			"prerequisite": "ach_battle_master"
 		},
 		"buff_tower_attack": {
 			"type": "buff",
-			"name": "塔攻击力+10%",
+			"name": tr("UNLOCK_BUFF_TOWER_ATTACK"),
 			"cost": {"life_wisdom": 100},
 			"prerequisite": "",
 			"effect": {"tower_damage_bonus": 0.10}
 		},
 		"buff_home_health": {
 			"type": "buff",
-			"name": "老家生命+20%",
+			"name": tr("BUFF_HOME_HEALTH"),
 			"cost": {"life_wisdom": 100},
 			"prerequisite": "",
 			"effect": {"home_health_bonus": 0.20}
 		},
 		"buff_gold_bonus": {
 			"type": "buff",
-			"name": "金币收入+10%",
+			"name": tr("UNLOCK_BUFF_GOLD_BONUS"),
 			"cost": {"life_wisdom": 150},
 			"prerequisite": "",
 			"effect": {"gold_income_bonus": 0.10}
@@ -125,7 +125,7 @@ func unlock(unlock_id: String) -> bool:
 		"buff", "difficulty":
 			player_save.unlocked_buffs[unlock_id] = config.get("effect", {})
 	content_unlocked.emit(unlock_id, unlock_type)
-	Global.debug_log("解锁内容：%s (%s)" % [config.get("name", unlock_id), unlock_type])
+	Global.debug_log("Unlocked: %s (%s)" % [config.get("name", unlock_id), unlock_type])
 	return true
 
 func get_unlock_config(unlock_id: String) -> Dictionary:

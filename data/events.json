@@ -3,7 +3,7 @@
 	"events": [
 		{
 			"event_id": "event_kindergarten_show",
-			"event_name": "幼儿园表演",
+			"event_name": "EVENT_KINDERGARTEN_SHOW_NAME",
 			"ages": [
 				6,
 				7
@@ -11,12 +11,12 @@
 			"stage": "childhood",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "幼儿园要举办六一表演，老师问你想参加什么节目。",
+			"description": "EVENT_KINDERGARTEN_SHOW_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_math_contest",
-			"event_name": "数学竞赛",
+			"event_name": "EVENT_MATH_CONTEST_NAME",
 			"ages": [
 				8,
 				9,
@@ -25,12 +25,12 @@
 			"stage": "childhood",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "学校举办数学竞赛，班主任鼓励你参加。",
+			"description": "EVENT_MATH_CONTEST_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_hobby_class",
-			"event_name": "兴趣班选择",
+			"event_name": "EVENT_HOBBY_CLASS_NAME",
 			"ages": [
 				9,
 				10,
@@ -39,12 +39,12 @@
 			"stage": "childhood",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "父母想给你报个兴趣班，但家里预算有限。",
+			"description": "EVENT_HOBBY_CLASS_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_peer_conflict",
-			"event_name": "同伴冲突",
+			"event_name": "EVENT_PEER_CONFLICT_NAME",
 			"ages": [
 				10,
 				11,
@@ -53,12 +53,12 @@
 			"stage": "childhood",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "班上的调皮鬼抢了你的文具，还嘲笑你。",
+			"description": "EVENT_PEER_CONFLICT_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_family_crisis",
-			"event_name": "家庭变故",
+			"event_name": "EVENT_FAMILY_CRISIS_NAME",
 			"ages": [
 				11,
 				12,
@@ -67,24 +67,24 @@
 			"stage": "childhood",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "爸爸失业了，家里气氛很压抑。",
+			"description": "EVENT_FAMILY_CRISIS_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_zhongkao",
-			"event_name": "中考分流",
+			"event_name": "EVENT_ZHONGKAO_NAME",
 			"ages": [
 				15
 			],
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "中考成绩出来了，你面临人生第一次重大分流。",
+			"description": "EVENT_ZHONGKAO_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_gaokao_choice",
-			"event_name": "高考志愿",
+			"event_name": "EVENT_GAOKAO_CHOICE_NAME",
 			"ages": [
 				18
 			],
@@ -95,12 +95,12 @@
 			"chain_excludes": [
 				"event_first_job"
 			],
-			"description": "十二年寒窗苦读，只为今朝一搏。高考成绩出来了，你要填报哪个志愿？",
+			"description": "EVENT_GAOKAO_CHOICE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_college_love",
-			"event_name": "大学恋爱",
+			"event_name": "EVENT_COLLEGE_LOVE_NAME",
 			"ages": [
 				19,
 				20,
@@ -113,12 +113,12 @@
 			"chain_excludes": [
 				"event_first_job"
 			],
-			"description": "大学里遇到了心动的人，你要不要表白？",
+			"description": "EVENT_COLLEGE_LOVE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_master_or_work",
-			"event_name": "人生岔路口",
+			"event_name": "EVENT_MASTER_OR_WORK_NAME",
 			"ages": [
 				22
 			],
@@ -129,12 +129,12 @@
 			"chain_excludes": [
 				"event_first_job"
 			],
-			"description": "大学毕业在即，你面临人生重大选择：考研还是工作？",
+			"description": "EVENT_MASTER_OR_WORK_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_first_job",
-			"event_name": "第一份工作",
+			"event_name": "EVENT_FIRST_JOB_NAME",
 			"ages": [
 				23
 			],
@@ -143,24 +143,24 @@
 			"chain_excludes": [
 				"event_college_love"
 			],
-			"description": "你收到了几个Offer，要选哪个？",
+			"description": "EVENT_FIRST_JOB_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_rent_house",
-			"event_name": "租房困境",
+			"event_name": "EVENT_RENT_HOUSE_NAME",
 			"ages": [
 				24
 			],
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "工作后要租房，你要选什么样的房子？",
+			"description": "EVENT_RENT_HOUSE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_workplace_newbie",
-			"event_name": "职场新人",
+			"event_name": "EVENT_WORKPLACE_NEWBIE_NAME",
 			"ages": [
 				25,
 				26
@@ -168,12 +168,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "刚入职场的你，遇到了老员工甩锅。",
+			"description": "EVENT_WORKPLACE_NEWBIE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_marriage_pressure",
-			"event_name": "催婚",
+			"event_name": "EVENT_MARRIAGE_PRESSURE_NAME",
 			"ages": [
 				27,
 				28,
@@ -182,12 +182,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "过年回家，亲戚都在催婚。",
+			"description": "EVENT_MARRIAGE_PRESSURE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_career_breakthrough",
-			"event_name": "职场突破",
+			"event_name": "EVENT_CAREER_BREAKTHROUGH_NAME",
 			"ages": [
 				30,
 				31,
@@ -196,12 +196,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "工作几年后，你终于等来了一个独当一面的机会，但压力也更大了。",
+			"description": "EVENT_CAREER_BREAKTHROUGH_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_friend_wedding",
-			"event_name": "朋友婚礼",
+			"event_name": "EVENT_FRIEND_WEDDING_NAME",
 			"ages": [
 				30,
 				31,
@@ -211,12 +211,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "大学好友结婚了，你在婚礼上感慨万千。",
+			"description": "EVENT_FRIEND_WEDDING_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_side_hustle",
-			"event_name": "副业机会",
+			"event_name": "EVENT_SIDE_HUSTLE_NAME",
 			"ages": [
 				32,
 				33,
@@ -225,12 +225,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "朋友拉你一起做副业，说能赚大钱。",
+			"description": "EVENT_SIDE_HUSTLE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_career_switch",
-			"event_name": "职业转型",
+			"event_name": "EVENT_CAREER_SWITCH_NAME",
 			"ages": [
 				29,
 				30,
@@ -239,12 +239,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你开始觉得当前的工作不适合自己，想要尝试新的方向。",
+			"description": "EVENT_CAREER_SWITCH_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_home_purchase",
-			"event_name": "买房安家",
+			"event_name": "EVENT_HOME_PURCHASE_NAME",
 			"ages": [
 				30,
 				31,
@@ -254,12 +254,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你攒了一些钱，开始考虑买一套属于自己的房子。",
+			"description": "EVENT_HOME_PURCHASE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_pet_companion",
-			"event_name": "毛茸茸的陪伴",
+			"event_name": "EVENT_PET_COMPANION_NAME",
 			"ages": [
 				32,
 				33,
@@ -268,12 +268,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你路过宠物店，一只小猫/小狗一直看着你。",
+			"description": "EVENT_PET_COMPANION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_house_loan",
-			"event_name": "买房",
+			"event_name": "EVENT_HOUSE_LOAN_NAME",
 			"ages": [
 				35,
 				36,
@@ -282,12 +282,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你考虑买一套属于自己的房子。",
+			"description": "EVENT_HOUSE_LOAN_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_children_education",
-			"event_name": "子女教育",
+			"event_name": "EVENT_CHILDREN_EDUCATION_NAME",
 			"ages": [
 				35,
 				36,
@@ -297,12 +297,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "孩子要上学了，你要怎么培养？",
+			"description": "EVENT_CHILDREN_EDUCATION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_parents_care",
-			"event_name": "父母养老",
+			"event_name": "EVENT_PARENTS_CARE_NAME",
 			"ages": [
 				38,
 				39,
@@ -312,12 +312,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "父母年纪大了，需要人照顾。",
+			"description": "EVENT_PARENTS_CARE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_career_promotion",
-			"event_name": "晋升机会",
+			"event_name": "EVENT_CAREER_PROMOTION_NAME",
 			"ages": [
 				41,
 				42,
@@ -326,12 +326,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "公司有个晋升机会，但需要付出大量时间。",
+			"description": "EVENT_CAREER_PROMOTION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_health_warning",
-			"event_name": "健康预警",
+			"event_name": "EVENT_HEALTH_WARNING_NAME",
 			"ages": [
 				43,
 				44,
@@ -341,12 +341,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "体检报告出来了，多项指标异常。",
+			"description": "EVENT_HEALTH_WARNING_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_serious_disease",
-			"event_name": "癌症早期",
+			"event_name": "EVENT_SERIOUS_DISEASE_NAME",
 			"ages": [
 				45,
 				46,
@@ -357,13 +357,13 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "体检发现癌症早期，需要立即治疗。",
+			"description": "EVENT_SERIOUS_DISEASE_DESC",
 			"is_deadly": true,
 			"trigger_chance": 0.25
 		},
 		{
 			"event_id": "event_accident",
-			"event_name": "车祸",
+			"event_name": "EVENT_ACCIDENT_NAME",
 			"ages": [
 				35,
 				40,
@@ -372,13 +372,13 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "下班路上遭遇车祸。",
+			"description": "EVENT_ACCIDENT_DESC",
 			"is_deadly": false,
 			"trigger_chance": 0.25
 		},
 		{
 			"event_id": "event_work_burnout",
-			"event_name": "职场倦怠",
+			"event_name": "EVENT_WORK_BURNOUT_NAME",
 			"ages": [
 				39,
 				40,
@@ -387,12 +387,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "日复一日的工作让你感到疲惫不堪，你开始怀疑这一切是否值得。",
+			"description": "EVENT_WORK_BURNOUT_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_investment",
-			"event_name": "投资理财",
+			"event_name": "EVENT_INVESTMENT_NAME",
 			"ages": [
 				40,
 				41,
@@ -402,12 +402,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "朋友推荐了一个投资项目，听起来回报不错。",
+			"description": "EVENT_INVESTMENT_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_neighbor_dispute",
-			"event_name": "邻里纠纷",
+			"event_name": "EVENT_NEIGHBOR_DISPUTE_NAME",
 			"ages": [
 				42,
 				43,
@@ -416,12 +416,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "楼上邻居半夜噪音不断，多次沟通无果。",
+			"description": "EVENT_NEIGHBOR_DISPUTE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_children_growing",
-			"event_name": "孩子长大了",
+			"event_name": "EVENT_CHILDREN_GROWING_NAME",
 			"ages": [
 				44,
 				45,
@@ -430,12 +430,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "孩子渐渐长大，开始有了自己的想法，你们之间的代沟越来越深。",
+			"description": "EVENT_CHILDREN_GROWING_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_midlife_skill",
-			"event_name": "中年学技能",
+			"event_name": "EVENT_MIDLIFE_SKILL_NAME",
 			"ages": [
 				46,
 				47,
@@ -444,12 +444,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你突然想学一项新技能，给生活增添些乐趣。",
+			"description": "EVENT_MIDLIFE_SKILL_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_retirement_plan",
-			"event_name": "退休规划",
+			"event_name": "EVENT_RETIREMENT_PLAN_NAME",
 			"ages": [
 				50,
 				51,
@@ -458,12 +458,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "到了退休的年纪，你开始思考如何度过余生。",
+			"description": "EVENT_RETIREMENT_PLAN_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_chronic_illness",
-			"event_name": "慢性病困扰",
+			"event_name": "EVENT_CHRONIC_ILLNESS_NAME",
 			"ages": [
 				53,
 				55,
@@ -473,12 +473,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "年纪大了，身体开始出现各种慢性病，需要长期调养。",
+			"description": "EVENT_CHRONIC_ILLNESS_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_family_reunion",
-			"event_name": "家庭团聚",
+			"event_name": "EVENT_FAMILY_REUNION_NAME",
 			"ages": [
 				54,
 				56,
@@ -487,12 +487,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "节假日到了，你感慨万千。",
+			"description": "EVENT_FAMILY_REUNION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_old_friend",
-			"event_name": "老友重逢",
+			"event_name": "EVENT_OLD_FRIEND_NAME",
 			"ages": [
 				52,
 				55,
@@ -502,12 +502,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "在公园遇到了多年未见的老朋友，你们聊起了往事。",
+			"description": "EVENT_OLD_FRIEND_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_legacy",
-			"event_name": "传承智慧",
+			"event_name": "EVENT_LEGACY_NAME",
 			"ages": [
 				60,
 				62,
@@ -516,12 +516,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你决定把自己一生的经验传授给年轻人。",
+			"description": "EVENT_LEGACY_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_health_crisis",
-			"event_name": "健康危机",
+			"event_name": "EVENT_HEALTH_CRISIS_NAME",
 			"ages": [
 				63,
 				66,
@@ -530,12 +530,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "一次严重的身体警报让你意识到时间不多了。",
+			"description": "EVENT_HEALTH_CRISIS_DESC",
 			"is_deadly": true
 		},
 		{
 			"event_id": "event_life_reflection",
-			"event_name": "人生感悟",
+			"event_name": "EVENT_LIFE_REFLECTION_NAME",
 			"ages": [
 				65,
 				68,
@@ -546,12 +546,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "坐在窗前，你回望这一生，百感交集。",
+			"description": "EVENT_LIFE_REFLECTION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_puberty_rebellion",
-			"event_name": "青春叛逆",
+			"event_name": "EVENT_PUBERTY_REBELLION_NAME",
 			"ages": [
 				16,
 				17
@@ -559,12 +559,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你开始对大人的规矩感到厌烦，想要按自己的方式生活。",
+			"description": "EVENT_PUBERTY_REBELLION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_first_love",
-			"event_name": "初恋",
+			"event_name": "TRAIT_FIRST_LOVE_NAME",
 			"ages": [
 				16,
 				17
@@ -572,12 +572,12 @@
 			"stage": "youth",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你对班上的一个同学产生了朦胧的好感。",
+			"description": "EVENT_FIRST_LOVE_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_midlife_confusion",
-			"event_name": "中年迷茫",
+			"event_name": "EVENT_MIDLIFE_CONFUSION_NAME",
 			"ages": [
 				37,
 				38
@@ -585,12 +585,12 @@
 			"stage": "middle_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "你突然对日复一日的生活感到迷茫，不知道这一切有什么意义。",
+			"description": "EVENT_MIDLIFE_CONFUSION_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_retirement_hobby",
-			"event_name": "退休爱好",
+			"event_name": "EVENT_RETIREMENT_HOBBY_NAME",
 			"ages": [
 				67,
 				68,
@@ -599,12 +599,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "退休后时间多了，你想培养一个新爱好。",
+			"description": "EVENT_RETIREMENT_HOBBY_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_old_friend_passing",
-			"event_name": "故人离去",
+			"event_name": "EVENT_OLD_FRIEND_PASSING_NAME",
 			"ages": [
 				71,
 				72,
@@ -613,12 +613,12 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "一位多年的老友去世了，你参加了葬礼，感慨万千。",
+			"description": "EVENT_OLD_FRIEND_PASSING_DESC",
 			"is_deadly": false
 		},
 		{
 			"event_id": "event_twilight_wisdom",
-			"event_name": "暮年感悟",
+			"event_name": "EVENT_TWILIGHT_WISDOM_NAME",
 			"ages": [
 				73,
 				74,
@@ -627,7 +627,7 @@
 			"stage": "old_age",
 			"chain_prerequisites": [],
 			"chain_excludes": [],
-			"description": "坐在夕阳下，你忽然想通了很多事情。",
+			"description": "EVENT_TWILIGHT_WISDOM_DESC",
 			"is_deadly": false
 		}
 	]

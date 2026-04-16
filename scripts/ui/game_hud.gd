@@ -20,6 +20,21 @@ func _ready():
 	setup_ui()
 	add_to_group("game_hud")
 
+var _hp_icon: Label
+var _gold_icon: Label
+var _wave_icon: Label
+var _attr_button: Button
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_refresh_hud_texts()
+
+func _refresh_hud_texts() -> void:
+	if _hp_icon: _hp_icon.text = tr("HUD_BASE_HP")
+	if _gold_icon: _gold_icon.text = tr("HUD_GOLD")
+	if _wave_icon: _wave_icon.text = tr("HUD_WAVE")
+	if _attr_button: _attr_button.text = tr("HUD_ATTRIBUTES")
+
 func setup_ui():
 	var margin = MarginContainer.new()
 	margin.anchor_left = 0.0
@@ -44,10 +59,10 @@ func setup_ui():
 	hp_container.add_theme_constant_override("separation", 10)
 	vbox.add_child(hp_container)
 
-	var hp_icon = Label.new()
-	hp_icon.text = "❤ 基地血量:"
-	hp_icon.add_theme_font_size_override("font_size", 16)
-	hp_container.add_child(hp_icon)
+	_hp_icon = Label.new()
+	_hp_icon.text = tr("HUD_BASE_HP")
+	_hp_icon.add_theme_font_size_override("font_size", 16)
+	hp_container.add_child(_hp_icon)
 
 	hp_bar = ProgressBar.new()
 	hp_bar.custom_minimum_size = Vector2(150, 20)
@@ -70,10 +85,10 @@ func setup_ui():
 	gold_container.add_theme_constant_override("separation", 10)
 	vbox.add_child(gold_container)
 
-	var gold_icon = Label.new()
-	gold_icon.text = "💰 金币:"
-	gold_icon.add_theme_font_size_override("font_size", 16)
-	gold_container.add_child(gold_icon)
+	_gold_icon = Label.new()
+	_gold_icon.text = tr("HUD_GOLD")
+	_gold_icon.add_theme_font_size_override("font_size", 16)
+	gold_container.add_child(_gold_icon)
 
 	gold_label = Label.new()
 	gold_label.text = str(gold)
@@ -84,22 +99,22 @@ func setup_ui():
 	var wave_container: HBoxContainer = HBoxContainer.new()
 	wave_container.add_theme_constant_override("separation", 10)
 	vbox.add_child(wave_container)
-	var wave_icon: Label = Label.new()
-	wave_icon.text = "⚔ 波次:"
-	wave_icon.add_theme_font_size_override("font_size", 16)
-	wave_container.add_child(wave_icon)
+	_wave_icon = Label.new()
+	_wave_icon.text = tr("HUD_WAVE")
+	_wave_icon.add_theme_font_size_override("font_size", 16)
+	wave_container.add_child(_wave_icon)
 	wave_label = Label.new()
-	wave_label.text = "准备中"
+	wave_label.text = tr("HUD_PREPARING")
 	wave_label.add_theme_font_size_override("font_size", 18)
 	wave_label.add_theme_color_override("font_color", Color(0.7, 0.85, 1.0))
 	wave_container.add_child(wave_label)
 
-	var attr_button: Button = Button.new()
-	attr_button.text = "📋 属性"
-	attr_button.add_theme_font_size_override("font_size", 14)
-	attr_button.custom_minimum_size = Vector2(80, 30)
-	attr_button.pressed.connect(_show_attributes_popup)
-	vbox.add_child(attr_button)
+	_attr_button = Button.new()
+	_attr_button.text = tr("HUD_ATTRIBUTES")
+	_attr_button.add_theme_font_size_override("font_size", 14)
+	_attr_button.custom_minimum_size = Vector2(80, 30)
+	_attr_button.pressed.connect(_show_attributes_popup)
+	vbox.add_child(_attr_button)
 
 func _show_attributes_popup() -> void:
 	var overlay: ColorRect = ColorRect.new()
@@ -126,7 +141,7 @@ func _show_attributes_popup() -> void:
 	popup.add_child(outer_vbox)
 
 	var title: Label = Label.new()
-	title.text = "角色属性"
+	title.text = tr("ATTR_TITLE")
 	title.add_theme_font_size_override("font_size", 22)
 	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -138,8 +153,8 @@ func _show_attributes_popup() -> void:
 	if cm and cm.has_method("load_json"):
 		var stages_data: Dictionary = cm.load_json("res://data/stages.json")
 		if stages_data.has("stages") and stages_data.stages.has(session.current_stage):
-			stage_display = stages_data.stages[session.current_stage].get("stage_name", session.current_stage)
-	var age_info: String = "🎂 年龄：%d  |  📌 阶段：%s" % [session.current_age, stage_display]
+			stage_display = tr(stages_data.stages[session.current_stage].get("stage_name", session.current_stage))
+	var age_info: String = tr("ATTR_AGE") % [session.current_age, stage_display]
 	var age_label: Label = Label.new()
 	age_label.text = age_info
 	age_label.add_theme_font_size_override("font_size", 16)
@@ -158,7 +173,7 @@ func _show_attributes_popup() -> void:
 			display = ac.get_display_with_icon(attr_name)
 		if attr_text != "":
 			attr_text += "  "
-		attr_text += "%s：%d" % [display, attrs[attr_name]]
+		attr_text += tr("ATTR_FORMAT") % [display, attrs[attr_name]]
 	var attr_label: Label = Label.new()
 	attr_label.text = attr_text
 	attr_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -168,7 +183,7 @@ func _show_attributes_popup() -> void:
 	outer_vbox.add_child(sep0)
 
 	var traits_title: Label = Label.new()
-	traits_title.text = "词条"
+	traits_title.text = tr("TRAITS_TITLE")
 	traits_title.add_theme_font_size_override("font_size", 16)
 	traits_title.add_theme_color_override("font_color", Color(0.8, 0.85, 1.0, 1.0))
 	outer_vbox.add_child(traits_title)
@@ -188,7 +203,7 @@ func _show_attributes_popup() -> void:
 
 	if session.traits.is_empty():
 		var no_trait: Label = Label.new()
-		no_trait.text = "无"
+		no_trait.text = tr("TRAITS_NONE")
 		no_trait.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
 		traits_flow.add_child(no_trait)
 
@@ -196,7 +211,7 @@ func _show_attributes_popup() -> void:
 	outer_vbox.add_child(sep1)
 
 	var effects_title: Label = Label.new()
-	effects_title.text = "生效效果总和"
+	effects_title.text = tr("EFFECTS_TITLE")
 	effects_title.add_theme_font_size_override("font_size", 16)
 	effects_title.add_theme_color_override("font_color", Color(0.8, 0.85, 1.0, 1.0))
 	outer_vbox.add_child(effects_title)
@@ -228,31 +243,31 @@ func _show_attributes_popup() -> void:
 		var universal_dmg: float = dmg_details.get("universal", 0.0)
 		var specific_dmg: Dictionary = dmg_details.get("specific", {})
 		if universal_dmg > 0.0:
-			effect_items.append({"text": "伤害加成（通用）：+%.0f%%" % (universal_dmg * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
+			effect_items.append({"text": tr("DAMAGE_BONUS_UNIVERSAL") % (universal_dmg * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
 		for tower_id: String in specific_dmg:
 			var bonus: float = specific_dmg[tower_id]
 			if bonus > 0.0:
 				var tower_name: String = _get_tower_display_name(tower_id)
-				effect_items.append({"text": "伤害加成（%s）：+%.0f%%" % [tower_name, bonus * 100.0], "color": Color(0.3, 0.9, 0.3, 1.0)})
+				effect_items.append({"text": tr("DAMAGE_BONUS_SPECIFIC") % [tower_name, bonus * 100.0], "color": Color(0.3, 0.9, 0.3, 1.0)})
 	if ts and ts.has_method("get_all_attack_speed_bonus_details"):
 		var as_details: Dictionary = ts.get_all_attack_speed_bonus_details()
 		var universal_as: float = as_details.get("universal", 0.0)
 		var specific_as: Dictionary = as_details.get("specific", {})
 		if universal_as > 0.0:
-			effect_items.append({"text": "攻速加成（通用）：+%.0f%%" % (universal_as * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
+			effect_items.append({"text": tr("ATTACK_SPEED_UNIVERSAL") % (universal_as * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
 		for tower_id: String in specific_as:
 			var bonus: float = specific_as[tower_id]
 			if bonus > 0.0:
 				var tower_name: String = _get_tower_display_name(tower_id)
-				effect_items.append({"text": "攻速加成（%s）：+%.0f%%" % [tower_name, bonus * 100.0], "color": Color(0.3, 0.9, 0.3, 1.0)})
+				effect_items.append({"text": tr("ATTACK_SPEED_SPECIFIC") % [tower_name, bonus * 100.0], "color": Color(0.3, 0.9, 0.3, 1.0)})
 	if ts and ts.has_method("get_damage_reduction"):
 		var dr: float = ts.get_damage_reduction()
 		if dr > 0.0:
-			effect_items.append({"text": "伤害减免：%.0f%%" % (dr * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
+			effect_items.append({"text": tr("DAMAGE_REDUCTION") % (dr * 100.0), "color": Color(0.4, 1.0, 0.4, 1.0)})
 	if ts and ts.has_method("get_gold_per_wave"):
 		var gpw: float = ts.get_gold_per_wave()
 		if gpw > 0.0:
-			effect_items.append({"text": "每波额外金币：+%.0f" % gpw, "color": Color(0.4, 1.0, 0.4, 1.0)})
+			effect_items.append({"text": tr("GOLD_PER_WAVE") % gpw, "color": Color(0.4, 1.0, 0.4, 1.0)})
 
 	var half: int = ceili(float(effect_items.size()) / 2.0)
 	for i: int in range(effect_items.size()):
@@ -266,7 +281,7 @@ func _show_attributes_popup() -> void:
 			right_col.add_child(lbl)
 
 	var hint: Label = Label.new()
-	hint.text = "点击任意地方关闭"
+	hint.text = tr("HINT_CLICK_CLOSE")
 	hint.add_theme_font_size_override("font_size", 14)
 	hint.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -296,8 +311,8 @@ func _on_trait_unhovered() -> void:
 
 func _get_tower_display_name(tower_id: String) -> String:
 	var cfg: TowerBean = TowerConfig.get_config(tower_id)
-	if cfg and cfg.tower_name != "":
-		return cfg.tower_name
+	if cfg and cfg.get_display_name() != "":
+		return cfg.get_display_name()
 	return tower_id
 
 func update_hp(value: int):

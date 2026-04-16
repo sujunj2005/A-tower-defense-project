@@ -57,14 +57,14 @@ func apply_ending_reward(ending_rating: String) -> void:
 func get_ending_description(ending_rating: String) -> String:
 	var ending: Dictionary = get_ending_config(ending_rating)
 	if ending.has("description"):
-		return ending.description
-	return "未知结局"
+		return tr(ending.description)
+	return tr("UNKNOWN_ENDING")
 
 func get_ending_name(ending_rating: String) -> String:
 	var ending: Dictionary = get_ending_config(ending_rating)
 	if ending.has("ending_name"):
-		return ending.ending_name
-	return "结局 " + ending_rating
+		return tr(ending.ending_name)
+	return tr("UNKNOWN_ENDING") + " " + ending_rating
 
 func determine_ending_by_life() -> String:
 	var health: int = session.attributes.get("health", 0)
@@ -98,53 +98,49 @@ func generate_life_summary() -> Dictionary:
 	var ending_type: String = determine_ending_by_life()
 	var ending_data: Dictionary = _get_ending_data(ending_type)
 	var summary_parts: Array[String] = []
-	var stage_names: Dictionary = {
-		"childhood": "童年", "youth": "青年",
-		"middle_age": "中年", "old_age": "老年"
-	}
-	summary_parts.append("你出生在一个%s家庭。" % _get_family_desc())
+	summary_parts.append(tr("SUMMARY_FAMILY_ORIGIN") % _get_family_desc())
 	if "event_zhongkao" in session.completed_events:
 		if "event_gaokao_choice" in session.completed_events:
-			summary_parts.append("你通过高考进入大学，开启了知识改变命运的道路。")
+			summary_parts.append(tr("SUMMARY_UNIVERSITY_PATH"))
 		else:
-			summary_parts.append("你选择了职高路线，早早步入社会。")
+			summary_parts.append(tr("SUMMARY_VOCATIONAL_PATH"))
 	else:
-		summary_parts.append("你的求学之路与众不同。")
+		summary_parts.append(tr("SUMMARY_DIFFERENT_PATH"))
 	if "event_college_love" in session.completed_events:
-		summary_parts.append("大学里你遇到了真爱。")
+		summary_parts.append(tr("SUMMARY_FOUND_LOVE"))
 	if "married" in session.traits:
-		summary_parts.append("你组建了家庭，有了温暖的港湾。")
+		summary_parts.append(tr("SUMMARY_MARRIED"))
 	if "event_first_job" in session.completed_events:
-		summary_parts.append("你凭借努力获得了第一份工作。")
+		summary_parts.append(tr("SUMMARY_FIRST_JOB"))
 	if session.traits.size() >= 5:
-		summary_parts.append("你的人生经历丰富多彩，积累了深厚的智慧。")
+		summary_parts.append(tr("SUMMARY_RICH_LIFE"))
 	elif session.traits.size() >= 3:
-		summary_parts.append("你的人生有起有落，但始终在前行。")
+		summary_parts.append(tr("SUMMARY_UPS_AND_DOWNS"))
 	else:
-		summary_parts.append("你的人生平淡但安稳。")
+		summary_parts.append(tr("SUMMARY_QUIET_LIFE"))
 	var final_age: int = session.current_age
-	summary_parts.append("你走过了%d个春秋，最终%s。" % [final_age, ending_data.get("ending_phrase", "画上了句号")])
+	summary_parts.append(tr("SUMMARY_FINAL_AGE") % [final_age, tr(ending_data.get("ending_phrase", "ENDING_HUMBLE_LIFE_PHRASE"))])
 	return {
 		"ending_type": ending_type,
-		"ending_name": ending_data.get("ending_name", "未知结局"),
+		"ending_name": tr(ending_data.get("ending_name", "未知结局")),
 		"summary": "".join(summary_parts),
 		"rating": ending_data.get("rating", "C"),
 		"reward": ending_data.get("reward", {}),
-		"description": ending_data.get("description", "")
+		"description": tr(ending_data.get("description", ""))
 	}
 
 func _get_family_desc() -> String:
 	match session.family_background:
 		"worker", "family_worker":
-			return "工人"
+			return tr("BG_WORKER")
 		"farmer", "family_farmer":
-			return "农民"
+			return tr("BG_FARMER")
 		"intellectual", "family_intellectual":
-			return "知识分子"
+			return tr("BG_CADRE")
 		"business", "family_business":
-			return "商人"
+			return tr("BG_MERCHANT")
 		_:
-			return "普通"
+			return tr("FAMILY_DEFAULT")
 
 func _get_ending_data(ending_type: String) -> Dictionary:
 	var cm: Node = _get_config_manager()

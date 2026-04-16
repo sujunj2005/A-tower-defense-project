@@ -49,21 +49,21 @@ func _setup_ui() -> void:
 	scroll.add_child(_rewards_container)
 
 	var hint: Label = Label.new()
-	hint.text = "点击任意地方关闭"
+	hint.text = tr("HINT_CLICK_CLOSE")
 	hint.add_theme_font_size_override("font_size", 14)
 	hint.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	outer.add_child(hint)
 
 	_continue_button = Button.new()
-	_continue_button.text = "继续人生"
+	_continue_button.text = tr("BTN_CONTINUE_LIFE")
 	_continue_button.custom_minimum_size = Vector2(200, 50)
 	_continue_button.add_theme_font_size_override("font_size", 20)
 	_continue_button.pressed.connect(_on_continue)
 	outer.add_child(_continue_button)
 
 	_ending_button = Button.new()
-	_ending_button.text = "查看结局"
+	_ending_button.text = tr("BTN_VIEW_ENDING")
 	_ending_button.custom_minimum_size = Vector2(200, 50)
 	_ending_button.add_theme_font_size_override("font_size", 20)
 	_ending_button.pressed.connect(_on_ending)
@@ -99,7 +99,7 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 	_rewards = rewards
 
 	var br: Node = get_node_or_null("/root/BattleRating")
-	var rating_desc: String = "未知评价"
+	var rating_desc: String = tr("RATING_UNKNOWN")
 	if br and br.has_method("get_rating_description"):
 		rating_desc = br.get_rating_description(rating)
 
@@ -111,7 +111,7 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 			"C": Color(1.0, 1.0, 0.4),
 			"D": Color(0.8, 0.4, 0.4)
 		}
-		_rating_label.text = "战斗评价：%s" % rating
+		_rating_label.text = tr("BATTLE_RATING") % rating
 		_rating_label.add_theme_color_override("font_color", rating_colors.get(rating, Color.WHITE))
 
 	if _rewards_container:
@@ -128,13 +128,13 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 		_rewards_container.add_child(sep1)
 
 		if rewards.has("gold") and rewards.gold > 0:
-			_add_reward_row("💰", "金币 +%d" % rewards.gold, Color(1.0, 0.85, 0.0, 1.0))
+			_add_reward_row("💰", tr("GOLD_PLUS") % rewards.gold, Color(1.0, 0.85, 0.0, 1.0))
 
 		var es: Node = get_node_or_null("/root/EconomySystem")
 		if es and es.has_method("calculate_interest"):
 			var interest: int = es.calculate_interest()
 			if interest > 0:
-				_add_reward_row("🏦", "利息收入：%d" % interest, Color(0.4, 1.0, 0.4, 1.0))
+				_add_reward_row("🏦", tr("INTEREST_INCOME") % interest, Color(0.4, 1.0, 0.4, 1.0))
 
 		var session: GameSessionData = Global.get_game_session()
 		var battle_tower_id: String = rewards.get("tower_id", "")
@@ -143,7 +143,7 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 			var sep_traits: HSeparator = HSeparator.new()
 			_rewards_container.add_child(sep_traits)
 			var towers_title: Label = Label.new()
-			towers_title.text = "——新获得防御塔——"
+			towers_title.text = tr("NEW_TOWERS")
 			towers_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			towers_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 			_rewards_container.add_child(towers_title)
@@ -165,7 +165,7 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 			var sep3: HSeparator = HSeparator.new()
 			_rewards_container.add_child(sep3)
 			var growth_title: Label = Label.new()
-			growth_title.text = "—— 阶段属性增长 ——"
+			growth_title.text = tr("STAGE_GROWTH")
 			growth_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			growth_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 			_rewards_container.add_child(growth_title)
@@ -185,7 +185,7 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 				var sep4: HSeparator = HSeparator.new()
 				_rewards_container.add_child(sep4)
 				var decline_title: Label = Label.new()
-				decline_title.text = "—— 老年衰退 ——"
+				decline_title.text = tr("OLD_AGE_DECLINE")
 				decline_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				decline_title.add_theme_color_override("font_color", Color(0.8, 0.3, 0.3, 1.0))
 				_rewards_container.add_child(decline_title)
@@ -232,10 +232,10 @@ func _get_tower_display_name(tower_id: String) -> String:
 	if towers is Array:
 		for tower in towers:
 			if tower.get("tower_id", "") == tower_id:
-				return tower.get("tower_name", tower.get("name", tower_id))
+				return tr(tower.get("tower_name", tower.get("name", tower_id)))
 		return tower_id
 	if towers is Dictionary and towers.has(tower_id):
-		return towers[tower_id].get("name", towers[tower_id].get("tower_name", tower_id))
+		return tr(towers[tower_id].get("name", towers[tower_id].get("tower_name", tower_id)))
 	return tower_id
 
 func _get_tower_stats_display(tower_id: String) -> String:
@@ -260,7 +260,7 @@ func _get_tower_stats_display(tower_id: String) -> String:
 	var damage: int = stats.get("damage", tower_config.get("damage", 0))
 	var attack_speed: float = stats.get("attack_speed", tower_config.get("attack_speed", 1.0))
 	var range_val: float = stats.get("range", tower_config.get("range", 100.0))
-	return "伤害：%d  攻速：%.1f  射程：%.0f" % [damage, attack_speed, range_val]
+	return tr("TOWER_INFO_DAMAGE") % damage + "  " + tr("TOWER_INFO_SPEED") % attack_speed + "  " + tr("TOWER_INFO_RANGE") % range_val
 
 func _get_stage_attribute_growth() -> Dictionary:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
@@ -303,10 +303,10 @@ func _format_effect(effect: Dictionary) -> String:
 	match effect_type:
 		"tower_damage_bonus":
 			var val: float = float(effect.get("tower_damage_bonus", effect.get("value", 0)))
-			return "塔伤害+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_DAMAGE") % (val * 100.0)
 		"tower_attack_speed_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "塔攻速+%.0f%%" % (val * 100.0)
+			return tr("EFFECT_TOWER_SPEED") % (val * 100.0)
 		"attribute_bonus":
 			var ac: Node = get_node_or_null("/root/AttributeConfig")
 			var attr_name: String = effect.get("attribute", "")
@@ -317,19 +317,19 @@ func _format_effect(effect: Dictionary) -> String:
 			return "%s%+d" % [display, val]
 		"gold_bonus":
 			var val: int = int(effect.get("value", 0))
-			return "金币%+d" % val
+			return tr("EFFECT_GOLD_BONUS") % val
 		"health_bonus":
 			var val: int = int(effect.get("value", 0))
-			return "生命%+d" % val
+			return tr("EFFECT_HEALTH_BONUS") % val
 		"gold_per_wave":
 			var val: int = int(effect.get("value", 0))
-			return "每波金币+%d" % val
+			return tr("EFFECT_GOLD_PER_WAVE") % val
 		"damage_reduction":
 			var val: float = float(effect.get("value", 0))
-			return "伤害减免%.0f%%" % (val * 100.0)
+			return tr("EFFECT_DAMAGE_REDUCTION") % (val * 100.0)
 		"event_trigger_bonus":
 			var val: float = float(effect.get("value", 0))
-			return "事件触发率%+.0f%%" % (val * 100.0)
+			return tr("EFFECT_EVENT_TRIGGER") % (val * 100.0)
 		_:
 			var val = effect.get("value", effect.get("tower_damage_bonus", ""))
 			return "%s: %s" % [effect_type, str(val)]

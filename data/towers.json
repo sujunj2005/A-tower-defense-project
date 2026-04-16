@@ -3,9 +3,9 @@
 	"towers": [
 		{
 			"tower_id": "tower_chinese_basic",
-			"tower_name": "语文之塔",
-			"tower_type": "学科塔",
-			"tier": "基础",
+			"tower_name": "TOWER_CHINESE_BASIC_NAME",
+			"tower_type": "academic",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 15,
@@ -15,10 +15,12 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "slow",
-				"value": 0.2,
-				"duration": 1.5,
-				"probability": 1
+				"effect_id": "slow",
+				"overrides": {
+					"value": 0.2,
+					"duration": 1.5,
+					"probability": 1
+				}
 			},
 			"cost": {
 				"build_cost": 50,
@@ -35,9 +37,9 @@
 		},
 		{
 			"tower_id": "tower_chinese_advanced",
-			"tower_name": "语文之塔·进阶",
-			"tower_type": "学科塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_CHINESE_ADVANCED_NAME",
+			"tower_type": "academic",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 22,
@@ -47,15 +49,21 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "slow",
-				"value": 0.3,
-				"duration": 2,
-				"probability": 1,
-				"extra": {
-					"type": "silence",
-					"probability": 0.1,
-					"duration": 1
-				}
+				"effect_id": "slow",
+				"overrides": {
+					"value": 0.3,
+					"duration": 2,
+					"probability": 1
+				},
+				"sub_effects": [
+					{
+						"effect_id": "silence",
+						"overrides": {
+							"probability": 0.1,
+							"duration": 1
+						}
+					}
+				]
 			},
 			"cost": {
 				"build_cost": 80,
@@ -72,9 +80,9 @@
 		},
 		{
 			"tower_id": "tower_math_basic",
-			"tower_name": "数学之塔",
-			"tower_type": "学科塔",
-			"tier": "基础",
+			"tower_name": "TOWER_MATH_BASIC_NAME",
+			"tower_type": "academic",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 20,
@@ -84,10 +92,12 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "dot",
-				"value": 3,
-				"duration": 3,
-				"probability": 0.8
+				"effect_id": "dot",
+				"overrides": {
+					"value": 3,
+					"duration": 3,
+					"probability": 0.8
+				}
 			},
 			"cost": {
 				"build_cost": 60,
@@ -103,9 +113,9 @@
 		},
 		{
 			"tower_id": "tower_math_advanced",
-			"tower_name": "数学之塔·进阶",
-			"tower_type": "学科塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_MATH_ADVANCED_NAME",
+			"tower_type": "academic",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 32,
@@ -115,10 +125,12 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "dot",
-				"value": 5,
-				"duration": 3.5,
-				"probability": 0.9
+				"effect_id": "dot",
+				"overrides": {
+					"value": 5,
+					"duration": 3.5,
+					"probability": 0.9
+				}
 			},
 			"cost": {
 				"build_cost": 100,
@@ -134,9 +146,9 @@
 		},
 		{
 			"tower_id": "tower_math_master",
-			"tower_name": "数学之塔·大师",
-			"tower_type": "学科塔",
-			"tier": "大师",
+			"tower_name": "TOWER_MATH_MASTER_NAME",
+			"tower_type": "academic",
+			"tier": "master",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 50,
@@ -146,10 +158,12 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "dot",
-				"value": 8,
-				"duration": 4,
-				"probability": 1
+				"effect_id": "dot",
+				"overrides": {
+					"value": 8,
+					"duration": 4,
+					"probability": 1
+				}
 			},
 			"cost": {
 				"build_cost": 150,
@@ -165,9 +179,9 @@
 		},
 		{
 			"tower_id": "tower_english_basic",
-			"tower_name": "英语之塔",
-			"tower_type": "学科塔",
-			"tier": "基础",
+			"tower_name": "TOWER_ENGLISH_BASIC_NAME",
+			"tower_type": "academic",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 18,
@@ -177,13 +191,15 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "cultural_suppression",
-				"probability": 0.15,
-				"bonus_damage": 0.5,
-				"target_tags": [
-					"foreign",
-					"western"
-				]
+				"effect_id": "cultural_suppression",
+				"overrides": {
+					"probability": 0.15,
+					"bonus_damage": 0.5,
+					"target_tags": [
+						"foreign",
+						"western"
+					]
+				}
 			},
 			"cost": {
 				"build_cost": 50,
@@ -200,9 +216,9 @@
 		},
 		{
 			"tower_id": "tower_science_basic",
-			"tower_name": "理综之塔",
-			"tower_type": "学科塔",
-			"tier": "基础",
+			"tower_name": "TOWER_SCIENCE_BASIC_NAME",
+			"tower_type": "academic",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 25,
@@ -212,12 +228,14 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "aoe",
-				"shape": "circle",
-				"radius": 100,
-				"damage_ratio": 1,
-				"knockback_distance": 20,
-				"knockback_probability": 0.3
+				"effect_id": "aoe",
+				"overrides": {
+					"shape": "circle",
+					"radius": 100,
+					"damage_ratio": 1,
+					"knockback_distance": 20,
+					"knockback_probability": 0.3
+				}
 			},
 			"cost": {
 				"build_cost": 80,
@@ -234,9 +252,9 @@
 		},
 		{
 			"tower_id": "tower_science_advanced",
-			"tower_name": "理综之塔·进阶",
-			"tower_type": "学科塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_SCIENCE_ADVANCED_NAME",
+			"tower_type": "academic",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 37,
@@ -246,12 +264,14 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "aoe",
-				"shape": "circle",
-				"radius": 150,
-				"damage_ratio": 1,
-				"knockback_distance": 30,
-				"knockback_probability": 0.5
+				"effect_id": "aoe",
+				"overrides": {
+					"shape": "circle",
+					"radius": 150,
+					"damage_ratio": 1,
+					"knockback_distance": 30,
+					"knockback_probability": 0.5
+				}
 			},
 			"cost": {
 				"build_cost": 120,
@@ -268,9 +288,9 @@
 		},
 		{
 			"tower_id": "tower_programming_basic",
-			"tower_name": "编程之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_PROGRAMMING_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 16,
@@ -280,9 +300,11 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "crit",
-				"crit_probability": 0.1,
-				"crit_multiplier": 2
+				"effect_id": "crit",
+				"overrides": {
+					"crit_probability": 0.1,
+					"crit_multiplier": 2
+				}
 			},
 			"cost": {
 				"build_cost": 55,
@@ -298,9 +320,9 @@
 		},
 		{
 			"tower_id": "tower_programming_advanced",
-			"tower_name": "编程之塔·进阶",
-			"tower_type": "技能塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_PROGRAMMING_ADVANCED_NAME",
+			"tower_type": "skill",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 24,
@@ -310,9 +332,11 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "crit",
-				"crit_probability": 0.15,
-				"crit_multiplier": 2.5
+				"effect_id": "crit",
+				"overrides": {
+					"crit_probability": 0.15,
+					"crit_multiplier": 2.5
+				}
 			},
 			"cost": {
 				"build_cost": 90,
@@ -328,9 +352,9 @@
 		},
 		{
 			"tower_id": "tower_time_basic",
-			"tower_name": "时间管理塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_TIME_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "none",
 			"stats": {
 				"damage": 0,
@@ -339,10 +363,12 @@
 				"damage_type": "none"
 			},
 			"special_effect": {
-				"type": "slow_aura",
-				"shape": "circle",
-				"radius": 200,
-				"slow_value": 0.25
+				"effect_id": "slow_aura",
+				"overrides": {
+					"shape": "circle",
+					"radius": 200,
+					"slow_value": 0.25
+				}
 			},
 			"cost": {
 				"build_cost": 70,
@@ -358,9 +384,9 @@
 		},
 		{
 			"tower_id": "tower_time_advanced",
-			"tower_name": "时间管理塔·进阶",
-			"tower_type": "技能塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_TIME_ADVANCED_NAME",
+			"tower_type": "skill",
+			"tier": "advanced",
 			"attack_mode": "none",
 			"stats": {
 				"damage": 0,
@@ -369,10 +395,12 @@
 				"damage_type": "none"
 			},
 			"special_effect": {
-				"type": "slow_aura",
-				"shape": "circle",
-				"radius": 250,
-				"slow_value": 0.35
+				"effect_id": "slow_aura",
+				"overrides": {
+					"shape": "circle",
+					"radius": 250,
+					"slow_value": 0.35
+				}
 			},
 			"cost": {
 				"build_cost": 110,
@@ -388,9 +416,9 @@
 		},
 		{
 			"tower_id": "tower_communication_basic",
-			"tower_name": "沟通能力塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_COMMUNICATION_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 12,
@@ -400,11 +428,13 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "single_control",
-				"duration": 3,
-				"probability": 0.2,
-				"control_type": "stun",
-				"cooldown": 8
+				"effect_id": "single_control",
+				"overrides": {
+					"duration": 3,
+					"probability": 0.2,
+					"control_type": "stun",
+					"cooldown": 8
+				}
 			},
 			"cost": {
 				"build_cost": 60,
@@ -421,9 +451,9 @@
 		},
 		{
 			"tower_id": "tower_communication_advanced",
-			"tower_name": "沟通能力塔·进阶",
-			"tower_type": "技能塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_COMMUNICATION_ADVANCED_NAME",
+			"tower_type": "skill",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 17,
@@ -433,11 +463,13 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "single_control",
-				"duration": 4,
-				"probability": 0.3,
-				"control_type": "stun",
-				"cooldown": 6
+				"effect_id": "single_control",
+				"overrides": {
+					"duration": 4,
+					"probability": 0.3,
+					"control_type": "stun",
+					"cooldown": 6
+				}
 			},
 			"cost": {
 				"build_cost": 95,
@@ -454,9 +486,9 @@
 		},
 		{
 			"tower_id": "tower_network_basic",
-			"tower_name": "人脉关系塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_NETWORK_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "none",
 			"stats": {
 				"damage": 0,
@@ -465,16 +497,18 @@
 				"damage_type": "none"
 			},
 			"special_effect": {
-				"type": "summon",
-				"summon_tower_id": "tower_helper_temp",
-				"summon_count": 1,
-				"summon_duration": 30,
-				"summon_cooldown_per_wave": 10,
-				"summon_tower_stats": {
-					"damage": 15,
-					"attack_speed": 1,
-					"range": 120,
-					"lifetime": 30
+				"effect_id": "summon",
+				"overrides": {
+					"summon_tower_id": "tower_helper_temp",
+					"summon_count": 1,
+					"summon_duration": 30,
+					"summon_cooldown_per_wave": 10,
+					"summon_tower_stats": {
+						"damage": 15,
+						"attack_speed": 1,
+						"range": 120,
+						"lifetime": 30
+					}
 				}
 			},
 			"cost": {
@@ -491,9 +525,9 @@
 		},
 		{
 			"tower_id": "tower_finance_basic",
-			"tower_name": "理财能力塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_FINANCE_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 10,
@@ -503,8 +537,10 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "gold_bonus",
-				"gold_per_kill": 0.2
+				"effect_id": "gold_bonus",
+				"overrides": {
+					"gold_per_kill": 0.2
+				}
 			},
 			"cost": {
 				"build_cost": 80,
@@ -525,9 +561,9 @@
 		},
 		{
 			"tower_id": "tower_sports_basic",
-			"tower_name": "体育之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_SPORTS_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "melee",
 			"stats": {
 				"damage": 14,
@@ -536,12 +572,14 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "aoe",
-				"shape": "circle",
-				"radius": 80,
-				"damage_ratio": 0.8,
-				"knockback_distance": 30,
-				"knockback_probability": 0.25
+				"effect_id": "aoe",
+				"overrides": {
+					"shape": "circle",
+					"radius": 80,
+					"damage_ratio": 0.8,
+					"knockback_distance": 30,
+					"knockback_probability": 0.25
+				}
 			},
 			"cost": {
 				"build_cost": 45,
@@ -558,9 +596,9 @@
 		},
 		{
 			"tower_id": "tower_artist_basic",
-			"tower_name": "艺术之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_ARTIST_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 12,
@@ -570,10 +608,12 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "confusion",
-				"duration": 2,
-				"probability": 0.15,
-				"effect": "敌人反向移动"
+				"effect_id": "confusion",
+				"overrides": {
+					"duration": 2,
+					"probability": 0.15,
+					"effect": "敌人反向移动"
+				}
 			},
 			"cost": {
 				"build_cost": 55,
@@ -589,9 +629,9 @@
 		},
 		{
 			"tower_id": "tower_engineer_basic",
-			"tower_name": "工程之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_ENGINEER_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "melee",
 			"stats": {
 				"damage": 22,
@@ -600,10 +640,12 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "armor_break",
-				"value": 0.3,
-				"duration": 3,
-				"probability": 0.2
+				"effect_id": "armor_break",
+				"overrides": {
+					"value": 0.3,
+					"duration": 3,
+					"probability": 0.2
+				}
 			},
 			"cost": {
 				"build_cost": 70,
@@ -619,9 +661,9 @@
 		},
 		{
 			"tower_id": "tower_profession_basic",
-			"tower_name": "职业之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_PROFESSION_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 18,
@@ -631,8 +673,10 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "gold_bonus",
-				"gold_per_kill": 0.1
+				"effect_id": "gold_bonus",
+				"overrides": {
+					"gold_per_kill": 0.1
+				}
 			},
 			"cost": {
 				"build_cost": 65,
@@ -648,9 +692,9 @@
 		},
 		{
 			"tower_id": "tower_business_basic",
-			"tower_name": "商业之塔",
-			"tower_type": "技能塔",
-			"tier": "基础",
+			"tower_name": "TOWER_BUSINESS_BASIC_NAME",
+			"tower_type": "skill",
+			"tier": "basic",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 14,
@@ -660,8 +704,10 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "gold_bonus",
-				"gold_per_kill": 0.3
+				"effect_id": "gold_bonus",
+				"overrides": {
+					"gold_per_kill": 0.3
+				}
 			},
 			"cost": {
 				"build_cost": 75,
@@ -677,9 +723,9 @@
 		},
 		{
 			"tower_id": "tower_business_advanced",
-			"tower_name": "商业之塔·进阶",
-			"tower_type": "技能塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_BUSINESS_ADVANCED_NAME",
+			"tower_type": "skill",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 20,
@@ -689,8 +735,10 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "gold_bonus",
-				"gold_per_kill": 0.4
+				"effect_id": "gold_bonus",
+				"overrides": {
+					"gold_per_kill": 0.4
+				}
 			},
 			"cost": {
 				"build_cost": 120,
@@ -711,9 +759,9 @@
 		},
 		{
 			"tower_id": "tower_history_advanced",
-			"tower_name": "历史之塔·进阶",
-			"tower_type": "学科塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_HISTORY_ADVANCED_NAME",
+			"tower_type": "academic",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 20,
@@ -723,11 +771,13 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "debuff",
-				"value": 0.15,
-				"duration": 3,
-				"probability": 0.25,
-				"debuff_type": "weakness"
+				"effect_id": "debuff",
+				"overrides": {
+					"value": 0.15,
+					"duration": 3,
+					"probability": 0.25,
+					"debuff_type": "weakness"
+				}
 			},
 			"cost": {
 				"build_cost": 85,
@@ -743,9 +793,9 @@
 		},
 		{
 			"tower_id": "tower_history_master",
-			"tower_name": "历史之塔·大师",
-			"tower_type": "学科塔",
-			"tier": "大师",
+			"tower_name": "TOWER_HISTORY_MASTER_NAME",
+			"tower_type": "academic",
+			"tier": "master",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 35,
@@ -755,11 +805,13 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "debuff",
-				"value": 0.25,
-				"duration": 4,
-				"probability": 0.35,
-				"debuff_type": "weakness"
+				"effect_id": "debuff",
+				"overrides": {
+					"value": 0.25,
+					"duration": 4,
+					"probability": 0.35,
+					"debuff_type": "weakness"
+				}
 			},
 			"cost": {
 				"build_cost": 140,
@@ -775,9 +827,9 @@
 		},
 		{
 			"tower_id": "tower_leadership_advanced",
-			"tower_name": "领导力之塔·进阶",
-			"tower_type": "技能塔",
-			"tier": "进阶",
+			"tower_name": "TOWER_LEADERSHIP_ADVANCED_NAME",
+			"tower_type": "skill",
+			"tier": "advanced",
 			"attack_mode": "none",
 			"stats": {
 				"damage": 0,
@@ -786,11 +838,13 @@
 				"damage_type": "none"
 			},
 			"special_effect": {
-				"type": "buff_aura",
-				"shape": "circle",
-				"radius": 200,
-				"damage_bonus": 0.15,
-				"attack_speed_bonus": 0.1
+				"effect_id": "buff_aura",
+				"overrides": {
+					"shape": "circle",
+					"radius": 200,
+					"damage_bonus": 0.15,
+					"attack_speed_bonus": 0.1
+				}
 			},
 			"cost": {
 				"build_cost": 130,
@@ -807,9 +861,9 @@
 		},
 		{
 			"tower_id": "tower_fire_advanced",
-			"tower_name": "烈焰塔",
-			"tower_type": "进阶",
-			"tier": "进阶",
+			"tower_name": "TOWER_FIRE_ADVANCED_NAME",
+			"tower_type": "advanced",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 35,
@@ -819,8 +873,10 @@
 				"damage_type": "physical"
 			},
 			"special_effect": {
-				"type": "burn",
-				"value": 8
+				"effect_id": "burn",
+				"overrides": {
+					"value": 8
+				}
 			},
 			"cost": {
 				"build_cost": 150,
@@ -836,9 +892,9 @@
 		},
 		{
 			"tower_id": "tower_ice_advanced",
-			"tower_name": "寒冰塔",
-			"tower_type": "进阶",
-			"tier": "进阶",
+			"tower_name": "TOWER_ICE_ADVANCED_NAME",
+			"tower_type": "advanced",
+			"tier": "advanced",
 			"attack_mode": "ranged",
 			"stats": {
 				"damage": 20,
@@ -848,8 +904,10 @@
 				"damage_type": "magic"
 			},
 			"special_effect": {
-				"type": "slow",
-				"value": 0.35
+				"effect_id": "slow",
+				"overrides": {
+					"value": 0.35
+				}
 			},
 			"cost": {
 				"build_cost": 140,
@@ -865,9 +923,9 @@
 		},
 		{
 			"tower_id": "tower_ruins",
-			"tower_name": "防御塔废墟",
-			"tower_type": "特殊",
-			"tier": "废墟",
+			"tower_name": "TOWER_RUINS_NAME",
+			"tower_type": "special",
+			"tier": "ruin",
 			"attack_mode": "none",
 			"stats": {
 				"damage": 0,
@@ -886,8 +944,7 @@
 				"attack_speed_increase": 0,
 				"max_level": 1
 			},
-			"texture_path": "res://images/towers/ruins.png",
-			"special_effect": {}
+			"texture_path": "res://images/towers/ruins.png"
 		}
 	]
 }

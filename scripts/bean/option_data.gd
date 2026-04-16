@@ -40,3 +40,6 @@ static func from_dict(data: Dictionary) -> OptionData:
 	opt.triggers_ending = bool(data.get("triggers_ending", false))
 	opt.ending_reason = str(data.get("ending_reason", ""))
 	return opt
+
+func get_display_text() -> String:
+	return tr(text)

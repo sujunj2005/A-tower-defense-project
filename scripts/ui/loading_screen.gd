@@ -5,6 +5,7 @@ signal loading_screen_ready
 
 var progress_bar: ProgressBar
 var progress_label: Label
+var _title_label: Label
 
 func _ready():
 	setup_ui()
@@ -13,27 +14,30 @@ func _ready():
 	if scene_manager and scene_manager.has_method("start_async_load"):
 		scene_manager.start_async_load()
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		if _title_label:
+			_title_label.text = tr("LOADING_TEXT")
+
 func setup_ui():
 	var bg = ColorRect.new()
 	bg.color = Color(0.05, 0.05, 0.1, 1.0)
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 
-	var title = Label.new()
-	title.text = "加载中..."
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	## 修复：使用锚点布局替代硬编码坐标
-	## 来源：knowledge_base/07_UI_System/07B_Size_and_Anchors_Detailed.md
-	title.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	title.offset_top = 250
-	title.offset_bottom = 310
-	title.offset_left = 100
-	title.offset_right = -100
-	title.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	title.add_theme_font_size_override("font_size", 36)
-	title.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1.0))
-	add_child(title)
+	_title_label = Label.new()
+	_title_label.text = tr("LOADING_TEXT")
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_title_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	_title_label.offset_top = 250
+	_title_label.offset_bottom = 310
+	_title_label.offset_left = 100
+	_title_label.offset_right = -100
+	_title_label.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_title_label.add_theme_font_size_override("font_size", 36)
+	_title_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1.0))
+	add_child(_title_label)
 
 	var bar_container = MarginContainer.new()
 	bar_container.anchor_left = 0.5

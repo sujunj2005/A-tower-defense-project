@@ -3,18 +3,18 @@
 	"family_backgrounds": [
 		{
 			"family_id": "family_cadre",
-			"family_name": "干部家庭",
-			"description": "父：公务员，母：教师",
+			"family_name": "FAMILY_CADRE_NAME",
+			"description": "FAMILY_CADRE_DESC",
 			"traits": [
 				{
 					"type": "gold_bonus",
 					"value": 0.3,
-					"text": "金币获取+30%"
+					"text": "FAMILY_CADRE_TRAIT_0_TEXT"
 				},
 				{
 					"type": "experience_bonus",
 					"value": 0.1,
-					"text": "经验获取+10%"
+					"text": "FAMILY_CADRE_TRAIT_1_TEXT"
 				}
 			],
 			"initial_resources": {
@@ -39,18 +39,18 @@
 		},
 		{
 			"family_id": "family_merchant",
-			"family_name": "商人家庭",
-			"description": "父：个体户，母：家庭主妇",
+			"family_name": "FAMILY_MERCHANT_NAME",
+			"description": "FAMILY_MERCHANT_DESC",
 			"traits": [
 				{
 					"type": "gold_bonus",
 					"value": 0.5,
-					"text": "金币获取+50%"
+					"text": "FAMILY_MERCHANT_TRAIT_0_TEXT"
 				},
 				{
 					"type": "health_bonus",
 					"value": -20,
-					"text": "生命-20"
+					"text": "FAMILY_MERCHANT_TRAIT_1_TEXT"
 				}
 			],
 			"initial_resources": {
@@ -75,18 +75,18 @@
 		},
 		{
 			"family_id": "family_worker",
-			"family_name": "工人家庭",
-			"description": "父：工人，母：工人",
+			"family_name": "FAMILY_WORKER_NAME",
+			"description": "FAMILY_WORKER_DESC",
 			"traits": [
 				{
 					"type": "tower_cost_modifier",
 					"value": -0.1,
-					"text": "建造成本-10%"
+					"text": "FAMILY_WORKER_TRAIT_0_TEXT"
 				},
 				{
 					"type": "health_bonus",
 					"value": 30,
-					"text": "生命+30"
+					"text": "FAMILY_WORKER_TRAIT_1_TEXT"
 				}
 			],
 			"initial_resources": {
@@ -111,18 +111,18 @@
 		},
 		{
 			"family_id": "family_farmer",
-			"family_name": "农民家庭",
-			"description": "父：农民，母：农民",
+			"family_name": "FAMILY_FARMER_NAME",
+			"description": "FAMILY_FARMER_DESC",
 			"traits": [
 				{
 					"type": "tower_cost_modifier",
 					"value": -0.15,
-					"text": "建造成本-15%"
+					"text": "FAMILY_FARMER_TRAIT_0_TEXT"
 				},
 				{
 					"type": "experience_bonus",
 					"value": 0.15,
-					"text": "经验获取+15%"
+					"text": "FAMILY_FARMER_TRAIT_1_TEXT"
 				}
 			],
 			"initial_resources": {

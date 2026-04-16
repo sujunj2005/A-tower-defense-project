@@ -96,7 +96,7 @@ func home_take_damage(amount: float) -> void:
 	if session:
 		session.home_health = home_health
 	
-	Global.debug_log("老家受到攻击！伤害：%.1f（减免%.0f%%），剩余生命：%d/%d" % [actual_damage, reduction * 100.0, int(home_health), int(max_home_health)])
+	Global.debug_log("Base attacked! Dmg: %.1f (reduced %.0f%%), HP: %d/%d" % [actual_damage, reduction * 100.0, int(home_health), int(max_home_health)])
 	
 	if home_health <= 0.0:
 		_on_defeat()

@@ -18,6 +18,15 @@ var _family_hbox: HBoxContainer
 var _families_data: Array[Dictionary] = []
 var _eras_data: Array[Dictionary] = []
 
+var _title_label: Label
+var _family_header: Label
+var _start_btn: Button
+var _back_btn: Button
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_refresh_era_texts()
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_load_eras_data()
@@ -58,10 +67,10 @@ func _get_era_system() -> Node:
 func _get_era_display_text() -> String:
 	for era: Dictionary in _eras_data:
 		if era.get("era_id", "") == _selected_era:
-			var era_name: String = era.get("era_name", _selected_era)
-			var period: String = era.get("time_period", "")
-			return "时代：%s（%s）" % [era_name, period]
-	return "时代：%s" % _selected_era
+			var era_name: String = tr(era.get("era_name", _selected_era))
+			var period: String = tr(era.get("time_period", ""))
+			return tr("ERA_DISPLAY") % [era_name, period]
+	return tr("ERA_DISPLAY_SIMPLE") % _selected_era
 
 func _setup_ui() -> void:
 	var bg: ColorRect = ColorRect.new()
@@ -70,7 +79,8 @@ func _setup_ui() -> void:
 	add_child(bg)
 
 	var title: Label = Label.new()
-	title.text = "选择你的出身"
+	title.text = tr("ERA_SELECT_TITLE")
+	_title_label = title
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	title.offset_top = 30
@@ -96,7 +106,8 @@ func _setup_ui() -> void:
 	main_vbox.add_child(_era_label)
 
 	var family_header: Label = Label.new()
-	family_header.text = "选择家境："
+	family_header.text = tr("FAMILY_SELECT")
+	_family_header = family_header
 	family_header.add_theme_font_size_override("font_size", 20)
 	family_header.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1.0))
 	main_vbox.add_child(family_header)
@@ -107,7 +118,7 @@ func _setup_ui() -> void:
 
 	for fam: Dictionary in _families_data:
 		var btn: Button = Button.new()
-		btn.text = fam.get("family_name", fam.get("family_id", ""))
+		btn.text = tr(fam.get("family_name", fam.get("family_id", "")))
 		btn.custom_minimum_size = Vector2(90, 40)
 		btn.pressed.connect(_on_family_button.bind(fam.get("family_id", "")))
 		_family_hbox.add_child(btn)
@@ -146,14 +157,16 @@ func _setup_ui() -> void:
 	main_vbox.add_child(spacer)
 
 	var start_btn: Button = Button.new()
-	start_btn.text = "开始人生"
+	start_btn.text = tr("BTN_START_LIFE")
+	_start_btn = start_btn
 	start_btn.custom_minimum_size = Vector2(250, 55)
 	start_btn.add_theme_font_size_override("font_size", 24)
 	start_btn.pressed.connect(_on_start_pressed)
 	main_vbox.add_child(start_btn)
 
 	var back_btn: Button = Button.new()
-	back_btn.text = "返回主菜单"
+	back_btn.text = tr("BTN_BACK_MENU")
+	_back_btn = back_btn
 	back_btn.custom_minimum_size = Vector2(250, 45)
 	back_btn.add_theme_font_size_override("font_size", 18)
 	back_btn.pressed.connect(_on_back_pressed)
@@ -161,6 +174,19 @@ func _setup_ui() -> void:
 
 func _on_family_button(family_id: String) -> void:
 	_selected_family = family_id
+	_update_selection_display()
+
+func _refresh_era_texts() -> void:
+	if _title_label:
+		_title_label.text = tr("ERA_SELECT_TITLE")
+	if _era_label:
+		_era_label.text = _get_era_display_text()
+	if _family_header:
+		_family_header.text = tr("FAMILY_SELECT")
+	if _start_btn:
+		_start_btn.text = tr("BTN_START_LIFE")
+	if _back_btn:
+		_back_btn.text = tr("BTN_BACK_MENU")
 	_update_selection_display()
 
 func _update_selection_display() -> void:
@@ -171,17 +197,17 @@ func _update_selection_display() -> void:
 			break
 	if selected_data.is_empty():
 		return
-	var fam_name: String = selected_data.get("family_name", _selected_family)
-	var desc: String = selected_data.get("description", "")
+	var fam_name: String = tr(selected_data.get("family_name", _selected_family))
+	var desc: String = tr(selected_data.get("description", ""))
 	if _family_label:
-		_family_label.text = "当前：%s" % fam_name
+		_family_label.text = tr("FAMILY_CURRENT") % fam_name
 	if _family_desc_label:
 		_family_desc_label.text = desc
 	if _family_traits_label:
 		var traits: Array = selected_data.get("traits", [])
 		var trait_texts: Array[String] = []
 		for trait_entry: Dictionary in traits:
-			trait_texts.append(trait_entry.get("text", ""))
+			trait_texts.append(tr(trait_entry.get("text", "")))
 		_family_traits_label.text = " | ".join(trait_texts) if not trait_texts.is_empty() else ""
 	if _family_towers_label:
 		var initial_res: Dictionary = selected_data.get("initial_resources", {})
@@ -191,10 +217,10 @@ func _update_selection_display() -> void:
 			for tid: String in tower_entry:
 				var count: int = int(tower_entry[tid])
 				var cfg: TowerBean = TowerConfig.get_config(tid)
-				var display_name: String = cfg.tower_name if cfg else tid
+				var display_name: String = cfg.get_display_name() if cfg else tid
 				var count_text: String = "×∞" if count < 0 else "×%d" % count
 				tower_names.append(display_name + count_text)
-		_family_towers_label.text = "初始防御塔：%s" % ("、".join(tower_names) if not tower_names.is_empty() else "无")
+		_family_towers_label.text = tr("INITIAL_TOWERS") % (tr("SEPARATOR_DUN").join(tower_names) if not tower_names.is_empty() else tr("TRAITS_NONE"))
 
 func _on_start_pressed() -> void:
 	var es: Node = _get_era_system()

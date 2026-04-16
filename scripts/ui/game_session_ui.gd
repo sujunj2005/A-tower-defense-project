@@ -12,6 +12,10 @@ var _courage_label: Label
 var _traits_container: HFlowContainer
 var _event_button: Button
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		_update_display()
+
 func _ready() -> void:
 	_build_ui()
 	_update_display()
@@ -40,38 +44,38 @@ func _build_ui() -> void:
 	panel.add_child(vbox)
 
 	var title: Label = Label.new()
-	title.text = "人生阶段"
+	title.text = tr("LIFE_STAGE")
 	title.add_theme_font_size_override("font_size", 22)
 	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
 
 	_age_label = Label.new()
-	_age_label.text = "年龄：6"
+	_age_label.text = tr("AGE_LABEL") % 6
 	vbox.add_child(_age_label)
 
 	_stage_label = Label.new()
-	_stage_label.text = "阶段：童年"
+	_stage_label.text = tr("STAGE_LABEL") % tr("STAGE_CHILDHOOD_NAME")
 	vbox.add_child(_stage_label)
 
 	_gold_label = Label.new()
-	_gold_label.text = "金币：50"
+	_gold_label.text = tr("GOLD_LABEL") % 50
 	vbox.add_child(_gold_label)
 
 	_health_label = Label.new()
-	_health_label.text = "%s：100" % _attr_display("health")
+	_health_label.text = tr("ATTR_FORMAT") % [_attr_display("health"), 100]
 	vbox.add_child(_health_label)
 
 	_intelligence_label = Label.new()
-	_intelligence_label.text = "%s：50" % _attr_display("intelligence")
+	_intelligence_label.text = tr("ATTR_FORMAT") % [_attr_display("intelligence"), 50]
 	vbox.add_child(_intelligence_label)
 
 	_courage_label = Label.new()
-	_courage_label.text = "%s：50" % _attr_display("courage")
+	_courage_label.text = tr("ATTR_FORMAT") % [_attr_display("courage"), 50]
 	vbox.add_child(_courage_label)
 
 	var traits_title: Label = Label.new()
-	traits_title.text = "词条："
+	traits_title.text = tr("TRAITS_LABEL")
 	vbox.add_child(traits_title)
 
 	_traits_container = HFlowContainer.new()
@@ -84,7 +88,7 @@ func _build_ui() -> void:
 	vbox.add_child(spacer)
 
 	_event_button = Button.new()
-	_event_button.text = "触发事件"
+	_event_button.text = tr("BTN_TRIGGER_EVENT")
 	_event_button.custom_minimum_size = Vector2(0, 40)
 	vbox.add_child(_event_button)
 
@@ -106,23 +110,23 @@ func _get_stage_display_name(stage_id: String) -> String:
 		return stage_id
 	var stages: Dictionary = stages_data.stages
 	if stages.has(stage_id):
-		return stages[stage_id].get("stage_name", stage_id)
+		return tr(stages[stage_id].get("stage_name", stage_id))
 	return stage_id
 
 func _update_display() -> void:
 	var session: GameSessionData = Global.get_game_session()
 	if _age_label:
-		_age_label.text = "年龄：%d" % session.current_age
+		_age_label.text = tr("AGE_LABEL") % session.current_age
 	if _stage_label:
-		_stage_label.text = "阶段：%s" % _get_stage_display_name(session.current_stage)
+		_stage_label.text = tr("STAGE_LABEL") % _get_stage_display_name(session.current_stage)
 	if _gold_label:
-		_gold_label.text = "金币：%d" % session.gold
+		_gold_label.text = tr("GOLD_LABEL") % session.gold
 	if _health_label:
-		_health_label.text = "%s：%d" % [_attr_display("health"), session.attributes.get("health", 0)]
+		_health_label.text = tr("ATTR_FORMAT") % [_attr_display("health"), session.attributes.get("health", 0)]
 	if _intelligence_label:
-		_intelligence_label.text = "%s：%d" % [_attr_display("intelligence"), session.attributes.get("intelligence", 0)]
+		_intelligence_label.text = tr("ATTR_FORMAT") % [_attr_display("intelligence"), session.attributes.get("intelligence", 0)]
 	if _courage_label:
-		_courage_label.text = "%s：%d" % [_attr_display("courage"), session.attributes.get("courage", 0)]
+		_courage_label.text = tr("ATTR_FORMAT") % [_attr_display("courage"), session.attributes.get("courage", 0)]
 	if _traits_container:
 		for child: Node in _traits_container.get_children():
 			child.queue_free()
@@ -136,7 +140,7 @@ func _update_display() -> void:
 			_traits_container.add_child(badge)
 		if session.traits.is_empty():
 			var no_trait: Label = Label.new()
-			no_trait.text = "无"
+			no_trait.text = tr("TRAITS_NONE")
 			no_trait.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
 			_traits_container.add_child(no_trait)
 

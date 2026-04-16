@@ -35,7 +35,7 @@ func setup_timer():
 		return
 	
 	if config.attack_speed <= 0:
-		push_error("[塔 %s] attack_speed 为 %.2f，无法启动攻击定时器！" % [config.tower_name, config.attack_speed])
+		push_error("[塔 %s] attack_speed 为 %.2f，无法启动攻击定时器！" % [config.get_display_name(), config.attack_speed])
 		return
 	
 	if attack_timer:
@@ -163,7 +163,7 @@ func execute_attack():
 		AttackMode.RANGED:
 			perform_ranged_attack(attack_target)
 		_:
-			push_error("[塔 %s] 未知的攻击模式: %d" % [config.tower_name, config.attack_mode])
+			push_error("[塔 %s] 未知的攻击模式: %d" % [config.get_display_name(), config.attack_mode])
 
 	# 阶段4: 触发特效
 	execute_effects(attack_target)
@@ -194,7 +194,7 @@ func perform_melee_attack(attack_target: Node2D):
 	attack_executed.emit(attack_target, final_damage)
 	
 	if enemies_hit_count > 0:
-		print("[近战攻击] %s 攻击范围内命中 %d 个敌人，每个 %.0f 伤害" % [config.tower_name, enemies_hit_count, final_damage])
+		print("[近战攻击] %s 攻击范围内命中 %d 个敌人，每个 %.0f 伤害" % [config.get_display_name(), enemies_hit_count, final_damage])
 
 ## 🆕 播放近战攻击动画
 func _play_melee_attack_animation() -> void:
@@ -221,7 +221,7 @@ func perform_ranged_attack(attack_target: Node2D):
 		if projectile:
 			attack_executed.emit(attack_target, final_damage)
 	else:
-		push_error("[塔 %s] 远程攻击未配置弹道！" % config.tower_name)
+		push_error("[塔 %s] 远程攻击未配置弹道！" % config.get_display_name())
 		perform_melee_attack(attack_target)
 
 func _play_ranged_attack_animation() -> void:
@@ -235,15 +235,15 @@ func _play_ranged_attack_animation() -> void:
 func create_projectile_from_bean(pbean: ProjectileBean, attack_target: Node2D, final_damage: float = -1.0) -> Projectile:
 	var projectile_scene_path = "res://scenes/projectile.tscn"
 	if not ResourceLoader.exists(projectile_scene_path):
-		push_error("[塔 %s] 弹道场景不存在：%s" % [config.tower_name, projectile_scene_path])
+		push_error("[塔 %s] 弹道场景不存在：%s" % [config.get_display_name(), projectile_scene_path])
 		return null
 	var projectile_scene = load(projectile_scene_path) as PackedScene
 	if not projectile_scene:
-		push_error("[塔 %s] 无法加载弹道场景：%s" % [config.tower_name, projectile_scene_path])
+		push_error("[塔 %s] 无法加载弹道场景：%s" % [config.get_display_name(), projectile_scene_path])
 		return null
 	var projectile = projectile_scene.instantiate() as Projectile
 	if not projectile:
-		push_error("[塔 %s] 弹道实例化失败！" % config.tower_name)
+		push_error("[塔 %s] 弹道实例化失败！" % config.get_display_name())
 		return null
 	projectile.bean = pbean
 	projectile.source_tower = tower
@@ -450,7 +450,7 @@ func debug_print_config():
 		return
 	
 	print("[DEBUG] 塔配置信息:")
-	print("  塔名: %s" % config.tower_name)
+	print("  塔名: %s" % config.get_display_name())
 	print("  攻击模式: %d (MELEE=0, RANGED=1)" % config.attack_mode)
 	print("  攻击范围: %.0f" % config.attack_range)
 	print("  索敌范围: %.0f" % config.detection_range)

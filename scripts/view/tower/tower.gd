@@ -85,11 +85,11 @@ func setup_tower() -> void:
 
 	attack_component.config = config
 	if config.attack_mode == AttackMode.NONE:
-		Global.debug_log("[Tower] %s 为技能塔，跳过攻击组件初始化" % config.tower_name)
+		Global.debug_log("[Tower] %s 为技能塔，跳过攻击组件初始化" % config.get_display_name())
 	else:
 		attack_component.setup_timer()
 		Global.debug_log("[Tower] %s 初始化完成 - 攻击模式：%d (0=近战,1=远程,2=无), 攻击范围：%.0f, 索敌范围：%.0f, 攻速：%.1f" % [
-			config.tower_name, config.attack_mode, config.attack_range,
+			config.get_display_name(), config.attack_mode, config.attack_range,
 			config.detection_range, config.attack_speed
 		])
 
@@ -261,7 +261,7 @@ func destroy() -> void:
 	var slot_idx: int = -1
 	if has_meta("slot_index"):
 		slot_idx = get_meta("slot_index")
-	Global.debug_log("[Tower] %s 开始销毁流程，slot_index=%d" % [(config.tower_name if config else "未知"), slot_idx])
+	Global.debug_log("[Tower] %s 开始销毁流程，slot_index=%d" % [(config.get_display_name() if config else "未知"), slot_idx])
 	var mm: Node = get_node_or_null("/root/MapManager")
 	if mm and mm.has_method("remove_built_tower"):
 		mm.remove_built_tower(self)
@@ -279,13 +279,20 @@ func get_tower_info_text() -> String:
 	if not attack_component:
 		return ""
 
-	var info_text: String = "%s (Lv.%d)\n" % [config.tower_name, current_level]
+	var info_text: String = "%s (Lv.%d)\n" % [config.get_display_name(), current_level]
+	if config.effect_id != "":
+		info_text += "\n" + config.effect_icon + " " + config.get_display_effect_name() + " — " + config.get_display_effect_desc()
+	for sub: Dictionary in config.sub_effects:
+		var sub_eid: String = sub.get("effect_id", "")
+		if sub_eid != "":
+			var sec: SpecialEffectConfig = SpecialEffectConfig.new()
+			info_text += "\n" + sec.get_effect_icon(sub_eid) + " " + sec.get_display_name(sub_eid) + " — " + sec.get_display_desc(sub_eid)
 	info_text += "━━━━━━━━━━━━━━━\n"
-	info_text += "💰 造价：%d\n" % config.cost
-	info_text += "⚔ 伤害：%.0f\n" % attack_component.config.damage
-	info_text += "🎯 射程：%.0f\n" % attack_component.config.attack_range
-	info_text += "⚡ 攻速：%.1f/s\n" % attack_component.config.attack_speed
+	info_text += tr("TOWER_INFO_COST") % config.cost + "\n"
+	info_text += tr("TOWER_INFO_DAMAGE") % attack_component.config.damage + "\n"
+	info_text += tr("TOWER_INFO_RANGE") % attack_component.config.attack_range + "\n"
+	info_text += tr("TOWER_INFO_SPEED") % attack_component.config.attack_speed + "\n"
 	info_text += "━━━━━━━━━━━━━━━\n"
-	info_text += "⭐ 经验：%d/%d" % [current_experience, experience_required]
+	info_text += tr("TOWER_EXP") % [current_experience, experience_required, config.cost]
 
 	return info_text

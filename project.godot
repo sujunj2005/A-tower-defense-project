@@ -43,6 +43,7 @@ AttributeConfig="*res://scripts/logic/life_simulation/attribute_config.gd"
 BattleRating="*res://scripts/logic/tower_defense/battle_rating.gd"
 WaveManager="*res://scripts/logic/tower_defense/wave_manager.gd"
 OptionSystem="*res://scripts/logic/life_simulation/option_system.gd"
+I18nManager="*res://autoload/i18n_manager.gd"
 
 [display]
 
@@ -63,3 +64,8 @@ enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg", "res://addons/gut
 folder_colors={
 "res://knowledge_base/": "green"
 }
+
+[internationalization]
+
+locale/translations=["res://locale/translations.zh.translation", "res://locale/translations.en.translation"]
+locale/fallback="zh"
