@@ -42,6 +42,10 @@ var initial_towers: Dictionary = {}
 @export var current_battle_victory: bool = false
 @export var battle_rating: String = "D"
 @export var current_battle_waves: Array[Dictionary] = []
+@export var current_map_id: String = ""
+@export var global_difficulty: String = "normal"
+var accumulated_map_weights: Dictionary = {}
+var pending_battle_modifiers: Array[Dictionary] = []
 @export var ending_reason: String = ""
 @export var last_battle_rewards: Dictionary = {}
 @export var last_event_traits: Array[String] = []
@@ -123,7 +127,9 @@ func to_dict() -> Dictionary:
 		"current_battle_deadly": current_battle_deadly,
 		"current_battle_victory": current_battle_victory,
 		"battle_rating": battle_rating,
-		"current_battle_waves": current_battle_waves
+		"current_battle_waves": current_battle_waves,
+		"current_map_id": current_map_id,
+		"global_difficulty": global_difficulty
 	}
 
 static func from_dict(data: Dictionary) -> GameSessionData:
@@ -175,4 +181,6 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 	session.current_battle_waves.clear()
 	for w: Dictionary in raw_waves:
 		session.current_battle_waves.append(w)
+	session.current_map_id = data.get("current_map_id", "")
+	session.global_difficulty = data.get("global_difficulty", "normal")
 	return session

@@ -131,7 +131,9 @@
 						"spawn_interval": 0.9
 					}
 				]
-			}
+			},
+			"map_weights": {"map_01": 0.7, "map_school": 0.3},
+			"battle_modifiers": [{"type": "add_waves", "value": 1}]
 		},
 		{
 			"event_id": "event_math_contest",
