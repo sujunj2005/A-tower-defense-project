@@ -124,6 +124,16 @@ func select_option(event: Dictionary, option: Dictionary) -> void:
 		age_sys.increment_stage_events()
 	if age_sys and "current_age" in age_sys:
 		age_sys.current_age = session.current_age
+	var opt_map_weights: Dictionary = option.get("map_weights", {})
+	if not opt_map_weights.is_empty():
+		for map_id in opt_map_weights:
+			var weight: float = float(opt_map_weights[map_id])
+			session.accumulated_map_weights[map_id] = session.accumulated_map_weights.get(map_id, 0.0) + weight
+		Global.debug_log("[事件系统] 累积地图权重: %s" % str(session.accumulated_map_weights))
+	var opt_modifiers: Array = option.get("battle_modifiers", [])
+	if not opt_modifiers.is_empty():
+		session.pending_battle_modifiers.append_array(opt_modifiers)
+		Global.debug_log("[事件系统] 收集战斗修改器: %d个" % opt_modifiers.size())
 	if option.get("battle_trigger") is Dictionary:
 		_trigger_battle(option.battle_trigger)
 	elif option.get("triggers_ending", false) == true:
@@ -266,6 +276,19 @@ func _trigger_battle(battle_trigger: Dictionary) -> void:
 	var battle_id: String = battle_trigger.get("battle_id", "unknown")
 	var is_deadly: bool = battle_trigger.get("is_deadly", false)
 	Global.debug_log("触发战斗：%s (致命：%s)" % [battle_id, str(is_deadly)])
+	var force_map: String = str(battle_trigger.get("force_map_id", ""))
+	var selected_map_id: String = ""
+	if force_map != "":
+		selected_map_id = force_map
+		Global.debug_log("[事件系统] 强制地图: %s" % selected_map_id)
+	elif not session.accumulated_map_weights.is_empty():
+		selected_map_id = _select_map_by_weights(session.accumulated_map_weights)
+		session.accumulated_map_weights.clear()
+		Global.debug_log("[事件系统] 权重选图: %s" % selected_map_id)
+	else:
+		selected_map_id = "map_01"
+		Global.debug_log("[事件系统] 默认地图: %s" % selected_map_id)
+	session.current_map_id = selected_map_id
 	session.current_battle_id = battle_id
 	session.current_battle_deadly = is_deadly
 	session.current_battle_waves.clear()
@@ -274,6 +297,28 @@ func _trigger_battle(battle_trigger: Dictionary) -> void:
 		session.current_battle_waves.append(wave_data)
 	Global.debug_log("波次配置已写入session，共%d波" % session.current_battle_waves.size())
 	battle_triggered.emit(battle_trigger)
+
+func _select_map_by_weights(weights: Dictionary) -> String:
+	var current_era: String = session.era_id
+	var available_ids: Array = MapConfig.get_map_ids()
+	var filtered_weights: Dictionary = {}
+	for map_id in weights:
+		if not map_id in available_ids:
+			continue
+		var map_cfg: MapConfig = MapConfig.load_map(map_id)
+		if map_cfg == null:
+			continue
+		if map_cfg.era_id == "" or map_cfg.era_id == current_era:
+			filtered_weights[map_id] = float(weights[map_id])
+	if filtered_weights.is_empty():
+		return "map_01"
+	var best_id: String = ""
+	var best_weight: float = -1.0
+	for map_id in filtered_weights:
+		if filtered_weights[map_id] > best_weight:
+			best_weight = filtered_weights[map_id]
+			best_id = map_id
+	return best_id
 
 func check_option_requirements(option: Dictionary) -> bool:
 	if not option.has("requirements"):

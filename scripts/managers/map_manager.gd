@@ -71,6 +71,10 @@ func _ready() -> void:
 	if Global.debug_map_id != "":
 		current_map_id = Global.debug_map_id
 		Global.debug_map_id = ""
+	else:
+		var session: GameSessionData = Global.get_game_session()
+		if session.current_map_id != "":
+			current_map_id = session.current_map_id
 	_load_map_data(current_map_id)
 	_initialize_game_objects()
 	_setup_ui_components()
