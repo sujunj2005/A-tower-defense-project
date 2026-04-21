@@ -12,6 +12,11 @@ var _courage_label: Label
 var _traits_container: HFlowContainer
 var _event_button: Button
 
+var _pause_canvas: CanvasLayer
+var _pause_menu: Control
+var _is_paused: bool = false
+var _pause_bg_gui_input_callable: Callable
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		_update_display()
@@ -24,6 +29,7 @@ func _ready() -> void:
 	var age_sys: Node = _get_age_system()
 	if age_sys and age_sys.has_signal("stage_changed"):
 		age_sys.stage_changed.connect(_on_stage_changed)
+	set_process_input(true)
 
 func _build_ui() -> void:
 	var canvas: CanvasLayer = CanvasLayer.new()
@@ -91,6 +97,8 @@ func _build_ui() -> void:
 	_event_button.text = tr("BTN_TRIGGER_EVENT")
 	_event_button.custom_minimum_size = Vector2(0, 40)
 	vbox.add_child(_event_button)
+
+	_build_pause_menu()
 
 func _get_age_system() -> Node:
 	return get_node_or_null("/root/AgeSystem")
@@ -169,3 +177,134 @@ func _attr_display(attr_id: String) -> String:
 	if ac and ac.has_method("get_display_with_icon"):
 		return ac.get_display_with_icon(attr_id)
 	return attr_id
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			if _is_paused:
+				_resume_game()
+			else:
+				_pause_game()
+
+func _build_pause_menu() -> void:
+	_pause_canvas = CanvasLayer.new()
+	_pause_canvas.layer = 100
+	add_child(_pause_canvas)
+
+	_pause_menu = Control.new()
+	_pause_menu.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_pause_menu.mouse_filter = Control.MOUSE_FILTER_PASS
+	_pause_menu.visible = false
+	_pause_canvas.add_child(_pause_menu)
+
+	var bg = ColorRect.new()
+	bg.color = Color(0.0, 0.0, 0.0, 0.6)
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg.name = "PauseBg"
+	bg.mouse_filter = Control.MOUSE_FILTER_STOP
+	_pause_bg_gui_input_callable = _on_pause_bg_gui_input
+	bg.gui_input.connect(_pause_bg_gui_input_callable)
+	_pause_menu.add_child(bg)
+
+	var panel = PanelContainer.new()
+	panel.anchor_left = 0.5
+	panel.anchor_top = 0.5
+	panel.anchor_right = 0.5
+	panel.anchor_bottom = 0.5
+	panel.offset_left = -300
+	panel.offset_top = -200
+	panel.offset_right = 300
+	panel.offset_bottom = 200
+	_pause_menu.add_child(panel)
+
+	var vbox = VBoxContainer.new()
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	vbox.add_theme_constant_override("separation", 20)
+	vbox.add_theme_constant_override("margin_top", 30)
+	vbox.add_theme_constant_override("margin_bottom", 30)
+	vbox.add_theme_constant_override("margin_left", 40)
+	vbox.add_theme_constant_override("margin_right", 40)
+	panel.add_child(vbox)
+
+	var title = Label.new()
+	title.text = tr("PAUSE_TITLE")
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 48)
+	title.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
+	vbox.add_child(title)
+
+	var spacer = Control.new()
+	spacer.custom_minimum_size = Vector2(0, 30)
+	vbox.add_child(spacer)
+
+	var resume_btn = Button.new()
+	resume_btn.text = tr("BTN_RESUME")
+	resume_btn.custom_minimum_size = Vector2(600, 60)
+	resume_btn.add_theme_font_size_override("font_size", 28)
+	resume_btn.pressed.connect(_resume_game)
+	vbox.add_child(resume_btn)
+
+	var menu_btn = Button.new()
+	menu_btn.text = tr("BTN_MAIN_MENU")
+	menu_btn.custom_minimum_size = Vector2(600, 60)
+	menu_btn.add_theme_font_size_override("font_size", 28)
+	menu_btn.pressed.connect(_on_pause_main_menu)
+	vbox.add_child(menu_btn)
+
+	var abandon_btn = Button.new()
+	abandon_btn.text = tr("BTN_ABANDON_GAME")
+	abandon_btn.custom_minimum_size = Vector2(600, 60)
+	abandon_btn.add_theme_font_size_override("font_size", 28)
+	abandon_btn.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	abandon_btn.pressed.connect(_on_pause_abandon)
+	vbox.add_child(abandon_btn)
+
+func _on_pause_bg_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		_resume_game()
+
+func _pause_game() -> void:
+	_is_paused = true
+	get_tree().paused = true
+	_pause_menu.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	_pause_canvas.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	_pause_menu.visible = true
+
+func _resume_game() -> void:
+	_is_paused = false
+	get_tree().paused = false
+	_pause_menu.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	_pause_canvas.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	_pause_menu.visible = false
+
+func _on_pause_main_menu() -> void:
+	_is_paused = false
+	_pause_menu.visible = false
+	get_tree().paused = false
+	_pause_menu.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	_pause_canvas.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if ss and ss.has_method("save_game"):
+		ss.save_game(0)
+	Global.reset_game_session()
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		scene_manager.return_to_main_menu()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
+func _on_pause_abandon() -> void:
+	_is_paused = false
+	_pause_menu.visible = false
+	get_tree().paused = false
+	_pause_menu.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	_pause_canvas.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if ss and ss.has_method("delete_save"):
+		ss.delete_save(0)
+	Global.reset_game_session()
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		scene_manager.return_to_main_menu()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")

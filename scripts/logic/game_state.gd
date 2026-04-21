@@ -22,7 +22,7 @@ var current_state: State = State.NONE
 ## 场景路径映射
 const SCENE_PATHS := {
 	State.MAIN_MENU: "res://scenes/core/main_menu.tscn",
-	State.ERA_SELECTION: "res://scenes/ui/era_selection.tscn",
+	State.ERA_SELECTION: "res://scenes/ui/life_choice.tscn",
 	State.STAGE: "res://scenes/core/game_session.tscn",
 	State.EVENT: "res://scenes/ui/event_screen.tscn",
 	State.BATTLE: "res://scenes/map.tscn",

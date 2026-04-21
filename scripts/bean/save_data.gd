@@ -40,10 +40,16 @@ func to_dict() -> Dictionary:
 ## 从 Dictionary 反序列化
 static func from_dict(data: Dictionary) -> PlayerSaveData:
 	var save_data = PlayerSaveData.new()
-	save_data.unlocked_eras = data.get("unlocked_eras", ["china_modern"])
-	save_data.unlocked_professions = data.get("unlocked_professions", [])
+	save_data.unlocked_eras.clear()
+	for item in data.get("unlocked_eras", ["china_modern"]):
+		save_data.unlocked_eras.append(str(item))
+	save_data.unlocked_professions.clear()
+	for item in data.get("unlocked_professions", []):
+		save_data.unlocked_professions.append(str(item))
 	save_data.currencies = data.get("currencies", {"life_wisdom": 0, "destiny_points": 0})
-	save_data.achievements = data.get("achievements", [])
+	save_data.achievements.clear()
+	for item in data.get("achievements", []):
+		save_data.achievements.append(str(item))
 	save_data.unlocked_buffs = data.get("unlocked_buffs", {})
 	save_data.play_stats = data.get("play_stats", {"total_games": 0, "best_ending": "D", "total_playtime": 0})
 	return save_data

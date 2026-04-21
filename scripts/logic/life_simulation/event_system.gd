@@ -62,13 +62,28 @@ func _can_trigger(event: EventData, age_sys: Node) -> bool:
 		return false
 	var chain_prerequisites: Array = event.chain_prerequisites
 	for prereq_id: String in chain_prerequisites:
-		if not prereq_id in session.completed_events:
+		if prereq_id.begins_with("flag:"):
+			var flag_id: String = prereq_id.substr(5)
+			if not flag_id in session.chain_flags:
+				Global.debug_log("[事件系统] %s 前置标记未满足: %s" % [event.event_id, flag_id])
+				return false
+		elif not prereq_id in session.completed_events:
 			Global.debug_log("[事件系统] %s 前置未满足: %s" % [event.event_id, prereq_id])
 			return false
 	var chain_excludes: Array = event.chain_excludes
 	for exclude_id: String in chain_excludes:
 		if exclude_id in session.completed_events:
 			Global.debug_log("[事件系统] %s 互斥事件已完成: %s" % [event.event_id, exclude_id])
+			return false
+	if not event.required_family.is_empty():
+		var session_bg: String = session.family_background.replace("family_", "")
+		var family_match: bool = false
+		for rf: String in event.required_family:
+			if rf.replace("family_", "") == session_bg:
+				family_match = true
+				break
+		if not family_match:
+			Global.debug_log("[事件系统] %s 家庭背景不满足: 需要%s, 当前%s" % [event.event_id, str(event.required_family), session.family_background])
 			return false
 	if event.trigger_chance < 1.0 and randf() > event.trigger_chance:
 		Global.debug_log("[事件系统] %s 概率未通过: %.0f%%" % [event.event_id, event.trigger_chance * 100.0])
@@ -85,6 +100,13 @@ func select_option(event: Dictionary, option: Dictionary) -> void:
 	session.last_event_towers.clear()
 	_apply_rewards(option.get("rewards", []))
 	_apply_costs(option.get("cost", {}))
+	if GameState.current_state == GameState.State.ENDING:
+		return
+	var opt_chain_flag: String = str(option.get("chain_flag", ""))
+	if opt_chain_flag != "" and not opt_chain_flag in session.chain_flags:
+		session.chain_flags.append(opt_chain_flag)
+		Global.debug_log("[事件系统] 记录chain_flag: %s" % opt_chain_flag)
+	_apply_family_effect(option.get("family_effect", {}))
 	if GameState.current_state == GameState.State.ENDING:
 		return
 	var event_id: String = event.get("event_id", "")
@@ -136,6 +158,7 @@ func _apply_rewards(rewards: Array) -> void:
 					if ac and ac.has_method("get_display_name"):
 						attr_display = ac.get_display_name(attr)
 					Global.debug_log("属性变化：%s %+d → %d" % [attr_display, count, session.attributes[attr]])
+	_check_health_depleted()
 
 func _grant_tower(tower_id: String, _count: int) -> void:
 	session.add_tower(tower_id, _count if _count > 0 else -1)
@@ -149,6 +172,44 @@ func _grant_trait(trait_id: String) -> void:
 		session.last_event_traits.append(trait_id)
 		Global.debug_log("获得词条：%s" % trait_id)
 
+func _apply_family_effect(fx: Variant) -> void:
+	if fx is Array:
+		for entry: Dictionary in fx:
+			_apply_single_family_effect(entry)
+	elif fx is Dictionary:
+		_apply_single_family_effect(fx)
+
+func _apply_single_family_effect(fx: Dictionary) -> void:
+	if fx.is_empty():
+		return
+	var member_id: String = fx.get("member", "")
+	if member_id == "" or not session.family_members.has(member_id):
+		return
+	var member: Dictionary = session.family_members[member_id]
+	if fx.has("mood_change"):
+		member["mood"] = fx.mood_change
+		Global.debug_log("[家庭] %s 心情变更: %s" % [member_id, fx.mood_change])
+	if fx.has("health_change"):
+		member["health"] = int(member.get("health", 100)) + int(fx.health_change)
+		Global.debug_log("[家庭] %s 健康变更: %+d → %d" % [member_id, int(fx.health_change), member["health"]])
+	if fx.has("alive_change"):
+		member["alive"] = fx.alive_change
+		Global.debug_log("[家庭] %s 存活状态: %s" % [member_id, str(fx.alive_change)])
+	if fx.has("born_change"):
+		member["born"] = fx.born_change
+		member["alive"] = true
+		if fx.has("is_twin"):
+			member["is_twin"] = fx.is_twin
+		Global.debug_log("[家庭] %s 出生" % member_id)
+	if fx.has("met_change"):
+		member["met"] = fx.met_change
+		Global.debug_log("[家庭] %s 相遇" % member_id)
+
+func _check_health_depleted() -> void:
+	if session.attributes.get("health", 0) <= 0:
+		Global.debug_log("健康归零，触发人生结局（当前健康=%d，阶段=%s）" % [session.attributes.get("health", 0), session.current_stage])
+		_trigger_life_ending("health_depleted")
+
 func _apply_costs(costs: Dictionary) -> void:
 	if costs.has("gold"):
 		var gold_change: int = costs.gold
@@ -160,14 +221,7 @@ func _apply_costs(costs: Dictionary) -> void:
 		session.attributes["health"] += health_change
 		if health_change < 0:
 			Global.debug_log("消耗健康：%d" % (-health_change))
-	if session.attributes.get("health", 0) <= 0:
-		var age_sys_check: Node = _get_age_system()
-		var is_old: bool = session.current_stage == "old_age"
-		if age_sys_check and age_sys_check.has_method("get_stage_id"):
-			is_old = is_old or age_sys_check.get_stage_id() == "old_age"
-		if is_old:
-			Global.debug_log("老年健康归零，触发人生结局（当前健康=%d，阶段=%s）" % [session.attributes.get("health", 0), session.current_stage])
-			_trigger_life_ending("health_depleted")
+	_check_health_depleted()
 
 func _apply_stage_attribute_growth() -> void:
 	var cm: Node = _get_config_manager()
@@ -202,6 +256,7 @@ func _apply_stage_attribute_growth() -> void:
 		session.max_home_health += float(health_growth)
 		session.home_health += float(health_growth)
 		Global.debug_log("生命值同步：max_home_health=%.0f, home_health=%.0f" % [session.max_home_health, session.home_health])
+	_check_health_depleted()
 
 func _trigger_life_ending(reason: String) -> void:
 	session.ending_reason = reason
@@ -253,10 +308,16 @@ func check_option_requirements(option: Dictionary) -> bool:
 			var edu_trait: String = str(required_value)
 			if not edu_trait in session.traits:
 				return false
-		elif attr_name == "work_ability":
-			var threshold: int = int(required_value)
-			var ability: int = session.attributes.get("intelligence", 0) + session.attributes.get("courage", 0)
-			if ability < threshold:
+		elif attr_name == "chain_flag":
+			if not str(required_value) in session.chain_flags:
+				return false
+		elif attr_name == "family_member_alive":
+			var mid: String = str(required_value)
+			if not session.family_members.has(mid) or not session.family_members[mid].get("alive", false):
+				return false
+		elif attr_name == "family_member_met":
+			var mid2: String = str(required_value)
+			if not session.family_members.has(mid2) or not session.family_members[mid2].get("met", false):
 				return false
 		else:
 			var current_value: int = session.attributes.get(attr_name, 0)

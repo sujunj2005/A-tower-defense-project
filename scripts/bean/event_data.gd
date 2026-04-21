@@ -11,6 +11,8 @@ extends Resource
 @export var trigger_chance: float = 1.0
 @export var chain_prerequisites: Array[String] = []
 @export var chain_excludes: Array[String] = []
+@export var family_member: String = ""
+@export var required_family: Array[String] = []
 
 func to_dict() -> Dictionary:
 	var opts: Array[Dictionary] = []
@@ -26,7 +28,9 @@ func to_dict() -> Dictionary:
 		"is_deadly": is_deadly,
 		"trigger_chance": trigger_chance,
 		"chain_prerequisites": chain_prerequisites,
-		"chain_excludes": chain_excludes
+		"chain_excludes": chain_excludes,
+		"family_member": family_member,
+		"required_family": required_family
 	}
 
 static func from_dict(data: Dictionary) -> EventData:
@@ -59,6 +63,10 @@ static func from_dict(data: Dictionary) -> EventData:
 	var raw_excludes = data.get("chain_excludes", [])
 	for e in raw_excludes:
 		event.chain_excludes.append(str(e))
+	event.family_member = str(data.get("family_member", ""))
+	var raw_req_family = data.get("required_family", [])
+	for rf in raw_req_family:
+		event.required_family.append(str(rf))
 	return event
 
 static func _load_options_fallback(event_id: String) -> Array[OptionData]:

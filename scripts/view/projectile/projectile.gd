@@ -32,6 +32,8 @@ var effect_radius: float = 50.0
 var effect_damage_ratio: float = 0.5
 var effect_max_targets: int = 3
 
+var is_crit: bool = false
+
 ## 状态标志
 var is_active: bool = false
 var has_hit_target: bool = false
@@ -352,12 +354,10 @@ func deal_damage_to_target(target: Node2D, amount: float):
 		return
 
 	if target.has_method("take_damage"):
-		# 🆕 传递攻击者信息（使用 source_tower，需要检查是否有效）
 		if source_tower and is_instance_valid(source_tower):
-			target.take_damage(amount, damage_type, source_tower)
+			target.take_damage(amount, damage_type, source_tower, is_crit)
 		else:
-			# 塔已被销毁，不记录伤害来源
-			target.take_damage(amount, damage_type, null)
+			target.take_damage(amount, damage_type, null, is_crit)
 	else:
 		print("[警告] 目标不支持 take_damage 方法")
 

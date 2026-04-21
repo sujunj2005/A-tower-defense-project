@@ -4,20 +4,18 @@ class_name TargetInfoPanel
 signal sell_tower_requested(tower: Tower)
 
 var _current_tower: Tower = null
-var _current_enemy: Enemy = null
 var _info_label: RichTextLabel
 var _sell_button: Button
 var _title_label: Label
 var _close_button: Button
+var _attack_toggle: CheckButton
+var _attack_toggle_container: HBoxContainer
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		if visible and _current_tower and is_instance_valid(_current_tower):
 			_title_label.text = "🏰 " + _current_tower.config.get_display_name() + "  Lv." + str(_current_tower.current_level)
 			_info_label.text = _build_tower_info_text(_current_tower)
-		elif visible and _current_enemy and is_instance_valid(_current_enemy):
-			_title_label.text = "👹 " + _current_enemy.config.get_display_name()
-			_info_label.text = _build_enemy_info_text(_current_enemy)
 
 func _ready() -> void:
 	visible = false
@@ -30,7 +28,7 @@ func _setup_ui() -> void:
 	anchor_bottom = 1.0
 	offset_left = 20.0
 	offset_right = -20.0
-	offset_top = -160.0
+	offset_top = -210.0
 	offset_bottom = -10.0
 
 	var style: StyleBoxFlat = StyleBoxFlat.new()
@@ -68,10 +66,26 @@ func _setup_ui() -> void:
 	_info_label.bbcode_enabled = true
 	_info_label.fit_content = true
 	_info_label.scroll_following = false
-	_info_label.custom_minimum_size = Vector2(0, 70)
+	_info_label.custom_minimum_size = Vector2(0, 100)
 	_info_label.add_theme_font_size_override("normal_font_size", 14)
 	_info_label.add_theme_color_override("default_color", Color(0.9, 0.9, 0.9, 1.0))
 	vbox.add_child(_info_label)
+
+	_attack_toggle_container = HBoxContainer.new()
+	_attack_toggle_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	_attack_toggle_container.add_theme_constant_override("separation", 8)
+	vbox.add_child(_attack_toggle_container)
+
+	var attack_lbl: Label = Label.new()
+	attack_lbl.text = tr("TOWER_ATTACK_TOGGLE")
+	attack_lbl.add_theme_font_size_override("font_size", 14)
+	attack_lbl.add_theme_color_override("font_color", Color(1, 1, 1))
+	_attack_toggle_container.add_child(attack_lbl)
+
+	_attack_toggle = CheckButton.new()
+	_attack_toggle.button_pressed = true
+	_attack_toggle.pressed.connect(_on_attack_toggle_changed)
+	_attack_toggle_container.add_child(_attack_toggle)
 
 	_sell_button = Button.new()
 	_sell_button.text = tr("SELL_TOWER")
@@ -95,7 +109,6 @@ func show_tower_info(tower: Tower) -> void:
 	if not tower or not tower.config:
 		return
 	_current_tower = tower
-	_current_enemy = null
 	_last_tower_level = tower.current_level
 	_last_tower_exp = tower.current_experience
 	_title_label.text = "🏰 " + tower.config.get_display_name() + "  Lv." + str(tower.current_level)
@@ -106,29 +119,17 @@ func show_tower_info(tower: Tower) -> void:
 		_sell_button.visible = true
 	else:
 		_sell_button.visible = false
-	visible = true
-
-func show_enemy_info(enemy: Enemy) -> void:
-	if not enemy or not enemy.config:
-		return
-	_current_enemy = enemy
-	_current_tower = null
-	_title_label.text = "👹 " + enemy.config.get_display_name()
-	var info: String = _build_enemy_info_text(enemy)
-	_info_label.text = info
-	_sell_button.visible = false
+	if _attack_toggle:
+		_attack_toggle.button_pressed = tower.is_attack_enabled
+		_attack_toggle_container.visible = true
 	visible = true
 
 func hide_panel() -> void:
 	visible = false
 	_current_tower = null
-	_current_enemy = null
 
 func get_current_tower() -> Tower:
 	return _current_tower
-
-func get_current_enemy() -> Enemy:
-	return _current_enemy
 
 func _build_tower_info_text(tower: Tower) -> String:
 	var cfg: TowerBean = tower.config
@@ -164,23 +165,6 @@ func _build_tower_info_text(tower: Tower) -> String:
 	text += "\n" + tr("TOWER_EXP") % [tower.current_experience, tower.experience_required, cfg.cost]
 	return text
 
-func _build_enemy_info_text(enemy: Enemy) -> String:
-	var cfg: EnemyConfig = enemy.config
-	var text: String = ""
-	text += tr("ENEMY_HP") % [max(0.0, enemy.current_health), cfg.max_health]
-	text += "    " + tr("ENEMY_SPEED") % enemy.base_move_speed
-	text += "    " + tr("ENEMY_DAMAGE") % cfg.damage
-	text += "    " + tr("ENEMY_GOLD") % cfg.gold_drop
-	var phys_res: float = cfg.physical_resistance * 100.0
-	var mag_res: float = cfg.magical_resistance * 100.0
-	text += "\n" + tr("ENEMY_PHYS_RES") % phys_res
-	text += "    " + tr("ENEMY_MAG_RES") % mag_res
-	if enemy.is_slowed:
-		text += "\n" + tr("ENEMY_SLOWED") % [enemy.slow_amount * 100.0, enemy.slow_timer]
-	if enemy.is_dot_active:
-		text += "\n" + tr("ENEMY_DOT") % [enemy.dot_damage_per_second, max(0.0, enemy.dot_duration - enemy.dot_elapsed)]
-	return text
-
 func _calculate_sell_price(tower: Tower) -> int:
 	if not tower or not tower.config:
 		return 0
@@ -193,13 +177,20 @@ func _on_sell_pressed() -> void:
 		sell_tower_requested.emit(_current_tower)
 	hide_panel()
 
+func _on_attack_toggle_changed() -> void:
+	if not _current_tower or not is_instance_valid(_current_tower):
+		return
+	_current_tower.is_attack_enabled = _attack_toggle.button_pressed
+	if not _attack_toggle.button_pressed:
+		_current_tower.modulate = Color(1, 1, 1, 0.5)
+	else:
+		_current_tower.modulate = Color(1, 1, 1, 1)
+
 var _last_tower_level: int = -1
 var _last_tower_exp: int = -1
 
 func _process(_delta: float) -> void:
-	if visible and _current_enemy and is_instance_valid(_current_enemy):
-		show_enemy_info(_current_enemy)
-	elif visible and _current_tower and is_instance_valid(_current_tower):
+	if visible and _current_tower and is_instance_valid(_current_tower):
 		var tower: Tower = _current_tower
 		if tower.current_level != _last_tower_level or tower.current_experience != _last_tower_exp:
 			_last_tower_level = tower.current_level
@@ -208,3 +199,5 @@ func _process(_delta: float) -> void:
 			_info_label.text = _build_tower_info_text(tower)
 		if _sell_button.visible and tower.config.sell_ratio > 0.0:
 			_sell_button.text = tr("SELL_RETURN") % _calculate_sell_price(tower)
+	elif visible and not is_instance_valid(_current_tower):
+		hide_panel()

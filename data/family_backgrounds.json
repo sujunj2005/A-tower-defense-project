@@ -5,6 +5,7 @@
 			"family_id": "family_cadre",
 			"family_name": "FAMILY_CADRE_NAME",
 			"description": "FAMILY_CADRE_DESC",
+			"points_cost": 12,
 			"traits": [
 				{
 					"type": "gold_bonus",
@@ -41,6 +42,7 @@
 			"family_id": "family_merchant",
 			"family_name": "FAMILY_MERCHANT_NAME",
 			"description": "FAMILY_MERCHANT_DESC",
+			"points_cost": 15,
 			"traits": [
 				{
 					"type": "gold_bonus",
@@ -77,6 +79,7 @@
 			"family_id": "family_worker",
 			"family_name": "FAMILY_WORKER_NAME",
 			"description": "FAMILY_WORKER_DESC",
+			"points_cost": 5,
 			"traits": [
 				{
 					"type": "tower_cost_modifier",
@@ -113,6 +116,7 @@
 			"family_id": "family_farmer",
 			"family_name": "FAMILY_FARMER_NAME",
 			"description": "FAMILY_FARMER_DESC",
+			"points_cost": 8,
 			"traits": [
 				{
 					"type": "tower_cost_modifier",
@@ -141,6 +145,228 @@
 			"modifiers": {
 				"gold_bonus": 0.1,
 				"tower_cost_modifier": -0.15,
+				"health_bonus": 0,
+				"experience_bonus": 0.15
+			}
+		},
+		{
+			"family_id": "family_teacher",
+			"family_name": "FAMILY_TEACHER_NAME",
+			"description": "FAMILY_TEACHER_DESC",
+			"points_cost": 8,
+			"traits": [
+				{
+					"type": "experience_bonus",
+					"value": 0.2,
+					"text": "FAMILY_TEACHER_TRAIT_0_TEXT"
+				},
+				{
+					"type": "gold_bonus",
+					"value": 0.1,
+					"text": "FAMILY_TEACHER_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 130,
+				"towers": [
+					{
+						"tower_chinese_basic": 2
+					},
+					{
+						"tower_math_basic": 2
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": 0.1,
+				"tower_cost_modifier": 0,
+				"health_bonus": 0,
+				"experience_bonus": 0.2
+			}
+		},
+		{
+			"family_id": "family_military",
+			"family_name": "FAMILY_MILITARY_NAME",
+			"description": "FAMILY_MILITARY_DESC",
+			"points_cost": 10,
+			"traits": [
+				{
+					"type": "health_bonus",
+					"value": 20,
+					"text": "FAMILY_MILITARY_TRAIT_0_TEXT"
+				},
+				{
+					"type": "tower_cost_modifier",
+					"value": -0.05,
+					"text": "FAMILY_MILITARY_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 110,
+				"towers": [
+					{
+						"tower_sports_basic": 3
+					},
+					{
+						"tower_chinese_basic": 1
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": 0.15,
+				"tower_cost_modifier": -0.05,
+				"health_bonus": 20,
+				"experience_bonus": 0.05
+			}
+		},
+		{
+			"family_id": "family_artist",
+			"family_name": "FAMILY_ARTIST_NAME",
+			"description": "FAMILY_ARTIST_DESC",
+			"points_cost": 10,
+			"traits": [
+				{
+					"type": "gold_bonus",
+					"value": 0.15,
+					"text": "FAMILY_ARTIST_TRAIT_0_TEXT"
+				},
+				{
+					"type": "experience_bonus",
+					"value": 0.1,
+					"text": "FAMILY_ARTIST_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 120,
+				"towers": [
+					{
+						"tower_artist_basic": 3
+					},
+					{
+						"tower_chinese_basic": 1
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": 0.15,
+				"tower_cost_modifier": 0,
+				"health_bonus": 0,
+				"experience_bonus": 0.1
+			}
+		},
+		{
+			"family_id": "family_doctor",
+			"family_name": "FAMILY_DOCTOR_NAME",
+			"description": "FAMILY_DOCTOR_DESC",
+			"points_cost": 12,
+			"traits": [
+				{
+					"type": "health_bonus",
+					"value": 25,
+					"text": "FAMILY_DOCTOR_TRAIT_0_TEXT"
+				},
+				{
+					"type": "gold_bonus",
+					"value": 0.2,
+					"text": "FAMILY_DOCTOR_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 160,
+				"towers": [
+					{
+						"tower_math_basic": 2
+					},
+					{
+						"tower_programming_basic": 1
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": 0.2,
+				"tower_cost_modifier": 0,
+				"health_bonus": 25,
+				"experience_bonus": 0.08
+			}
+		},
+		{
+			"family_id": "family_rural_poor",
+			"family_name": "FAMILY_RURAL_POOR_NAME",
+			"description": "FAMILY_RURAL_POOR_DESC",
+			"points_cost": 2,
+			"traits": [
+				{
+					"type": "tower_cost_modifier",
+					"value": -0.2,
+					"text": "FAMILY_RURAL_POOR_TRAIT_0_TEXT"
+				},
+				{
+					"type": "gold_bonus",
+					"value": -0.1,
+					"text": "FAMILY_RURAL_POOR_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 60,
+				"towers": [
+					{
+						"tower_sports_basic": 2
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": -0.1,
+				"tower_cost_modifier": -0.2,
+				"health_bonus": 0,
+				"experience_bonus": 0.1
+			}
+		},
+		{
+			"family_id": "family_celebrity",
+			"family_name": "FAMILY_CELEBRITY_NAME",
+			"description": "FAMILY_CELEBRITY_DESC",
+			"points_cost": 15,
+			"traits": [
+				{
+					"type": "gold_bonus",
+					"value": 0.4,
+					"text": "FAMILY_CELEBRITY_TRAIT_0_TEXT"
+				},
+				{
+					"type": "experience_bonus",
+					"value": 0.15,
+					"text": "FAMILY_CELEBRITY_TRAIT_1_TEXT"
+				}
+			],
+			"initial_resources": {
+				"gold": 220,
+				"towers": [
+					{
+						"tower_chinese_basic": -1
+					},
+					{
+						"tower_english_basic": 2
+					},
+					{
+						"tower_artist_basic": 2
+					}
+				],
+				"traits": []
+			},
+			"max_home_health": 100,
+			"modifiers": {
+				"gold_bonus": 0.4,
+				"tower_cost_modifier": 0,
 				"health_bonus": 0,
 				"experience_bonus": 0.15
 			}

@@ -629,6 +629,551 @@
 			"chain_excludes": [],
 			"description": "EVENT_TWILIGHT_WISDOM_DESC",
 			"is_deadly": false
+		},
+		{
+			"event_id": "event_father_back",
+			"event_name": "EVENT_FATHER_BACK_NAME",
+			"ages": [
+				9,
+				10,
+				11
+			],
+			"stage": "childhood",
+			"chain_prerequisites": [],
+			"chain_excludes": [],
+			"description": "EVENT_FATHER_BACK_DESC",
+			"is_deadly": false,
+			"family_member": "father",
+			"required_family": [
+				"family_farmer",
+				"family_worker"
+			]
+		},
+		{
+			"event_id": "event_father_sick",
+			"event_name": "EVENT_FATHER_SICK_NAME",
+			"ages": [
+				26,
+				27,
+				28
+			],
+			"stage": "youth",
+			"chain_prerequisites": [
+				"event_father_back"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_FATHER_SICK_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_father_retire",
+			"event_name": "EVENT_FATHER_RETIRE_NAME",
+			"ages": [
+				36,
+				37,
+				38
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_father_sick"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_FATHER_RETIRE_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_father_final",
+			"event_name": "EVENT_FATHER_FINAL_NAME",
+			"ages": [
+				48,
+				49,
+				50,
+				51,
+				52
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"flag:father_retire_cared",
+				"flag:father_retire_mail",
+				"flag:father_retire_reconciled"
+			],
+			"chain_excludes": [
+				"event_father_alone"
+			],
+			"description": "EVENT_FATHER_FINAL_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_father_alone",
+			"event_name": "EVENT_FATHER_ALONE_NAME",
+			"ages": [
+				48,
+				49,
+				50,
+				51,
+				52
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"flag:father_retire_cold"
+			],
+			"chain_excludes": [
+				"event_father_final"
+			],
+			"description": "EVENT_FATHER_ALONE_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_father_memory",
+			"event_name": "EVENT_FATHER_MEMORY_NAME",
+			"ages": [
+				58,
+				59,
+				60,
+				61,
+				62
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_father_final",
+				"event_father_alone"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_FATHER_MEMORY_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_father_legacy",
+			"event_name": "EVENT_FATHER_LEGACY_NAME",
+			"ages": [
+				63,
+				64,
+				65,
+				66,
+				67,
+				68
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_father_memory"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_FATHER_LEGACY_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_mother_nag",
+			"event_name": "EVENT_MOTHER_NAG_NAME",
+			"ages": [
+				8,
+				9,
+				10
+			],
+			"stage": "childhood",
+			"chain_prerequisites": [],
+			"chain_excludes": [],
+			"description": "EVENT_MOTHER_NAG_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_mother_visit",
+			"event_name": "EVENT_MOTHER_VISIT_NAME",
+			"ages": [
+				22,
+				23,
+				24
+			],
+			"stage": "youth",
+			"chain_prerequisites": [
+				"event_mother_nag"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_MOTHER_VISIT_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_mother_sick_serious",
+			"event_name": "EVENT_MOTHER_SICK_SERIOUS_NAME",
+			"ages": [
+				32,
+				33,
+				34,
+				35,
+				36
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_mother_visit"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_MOTHER_SICK_SERIOUS_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_mother_recovery",
+			"event_name": "EVENT_MOTHER_RECOVERY_NAME",
+			"ages": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"flag:mother_sick_treated",
+				"flag:mother_sick_cared"
+			],
+			"chain_excludes": [
+				"event_mother_decline"
+			],
+			"description": "EVENT_MOTHER_RECOVERY_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_mother_decline",
+			"event_name": "EVENT_MOTHER_DECLINE_NAME",
+			"ages": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"flag:mother_sick_ignore"
+			],
+			"chain_excludes": [
+				"event_mother_recovery"
+			],
+			"description": "EVENT_MOTHER_DECLINE_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_mother_final_memory",
+			"event_name": "EVENT_MOTHER_FINAL_MEMORY_NAME",
+			"ages": [
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_mother_recovery",
+				"event_mother_decline"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_MOTHER_FINAL_MEMORY_DESC",
+			"is_deadly": false,
+			"family_member": "mother"
+		},
+		{
+			"event_id": "event_meet_spouse",
+			"event_name": "EVENT_MEET_SPOUSE_NAME",
+			"ages": [
+				22,
+				23,
+				24
+			],
+			"stage": "youth",
+			"chain_prerequisites": [],
+			"chain_excludes": [
+				"event_college_love"
+			],
+			"description": "EVENT_MEET_SPOUSE_DESC",
+			"is_deadly": false,
+			"family_member": "spouse"
+		},
+		{
+			"event_id": "event_proposal",
+			"event_name": "EVENT_PROPOSAL_NAME",
+			"ages": [
+				25,
+				26,
+				27
+			],
+			"stage": "youth",
+			"chain_prerequisites": [
+				"event_meet_spouse"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_PROPOSAL_DESC",
+			"is_deadly": false,
+			"family_member": "spouse"
+		},
+		{
+			"event_id": "event_wedding",
+			"event_name": "EVENT_WEDDING_NAME",
+			"ages": [
+				26,
+				27,
+				28
+			],
+			"stage": "youth",
+			"chain_prerequisites": [
+				"event_proposal"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_WEDDING_DESC",
+			"is_deadly": false,
+			"family_member": "spouse"
+		},
+		{
+			"event_id": "event_first_child_birth",
+			"event_name": "EVENT_FIRST_CHILD_BIRTH_NAME",
+			"ages": [
+				28,
+				29,
+				30,
+				31,
+				32
+			],
+			"stage": "youth",
+			"chain_prerequisites": [
+				"event_wedding"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_FIRST_CHILD_BIRTH_DESC",
+			"is_deadly": false,
+			"family_member": "first_child"
+		},
+		{
+			"event_id": "event_second_child",
+			"event_name": "EVENT_SECOND_CHILD_NAME",
+			"ages": [
+				32,
+				33,
+				34,
+				35,
+				36
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_first_child_birth"
+			],
+			"chain_excludes": [
+				"flag:child_twins"
+			],
+			"description": "EVENT_SECOND_CHILD_DESC",
+			"is_deadly": false,
+			"family_member": "second_child"
+		},
+		{
+			"event_id": "event_child_school",
+			"event_name": "EVENT_CHILD_SCHOOL_NAME",
+			"ages": [
+				35,
+				36,
+				37
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_first_child_birth"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_CHILD_SCHOOL_DESC",
+			"is_deadly": false,
+			"family_member": "first_child"
+		},
+		{
+			"event_id": "event_child_rebellion",
+			"event_name": "EVENT_CHILD_REBELLION_NAME",
+			"ages": [
+				43,
+				44,
+				45
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_child_school"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_CHILD_REBELLION_DESC",
+			"is_deadly": false,
+			"family_member": "first_child"
+		},
+		{
+			"event_id": "event_child_college",
+			"event_name": "EVENT_CHILD_COLLEGE_NAME",
+			"ages": [
+				48,
+				49,
+				50
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_child_rebellion"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_CHILD_COLLEGE_DESC",
+			"is_deadly": false,
+			"family_member": "first_child"
+		},
+		{
+			"event_id": "event_child_career",
+			"event_name": "EVENT_CHILD_CAREER_NAME",
+			"ages": [
+				55,
+				56,
+				57,
+				58
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_child_college"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_CHILD_CAREER_DESC",
+			"is_deadly": false,
+			"family_member": "first_child"
+		},
+		{
+			"event_id": "event_spouse_argument",
+			"event_name": "EVENT_SPOUSE_ARGUMENT_NAME",
+			"ages": [
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_wedding"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_SPOUSE_ARGUMENT_DESC",
+			"is_deadly": false,
+			"family_member": "spouse",
+			"trigger_chance": 0.3
+		},
+		{
+			"event_id": "event_child_sick",
+			"event_name": "EVENT_CHILD_SICK_NAME",
+			"ages": [
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_first_child_birth"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_CHILD_SICK_DESC",
+			"is_deadly": false,
+			"family_member": "first_child",
+			"trigger_chance": 0.3
+		},
+		{
+			"event_id": "event_parent_move_in",
+			"event_name": "EVENT_PARENT_MOVE_IN_NAME",
+			"ages": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [
+				"event_father_retire"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_PARENT_MOVE_IN_DESC",
+			"is_deadly": false,
+			"family_member": "father"
+		},
+		{
+			"event_id": "event_midlife_crisis",
+			"event_name": "EVENT_MIDLIFE_CRISIS_NAME",
+			"ages": [
+				42,
+				43,
+				44,
+				45,
+				46,
+				47,
+				48
+			],
+			"stage": "middle_age",
+			"chain_prerequisites": [],
+			"chain_excludes": [],
+			"description": "EVENT_MIDLIFE_CRISIS_DESC",
+			"is_deadly": false
+		},
+		{
+			"event_id": "event_grandchild_birth",
+			"event_name": "EVENT_GRANDCHILD_BIRTH_NAME",
+			"ages": [
+				52,
+				53,
+				54,
+				55,
+				56
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_child_career"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_GRANDCHILD_BIRTH_DESC",
+			"is_deadly": false,
+			"family_member": "grandchild"
+		},
+		{
+			"event_id": "event_spouse_retirement",
+			"event_name": "EVENT_SPOUSE_RETIREMENT_NAME",
+			"ages": [
+				58,
+				59,
+				60,
+				61,
+				62
+			],
+			"stage": "old_age",
+			"chain_prerequisites": [
+				"event_wedding"
+			],
+			"chain_excludes": [],
+			"description": "EVENT_SPOUSE_RETIREMENT_DESC",
+			"is_deadly": false,
+			"family_member": "spouse"
 		}
 	]
 }

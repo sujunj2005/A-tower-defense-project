@@ -75,7 +75,7 @@ func _setup_ui() -> void:
 	_panel_bg = PanelContainer.new()
 	_panel_bg.anchor_left = 0.0
 	_panel_bg.anchor_top = 0.0
-	_panel_bg.anchor_right = 0.0
+	_panel_bg.anchor_right = 1.0
 	_panel_bg.anchor_bottom = 1.0
 	_panel_bg.offset_left = 36.0
 	_panel_bg.offset_right = 0.0

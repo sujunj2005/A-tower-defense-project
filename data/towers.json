@@ -196,8 +196,8 @@
 					"probability": 0.15,
 					"bonus_damage": 0.5,
 					"target_tags": [
-						"foreign",
-						"western"
+						"social",
+						"mental"
 					]
 				}
 			},

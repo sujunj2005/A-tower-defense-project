@@ -10,6 +10,8 @@ var game_session: GameSessionData = GameSessionData.new()
 
 var debug_mode: bool = true
 
+var debug_map_id: String = ""
+
 var soft_paused: bool = false
 
 func _ready() -> void:

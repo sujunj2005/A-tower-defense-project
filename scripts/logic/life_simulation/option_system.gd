@@ -66,6 +66,18 @@ func check_requirements(option: OptionData) -> bool:
 			var edu_trait: String = str(required_value)
 			if not edu_trait in session.traits:
 				return false
+		elif attr_name == "chain_flag":
+			var flag_id: String = str(required_value)
+			if not flag_id in session.chain_flags:
+				return false
+		elif attr_name == "family_member_alive":
+			var member_id: String = str(required_value)
+			if not session.family_members.has(member_id) or not session.family_members[member_id].get("alive", false):
+				return false
+		elif attr_name == "family_member_met":
+			var member_id: String = str(required_value)
+			if not session.family_members.has(member_id) or not session.family_members[member_id].get("met", false):
+				return false
 		elif attr_name == "work_ability":
 			var threshold: int = int(required_value)
 			var ability: int = session.attributes.get("intelligence", 0) + session.attributes.get("courage", 0)
@@ -128,9 +140,28 @@ func format_requirements(requirements: Dictionary) -> String:
 					parts.append(tr("REQ_FAMILY") % bg_val)
 			"education":
 				parts.append(tr("REQ_EDUCATION") % str(val))
+			"chain_flag":
+				pass
+			"family_member_alive":
+				var member_name: String = _get_family_member_name(str(val))
+				parts.append(tr("REQ_FAMILY_MEMBER_ALIVE") % member_name)
+			"family_member_met":
+				var member_name2: String = _get_family_member_name(str(val))
+				parts.append(tr("REQ_FAMILY_MEMBER_MET") % member_name2)
 			"work_ability":
 				parts.append(tr("REQ_WORK_ABILITY") % int(val))
 			_:
 				var display_name: String = attr_names.get(key, key)
 				parts.append(tr("REQUIREMENT_FORMAT") % [display_name, int(val)])
 	return tr("SEPARATOR_DUN").join(parts)
+
+func _get_family_member_name(member_id: String) -> String:
+	var names: Dictionary = {
+		"father": tr("FAMILY_FATHER"),
+		"mother": tr("FAMILY_MOTHER"),
+		"spouse": tr("FAMILY_SPOUSE"),
+		"first_child": tr("FAMILY_FIRST_CHILD"),
+		"second_child": tr("FAMILY_SECOND_CHILD"),
+		"grandchild": tr("FAMILY_GRANDCHILD"),
+	}
+	return names.get(member_id, member_id)

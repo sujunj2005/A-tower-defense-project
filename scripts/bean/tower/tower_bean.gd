@@ -40,7 +40,9 @@ var effect_id: String = ""
 var effect_name: String = ""
 var effect_desc: String = ""
 var effect_icon: String = ""
+var effect_params: Dictionary = {}
 var sub_effects: Array = []
+var passive_effect: Dictionary = {}
 
 static func from_dict(data: Dictionary) -> TowerBean:
 	var bean := TowerBean.new()
@@ -74,6 +76,8 @@ static func from_dict(data: Dictionary) -> TowerBean:
 	bean.damage_growth = float(upgrade.get("damage_increase", 0.1))
 	bean.attack_speed_growth = float(upgrade.get("attack_speed_increase", 0.05))
 	_parse_special_effect(bean, data.get("special_effect", {}))
+	if data.has("passive_effect"):
+		bean.passive_effect = data.passive_effect
 	if data.has("texture_path") and str(data.texture_path) != "":
 		bean.texture_path = str(data.texture_path)
 	else:
@@ -98,19 +102,52 @@ static func _parse_special_effect(bean: TowerBean, special: Dictionary) -> void:
 	var params: Dictionary = defaults.duplicate()
 	for k: String in overrides:
 		params[k] = overrides[k]
+	bean.effect_params = params
 	match effect_type_str:
 		"slow":
 			bean.effect_type = GameConfig.EffectType.SLOW
 			bean.effect_value = float(params.get("value", 0.2))
-		"dot", "burn":
+		"dot":
 			bean.effect_type = GameConfig.EffectType.DOT
 			bean.effect_value = float(params.get("value", 5.0))
+		"burn":
+			bean.effect_type = GameConfig.EffectType.BURN
+			bean.effect_value = float(params.get("value", 8.0))
 		"splash", "aoe":
 			bean.effect_type = GameConfig.EffectType.SPLASH
 			bean.effect_radius = float(params.get("radius", 50.0))
 		"crit":
-			bean.effect_type = GameConfig.EffectType.NONE
+			bean.effect_type = GameConfig.EffectType.CRIT
 			bean.effect_value = float(params.get("crit_multiplier", 2.0))
+		"silence":
+			bean.effect_type = GameConfig.EffectType.SILENCE
+			bean.effect_value = float(params.get("duration", 1.0))
+		"armor_break":
+			bean.effect_type = GameConfig.EffectType.ARMOR_BREAK
+			bean.effect_value = float(params.get("value", 0.3))
+		"confusion":
+			bean.effect_type = GameConfig.EffectType.CONFUSION
+			bean.effect_value = float(params.get("duration", 2.0))
+		"debuff":
+			bean.effect_type = GameConfig.EffectType.DEBUFF
+			bean.effect_value = float(params.get("value", 0.15))
+		"slow_aura":
+			bean.effect_type = GameConfig.EffectType.SLOW_AURA
+			bean.effect_radius = float(params.get("radius", 200.0))
+		"buff_aura":
+			bean.effect_type = GameConfig.EffectType.BUFF_AURA
+			bean.effect_radius = float(params.get("radius", 200.0))
+		"single_control":
+			bean.effect_type = GameConfig.EffectType.SINGLE_CONTROL
+			bean.effect_value = float(params.get("duration", 3.0))
+		"cultural_suppression":
+			bean.effect_type = GameConfig.EffectType.CULTURAL_SUPPRESSION
+			bean.effect_value = float(params.get("bonus_damage", 0.5))
+		"gold_bonus":
+			bean.effect_type = GameConfig.EffectType.GOLD_BONUS
+			bean.effect_value = float(params.get("gold_per_kill", 0.2))
+		"summon":
+			bean.effect_type = GameConfig.EffectType.SUMMON
 		"pierce":
 			bean.pierce_enabled = true
 			bean.pierce_count = int(params.get("count", 2))

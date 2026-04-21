@@ -25,6 +25,8 @@ func _process(delta: float) -> void:
 		_process_ability(ability, delta)
 
 func _process_ability(ability: Dictionary, delta: float) -> void:
+	if enemy and enemy.is_silenced:
+		return
 	var ability_id: String = ability.get("ability_id", "")
 	match ability_id:
 		"dodge":

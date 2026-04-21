@@ -32,6 +32,24 @@ var knockback_duration: float = 0.0
 var knockback_timer: float = 0.0
 var is_being_knocked_back: bool = false
 
+var is_silenced: bool = false
+var silence_timer: float = 0.0
+
+var is_stunned: bool = false
+var stun_timer: float = 0.0
+
+var is_confused: bool = false
+var confusion_timer: float = 0.0
+
+var armor_break_amount: float = 0.0
+var armor_break_timer: float = 0.0
+
+var debuff_amount: float = 0.0
+var debuff_timer: float = 0.0
+
+var _status_icon_container: HBoxContainer
+var _status_icons: Dictionary = {}
+
 var damage_dealers: Dictionary[Node2D, float] = {}
 var last_hit_tower: Node2D = null
 var ability_component: Node
@@ -73,6 +91,7 @@ func initialize(enemy_config: EnemyConfig) -> void:
 	base_move_speed = config.move_speed
 	setup_sprite()
 	setup_health_bar()
+	_setup_status_icons()
 	call_deferred("_setup_abilities")
 
 func setup_sprite() -> void:
@@ -122,6 +141,51 @@ func setup_health_bar() -> void:
 
 	add_child(health_bar)
 
+func _setup_status_icons() -> void:
+	_status_icon_container = HBoxContainer.new()
+	_status_icon_container.add_theme_constant_override("separation", 2)
+	_status_icon_container.position = Vector2(-35, -60)
+	_status_icon_container.z_index = 21
+	add_child(_status_icon_container)
+	var icon_defs := {
+		"slow": "res://images/status_icons/status_slow.png",
+		"dot": "res://images/status_icons/status_dot.png",
+		"stun": "res://images/status_icons/status_stun.png",
+		"silence": "res://images/status_icons/status_silence.png",
+		"confusion": "res://images/status_icons/status_confusion.png",
+		"armor_break": "res://images/status_icons/status_armor_break.png",
+		"debuff": "res://images/status_icons/status_debuff.png"
+	}
+	for key: String in icon_defs:
+		var tex: Texture2D = AssetsManager.load_image(icon_defs[key]) as Texture2D
+		var rect := TextureRect.new()
+		rect.texture = tex
+		rect.custom_minimum_size = Vector2(12, 12)
+		rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		rect.visible = false
+		rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_status_icon_container.add_child(rect)
+		_status_icons[key] = rect
+
+func _update_status_icons() -> void:
+	if not _status_icon_container:
+		return
+	if _status_icons.has("slow"):
+		_status_icons["slow"].visible = is_slowed
+	if _status_icons.has("dot"):
+		_status_icons["dot"].visible = is_dot_active
+	if _status_icons.has("stun"):
+		_status_icons["stun"].visible = is_stunned
+	if _status_icons.has("silence"):
+		_status_icons["silence"].visible = is_silenced
+	if _status_icons.has("confusion"):
+		_status_icons["confusion"].visible = is_confused
+	if _status_icons.has("armor_break"):
+		_status_icons["armor_break"].visible = armor_break_timer > 0
+	if _status_icons.has("debuff"):
+		_status_icons["debuff"].visible = debuff_timer > 0
+	_status_icon_container.visible = _status_icon_container.get_children().any(func(c): return c.visible)
+
 func set_waypoints(wps: Array[Vector2], set_position: bool = false) -> void:
 	waypoints = wps
 	_rebuild_path_from_waypoints()
@@ -156,6 +220,9 @@ func _process(delta: float) -> void:
 	if is_being_knocked_back:
 		return
 
+	if is_stunned:
+		return
+
 	if path_points.is_empty():
 		return
 
@@ -171,9 +238,17 @@ func _process(delta: float) -> void:
 	var actual_speed: float = get_effective_move_speed()
 	var move_distance: float = actual_speed * delta
 
-	if dist_to_target <= move_distance:
-		global_position = target_pos
-		current_path_index += 1
+	if is_confused:
+		move_distance = -move_distance
+
+	if dist_to_target <= absf(move_distance):
+		if move_distance >= 0:
+			global_position = target_pos
+			current_path_index += 1
+		else:
+			if current_path_index > 0:
+				current_path_index -= 1
+				global_position = path_points[current_path_index]
 	else:
 		var move_dir: Vector2 = direction_to_target.normalized()
 		global_position += move_dir * move_distance
@@ -182,6 +257,12 @@ func update_effect_states(delta: float) -> void:
 	update_slow_effect(delta)
 	update_dot_effect(delta)
 	update_knockback_effect(delta)
+	update_silence_effect(delta)
+	update_stun_effect(delta)
+	update_confusion_effect(delta)
+	update_armor_break_effect(delta)
+	update_debuff_effect(delta)
+	_update_status_icons()
 
 func apply_slow(speed_reduction: float, duration: float) -> void:
 	if not config:
@@ -273,7 +354,70 @@ func update_knockback_effect(delta: float) -> void:
 		knockback_velocity = Vector2.ZERO
 		knockback_timer = 0.0
 
-func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null) -> void:
+func apply_silence(duration: float) -> void:
+	is_silenced = true
+	silence_timer = maxf(silence_timer, duration)
+
+func update_silence_effect(delta: float) -> void:
+	if not is_silenced:
+		return
+	silence_timer -= delta
+	if silence_timer <= 0:
+		is_silenced = false
+		silence_timer = 0.0
+
+func apply_stun(duration: float) -> void:
+	is_stunned = true
+	stun_timer = maxf(stun_timer, duration)
+
+func update_stun_effect(delta: float) -> void:
+	if not is_stunned:
+		return
+	stun_timer -= delta
+	if stun_timer <= 0:
+		is_stunned = false
+		stun_timer = 0.0
+
+func apply_confusion(duration: float) -> void:
+	is_confused = true
+	confusion_timer = maxf(confusion_timer, duration)
+
+func update_confusion_effect(delta: float) -> void:
+	if not is_confused:
+		return
+	confusion_timer -= delta
+	if confusion_timer <= 0:
+		is_confused = false
+		confusion_timer = 0.0
+
+func apply_armor_break(value: float, duration: float) -> void:
+	armor_break_amount = maxf(armor_break_amount, value)
+	armor_break_timer = maxf(armor_break_timer, duration)
+
+func update_armor_break_effect(delta: float) -> void:
+	if armor_break_timer <= 0:
+		return
+	armor_break_timer -= delta
+	if armor_break_timer <= 0:
+		armor_break_amount = 0.0
+		armor_break_timer = 0.0
+
+func apply_debuff(value: float, duration: float) -> void:
+	debuff_amount = maxf(debuff_amount, value)
+	debuff_timer = maxf(debuff_timer, duration)
+
+func update_debuff_effect(delta: float) -> void:
+	if debuff_timer <= 0:
+		return
+	debuff_timer -= delta
+	if debuff_timer <= 0:
+		debuff_amount = 0.0
+		debuff_timer = 0.0
+
+func show_crit_number(damage: float) -> void:
+	_show_damage_number(damage, Color(1.0, 0.85, 0.0, 1.0))
+
+func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null, is_crit: bool = false) -> void:
 	if not config:
 		return
 	if ability_component and ability_component.check_dodge(damage_type):
@@ -284,6 +428,7 @@ func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null
 		resistance = config.physical_resistance
 	else:
 		resistance = config.magical_resistance
+	resistance = maxf(0.0, resistance - armor_break_amount - debuff_amount)
 	if ability_component:
 		resistance += ability_component.get_achievement_shield_reduction()
 		var regret_mult: float = ability_component.get_regret_damage_multiplier()
@@ -291,7 +436,10 @@ func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null
 			damage_amount *= regret_mult
 	var actual_damage: float = damage_amount * (1.0 - resistance)
 	current_health -= actual_damage
-	_show_damage_number(actual_damage)
+	if is_crit:
+		_show_damage_number(actual_damage, Color(1.0, 0.85, 0.0, 1.0))
+	else:
+		_show_damage_number(actual_damage)
 
 	if attacker and attacker is Tower:
 		if not damage_dealers.has(attacker):
@@ -336,12 +484,12 @@ func update_health_bar() -> void:
 		else:
 			health_bar.get_theme_stylebox("fill").bg_color = Color(0.8, 0.2, 0.2, 1.0)
 
-func _show_damage_number(damage: float) -> void:
+func _show_damage_number(damage: float, color: Color = Color(1.0, 0.3, 0.2, 1.0)) -> void:
 	var label: Label = Label.new()
 	var dmg_int: int = int(ceilf(damage))
 	label.text = str(dmg_int)
 	label.add_theme_font_size_override("font_size", 16)
-	label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.2, 1.0))
+	label.add_theme_color_override("font_color", color)
 	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
 	label.add_theme_constant_override("shadow_offset_x", 1)
 	label.add_theme_constant_override("shadow_offset_y", 1)
@@ -360,6 +508,59 @@ func _show_damage_number(damage: float) -> void:
 	tween.set_parallel(false)
 	tween.tween_callback(label.queue_free)
 
+func show_gold_number(amount: int) -> void:
+	var label: Label = Label.new()
+	label.text = "+%d" % amount
+	label.add_theme_font_size_override("font_size", 18)
+	label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.0, 1.0))
+	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
+	label.add_theme_constant_override("shadow_offset_x", 1)
+	label.add_theme_constant_override("shadow_offset_y", 1)
+	label.global_position = global_position + Vector2(randf_range(-10.0, 10.0), -45.0)
+	label.z_index = 31
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var parent_node: Node = get_parent()
+	if parent_node:
+		parent_node.add_child(label)
+	else:
+		add_child(label)
+	var tween: Tween = label.create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(label, "position:y", label.position.y - 50.0, 1.0)
+	tween.tween_property(label, "modulate:a", 0.0, 1.0).set_delay(0.5)
+	tween.tween_property(label, "scale", Vector2(1.3, 1.3), 0.15)
+	tween.chain().tween_property(label, "scale", Vector2(1.0, 1.0), 0.1)
+	tween.set_parallel(false)
+	tween.tween_callback(label.queue_free)
+	_spawn_gold_particles()
+
+func _spawn_gold_particles() -> void:
+	var particles: GPUParticles2D = GPUParticles2D.new()
+	particles.global_position = global_position
+	particles.z_index = 29
+	particles.emitting = true
+	particles.one_shot = true
+	particles.explosiveness = 0.9
+	particles.amount = 6
+	particles.lifetime = 0.6
+	var process_mat: ParticleProcessMaterial = ParticleProcessMaterial.new()
+	process_mat.particle_flag_disable_z = true
+	process_mat.direction = Vector3(0, -1, 0)
+	process_mat.spread = 30.0
+	process_mat.initial_velocity_min = 40.0
+	process_mat.initial_velocity_max = 80.0
+	process_mat.gravity = Vector3(0, 80, 0)
+	process_mat.scale_min = 2.0
+	process_mat.scale_max = 4.0
+	process_mat.color = Color(1.0, 0.85, 0.0, 1.0)
+	particles.process_material = process_mat
+	var parent_node: Node = get_parent()
+	if parent_node:
+		parent_node.add_child(particles)
+	else:
+		add_child(particles)
+	get_tree().create_timer(1.0).timeout.connect(particles.queue_free)
+
 func die() -> void:
 	if ability_component:
 		ability_component.trigger_death_split()
@@ -369,9 +570,17 @@ func die() -> void:
 			game_hud = get_tree().get_first_node_in_group("game_hud")
 
 		if game_hud:
+			var es: Node = get_node_or_null("/root/EffectSystem")
 			if game_hud.has_method("add_gold"):
-				game_hud.add_gold(config.gold_drop)
-				Global.debug_log("[Enemy] 发放金币：%d" % config.gold_drop)
+				var gold: int = config.gold_drop
+				if es and es.has_method("get_global_gold_bonus"):
+					var bonus: float = es.get_global_gold_bonus()
+					if bonus > 0.0:
+						gold += maxi(1, int(ceilf(config.gold_drop * bonus)))
+				game_hud.add_gold(gold)
+			if es and last_hit_tower and last_hit_tower is Tower and last_hit_tower.config:
+				if last_hit_tower.config.effect_type == GameConfig.EffectType.GOLD_BONUS:
+					es.apply_on_kill_effect(last_hit_tower.config.effect_type, last_hit_tower.config.effect_params, last_hit_tower, self)
 
 			if damage_dealers.size() > 0:
 				distribute_experience(game_hud)

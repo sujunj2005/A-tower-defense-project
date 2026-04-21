@@ -80,6 +80,12 @@ func determine_ending_by_life() -> String:
 		if health <= -20:
 			return "suffering_end"
 		return "fading_away"
+	if "warm_family" in session.traits and "mother_blessed" in session.traits:
+		return "fulfilled_life"
+	if "lonely_parent" in session.traits and "emotional_void" in session.traits:
+		return "lonely_end"
+	if "father_guilt" in session.traits or "unforgivable" in session.traits:
+		return "regretful_life"
 	if has_no_regrets and intelligence >= 80 and courage >= 70:
 		return "legendary_life"
 	if trait_count >= 8 and intelligence >= 70:
@@ -112,6 +118,14 @@ func generate_life_summary() -> Dictionary:
 		summary_parts.append(tr("SUMMARY_MARRIED"))
 	if "event_first_job" in session.completed_events:
 		summary_parts.append(tr("SUMMARY_FIRST_JOB"))
+	if session.family_members.get("spouse", {}).get("alive", false):
+		summary_parts.append(tr("SUMMARY_SPOUSE_COMPANION"))
+	if session.family_members.get("first_child", {}).get("born", false):
+		summary_parts.append(tr("SUMMARY_CHILDREN_BORN"))
+	if "warm_family" in session.traits:
+		summary_parts.append(tr("SUMMARY_WARM_FAMILY"))
+	elif "lonely_parent" in session.traits:
+		summary_parts.append(tr("SUMMARY_LONELY_ENDING"))
 	if session.traits.size() >= 5:
 		summary_parts.append(tr("SUMMARY_RICH_LIFE"))
 	elif session.traits.size() >= 3:

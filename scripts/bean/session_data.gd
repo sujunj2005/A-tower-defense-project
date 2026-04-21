@@ -4,6 +4,7 @@ extends Resource
 @export var era_id: String = "china_modern"
 @export var family_background: String = "worker"
 @export var region: String = "tier2_city"
+@export var birthday: String = ""
 
 @export var current_age: int = 6
 @export var current_stage: String = "childhood"
@@ -16,6 +17,16 @@ var initial_towers: Dictionary = {}
 @export var home_health: float = 100.0
 @export var max_home_health: float = 100.0
 @export var battle_start_health: float = -1.0
+
+@export var chain_flags: Array[String] = []
+@export var family_members: Dictionary = {
+	"father": {"alive": true, "age_offset": 25, "health": 80, "mood": "neutral"},
+	"mother": {"alive": true, "age_offset": 23, "health": 85, "mood": "neutral"},
+	"spouse": {"alive": false, "age_offset": -1, "health": 100, "mood": "neutral", "met": false},
+	"first_child": {"alive": false, "age_offset": -28, "health": 100, "born": false},
+	"second_child": {"alive": false, "age_offset": -32, "health": 100, "born": false, "is_twin": false},
+	"grandchild": {"alive": false, "age_offset": -52, "health": 100, "born": false}
+}
 
 @export var attributes: Dictionary = {
 	"intelligence": 50,
@@ -94,6 +105,7 @@ func to_dict() -> Dictionary:
 		"era_id": era_id,
 		"family_background": family_background,
 		"region": region,
+		"birthday": birthday,
 		"current_age": current_age,
 		"current_stage": current_stage,
 		"stage_index": stage_index,
@@ -103,6 +115,8 @@ func to_dict() -> Dictionary:
 		"home_health": home_health,
 		"max_home_health": max_home_health,
 		"attributes": attributes,
+		"chain_flags": chain_flags,
+		"family_members": family_members,
 		"completed_events": completed_events,
 		"completed_battles": completed_battles,
 		"current_battle_id": current_battle_id,
@@ -117,6 +131,7 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 	session.era_id = data.get("era_id", "china_modern")
 	session.family_background = data.get("family_background", "worker")
 	session.region = data.get("region", "tier2_city")
+	session.birthday = data["birthday"]
 	session.current_age = data.get("current_age", 6)
 	session.current_stage = data.get("current_stage", "childhood")
 	session.stage_index = data.get("stage_index", 0)
@@ -127,13 +142,31 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 		session.towers.clear()
 		for t: String in raw_towers:
 			session.towers[t] = -1
-	session.traits = data.get("traits", [])
+	session.traits.clear()
+	for item in data.get("traits", []):
+		session.traits.append(str(item))
 	session.gold = data.get("gold", 50)
 	session.home_health = data.get("home_health", 100.0)
 	session.max_home_health = data.get("max_home_health", 100.0)
 	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100, "charm": 30, "work_ability": 0, "luck": 30})
-	session.completed_events = data.get("completed_events", [])
-	session.completed_battles = data.get("completed_battles", [])
+	session.chain_flags.clear()
+	for item in data.get("chain_flags", []):
+		session.chain_flags.append(str(item))
+	var default_family: Dictionary = {
+		"father": {"alive": true, "age_offset": 25, "health": 80, "mood": "neutral"},
+		"mother": {"alive": true, "age_offset": 23, "health": 85, "mood": "neutral"},
+		"spouse": {"alive": false, "age_offset": -1, "health": 100, "mood": "neutral", "met": false},
+		"first_child": {"alive": false, "age_offset": -28, "health": 100, "born": false},
+		"second_child": {"alive": false, "age_offset": -32, "health": 100, "born": false, "is_twin": false},
+		"grandchild": {"alive": false, "age_offset": -52, "health": 100, "born": false}
+	}
+	session.family_members = data.get("family_members", default_family)
+	session.completed_events.clear()
+	for item in data.get("completed_events", []):
+		session.completed_events.append(str(item))
+	session.completed_battles.clear()
+	for item in data.get("completed_battles", []):
+		session.completed_battles.append(str(item))
 	session.current_battle_id = data.get("current_battle_id", "")
 	session.current_battle_deadly = data.get("current_battle_deadly", false)
 	session.current_battle_victory = data.get("current_battle_victory", false)

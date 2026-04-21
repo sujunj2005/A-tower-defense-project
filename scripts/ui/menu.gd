@@ -2,15 +2,19 @@ extends Control
 
 var _title_label: Label
 var _subtitle_label: Label
+var _continue_btn: Button
 var _start_btn: Button
 var _meta_btn: Button
 var _load_btn: Button
 var _quit_btn: Button
 var _lang_btn: Button
 
+var _debug_btn: Button
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_setup_ui()
+	_update_continue_button()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
@@ -19,11 +23,13 @@ func _notification(what: int) -> void:
 func _refresh_texts() -> void:
 	if _title_label: _title_label.text = tr("MAIN_TITLE")
 	if _subtitle_label: _subtitle_label.text = tr("MAIN_SUBTITLE")
+	if _continue_btn: _continue_btn.text = tr("BTN_CONTINUE_GAME")
 	if _start_btn: _start_btn.text = tr("BTN_START_GAME")
 	if _meta_btn: _meta_btn.text = tr("BTN_META_GROWTH")
 	if _load_btn: _load_btn.text = tr("BTN_LOAD_GAME")
 	if _quit_btn: _quit_btn.text = tr("BTN_QUIT")
 	if _lang_btn: _lang_btn.text = tr("BTN_LANGUAGE")
+	if _debug_btn: _debug_btn.text = tr("BTN_DEBUG_TEST_MAP")
 
 func _setup_ui() -> void:
 	var bg: ColorRect = ColorRect.new()
@@ -67,6 +73,11 @@ func _setup_ui() -> void:
 	vbox.offset_bottom = 80
 	add_child(vbox)
 
+	_continue_btn = _create_button(tr("BTN_CONTINUE_GAME"), _on_continue_pressed)
+	_continue_btn.modulate = Color(0.3, 1.0, 0.5)
+	_continue_btn.visible = false
+	vbox.add_child(_continue_btn)
+
 	_start_btn = _create_button(tr("BTN_START_GAME"), _on_start_pressed)
 	vbox.add_child(_start_btn)
 
@@ -82,6 +93,15 @@ func _setup_ui() -> void:
 	_lang_btn = _create_button(tr("BTN_LANGUAGE"), _on_language_pressed)
 	vbox.add_child(_lang_btn)
 
+	if Global.debug_mode:
+		_debug_btn = Button.new()
+		_debug_btn.text = tr("BTN_DEBUG_TEST_MAP")
+		_debug_btn.position = Vector2(20, 20)
+		_debug_btn.add_theme_font_size_override("font_size", 16)
+		_debug_btn.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
+		_debug_btn.pressed.connect(_on_debug_test_map_pressed)
+		add_child(_debug_btn)
+
 func _create_button(text: String, callback: Callable) -> Button:
 	var btn: Button = Button.new()
 	btn.text = text
@@ -93,6 +113,20 @@ func _create_button(text: String, callback: Callable) -> Button:
 func _on_start_pressed() -> void:
 	GameState.change_state(GameState.State.ERA_SELECTION)
 
+func _on_continue_pressed() -> void:
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if not ss or not ss.has_method("load_game"):
+		return
+	if not ss.load_game(0):
+		Global.debug_log(tr("NO_SAVE"))
+		_update_continue_button()
+		return
+	var saved_state: int = ss.get_saved_game_state(0)
+	if saved_state >= 0:
+		GameState.change_state(saved_state)
+	else:
+		GameState.change_state(GameState.State.STAGE)
+
 func _on_meta_pressed() -> void:
 	GameState.change_state(GameState.State.META_PROGRESSION)
 
@@ -100,12 +134,36 @@ func _on_load_pressed() -> void:
 	var ss: Node = get_node_or_null("/root/SaveSystem")
 	if ss and ss.has_method("load_game"):
 		if ss.load_game(0):
-			GameState.change_state(GameState.State.STAGE)
+			var saved_state: int = ss.get_saved_game_state(0)
+			if saved_state >= 0:
+				GameState.change_state(saved_state)
+			else:
+				GameState.change_state(GameState.State.STAGE)
 		else:
 			Global.debug_log(tr("NO_SAVE"))
+			_update_continue_button()
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func _update_continue_button() -> void:
+	if not _continue_btn:
+		return
+	_continue_btn.visible = false
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if not ss or not ss.has_method("has_save"):
+		return
+	if not ss.has_save(0):
+		return
+	var saved_state: int = ss.get_saved_game_state(0)
+	if saved_state < 0:
+		return
+	_continue_btn.visible = true
+
+func _on_debug_test_map_pressed() -> void:
+	Global.debug_map_id = "map_test"
+	Global.reset_game_session()
+	GameState.change_state(GameState.State.BATTLE)
 
 func _on_language_pressed() -> void:
 	_show_language_selector()

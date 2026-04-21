@@ -27,6 +27,7 @@ var hovered_tower: Tower = null
 var range_circle: Node2D
 var highlight_rect: ColorRect
 var target_info_panel: TargetInfoPanel
+var enemy_info_panel: EnemyInfoPanel
 var _selected_tower: Tower = null
 var _selected_enemy: Enemy = null
 
@@ -51,6 +52,8 @@ var _battle_timer_label: Label
 var _soft_paused: bool = false
 var _pause_label: Label
 var _pause_canvas: CanvasLayer
+var _trait_select_button: Button
+var _trait_popup: PopupPanel
 
 var _battle_speed: float = 1.0
 var _speed_buttons: Array[Button] = []
@@ -64,6 +67,10 @@ var damage_stats_panel: Node
 @onready var ground_layer: TileMapLayer = $GroundLayer
 
 func _ready() -> void:
+	add_to_group("map_manager")
+	if Global.debug_map_id != "":
+		current_map_id = Global.debug_map_id
+		Global.debug_map_id = ""
 	_load_map_data(current_map_id)
 	_initialize_game_objects()
 	_setup_ui_components()
@@ -79,7 +86,6 @@ func _process(delta: float) -> void:
 		_update_wave_announcement(delta)
 		_update_summon_button(delta)
 	_update_battle_timer()
-	_update_tower_hover()
 
 func _exit_tree() -> void:
 	_cleanup_signals()
@@ -125,6 +131,8 @@ func _setup_ui_components() -> void:
 	_create_battle_hud()
 	_create_target_info_panel()
 	_create_damage_stats()
+	if current_map_id == "map_test":
+		_create_trait_select_button()
 
 func _start_battle() -> void:
 	_battle_active = true
@@ -133,12 +141,18 @@ func _start_battle() -> void:
 	_kill_gold_earned = 0
 	_victory_scheduled = false
 	var session: GameSessionData = Global.get_game_session()
+	if current_map_id == "map_test":
+		session.gold = 1000
+		session.home_health = 100.0
+		session.max_home_health = 100.0
 	if game_hud:
 		game_hud.max_base_hp = int(session.max_home_health)
 		game_hud.base_hp = int(session.home_health)
 		game_hud.gold = session.gold
 		game_hud.update_hp(game_hud.base_hp)
 		game_hud.update_gold(game_hud.gold)
+	if current_map_id == "map_test":
+		_place_initial_towers()
 	_setup_wave_manager()
 
 func _setup_wave_manager() -> void:
@@ -488,9 +502,8 @@ func build_tower(slot_index: int, tower_type: String) -> void:
 	tower.set_meta("slot_index", slot_index)
 	add_child(tower)
 	tower.initialize(tower_config)
-	if tower_select_ui:
-		tower.mouse_hover_started.connect(tower_select_ui._on_tower_mouse_hover_started)
-		tower.mouse_hover_ended.connect(tower_select_ui._on_tower_mouse_hover_ended)
+	tower.mouse_hover_started.connect(_on_tower_hover_started)
+	tower.mouse_hover_ended.connect(_on_tower_hover_ended)
 	if tower_sell_ui:
 		tower.mouse_clicked.connect(_on_tower_mouse_clicked)
 	if hovered_tower == tower:
@@ -648,14 +661,19 @@ func _handle_left_click() -> void:
 		_clear_selection()
 		_selected_enemy = clicked_enemy
 		clicked_enemy.set_selected(true)
-		if target_info_panel:
-			target_info_panel.show_enemy_info(clicked_enemy)
+		if enemy_info_panel:
+			enemy_info_panel.show_enemy_info(clicked_enemy)
 		return
 	if target_info_panel and target_info_panel.visible:
 		var panel_rect: Rect2 = Rect2(target_info_panel.global_position, target_info_panel.size)
 		if not panel_rect.has_point(get_global_mouse_position()):
 			_clear_selection()
 			target_info_panel.hide_panel()
+	if enemy_info_panel and enemy_info_panel.visible:
+		var epanel_rect: Rect2 = Rect2(enemy_info_panel.global_position, enemy_info_panel.size)
+		if not epanel_rect.has_point(get_global_mouse_position()):
+			_clear_selection()
+			enemy_info_panel.hide_panel()
 
 func _initialize_camera() -> void:
 	if camera and camera.has_method("initialize"):
@@ -688,6 +706,8 @@ func _create_target_info_panel() -> void:
 	target_info_panel = TargetInfoPanel.new()
 	canvas.add_child(target_info_panel)
 	target_info_panel.sell_tower_requested.connect(_on_tower_sold)
+	enemy_info_panel = EnemyInfoPanel.new()
+	canvas.add_child(enemy_info_panel)
 
 func _find_enemy_at_position(mouse_pos: Vector2) -> Enemy:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
@@ -761,23 +781,16 @@ func _setup_panel_style(panel: PanelContainer) -> void:
 	style.set_content_margin_all(10)
 	panel.add_theme_stylebox_override("panel", style)
 
-func _update_tower_hover() -> void:
+func _on_tower_hover_started(tower: Tower) -> void:
 	if tower_select_ui and tower_select_ui.visible:
-		_hide_tower_hover_ui()
 		return
-	if hovered_tower and not is_instance_valid(hovered_tower):
+	hovered_tower = tower
+	_show_tower_hover_ui(tower)
+
+func _on_tower_hover_ended(tower: Tower) -> void:
+	if hovered_tower == tower:
 		hovered_tower = null
 		_hide_tower_hover_ui()
-	var mouse_world_pos: Vector2 = get_global_mouse_position()
-	var found_tower: Tower = _find_tower_at_position(mouse_world_pos)
-	if found_tower != hovered_tower:
-		hovered_tower = found_tower
-		if hovered_tower:
-			_show_tower_hover_ui(hovered_tower)
-		else:
-			_hide_tower_hover_ui()
-	elif hovered_tower:
-		_update_tower_info_position()
 
 func remove_built_tower(tower: Tower) -> void:
 	for slot_index in built_towers.keys():
@@ -828,32 +841,11 @@ func build_ruins_at_slot(slot_index: int) -> void:
 	add_child(tower)
 	tower.initialize(tower_config)
 	Global.debug_log("[废墟] 在 slot %d 创建废墟塔，纹理路径=%s" % [slot_index, tower_config.texture_path])
-	if tower_select_ui:
-		tower.mouse_hover_started.connect(tower_select_ui._on_tower_mouse_hover_started)
-		tower.mouse_hover_ended.connect(tower_select_ui._on_tower_mouse_hover_ended)
+	tower.mouse_hover_started.connect(_on_tower_hover_started)
+	tower.mouse_hover_ended.connect(_on_tower_hover_ended)
 	if tower_sell_ui:
 		tower.mouse_clicked.connect(_on_tower_mouse_clicked)
 	built_towers[slot_index] = tower
-
-func _find_tower_at_position(mouse_pos: Vector2) -> Tower:
-	var tile_size_half: float = map_config.tile_size / 2.0
-	var tile_size_full: float = map_config.tile_size
-	var invalid_slots: Array = []
-	for slot_index in built_towers.keys():
-		var tower_ref = built_towers.get(slot_index)
-		if tower_ref == null or not is_instance_valid(tower_ref):
-			invalid_slots.append(slot_index)
-			continue
-		var tower: Tower = tower_ref as Tower
-		if tower == null:
-			invalid_slots.append(slot_index)
-			continue
-		var tower_rect: Rect2 = Rect2(tower.position - Vector2(tile_size_half, tile_size_half), Vector2(tile_size_full, tile_size_full))
-		if tower_rect.has_point(mouse_pos):
-			return tower
-	for slot in invalid_slots:
-		built_towers.erase(slot)
-	return null
 
 func _show_tower_hover_ui(tower: Tower) -> void:
 	if not tower or not tower.config:
@@ -918,7 +910,7 @@ func _show_tower_info(tower: Tower) -> void:
 		attack_speed_bonus = ts.get_attack_speed_bonus_for_tower(cfg.tower_id)
 	var final_damage: float = base_damage * (1.0 + damage_bonus)
 	var final_attack_speed: float = base_attack_speed * (1.0 + attack_speed_bonus)
-	var info: String = "%s (Lv.%d)\n" % [cfg.tower_name, tower.current_level]
+	var info: String = "%s (Lv.%d)\n" % [cfg.get_display_name(), tower.current_level]
 	info += "━━━━━━━━━━━━━━━\n"
 	info += tr("TOWER_INFO_DAMAGE") % final_damage
 	if damage_bonus > 0.0:
@@ -930,14 +922,8 @@ func _show_tower_info(tower: Tower) -> void:
 		info += " (+%.0f%%)" % (attack_speed_bonus * 100.0)
 	tower_info_label.text = info
 	tower_info_panel.visible = true
-	_update_tower_info_position()
-
-func _update_tower_info_position() -> void:
-	if not hovered_tower:
-		return
 	var tile_size_half: float = map_config.tile_size / 2.0
-	var screen_pos: Vector2 = hovered_tower.position + Vector2(0, tile_size_half + 15)
-	tower_info_panel.position = screen_pos
+	tower_info_panel.position = tower.position + Vector2(0, tile_size_half + 15)
 
 func _hide_tower_hover_ui() -> void:
 	if hovered_tower and _tower_stats_update_callables.has(hovered_tower):
@@ -1101,3 +1087,122 @@ func _update_wave_announcement(delta: float) -> void:
 		_wave_announcement.modulate = Color(1, 1, 1, _wave_announcement_timer / 0.5)
 	if _wave_announcement_timer <= 0 and _wave_announcement:
 		_wave_announcement.visible = false
+
+func summon_temp_tower(position: Vector2, stats: Dictionary, duration: float) -> void:
+	var tower_id: String = stats.get("tower_id", "tower_math_basic")
+	var tower_config: TowerBean = TowerConfig.get_config(tower_id)
+	if not tower_config:
+		return
+	var tower: Tower = Tower.new()
+	tower.global_position = position
+	tower.z_index = 10
+	add_child(tower)
+	tower.initialize(tower_config)
+	tower.mouse_hover_started.connect(_on_tower_hover_started)
+	tower.mouse_hover_ended.connect(_on_tower_hover_ended)
+	if stats.has("damage"):
+		tower.config.damage = float(stats.damage)
+		tower.attack_component.config.damage = float(stats.damage)
+	if stats.has("attack_speed"):
+		tower.config.attack_speed = float(stats.attack_speed)
+		tower.attack_component.config.attack_speed = float(stats.attack_speed)
+		tower.attack_component.setup_timer()
+	if stats.has("attack_range"):
+		tower.config.attack_range = float(stats.attack_range)
+		tower.attack_component.config.attack_range = float(stats.attack_range)
+	if stats.has("detection_range"):
+		tower.config.detection_range = float(stats.detection_range)
+		tower.attack_component.config.detection_range = float(stats.detection_range)
+	get_tree().create_timer(duration).timeout.connect(tower.destroy)
+
+func _place_initial_towers() -> void:
+	var tower_types: Array = TowerConfig.get_tower_types()
+	if tower_types.is_empty():
+		return
+	for i in range(tower_positions.size()):
+		var tower_type: String = tower_types[i % tower_types.size()]
+		var tower_config: TowerBean = TowerConfig.get_config(tower_type)
+		if not tower_config:
+			continue
+		var tower: Tower = Tower.new()
+		tower.position = _get_tile_center_position(tower_positions[i])
+		tower.z_index = 10
+		tower.set_meta("slot_index", i)
+		add_child(tower)
+		tower.initialize(tower_config)
+		tower.mouse_hover_started.connect(_on_tower_hover_started)
+		tower.mouse_hover_ended.connect(_on_tower_hover_ended)
+		if tower_sell_ui:
+			tower.mouse_clicked.connect(_on_tower_mouse_clicked)
+		built_towers[i] = tower
+		_hide_tower_slot(i)
+
+func _create_trait_select_button() -> void:
+	_trait_select_button = Button.new()
+	_trait_select_button.text = tr("BTN_SELECT_TRAIT")
+	_trait_select_button.custom_minimum_size = Vector2(120, 40)
+	_trait_select_button.add_theme_font_size_override("font_size", 16)
+	_trait_select_button.position = Vector2(20, 310)
+	_trait_select_button.pressed.connect(_on_trait_select_pressed)
+	if _summon_canvas:
+		_summon_canvas.add_child(_trait_select_button)
+	else:
+		var canvas: CanvasLayer = CanvasLayer.new()
+		canvas.layer = 25
+		add_child(canvas)
+		canvas.add_child(_trait_select_button)
+
+func _on_trait_select_pressed() -> void:
+	if _trait_popup and is_instance_valid(_trait_popup):
+		_trait_popup.popup_centered()
+		return
+	_trait_popup = PopupPanel.new()
+	_trait_popup.min_size = Vector2(400, 500)
+	var vbox: VBoxContainer = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 4)
+	var title: Label = Label.new()
+	title.text = tr("TRAIT_SELECT_TITLE")
+	title.add_theme_font_size_override("font_size", 20)
+	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(title)
+	var scroll: ScrollContainer = ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	vbox.add_child(scroll)
+	var list: VBoxContainer = VBoxContainer.new()
+	list.add_theme_constant_override("separation", 2)
+	scroll.add_child(list)
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	var session: GameSessionData = Global.get_game_session()
+	if ts and "trait_configs" in ts:
+		var all_traits: Dictionary = ts.trait_configs
+		for trait_id: String in all_traits:
+			var config: Dictionary = all_traits[trait_id]
+			var btn: Button = Button.new()
+			var trait_name: String = tr(config.get("name", trait_id))
+			var trait_desc: String = tr(config.get("description", ""))
+			btn.text = "%s - %s" % [trait_name, trait_desc]
+			btn.add_theme_font_size_override("font_size", 13)
+			btn.custom_minimum_size = Vector2(360, 30)
+			if trait_id in session.traits:
+				btn.disabled = true
+				btn.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+			btn.pressed.connect(_on_trait_selected.bind(trait_id))
+			list.add_child(btn)
+	var close_btn: Button = Button.new()
+	close_btn.text = tr("BTN_CLOSE")
+	close_btn.pressed.connect(func(): _trait_popup.hide())
+	vbox.add_child(close_btn)
+	_trait_popup.add_child(vbox)
+	add_child(_trait_popup)
+	_trait_popup.popup_centered()
+
+func _on_trait_selected(trait_id: String) -> void:
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("grant_trait"):
+		ts.grant_trait(trait_id)
+	if _trait_popup and is_instance_valid(_trait_popup):
+		_trait_popup.hide()
+		_trait_popup.queue_free()
+		_trait_popup = null

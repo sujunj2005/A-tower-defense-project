@@ -11,13 +11,14 @@ var sell_price_label: Label
 var ratio_label: Label
 var confirm_button: Button
 var cancel_button: Button
+var attack_toggle: CheckButton
+var attack_label: Label
 
 func _ready():
 	visible = false
 	setup_ui()
 
 func setup_ui():
-	# 设置面板样式
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0.15, 0.15, 0.2, 0.95)
 	style.border_color = Color(0.8, 0.7, 0.3, 1.0)
@@ -29,24 +30,21 @@ func setup_ui():
 	style.set_content_margin_all(12)
 	add_theme_stylebox_override("panel", style)
 	
-	# 设置锚点和位置
 	anchor_left = 0.5
 	anchor_top = 0.5
 	anchor_right = 0.5
 	anchor_bottom = 0.5
 	offset_left = -150
-	offset_top = -100
+	offset_top = -120
 	offset_right = 150
-	offset_bottom = 100
+	offset_bottom = 120
 	z_index = 1000
 	
-	# 创建垂直布局
 	var vbox = VBoxContainer.new()
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_theme_constant_override("separation", 15)
 	add_child(vbox)
 	
-	# 标题
 	tower_name_label = Label.new()
 	tower_name_label.text = ""
 	tower_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -54,11 +52,9 @@ func setup_ui():
 	tower_name_label.add_theme_color_override("font_color", Color(1, 1, 1))
 	vbox.add_child(tower_name_label)
 	
-	# 分隔线
 	var separator = HSeparator.new()
 	vbox.add_child(separator)
 	
-	# 出售价格信息
 	var price_hbox = HBoxContainer.new()
 	price_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_child(price_hbox)
@@ -75,7 +71,6 @@ func setup_ui():
 	sell_price_label.add_theme_color_override("font_color", Color(1, 0.84, 0))
 	price_hbox.add_child(sell_price_label)
 	
-	# 返还比例说明
 	ratio_label = Label.new()
 	ratio_label.text = tr("SELL_RATIO") % 50
 	ratio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -83,13 +78,30 @@ func setup_ui():
 	ratio_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
 	vbox.add_child(ratio_label)
 	
-	# 按钮区域
+	var toggle_container = HBoxContainer.new()
+	toggle_container.alignment = BoxContainer.ALIGNMENT_CENTER
+	toggle_container.add_theme_constant_override("separation", 10)
+	vbox.add_child(toggle_container)
+	
+	attack_label = Label.new()
+	attack_label.text = tr("TOWER_ATTACK_TOGGLE")
+	attack_label.add_theme_font_size_override("font_size", 14)
+	attack_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	toggle_container.add_child(attack_label)
+	
+	attack_toggle = CheckButton.new()
+	attack_toggle.button_pressed = true
+	attack_toggle.pressed.connect(_on_attack_toggle_changed)
+	toggle_container.add_child(attack_toggle)
+	
+	var sep2 = HSeparator.new()
+	vbox.add_child(sep2)
+	
 	var button_hbox = HBoxContainer.new()
 	button_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	button_hbox.add_theme_constant_override("separation", 20)
 	vbox.add_child(button_hbox)
 	
-	# 出售按钮
 	confirm_button = Button.new()
 	confirm_button.text = tr("BTN_SELL")
 	confirm_button.custom_minimum_size = Vector2(80, 35)
@@ -105,7 +117,6 @@ func setup_ui():
 	confirm_button.pressed.connect(_on_confirm_sell)
 	button_hbox.add_child(confirm_button)
 	
-	# 取消按钮
 	cancel_button = Button.new()
 	cancel_button.text = tr("BTN_CANCEL")
 	cancel_button.custom_minimum_size = Vector2(80, 35)
@@ -135,6 +146,9 @@ func show_for_tower(tower: Tower):
 	var ratio_pct: int = int(tower.config.sell_ratio * 100.0)
 	ratio_label.text = tr("SELL_RATIO") % ratio_pct
 	
+	if attack_toggle:
+		attack_toggle.button_pressed = tower.is_attack_enabled
+	
 	visible = true
 	global_position = tower.global_position + Vector2(0, -50)
 
@@ -155,3 +169,12 @@ func _on_confirm_sell():
 func _on_cancel():
 	sell_cancelled.emit()
 	hide_ui()
+
+func _on_attack_toggle_changed() -> void:
+	if not current_tower:
+		return
+	current_tower.is_attack_enabled = attack_toggle.button_pressed
+	if not attack_toggle.button_pressed:
+		current_tower.modulate = Color(1, 1, 1, 0.5)
+	else:
+		current_tower.modulate = Color(1, 1, 1, 1)

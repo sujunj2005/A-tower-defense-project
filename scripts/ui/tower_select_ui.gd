@@ -43,30 +43,9 @@ var is_locked: bool = false:
 	get:
 		return is_locked
 
-var hovered_tower: Tower = null:  # 🆕 当前悬停的防御塔实例
-	set(value):
-		if hovered_tower != value:
-			hovered_tower = value
-			if hovered_tower:
-				_on_tower_hovered(hovered_tower)
-			else:
-				_on_tower_hover_ended()
-	get:
-		return hovered_tower
-
 func _ready():
 	load_tower_configs()
 	setup_ui()
-	_connect_tower_signals()
-
-## 🆕 连接所有已存在防御塔的信号
-func _connect_tower_signals() -> void:
-	await get_tree().process_frame  # 等待一帧，确保所有塔已创建
-	var towers = get_tree().get_nodes_in_group("towers")
-	for tower_node in towers:
-		if tower_node is Tower:
-			tower_node.mouse_hover_started.connect(_on_tower_mouse_hover_started)
-			tower_node.mouse_hover_ended.connect(_on_tower_mouse_hover_ended)
 
 func _get_placed_tower_counts() -> Dictionary:
 	var counts: Dictionary = {}
@@ -225,7 +204,7 @@ func flash_button_red(button: Button):
 	flashing_buttons[button] = {"timer": 0.6, "original": original_normal, "original_hover": original_hover, "red": style_red}
 
 func _process(delta):
-	if tooltip_panel.visible and (hovered_tower != null or hovered_tower_type != ""):
+	if tooltip_panel.visible and hovered_tower_type != "":
 		tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
 	
 	if warning_timer > 0:
@@ -373,25 +352,7 @@ func _on_tower_button_hovered(tower_type: String, config: TowerBean):
 
 func _on_tower_button_exited():
 	hovered_tower_type = ""
-	# 只有在没有悬停实际塔实例时才隐藏 tooltip
-	if hovered_tower == null:
-		tooltip_panel.visible = false
-
-## 🆕 防御塔实例悬停开始
-func _on_tower_mouse_hover_started(tower: Tower):
-	hovered_tower = tower
-	hovered_tower_type = ""  # 清除按钮悬停状态
-	var info_text = tower.get_tower_info_text()
-	tooltip_label.text = info_text
-	tooltip_panel.visible = true
-	tooltip_panel.position = get_local_mouse_position() + Vector2(20, -60)
-
-## 🆕 防御塔实例悬停结束
-func _on_tower_mouse_hover_ended(_tower: Tower):
-	hovered_tower = null
-	# 只有在没有悬停按钮时才隐藏 tooltip
-	if hovered_tower_type == "":
-		tooltip_panel.visible = false
+	tooltip_panel.visible = false
 
 ## 🆕 面板显示时的回调
 func _on_panel_shown() -> void:
@@ -413,17 +374,6 @@ func _lock_panel() -> void:
 
 ## 🆕 解锁面板
 func _unlock_panel() -> void:
-	# 可以添加解锁时的视觉效果
-	pass
-
-## 🆕 塔悬停时的处理
-func _on_tower_hovered(_tower: Tower) -> void:
-	# 可以在这里添加塔悬停时的额外逻辑
-	pass
-
-## 🆕 塔悬停结束时的处理
-func _on_tower_hover_ended() -> void:
-	# 可以在这里添加塔悬停结束时的额外逻辑
 	pass
 
 func _on_tower_button_pressed(tower_type: String):

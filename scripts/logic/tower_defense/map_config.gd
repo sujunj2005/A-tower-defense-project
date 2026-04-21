@@ -76,7 +76,8 @@ static var _map_registry: Dictionary = {}
 
 static func _static_init():
 	_map_registry = {
-		"map_01": "res://resources/maps/map_01.tres"
+		"map_01": "res://resources/maps/map_01.tres",
+		"map_test": "res://resources/maps/map_test.tres"
 	}
 
 static func get_map_ids() -> Array:

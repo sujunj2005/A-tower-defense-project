@@ -257,7 +257,7 @@ func test_enemy_take_damage_physical():
 	var enemy = Enemy.new()
 	add_child_autofree(enemy)
 	enemy.initialize(cfg)
-	enemy.take_damage(100.0, DamageTypes.Type.PHYSICAL)
+	enemy.take_damage(100.0, GameConfig.DamageType.PHYSICAL)
 	assert_eq(enemy.get_current_health(), 120.0, "Heavy armor should take 30 damage from 100 physical (70% resistance): 150 - 30 = 120")
 
 func test_enemy_take_damage_magical():
@@ -266,7 +266,7 @@ func test_enemy_take_damage_magical():
 	var enemy = Enemy.new()
 	add_child_autofree(enemy)
 	enemy.initialize(cfg)
-	enemy.take_damage(100.0, DamageTypes.Type.MAGICAL)
+	enemy.take_damage(100.0, GameConfig.DamageType.MAGICAL)
 	assert_eq(enemy.get_current_health(), 60.0, "Heavy armor should take 90 damage from 100 magical (10% resistance)")
 
 func test_enemy_died_signal():
@@ -276,7 +276,7 @@ func test_enemy_died_signal():
 	add_child_autofree(enemy)
 	enemy.initialize(cfg)
 	watch_signals(enemy)
-	enemy.take_damage(1000.0, DamageTypes.Type.PHYSICAL)
+	enemy.take_damage(1000.0, GameConfig.DamageType.PHYSICAL)
 	assert_signal_emitted(enemy, "died", "died signal should emit on death")
 
 func test_tower_config_damage_type():
@@ -285,8 +285,8 @@ func test_tower_config_damage_type():
 	assert_eq(cfg.damage_type, 0, "Basic tower damage type should be 0 (physical)")
 
 func test_damage_types_enum():
-	assert_eq(DamageTypes.Type.PHYSICAL, 0, "PHYSICAL should be 0")
-	assert_eq(DamageTypes.Type.MAGICAL, 1, "MAGICAL should be 1")
+	assert_eq(GameConfig.DamageType.PHYSICAL, 0, "PHYSICAL should be 0")
+	assert_eq(GameConfig.DamageType.MAGICAL, 1, "MAGICAL should be 1")
 
 func test_enemy_config_has_texture():
 	var heavy_cfg = EnemyConfig.get_config("heavy_armor")

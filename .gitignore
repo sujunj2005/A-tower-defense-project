@@ -15,10 +15,13 @@ stable/
 addons/
 images/
 xlsx/
+w64devkit/
+get-shit-done/
 
 # 排除测试报告文件
 测试报告_暂停菜单功能.md
 主菜单与暂停菜单功能测试报告.md
+gsd-file-manifest.json
 
 # 其他常见忽略规则
 *.import

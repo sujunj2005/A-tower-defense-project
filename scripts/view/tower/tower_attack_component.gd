@@ -20,7 +20,8 @@ var windup_state: WindupState = WindupState.IDLE
 ## 计时器
 var attack_timer: Timer
 var windup_timer: float = 0.0
-var committed_target: Node2D = null  # 前摇期间锁定的目标（承诺机制）
+var committed_target: Node2D = null
+var _crit_multiplier: float = 1.0
 
 ## 回调信号（用于特效系统等）
 signal attack_executed(target: Node2D, damage: float)
@@ -33,22 +34,44 @@ func _ready():
 func setup_timer():
 	if not config:
 		return
-	
+
 	if config.attack_speed <= 0:
 		push_error("[塔 %s] attack_speed 为 %.2f，无法启动攻击定时器！" % [config.get_display_name(), config.attack_speed])
 		return
-	
+
 	if attack_timer:
 		attack_timer.stop()
 		attack_timer.queue_free()
 		attack_timer = null
-	
+
 	var effective_speed: float = config.attack_speed
 	var ts: Node = get_node_or_null("/root/TraitSystem")
 	if ts and ts.has_method("get_attack_speed_bonus_for_tower"):
 		var tower_type: String = config.tower_id if config else ""
 		var speed_bonus: float = ts.get_attack_speed_bonus_for_tower(tower_type)
 		effective_speed = config.attack_speed * (1.0 + speed_bonus)
+	_create_timer_from_speed(effective_speed)
+
+func setup_timer_with_buffs(buff_dmg: float, buff_spd: float) -> void:
+	if not config or not tower:
+		return
+	var base_spd: float = tower._base_attack_speed if "_base_attack_speed" in tower else config.attack_speed
+	var effective_speed: float = base_spd * (1.0 + buff_spd)
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_attack_speed_bonus_for_tower"):
+		var speed_bonus: float = ts.get_attack_speed_bonus_for_tower(config.tower_id)
+		effective_speed *= (1.0 + speed_bonus)
+	if effective_speed <= 0:
+		return
+	_create_timer_from_speed(effective_speed)
+
+func _create_timer_from_speed(effective_speed: float) -> void:
+	if effective_speed <= 0:
+		return
+	if attack_timer:
+		attack_timer.stop()
+		attack_timer.queue_free()
+		attack_timer = null
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 1.0 / effective_speed
 	attack_timer.autostart = true
@@ -157,6 +180,8 @@ func execute_attack():
 
 	detection_state = DetectionState.ATTACKING
 
+	_roll_crit()
+
 	match config.attack_mode:
 		AttackMode.MELEE:
 			perform_melee_attack(attack_target)
@@ -178,7 +203,8 @@ func execute_attack():
 func perform_melee_attack(attack_target: Node2D):
 	_play_melee_attack_animation()
 	var trait_bonus: float = _get_trait_damage_bonus()
-	var final_damage: float = config.damage * (1.0 + trait_bonus)
+	var final_damage: float = config.damage * (1.0 + trait_bonus) * _crit_multiplier
+	var is_crit: bool = _crit_multiplier > 1.0
 	var enemies_hit_count: int = 0
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
 	
@@ -188,7 +214,7 @@ func perform_melee_attack(attack_target: Node2D):
 		var distance_to_enemy: float = tower.global_position.distance_to(enemy.global_position)
 		if distance_to_enemy <= config.attack_range:
 			if enemy.has_method("take_damage"):
-				enemy.take_damage(final_damage, config.damage_type, tower)
+				enemy.take_damage(final_damage, config.damage_type, tower, is_crit)
 				enemies_hit_count += 1
 	
 	attack_executed.emit(attack_target, final_damage)
@@ -214,11 +240,13 @@ func _play_melee_attack_animation() -> void:
 func perform_ranged_attack(attack_target: Node2D):
 	_play_ranged_attack_animation()
 	var trait_bonus: float = _get_trait_damage_bonus()
-	var final_damage: float = config.damage * (1.0 + trait_bonus)
+	var final_damage: float = config.damage * (1.0 + trait_bonus) * _crit_multiplier
+	var is_crit: bool = _crit_multiplier > 1.0
 	var pbean: ProjectileBean = TowerConfig.create_projectile_bean(config)
 	if pbean and pbean.projectile_type == GameConfig.ProjectileType.TARGET_LOCKED:
 		var projectile = create_projectile_from_bean(pbean, attack_target, final_damage)
 		if projectile:
+			projectile.is_crit = is_crit
 			attack_executed.emit(attack_target, final_damage)
 	else:
 		push_error("[塔 %s] 远程攻击未配置弹道！" % config.get_display_name())
@@ -291,25 +319,80 @@ func setup_legacy_projectile(projectile: Projectile, attack_target: Node2D, fina
 
 ## ==================== 特效系统（Effects System）====================
 
-## 执行攻击特效
 func execute_effects(primary_target: Node2D):
-	if not config or config.effect_type == EffectType.NONE:
+	if not config:
 		return
-	
-	match config.effect_type:
-		EffectType.PIERCE:
-			# PIERCE 由弹道系统内部处理
-			pass
-		EffectType.SPLASH:
-			apply_splash_effect(primary_target)
-		EffectType.SLOW:
-			apply_slow_effect(primary_target)
-		EffectType.DOT:
-			apply_dot_effect(primary_target)
-		EffectType.KNOCKBACK:
-			apply_knockback_effect(primary_target)
-		EffectType.LIFESTEAL:
-			apply_lifesteal_effect(primary_target)
+	if config.effect_type == EffectType.PIERCE:
+		return
+	if config.effect_type == EffectType.CRIT:
+		return
+	var es: Node = get_node_or_null("/root/EffectSystem")
+	if config.effect_type != EffectType.NONE:
+		if es:
+			es.apply_effect(config.effect_type, config.effect_params, tower, primary_target)
+		else:
+			match config.effect_type:
+				EffectType.SPLASH:
+					apply_splash_effect(primary_target)
+				EffectType.SLOW:
+					apply_slow_effect(primary_target)
+				EffectType.DOT:
+					apply_dot_effect(primary_target)
+				EffectType.KNOCKBACK:
+					apply_knockback_effect(primary_target)
+				EffectType.LIFESTEAL:
+					apply_lifesteal_effect(primary_target)
+	for sub: Dictionary in config.sub_effects:
+		var sub_eid: String = sub.get("effect_id", "")
+		if sub_eid == "":
+			continue
+		var sec: SpecialEffectConfig = SpecialEffectConfig.new()
+		var sub_type_str: String = sec.get_effect_type(sub_eid)
+		var sub_type: int = _effect_type_from_string(sub_type_str)
+		if sub_type == EffectType.NONE:
+			continue
+		var defaults: Dictionary = sec.get_default_params(sub_eid)
+		var overrides: Dictionary = sub.get("overrides", {})
+		var sub_params: Dictionary = defaults.duplicate()
+		for k: String in overrides:
+			sub_params[k] = overrides[k]
+		if es:
+			es.apply_effect(sub_type, sub_params, tower, primary_target)
+
+func _effect_type_from_string(type_str: String) -> int:
+	match type_str:
+		"slow":
+			return EffectType.SLOW
+		"dot":
+			return EffectType.DOT
+		"burn":
+			return EffectType.BURN
+		"splash", "aoe":
+			return EffectType.SPLASH
+		"crit":
+			return EffectType.CRIT
+		"silence":
+			return EffectType.SILENCE
+		"armor_break":
+			return EffectType.ARMOR_BREAK
+		"confusion":
+			return EffectType.CONFUSION
+		"debuff":
+			return EffectType.DEBUFF
+		"single_control":
+			return EffectType.SINGLE_CONTROL
+		"cultural_suppression":
+			return EffectType.CULTURAL_SUPPRESSION
+		"gold_bonus":
+			return EffectType.GOLD_BONUS
+		"slow_aura":
+			return EffectType.SLOW_AURA
+		"buff_aura":
+			return EffectType.BUFF_AURA
+		"summon":
+			return EffectType.SUMMON
+		_:
+			return EffectType.NONE
 
 ## AOE范围爆炸特效
 func apply_splash_effect(center_target: Node2D):
@@ -396,6 +479,9 @@ func find_target():
 	target = null
 	if not tower or not config:
 		return
+	if not tower.is_attack_enabled:
+		detection_state = DetectionState.IDLE
+		return
 	
 	# 近战模式：使用攻击范围作为索敌范围（无额外索敌范围）
 	# 远程模式：使用索敌范围（如果配置了）或攻击范围
@@ -469,3 +555,12 @@ func _get_trait_damage_bonus() -> float:
 	if config:
 		tower_type = config.tower_id
 	return ts.get_trait_effects_for_tower(tower_type)
+
+func _roll_crit() -> void:
+	_crit_multiplier = 1.0
+	if not config or config.effect_type != EffectType.CRIT:
+		return
+	var crit_prob: float = float(config.effect_params.get("crit_probability", 0.1))
+	if randf() > crit_prob:
+		return
+	_crit_multiplier = float(config.effect_params.get("crit_multiplier", 2.0))

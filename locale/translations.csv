@@ -1,7 +1,8 @@
-keys,zh,en
+﻿﻿﻿﻿﻿﻿﻿﻿﻿keys,zh,en
 MAIN_TITLE,人生塔防,Life Tower Defense
 MAIN_SUBTITLE,Life Tower Defense,Life Tower Defense
 BTN_START_GAME,开始游戏,Start Game
+BTN_CONTINUE_GAME,继续游戏,Continue Game
 BTN_META_GROWTH,长效成长,Meta Progression
 BTN_LOAD_GAME,载入游戏,Load Game
 BTN_QUIT,退出游戏,Quit Game
@@ -9,6 +10,7 @@ BTN_LANGUAGE,🌐 语言/Language,🌐 Language
 PAUSE_TITLE,暂停,Paused
 BTN_RESUME,继续游戏,Resume
 BTN_MAIN_MENU,返回主菜单,Main Menu
+BTN_ABANDON_GAME,放弃游戏,Abandon Game
 HUD_BASE_HP,❤ 基地血量:,❤ Base HP:
 HUD_GOLD,💰 金币:,💰 Gold:
 HUD_WAVE,⚔ 波次:,⚔ Wave:
@@ -98,6 +100,11 @@ ENEMY_PHYS_RES,🛡 物抗：%.0f%%,🛡 Phys Res: %.0f%%
 ENEMY_MAG_RES,🔮 魔抗：%.0f%%,🔮 Mag Res: %.0f%%
 ENEMY_SLOWED,🐌 减速中（-%.0f%%，%.1fs）,🐌 Slowed (-%.0f%%, %.1fs)
 ENEMY_DOT,🔥 持续伤害（%.1f/s，%.1fs）,🔥 DoT (%.1f/s, %.1fs)
+ENEMY_STUNNED,💫 眩晕中（%.1fs）,💫 Stunned (%.1fs)
+ENEMY_SILENCED,🔇 沉默中（%.1fs）,🔇 Silenced (%.1fs)
+ENEMY_CONFUSED,❓ 混乱中（%.1fs）,❓ Confused (%.1fs)
+ENEMY_ARMOR_BROKEN,🛡️ 破甲（-%.0f%%，%.1fs）,🛡️ Armor Broken (-%.0f%%, %.1fs)
+ENEMY_DEBUFF,⬇️ 削弱（-%.0f%%，%.1fs）,⬇️ Debuffed (-%.0f%%, %.1fs)
 META_WISDOM,人生智慧：%d,Life Wisdom: %d
 META_DESTINY,命运点数：%d,Destiny Points: %d
 TAB_SHOP,解锁商店,Unlock Shop
@@ -688,6 +695,83 @@ FAMILY_FARMER_NAME,农民家庭,Farmer Family
 FAMILY_FARMER_DESC,父：农民，母：农民,"Father: Farmer, Mother: Farmer"
 FAMILY_FARMER_TRAIT_0_TEXT,建造成本-15%,Build cost -15%
 FAMILY_FARMER_TRAIT_1_TEXT,经验获取+15%,Exp gain +15%
+FAMILY_TEACHER_NAME,教师家庭,Teacher Family
+FAMILY_TEACHER_DESC,父：大学教授，母：中学教师,"Father: Professor, Mother: Teacher"
+FAMILY_TEACHER_TRAIT_0_TEXT,经验获取+20%,Exp gain +20%
+FAMILY_TEACHER_TRAIT_1_TEXT,金币获取+10%,Gold income +10%
+FAMILY_MILITARY_NAME,军人家庭,Military Family
+FAMILY_MILITARY_DESC,父：军官，母：军医,"Father: Officer, Mother: Military Doctor"
+FAMILY_MILITARY_TRAIT_0_TEXT,生命+20,HP +20
+FAMILY_MILITARY_TRAIT_1_TEXT,建造成本-5%,Build cost -5%
+FAMILY_ARTIST_NAME,艺术家庭,Artist Family
+FAMILY_ARTIST_DESC,父：画家，母：音乐家,"Father: Painter, Mother: Musician"
+FAMILY_ARTIST_TRAIT_0_TEXT,金币获取+15%,Gold income +15%
+FAMILY_ARTIST_TRAIT_1_TEXT,经验获取+10%,Exp gain +10%
+FAMILY_DOCTOR_NAME,医生家庭,Doctor Family
+FAMILY_DOCTOR_DESC,父：外科医生，母：药剂师,"Father: Surgeon, Mother: Pharmacist"
+FAMILY_DOCTOR_TRAIT_0_TEXT,生命+25,HP +25
+FAMILY_DOCTOR_TRAIT_1_TEXT,金币获取+20%,Gold income +20%
+FAMILY_RURAL_POOR_NAME,贫困农家,Poor Rural Family
+FAMILY_RURAL_POOR_DESC,父：务农，母：务农，祖产微薄,"Father: Farmer, Mother: Farmer, Meager heritage"
+FAMILY_RURAL_POOR_TRAIT_0_TEXT,建造成本-20%,Build cost -20%
+FAMILY_RURAL_POOR_TRAIT_1_TEXT,金币获取-10%,Gold income -10%
+FAMILY_CELEBRITY_NAME,名流家庭,Celebrity Family
+FAMILY_CELEBRITY_DESC,父：企业家，母：知名人士,"Father: Entrepreneur, Mother: Celebrity"
+FAMILY_CELEBRITY_TRAIT_0_TEXT,金币获取+40%,Gold income +40%
+FAMILY_CELEBRITY_TRAIT_1_TEXT,经验获取+15%,Exp gain +15%
+LIFE_CHOICE_TITLE,人生选择,Life Choice
+LIFE_CHOICE_TAB_BIRTHDAY,生日,Birthday
+LIFE_CHOICE_TAB_FAMILY,家庭,Family
+LIFE_CHOICE_TAB_TRAIT,先天特质,Congenital Traits
+LIFE_CHOICE_TAB_ATTRIBUTE,属性,Attributes
+LIFE_CHOICE_APPEARANCE,换外观,Appearance
+LIFE_CHOICE_POINTS_TOTAL_SHORT,单点数,Destiny Points
+LIFE_CHOICE_POINTS_TOTAL,命运点数,Destiny Points
+LIFE_CHOICE_POINTS_REMAINING,剩余,Remaining
+LIFE_CHOICE_POINTS_SPENT,已消耗,Spent
+LIFE_CHOICE_CONFIRM,确认开始人生,Confirm & Start Life
+LIFE_CHOICE_BACK,返回主菜单,Back to Menu
+LIFE_CHOICE_RANDOMIZE,随机,Randomize
+LIFE_CHOICE_BIRTHDAY_LABEL,选择出生月份,Select Birth Month
+LIFE_CHOICE_FAMILY_COST,点数消耗,Point Cost
+LIFE_CHOICE_FAMILY_INITIAL_TOWERS,初始防御塔,Initial Towers
+LIFE_CHOICE_TRAIT_COST,消耗,Cost
+LIFE_CHOICE_TRAIT_SELECTED,已选,Selected
+LIFE_CHOICE_TRAIT_SELECTED_NONE,暂未选择任何特质,No traits selected
+LIFE_CHOICE_TRAIT_SELECTED_FMT,已选：%s,Selected: %s
+BIRTHDAY_UNIT_YEAR,年,Year
+BIRTHDAY_ZODIAC_PREFIX,星座：,Zodiac:
+ZODIAC_CAPRICORN,摩羯座,Capricorn
+ZODIAC_AQUARIUS,水瓶座,Aquarius
+ZODIAC_PISCES,双鱼座,Pisces
+ZODIAC_ARIES,白羊座,Aries
+ZODIAC_TAURUS,金牛座,Taurus
+ZODIAC_GEMINI,双子座,Gemini
+ZODIAC_CANCER,巨蟹座,Cancer
+ZODIAC_LEO,狮子座,Leo
+ZODIAC_VIRGO,处女座,Virgo
+ZODIAC_LIBRA,天秤座,Libra
+ZODIAC_SCORPIO,天蝎座,Scorpio
+ZODIAC_SAGITTARIUS,射手座,Sagittarius
+LIFE_CHOICE_ATTR_BASE,基础,Base
+LIFE_CHOICE_ATTR_CURRENT,当前,Current
+LIFE_CHOICE_POINTS_NEGATIVE_WARNING,点数不足！,Not enough points!
+BIRTHDAY_SPRING,春季,Spring
+BIRTHDAY_SUMMER,夏季,Summer
+BIRTHDAY_AUTUMN,秋季,Autumn
+BIRTHDAY_WINTER,冬季,Winter
+BIRTHDAY_MONTH_1,一月,January
+BIRTHDAY_MONTH_2,二月,February
+BIRTHDAY_MONTH_3,三月,March
+BIRTHDAY_MONTH_4,四月,April
+BIRTHDAY_MONTH_5,五月,May
+BIRTHDAY_MONTH_6,六月,June
+BIRTHDAY_MONTH_7,七月,July
+BIRTHDAY_MONTH_8,八月,August
+BIRTHDAY_MONTH_9,九月,September
+BIRTHDAY_MONTH_10,十月,October
+BIRTHDAY_MONTH_11,十一月,November
+BIRTHDAY_MONTH_12,十二月,December
 ERA_CHINA_MODERN_NAME,中国现代,Modern China
 ERA_CHINA_MODERN_TIME_PERIOD,1949-至今,1949-Present
 TOWER_TYPE_ACADEMIC,学科塔,Academic Tower
@@ -798,3 +882,320 @@ TOWER_COUNT_FORMAT,%d次,%d uses
 BATTLE_VICTORY,胜利,Victory
 BATTLE_DEFEAT,失败,Defeat
 EXP_BONUS_FORMAT,，经验获取提升%.0f%%,, exp bonus +%.0f%%
+EVENT_FATHER_BACK_NAME,父亲的背影,Father's Silhouette
+EVENT_FATHER_BACK_DESC,父亲扛着50斤麻袋从集市回来，汗湿透了衬衫。,"Father carries a 50-pound sack from the market, his shirt soaked with sweat."
+OPTION_FATHER_BACK_A,跑上去帮忙,Run up to help
+OPTION_FATHER_BACK_B,在门口等着,Wait at the door
+OPTION_FATHER_BACK_C,假装没看见,Pretend not to see
+EVENT_FATHER_SICK_NAME,父亲的腰,Father's Back
+EVENT_FATHER_SICK_DESC,电话里母亲说：你爸腰疼得直不起来。,Mother calls: Your father's back hurts so much he can't stand straight.
+OPTION_FATHER_SICK_A,立刻请假回老家,Take leave and go home immediately
+OPTION_FATHER_SICK_B,买了膏药寄回去,Buy medicine patches and mail them
+OPTION_FATHER_SICK_C,工作正忙……再看看,Work is busy... I'll see later
+OPTION_FATHER_SICK_D,带父亲去省城看病,Take father to the provincial hospital
+EVENT_FATHER_RETIRE_NAME,父亲退休了,Father Retires
+EVENT_FATHER_RETIRE_DESC,父亲正式从工地退休了，一辈子没攒下多少钱。,Father officially retires from the construction site. He didn't save much in a lifetime.
+OPTION_FATHER_RETIRE_A,爸，来城里住吧,"Dad, come live in the city"
+OPTION_FATHER_RETIRE_B,每个月寄钱回去,Send money home every month
+OPTION_FATHER_RETIRE_C,爸，接你来住,"Dad, let's have you stay with us"
+OPTION_FATHER_RETIRE_D,自己顾自己吧,Look after yourself
+EVENT_FATHER_FINAL_NAME,父亲病危,Father is Critical
+EVENT_FATHER_FINAL_DESC,你守在父亲床边，他拉着你的手。,You sit by your father's bedside. He holds your hand.
+OPTION_FATHER_FINAL_A,爸，你放心走,"Dad, you can go in peace"
+OPTION_FATHER_FINAL_B,我不舍得你走,I can't bear to let you go
+EVENT_FATHER_ALONE_NAME,孤独的告别,A Lonely Farewell
+EVENT_FATHER_ALONE_DESC,你接到电话时，父亲已经走了。,"By the time you get the call, father is already gone."
+OPTION_FATHER_ALONE_A,赶回老家奔丧,Rush home for the funeral
+OPTION_FATHER_ALONE_B,实在走不开,I really can't leave
+EVENT_FATHER_MEMORY_NAME,父亲的椅子,Father's Chair
+EVENT_FATHER_MEMORY_DESC,你坐在父亲生前坐过的椅子上，忽然明白了什么。,You sit in your father's old chair and suddenly understand something.
+OPTION_FATHER_MEMORY_A,我做得够好了,I did well enough
+OPTION_FATHER_MEMORY_B,子欲养而亲不待,"I wanted to care for him, but it's too late"
+OPTION_FATHER_MEMORY_C,我辜负了他,I failed him
+EVENT_FATHER_LEGACY_NAME,父亲的遗物,Father's Belongings
+EVENT_FATHER_LEGACY_DESC,你发现父亲留下了一本日记。,You find your father's diary.
+OPTION_FATHER_LEGACY_A,把日记传给下一代,Pass the diary to the next generation
+OPTION_FATHER_LEGACY_B,默默珍藏,Cherish it silently
+OPTION_FATHER_LEGACY_C,读了，泪流满面,"Read it, tears streaming down"
+EVENT_MOTHER_NAG_NAME,唠叨,Nagging
+EVENT_MOTHER_NAG_DESC,母亲唠叨你穿秋裤、好好读书。,Mother nags you to wear long johns and study hard.
+OPTION_MOTHER_NAG_A,乖乖听话,Obey obediently
+OPTION_MOTHER_NAG_B,知道了知道了,"I know, I know"
+OPTION_MOTHER_NAG_C,你懂什么,What do you know
+EVENT_MOTHER_VISIT_NAME,母亲来看你,Mother Visits
+EVENT_MOTHER_VISIT_DESC,母亲坐了4小时火车来看你，带了一袋子自家种的菜。,"Mother took a 4-hour train to see you, bringing a bag of homegrown vegetables."
+OPTION_MOTHER_VISIT_A,妈，辛苦了,"Mom, you've worked so hard"
+OPTION_MOTHER_VISIT_B,怎么不提前说一声,Why didn't you tell me in advance
+OPTION_MOTHER_VISIT_C,妈，对不起,"Mom, I'm sorry"
+OPTION_MOTHER_VISIT_D,继续冷淡,Stay cold
+EVENT_MOTHER_SICK_SERIOUS_NAME,母亲重病,Mother is Seriously Ill
+EVENT_MOTHER_SICK_SERIOUS_DESC,母亲查出重病，需要手术。,Mother is diagnosed with a serious illness. Surgery is needed.
+OPTION_MOTHER_SICK_A,花多少都要治,"Whatever it costs, we must treat it"
+OPTION_MOTHER_SICK_B,借钱也要治,Borrow money to treat it
+OPTION_MOTHER_SICK_C,良心发现，全力救治,"Conscience awakens, do everything possible"
+OPTION_MOTHER_SICK_D,实在没钱……,I really don't have the money...
+EVENT_MOTHER_RECOVERY_NAME,母亲康复,Mother Recovers
+EVENT_MOTHER_RECOVERY_DESC,母亲手术成功，恢复得不错。,Mother's surgery was successful. She's recovering well.
+OPTION_MOTHER_RECOVERY_A,接母亲同住,Have mother live with us
+OPTION_MOTHER_RECOVERY_B,经常回去看望,Visit often
+OPTION_MOTHER_RECOVERY_C,雇佣保姆照顾,Hire a caregiver
+EVENT_MOTHER_DECLINE_NAME,母亲衰退,Mother Declines
+EVENT_MOTHER_DECLINE_DESC,母亲的身体越来越差了。,Mother's health keeps declining.
+OPTION_MOTHER_DECLINE_A,尽量多陪伴,Spend as much time as possible with her
+OPTION_MOTHER_DECLINE_B,请护工,Hire a nurse
+OPTION_MOTHER_DECLINE_C,逃避,Avoid it
+EVENT_MOTHER_FINAL_MEMORY_NAME,母亲的遗物,Mother's Belongings
+EVENT_MOTHER_FINAL_MEMORY_DESC,母亲走了。你整理她的遗物，发现了一些东西。,"Mother has passed. While sorting her belongings, you find something."
+OPTION_MOTHER_MEMORY_A,母亲留下了一封长信,Mother left a long letter
+OPTION_MOTHER_MEMORY_B,母亲临终前说：我不怪他,Mother said before passing: I don't blame them
+OPTION_MOTHER_MEMORY_C,一张小时候的照片,A childhood photo
+EVENT_MEET_SPOUSE_NAME,遇见你,Meeting You
+EVENT_MEET_SPOUSE_DESC,你遇到了那个改变你一生的人。,You meet the person who will change your life.
+OPTION_MEET_SPOUSE_A,大学同学,College classmate
+OPTION_MEET_SPOUSE_B,相亲认识,Blind date
+OPTION_MEET_SPOUSE_C,工作中偶遇,Met at work
+EVENT_PROPOSAL_NAME,求婚,The Proposal
+EVENT_PROPOSAL_DESC,你觉得是时候了。,You feel it's time.
+OPTION_PROPOSAL_A,浪漫求婚,Romantic proposal
+OPTION_PROPOSAL_B,简单求婚,Simple proposal
+OPTION_PROPOSAL_C,家人催促,Family is pushing
+EVENT_WEDDING_NAME,婚礼,The Wedding
+EVENT_WEDDING_DESC,婚礼当天。,The wedding day.
+OPTION_WEDDING_A,大办婚礼,Grand wedding
+OPTION_WEDDING_B,简单办,Simple ceremony
+OPTION_WEDDING_C,不办，领证就行,"Just register, no ceremony"
+EVENT_FIRST_CHILD_BIRTH_NAME,孩子出生了,A Child is Born
+EVENT_FIRST_CHILD_BIRTH_DESC,你的孩子出生了！,Your child is born!
+OPTION_FIRST_CHILD_A,是个男孩！,It's a boy!
+OPTION_FIRST_CHILD_B,是个女孩！,It's a girl!
+OPTION_FIRST_CHILD_C,双胞胎！一儿一女,Twins! A boy and a girl
+EVENT_SECOND_CHILD_NAME,再要一个？,Another One?
+EVENT_SECOND_CHILD_DESC,配偶说：要不要再要一个？,Your spouse asks: Should we have another?
+OPTION_SECOND_CHILD_A,要！多子多福,"Yes! More children, more blessings"
+OPTION_SECOND_CHILD_B,一个够了,One is enough
+EVENT_CHILD_SCHOOL_NAME,择校,Choosing a School
+EVENT_CHILD_SCHOOL_DESC,孩子上学了，面临择校选择。,Your child is starting school. Time to choose.
+OPTION_CHILD_SCHOOL_A,选最好的学校,Choose the best school
+OPTION_CHILD_SCHOOL_B,就近上学，快乐童年,"Nearby school, happy childhood"
+OPTION_CHILD_SCHOOL_C,看孩子自己选,Let the child decide
+EVENT_CHILD_REBELLION_NAME,青春期叛逆,Teenage Rebellion
+EVENT_CHILD_REBELLION_DESC,孩子青春期叛逆了。,Your child is rebelling in their teenage years.
+OPTION_CHILD_REBELLION_A,继续施压,Keep the pressure on
+OPTION_CHILD_REBELLION_B,放低姿态谈心,Open up and talk heart to heart
+OPTION_CHILD_REBELLION_C,孩子反而更自觉了,The child becomes more self-disciplined
+OPTION_CHILD_REBELLION_D,孩子选了歪路,The child chose the wrong path
+EVENT_CHILD_COLLEGE_NAME,高考出分,College Entrance Exam Results
+EVENT_CHILD_COLLEGE_DESC,孩子高考出分了！,Your child's exam results are out!
+OPTION_CHILD_COLLEGE_A,考上了！,They got in!
+OPTION_CHILD_COLLEGE_B,考上了！,They got in!
+OPTION_CHILD_COLLEGE_C,没考上……,They didn't get in...
+EVENT_CHILD_CAREER_NAME,孩子的事业,Child's Career
+EVENT_CHILD_CAREER_DESC,孩子有了自己的事业和家庭。,Your child has their own career and family now.
+OPTION_CHILD_CAREER_A,事业有成但不太亲近,Successful but not very close
+OPTION_CHILD_CAREER_B,带着孙子回来看你了,Bringing the grandchild to visit
+OPTION_CHILD_CAREER_C,很少回来,Rarely comes back
+OPTION_CHILD_CAREER_D,谢谢你的理解,Thank you for understanding
+EVENT_SPOUSE_ARGUMENT_NAME,夫妻吵架,Spousal Argument
+EVENT_SPOUSE_ARGUMENT_DESC,你们因为一些事情吵架了。,You had an argument about something.
+OPTION_SPOUSE_ARG_A,主动道歉,Apologize first
+OPTION_SPOUSE_ARG_B,冷战,Cold war
+OPTION_SPOUSE_ARG_C,找朋友倾诉,Talk to a friend
+EVENT_CHILD_SICK_NAME,孩子发烧了,Child Has a Fever
+EVENT_CHILD_SICK_DESC,孩子半夜发烧。,Your child has a fever in the middle of the night.
+OPTION_CHILD_SICK_A,立刻送医院,Take to hospital immediately
+OPTION_CHILD_SICK_B,先在家观察,Observe at home first
+OPTION_CHILD_SICK_C,让配偶去,Let spouse handle it
+EVENT_PARENT_MOVE_IN_NAME,父母想搬来同住,Parents Want to Move In
+EVENT_PARENT_MOVE_IN_DESC,父母年纪大了，想搬来和你同住。,Your parents are getting older and want to live with you.
+OPTION_PARENT_MOVE_IN_A,欢迎,Welcome them
+OPTION_PARENT_MOVE_IN_B,在附近租房,Rent nearby
+OPTION_PARENT_MOVE_IN_C,委婉拒绝,Politely decline
+EVENT_MIDLIFE_CRISIS_NAME,中年危机,Midlife Crisis
+EVENT_MIDLIFE_CRISIS_DESC,人到中年，你觉得人生就这样了。,Middle age hits. You feel like this is it.
+OPTION_MIDLIFE_A,跟配偶深谈,Have a deep talk with spouse
+OPTION_MIDLIFE_B,一个人默默承受,Bear it silently
+OPTION_MIDLIFE_C,出去散心,Go out to clear your mind
+EVENT_GRANDCHILD_BIRTH_NAME,当爷爷奶奶了,Becoming Grandparents
+EVENT_GRANDCHILD_BIRTH_DESC,长子/女生了孩子，你当爷爷奶奶了！,Your child had a baby. You're a grandparent now!
+OPTION_GRANDCHILD_A,高兴得不得了,Overjoyed
+OPTION_GRANDCHILD_B,帮着带孩子,Help take care of the baby
+OPTION_GRANDCHILD_C,不想带,Don't want to babysit
+OPTION_REUNION_A,大办,Big celebration
+OPTION_REUNION_B,简单吃顿饭,Simple dinner
+OPTION_REUNION_C,不聚了,Skip the gathering
+EVENT_SPOUSE_RETIREMENT_NAME,配偶退休,Spouse Retires
+EVENT_SPOUSE_RETIREMENT_DESC,配偶退休了，忽然闲下来。,Your spouse retires and suddenly has free time.
+OPTION_SPOUSE_RETIRE_A,一起规划退休生活,Plan retirement together
+OPTION_SPOUSE_RETIRE_B,各过各的,Live separately
+OPTION_SPOUSE_RETIRE_C,配偶觉得被冷落,Spouse feels neglected
+TRAIT_FILIAL_SON_NAME,孝顺,Filial
+TRAIT_FILIAL_SON_DESC,你总是第一时间帮助家人,You always help family first
+TRAIT_CARELESS_CHILD_NAME,不懂事,Careless Child
+TRAIT_CARELESS_CHILD_DESC,你对家人的辛苦视而不见,You turn a blind eye to family's hardship
+TRAIT_DEVOTED_SON_NAME,尽心儿子,Devoted Son
+TRAIT_DEVOTED_SON_DESC,你放下一切回老家照顾父亲,You dropped everything to care for father
+TRAIT_WORK_OVER_FAMILY_NAME,工作重于家庭,Work Over Family
+TRAIT_WORK_OVER_FAMILY_DESC,你总是把工作放在家人前面,You always put work before family
+TRAIT_GOOD_SON_NAME,好儿子,Good Son
+TRAIT_GOOD_SON_DESC,你带父亲去省城看病,You took father to the provincial hospital
+TRAIT_RECONCILED_NAME,和解,Reconciled
+TRAIT_RECONCILED_DESC,你和疏远的家人和解了,You reconciled with estranged family
+TRAIT_COLD_CHILD_NAME,冷漠子女,Cold Child
+TRAIT_COLD_CHILD_DESC,你对父母的需求漠不关心,You're indifferent to your parents' needs
+TRAIT_PEACEFUL_GOODBYE_NAME,平静告别,Peaceful Goodbye
+TRAIT_PEACEFUL_GOODBYE_DESC,你在父亲身边送他最后一程,You were by father's side at the end
+TRAIT_GRIEF_STRICKEN_NAME,悲痛欲绝,Grief-Stricken
+TRAIT_GRIEF_STRICKEN_DESC,你无法接受亲人的离去,You can't accept the loss
+TRAIT_REGRET_LATE_NAME,子欲养而亲不待,Too Late to Care
+TRAIT_REGRET_LATE_DESC,你想报答时已经来不及了,"When you wanted to repay, it was too late"
+TRAIT_UNFORGIVABLE_NAME,不可原谅,Unforgivable
+TRAIT_UNFORGIVABLE_DESC,你没能赶回来见最后一面,You couldn't make it back in time
+TRAIT_FILIAL_REGRET_NAME,孝道遗憾,Filial Regret
+TRAIT_FILIAL_REGRET_DESC,你后悔没有做得更多,You regret not doing more
+TRAIT_FATHER_GUILT_NAME,父亲内疚,Father's Guilt
+TRAIT_FATHER_GUILT_DESC,你辜负了父亲的期望,You failed your father's expectations
+TRAIT_EMOTIONAL_VOID_NAME,情感空虚,Emotional Void
+TRAIT_EMOTIONAL_VOID_DESC,你和家人之间隔了一道墙,A wall stands between you and your family
+TRAIT_FAMILY_HERITAGE_NAME,家族传承,Family Heritage
+TRAIT_FAMILY_HERITAGE_DESC,你把家族故事传给了下一代,You passed the family story to the next generation
+TRAIT_CHERISHED_MEMORY_NAME,珍贵回忆,Cherished Memory
+TRAIT_CHERISHED_MEMORY_DESC,你默默珍藏父亲的记忆,You silently cherish father's memory
+TRAIT_TEARS_OF_TIME_NAME,时光之泪,Tears of Time
+TRAIT_TEARS_OF_TIME_DESC,读了父亲的日记，泪流满面,"Reading father's diary, tears streaming down"
+TRAIT_OBEDIENT_CHILD_NAME,听话孩子,Obedient Child
+TRAIT_OBEDIENT_CHILD_DESC,你总是听妈妈的话,You always listen to mom
+TRAIT_GRATEFUL_CHILD_NAME,感恩子女,Grateful Child
+TRAIT_GRATEFUL_CHILD_DESC,你懂得感恩母亲的付出,You appreciate mother's sacrifices
+TRAIT_DISTANT_CHILD_NAME,疏远子女,Distant Child
+TRAIT_DISTANT_CHILD_DESC,你和母亲之间有了距离,Distance grew between you and mother
+TRAIT_MATURE_APOLOGY_NAME,成熟道歉,Mature Apology
+TRAIT_MATURE_APOLOGY_DESC,你学会了向母亲道歉,You learned to apologize to mother
+TRAIT_COLD_HEART_NAME,心冷,Cold Heart
+TRAIT_COLD_HEART_DESC,你对母亲的关心无动于衷,You're indifferent to mother's care
+TRAIT_DEVOTED_DAUGHTER_NAME,尽心女儿,Devoted Daughter
+TRAIT_DEVOTED_DAUGHTER_DESC,你花多少都要治好母亲,You'll spend whatever it takes to cure mother
+TRAIT_LATE_FILIAL_PIETY_NAME,迟来孝道,Late Filial Piety
+TRAIT_LATE_FILIAL_PIETY_DESC,你终于良心发现,Your conscience finally awakens
+TRAIT_DUTIFUL_CHILD_NAME,尽责子女,Dutiful Child
+TRAIT_DUTIFUL_CHILD_DESC,你尽了基本义务,You fulfilled basic duties
+TRAIT_HELPLESS_NAME,无能为力,Helpless
+TRAIT_HELPLESS_DESC,你实在没有能力帮助,You truly can't afford to help
+TRAIT_FINAL_COMPANION_NAME,最后陪伴,Final Companion
+TRAIT_FINAL_COMPANION_DESC,你在母亲最后的日子里陪伴她,You stayed by mother in her final days
+TRAIT_AVOIDANT_NAME,逃避者,Avoidant
+TRAIT_AVOIDANT_DESC,你选择了逃避,You chose to avoid
+TRAIT_MOTHER_BLESSED_NAME,母亲祝福,Mother's Blessing
+TRAIT_MOTHER_BLESSED_DESC,母亲的爱永远守护你,Mother's love watches over you forever
+TRAIT_MOTHER_FORGIVEN_NAME,母亲原谅,Mother Forgives
+TRAIT_MOTHER_FORGIVEN_DESC,母亲说：我不怪他,Mother said: I don't blame them
+TRAIT_MOTHER_UNCHANGING_LOVE_NAME,母亲不变的爱,Mother's Unchanging Love
+TRAIT_MOTHER_UNCHANGING_LOVE_DESC,即使你冷漠，母亲依然爱你,"Even when you were cold, mother still loved you"
+TRAIT_COLLEGE_LOVE_NAME,校园爱情,College Love
+TRAIT_COLLEGE_LOVE_DESC,你在大学遇到了真爱,You found true love in college
+TRAIT_WORKPLACE_ROMANCE_NAME,职场恋爱,Workplace Romance
+TRAIT_WORKPLACE_ROMANCE_DESC,你在工作中遇到了另一半,You met your partner at work
+TRAIT_ROMANTIC_PROPOSAL_NAME,浪漫求婚,Romantic Proposal
+TRAIT_ROMANTIC_PROPOSAL_DESC,你用最浪漫的方式求婚,You proposed in the most romantic way
+TRAIT_PRESSURED_MARRIAGE_NAME,被迫婚姻,Pressured Marriage
+TRAIT_PRESSURED_MARRIAGE_DESC,家人催促下你匆忙结婚,You married in haste under family pressure
+TRAIT_GRAND_WEDDING_NAME,盛大婚礼,Grand Wedding
+TRAIT_GRAND_WEDDING_DESC,你办了一场盛大的婚礼,You had a grand wedding
+TRAIT_SIMPLE_WEDDING_NAME,简单婚礼,Simple Wedding
+TRAIT_SIMPLE_WEDDING_DESC,你选择了简单的婚礼,You chose a simple wedding
+TRAIT_PRAGMATIC_MARRIAGE_NAME,务实婚姻,Pragmatic Marriage
+TRAIT_PRAGMATIC_MARRIAGE_DESC,你选择了务实的婚姻方式,You chose a pragmatic approach to marriage
+TRAIT_PROUD_FATHER_NAME,骄傲父亲,Proud Father
+TRAIT_PROUD_FATHER_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
+TRAIT_PROUD_PARENT_NAME,骄傲父母,Proud Parent
+TRAIT_PROUD_PARENT_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
+TRAIT_TWIN_BLESSING_NAME,双胞胎福,Twin Blessing
+TRAIT_TWIN_BLESSING_DESC,一儿一女，双喜临门,"A boy and a girl, double happiness"
+TRAIT_FREE_RANGE_PARENT_NAME,放养父母,Free-Range Parent
+TRAIT_FREE_RANGE_PARENT_DESC,你让孩子快乐成长,You let your child grow happily
+TRAIT_PATIENT_PARENT_NAME,耐心父母,Patient Parent
+TRAIT_PATIENT_PARENT_DESC,你愿意倾听孩子的心声,You're willing to listen to your child
+TRAIT_WISE_PARENT_NAME,智慧父母,Wise Parent
+TRAIT_WISE_PARENT_DESC,你用理解代替控制,You use understanding instead of control
+TRAIT_STRICT_PARENT_NAME,严厉父母,Strict Parent
+TRAIT_STRICT_PARENT_DESC,你对孩子要求严格,You're strict with your child
+TRAIT_WORRIED_PARENT_NAME,焦虑父母,Worried Parent
+TRAIT_WORRIED_PARENT_DESC,你总是担心孩子的未来,You always worry about your child's future
+TRAIT_WARM_FAMILY_NAME,温暖家庭,Warm Family
+TRAIT_WARM_FAMILY_DESC,你的家庭充满爱和温暖,Your family is full of love and warmth
+TRAIT_LONELY_PARENT_NAME,孤独父母,Lonely Parent
+TRAIT_LONELY_PARENT_DESC,孩子很少回来看你,Your child rarely visits
+TRAIT_MUTUAL_RESPECT_NAME,互相尊重,Mutual Respect
+TRAIT_MUTUAL_RESPECT_DESC,你和孩子之间建立了互相尊重的关系,You and your child built a relationship of mutual respect
+TRAIT_PEACEMAKER_NAME,和事佬,Peacemaker
+TRAIT_PEACEMAKER_DESC,你总是主动化解矛盾,You always take the initiative to resolve conflicts
+TRAIT_RESPONSIBLE_PARENT_NAME,负责任父母,Responsible Parent
+TRAIT_RESPONSIBLE_PARENT_DESC,你总是第一时间照顾孩子,You always take care of your child first
+TRAIT_FORGETFUL_NAME,健忘,Forgetful
+TRAIT_FORGETFUL_DESC,你忘了重要的纪念日,You forgot an important anniversary
+TRAIT_DOTING_GRANDPARENT_NAME,溺爱祖辈,Doting Grandparent
+TRAIT_DOTING_GRANDPARENT_DESC,你对孙子疼爱有加,You spoil your grandchild
+TRAIT_DISTANT_GRANDPARENT_NAME,疏远祖辈,Distant Grandparent
+TRAIT_DISTANT_GRANDPARENT_DESC,你不太想带孙子,You don't really want to babysit
+TRAIT_FAMILY_DRIFTING_NAME,家庭疏远,Family Drifting
+TRAIT_FAMILY_DRIFTING_DESC,你和家人越来越疏远,You and your family grow apart
+TRAIT_GUILTY_SECRET_NAME,愧疚秘密,Guilty Secret
+TRAIT_GUILTY_SECRET_DESC,你心里藏着一个秘密,You carry a secret guilt
+TRAIT_MARRIAGE_CRISIS_NAME,婚姻危机,Marriage Crisis
+TRAIT_MARRIAGE_CRISIS_DESC,你的婚姻出现了严重问题,Your marriage has serious problems
+TRAIT_STRONG_MARRIAGE_NAME,坚固婚姻,Strong Marriage
+TRAIT_STRONG_MARRIAGE_DESC,你和配偶一起度过了难关,You and your spouse weathered the storm together
+TRAIT_FILIAL_SPOUSE_NAME,孝顺配偶,Filial Spouse
+TRAIT_FILIAL_SPOUSE_DESC,你的配偶主动帮你照顾父母,Your spouse helps care for your parents
+TRAIT_ENLIGHTENED_PARENT_NAME,开明父母,Enlightened Parent
+TRAIT_ENLIGHTENED_PARENT_DESC,你因童年经历选择放手教育,Your childhood led you to choose a hands-off approach
+TRAIT_COUPLE_FOUNDERS_NAME,夫妻创业,Couple Founders
+TRAIT_COUPLE_FOUNDERS_DESC,你和配偶一起创业,You and your spouse started a business together
+TRAIT_DOUBLE_REGRET_NAME,双重遗憾,Double Regret
+TRAIT_DOUBLE_REGRET_DESC,你在爱情和师恩上都有遗憾,You have regrets in both love and mentorship
+FAMILY_FATHER_NAME,李建国,Li Jianguo
+FAMILY_MOTHER_NAME,王秀英,Wang Xiuying
+FAMILY_SPOUSE_NAME,陈雅婷,Chen Yating
+FAMILY_FIRST_CHILD_NAME,李天宇,Li Tianyu
+FAMILY_SECOND_CHILD_NAME,李雨欣,Li Yuxin
+FAMILY_GRANDCHILD_NAME,李小宇,Li Xiaoyu
+ENDING_LONELY_END_NAME,孤独终老,Lonely End
+ENDING_LONELY_END_DESC,你和家人越走越远，最终独自一人,You drifted apart from family and ended up alone
+ENDING_LONELY_END_PHRASE,陌路,Strangers
+ENDING_FULFILLED_LIFE_NAME,圆满人生,Fulfilled Life
+ENDING_FULFILLED_LIFE_DESC,家庭和睦，人生圆满,"A harmonious family, a fulfilled life"
+ENDING_FULFILLED_LIFE_PHRASE,圆满,Fulfilled
+SUMMARY_SPOUSE_COMPANION,配偶陪伴左右,Spouse by your side
+SUMMARY_CHILDREN_BORN,有了自己的孩子,Had children of your own
+SUMMARY_WARM_FAMILY,家庭温暖幸福,A warm and happy family
+SUMMARY_LONELY_ENDING,晚年孤独,Lonely in old age
+FAMILY_FATHER,父亲,Father
+FAMILY_MOTHER,母亲,Mother
+FAMILY_SPOUSE,配偶,Spouse
+FAMILY_FIRST_CHILD,长子/女,First Child
+FAMILY_SECOND_CHILD,次子/女,Second Child
+FAMILY_GRANDCHILD,孙辈,Grandchild
+REQ_FAMILY_MEMBER_ALIVE,需要%s在世,Requires %s alive
+REQ_FAMILY_MEMBER_MET,需要已遇见%s,Requires having met %s
+FAMILY_EFFECT_TITLE,家庭变化,Family Changes
+FAMILY_MOOD_CHANGE,%s心情：%s,%s mood: %s
+FAMILY_HEALTH_CHANGE,%s健康%+d,%s health %+d
+FAMILY_ALIVE_TRUE,%s来到身边,%s joins you
+FAMILY_ALIVE_FALSE,%s离世,%s passes away
+FAMILY_BORN,%s出生了,%s is born
+FAMILY_MET,遇见了%s,Met %s
+MOOD_NEUTRAL,平静,Calm
+MOOD_HAPPY,开心,Happy
+MOOD_SLIGHTLY_HURT,有点受伤,Slightly Hurt
+MOOD_HURT,受伤,Hurt
+MOOD_VERY_HURT,很受伤,Very Hurt
+MOOD_GRATEFUL,欣慰,Grateful
+MOOD_DISAPPOINTED,失望,Disappointed
+MOOD_COLD,冷淡,Cold
+MOOD_FURIOUS,愤怒,Furious
+MOOD_SUPPORTIVE,支持,Supportive
+MOOD_LONELY,孤独,Lonely
+TOWER_ATTACK_TOGGLE,攻击开关,Attack Toggle
+BTN_SELECT_TRAIT,选择词条,Select Trait
+TRAIT_SELECT_TITLE,词条选择,Trait Selection
+BTN_CLOSE,关闭,Close
+BTN_DEBUG_TEST_MAP,调试测试地图,Debug Test Map

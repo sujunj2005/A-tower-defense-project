@@ -1,0 +1,96 @@
+{
+	"version": "1.0",
+	"total_points": 20,
+	"congenital_traits": [
+		{
+			"trait_id": "happy_childhood",
+			"cost": 3,
+			"category": "personality"
+		},
+		{
+			"trait_id": "math_talent",
+			"cost": 5,
+			"category": "talent"
+		},
+		{
+			"trait_id": "sports_youth",
+			"cost": 4,
+			"category": "physical"
+		},
+		{
+			"trait_id": "coding_talent",
+			"cost": 5,
+			"category": "talent"
+		},
+		{
+			"trait_id": "self_learning",
+			"cost": 4,
+			"category": "talent"
+		},
+		{
+			"trait_id": "empathy",
+			"cost": 3,
+			"category": "personality"
+		},
+		{
+			"trait_id": "rebel",
+			"cost": 4,
+			"category": "personality"
+		},
+		{
+			"trait_id": "calligraphy",
+			"cost": 2,
+			"category": "hobby"
+		},
+		{
+			"trait_id": "gardener",
+			"cost": 3,
+			"category": "hobby"
+		},
+		{
+			"trait_id": "patience",
+			"cost": 3,
+			"category": "personality"
+		},
+		{
+			"trait_id": "strong_will",
+			"cost": 4,
+			"category": "personality"
+		},
+		{
+			"trait_id": "little_singer",
+			"cost": 3,
+			"category": "talent"
+		},
+		{
+			"trait_id": "music_culture",
+			"cost": 3,
+			"category": "talent"
+		},
+		{
+			"trait_id": "self_aware",
+			"cost": 3,
+			"category": "personality"
+		},
+		{
+			"trait_id": "dancer",
+			"cost": 2,
+			"category": "hobby"
+		},
+		{
+			"trait_id": "tai_chi",
+			"cost": 3,
+			"category": "hobby"
+		},
+		{
+			"trait_id": "freedom_seeker",
+			"cost": 3,
+			"category": "personality"
+		},
+		{
+			"trait_id": "peace_seeker",
+			"cost": 3,
+			"category": "personality"
+		}
+	]
+}

@@ -17,10 +17,17 @@ func save_game(slot: int = 0) -> bool:
 		return false
 	var save_path: String = SAVE_DIR + "save_%d%s" % [slot, SAVE_EXTENSION]
 	var player_save: PlayerSaveData = Global.get_player_save()
+	var game_session: GameSessionData = Global.get_game_session()
+	var game_state_node: Node = get_node_or_null("/root/GameState")
+	var current_state: int = -1
+	if game_state_node and "current_state" in game_state_node:
+		current_state = game_state_node.current_state
 	var save_data: Dictionary = {
-		"version": "1.0",
+		"version": "1.1",
 		"timestamp": Time.get_datetime_string_from_system(),
-		"player_data": player_save.to_dict()
+		"player_data": player_save.to_dict(),
+		"game_session_data": game_session.to_dict(),
+		"game_state": current_state
 	}
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
 	if not file:
@@ -57,6 +64,8 @@ func load_game(slot: int = 0) -> bool:
 		return false
 	var player_save: PlayerSaveData = PlayerSaveData.from_dict(save_data.player_data)
 	Global.player_save = player_save
+	if save_data.has("game_session_data"):
+		Global.game_session = GameSessionData.from_dict(save_data.game_session_data)
 	Global.debug_log("存档加载成功：槽位 %d" % slot)
 	return true
 
@@ -108,3 +117,18 @@ func get_all_save_slots() -> Array[Dictionary]:
 func auto_save() -> void:
 	save_game(0)
 	Global.debug_log("自动存档完成")
+
+func get_saved_game_state(slot: int = 0) -> int:
+	var save_path: String = SAVE_DIR + "save_%d%s" % [slot, SAVE_EXTENSION]
+	if not FileAccess.file_exists(save_path):
+		return -1
+	var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
+	if not file:
+		return -1
+	var content: String = file.get_as_text()
+	file.close()
+	var json: JSON = JSON.new()
+	if json.parse(content) != OK:
+		return -1
+	var data: Dictionary = json.data
+	return int(data.get("game_state", -1))

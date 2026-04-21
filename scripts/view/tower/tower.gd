@@ -25,12 +25,18 @@ var tower_sprite: Sprite2D
 var attack_component: TowerAttackComponent
 var experience_bar: ProgressBar
 var level_label: Label
-var hover_area: Area2D
-var collision_shape: CollisionShape2D
+var name_label: Label
 
 var is_selected: bool = false
 var is_destroyed: bool = false
+var is_attack_enabled: bool = true
 var _selection_indicator: ColorRect = null
+
+var _buff_damage_bonus: float = 0.0
+var _buff_speed_bonus: float = 0.0
+var _buff_timer: float = 0.0
+var _base_damage: float = 0.0
+var _base_attack_speed: float = 0.0
 
 signal target_changed(new_target: Node2D)
 signal tower_placed(tower: Tower)
@@ -49,14 +55,21 @@ func _ready() -> void:
 
 	add_to_group("towers")
 
-func _process(_delta: float) -> void:
-	if hover_area and hover_area.global_position.distance_to(get_global_mouse_position()) < 30:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			var current_time: int = Time.get_ticks_msec()
-			if not has_meta("last_click_time") or current_time - get_meta("last_click_time") > 200:
-				set_meta("last_click_time", current_time)
-				Global.debug_log("[Tower] _process 检测到点击！发射 mouse_clicked 信号")
-				mouse_clicked.emit(self)
+var _click_cooldown: int = 0
+
+func _process(delta: float) -> void:
+	_update_buff(delta)
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	var half: float = 20.0
+	var rect: Rect2 = Rect2(global_position - Vector2(half, half), Vector2(40, 40))
+	var is_inside: bool = rect.has_point(mouse_pos)
+	if is_inside != is_mouse_hovering:
+		is_mouse_hovering = is_inside
+	if is_inside and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var now: int = Time.get_ticks_msec()
+		if now - _click_cooldown > 300:
+			_click_cooldown = now
+			mouse_clicked.emit(self)
 
 func initialize(tower_config: TowerBean) -> void:
 	config = tower_config
@@ -84,6 +97,8 @@ func setup_tower() -> void:
 		add_child(attack_component)
 
 	attack_component.config = config
+	_base_damage = config.damage
+	_base_attack_speed = config.attack_speed
 	if config.attack_mode == AttackMode.NONE:
 		Global.debug_log("[Tower] %s 为技能塔，跳过攻击组件初始化" % config.get_display_name())
 	else:
@@ -94,10 +109,10 @@ func setup_tower() -> void:
 		])
 
 	init_level_system()
-
 	setup_experience_ui()
-
-	setup_hover_area()
+	_setup_name_label()
+	_register_aura_if_needed()
+	_register_passive_if_needed()
 
 func get_attack_range() -> float:
 	return config.attack_range if config else 0.0
@@ -142,6 +157,36 @@ func setup_experience_ui() -> void:
 
 	experience_changed.connect(_on_experience_changed)
 	level_changed.connect(_on_level_changed)
+
+func _setup_name_label() -> void:
+	if not config:
+		return
+	name_label = Label.new()
+	name_label.text = config.get_display_name()
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.position = Vector2(-40, -30)
+	name_label.z_index = 17
+	name_label.add_theme_font_size_override("font_size", 11)
+	name_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.9))
+	add_child(name_label)
+
+func _register_aura_if_needed() -> void:
+	if not config:
+		return
+	var is_aura: bool = config.effect_type == GameConfig.EffectType.SLOW_AURA or config.effect_type == GameConfig.EffectType.BUFF_AURA
+	if not is_aura:
+		return
+	var es: Node = get_node_or_null("/root/EffectSystem")
+	if not es or not es.has_method("apply_effect"):
+		return
+	es.apply_effect(config.effect_type, config.effect_params, self, self)
+
+func _register_passive_if_needed() -> void:
+	if not config or config.passive_effect.is_empty():
+		return
+	var es: Node = get_node_or_null("/root/EffectSystem")
+	if es and es.has_method("register_passive"):
+		es.register_passive(self)
 
 func _on_experience_changed(current: int, required: int) -> void:
 	if experience_bar:
@@ -203,24 +248,6 @@ func update_tower_stats() -> void:
 
 	stats_updated.emit()
 
-func setup_hover_area() -> void:
-	hover_area = Area2D.new()
-	hover_area.name = "HoverArea"
-	hover_area.z_index = 20
-	hover_area.collision_layer = 1
-	hover_area.collision_mask = 1
-	collision_shape = CollisionShape2D.new()
-	collision_shape.name = "CollisionShape"
-	var shape: RectangleShape2D = RectangleShape2D.new()
-	shape.size = Vector2(40, 40)
-	collision_shape.shape = shape
-	collision_shape.position = Vector2.ZERO
-	hover_area.add_child(collision_shape)
-	add_child(hover_area)
-	hover_area.mouse_entered.connect(_on_hover_area_mouse_entered)
-	hover_area.mouse_exited.connect(_on_hover_area_mouse_exited)
-	hover_area.input_event.connect(_on_hover_area_input_event)
-
 func set_selected(selected: bool) -> void:
 	if is_selected == selected:
 		return
@@ -243,17 +270,6 @@ func set_selected(selected: bool) -> void:
 		if _selection_indicator:
 			_selection_indicator.visible = false
 
-func _on_hover_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		Global.debug_log("[Tower] 检测到点击！发射 mouse_clicked 信号")
-		mouse_clicked.emit(self)
-
-func _on_hover_area_mouse_entered() -> void:
-	is_mouse_hovering = true
-
-func _on_hover_area_mouse_exited() -> void:
-	is_mouse_hovering = false
-
 func destroy() -> void:
 	if is_destroyed:
 		return
@@ -270,6 +286,11 @@ func destroy() -> void:
 		Global.debug_log("[Tower] 已请求在 slot %d 创建废墟" % slot_idx)
 	else:
 		Global.debug_log("[Tower] 无法创建废墟：mm=%s, slot_idx=%d" % [str(mm != null), slot_idx])
+	var es: Node = get_node_or_null("/root/EffectSystem")
+	if es and es.has_method("remove_aura_for_tower"):
+		es.remove_aura_for_tower(self)
+	if es and es.has_method("unregister_passive"):
+		es.unregister_passive(self)
 	queue_free()
 
 func get_tower_info_text() -> String:
@@ -287,6 +308,11 @@ func get_tower_info_text() -> String:
 		if sub_eid != "":
 			var sec: SpecialEffectConfig = SpecialEffectConfig.new()
 			info_text += "\n" + sec.get_effect_icon(sub_eid) + " " + sec.get_display_name(sub_eid) + " — " + sec.get_display_desc(sub_eid)
+	if not config.passive_effect.is_empty():
+		var ptype: String = config.passive_effect.get("type", "")
+		if ptype == "global_gold_bonus":
+			var bonus_val: float = float(config.passive_effect.get("gold_bonus", 0.0))
+			info_text += "\n💰 " + tr("PASSIVE_GLOBAL_GOLD_BONUS") % (bonus_val * 100.0)
 	info_text += "━━━━━━━━━━━━━━━\n"
 	info_text += tr("TOWER_INFO_COST") % config.cost + "\n"
 	info_text += tr("TOWER_INFO_DAMAGE") % attack_component.config.damage + "\n"
@@ -296,3 +322,21 @@ func get_tower_info_text() -> String:
 	info_text += tr("TOWER_EXP") % [current_experience, experience_required, config.cost]
 
 	return info_text
+
+func apply_buff(damage_bonus: float, speed_bonus: float, duration: float) -> void:
+	_buff_damage_bonus = maxf(_buff_damage_bonus, damage_bonus)
+	_buff_speed_bonus = maxf(_buff_speed_bonus, speed_bonus)
+	_buff_timer = maxf(_buff_timer, duration)
+	if attack_component and _base_attack_speed > 0:
+		attack_component.setup_timer_with_buffs(_buff_damage_bonus, _buff_speed_bonus)
+
+func _update_buff(delta: float) -> void:
+	if _buff_timer <= 0.0:
+		return
+	_buff_timer -= delta
+	if _buff_timer <= 0.0:
+		_buff_timer = 0.0
+		_buff_damage_bonus = 0.0
+		_buff_speed_bonus = 0.0
+		if attack_component and _base_attack_speed > 0:
+			attack_component.setup_timer_with_buffs(0.0, 0.0)

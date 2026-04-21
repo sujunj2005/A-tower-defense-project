@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dggjpq4g4mn6x"]
+
+[ext_resource type="Script" uid="uid://dyq5y4ra7c7i2" path="res://scripts/ui/life_choice_ui.gd" id="1_0gtem"]
+
+[node name="LifeChoice" type="Control" unique_id=278470168]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0gtem")

@@ -92,11 +92,11 @@ func _load_current_event() -> void:
 		if all_events.is_empty():
 			_display_quiet_year()
 			return
-		var random_index: int = randi() % all_events.size()
-		display_event(all_events[random_index])
+		var pick_count: int = mini(3, all_events.size())
+		display_event(all_events[randi() % pick_count])
 	else:
-		var random_index: int = randi() % events.size()
-		display_event(events[random_index])
+		var pick_count: int = mini(3, events.size())
+		display_event(events[randi() % pick_count])
 
 func _get_events_for_stage() -> Array[EventData]:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
@@ -117,7 +117,12 @@ func _get_events_for_stage() -> Array[EventData]:
 			continue
 		var prereq_met: bool = true
 		for prereq_id: String in event.chain_prerequisites:
-			if not prereq_id in session.completed_events:
+			if prereq_id.begins_with("flag:"):
+				var flag_id: String = prereq_id.substr(5)
+				if not flag_id in session.chain_flags:
+					prereq_met = false
+					break
+			elif not prereq_id in session.completed_events:
 				prereq_met = false
 				break
 		if not prereq_met:
@@ -144,11 +149,25 @@ func _get_events_for_stage() -> Array[EventData]:
 					min_age = a
 				if a > max_age:
 					max_age = a
-			if current_age >= min_age - 3 and current_age <= max_age + 3:
+			if current_age >= min_age - 1 and current_age <= max_age + 1:
 				stage_matched.append(event)
+	age_matched.sort_custom(func(a: EventData, b: EventData) -> bool:
+		return _age_distance(a, current_age) < _age_distance(b, current_age)
+	)
+	stage_matched.sort_custom(func(a: EventData, b: EventData) -> bool:
+		return _age_distance(a, current_age) < _age_distance(b, current_age)
+	)
 	if not age_matched.is_empty():
 		return age_matched
 	return stage_matched
+
+func _age_distance(event: EventData, current_age: int) -> int:
+	var min_dist: int = 999
+	for a: int in event.ages:
+		var dist: int = absi(a - current_age)
+		if dist < min_dist:
+			min_dist = dist
+	return min_dist
 
 func display_event(event: EventData) -> void:
 	_current_event = event
@@ -167,7 +186,7 @@ func display_event(event: EventData) -> void:
 			req_text = os.format_requirements(option.requirements)
 		var btn_text: String = option.get_display_text() if option.text != "" else tr("OPTION_LABEL") % (i + 1)
 		if req_text != "":
-			btn_text += "\n" + tr("REQUIREMENT_NEED") % req_text + "]"
+			btn_text += "\n" + tr("REQUIREMENT_NEED") % req_text
 		var has_ending: bool = option.triggers_ending
 		var has_battle: bool = option.battle_trigger is Dictionary
 		if has_ending:
@@ -183,7 +202,7 @@ func display_event(event: EventData) -> void:
 			can_select = _check_requirements(option.requirements)
 		btn.disabled = not can_select
 		if not can_select:
-			btn.add_theme_color_override("font_disabled_color", Color(0.5, 0.5, 0.5, 1.0))
+			btn.add_theme_color_override("font_disabled_color", Color(0.6, 0.3, 0.3, 1.0))
 		elif has_ending:
 			btn.add_theme_color_override("font_color", Color(1.0, 0.2, 0.2, 1.0))
 			btn.add_theme_color_override("font_hover_color", Color(1.0, 0.4, 0.4, 1.0))
@@ -227,6 +246,17 @@ func _check_requirements(requirements: Dictionary) -> bool:
 		elif attr_name == "education":
 			var edu_trait: String = str(required_value)
 			if not edu_trait in session.traits:
+				return false
+		elif attr_name == "chain_flag":
+			if not str(required_value) in session.chain_flags:
+				return false
+		elif attr_name == "family_member_alive":
+			var mid: String = str(required_value)
+			if not session.family_members.has(mid) or not session.family_members[mid].get("alive", false):
+				return false
+		elif attr_name == "family_member_met":
+			var mid2: String = str(required_value)
+			if not session.family_members.has(mid2) or not session.family_members[mid2].get("met", false):
 				return false
 		elif attr_name == "work_ability":
 			var threshold: int = int(required_value)
@@ -294,9 +324,6 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
-
-	var sep0: HSeparator = HSeparator.new()
-	vbox.add_child(sep0)
 
 	var rewards: Array = selected_option.rewards
 	var costs: Dictionary = selected_option.cost
@@ -411,6 +438,12 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 				stats_label.add_theme_font_size_override("font_size", 14)
 				vbox.add_child(stats_label)
 
+	var family_fx: Variant = selected_option.family_effect
+	if family_fx is Dictionary and not family_fx.is_empty():
+		_show_family_effect_section(vbox, [family_fx])
+	elif family_fx is Array and not family_fx.is_empty():
+		_show_family_effect_section(vbox, family_fx)
+
 	var stage_growth: Dictionary = _get_stage_attribute_growth()
 	if not stage_growth.is_empty():
 		var sep_growth: HSeparator = HSeparator.new()
@@ -473,6 +506,8 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		overlay.queue_free()
 		popup.queue_free()
 		event_completed.emit()
+		if GameState.current_state == GameState.State.ENDING:
+			return
 		if selected_option.triggers_ending:
 			var es: Node = get_node_or_null("/root/EventSystem")
 			if es and es.has_method("_trigger_life_ending"):
@@ -491,6 +526,49 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		if event is InputEventMouseButton and event.pressed:
 			callback.call()
 	)
+
+func _show_family_effect_section(vbox: VBoxContainer, effects: Array) -> void:
+	var sep_family: HSeparator = HSeparator.new()
+	vbox.add_child(sep_family)
+	var family_title: Label = Label.new()
+	family_title.text = tr("FAMILY_EFFECT_TITLE")
+	family_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	family_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+	vbox.add_child(family_title)
+	for fx: Dictionary in effects:
+		var member_id: String = fx.get("member", "")
+		var member_name: String = _get_family_member_display_name(member_id)
+		var parts: Array[String] = []
+		if fx.has("mood_change"):
+			parts.append(tr("FAMILY_MOOD_CHANGE") % [member_name, tr("MOOD_" + fx.mood_change.to_upper())])
+		if fx.has("health_change"):
+			var hv: int = int(fx.health_change)
+			parts.append(tr("FAMILY_HEALTH_CHANGE") % [member_name, hv])
+		if fx.has("alive_change"):
+			if fx.alive_change:
+				parts.append(tr("FAMILY_ALIVE_TRUE") % member_name)
+			else:
+				parts.append(tr("FAMILY_ALIVE_FALSE") % member_name)
+		if fx.has("born_change"):
+			if fx.born_change:
+				parts.append(tr("FAMILY_BORN") % member_name)
+		if fx.has("met_change"):
+			if fx.met_change:
+				parts.append(tr("FAMILY_MET") % member_name)
+		if parts.is_empty():
+			parts.append(member_name)
+		_add_popup_row(vbox, "🏠", "  ".join(parts), Color(0.9, 0.75, 0.5, 1.0))
+
+func _get_family_member_display_name(member_id: String) -> String:
+	var names: Dictionary = {
+		"father": tr("FAMILY_FATHER"),
+		"mother": tr("FAMILY_MOTHER"),
+		"spouse": tr("FAMILY_SPOUSE"),
+		"first_child": tr("FAMILY_FIRST_CHILD"),
+		"second_child": tr("FAMILY_SECOND_CHILD"),
+		"grandchild": tr("FAMILY_GRANDCHILD"),
+	}
+	return names.get(member_id, member_id)
 
 func _add_popup_row(container: VBoxContainer, icon: String, text: String, color: Color) -> void:
 	var row: HBoxContainer = HBoxContainer.new()

@@ -1047,6 +1047,861 @@
 					"value": 3
 				}
 			]
+		},
+		{
+			"trait_id": "filial_son",
+			"name": "TRAIT_FILIAL_SON_NAME",
+			"description": "TRAIT_FILIAL_SON_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -2
+				}
+			]
+		},
+		{
+			"trait_id": "careless_child",
+			"name": "TRAIT_CARELESS_CHILD_NAME",
+			"description": "TRAIT_CARELESS_CHILD_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 2,
+				"attribute": "courage"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -2,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "devoted_son",
+			"name": "TRAIT_DEVOTED_SON_NAME",
+			"description": "TRAIT_DEVOTED_SON_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "work_over_family",
+			"name": "TRAIT_WORK_OVER_FAMILY_NAME",
+			"description": "TRAIT_WORK_OVER_FAMILY_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 5
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -5,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "good_son",
+			"name": "TRAIT_GOOD_SON_NAME",
+			"description": "TRAIT_GOOD_SON_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -10,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "reconciled",
+			"name": "TRAIT_RECONCILED_NAME",
+			"description": "TRAIT_RECONCILED_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "cold_child",
+			"name": "TRAIT_COLD_CHILD_NAME",
+			"description": "TRAIT_COLD_CHILD_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 10,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -8,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "peaceful_goodbye",
+			"name": "TRAIT_PEACEFUL_GOODBYE_NAME",
+			"description": "TRAIT_PEACEFUL_GOODBYE_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			}
+		},
+		{
+			"trait_id": "grief_stricken",
+			"name": "TRAIT_GRIEF_STRICKEN_NAME",
+			"description": "TRAIT_GRIEF_STRICKEN_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "regret_late",
+			"name": "TRAIT_REGRET_LATE_NAME",
+			"description": "TRAIT_REGRET_LATE_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "unforgivable",
+			"name": "TRAIT_UNFORGIVABLE_NAME",
+			"description": "TRAIT_UNFORGIVABLE_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -10
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -5,
+					"attribute": "courage"
+				}
+			]
+		},
+		{
+			"trait_id": "filial_regret",
+			"name": "TRAIT_FILIAL_REGRET_NAME",
+			"description": "TRAIT_FILIAL_REGRET_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "father_guilt",
+			"name": "TRAIT_FATHER_GUILT_NAME",
+			"description": "TRAIT_FATHER_GUILT_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -8
+			}
+		},
+		{
+			"trait_id": "emotional_void",
+			"name": "TRAIT_EMOTIONAL_VOID_NAME",
+			"description": "TRAIT_EMOTIONAL_VOID_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -5
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -3,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "family_heritage",
+			"name": "TRAIT_FAMILY_HERITAGE_NAME",
+			"description": "TRAIT_FAMILY_HERITAGE_DESC",
+			"effect": {
+				"type": "tower_damage_bonus",
+				"tower_damage_bonus": 0.1,
+				"tower_types": []
+			}
+		},
+		{
+			"trait_id": "cherished_memory",
+			"name": "TRAIT_CHERISHED_MEMORY_NAME",
+			"description": "TRAIT_CHERISHED_MEMORY_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			}
+		},
+		{
+			"trait_id": "tears_of_time",
+			"name": "TRAIT_TEARS_OF_TIME_NAME",
+			"description": "TRAIT_TEARS_OF_TIME_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "obedient_child",
+			"name": "TRAIT_OBEDIENT_CHILD_NAME",
+			"description": "TRAIT_OBEDIENT_CHILD_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -2,
+					"attribute": "courage"
+				}
+			]
+		},
+		{
+			"trait_id": "grateful_child",
+			"name": "TRAIT_GRATEFUL_CHILD_NAME",
+			"description": "TRAIT_GRATEFUL_CHILD_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "distant_child",
+			"name": "TRAIT_DISTANT_CHILD_NAME",
+			"description": "TRAIT_DISTANT_CHILD_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -3,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "mature_apology",
+			"name": "TRAIT_MATURE_APOLOGY_NAME",
+			"description": "TRAIT_MATURE_APOLOGY_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "cold_heart",
+			"name": "TRAIT_COLD_HEART_NAME",
+			"description": "TRAIT_COLD_HEART_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 8,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -8,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "devoted_daughter",
+			"name": "TRAIT_DEVOTED_DAUGHTER_NAME",
+			"description": "TRAIT_DEVOTED_DAUGHTER_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 10
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "late_filial_piety",
+			"name": "TRAIT_LATE_FILIAL_PIETY_NAME",
+			"description": "TRAIT_LATE_FILIAL_PIETY_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "dutiful_child",
+			"name": "TRAIT_DUTIFUL_CHILD_NAME",
+			"description": "TRAIT_DUTIFUL_CHILD_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 0
+			}
+		},
+		{
+			"trait_id": "helpless",
+			"name": "TRAIT_HELPLESS_NAME",
+			"description": "TRAIT_HELPLESS_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": -5,
+				"attribute": "courage"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "final_companion",
+			"name": "TRAIT_FINAL_COMPANION_NAME",
+			"description": "TRAIT_FINAL_COMPANION_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "avoidant",
+			"name": "TRAIT_AVOIDANT_NAME",
+			"description": "TRAIT_AVOIDANT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": -3,
+				"attribute": "courage"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "mother_blessed",
+			"name": "TRAIT_MOTHER_BLESSED_NAME",
+			"description": "TRAIT_MOTHER_BLESSED_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 10
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 10,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "mother_forgiven",
+			"name": "TRAIT_MOTHER_FORGIVEN_NAME",
+			"description": "TRAIT_MOTHER_FORGIVEN_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 5,
+					"attribute": "intelligence"
+				}
+			]
+		},
+		{
+			"trait_id": "mother_unchanging_love",
+			"name": "TRAIT_MOTHER_UNCHANGING_LOVE_NAME",
+			"description": "TRAIT_MOTHER_UNCHANGING_LOVE_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "college_love",
+			"name": "TRAIT_COLLEGE_LOVE_NAME",
+			"description": "TRAIT_COLLEGE_LOVE_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "workplace_romance",
+			"name": "TRAIT_WORKPLACE_ROMANCE_NAME",
+			"description": "TRAIT_WORKPLACE_ROMANCE_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 3
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 3,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "romantic_proposal",
+			"name": "TRAIT_ROMANTIC_PROPOSAL_NAME",
+			"description": "TRAIT_ROMANTIC_PROPOSAL_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -10,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "pressured_marriage",
+			"name": "TRAIT_PRESSURED_MARRIAGE_NAME",
+			"description": "TRAIT_PRESSURED_MARRIAGE_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -5
+			}
+		},
+		{
+			"trait_id": "grand_wedding",
+			"name": "TRAIT_GRAND_WEDDING_NAME",
+			"description": "TRAIT_GRAND_WEDDING_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 8,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -20,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "simple_wedding",
+			"name": "TRAIT_SIMPLE_WEDDING_NAME",
+			"description": "TRAIT_SIMPLE_WEDDING_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "pragmatic_marriage",
+			"name": "TRAIT_PRAGMATIC_MARRIAGE_NAME",
+			"description": "TRAIT_PRAGMATIC_MARRIAGE_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 3
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -2,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "proud_father",
+			"name": "TRAIT_PROUD_FATHER_NAME",
+			"description": "TRAIT_PROUD_FATHER_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -2
+				}
+			]
+		},
+		{
+			"trait_id": "proud_parent",
+			"name": "TRAIT_PROUD_PARENT_NAME",
+			"description": "TRAIT_PROUD_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "twin_blessing",
+			"name": "TRAIT_TWIN_BLESSING_NAME",
+			"description": "TRAIT_TWIN_BLESSING_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "free_range_parent",
+			"name": "TRAIT_FREE_RANGE_PARENT_NAME",
+			"description": "TRAIT_FREE_RANGE_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "patient_parent",
+			"name": "TRAIT_PATIENT_PARENT_NAME",
+			"description": "TRAIT_PATIENT_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "wise_parent",
+			"name": "TRAIT_WISE_PARENT_NAME",
+			"description": "TRAIT_WISE_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 2,
+					"attribute": "intelligence"
+				}
+			]
+		},
+		{
+			"trait_id": "strict_parent",
+			"name": "TRAIT_STRICT_PARENT_NAME",
+			"description": "TRAIT_STRICT_PARENT_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -3
+			}
+		},
+		{
+			"trait_id": "worried_parent",
+			"name": "TRAIT_WORRIED_PARENT_NAME",
+			"description": "TRAIT_WORRIED_PARENT_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -3
+			}
+		},
+		{
+			"trait_id": "warm_family",
+			"name": "TRAIT_WARM_FAMILY_NAME",
+			"description": "TRAIT_WARM_FAMILY_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 5
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 5,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "lonely_parent",
+			"name": "TRAIT_LONELY_PARENT_NAME",
+			"description": "TRAIT_LONELY_PARENT_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -5
+			}
+		},
+		{
+			"trait_id": "mutual_respect",
+			"name": "TRAIT_MUTUAL_RESPECT_NAME",
+			"description": "TRAIT_MUTUAL_RESPECT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 5,
+					"attribute": "intelligence"
+				}
+			]
+		},
+		{
+			"trait_id": "peacemaker",
+			"name": "TRAIT_PEACEMAKER_NAME",
+			"description": "TRAIT_PEACEMAKER_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "responsible_parent",
+			"name": "TRAIT_RESPONSIBLE_PARENT_NAME",
+			"description": "TRAIT_RESPONSIBLE_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 3,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "forgetful",
+			"name": "TRAIT_FORGETFUL_NAME",
+			"description": "TRAIT_FORGETFUL_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": -2,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "doting_grandparent",
+			"name": "TRAIT_DOTING_GRANDPARENT_NAME",
+			"description": "TRAIT_DOTING_GRANDPARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -3
+				}
+			]
+		},
+		{
+			"trait_id": "distant_grandparent",
+			"name": "TRAIT_DISTANT_GRANDPARENT_NAME",
+			"description": "TRAIT_DISTANT_GRANDPARENT_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 3
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -3,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "family_drifting",
+			"name": "TRAIT_FAMILY_DRIFTING_NAME",
+			"description": "TRAIT_FAMILY_DRIFTING_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -3
+			}
+		},
+		{
+			"trait_id": "guilty_secret",
+			"name": "TRAIT_GUILTY_SECRET_NAME",
+			"description": "TRAIT_GUILTY_SECRET_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -3
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": -3,
+					"attribute": "charm"
+				}
+			]
+		},
+		{
+			"trait_id": "marriage_crisis",
+			"name": "TRAIT_MARRIAGE_CRISIS_NAME",
+			"description": "TRAIT_MARRIAGE_CRISIS_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": -10
+			},
+			"side_effects": [
+				{
+					"type": "gold_per_wave",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "strong_marriage",
+			"name": "TRAIT_STRONG_MARRIAGE_NAME",
+			"description": "TRAIT_STRONG_MARRIAGE_DESC",
+			"effect": {
+				"type": "damage_reduction",
+				"value": 0.05
+			}
+		},
+		{
+			"trait_id": "filial_spouse",
+			"name": "TRAIT_FILIAL_SPOUSE_NAME",
+			"description": "TRAIT_FILIAL_SPOUSE_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			}
+		},
+		{
+			"trait_id": "enlightened_parent",
+			"name": "TRAIT_ENLIGHTENED_PARENT_NAME",
+			"description": "TRAIT_ENLIGHTENED_PARENT_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 5,
+				"attribute": "charm"
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 3,
+					"attribute": "intelligence"
+				}
+			]
+		},
+		{
+			"trait_id": "couple_founders",
+			"name": "TRAIT_COUPLE_FOUNDERS_NAME",
+			"description": "TRAIT_COUPLE_FOUNDERS_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 15
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -5
+				}
+			]
+		},
+		{
+			"trait_id": "double_regret",
+			"name": "TRAIT_DOUBLE_REGRET_NAME",
+			"description": "TRAIT_DOUBLE_REGRET_DESC",
+			"effect": {
+				"type": "attribute_bonus",
+				"value": 10,
+				"attribute": "intelligence"
+			},
+			"side_effects": [
+				{
+					"type": "health_bonus",
+					"value": -15
+				},
+				{
+					"type": "attribute_bonus",
+					"value": -8,
+					"attribute": "courage"
+				}
+			]
 		}
 	]
 }

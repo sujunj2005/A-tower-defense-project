@@ -10,6 +10,8 @@ extends Resource
 @export var battle_trigger: Variant = null
 @export var triggers_ending: bool = false
 @export var ending_reason: String = ""
+@export var chain_flag: String = ""
+@export var family_effect: Variant = {}
 
 func to_dict() -> Dictionary:
 	var result: Dictionary = {
@@ -24,6 +26,13 @@ func to_dict() -> Dictionary:
 	if triggers_ending:
 		result["triggers_ending"] = true
 		result["ending_reason"] = ending_reason
+	if chain_flag != "":
+		result["chain_flag"] = chain_flag
+	var fx = family_effect
+	if fx is Dictionary and not fx.is_empty():
+		result["family_effect"] = fx
+	elif fx is Array and not fx.is_empty():
+		result["family_effect"] = fx
 	return result
 
 static func from_dict(data: Dictionary) -> OptionData:
@@ -39,6 +48,12 @@ static func from_dict(data: Dictionary) -> OptionData:
 	opt.battle_trigger = data.get("battle_trigger", null)
 	opt.triggers_ending = bool(data.get("triggers_ending", false))
 	opt.ending_reason = str(data.get("ending_reason", ""))
+	opt.chain_flag = str(data.get("chain_flag", ""))
+	var raw_fx = data.get("family_effect", {})
+	if raw_fx is Array:
+		opt.family_effect = raw_fx
+	else:
+		opt.family_effect = Dictionary(raw_fx)
 	return opt
 
 func get_display_text() -> String:

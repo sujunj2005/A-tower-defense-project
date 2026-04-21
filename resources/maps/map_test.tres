@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MapConfig" load_steps=2 format=3 uid="uid://map_test"]
+
+[ext_resource type="Script" path="res://scripts/logic/tower_defense/map_config.gd" id="1_map"]
+
+[resource]
+script = ExtResource("1_map")
+map_name = "测试地图"
+map_width = 20
+map_height = 15
+tile_size = 96
+spawn_point = Vector2i(2, 7)
+base_point = Vector2i(17, 7)
+path_points = [Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7), Vector2i(7, 6), Vector2i(7, 5), Vector2i(7, 4), Vector2i(7, 3), Vector2i(8, 3), Vector2i(9, 3), Vector2i(10, 3), Vector2i(11, 3), Vector2i(12, 3), Vector2i(12, 4), Vector2i(12, 5), Vector2i(12, 6), Vector2i(12, 7), Vector2i(13, 7), Vector2i(14, 7), Vector2i(15, 7), Vector2i(16, 7), Vector2i(17, 7)]
+waypoints = [Vector2i(2, 7), Vector2i(7, 7), Vector2i(7, 3), Vector2i(12, 3), Vector2i(12, 7), Vector2i(17, 7)]
+tower_positions = [Vector2i(3, 6), Vector2i(3, 8), Vector2i(4, 6), Vector2i(4, 8), Vector2i(5, 6), Vector2i(5, 8), Vector2i(6, 3), Vector2i(6, 4), Vector2i(6, 5), Vector2i(6, 6), Vector2i(6, 8), Vector2i(7, 2), Vector2i(7, 8), Vector2i(8, 2), Vector2i(8, 4), Vector2i(8, 5), Vector2i(8, 6), Vector2i(8, 7), Vector2i(9, 2), Vector2i(9, 4), Vector2i(10, 2), Vector2i(10, 4), Vector2i(11, 2), Vector2i(11, 4), Vector2i(11, 5), Vector2i(11, 6), Vector2i(11, 7), Vector2i(12, 2), Vector2i(12, 8), Vector2i(13, 3), Vector2i(13, 4), Vector2i(13, 5), Vector2i(13, 6), Vector2i(13, 8), Vector2i(14, 6), Vector2i(14, 8), Vector2i(15, 6), Vector2i(15, 8), Vector2i(16, 6), Vector2i(16, 8)]
+max_towers = 40
+camera_speed = 800.0
+zoom_speed = 0.2
+drag_speed = 1.5
+drag_inertia = 0.9
+grass_texture_path = "res://images/Outside_A2.png"
+grass_texture_region = Rect2(0, 0, 32, 32)
+road_texture_path = "res://images/Outside_A2.png"
+road_texture_region = Rect2(96, 0, 32, 32)
+edge_texture_path = "res://images/Outside_A2.png"
+edge_texture_region = Rect2(32, 0, 32, 32)

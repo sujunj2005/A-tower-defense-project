@@ -18,6 +18,7 @@ func _ready():
 var _title_label: Label
 var _resume_btn: Button
 var _menu_btn: Button
+var _abandon_btn: Button
 var _quit_btn: Button
 
 func _notification(what: int) -> void:
@@ -28,6 +29,7 @@ func _refresh_texts() -> void:
 	if _title_label: _title_label.text = tr("PAUSE_TITLE")
 	if _resume_btn: _resume_btn.text = tr("BTN_RESUME")
 	if _menu_btn: _menu_btn.text = tr("BTN_MAIN_MENU")
+	if _abandon_btn: _abandon_btn.text = tr("BTN_ABANDON_GAME")
 	if _quit_btn: _quit_btn.text = tr("BTN_QUIT")
 
 func setup_ui():
@@ -77,6 +79,10 @@ func setup_ui():
 
 	_menu_btn = create_button(tr("BTN_MAIN_MENU"), _on_main_menu_pressed)
 	vbox.add_child(_menu_btn)
+
+	_abandon_btn = create_button(tr("BTN_ABANDON_GAME"), _on_abandon_pressed)
+	_abandon_btn.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	vbox.add_child(_abandon_btn)
 
 	_quit_btn = create_button(tr("BTN_QUIT"), _on_quit_pressed)
 	vbox.add_child(_quit_btn)
@@ -135,6 +141,25 @@ func _on_main_menu_pressed():
 	var tree = get_tree()
 	tree.paused = false
 	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if ss and ss.has_method("save_game"):
+		ss.save_game(0)
+	Global.reset_game_session()
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		scene_manager.return_to_main_menu()
+	else:
+		tree.change_scene_to_file("res://scenes/menu.tscn")
+
+func _on_abandon_pressed():
+	is_paused = false
+	visible = false
+	var tree = get_tree()
+	tree.paused = false
+	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	var ss: Node = get_node_or_null("/root/SaveSystem")
+	if ss and ss.has_method("delete_save"):
+		ss.delete_save(0)
 	Global.reset_game_session()
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager:

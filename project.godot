@@ -44,6 +44,7 @@ BattleRating="*res://scripts/logic/tower_defense/battle_rating.gd"
 WaveManager="*res://scripts/logic/tower_defense/wave_manager.gd"
 OptionSystem="*res://scripts/logic/life_simulation/option_system.gd"
 I18nManager="*res://autoload/i18n_manager.gd"
+EffectSystem="*res://scripts/logic/tower_defense/effect_system.gd"
 
 [display]
 
