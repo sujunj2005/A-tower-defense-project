@@ -16,6 +16,13 @@ class_name MapConfig
 @export var tower_positions: Array[Vector2i] = []
 @export var max_towers: int = 10
 
+@export var era_id: String = ""
+
+@export_group("Difficulty")
+@export var wave_count_modifier: int = 0
+@export var enemy_attribute_multiplier: float = 1.0
+@export var tower_slot_count: int = -1
+
 @export var camera_speed: float = 800.0
 @export var zoom_speed: float = 0.2
 @export var drag_speed: float = 1.5
@@ -75,10 +82,32 @@ static func compute_path_from_waypoints(wps: Array[Vector2i]) -> Array[Vector2i]
 static var _map_registry: Dictionary = {}
 
 static func _static_init():
-	_map_registry = {
-		"map_01": "res://resources/maps/map_01.tres",
-		"map_test": "res://resources/maps/map_test.tres"
-	}
+	_map_registry = _scan_maps_directory()
+	if _map_registry.is_empty():
+		_map_registry = {
+			"map_01": "res://resources/maps/map_01.tres",
+			"map_test": "res://resources/maps/map_test.tres"
+		}
+
+static func _scan_maps_directory() -> Dictionary:
+	var registry: Dictionary = {}
+	var dir := DirAccess.open("res://resources/maps/")
+	if dir == null:
+		push_warning("MapConfig: Could not open maps directory, using fallback registry")
+		return registry
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".tres"):
+			var map_id: String = file_name.replace(".tres", "")
+			var path: String = "res://resources/maps/" + file_name
+			if ResourceLoader.exists(path):
+				var resource = load(path)
+				if resource is MapConfig:
+					registry[map_id] = path
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	return registry
 
 static func get_map_ids() -> Array:
 	return _map_registry.keys()
@@ -106,3 +135,8 @@ static func load_map(map_id: String) -> MapConfig:
 
 static func register_map(map_id: String, path: String):
 	_map_registry[map_id] = path
+
+func get_effective_tower_slots() -> int:
+	if tower_slot_count == -1:
+		return max_towers
+	return tower_slot_count
