@@ -38,6 +38,9 @@ var silence_timer: float = 0.0
 var is_stunned: bool = false
 var stun_timer: float = 0.0
 
+var difficulty_multiplier: float = 1.0
+var damage_multiplier: float = 1.0
+
 var is_confused: bool = false
 var confusion_timer: float = 0.0
 

@@ -90,10 +90,13 @@ func start_battle(stage_config: Dictionary, mode: WaveMode = WaveMode.STANDARD) 
 
 	_show_summon_button()
 
-func start_event_battle(waves: Array[Dictionary]) -> void:
+func start_event_battle(waves: Array[Dictionary], extra_waves: int = 0) -> void:
 	_event_waves.clear()
 	for wave_data: Dictionary in waves:
 		_event_waves.append(wave_data)
+	for i: int in range(extra_waves):
+		if not _event_waves.is_empty():
+			_event_waves.append(_event_waves[-1].duplicate(true))
 	current_mode = WaveMode.EVENT
 	current_wave = 0
 	total_waves = _event_waves.size()

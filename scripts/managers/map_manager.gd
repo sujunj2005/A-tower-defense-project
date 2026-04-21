@@ -176,8 +176,11 @@ func _setup_wave_manager() -> void:
 		if wave_manager.has_signal("summon_button_requested"):
 			wave_manager.summon_button_requested.connect(_on_summon_button_requested)
 		if not session.current_battle_waves.is_empty() and wave_manager.has_method("start_event_battle"):
-			wave_manager.start_event_battle(session.current_battle_waves)
-			Global.debug_log("WaveManager 启动事件战斗，波次：%d" % session.current_battle_waves.size())
+			var extra_waves: int = _apply_battle_modifiers()
+			if map_config and map_config.wave_count_modifier > 0:
+				extra_waves += map_config.wave_count_modifier
+			wave_manager.start_event_battle(session.current_battle_waves, extra_waves)
+			Global.debug_log("WaveManager 启动事件战斗，波次：%d，额外：%d" % [session.current_battle_waves.size(), extra_waves])
 		else:
 			var stage_id: String = session.current_stage
 			if stage_id == "":
@@ -214,6 +217,13 @@ func _on_enemy_spawn_requested(enemy_id: String) -> void:
 		return
 	var enemy: Enemy = Enemy.new()
 	enemy.initialize(enemy_cfg)
+	var multipliers: Dictionary = _get_difficulty_multipliers()
+	enemy.difficulty_multiplier = multipliers.get("health", 1.0)
+	enemy.damage_multiplier = multipliers.get("damage", 1.0)
+	if enemy.difficulty_multiplier != 1.0:
+		enemy.current_health = int(float(enemy.current_health) * enemy.difficulty_multiplier)
+		enemy.health_bar.max_value = enemy.current_health
+		enemy.health_bar.value = enemy.current_health
 	var world_waypoints: Array[Vector2] = []
 	var wps: Array[Vector2i] = map_config.waypoints if map_config.waypoints.size() >= 2 else map_config.path_points
 	for point: Vector2i in wps:
@@ -565,6 +575,34 @@ func _get_modified_cost(base_cost: int) -> int:
 	if era_sys and era_sys.has_method("get_modified_tower_cost"):
 		return era_sys.get_modified_tower_cost(base_cost)
 	return base_cost
+
+func _get_difficulty_multipliers() -> Dictionary:
+	var session: GameSessionData = Global.get_game_session()
+	var global_health: float = 1.0
+	var global_damage: float = 1.0
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	if cm and cm.has_method("load_json"):
+		var config_data = cm.load_json("res://data/game_config.json")
+		if config_data is Dictionary and config_data.has("difficulty_presets"):
+			var presets: Dictionary = config_data.difficulty_presets
+			var preset: Dictionary = presets.get(session.global_difficulty, {})
+			global_health = float(preset.get("enemy_health_multiplier", 1.0))
+			global_damage = float(preset.get("enemy_damage_multiplier", 1.0))
+	var map_mult: float = map_config.enemy_attribute_multiplier if map_config else 1.0
+	return {
+		"health": global_health * map_mult,
+		"damage": global_damage * map_mult
+	}
+
+func _apply_battle_modifiers() -> int:
+	var session: GameSessionData = Global.get_game_session()
+	var extra_waves: int = 0
+	for mod: Dictionary in session.pending_battle_modifiers:
+		var type: String = str(mod.get("type", ""))
+		if type == "add_waves":
+			extra_waves += int(mod.get("value", 0))
+	session.pending_battle_modifiers.clear()
+	return extra_waves
 
 func _hide_tower_slot(slot_index: int) -> void:
 	if slot_index < tower_slot_rects.size():
@@ -942,7 +980,7 @@ func _on_enemy_reached_base(_enemy: Node2D) -> void:
 	if game_hud and game_hud.base_hp > 0:
 		var base_damage: float = 1.0
 		if _enemy is Enemy and _enemy.config:
-			base_damage = float(_enemy.config.damage)
+			base_damage = float(_enemy.config.damage) * _enemy.damage_multiplier
 		var ts: Node = get_node_or_null("/root/TraitSystem")
 		if ts and ts.has_method("get_damage_reduction"):
 			base_damage = base_damage * (1.0 - ts.get_damage_reduction())
