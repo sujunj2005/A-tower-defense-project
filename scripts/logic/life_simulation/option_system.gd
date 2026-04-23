@@ -83,6 +83,15 @@ func check_requirements(option: OptionData) -> bool:
 			var ability: int = session.attributes.get("intelligence", 0) + session.attributes.get("courage", 0)
 			if ability < threshold:
 				return false
+		elif attr_name == "profession":
+			var prof_value: String = str(required_value)
+			if prof_value.begins_with("!"):
+				var excluded_prof: String = prof_value.substr(1)
+				if session.current_profession == excluded_prof:
+					return false
+			else:
+				if session.current_profession != prof_value:
+					return false
 		else:
 			var current_value: int = session.attributes.get(attr_name, 0)
 			if current_value < int(required_value):
@@ -105,6 +114,13 @@ func format_requirements(requirements: Dictionary) -> String:
 		"merchant": tr("BG_MERCHANT"),
 		"cadre": tr("BG_CADRE"),
 		"farmer_or_worker": tr("BG_FARMER_OR_WORKER")
+	}
+	var prof_names: Dictionary = {
+		"programmer": tr("PROFESSION_PROGRAMMER"),
+		"doctor": tr("PROFESSION_DOCTOR"),
+		"teacher": tr("PROFESSION_TEACHER"),
+		"civil_servant": tr("PROFESSION_CIVIL_SERVANT"),
+		"entrepreneur": tr("PROFESSION_ENTREPRENEUR")
 	}
 	for key: String in requirements:
 		var val: Variant = requirements[key]
@@ -150,10 +166,42 @@ func format_requirements(requirements: Dictionary) -> String:
 				parts.append(tr("REQ_FAMILY_MEMBER_MET") % member_name2)
 			"work_ability":
 				parts.append(tr("REQ_WORK_ABILITY") % int(val))
+			"profession":
+				var prof_key: String = str(val)
+				if prof_key.begins_with("!"):
+					var excluded_prof: String = prof_key.substr(1)
+					var prof_display: String = prof_names.get(excluded_prof, excluded_prof)
+					parts.append(tr("REQ_NOT_PROFESSION") % prof_display)
+				else:
+					var prof_display: String = prof_names.get(prof_key, prof_key)
+					parts.append(tr("REQ_PROFESSION") % prof_display)
+			"profession_absent":
+				parts.append(tr("REQ_PROFESSION_ABSENT"))
+			"npc_relation":
+				if val is Dictionary:
+					var npc_id: String = str(val.get("npc_id", ""))
+					var op: String = str(val.get("op", ">="))
+					var threshold: int = int(val.get("value", 0))
+					var npc_name: String = _get_npc_name(npc_id)
+					if op == "<":
+						parts.append(tr("REQ_NPC_RELATION_LT") % [npc_name, threshold])
+					else:
+						parts.append(tr("REQ_NPC_RELATION_GTE") % [npc_name, threshold])
 			_:
 				var display_name: String = attr_names.get(key, key)
 				parts.append(tr("REQUIREMENT_FORMAT") % [display_name, int(val)])
 	return tr("SEPARATOR_DUN").join(parts)
+
+func _get_npc_name(npc_id: String) -> String:
+	var names: Dictionary = {
+		"npc_father": tr("NPC_FATHER"),
+		"npc_mother": tr("NPC_MOTHER"),
+		"npc_friend": tr("NPC_FRIEND"),
+		"npc_mentor": tr("NPC_MENTOR"),
+		"npc_colleague": tr("NPC_COLLEAGUE"),
+		"npc_spouse": tr("NPC_SPOUSE"),
+	}
+	return names.get(npc_id, npc_id)
 
 func _get_family_member_name(member_id: String) -> String:
 	var names: Dictionary = {

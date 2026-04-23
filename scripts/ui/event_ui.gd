@@ -84,10 +84,10 @@ func _load_current_event() -> void:
 		_display_quiet_year()
 		return
 	var es: Node = get_node_or_null("/root/EventSystem")
-	var events: Array[EventData] = []
+	var event: EventData = null
 	if es and es.has_method("get_events_for_current_age"):
-		events = es.get_events_for_current_age()
-	if events.is_empty():
+		event = es.get_events_for_current_age()
+	if event == null:
 		var all_events: Array[EventData] = _get_events_for_stage()
 		if all_events.is_empty():
 			_display_quiet_year()
@@ -95,8 +95,7 @@ func _load_current_event() -> void:
 		var pick_count: int = mini(3, all_events.size())
 		display_event(all_events[randi() % pick_count])
 	else:
-		var pick_count: int = mini(3, events.size())
-		display_event(events[randi() % pick_count])
+		display_event(event)
 
 func _get_events_for_stage() -> Array[EventData]:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
@@ -184,6 +183,18 @@ func display_event(event: EventData) -> void:
 		var req_text: String = ""
 		if os and os.has_method("format_requirements"):
 			req_text = os.format_requirements(option.requirements)
+		if not event.conditions.is_empty():
+			var event_cond_text: String = _format_event_conditions(event.conditions, os)
+			if event_cond_text != "":
+				if req_text != "":
+					req_text += tr("SEPARATOR_DUN")
+				req_text += event_cond_text
+		if not event.chain_prerequisites.is_empty():
+			var prereq_text: String = _format_chain_prerequisites(event.chain_prerequisites)
+			if prereq_text != "":
+				if req_text != "":
+					req_text += tr("SEPARATOR_DUN")
+				req_text += prereq_text
 		var btn_text: String = option.get_display_text() if option.text != "" else tr("OPTION_LABEL") % (i + 1)
 		if req_text != "":
 			btn_text += "\n" + tr("REQUIREMENT_NEED") % req_text
@@ -209,6 +220,37 @@ func display_event(event: EventData) -> void:
 		btn.pressed.connect(_on_option_pressed.bind(i))
 		_options_container.add_child(btn)
 		_option_buttons.append(btn)
+
+func _format_event_conditions(conditions: Array[Dictionary], os: Node) -> String:
+	var parts: Array[String] = []
+	for cond: Dictionary in conditions:
+		var cond_type: String = cond.get("type", "")
+		match cond_type:
+			"npc_relation":
+				var npc_id: String = str(cond.get("npc_id", ""))
+				var op: String = str(cond.get("op", ">="))
+				var value: int = int(cond.get("value", 0))
+				var npc_name: String = _get_npc_display_name(npc_id)
+				if op == "<":
+					parts.append(tr("REQ_NPC_RELATION_LT") % [npc_name, value])
+				else:
+					parts.append(tr("REQ_NPC_RELATION_GTE") % [npc_name, value])
+			"profession":
+				var prof_key: String = str(cond.get("key", ""))
+				var prof_display: String = _get_profession_display_name(prof_key)
+				parts.append(tr("REQ_PROFESSION") % prof_display)
+			"profession_absent":
+				parts.append(tr("REQ_PROFESSION_ABSENT"))
+	return tr("SEPARATOR_DUN").join(parts)
+
+func _format_chain_prerequisites(prerequisites: Array) -> String:
+	var parts: Array[String] = []
+	for prereq: String in prerequisites:
+		if prereq.begins_with("flag:"):
+			continue
+		var ev_name: String = _get_event_display_name(prereq)
+		parts.append(tr("REQ_COMPLETED_EVENT") % ev_name)
+	return tr("SEPARATOR_DUN").join(parts)
 
 func _clear_options() -> void:
 	for btn: Button in _option_buttons:
@@ -327,54 +369,71 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 
 	var rewards: Array = selected_option.rewards
 	var costs: Dictionary = selected_option.cost
-	var has_gold_section: bool = false
-	var has_trait_section: bool = false
-	var has_tower_section: bool = false
 
+	var gold_from_rewards: int = 0
+	var attrs_from_rewards: Dictionary = {}
+	var trait_ids_from_rewards: Array[String] = []
+	var tower_from_rewards: Array[Dictionary] = []
 	for reward: Dictionary in rewards:
 		var reward_type: String = reward.get("type", "")
 		match reward_type:
 			"gold":
-				if not has_gold_section:
-					has_gold_section = true
-				var gold_val: int = reward.get("value", reward.get("count", 0))
-				if gold_val >= 0:
-					_add_popup_row(vbox, "💰", tr("GOLD_PLUS") % gold_val, Color(1.0, 0.85, 0.0, 1.0))
-				else:
-					_add_popup_row(vbox, "💰", tr("GOLD_MINUS") % gold_val, Color(1.0, 0.4, 0.4, 1.0))
+				gold_from_rewards += reward.get("value", reward.get("count", 0))
 			"attribute":
-				var ac: Node = get_node_or_null("/root/AttributeConfig")
 				var attr_id: String = reward.get("attribute", reward.get("id", ""))
-				var attr_display: String = attr_id
-				if ac and ac.has_method("get_display_with_icon"):
-					attr_display = ac.get_display_with_icon(attr_id)
-				var count_val: int = reward.get("value", reward.get("count", 0))
-				if count_val >= 0:
-					_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, count_val], Color(0.4, 1.0, 0.4, 1.0))
-				else:
-					_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, count_val], Color(1.0, 0.4, 0.4, 1.0))
+				var attr_val: int = reward.get("value", reward.get("count", 0))
+				attrs_from_rewards[attr_id] = attrs_from_rewards.get(attr_id, 0) + attr_val
+			"trait":
+				trait_ids_from_rewards.append(reward.get("id", ""))
+			"tower":
+				tower_from_rewards.append({"tower_id": reward.get("id", ""), "count": reward.get("count", 1)})
 
-	if costs.has("gold"):
-		var cost_val: int = costs.gold
-		if cost_val < 0:
-			has_gold_section = true
-			_add_popup_row(vbox, "💰", tr("GOLD_MINUS") % cost_val, Color(1.0, 0.4, 0.4, 1.0))
-	if costs.has("health"):
-		var health_cost: int = costs.health
-		if health_cost < 0:
-			var ac2: Node = get_node_or_null("/root/AttributeConfig")
-			var health_display: String = "health"
-			if ac2 and ac2.has_method("get_display_with_icon"):
-				health_display = ac2.get_display_with_icon("health")
-			_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [health_display, health_cost], Color(1.0, 0.4, 0.4, 1.0))
+	var era_sys: Node = get_node_or_null("/root/EraSystem")
+	var actual_gold_from_rewards: int = gold_from_rewards
+	if gold_from_rewards > 0 and era_sys and era_sys.has_method("apply_gold_bonus"):
+		actual_gold_from_rewards = era_sys.apply_gold_bonus(gold_from_rewards)
+	var cost_gold: int = costs.get("gold", 0)
+	var total_gold: int = actual_gold_from_rewards + selected_option.gold_change + cost_gold
+	if total_gold != 0:
+		if total_gold >= 0:
+			_add_popup_row(vbox, "💰", tr("GOLD_PLUS") % total_gold, Color(1.0, 0.85, 0.0, 1.0))
+		else:
+			_add_popup_row(vbox, "💰", tr("GOLD_MINUS") % absi(total_gold), Color(1.0, 0.4, 0.4, 1.0))
 
-	var trait_rewards: Array[String] = []
-	for reward: Dictionary in rewards:
-		if reward.get("type", "") == "trait":
-			trait_rewards.append(reward.get("id", ""))
+	var merged_attrs: Dictionary = {}
+	for attr_id: String in attrs_from_rewards:
+		if attr_id != "health":
+			merged_attrs[attr_id] = attrs_from_rewards[attr_id]
+	for attr_id: String in selected_option.attribute_changes:
+		if attr_id != "health":
+			merged_attrs[attr_id] = merged_attrs.get(attr_id, 0) + selected_option.attribute_changes[attr_id]
 
-	if not trait_rewards.is_empty():
-		has_trait_section = true
+	var total_health: int = attrs_from_rewards.get("health", 0) + selected_option.attribute_changes.get("health", 0) + costs.get("health", 0)
+	if total_health != 0:
+		merged_attrs["health"] = total_health
+
+	var ac: Node = get_node_or_null("/root/AttributeConfig")
+	for attr_id: String in merged_attrs:
+		var val: int = merged_attrs[attr_id]
+		if val == 0:
+			continue
+		var attr_display: String = attr_id
+		if ac and ac.has_method("get_display_with_icon"):
+			attr_display = ac.get_display_with_icon(attr_id)
+		if val >= 0:
+			_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, val], Color(0.4, 1.0, 0.4, 1.0))
+		else:
+			_add_popup_row(vbox, "", tr("ATTR_FORMAT") % [attr_display, val], Color(1.0, 0.4, 0.4, 1.0))
+
+	var all_trait_gains: Array[String] = []
+	for tid: String in trait_ids_from_rewards:
+		if not tid in all_trait_gains:
+			all_trait_gains.append(tid)
+	for tid: String in selected_option.trait_gains:
+		if not tid in all_trait_gains:
+			all_trait_gains.append(tid)
+
+	if not all_trait_gains.is_empty():
 		var sep_traits: HSeparator = HSeparator.new()
 		vbox.add_child(sep_traits)
 		var traits_title: Label = Label.new()
@@ -383,9 +442,9 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		traits_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 		vbox.add_child(traits_title)
 		var ts: Node = get_node_or_null("/root/TraitSystem")
-		for trait_id: String in trait_rewards:
+		for trait_id: String in all_trait_gains:
 			var config: Dictionary = ts.get_trait_config(trait_id) if ts and ts.has_method("get_trait_config") else {}
-			var trait_name: String = tr(tr(config.get("name", trait_id)))
+			var trait_name: String = tr(str(config.get("name", trait_id)))
 			var effects = config.get("effects", config.get("effect", []))
 			var effect_text: String = ""
 			if effects is Array and not effects.is_empty():
@@ -410,13 +469,42 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 			trait_row.add_child(lbl)
 			vbox.add_child(trait_row)
 
-	var tower_rewards: Array[Dictionary] = []
-	for reward: Dictionary in rewards:
-		if reward.get("type", "") == "tower":
-			tower_rewards.append({"tower_id": reward.get("id", ""), "count": reward.get("count", 1)})
+	if not selected_option.trait_losses.is_empty():
+		var sep_loss: HSeparator = HSeparator.new()
+		vbox.add_child(sep_loss)
+		var loss_title: Label = Label.new()
+		loss_title.text = tr("LOST_TRAITS")
+		loss_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		loss_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(loss_title)
+		var ts2: Node = get_node_or_null("/root/TraitSystem")
+		for trait_id: String in selected_option.trait_losses:
+			var config2: Dictionary = ts2.get_trait_config(trait_id) if ts2 and ts2.has_method("get_trait_config") else {}
+			var loss_name: String = tr(str(config2.get("name", trait_id)))
+			_add_popup_row(vbox, "✦", tr("TRAIT_LOST_FORMAT") % loss_name, Color(1.0, 0.4, 0.4, 1.0))
 
-	if not tower_rewards.is_empty():
-		has_tower_section = true
+	var all_tower_gains: Array[Dictionary] = []
+	var gained_tower_ids: Dictionary = {}
+	for ti: Dictionary in tower_from_rewards:
+		var tid: String = ti.get("tower_id", "")
+		var tc: int = ti.get("count", 1)
+		if not gained_tower_ids.has(tid):
+			gained_tower_ids[tid] = tc
+			all_tower_gains.append(ti)
+		else:
+			gained_tower_ids[tid] += tc
+	for tid: String in selected_option.tower_gains:
+		if not gained_tower_ids.has(tid):
+			gained_tower_ids[tid] = 1
+			all_tower_gains.append({"tower_id": tid, "count": 1})
+		else:
+			gained_tower_ids[tid] += 1
+	for i: int in range(all_tower_gains.size()):
+		var tid: String = all_tower_gains[i].get("tower_id", "")
+		if gained_tower_ids.has(tid):
+			all_tower_gains[i] = {"tower_id": tid, "count": gained_tower_ids[tid]}
+
+	if not all_tower_gains.is_empty():
 		var sep_towers: HSeparator = HSeparator.new()
 		vbox.add_child(sep_towers)
 		var towers_title: Label = Label.new()
@@ -424,7 +512,7 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 		towers_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		towers_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
 		vbox.add_child(towers_title)
-		for tower_info: Dictionary in tower_rewards:
+		for tower_info: Dictionary in all_tower_gains:
 			var tid: String = tower_info.get("tower_id", "")
 			var tcount: int = tower_info.get("count", 1)
 			var tower_display: String = _get_tower_display_name(tid)
@@ -437,6 +525,66 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 				stats_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1.0))
 				stats_label.add_theme_font_size_override("font_size", 14)
 				vbox.add_child(stats_label)
+
+	if not selected_option.tower_losses.is_empty():
+		var sep_tloss: HSeparator = HSeparator.new()
+		vbox.add_child(sep_tloss)
+		var tloss_title: Label = Label.new()
+		tloss_title.text = tr("LOST_TOWERS")
+		tloss_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		tloss_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(tloss_title)
+		for tid: String in selected_option.tower_losses:
+			var tower_display: String = _get_tower_display_name(tid)
+			_add_popup_row(vbox, "🏰", tr("TOWER_LOST_FORMAT") % tower_display, Color(1.0, 0.4, 0.4, 1.0))
+
+	if selected_option.profession_change != "" or selected_option.profession_lost:
+		var sep_prof: HSeparator = HSeparator.new()
+		vbox.add_child(sep_prof)
+		var prof_title: Label = Label.new()
+		prof_title.text = tr("PROFESSION_CHANGE_TITLE")
+		prof_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		prof_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(prof_title)
+		if selected_option.profession_change != "":
+			var prof_display: String = _get_profession_display_name(selected_option.profession_change)
+			_add_popup_row(vbox, "💼", tr("PROFESSION_GAIN") % prof_display, Color(0.4, 1.0, 0.6, 1.0))
+		if selected_option.profession_lost:
+			_add_popup_row(vbox, "💼", tr("PROFESSION_LOST"), Color(1.0, 0.4, 0.4, 1.0))
+
+	if not selected_option.npc_relation_changes.is_empty():
+		var sep_npc: HSeparator = HSeparator.new()
+		vbox.add_child(sep_npc)
+		var npc_title: Label = Label.new()
+		npc_title.text = tr("NPC_RELATION_TITLE")
+		npc_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		npc_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(npc_title)
+		for npc_change: Dictionary in selected_option.npc_relation_changes:
+			var npc_id: String = str(npc_change.get("npc_id", ""))
+			var npc_val: int = int(npc_change.get("value", 0))
+			var npc_name: String = _get_npc_display_name(npc_id)
+			if npc_val >= 0:
+				_add_popup_row(vbox, "👤", tr("NPC_RELATION_UP") % [npc_name, npc_val], Color(0.4, 1.0, 0.6, 1.0))
+			else:
+				_add_popup_row(vbox, "👤", tr("NPC_RELATION_DOWN") % [npc_name, absi(npc_val)], Color(1.0, 0.4, 0.4, 1.0))
+
+	var has_unlock: bool = not selected_option.unlock_events.is_empty()
+	var has_lock: bool = not selected_option.lock_events.is_empty()
+	if has_unlock or has_lock:
+		var sep_ev: HSeparator = HSeparator.new()
+		vbox.add_child(sep_ev)
+		var ev_title: Label = Label.new()
+		ev_title.text = tr("EVENT_CHANGE_TITLE")
+		ev_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		ev_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(ev_title)
+		for ev_id: String in selected_option.unlock_events:
+			var ev_name: String = _get_event_display_name(ev_id)
+			_add_popup_row(vbox, "🔓", tr("EVENT_UNLOCKED") % ev_name, Color(0.4, 1.0, 0.6, 1.0))
+		for ev_id: String in selected_option.lock_events:
+			var ev_name: String = _get_event_display_name(ev_id)
+			_add_popup_row(vbox, "🔒", tr("EVENT_LOCKED") % ev_name, Color(1.0, 0.4, 0.4, 1.0))
 
 	var family_fx: Variant = selected_option.family_effect
 	if family_fx is Dictionary and not family_fx.is_empty():
@@ -539,8 +687,6 @@ func _show_family_effect_section(vbox: VBoxContainer, effects: Array) -> void:
 		var member_id: String = fx.get("member", "")
 		var member_name: String = _get_family_member_display_name(member_id)
 		var parts: Array[String] = []
-		if fx.has("mood_change"):
-			parts.append(tr("FAMILY_MOOD_CHANGE") % [member_name, tr("MOOD_" + fx.mood_change.to_upper())])
 		if fx.has("health_change"):
 			var hv: int = int(fx.health_change)
 			parts.append(tr("FAMILY_HEALTH_CHANGE") % [member_name, hv])
@@ -643,6 +789,39 @@ func _get_tower_display_name(tower_id: String) -> String:
 		return tr(towers[tower_id].get("name", towers[tower_id].get("tower_name", tower_id)))
 	return tower_id
 
+func _get_npc_display_name(npc_id: String) -> String:
+	var names: Dictionary = {
+		"npc_father": tr("NPC_FATHER"),
+		"npc_mother": tr("NPC_MOTHER"),
+		"npc_friend": tr("NPC_FRIEND"),
+		"npc_mentor": tr("NPC_MENTOR"),
+		"npc_colleague": tr("NPC_COLLEAGUE"),
+		"npc_spouse": tr("NPC_SPOUSE"),
+	}
+	return names.get(npc_id, npc_id)
+
+func _get_profession_display_name(profession_id: String) -> String:
+	var names: Dictionary = {
+		"programmer": tr("PROFESSION_PROGRAMMER"),
+		"doctor": tr("PROFESSION_DOCTOR"),
+		"teacher": tr("PROFESSION_TEACHER"),
+		"civil_servant": tr("PROFESSION_CIVIL_SERVANT"),
+		"entrepreneur": tr("PROFESSION_ENTREPRENEUR"),
+	}
+	return names.get(profession_id, profession_id)
+
+func _get_event_display_name(event_id: String) -> String:
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	if not cm or not cm.has_method("load_json"):
+		return event_id
+	var events_data = cm.load_json("res://data/events.json")
+	if not events_data.has("events"):
+		return event_id
+	for ev: Dictionary in events_data.events:
+		if ev.get("event_id", "") == event_id:
+			return tr(str(ev.get("event_name", event_id)))
+	return event_id
+
 func _get_trait_display_name(trait_id: String) -> String:
 	var ts: Node = get_node_or_null("/root/TraitSystem")
 	if ts and ts.has_method("get_trait_config"):
@@ -675,6 +854,8 @@ func _get_tower_stats_display(tower_id: String) -> String:
 	return tr("TOWER_STATS_FORMAT") % [damage, attack_speed, attack_range]
 
 func _get_stage_attribute_growth() -> Dictionary:
+	if not is_inside_tree():
+		return {}
 	var cm: Node = get_node_or_null("/root/ConfigManager")
 	if not cm or not cm.has_method("load_json"):
 		return {}
@@ -775,22 +956,6 @@ func _display_quiet_year() -> void:
 		var texts: Array[String] = _get_quiet_year_texts()
 		_desc_label.text = texts[randi() % texts.size()]
 	_clear_options()
-	var growth: Dictionary = _get_stage_attribute_growth()
-	if not growth.is_empty():
-		var ac: Node = get_node_or_null("/root/AttributeConfig")
-		var growth_parts: Array[String] = []
-		for attr_name: String in growth:
-			var growth_val: int = growth[attr_name]
-			var attr_disp: String = attr_name
-			if ac and ac.has_method("get_display_with_icon"):
-				attr_disp = ac.get_display_with_icon(attr_name)
-			growth_parts.append("%s%+d" % [attr_disp, growth_val])
-		if not growth_parts.is_empty():
-			var growth_label: Label = Label.new()
-			growth_label.text = tr("AGE_PLUS_ONE") + " | " + "  ".join(growth_parts)
-			growth_label.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4, 1.0))
-			growth_label.add_theme_font_size_override("font_size", 16)
-			_options_container.add_child(growth_label)
 	var btn: Button = Button.new()
 	btn.text = tr("BTN_CONTINUE")
 	btn.custom_minimum_size = Vector2(0, 40)
@@ -802,7 +967,100 @@ func _on_quiet_year_continue() -> void:
 	var es: Node = get_node_or_null("/root/EventSystem")
 	if es and es.has_method("select_option"):
 		es.select_option({"event_id": "quiet_year"}, {"option_id": "continue", "rewards": []})
-	else:
-		var session: GameSessionData = Global.get_game_session()
-		session.current_age += 1
-	GameState.change_state(GameState.State.STAGE)
+	_show_quiet_year_popup()
+
+func _show_quiet_year_popup() -> void:
+	var overlay: ColorRect = ColorRect.new()
+	overlay.color = Color(0.0, 0.0, 0.0, 0.5)
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(overlay)
+
+	var popup: PanelContainer = PanelContainer.new()
+	popup.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	popup.offset_left = -280
+	popup.offset_right = 280
+	popup.offset_top = -200
+	popup.offset_bottom = 200
+	add_child(popup)
+
+	var scroll: ScrollContainer = ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.offset_left = 15
+	scroll.offset_right = -15
+	scroll.offset_top = 15
+	scroll.offset_bottom = -15
+	popup.add_child(scroll)
+
+	var vbox: VBoxContainer = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 8)
+	vbox.custom_minimum_size = Vector2(520, 0)
+	scroll.add_child(vbox)
+
+	var title: Label = Label.new()
+	title.text = tr("QUIET_YEAR_TITLE")
+	title.add_theme_font_size_override("font_size", 24)
+	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(title)
+
+	if is_inside_tree():
+		var es: Node = get_node_or_null("/root/EconomySystem")
+		if es and es.has_method("calculate_salary"):
+			var salary: int = es.calculate_salary()
+			if salary > 0:
+				_add_popup_row(vbox, "💼", tr("SALARY_INCOME") % salary, Color(0.4, 1.0, 0.4, 1.0))
+
+	var growth: Dictionary = _get_stage_attribute_growth()
+	if not growth.is_empty():
+		var sep_growth: HSeparator = HSeparator.new()
+		vbox.add_child(sep_growth)
+		var growth_title: Label = Label.new()
+		growth_title.text = tr("STAGE_GROWTH")
+		growth_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		growth_title.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1.0))
+		vbox.add_child(growth_title)
+		if is_inside_tree():
+			var ac: Node = get_node_or_null("/root/AttributeConfig")
+			for attr_name: String in growth:
+				var growth_val: int = growth[attr_name]
+				var attr_disp: String = attr_name
+				if ac and ac.has_method("get_display_with_icon"):
+					attr_disp = ac.get_display_with_icon(attr_name)
+				var growth_color: Color = Color(0.4, 1.0, 0.4, 1.0) if growth_val >= 0 else Color(1.0, 0.4, 0.4, 1.0)
+				_add_popup_row(vbox, "", "%s %+d" % [attr_disp, growth_val], growth_color)
+
+	var age_row: HBoxContainer = HBoxContainer.new()
+	age_row.add_theme_constant_override("separation", 6)
+	var age_icon: Label = Label.new()
+	age_icon.text = "🎂"
+	age_icon.add_theme_font_size_override("font_size", 18)
+	age_row.add_child(age_icon)
+	var lbl_age: Label = Label.new()
+	lbl_age.text = tr("AGE_PLUS_ONE")
+	lbl_age.add_theme_color_override("font_color", Color(0.8, 0.9, 1.0, 1.0))
+	age_row.add_child(lbl_age)
+	vbox.add_child(age_row)
+
+	var hint: Label = Label.new()
+	hint.text = tr("HINT_CLICK_CLOSE")
+	hint.add_theme_font_size_override("font_size", 14)
+	hint.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5, 1.0))
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(hint)
+
+	var callback: Callable = func() -> void:
+		overlay.queue_free()
+		popup.queue_free()
+		event_completed.emit()
+		if GameState.current_state == GameState.State.ENDING:
+			return
+		GameState.change_state(GameState.State.STAGE)
+	overlay.gui_input.connect(func(event: InputEvent) -> void:
+		if event is InputEventMouseButton and event.pressed:
+			callback.call()
+	)
+	popup.gui_input.connect(func(event: InputEvent) -> void:
+		if event is InputEventMouseButton and event.pressed:
+			callback.call()
+	)

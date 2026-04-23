@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿keys,zh,en
+keys,zh,en
 MAIN_TITLE,人生塔防,Life Tower Defense
 MAIN_SUBTITLE,Life Tower Defense,Life Tower Defense
 BTN_START_GAME,开始游戏,Start Game
@@ -445,180 +445,44 @@ TRAIT_HAPPY_CHILDHOOD_NAME,快乐童年,Happy Childhood
 TRAIT_HAPPY_CHILDHOOD_DESC,无忧无虑的童年时光,Carefree childhood days
 TRAIT_MATH_TALENT_NAME,数学天赋,Math Talent
 TRAIT_MATH_TALENT_DESC,对数学有天然直觉,Natural intuition for mathematics
-TRAIT_PARTICIPATION_SPIRIT_NAME,参与精神,Team Spirit
-TRAIT_PARTICIPATION_SPIRIT_DESC,积极参与集体活动,Actively participates in group activities
-TRAIT_SPORTS_YOUTH_NAME,运动少年,Sports Kid
-TRAIT_SPORTS_YOUTH_DESC,热爱运动，体魄强健,"Loves sports, strong physique"
-TRAIT_MUSIC_CULTURE_NAME,音乐素养,Musicality
-TRAIT_MUSIC_CULTURE_DESC,受过良好的音乐教育,Received good music education
 TRAIT_CODING_TALENT_NAME,编程天赋,Coding Talent
 TRAIT_CODING_TALENT_DESC,对编程有浓厚兴趣,Strong interest in programming
-TRAIT_SELF_LEARNING_NAME,自学能力,Self-Learner
-TRAIT_SELF_LEARNING_DESC,善于独立学习新知识,Good at learning independently
-TRAIT_EARLY_RESPONSIBILITY_NAME,早当家,Mature Early
-TRAIT_EARLY_RESPONSIBILITY_DESC,从小承担家庭责任,Took on family responsibilities young
-TRAIT_FOLLOW_RULES_NAME,循规蹈矩,Rule-Follower
-TRAIT_FOLLOW_RULES_DESC,遵守规则，不越雷池,"Follows rules, stays within bounds"
 TRAIT_TOUGH_GUY_NAME,硬汉,Tough Guy
 TRAIT_TOUGH_GUY_DESC,吃得了苦，扛得住压,"Can endure hardship, handle pressure"
-TRAIT_PATIENCE_NAME,耐心,Patience
-TRAIT_PATIENCE_DESC,遇事不急，沉稳应对,Stays calm under pressure
 TRAIT_HAS_BACKING_NAME,有人撑腰,Well-Connected
 TRAIT_HAS_BACKING_DESC,背后有贵人相助,Has influential backers
-TRAIT_SENSIBLE_CHILD_NAME,懂事的孩子,Sensible Child
-TRAIT_SENSIBLE_CHILD_DESC,从小就很懂事,Been sensible from a young age
-TRAIT_EARLY_WORKER_NAME,早早打工,Early Worker
-TRAIT_EARLY_WORKER_DESC,提前进入社会磨练,Entered the workforce ahead of peers
 TRAIT_DROPOUT_NAME,辍学,Dropout
 TRAIT_DROPOUT_DESC,中途辍学，但社会经验丰富,"Left school early, but rich in social experience"
-TRAIT_KEY_HIGH_SCHOOL_NAME,重点高中,Top High School
-TRAIT_KEY_HIGH_SCHOOL_DESC,考入重点高中,Got into a key high school
 TRAIT_TOP_UNIVERSITY_NAME,名校出身,Top University Grad
 TRAIT_TOP_UNIVERSITY_DESC,考入顶尖大学,Got into a top-tier university
 TRAIT_BACHELOR_NAME,本科学历,Bachelor's Degree
 TRAIT_BACHELOR_DESC,获得大学本科学历,Earned a bachelor's degree
 TRAIT_EARLY_STARTER_NAME,提前起跑,Early Starter
 TRAIT_EARLY_STARTER_DESC,比同龄人更早进入职场,Entered workforce earlier than peers
-TRAIT_LOVER_NAME,恋人,Lover
-TRAIT_LOVER_DESC,拥有一段美好的恋情,In a beautiful relationship
-TRAIT_SECRET_CRUSH_NAME,暗恋,Secret Crush
-TRAIT_SECRET_CRUSH_DESC,心中默默喜欢着某人,Secretly fond of someone
-TRAIT_STUDY_FOCUS_NAME,专注学业,Study Focus
-TRAIT_STUDY_FOCUS_DESC,心无旁骛地投入学习,Fully immersed in studying
 TRAIT_MASTER_STUDENT_NAME,研究生,Graduate Student
 TRAIT_MASTER_STUDENT_DESC,继续深造获得硕士学位,Continued studies for master's degree
 TRAIT_ENTREPRENEUR_NAME,创业先锋,Entrepreneur
 TRAIT_ENTREPRENEUR_DESC,选择创业路线,Chose the startup path
-TRAIT_BIG_TECH_NAME,大厂员工,Big Tech Employee
-TRAIT_BIG_TECH_DESC,进入互联网大厂工作,Works at a major tech company
-TRAIT_STABLE_JOB_NAME,铁饭碗,Stable Job
-TRAIT_STABLE_JOB_DESC,获得稳定的工作,Has a stable job
-TRAIT_STARTUP_EMPLOYEE_NAME,创业公司员工,Startup Employee
-TRAIT_STARTUP_EMPLOYEE_DESC,在创业公司打拼,Working at a startup
-TRAIT_CITY_CENTER_NAME,市中心,City Center Dweller
-TRAIT_CITY_CENTER_DESC,住在城市中心地带,Lives in the city center
-TRAIT_ROOMMATE_NAME,合租,Roommate
-TRAIT_ROOMMATE_DESC,与人合租节省开支,Shares rent to save money
-TRAIT_HARD_WORKER_NAME,拼命三郎,Workaholic
-TRAIT_HARD_WORKER_DESC,工作拼命，不惧加班,"Works tirelessly, unafraid of overtime"
-TRAIT_SPEAK_UP_NAME,敢于发声,Speaks Up
-TRAIT_SPEAK_UP_DESC,勇于表达自己的观点,Brave enough to voice opinions
-TRAIT_TIT_FOR_TAT_NAME,以牙还牙,Eye for Eye
-TRAIT_TIT_FOR_TAT_DESC,绝不忍气吞声,Never swallows grievances
-TRAIT_BLIND_DATE_NAME,相亲,Blind Dater
-TRAIT_BLIND_DATE_DESC,通过相亲认识另一半,Met partner through blind date
-TRAIT_SINGLE_FOREVER_NAME,单身万岁,Forever Single
-TRAIT_SINGLE_FOREVER_DESC,享受单身生活,Enjoys single life
 TRAIT_MARRIED_NAME,已婚,Married
 TRAIT_MARRIED_DESC,步入婚姻殿堂,Entered marriage
 TRAIT_BIG_HOUSE_NAME,大房子,Big House Owner
 TRAIT_BIG_HOUSE_DESC,拥有宽敞的住房,Owns a spacious home
-TRAIT_SMALL_HOUSE_NAME,小房子,Small House Owner
-TRAIT_SMALL_HOUSE_DESC,拥有自己的小窝,Owns a cozy little place
 TRAIT_RENT_FOREVER_NAME,永远租房,Perpetual Renter
 TRAIT_RENT_FOREVER_DESC,一直在租房生活,Always renting
-TRAIT_TIGER_PARENT_NAME,虎妈狼爸,Tiger Parent
-TRAIT_TIGER_PARENT_DESC,对孩子严格教育,Strict with children's education
-TRAIT_RELAXED_PARENT_NAME,佛系家长,Relaxed Parent
-TRAIT_RELAXED_PARENT_DESC,对孩子放养式教育,Free-range parenting style
-TRAIT_OVERSEAS_CHILD_NAME,海外留学,Overseas Student Child
-TRAIT_OVERSEAS_CHILD_DESC,送孩子出国留学,Sent child to study abroad
 TRAIT_FILIAL_CHILD_NAME,孝顺子女,Filial Child
 TRAIT_FILIAL_CHILD_DESC,子女孝顺，晚年幸福,"Children are filial, happy old age"
 TRAIT_HIRE_NANNY_NAME,请保姆,Nanny Employer
 TRAIT_HIRE_NANNY_DESC,请保姆照顾家庭,Hired nanny for home care
-TRAIT_WORK_LIFE_BALANCE_NAME,工作生活平衡,Work-Life Balance
-TRAIT_WORK_LIFE_BALANCE_DESC,成功平衡工作与生活,Successfully balanced work and life
-TRAIT_JOB_HOPPER_NAME,跳槽达人,Job Hopper
-TRAIT_JOB_HOPPER_DESC,频繁跳槽积累经验,Frequent job changes for experience
-TRAIT_FITNESS_HABIT_NAME,健身习惯,Fitness Habit
-TRAIT_FITNESS_HABIT_DESC,坚持锻炼身体,Consistently exercises
-TRAIT_SUPPLEMENT_USER_NAME,保健品达人,Supplement User
-TRAIT_SUPPLEMENT_USER_DESC,各种保健品不断,Always taking supplements
 TRAIT_ACCEPT_FATE_NAME,认命,Accept Fate
 TRAIT_ACCEPT_FATE_DESC,接受命运的安排,Accepts destiny's arrangement
 TRAIT_CAREER_FOCUS_NAME,事业为重,Career-Focused
 TRAIT_CAREER_FOCUS_DESC,没有家庭牵绊，全力投入事业,"No family ties, fully devoted to career"
-TRAIT_PEACEFUL_ELDER_NAME,安享晚年,Peaceful Elder
-TRAIT_PEACEFUL_ELDER_DESC,含饴弄孙，岁月静好——但收入减少,"Enjoying grandchildren, peaceful days — but lower income"
-TRAIT_COMMUNITY_ELDER_NAME,社区长者,Community Elder
-TRAIT_COMMUNITY_ELDER_DESC,在社区中受人尊敬，人脉广泛——但精力不济,"Respected in community, wide network — but low energy"
-TRAIT_LIFELONG_LEARNER_NAME,终身学习,Lifelong Learner
-TRAIT_LIFELONG_LEARNER_DESC,活到老学到老，智慧日增——但学费不菲,"Never stops learning, wisdom grows — but tuition costs add up"
 TRAIT_STRONG_WILL_NAME,坚韧意志,Strong Will
 TRAIT_STRONG_WILL_DESC,面对病痛依然坚强，意志力转化为防御,Remains strong despite illness; willpower converts to defense
-TRAIT_CAREFREE_ELDER_NAME,洒脱老人,Carefree Elder
-TRAIT_CAREFREE_ELDER_DESC,看淡一切，自在生活——代价是忽视健康,"Lets go of everything, lives freely — at the cost of neglecting health"
-TRAIT_FAMILY_HAPPINESS_NAME,天伦之乐,Family Happiness
-TRAIT_FAMILY_HAPPINESS_DESC,儿孙绕膝，情感支持让你更坚韧——但开销也大,"Surrounded by family, emotional support strengthens you — but expenses are high"
-TRAIT_TRAVEL_ELDER_NAME,旅行老人,Traveling Elder
-TRAIT_TRAVEL_ELDER_DESC,晚年走遍大好河山，见闻转化为智慧,"Traveled widely in later years, experiences become wisdom"
-TRAIT_NOSTALGIC_NAME,怀旧,Nostalgic
-TRAIT_NOSTALGIC_DESC,常常回忆往昔岁月，沉淀出智慧——但勇气渐消,"Often recalls past days, distills wisdom — but courage fades"
-TRAIT_SOCIAL_ELDER_NAME,社交达人,Social Butterfly
-TRAIT_SOCIAL_ELDER_DESC,老年社交圈广泛，信息灵通——但应酬花费不少,"Wide social circle in old age, well-informed — but socializing costs mount"
-TRAIT_MEMOIRIST_NAME,回忆录作者,Memoirist
-TRAIT_MEMOIRIST_DESC,将一生经历写成文字，稿费可观——但写作伤神,"Wrote life story into words, decent royalties — but writing is draining"
-TRAIT_MENTOR_NAME,导师,Mentor
-TRAIT_MENTOR_DESC,将经验传授给后辈，桃李满天下——但操劳伤身,Passes experience to the next generation — but mentoring takes toll on body
-TRAIT_QUIET_OBSERVER_NAME,默默旁观,Quiet Observer
-TRAIT_QUIET_OBSERVER_DESC,静静看着世界变化，内心平和,"Quietly watches the world change, inner peace"
-TRAIT_SOLITARY_PEACE_NAME,独处安宁,Solitary Peace
-TRAIT_SOLITARY_PEACE_DESC,独自享受宁静时光，内心澄澈——但偶尔孤独,"Enjoys quiet time alone, clear mind — but occasionally lonely"
-TRAIT_ACCEPT_MORTALITY_NAME,接受死亡,Accept Mortality
-TRAIT_ACCEPT_MORTALITY_DESC,坦然面对生命的终点，无所畏惧,"Faces the end of life calmly, without fear"
-TRAIT_FINAL_PEACE_NAME,最终安宁,Final Peace
-TRAIT_FINAL_PEACE_DESC,放弃治疗，内心彻底平静——但身体加速衰弱,"Gave up treatment, complete inner peace — but body weakens faster"
-TRAIT_NO_REGRETS_NAME,此生无憾,No Regrets
-TRAIT_NO_REGRETS_DESC,回首一生没有遗憾，自信化为力量——但挥金如土,"Looking back with no regrets, confidence becomes strength — but spent freely"
-TRAIT_AT_PEACE_NAME,释然,At Peace
-TRAIT_AT_PEACE_DESC,虽有遗憾，但已放下——内心平和带来微弱的身心恢复,"Some regrets, but let go — inner peace brings slight recovery"
-TRAIT_REGRETFUL_NAME,遗憾,Regretful
-TRAIT_REGRETFUL_DESC,如果重来一定不同——遗憾催生反思，但也消磨勇气,"If I could do it over, it would be different — regret breeds reflection, but erodes courage"
-TRAIT_REBEL_NAME,叛逆者,Rebel
-TRAIT_REBEL_DESC,敢于挑战权威，勇气倍增,"Dares to challenge authority, courage doubled"
-TRAIT_DIARIST_NAME,日记达人,Diary Keeper
-TRAIT_DIARIST_DESC,用文字记录内心，智慧渐增,"Records inner thoughts in writing, wisdom grows"
-TRAIT_EMPATHY_NAME,共情力,Empathy
-TRAIT_EMPATHY_DESC,善于理解他人，魅力提升,"Good at understanding others, charm increased"
-TRAIT_FIRST_LOVE_NAME,初恋,First Love
-TRAIT_FIRST_LOVE_DESC,青涩的初恋让你更懂得感情,Innocent first love taught you about relationships
-TRAIT_SELF_AWARE_NAME,自我觉察,Self-Aware
-TRAIT_SELF_AWARE_DESC,通过心理咨询更了解自己,Came to know yourself better through counseling
-TRAIT_FREEDOM_SEEKER_NAME,自由追寻者,Freedom Seeker
-TRAIT_FREEDOM_SEEKER_DESC,不甘平庸，追求自由,"Won't settle for mediocrity, chases freedom"
-TRAIT_CALLIGRAPHY_NAME,书法爱好者,Calligraphy Lover
-TRAIT_CALLIGRAPHY_DESC,修身养性，内心平和,Cultivates mind through calligraphy
-TRAIT_DANCER_NAME,广场舞达人,Square Dancer
-TRAIT_DANCER_DESC,社交广泛，身心活跃,"Wide social circle, active body and mind"
-TRAIT_GARDENER_NAME,园艺爱好者,Gardening Lover
-TRAIT_GARDENER_DESC,亲近自然，身心愉悦,"Close to nature, body and mind at ease"
-TRAIT_MEMORIALIST_NAME,纪念者,Memorialist
-TRAIT_MEMORIALIST_DESC,用文字留住记忆,Preserves memories through writing
-TRAIT_CHERISH_PEOPLE_NAME,珍惜身边人,Cherishes People
-TRAIT_CHERISH_PEOPLE_DESC,更加重视人际关系,Values relationships even more
+TRAIT_FAMILY_HAPPINESS_NAME,家庭幸福,Family Happiness
+TRAIT_FAMILY_HAPPINESS_DESC,家人陪伴，情感支持让你更坚韧,Family support strengthens you
 TRAIT_WISE_ELDER_NAME,智慧长者,Wise Elder
 TRAIT_WISE_ELDER_DESC,人生阅历化为智慧,Life experience becomes wisdom
-TRAIT_TRAVELER_NAME,旅行者,Traveler
-TRAIT_TRAVELER_DESC,在旅途中找回自我,Found oneself while traveling
-TRAIT_CAREER_CHANGER_NAME,转型者,Career Changer
-TRAIT_CAREER_CHANGER_DESC,敢于改变职业方向,Brave enough to switch career paths
-TRAIT_CONFRONTATIONAL_NAME,直面冲突,Confrontational
-TRAIT_CONFRONTATIONAL_DESC,不怕与人争执,Not afraid to argue
-TRAIT_PEACE_SEEKER_NAME,和平主义者,Peace Seeker
-TRAIT_PEACE_SEEKER_DESC,避免冲突，追求安宁,"Avoids conflict, seeks tranquility"
-TRAIT_OPEN_PARENT_NAME,开明家长,Open-Minded Parent
-TRAIT_OPEN_PARENT_DESC,尊重孩子的选择,Respects child's choices
-TRAIT_HOME_CHEF_NAME,家庭大厨,Home Chef
-TRAIT_HOME_CHEF_DESC,用美食温暖家人,Warms family with food
-TRAIT_TAI_CHI_NAME,太极修习者,Tai Chi Practitioner
-TRAIT_TAI_CHI_DESC,以柔克刚，身心合一,"Overcomes hardness with softness, body and mind united"
-TRAIT_HOMEOWNER_NAME,有房一族,Homeowner
-TRAIT_HOMEOWNER_DESC,有了自己的窝,Finally has own place
-TRAIT_HOMETOWN_RETURN_NAME,返乡者,Returnee
-TRAIT_HOMETOWN_RETURN_DESC,回到故乡，安居乐业,"Returned to hometown, settled down"
-TRAIT_PET_OWNER_NAME,铲屎官,Pet Owner
-TRAIT_PET_OWNER_DESC,毛茸茸的治愈力量,The healing power of furry friends
 ENDING_LEGENDARY_LIFE_NAME,传奇人生,Legendary Life
 ENDING_LEGENDARY_LIFE_DESC,你的一生堪称传奇，智慧与勇气兼备，此生无憾。,"Your life was truly legendary. Wisdom and courage combined, no regrets."
 ENDING_LEGENDARY_LIFE_PHRASE,成为了后人传颂的传奇,Became a legend passed down through generations
@@ -823,14 +687,11 @@ SE_BURN_NAME,灼烧,Burn
 SE_BURN_DESC,点燃敌人造成持续伤害,Sets enemies ablaze for ongoing damage
 SE_SILENCE_NAME,沉默,Silence
 SE_SILENCE_DESC,使敌人无法使用特殊能力,Prevents enemies from using special abilities
-TRAIT_ENTREPRENEUR_2_NAME,创业者,Entrepreneur
-TRAIT_ENTREPRENEUR_2_DESC,敢于创业，追逐梦想,Dare to start a business, chase dreams
 BTN_SUMMON,立即召唤,Summon Now
 ATTR_FORMAT,%s：%d,%s: %d
 SEPARATOR_DUN,、,", ",  
 SEPARATOR_SEMICOLON,；,; 
 RATING_UNKNOWN,未知评价,Unknown Rating
-TRAIT_EFFECT_FORMAT,%s：%s,%s: %s
 REQUIREMENT_FORMAT,%s≥%d,%s>=%d
 TOWER_NAME_LV,%s Lv.%d,%s Lv.%d
 TOWER_NAME_LEVEL,%s  Lv.%d,%s  Lv.%d
@@ -1028,130 +889,10 @@ EVENT_SPOUSE_RETIREMENT_DESC,配偶退休了，忽然闲下来。,Your spouse re
 OPTION_SPOUSE_RETIRE_A,一起规划退休生活,Plan retirement together
 OPTION_SPOUSE_RETIRE_B,各过各的,Live separately
 OPTION_SPOUSE_RETIRE_C,配偶觉得被冷落,Spouse feels neglected
-TRAIT_FILIAL_SON_NAME,孝顺,Filial
-TRAIT_FILIAL_SON_DESC,你总是第一时间帮助家人,You always help family first
-TRAIT_CARELESS_CHILD_NAME,不懂事,Careless Child
-TRAIT_CARELESS_CHILD_DESC,你对家人的辛苦视而不见,You turn a blind eye to family's hardship
-TRAIT_DEVOTED_SON_NAME,尽心儿子,Devoted Son
-TRAIT_DEVOTED_SON_DESC,你放下一切回老家照顾父亲,You dropped everything to care for father
-TRAIT_WORK_OVER_FAMILY_NAME,工作重于家庭,Work Over Family
-TRAIT_WORK_OVER_FAMILY_DESC,你总是把工作放在家人前面,You always put work before family
-TRAIT_GOOD_SON_NAME,好儿子,Good Son
-TRAIT_GOOD_SON_DESC,你带父亲去省城看病,You took father to the provincial hospital
-TRAIT_RECONCILED_NAME,和解,Reconciled
-TRAIT_RECONCILED_DESC,你和疏远的家人和解了,You reconciled with estranged family
-TRAIT_COLD_CHILD_NAME,冷漠子女,Cold Child
-TRAIT_COLD_CHILD_DESC,你对父母的需求漠不关心,You're indifferent to your parents' needs
-TRAIT_PEACEFUL_GOODBYE_NAME,平静告别,Peaceful Goodbye
-TRAIT_PEACEFUL_GOODBYE_DESC,你在父亲身边送他最后一程,You were by father's side at the end
-TRAIT_GRIEF_STRICKEN_NAME,悲痛欲绝,Grief-Stricken
-TRAIT_GRIEF_STRICKEN_DESC,你无法接受亲人的离去,You can't accept the loss
-TRAIT_REGRET_LATE_NAME,子欲养而亲不待,Too Late to Care
-TRAIT_REGRET_LATE_DESC,你想报答时已经来不及了,"When you wanted to repay, it was too late"
 TRAIT_UNFORGIVABLE_NAME,不可原谅,Unforgivable
 TRAIT_UNFORGIVABLE_DESC,你没能赶回来见最后一面,You couldn't make it back in time
-TRAIT_FILIAL_REGRET_NAME,孝道遗憾,Filial Regret
-TRAIT_FILIAL_REGRET_DESC,你后悔没有做得更多,You regret not doing more
-TRAIT_FATHER_GUILT_NAME,父亲内疚,Father's Guilt
-TRAIT_FATHER_GUILT_DESC,你辜负了父亲的期望,You failed your father's expectations
-TRAIT_EMOTIONAL_VOID_NAME,情感空虚,Emotional Void
-TRAIT_EMOTIONAL_VOID_DESC,你和家人之间隔了一道墙,A wall stands between you and your family
-TRAIT_FAMILY_HERITAGE_NAME,家族传承,Family Heritage
-TRAIT_FAMILY_HERITAGE_DESC,你把家族故事传给了下一代,You passed the family story to the next generation
-TRAIT_CHERISHED_MEMORY_NAME,珍贵回忆,Cherished Memory
-TRAIT_CHERISHED_MEMORY_DESC,你默默珍藏父亲的记忆,You silently cherish father's memory
-TRAIT_TEARS_OF_TIME_NAME,时光之泪,Tears of Time
-TRAIT_TEARS_OF_TIME_DESC,读了父亲的日记，泪流满面,"Reading father's diary, tears streaming down"
-TRAIT_OBEDIENT_CHILD_NAME,听话孩子,Obedient Child
-TRAIT_OBEDIENT_CHILD_DESC,你总是听妈妈的话,You always listen to mom
-TRAIT_GRATEFUL_CHILD_NAME,感恩子女,Grateful Child
-TRAIT_GRATEFUL_CHILD_DESC,你懂得感恩母亲的付出,You appreciate mother's sacrifices
-TRAIT_DISTANT_CHILD_NAME,疏远子女,Distant Child
-TRAIT_DISTANT_CHILD_DESC,你和母亲之间有了距离,Distance grew between you and mother
-TRAIT_MATURE_APOLOGY_NAME,成熟道歉,Mature Apology
-TRAIT_MATURE_APOLOGY_DESC,你学会了向母亲道歉,You learned to apologize to mother
-TRAIT_COLD_HEART_NAME,心冷,Cold Heart
-TRAIT_COLD_HEART_DESC,你对母亲的关心无动于衷,You're indifferent to mother's care
-TRAIT_DEVOTED_DAUGHTER_NAME,尽心女儿,Devoted Daughter
-TRAIT_DEVOTED_DAUGHTER_DESC,你花多少都要治好母亲,You'll spend whatever it takes to cure mother
-TRAIT_LATE_FILIAL_PIETY_NAME,迟来孝道,Late Filial Piety
-TRAIT_LATE_FILIAL_PIETY_DESC,你终于良心发现,Your conscience finally awakens
-TRAIT_DUTIFUL_CHILD_NAME,尽责子女,Dutiful Child
-TRAIT_DUTIFUL_CHILD_DESC,你尽了基本义务,You fulfilled basic duties
 TRAIT_HELPLESS_NAME,无能为力,Helpless
 TRAIT_HELPLESS_DESC,你实在没有能力帮助,You truly can't afford to help
-TRAIT_FINAL_COMPANION_NAME,最后陪伴,Final Companion
-TRAIT_FINAL_COMPANION_DESC,你在母亲最后的日子里陪伴她,You stayed by mother in her final days
-TRAIT_AVOIDANT_NAME,逃避者,Avoidant
-TRAIT_AVOIDANT_DESC,你选择了逃避,You chose to avoid
-TRAIT_MOTHER_BLESSED_NAME,母亲祝福,Mother's Blessing
-TRAIT_MOTHER_BLESSED_DESC,母亲的爱永远守护你,Mother's love watches over you forever
-TRAIT_MOTHER_FORGIVEN_NAME,母亲原谅,Mother Forgives
-TRAIT_MOTHER_FORGIVEN_DESC,母亲说：我不怪他,Mother said: I don't blame them
-TRAIT_MOTHER_UNCHANGING_LOVE_NAME,母亲不变的爱,Mother's Unchanging Love
-TRAIT_MOTHER_UNCHANGING_LOVE_DESC,即使你冷漠，母亲依然爱你,"Even when you were cold, mother still loved you"
-TRAIT_COLLEGE_LOVE_NAME,校园爱情,College Love
-TRAIT_COLLEGE_LOVE_DESC,你在大学遇到了真爱,You found true love in college
-TRAIT_WORKPLACE_ROMANCE_NAME,职场恋爱,Workplace Romance
-TRAIT_WORKPLACE_ROMANCE_DESC,你在工作中遇到了另一半,You met your partner at work
-TRAIT_ROMANTIC_PROPOSAL_NAME,浪漫求婚,Romantic Proposal
-TRAIT_ROMANTIC_PROPOSAL_DESC,你用最浪漫的方式求婚,You proposed in the most romantic way
-TRAIT_PRESSURED_MARRIAGE_NAME,被迫婚姻,Pressured Marriage
-TRAIT_PRESSURED_MARRIAGE_DESC,家人催促下你匆忙结婚,You married in haste under family pressure
-TRAIT_GRAND_WEDDING_NAME,盛大婚礼,Grand Wedding
-TRAIT_GRAND_WEDDING_DESC,你办了一场盛大的婚礼,You had a grand wedding
-TRAIT_SIMPLE_WEDDING_NAME,简单婚礼,Simple Wedding
-TRAIT_SIMPLE_WEDDING_DESC,你选择了简单的婚礼,You chose a simple wedding
-TRAIT_PRAGMATIC_MARRIAGE_NAME,务实婚姻,Pragmatic Marriage
-TRAIT_PRAGMATIC_MARRIAGE_DESC,你选择了务实的婚姻方式,You chose a pragmatic approach to marriage
-TRAIT_PROUD_FATHER_NAME,骄傲父亲,Proud Father
-TRAIT_PROUD_FATHER_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
-TRAIT_PROUD_PARENT_NAME,骄傲父母,Proud Parent
-TRAIT_PROUD_PARENT_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
-TRAIT_TWIN_BLESSING_NAME,双胞胎福,Twin Blessing
-TRAIT_TWIN_BLESSING_DESC,一儿一女，双喜临门,"A boy and a girl, double happiness"
-TRAIT_FREE_RANGE_PARENT_NAME,放养父母,Free-Range Parent
-TRAIT_FREE_RANGE_PARENT_DESC,你让孩子快乐成长,You let your child grow happily
-TRAIT_PATIENT_PARENT_NAME,耐心父母,Patient Parent
-TRAIT_PATIENT_PARENT_DESC,你愿意倾听孩子的心声,You're willing to listen to your child
-TRAIT_WISE_PARENT_NAME,智慧父母,Wise Parent
-TRAIT_WISE_PARENT_DESC,你用理解代替控制,You use understanding instead of control
-TRAIT_STRICT_PARENT_NAME,严厉父母,Strict Parent
-TRAIT_STRICT_PARENT_DESC,你对孩子要求严格,You're strict with your child
-TRAIT_WORRIED_PARENT_NAME,焦虑父母,Worried Parent
-TRAIT_WORRIED_PARENT_DESC,你总是担心孩子的未来,You always worry about your child's future
-TRAIT_WARM_FAMILY_NAME,温暖家庭,Warm Family
-TRAIT_WARM_FAMILY_DESC,你的家庭充满爱和温暖,Your family is full of love and warmth
-TRAIT_LONELY_PARENT_NAME,孤独父母,Lonely Parent
-TRAIT_LONELY_PARENT_DESC,孩子很少回来看你,Your child rarely visits
-TRAIT_MUTUAL_RESPECT_NAME,互相尊重,Mutual Respect
-TRAIT_MUTUAL_RESPECT_DESC,你和孩子之间建立了互相尊重的关系,You and your child built a relationship of mutual respect
-TRAIT_PEACEMAKER_NAME,和事佬,Peacemaker
-TRAIT_PEACEMAKER_DESC,你总是主动化解矛盾,You always take the initiative to resolve conflicts
-TRAIT_RESPONSIBLE_PARENT_NAME,负责任父母,Responsible Parent
-TRAIT_RESPONSIBLE_PARENT_DESC,你总是第一时间照顾孩子,You always take care of your child first
-TRAIT_FORGETFUL_NAME,健忘,Forgetful
-TRAIT_FORGETFUL_DESC,你忘了重要的纪念日,You forgot an important anniversary
-TRAIT_DOTING_GRANDPARENT_NAME,溺爱祖辈,Doting Grandparent
-TRAIT_DOTING_GRANDPARENT_DESC,你对孙子疼爱有加,You spoil your grandchild
-TRAIT_DISTANT_GRANDPARENT_NAME,疏远祖辈,Distant Grandparent
-TRAIT_DISTANT_GRANDPARENT_DESC,你不太想带孙子,You don't really want to babysit
-TRAIT_FAMILY_DRIFTING_NAME,家庭疏远,Family Drifting
-TRAIT_FAMILY_DRIFTING_DESC,你和家人越来越疏远,You and your family grow apart
-TRAIT_GUILTY_SECRET_NAME,愧疚秘密,Guilty Secret
-TRAIT_GUILTY_SECRET_DESC,你心里藏着一个秘密,You carry a secret guilt
-TRAIT_MARRIAGE_CRISIS_NAME,婚姻危机,Marriage Crisis
-TRAIT_MARRIAGE_CRISIS_DESC,你的婚姻出现了严重问题,Your marriage has serious problems
-TRAIT_STRONG_MARRIAGE_NAME,坚固婚姻,Strong Marriage
-TRAIT_STRONG_MARRIAGE_DESC,你和配偶一起度过了难关,You and your spouse weathered the storm together
-TRAIT_FILIAL_SPOUSE_NAME,孝顺配偶,Filial Spouse
-TRAIT_FILIAL_SPOUSE_DESC,你的配偶主动帮你照顾父母,Your spouse helps care for your parents
-TRAIT_ENLIGHTENED_PARENT_NAME,开明父母,Enlightened Parent
-TRAIT_ENLIGHTENED_PARENT_DESC,你因童年经历选择放手教育,Your childhood led you to choose a hands-off approach
-TRAIT_COUPLE_FOUNDERS_NAME,夫妻创业,Couple Founders
-TRAIT_COUPLE_FOUNDERS_DESC,你和配偶一起创业,You and your spouse started a business together
-TRAIT_DOUBLE_REGRET_NAME,双重遗憾,Double Regret
-TRAIT_DOUBLE_REGRET_DESC,你在爱情和师恩上都有遗憾,You have regrets in both love and mentorship
 FAMILY_FATHER_NAME,李建国,Li Jianguo
 FAMILY_MOTHER_NAME,王秀英,Wang Xiuying
 FAMILY_SPOUSE_NAME,陈雅婷,Chen Yating
@@ -1177,26 +918,13 @@ FAMILY_GRANDCHILD,孙辈,Grandchild
 REQ_FAMILY_MEMBER_ALIVE,需要%s在世,Requires %s alive
 REQ_FAMILY_MEMBER_MET,需要已遇见%s,Requires having met %s
 FAMILY_EFFECT_TITLE,家庭变化,Family Changes
-FAMILY_MOOD_CHANGE,%s心情：%s,%s mood: %s
 FAMILY_HEALTH_CHANGE,%s健康%+d,%s health %+d
 FAMILY_ALIVE_TRUE,%s来到身边,%s joins you
 FAMILY_ALIVE_FALSE,%s离世,%s passes away
 FAMILY_BORN,%s出生了,%s is born
 FAMILY_MET,遇见了%s,Met %s
-MOOD_NEUTRAL,平静,Calm
-MOOD_HAPPY,开心,Happy
-MOOD_SLIGHTLY_HURT,有点受伤,Slightly Hurt
-MOOD_HURT,受伤,Hurt
-MOOD_VERY_HURT,很受伤,Very Hurt
-MOOD_GRATEFUL,欣慰,Grateful
-MOOD_DISAPPOINTED,失望,Disappointed
-MOOD_COLD,冷淡,Cold
-MOOD_FURIOUS,愤怒,Furious
-MOOD_SUPPORTIVE,支持,Supportive
-MOOD_LONELY,孤独,Lonely
 TOWER_ATTACK_TOGGLE,攻击开关,Attack Toggle
 BTN_SELECT_TRAIT,选择词条,Select Trait
-TRAIT_SELECT_TITLE,词条选择,Trait Selection
 BTN_CLOSE,关闭,Close
 BTN_DEBUG_TEST_MAP,调试测试地图,Debug Test Map
 MAP_NAME_MAP_01,初始之路,First Path
@@ -1218,1204 +946,401 @@ GLOBAL_DIFFICULTY_SELECT,选择难度,Select Difficulty
 GLOBAL_DIFFICULTY_DESC,影响所有敌人的属性,Affects all enemy attributes
 TERRAIN_SAND,沙地,Sand
 TERRAIN_WATER,水域,Water
-﻿﻿﻿﻿﻿﻿﻿﻿keys,zh,en
-MAIN_TITLE,人生塔防,Life Tower Defense
-MAIN_SUBTITLE,Life Tower Defense,Life Tower Defense
-BTN_START_GAME,开始游戏,Start Game
-BTN_CONTINUE_GAME,继续游戏,Continue Game
-BTN_META_GROWTH,长效成长,Meta Progression
-BTN_LOAD_GAME,载入游戏,Load Game
-BTN_QUIT,退出游戏,Quit Game
-BTN_LANGUAGE,🌐 语言/Language,🌐 Language
-PAUSE_TITLE,暂停,Paused
-BTN_RESUME,继续游戏,Resume
-BTN_MAIN_MENU,返回主菜单,Main Menu
-BTN_ABANDON_GAME,放弃游戏,Abandon Game
-HUD_BASE_HP,❤ 基地血量:,❤ Base HP:
-HUD_GOLD,💰 金币:,💰 Gold:
-HUD_WAVE,⚔ 波次:,⚔ Wave:
-HUD_PREPARING,准备中,Preparing
-HUD_ATTRIBUTES,📋 属性,📋 Stats
-ATTR_TITLE,角色属性,Character Stats
-ATTR_AGE,🎂 年龄：%d  |  📌 阶段：%s,🎂 Age: %d  |  📌 Stage: %s
-TRAITS_TITLE,词条,Traits
-TRAITS_NONE,无,None
-EFFECTS_TITLE,生效效果总和,Active Effects
-HINT_CLICK_CLOSE,点击任意地方关闭,Click anywhere to close
-LANG_SELECT_TITLE,选择语言,Select Language
-LANG_ZH,中文,Chinese
-LANG_EN,English,English
-LOADING_TEXT,加载中...,Loading...
-ENDING_RATING,结局评级：%s — %s,Ending Rating: %s — %s
-UNKNOWN_ENDING,未知结局,Unknown Ending
-ENDING_WISDOM,人生智慧：%d,Life Wisdom: %d
-ENDING_DESTINY,命运点数：%d,Destiny Points: %d
-BTN_PLAY_AGAIN,再来一次,Play Again
-BTN_VIEW_ENDING,查看结局,View Ending
-ERA_SELECT_TITLE,选择你的出身,Choose Your Origin
-ERA_DISPLAY,时代：%s（%s）,Era: %s (%s)
-ERA_DISPLAY_SIMPLE,时代：%s,Era: %s
-FAMILY_SELECT,选择家境：,Select Family:
-FAMILY_CURRENT,当前：%s,Current: %s
-INITIAL_TOWERS,初始防御塔：%s,Initial Towers: %s
-BTN_START_LIFE,开始人生,Start Life
-BTN_BACK_MENU,返回主菜单,Back to Menu
-EVENT_TITLE,事件标题,Event Title
-EVENT_DESC,事件描述,Event Description
-QUIET_YEAR_1,平淡的一年，没有特别的事情发生。,A quiet year
-QUIET_YEAR_2,岁月静好，一切如常。,Peaceful days
-QUIET_YEAR_3,波澜不惊的一年，平平淡淡才是真。,An uneventful year
-QUIET_YEAR_4,日子就这样一天天过去了。,Days just passed by one after another.
-QUIET_YEAR_5,这一年，你只是安静地生活着。,This year
-QUIET_YEAR_6,没有惊喜，也没有意外。,No surprises
-OPTION_LABEL,选项 %d,Option %d
-REQUIREMENT_NEED,[需要: %s],[Requires: %s]
-TRIGGER_ENDING,[💀 触发结局],[💀 Triggers Ending]
-TRIGGER_BATTLE,[⚔️ 触发战斗],[⚔️ Triggers Battle]
-YOU_RECEIVED,你获得,You Received
-NEW_TRAITS,——新获得词条——,——New Traits——
-NEW_TOWERS,——新获得防御塔——,——New Towers——
-GOLD_PLUS,金币 +%d,Gold +%d
-GOLD_MINUS,金币 %d,Gold %d
-BATTLE_RATING,战斗评价：%s,Battle Rating: %s
-INTEREST_INCOME,利息收入：%d,Interest Income: %d
-STAGE_GROWTH,—— 阶段属性增长 ——,—— Stage Attribute Growth ——
-OLD_AGE_DECLINE,—— 老年衰退 ——,—— Old Age Decline ——
-BTN_CONTINUE_LIFE,继续人生,Continue Life
-TOWER_SELECT_TITLE,选择防御塔类型,Select Tower Type
-TOWER_COST,造价: %d,Cost: %d
-TOWER_INFO_COST,💰 造价: %d,💰 Cost: %d
-TOWER_INFO_DAMAGE,⚔ 伤害: %.0f,⚔ Damage: %.0f
-TOWER_INFO_RANGE,🎯 射程: %.0f,🎯 Range: %.0f
-TOWER_INFO_SPEED,⚡ 攻速: %.1f/s,⚡ Speed: %.1f/s
-TOWER_INFINITE,×∞,×∞
-NOT_ENOUGH_GOLD,金币不足！,Not enough gold!
-NOT_ENOUGH_GOLD_NEED,金币不足！需要 %d 金币,Not enough gold! Need %d gold
-BTN_CANCEL,取消,Cancel
-BTN_SELL,出售,Sell
-BTN_BUY,购买,Buy
-SELL_PRICE_LABEL,出售价格：,Sell Price:
-SELL_RATIO,(返还 %d%% 造价，含等级加成),(Returns %d%% of cost
-SELL_RETURN,💰 出售（返还 %d 金币）,💰 Sell (Return %d Gold)
-SELL_GOLD,%d 金币,%d Gold
-DAMAGE_STATS,⚔ 伤害统计,⚔ Damage Stats
-TOTAL_DAMAGE,总伤害：%.0f,Total Damage: %.0f
-TOTAL_DAMAGE_INT,总伤害：%d,Total Damage: %d
-NO_DATA,暂无数据,No Data
-TOWER_SOLD,(已售),(Sold)
-LIFE_STAGE,人生阶段,Life Stage
-AGE_LABEL,年龄：%d,Age: %d
-STAGE_LABEL,阶段：%s,Stage: %s
-GOLD_LABEL,金币：%d,Gold: %d
-TRAITS_LABEL,词条：,Traits:
-BTN_TRIGGER_EVENT,触发事件,Trigger Event
-DAMAGE_TYPE_MAGIC,🔮 魔法,🔮 Magic
-DAMAGE_TYPE_PHYSICAL,⚔ 物理,⚔ Physical
-TOWER_EXP,⭐ 经验：%d/%d    💰 造价：%d,⭐ Exp: %d/%d    💰 Cost: %d
-ENEMY_HP,❤ 血量：%.0f/%.0f,❤ HP: %.0f/%.0f
-ENEMY_SPEED,🏃 速度：%.0f,🏃 Speed: %.0f
-ENEMY_DAMAGE,⚔ 伤害：%d,⚔ Damage: %d
-ENEMY_GOLD,💰 击杀奖励：%d,💰 Kill Reward: %d
-ENEMY_PHYS_RES,🛡 物抗：%.0f%%,🛡 Phys Res: %.0f%%
-ENEMY_MAG_RES,🔮 魔抗：%.0f%%,🔮 Mag Res: %.0f%%
-ENEMY_SLOWED,🐌 减速中（-%.0f%%，%.1fs）,🐌 Slowed (-%.0f%%, %.1fs)
-ENEMY_DOT,🔥 持续伤害（%.1f/s，%.1fs）,🔥 DoT (%.1f/s, %.1fs)
-ENEMY_STUNNED,💫 眩晕中（%.1fs）,💫 Stunned (%.1fs)
-ENEMY_SILENCED,🔇 沉默中（%.1fs）,🔇 Silenced (%.1fs)
-ENEMY_CONFUSED,❓ 混乱中（%.1fs）,❓ Confused (%.1fs)
-ENEMY_ARMOR_BROKEN,🛡️ 破甲（-%.0f%%，%.1fs）,🛡️ Armor Broken (-%.0f%%, %.1fs)
-ENEMY_DEBUFF,⬇️ 削弱（-%.0f%%，%.1fs）,⬇️ Debuffed (-%.0f%%, %.1fs)
-META_WISDOM,人生智慧：%d,Life Wisdom: %d
-META_DESTINY,命运点数：%d,Destiny Points: %d
-TAB_SHOP,解锁商店,Unlock Shop
-TAB_ACHIEVEMENTS,成就,Achievements
-TAB_UNLOCKED,已解锁,Unlocked
-SHOP_AVAILABLE,可购买内容,Available
-SHOP_LOCKED,未满足条件,Requirements Not Met
-TYPE_ERA,时代,Era
-TYPE_PROFESSION,职业,Profession
-TYPE_DIFFICULTY,难度,Difficulty
-TYPE_BUFF,增益,Buff
-TYPE_LABEL,类型：%s,Type: %s
-PREREQ_ACHIEVEMENT,需要成就：%s,Requires Achievement: %s
-LOCKED,未满足,Locked
-UNLOCKED_ACHIEVEMENTS,已解锁成就 (%d),Unlocked Achievements (%d)
-LOCKED_ACHIEVEMENTS,未解锁成就 (%d),Locked Achievements (%d)
-REWARD_LABEL,奖励：,Reward:
-UNLOCKED_ERAS,已解锁时代,Unlocked Eras
-UNLOCKED_PROFESSIONS,已解锁职业,Unlocked Professions
-UNLOCKED_BUFFS,已解锁增益,Unlocked Buffs
-ACHIEVEMENTS_COUNT,已获得成就 (%d),Achievements Earned (%d)
-DAMAGE_BONUS_UNIVERSAL,伤害加成（通用）：+%.0f%%,Damage Bonus (Universal): +%.0f%%
-DAMAGE_BONUS_SPECIFIC,伤害加成（%s）：+%.0f%%,Damage Bonus (%s): +%.0f%%
-ATTACK_SPEED_UNIVERSAL,攻速加成（通用）：+%.0f%%,Attack Speed Bonus (Universal): +%.0f%%
-ATTACK_SPEED_SPECIFIC,攻速加成（%s）：+%.0f%%,Attack Speed Bonus (%s): +%.0f%%
-DAMAGE_REDUCTION,伤害减免：%.0f%%,Damage Reduction: %.0f%%
-GOLD_PER_WAVE,每波额外金币：+%.0f,Extra Gold Per Wave: +%.0f
-EFFECT_TOWER_DAMAGE,塔伤害+%.0f%%,Tower Damage +%.0f%%
-EFFECT_TOWER_SPEED,塔攻速+%.0f%%,Tower Speed +%.0f%%
-EFFECT_GOLD_BONUS,金币%+d,Gold %+d
-EFFECT_HEALTH_BONUS,生命%+d,Health %+d
-EFFECT_GOLD_PER_WAVE,每波金币+%d,Gold Per Wave +%d
-EFFECT_DAMAGE_REDUCTION,伤害减免%.0f%%,Damage Reduction %.0f%%
-EFFECT_EVENT_TRIGGER,事件触发率%+.0f%%,Event Trigger Rate %+.0f%%
-ATTR_INTELLIGENCE,智力,Intelligence
-ATTR_COURAGE,勇气,Courage
-ATTR_HEALTH,健康,Health
-ATTR_CHARM,魅力,Charm
-ATTR_WORK_ABILITY,工作能力,Work Ability
-ATTR_LUCK,运气,Luck
-BG_FARMER,农民,Farmer
-BG_WORKER,工人,Worker
-BG_MERCHANT,商人,Merchant
-BG_CADRE,干部,Cadre
-BG_FARMER_OR_WORKER,农民或工人,Farmer or Worker
-REQ_HAS_TRAIT,拥有「%s」,"Has ""%s"""
-REQ_NOT_TRAIT,非「%s」,"Not ""%s"""
-REQ_GOLD,金币≥%d,Gold≥%d
-REQ_FAMILY,家庭背景：%s,Family: %s
-REQ_NOT_FAMILY,非%s家庭,Not %s Family
-REQ_EDUCATION,学历：%s,Education: %s
-REQ_WORK_ABILITY,工作能力≥%d,Work Ability≥%d
-NO_SAVE,没有可载入的存档,No save to load
-CURRENCY_WISDOM,人生智慧,Life Wisdom
-CURRENCY_DESTINY,命运点数,Destiny Points
-QUIET_YEAR_TITLE,今年无事发生,Nothing happened this year
-SELL_TOWER,💰 出售防御塔,💰 Sell Tower
-TOWER_CHINESE_BASIC_NAME,语文之塔,Chinese Basics Tower
-TOWER_CHINESE_ADVANCED_NAME,语文之塔·进阶,Chinese Advanced Tower
-TOWER_MATH_BASIC_NAME,数学之塔,Math Tower
-TOWER_MATH_ADVANCED_NAME,数学之塔·进阶,Math Advanced Tower
-TOWER_MATH_MASTER_NAME,数学之塔·大师,Math Master Tower
-TOWER_ENGLISH_BASIC_NAME,英语之塔,English Tower
-TOWER_SCIENCE_BASIC_NAME,理综之塔,Science Tower
-TOWER_SCIENCE_ADVANCED_NAME,理综之塔·进阶,Science Advanced Tower
-TOWER_PROGRAMMING_BASIC_NAME,编程之塔,Programming Tower
-TOWER_PROGRAMMING_ADVANCED_NAME,编程之塔·进阶,Programming Advanced Tower
-TOWER_TIME_BASIC_NAME,时间管理塔,Time Management Tower
-TOWER_TIME_ADVANCED_NAME,时间管理塔·进阶,Time Management Adv. Tower
-TOWER_COMMUNICATION_BASIC_NAME,沟通能力塔,Communication Tower
-TOWER_COMMUNICATION_ADVANCED_NAME,沟通能力塔·进阶,Communication Adv. Tower
-TOWER_NETWORK_BASIC_NAME,人脉关系塔,Networking Tower
-TOWER_FINANCE_BASIC_NAME,理财能力塔,Finance Tower
-TOWER_SPORTS_BASIC_NAME,体育之塔,Sports Tower
-TOWER_ARTIST_BASIC_NAME,艺术之塔,Art Tower
-TOWER_ENGINEER_BASIC_NAME,工程之塔,Engineering Tower
-TOWER_PROFESSION_BASIC_NAME,职业之塔,Profession Tower
-TOWER_BUSINESS_BASIC_NAME,商业之塔,Business Tower
-TOWER_BUSINESS_ADVANCED_NAME,商业之塔·进阶,Business Advanced Tower
-TOWER_HISTORY_ADVANCED_NAME,历史之塔·进阶,History Advanced Tower
-TOWER_HISTORY_MASTER_NAME,历史之塔·大师,History Master Tower
-TOWER_LEADERSHIP_ADVANCED_NAME,领导力之塔·进阶,Leadership Adv. Tower
-TOWER_FIRE_ADVANCED_NAME,烈焰塔,Flame Tower
-TOWER_ICE_ADVANCED_NAME,寒冰塔,Ice Tower
-TOWER_RUINS_NAME,防御塔废墟,Tower Ruins
-ENEMY_HOMEWORK_NAME,作业怪,Homework Monster
-ENEMY_EXAM_NAME,考试怪,Exam Monster
-ENEMY_BILL_NAME,账单怪,Bill Monster
-ENEMY_996_NAME,996怪,996 Monster
-ENEMY_CHRONIC_DISEASE_NAME,慢性病,Chronic Disease
-ENEMY_LONELINESS_NAME,孤独怪,Loneliness Monster
-ENEMY_RECESSION_NAME,经济衰退,Recession
-ENEMY_MEMORY_LOSS_NAME,记忆衰退,Memory Loss
-ENEMY_PRESSURE_SCHOOL_NAME,升学压力,School Pressure
-ENEMY_INVOLUTION_NAME,内卷怪,Involution Monster
-ENEMY_BOSS_MIDLIFE_CRISIS_NAME,中年危机,Midlife Crisis Boss
-ENEMY_BOSS_FINAL_JUDGMENT_NAME,最终审判,Final Judgment Boss
-EVENT_KINDERGARTEN_SHOW_NAME,幼儿园表演,Kindergarten Performance
-EVENT_KINDERGARTEN_SHOW_DESC,幼儿园要举办六一表演，老师问你想参加什么节目。,The kindergarten is holding a Children's Day show. The teacher asks what you'd like to perform.
-EVENT_MATH_CONTEST_NAME,数学竞赛,Math Competition
-EVENT_MATH_CONTEST_DESC,学校举办数学竞赛，班主任鼓励你参加。,Your school is hosting a math contest. Your homeroom teacher encourages you to participate.
-EVENT_HOBBY_CLASS_NAME,兴趣班选择,Hobby Class Choice
-EVENT_HOBBY_CLASS_DESC,父母想给你报个兴趣班，但家里预算有限。,"Your parents want to sign you up for a hobby class, but the family budget is limited."
-EVENT_PEER_CONFLICT_NAME,同伴冲突,Peer Conflict
-EVENT_PEER_CONFLICT_DESC,班上的调皮鬼抢了你的文具，还嘲笑你。,A class bully took your stationery and made fun of you.
-EVENT_FAMILY_CRISIS_NAME,家庭变故,Family Crisis
-EVENT_FAMILY_CRISIS_DESC,爸爸失业了，家里气氛很压抑。,Dad lost his job. The atmosphere at home is heavy.
-EVENT_ZHONGKAO_NAME,中考分流,High School Entrance Exam
-EVENT_ZHONGKAO_DESC,中考成绩出来了，你面临人生第一次重大分流。,Your Zhongkao results are out. You face your first major life fork in the road.
-EVENT_GAOKAO_CHOICE_NAME,高考志愿,College Application
-EVENT_GAOKAO_CHOICE_DESC,十二年寒窗苦读，只为今朝一搏。高考成绩出来了，你要填报哪个志愿？,Twelve years of hard work come down to this moment. Your Gaokao scores are out — which major will you choose?
-EVENT_COLLEGE_LOVE_NAME,大学恋爱,College Romance
-EVENT_COLLEGE_LOVE_DESC,大学里遇到了心动的人，你要不要表白？,You met someone special in college. Will you confess your feelings?
-EVENT_MASTER_OR_WORK_NAME,人生岔路口,Life Crossroads
-EVENT_MASTER_OR_WORK_DESC,大学毕业在即，你面临人生重大选择：考研还是工作？,College graduation is approaching. You face a major choice: grad school or work?
-EVENT_FIRST_JOB_NAME,第一份工作,First Job
-EVENT_FIRST_JOB_DESC,你收到了几个Offer，要选哪个？,You received several offers. Which one will you pick?
-EVENT_RENT_HOUSE_NAME,租房困境,Renting Dilemma
-EVENT_RENT_HOUSE_DESC,工作后要租房，你要选什么样的房子？,You need to rent a place after starting work. What kind of apartment will you choose?
-EVENT_WORKPLACE_NEWBIE_NAME,职场新人,Workplace Newbie
-EVENT_WORKPLACE_NEWBIE_DESC,刚入职场的你，遇到了老员工甩锅。,"As a new employee, a senior colleague shifts their work onto you."
-EVENT_MARRIAGE_PRESSURE_NAME,催婚,Marriage Pressure
-EVENT_MARRIAGE_PRESSURE_DESC,过年回家，亲戚都在催婚。,"Going home for New Year, all your relatives are pressuring you to get married."
-EVENT_CAREER_BREAKTHROUGH_NAME,职场突破,Career Breakthrough
-EVENT_CAREER_BREAKTHROUGH_DESC,工作几年后，你终于等来了一个独当一面的机会，但压力也更大了。,"After working for several years, you finally get a chance to lead — but the pressure is even greater."
-EVENT_FRIEND_WEDDING_NAME,朋友婚礼,Friend's Wedding
-EVENT_FRIEND_WEDDING_DESC,大学好友结婚了，你在婚礼上感慨万千。,"Your college best friend got married. At the wedding, you're filled with emotion."
-EVENT_SIDE_HUSTLE_NAME,副业机会,Side Hustle Opportunity
-EVENT_SIDE_HUSTLE_DESC,朋友拉你一起做副业，说能赚大钱。,"A friend invites you to start a side business together, saying it could make big money."
-EVENT_CAREER_SWITCH_NAME,职业转型,Career Change
-EVENT_CAREER_SWITCH_DESC,你开始觉得当前的工作不适合自己，想要尝试新的方向。,You've started feeling that your current job isn't right for you and want to try a new direction.
-EVENT_HOME_PURCHASE_NAME,买房安家,Buying a Home
-EVENT_HOME_PURCHASE_DESC,你攒了一些钱，开始考虑买一套属于自己的房子。,You've saved some money and are considering buying your own place.
-EVENT_PET_COMPANION_NAME,毛茸茸的陪伴,Furry Companion
-EVENT_PET_COMPANION_DESC,你路过宠物店，一只小猫/小狗一直看着你。,You pass by a pet shop. A kitten/puppy keeps looking at you.
-EVENT_HOUSE_LOAN_NAME,买房,Mortgage
-EVENT_HOUSE_LOAN_DESC,你考虑买一套属于自己的房子。,You're considering buying your own home.
-EVENT_CHILDREN_EDUCATION_NAME,子女教育,Children's Education
-EVENT_CHILDREN_EDUCATION_DESC,孩子要上学了，你要怎么培养？,Your child needs to start school. How will you raise them?
-EVENT_PARENTS_CARE_NAME,父母养老,Caring for Parents
-EVENT_PARENTS_CARE_DESC,父母年纪大了，需要人照顾。,Your parents are getting older and need someone to care for them.
-EVENT_CAREER_PROMOTION_NAME,晋升机会,Promotion Opportunity
-EVENT_CAREER_PROMOTION_DESC,公司有个晋升机会，但需要付出大量时间。,"There's a promotion opportunity at your company, but it requires sacrificing a lot of personal time."
-EVENT_HEALTH_WARNING_NAME,健康预警,Health Warning
-EVENT_HEALTH_WARNING_DESC,体检报告出来了，多项指标异常。,Your physical exam results came back with multiple abnormal indicators.
-EVENT_SERIOUS_DISEASE_NAME,癌症早期,Early-Stage Cancer
-EVENT_SERIOUS_DISEASE_DESC,体检发现癌症早期，需要立即治疗。,The physical exam found early-stage cancer. Immediate treatment is needed.
-EVENT_ACCIDENT_NAME,车祸,Car Accident
-EVENT_ACCIDENT_DESC,下班路上遭遇车祸。,You were in a car accident on your way home from work.
-EVENT_WORK_BURNOUT_NAME,职场倦怠,Work Burnout
-EVENT_WORK_BURNOUT_DESC,日复一日的工作让你感到疲惫不堪，你开始怀疑这一切是否值得。,Day after day of work has left you exhausted. You're starting to question whether it's all worth it.
-EVENT_INVESTMENT_NAME,投资理财,Investment Opportunity
-EVENT_INVESTMENT_DESC,朋友推荐了一个投资项目，听起来回报不错。,A friend recommended an investment project that sounds promising.
-EVENT_NEIGHBOR_DISPUTE_NAME,邻里纠纷,Neighbor Dispute
-EVENT_NEIGHBOR_DISPUTE_DESC,楼上邻居半夜噪音不断，多次沟通无果。,The upstairs neighbor makes noise late at night despite repeated complaints.
-EVENT_CHILDREN_GROWING_NAME,孩子长大了,Kids Growing Up
-EVENT_CHILDREN_GROWING_DESC,孩子渐渐长大，开始有了自己的想法，你们之间的代沟越来越深。,Your child is growing up and developing their own ideas. The generation gap between you keeps widening.
-EVENT_MIDLIFE_SKILL_NAME,中年学技能,Midlife Skill Learning
-EVENT_MIDLIFE_SKILL_DESC,你突然想学一项新技能，给生活增添些乐趣。,You suddenly want to learn a new skill to add some joy to life.
-EVENT_RETIREMENT_PLAN_NAME,退休规划,Retirement Planning
-EVENT_RETIREMENT_PLAN_DESC,到了退休的年纪，你开始思考如何度过余生。,"At retirement age, you're thinking about how to spend the rest of your life."
-EVENT_CHRONIC_ILLNESS_NAME,慢性病困扰,Chronic Illness
-EVENT_CHRONIC_ILLNESS_DESC,年纪大了，身体开始出现各种慢性病，需要长期调养。,"Getting old, various chronic health issues appear. Long-term care is needed."
-EVENT_FAMILY_REUNION_NAME,家庭团聚,Family Reunion
-EVENT_FAMILY_REUNION_DESC,节假日到了，你感慨万千。,It's the holidays. You're filled with emotion.
-EVENT_OLD_FRIEND_NAME,老友重逢,Reuniting with Old Friends
-EVENT_OLD_FRIEND_DESC,在公园遇到了多年未见的老朋友，你们聊起了往事。,You ran into an old friend you haven't seen in years at the park. You started reminiscing.
-EVENT_LEGACY_NAME,传承智慧,Passing Down Wisdom
-EVENT_LEGACY_DESC,你决定把自己一生的经验传授给年轻人。,You decide to share a lifetime of experience with younger generations.
-EVENT_HEALTH_CRISIS_NAME,健康危机,Health Crisis
-EVENT_HEALTH_CRISIS_DESC,一次严重的身体警报让你意识到时间不多了。,A serious health alert made you realize time is running out.
-EVENT_LIFE_REFLECTION_NAME,人生感悟,Life Reflections
-EVENT_LIFE_REFLECTION_DESC,坐在窗前，你回望这一生，百感交集。,"Sitting by the window, you look back on this life with mixed feelings."
-EVENT_PUBERTY_REBELLION_NAME,青春叛逆,Puberty Rebellion
-EVENT_PUBERTY_REBELLION_DESC,你开始对大人的规矩感到厌烦，想要按自己的方式生活。,You've grown tired of adult rules and want to live life your own way.
-EVENT_FIRST_LOVE_NAME,初恋,First Love
-EVENT_FIRST_LOVE_DESC,你对班上的一个同学产生了朦胧的好感。,You developed a crush on a classmate.
-EVENT_MIDLIFE_CONFUSION_NAME,中年迷茫,Midlife Confusion
-EVENT_MIDLIFE_CONFUSION_DESC,你突然对日复一日的生活感到迷茫，不知道这一切有什么意义。,"You suddenly feel lost about day-to-day life, wondering what it all means."
-EVENT_RETIREMENT_HOBBY_NAME,退休爱好,Retirement Hobby
-EVENT_RETIREMENT_HOBBY_DESC,退休后时间多了，你想培养一个新爱好。,"With more free time after retirement, you want to cultivate a new hobby."
-EVENT_OLD_FRIEND_PASSING_NAME,故人离去,Passing of an Old Friend
-EVENT_OLD_FRIEND_PASSING_DESC,一位多年的老友去世了，你参加了葬礼，感慨万千。,"An old friend of many years passed away. You attended the funeral, filled with emotion."
-EVENT_TWILIGHT_WISDOM_NAME,暮年感悟,Twilight Wisdom
-EVENT_TWILIGHT_WISDOM_DESC,坐在夕阳下，你忽然想通了很多事情。,"Sitting in the sunset, you suddenly understood many things."
-OPTION_KINDERGARTEN_SHOW_A_TEXT,参加合唱团,Join the choir
-OPTION_KINDERGARTEN_SHOW_B_TEXT,参加朗诵比赛,Join the recitation contest
-OPTION_KINDERGARTEN_SHOW_C_TEXT,当观众就好,Just be an audience member
-OPTION_MATH_CONTEST_A_TEXT,努力准备，冲刺名次,"Study hard, aim for top ranking"
-OPTION_MATH_CONTEST_B_TEXT,随便参加，重在参与,"Participate casually, just for fun"
-OPTION_MATH_CONTEST_C_TEXT,放弃参加，去踢球,"Skip it, go play soccer instead"
-OPTION_HOBBY_CLASS_A_TEXT,学钢琴,Learn piano
-OPTION_HOBBY_CLASS_B_TEXT,学编程,Learn programming
-OPTION_HOBBY_CLASS_C_TEXT,自学，不花钱,"Self-study, save money"
-OPTION_HOBBY_CLASS_D_TEXT,帮家里干活,Help with chores at home
-OPTION_PEER_CONFLICT_A_TEXT,告诉老师,Tell the teacher
-OPTION_PEER_CONFLICT_B_TEXT,自己解决，打回去,"Handle it myself, fight back"
-OPTION_PEER_CONFLICT_C_TEXT,忍气吞声,Swallow my pride
-OPTION_PEER_CONFLICT_D_TEXT,告诉家长，让家长处理,"Tell my parents, let them handle it"
-OPTION_FAMILY_CRISIS_A_TEXT,努力学习，不让爸妈操心,"Study hard, don't worry Mom and Dad"
-OPTION_FAMILY_CRISIS_B_TEXT,帮家里找兼职,Help find part-time work for the family
-OPTION_FAMILY_CRISIS_C_TEXT,像往常一样玩耍,Play as usual
-OPTION_FAMILY_CRISIS_D_TEXT,问爸妈要不要辍学,Ask if I should drop out of school
-OPTION_ZHONGKAO_A_TEXT,冲刺重点高中,Go for a top high school
-OPTION_ZHONGKAO_B_TEXT,读普通高中,Go to a regular high school
-OPTION_ZHONGKAO_C_TEXT,读职高，学技术,"Go to vocational school, learn a trade"
-OPTION_GAOKAO_CHOICE_A_TEXT,冲刺清华北大,Aim for Tsinghua or Peking University
-OPTION_GAOKAO_CHOICE_B_TEXT,正常发挥，考个一本,"Do my best, get into a Tier 1 university"
-OPTION_GAOKAO_CHOICE_C_TEXT,二本也行，选个好专业,"Tier 2 is fine, pick a good major"
-OPTION_GAOKAO_CHOICE_D_TEXT,放弃高考，直接工作,"Skip Gaokao, start working directly"
-OPTION_COLLEGE_LOVE_A_TEXT,勇敢表白,Bravely confess
-OPTION_COLLEGE_LOVE_B_TEXT,暗恋，不说破,"Keep it a secret, never say it"
-OPTION_COLLEGE_LOVE_C_TEXT,恋爱哪有学习重要,"Love can wait, studies come first"
-OPTION_MASTER_OR_WORK_A_TEXT,考研深造,Pursue a master's degree
-OPTION_MASTER_OR_WORK_B_TEXT,直接工作，积累经验,"Start working, gain experience"
-OPTION_MASTER_OR_WORK_C_TEXT,创业！改变世界！,Start a startup! Change the world!
-OPTION_FIRST_JOB_A_TEXT,大厂Offer，996但钱多,"Big tech offer, 996 but high pay"
-OPTION_FIRST_JOB_B_TEXT,国企，稳定但工资一般,"State-owned enterprise, stable but average pay"
-OPTION_FIRST_JOB_C_TEXT,创业公司，有风险但可能暴富,"Startup, risky but could strike it rich"
-OPTION_RENT_HOUSE_A_TEXT,市中心，贵但方便,"City center, expensive but convenient"
-OPTION_RENT_HOUSE_B_TEXT,郊区，便宜但远,"Suburbs, cheap but far"
-OPTION_RENT_HOUSE_C_TEXT,跟别人合租,Share with roommates
-OPTION_WORKPLACE_NEWBIE_A_TEXT,默默接受，多干活,"Accept silently, work harder"
-OPTION_WORKPLACE_NEWBIE_B_TEXT,找领导说明情况,Talk to my manager about it
-OPTION_WORKPLACE_NEWBIE_C_TEXT,以牙还牙，甩回去,"Give as good as I get, shift it back"
-OPTION_MARRIAGE_PRESSURE_A_TEXT,顺从父母，去相亲,"Obey parents, go on blind dates"
-OPTION_MARRIAGE_PRESSURE_B_TEXT,坚持不婚主义,Stay single forever
-OPTION_MARRIAGE_PRESSURE_C_TEXT,已有对象，带回家见父母,"Already have someone, bring them home"
-OPTION_CAREER_BREAKTHROUGH_A_TEXT,主动请缨，承担核心项目,Volunteer for the core project
-OPTION_CAREER_BREAKTHROUGH_B_TEXT,稳扎稳打，做好本职工作,"Play it safe, do my job well"
-OPTION_CAREER_BREAKTHROUGH_C_TEXT,跳槽到更好的平台,Jump ship to a better platform
-OPTION_FRIEND_WEDDING_A_TEXT,送上厚礼，真心祝福,"Give a generous gift, sincere blessings"
-OPTION_FRIEND_WEDDING_B_TEXT,趁机社交，拓展人脉,"Use it to network, expand connections"
-OPTION_FRIEND_WEDDING_C_TEXT,独自喝闷酒,Drink alone in silence
-OPTION_SIDE_HUSTLE_A_TEXT,投入积蓄全力做,Put all savings into it
-OPTION_SIDE_HUSTLE_B_TEXT,小规模试水,"Start small, test the waters"
-OPTION_SIDE_HUSTLE_C_TEXT,婉拒，专注本职,"Decline politely, focus on main job"
-OPTION_CAREER_SWITCH_A_TEXT,辞职去创业,Quit and start a business
-OPTION_CAREER_SWITCH_B_TEXT,先兼职试试水,Try part-time first
-OPTION_CAREER_SWITCH_C_TEXT,算了，稳定最重要,"Never mind, stability comes first"
-OPTION_HOME_PURCHASE_A_TEXT,咬咬牙，贷款买,"Bite the bullet, get a mortgage"
-OPTION_HOME_PURCHASE_B_TEXT,先租着吧，不急,"Keep renting, no rush"
-OPTION_HOME_PURCHASE_C_TEXT,回老家买房,Buy back in hometown
-OPTION_PET_COMPANION_A_TEXT,带它回家！,Take it home!
-OPTION_PET_COMPANION_B_TEXT,经常来看看它,Visit it often
-OPTION_PET_COMPANION_C_TEXT,算了，养宠物太麻烦,"Never mind, pets are too much trouble"
-OPTION_HOUSE_LOAN_A_TEXT,贷款买大房子,Get a mortgage for a big house
-OPTION_HOUSE_LOAN_B_TEXT,买个小点的，压力小,"Buy smaller, less pressure"
-OPTION_HOUSE_LOAN_C_TEXT,不买了，租房住,"Don't buy, keep renting"
-OPTION_CHILDREN_EDUCATION_A_TEXT,报各种补习班,Sign up for every cram school
-OPTION_CHILDREN_EDUCATION_B_TEXT,快乐教育，顺其自然,"Happy education, let nature take its course"
-OPTION_CHILDREN_EDUCATION_C_TEXT,送孩子出国,Send child abroad
-OPTION_CHILDREN_EDUCATION_D_TEXT,还没孩子，专注事业,"No kids yet, focus on career"
-OPTION_PARENTS_CARE_A_TEXT,接来同住,Have them move in
-OPTION_PARENTS_CARE_B_TEXT,送养老院,Send to nursing home
-OPTION_PARENTS_CARE_C_TEXT,请保姆照顾,Hire a caregiver
-OPTION_CAREER_PROMOTION_A_TEXT,争取晋升,Go for the promotion
-OPTION_CAREER_PROMOTION_B_TEXT,保持现状，工作生活平衡,"Maintain status quo, work-life balance"
-OPTION_CAREER_PROMOTION_C_TEXT,跳槽去对手公司,Jump to a competitor
-OPTION_HEALTH_WARNING_A_TEXT,重视健康，开始锻炼,"Take health seriously, start exercising"
-OPTION_HEALTH_WARNING_B_TEXT,吃保健品,Take supplements
-OPTION_HEALTH_WARNING_C_TEXT,工作太忙，没时间管,"Too busy, no time for this"
-OPTION_SERIOUS_DISEASE_A_TEXT,积极治疗,Aggressive treatment
-OPTION_SERIOUS_DISEASE_B_TEXT,保守治疗,Conservative treatment
-OPTION_SERIOUS_DISEASE_C_TEXT,放弃治疗，享受余生,"Give up treatment, enjoy remaining time"
-OPTION_ACCIDENT_A_TEXT,手术抢救,Emergency surgery
-OPTION_ACCIDENT_B_TEXT,听天由命,Leave it to fate
-OPTION_WORK_BURNOUT_A_TEXT,请个长假，出去走走,"Take a long break, go travel"
-OPTION_WORK_BURNOUT_B_TEXT,咬牙坚持，习惯就好,"Grin and bear it, get used to it"
-OPTION_WORK_BURNOUT_C_TEXT,考虑换个方向,Consider changing direction
-OPTION_INVESTMENT_A_TEXT,投入大量资金,Invest heavily
-OPTION_INVESTMENT_B_TEXT,小试牛刀，投一点,Test the waters with a small amount
-OPTION_INVESTMENT_C_TEXT,不碰，稳妥为上,"Stay away, safety first"
-OPTION_NEIGHBOR_DISPUTE_A_TEXT,找物业投诉,File complaint with property management
-OPTION_NEIGHBOR_DISPUTE_B_TEXT,直接上门理论,Confront them directly
-OPTION_NEIGHBOR_DISPUTE_C_TEXT,忍了，搬家算了,"Just endure it, move away"
-OPTION_CHILDREN_GROWING_A_TEXT,尊重孩子的选择,Respect the child's choices
-OPTION_CHILDREN_GROWING_B_TEXT,严格要求，不能走弯路,"Be strict, no wrong turns allowed"
-OPTION_CHILDREN_GROWING_C_TEXT,顺其自然吧,Let nature take its course
-OPTION_MIDLIFE_SKILL_A_TEXT,学烹饪，犒劳家人,"Learn cooking, treat the family"
-OPTION_MIDLIFE_SKILL_B_TEXT,学编程，跟上时代,"Learn coding, keep up with the times"
-OPTION_MIDLIFE_SKILL_C_TEXT,学太极，强身健体,"Learn Tai Chi, stay fit"
-OPTION_RETIREMENT_PLAN_A_TEXT,安享晚年，含饴弄孙,"Enjoy retirement, play with grandkids"
-OPTION_RETIREMENT_PLAN_B_TEXT,发挥余热，做社区志愿者,"Stay active, volunteer in community"
-OPTION_RETIREMENT_PLAN_C_TEXT,开始学新东西，活到老学到老,"Start learning new things, lifelong learning"
-OPTION_RETIREMENT_PLAN_D_TEXT,这一生已经足够了,This life has been enough
-OPTION_CHRONIC_ILLNESS_A_TEXT,坚持锻炼，积极对抗,"Keep exercising, fight back actively"
-OPTION_CHRONIC_ILLNESS_B_TEXT,吃药调养，顺其自然,"Take medicine, let nature run its course"
-OPTION_CHRONIC_ILLNESS_C_TEXT,不管了，该吃吃该喝喝,"Ignore it, eat drink and be merry"
-OPTION_FAMILY_REUNION_A_TEXT,享受天伦之乐,Enjoy family happiness
-OPTION_FAMILY_REUNION_B_TEXT,叮嘱晚辈好好工作,Urge the young ones to work hard
-OPTION_FAMILY_REUNION_C_TEXT,和家人一起旅行,Travel together as a family
-OPTION_FAMILY_REUNION_D_TEXT,独自享受宁静时光,Enjoy quiet time alone
-OPTION_FAMILY_REUNION_E_TEXT,此生足矣，无憾了,"This life is enough, no regrets"
-OPTION_OLD_FRIEND_A_TEXT,畅叙旧情，感慨人生,"Chat about old times, reflect on life"
-OPTION_OLD_FRIEND_B_TEXT,约好以后常聚,Promise to meet more often
-OPTION_OLD_FRIEND_C_TEXT,看淡生死，坦然面对,Accept mortality with equanimity
-OPTION_LEGACY_A_TEXT,写回忆录,Write a memoir
-OPTION_LEGACY_B_TEXT,当导师带徒弟,Become a mentor
-OPTION_LEGACY_C_TEXT,默默看着就好,Just watch quietly
-OPTION_HEALTH_CRISIS_A_TEXT,全力治疗,Full-on treatment
-OPTION_HEALTH_CRISIS_B_TEXT,保守治疗，珍惜当下,"Conservative treatment, cherish the present"
-OPTION_HEALTH_CRISIS_C_TEXT,放弃治疗,Give up treatment
-OPTION_LIFE_REFLECTION_A_TEXT,此生无憾,No regrets in this life
-OPTION_LIFE_REFLECTION_B_TEXT,有些遗憾，但已释然,"Some regrets, but at peace now"
-OPTION_LIFE_REFLECTION_C_TEXT,如果重来，一定不同,"If I could do it over, it would be different"
-OPTION_PUBERTY_REBELLION_A_TEXT,跟父母大吵一架，离家出走,"Have a huge fight with parents, run away from home"
-OPTION_PUBERTY_REBELLION_B_TEXT,沉默对抗，写日记发泄,"Silent resistance, write in diary"
-OPTION_PUBERTY_REBELLION_C_TEXT,试着理解父母的苦心,Try to understand parents' intentions
-OPTION_FIRST_LOVE_A_TEXT,偷偷递纸条表白,Secretly pass a note to confess
-OPTION_FIRST_LOVE_B_TEXT,把心思放在学习上,Focus on studies instead
-OPTION_FIRST_LOVE_C_TEXT,默默关注，享受心动的感觉,"Watch from afar, enjoy the feeling"
-OPTION_MIDLIFE_CONFUSION_A_TEXT,报名心理咨询，正视内心,"Sign up for counseling, face inner self"
-OPTION_MIDLIFE_CONFUSION_B_TEXT,买辆摩托车，去远方,"Buy a motorcycle, ride into the distance"
-OPTION_MIDLIFE_CONFUSION_C_TEXT,继续过日子，迷茫就迷茫吧,"Keep living, confusion is fine"
-OPTION_RETIREMENT_HOBBY_A_TEXT,学书法，修身养性,"Learn calligraphy, cultivate the mind"
-OPTION_RETIREMENT_HOBBY_B_TEXT,跳广场舞，交朋友,"Join square dancing, make friends"
-OPTION_RETIREMENT_HOBBY_C_TEXT,养花种菜，享受田园,"Garden, enjoy country life"
-OPTION_RETIREMENT_HOBBY_D_TEXT,心满意足，安享天年,"Content and satisfied, enjoy golden years"
-OPTION_OLD_FRIEND_PASSING_A_TEXT,写一篇文章纪念他,Write an article to commemorate him
-OPTION_OLD_FRIEND_PASSING_B_TEXT,更加珍惜身边的人,Cherish those around me even more
-OPTION_OLD_FRIEND_PASSING_C_TEXT,独自沉默了很久,Sat in silence for a long time
-OPTION_OLD_FRIEND_PASSING_D_TEXT,随他而去吧，我也该走了,"Follow him, it's my time too"
-OPTION_TWILIGHT_WISDOM_A_TEXT,把感悟告诉年轻人,Share insights with the young
-OPTION_TWILIGHT_WISDOM_B_TEXT,写下来，留给后人,"Write it down, leave it for future generations"
-OPTION_TWILIGHT_WISDOM_C_TEXT,微笑着，什么都不说,"Smile, say nothing"
-STAGE_CHILDHOOD_NAME,童年,Childhood
-STAGE_CHILDHOOD_DESC,无忧无虑的童年时光，学习基础知识，培养兴趣。,"Carefree childhood days. Learn basics, cultivate interests."
-STAGE_MIDDLE_AGE_NAME,中年,Middle Age
-STAGE_MIDDLE_AGE_DESC,事业与家庭的双重压力，健康开始走下坡路。,Dual pressures of career and family. Health starts declining.
-STAGE_OLD_AGE_NAME,老年,Old Age
-STAGE_OLD_AGE_DESC,回顾一生，面对最终审判。属性逐年递减。,"Reviewing a lifetime, facing final judgment. Attributes decline yearly."
-STAGE_YOUTH_NAME,青年,Youth
-STAGE_YOUTH_DESC,求学与初入社会的阶段，面临人生重大选择。,Schooling and entering society. Facing major life choices.
-TRAIT_LITTLE_SINGER_NAME,小歌唱家,Little Singer
-TRAIT_LITTLE_SINGER_DESC,幼儿园表演表现出色,Performed excellently at kindergarten show
-TRAIT_HAPPY_CHILDHOOD_NAME,快乐童年,Happy Childhood
-TRAIT_HAPPY_CHILDHOOD_DESC,无忧无虑的童年时光,Carefree childhood days
-TRAIT_MATH_TALENT_NAME,数学天赋,Math Talent
-TRAIT_MATH_TALENT_DESC,对数学有天然直觉,Natural intuition for mathematics
-TRAIT_PARTICIPATION_SPIRIT_NAME,参与精神,Team Spirit
-TRAIT_PARTICIPATION_SPIRIT_DESC,积极参与集体活动,Actively participates in group activities
-TRAIT_SPORTS_YOUTH_NAME,运动少年,Sports Kid
-TRAIT_SPORTS_YOUTH_DESC,热爱运动，体魄强健,"Loves sports, strong physique"
-TRAIT_MUSIC_CULTURE_NAME,音乐素养,Musicality
-TRAIT_MUSIC_CULTURE_DESC,受过良好的音乐教育,Received good music education
-TRAIT_CODING_TALENT_NAME,编程天赋,Coding Talent
-TRAIT_CODING_TALENT_DESC,对编程有浓厚兴趣,Strong interest in programming
-TRAIT_SELF_LEARNING_NAME,自学能力,Self-Learner
-TRAIT_SELF_LEARNING_DESC,善于独立学习新知识,Good at learning independently
-TRAIT_EARLY_RESPONSIBILITY_NAME,早当家,Mature Early
-TRAIT_EARLY_RESPONSIBILITY_DESC,从小承担家庭责任,Took on family responsibilities young
-TRAIT_FOLLOW_RULES_NAME,循规蹈矩,Rule-Follower
-TRAIT_FOLLOW_RULES_DESC,遵守规则，不越雷池,"Follows rules, stays within bounds"
-TRAIT_TOUGH_GUY_NAME,硬汉,Tough Guy
-TRAIT_TOUGH_GUY_DESC,吃得了苦，扛得住压,"Can endure hardship, handle pressure"
-TRAIT_PATIENCE_NAME,耐心,Patience
-TRAIT_PATIENCE_DESC,遇事不急，沉稳应对,Stays calm under pressure
-TRAIT_HAS_BACKING_NAME,有人撑腰,Well-Connected
-TRAIT_HAS_BACKING_DESC,背后有贵人相助,Has influential backers
-TRAIT_SENSIBLE_CHILD_NAME,懂事的孩子,Sensible Child
-TRAIT_SENSIBLE_CHILD_DESC,从小就很懂事,Been sensible from a young age
-TRAIT_EARLY_WORKER_NAME,早早打工,Early Worker
-TRAIT_EARLY_WORKER_DESC,提前进入社会磨练,Entered the workforce ahead of peers
-TRAIT_DROPOUT_NAME,辍学,Dropout
-TRAIT_DROPOUT_DESC,中途辍学，但社会经验丰富,"Left school early, but rich in social experience"
-TRAIT_KEY_HIGH_SCHOOL_NAME,重点高中,Top High School
-TRAIT_KEY_HIGH_SCHOOL_DESC,考入重点高中,Got into a key high school
-TRAIT_TOP_UNIVERSITY_NAME,名校出身,Top University Grad
-TRAIT_TOP_UNIVERSITY_DESC,考入顶尖大学,Got into a top-tier university
-TRAIT_BACHELOR_NAME,本科学历,Bachelor's Degree
-TRAIT_BACHELOR_DESC,获得大学本科学历,Earned a bachelor's degree
-TRAIT_EARLY_STARTER_NAME,提前起跑,Early Starter
-TRAIT_EARLY_STARTER_DESC,比同龄人更早进入职场,Entered workforce earlier than peers
-TRAIT_LOVER_NAME,恋人,Lover
-TRAIT_LOVER_DESC,拥有一段美好的恋情,In a beautiful relationship
-TRAIT_SECRET_CRUSH_NAME,暗恋,Secret Crush
-TRAIT_SECRET_CRUSH_DESC,心中默默喜欢着某人,Secretly fond of someone
-TRAIT_STUDY_FOCUS_NAME,专注学业,Study Focus
-TRAIT_STUDY_FOCUS_DESC,心无旁骛地投入学习,Fully immersed in studying
-TRAIT_MASTER_STUDENT_NAME,研究生,Graduate Student
-TRAIT_MASTER_STUDENT_DESC,继续深造获得硕士学位,Continued studies for master's degree
-TRAIT_ENTREPRENEUR_NAME,创业先锋,Entrepreneur
-TRAIT_ENTREPRENEUR_DESC,选择创业路线,Chose the startup path
-TRAIT_BIG_TECH_NAME,大厂员工,Big Tech Employee
-TRAIT_BIG_TECH_DESC,进入互联网大厂工作,Works at a major tech company
-TRAIT_STABLE_JOB_NAME,铁饭碗,Stable Job
-TRAIT_STABLE_JOB_DESC,获得稳定的工作,Has a stable job
-TRAIT_STARTUP_EMPLOYEE_NAME,创业公司员工,Startup Employee
-TRAIT_STARTUP_EMPLOYEE_DESC,在创业公司打拼,Working at a startup
-TRAIT_CITY_CENTER_NAME,市中心,City Center Dweller
-TRAIT_CITY_CENTER_DESC,住在城市中心地带,Lives in the city center
-TRAIT_ROOMMATE_NAME,合租,Roommate
-TRAIT_ROOMMATE_DESC,与人合租节省开支,Shares rent to save money
-TRAIT_HARD_WORKER_NAME,拼命三郎,Workaholic
-TRAIT_HARD_WORKER_DESC,工作拼命，不惧加班,"Works tirelessly, unafraid of overtime"
-TRAIT_SPEAK_UP_NAME,敢于发声,Speaks Up
-TRAIT_SPEAK_UP_DESC,勇于表达自己的观点,Brave enough to voice opinions
-TRAIT_TIT_FOR_TAT_NAME,以牙还牙,Eye for Eye
-TRAIT_TIT_FOR_TAT_DESC,绝不忍气吞声,Never swallows grievances
-TRAIT_BLIND_DATE_NAME,相亲,Blind Dater
-TRAIT_BLIND_DATE_DESC,通过相亲认识另一半,Met partner through blind date
-TRAIT_SINGLE_FOREVER_NAME,单身万岁,Forever Single
-TRAIT_SINGLE_FOREVER_DESC,享受单身生活,Enjoys single life
-TRAIT_MARRIED_NAME,已婚,Married
-TRAIT_MARRIED_DESC,步入婚姻殿堂,Entered marriage
-TRAIT_BIG_HOUSE_NAME,大房子,Big House Owner
-TRAIT_BIG_HOUSE_DESC,拥有宽敞的住房,Owns a spacious home
-TRAIT_SMALL_HOUSE_NAME,小房子,Small House Owner
-TRAIT_SMALL_HOUSE_DESC,拥有自己的小窝,Owns a cozy little place
-TRAIT_RENT_FOREVER_NAME,永远租房,Perpetual Renter
-TRAIT_RENT_FOREVER_DESC,一直在租房生活,Always renting
-TRAIT_TIGER_PARENT_NAME,虎妈狼爸,Tiger Parent
-TRAIT_TIGER_PARENT_DESC,对孩子严格教育,Strict with children's education
-TRAIT_RELAXED_PARENT_NAME,佛系家长,Relaxed Parent
-TRAIT_RELAXED_PARENT_DESC,对孩子放养式教育,Free-range parenting style
-TRAIT_OVERSEAS_CHILD_NAME,海外留学,Overseas Student Child
-TRAIT_OVERSEAS_CHILD_DESC,送孩子出国留学,Sent child to study abroad
-TRAIT_FILIAL_CHILD_NAME,孝顺子女,Filial Child
-TRAIT_FILIAL_CHILD_DESC,子女孝顺，晚年幸福,"Children are filial, happy old age"
-TRAIT_HIRE_NANNY_NAME,请保姆,Nanny Employer
-TRAIT_HIRE_NANNY_DESC,请保姆照顾家庭,Hired nanny for home care
-TRAIT_WORK_LIFE_BALANCE_NAME,工作生活平衡,Work-Life Balance
-TRAIT_WORK_LIFE_BALANCE_DESC,成功平衡工作与生活,Successfully balanced work and life
-TRAIT_JOB_HOPPER_NAME,跳槽达人,Job Hopper
-TRAIT_JOB_HOPPER_DESC,频繁跳槽积累经验,Frequent job changes for experience
-TRAIT_FITNESS_HABIT_NAME,健身习惯,Fitness Habit
-TRAIT_FITNESS_HABIT_DESC,坚持锻炼身体,Consistently exercises
-TRAIT_SUPPLEMENT_USER_NAME,保健品达人,Supplement User
-TRAIT_SUPPLEMENT_USER_DESC,各种保健品不断,Always taking supplements
-TRAIT_ACCEPT_FATE_NAME,认命,Accept Fate
-TRAIT_ACCEPT_FATE_DESC,接受命运的安排,Accepts destiny's arrangement
-TRAIT_CAREER_FOCUS_NAME,事业为重,Career-Focused
-TRAIT_CAREER_FOCUS_DESC,没有家庭牵绊，全力投入事业,"No family ties, fully devoted to career"
-TRAIT_PEACEFUL_ELDER_NAME,安享晚年,Peaceful Elder
-TRAIT_PEACEFUL_ELDER_DESC,含饴弄孙，岁月静好——但收入减少,"Enjoying grandchildren, peaceful days — but lower income"
-TRAIT_COMMUNITY_ELDER_NAME,社区长者,Community Elder
-TRAIT_COMMUNITY_ELDER_DESC,在社区中受人尊敬，人脉广泛——但精力不济,"Respected in community, wide network — but low energy"
-TRAIT_LIFELONG_LEARNER_NAME,终身学习,Lifelong Learner
-TRAIT_LIFELONG_LEARNER_DESC,活到老学到老，智慧日增——但学费不菲,"Never stops learning, wisdom grows — but tuition costs add up"
-TRAIT_STRONG_WILL_NAME,坚韧意志,Strong Will
-TRAIT_STRONG_WILL_DESC,面对病痛依然坚强，意志力转化为防御,Remains strong despite illness; willpower converts to defense
-TRAIT_CAREFREE_ELDER_NAME,洒脱老人,Carefree Elder
-TRAIT_CAREFREE_ELDER_DESC,看淡一切，自在生活——代价是忽视健康,"Lets go of everything, lives freely — at the cost of neglecting health"
-TRAIT_FAMILY_HAPPINESS_NAME,天伦之乐,Family Happiness
-TRAIT_FAMILY_HAPPINESS_DESC,儿孙绕膝，情感支持让你更坚韧——但开销也大,"Surrounded by family, emotional support strengthens you — but expenses are high"
-TRAIT_TRAVEL_ELDER_NAME,旅行老人,Traveling Elder
-TRAIT_TRAVEL_ELDER_DESC,晚年走遍大好河山，见闻转化为智慧,"Traveled widely in later years, experiences become wisdom"
-TRAIT_NOSTALGIC_NAME,怀旧,Nostalgic
-TRAIT_NOSTALGIC_DESC,常常回忆往昔岁月，沉淀出智慧——但勇气渐消,"Often recalls past days, distills wisdom — but courage fades"
-TRAIT_SOCIAL_ELDER_NAME,社交达人,Social Butterfly
-TRAIT_SOCIAL_ELDER_DESC,老年社交圈广泛，信息灵通——但应酬花费不少,"Wide social circle in old age, well-informed — but socializing costs mount"
-TRAIT_MEMOIRIST_NAME,回忆录作者,Memoirist
-TRAIT_MEMOIRIST_DESC,将一生经历写成文字，稿费可观——但写作伤神,"Wrote life story into words, decent royalties — but writing is draining"
-TRAIT_MENTOR_NAME,导师,Mentor
-TRAIT_MENTOR_DESC,将经验传授给后辈，桃李满天下——但操劳伤身,Passes experience to the next generation — but mentoring takes toll on body
-TRAIT_QUIET_OBSERVER_NAME,默默旁观,Quiet Observer
-TRAIT_QUIET_OBSERVER_DESC,静静看着世界变化，内心平和,"Quietly watches the world change, inner peace"
-TRAIT_SOLITARY_PEACE_NAME,独处安宁,Solitary Peace
-TRAIT_SOLITARY_PEACE_DESC,独自享受宁静时光，内心澄澈——但偶尔孤独,"Enjoys quiet time alone, clear mind — but occasionally lonely"
-TRAIT_ACCEPT_MORTALITY_NAME,接受死亡,Accept Mortality
-TRAIT_ACCEPT_MORTALITY_DESC,坦然面对生命的终点，无所畏惧,"Faces the end of life calmly, without fear"
-TRAIT_FINAL_PEACE_NAME,最终安宁,Final Peace
-TRAIT_FINAL_PEACE_DESC,放弃治疗，内心彻底平静——但身体加速衰弱,"Gave up treatment, complete inner peace — but body weakens faster"
-TRAIT_NO_REGRETS_NAME,此生无憾,No Regrets
-TRAIT_NO_REGRETS_DESC,回首一生没有遗憾，自信化为力量——但挥金如土,"Looking back with no regrets, confidence becomes strength — but spent freely"
-TRAIT_AT_PEACE_NAME,释然,At Peace
-TRAIT_AT_PEACE_DESC,虽有遗憾，但已放下——内心平和带来微弱的身心恢复,"Some regrets, but let go — inner peace brings slight recovery"
-TRAIT_REGRETFUL_NAME,遗憾,Regretful
-TRAIT_REGRETFUL_DESC,如果重来一定不同——遗憾催生反思，但也消磨勇气,"If I could do it over, it would be different — regret breeds reflection, but erodes courage"
-TRAIT_REBEL_NAME,叛逆者,Rebel
-TRAIT_REBEL_DESC,敢于挑战权威，勇气倍增,"Dares to challenge authority, courage doubled"
-TRAIT_DIARIST_NAME,日记达人,Diary Keeper
-TRAIT_DIARIST_DESC,用文字记录内心，智慧渐增,"Records inner thoughts in writing, wisdom grows"
-TRAIT_EMPATHY_NAME,共情力,Empathy
-TRAIT_EMPATHY_DESC,善于理解他人，魅力提升,"Good at understanding others, charm increased"
-TRAIT_FIRST_LOVE_NAME,初恋,First Love
-TRAIT_FIRST_LOVE_DESC,青涩的初恋让你更懂得感情,Innocent first love taught you about relationships
-TRAIT_SELF_AWARE_NAME,自我觉察,Self-Aware
-TRAIT_SELF_AWARE_DESC,通过心理咨询更了解自己,Came to know yourself better through counseling
-TRAIT_FREEDOM_SEEKER_NAME,自由追寻者,Freedom Seeker
-TRAIT_FREEDOM_SEEKER_DESC,不甘平庸，追求自由,"Won't settle for mediocrity, chases freedom"
-TRAIT_CALLIGRAPHY_NAME,书法爱好者,Calligraphy Lover
-TRAIT_CALLIGRAPHY_DESC,修身养性，内心平和,Cultivates mind through calligraphy
-TRAIT_DANCER_NAME,广场舞达人,Square Dancer
-TRAIT_DANCER_DESC,社交广泛，身心活跃,"Wide social circle, active body and mind"
-TRAIT_GARDENER_NAME,园艺爱好者,Gardening Lover
-TRAIT_GARDENER_DESC,亲近自然，身心愉悦,"Close to nature, body and mind at ease"
-TRAIT_MEMORIALIST_NAME,纪念者,Memorialist
-TRAIT_MEMORIALIST_DESC,用文字留住记忆,Preserves memories through writing
-TRAIT_CHERISH_PEOPLE_NAME,珍惜身边人,Cherishes People
-TRAIT_CHERISH_PEOPLE_DESC,更加重视人际关系,Values relationships even more
-TRAIT_WISE_ELDER_NAME,智慧长者,Wise Elder
-TRAIT_WISE_ELDER_DESC,人生阅历化为智慧,Life experience becomes wisdom
-TRAIT_TRAVELER_NAME,旅行者,Traveler
-TRAIT_TRAVELER_DESC,在旅途中找回自我,Found oneself while traveling
-TRAIT_CAREER_CHANGER_NAME,转型者,Career Changer
-TRAIT_CAREER_CHANGER_DESC,敢于改变职业方向,Brave enough to switch career paths
-TRAIT_CONFRONTATIONAL_NAME,直面冲突,Confrontational
-TRAIT_CONFRONTATIONAL_DESC,不怕与人争执,Not afraid to argue
-TRAIT_PEACE_SEEKER_NAME,和平主义者,Peace Seeker
-TRAIT_PEACE_SEEKER_DESC,避免冲突，追求安宁,"Avoids conflict, seeks tranquility"
-TRAIT_OPEN_PARENT_NAME,开明家长,Open-Minded Parent
-TRAIT_OPEN_PARENT_DESC,尊重孩子的选择,Respects child's choices
-TRAIT_HOME_CHEF_NAME,家庭大厨,Home Chef
-TRAIT_HOME_CHEF_DESC,用美食温暖家人,Warms family with food
-TRAIT_TAI_CHI_NAME,太极修习者,Tai Chi Practitioner
-TRAIT_TAI_CHI_DESC,以柔克刚，身心合一,"Overcomes hardness with softness, body and mind united"
-TRAIT_HOMEOWNER_NAME,有房一族,Homeowner
-TRAIT_HOMEOWNER_DESC,有了自己的窝,Finally has own place
-TRAIT_HOMETOWN_RETURN_NAME,返乡者,Returnee
-TRAIT_HOMETOWN_RETURN_DESC,回到故乡，安居乐业,"Returned to hometown, settled down"
-TRAIT_PET_OWNER_NAME,铲屎官,Pet Owner
-TRAIT_PET_OWNER_DESC,毛茸茸的治愈力量,The healing power of furry friends
-ENDING_LEGENDARY_LIFE_NAME,传奇人生,Legendary Life
-ENDING_LEGENDARY_LIFE_DESC,你的一生堪称传奇，智慧与勇气兼备，此生无憾。,"Your life was truly legendary. Wisdom and courage combined, no regrets."
-ENDING_LEGENDARY_LIFE_PHRASE,成为了后人传颂的传奇,Became a legend passed down through generations
-ENDING_EXTRAORDINARY_LIFE_NAME,精彩人生,Extraordinary Life
-ENDING_EXTRAORDINARY_LIFE_DESC,你的人生经历丰富多彩，积累了深厚的智慧，堪称精彩。,"Your life was rich and colorful, accumulating deep wisdom. Truly extraordinary."
-ENDING_EXTRAORDINARY_LIFE_PHRASE,留下了一段精彩的故事,Left behind a brilliant story
-ENDING_SUCCESSFUL_LIFE_NAME,成功人生,Successful Life
-ENDING_SUCCESSFUL_LIFE_DESC,你凭借智慧和勇气，度过了成功的一生。,"With wisdom and courage, you lived a successful life."
-ENDING_SUCCESSFUL_LIFE_PHRASE,安详地闭上了眼睛,Closed eyes peacefully
-ENDING_BRAVE_LIFE_NAME,勇敢人生,Brave Life
-ENDING_BRAVE_LIFE_DESC,你的一生充满勇气，敢于面对一切挑战。,"Your life was full of courage, facing every challenge head-on."
-ENDING_BRAVE_LIFE_PHRASE,无惧地走完了最后一程,Walked the final journey without fear
-ENDING_PEACEFUL_DEPARTURE_NAME,安详离去,Peaceful Departure
-ENDING_PEACEFUL_DEPARTURE_DESC,虽然健康不再，但你此生无憾，平静地接受了命运的安排。,"Though health faded, you had no regrets. Calmly accepted destiny's arrangement."
-ENDING_PEACEFUL_DEPARTURE_PHRASE,带着满足的微笑离开了,Departed with a content smile
-ENDING_ORDINARY_LIFE_NAME,平凡人生,Ordinary Life
-ENDING_ORDINARY_LIFE_DESC,平凡但充实的一生，虽无大起大落，但也有自己的小确幸。,"Ordinary but fulfilling. No great ups and downs, but your own small joys."
-ENDING_ORDINARY_LIFE_PHRASE,平静地画上了句号,Quietly drew a period
-ENDING_FADING_AWAY_NAME,渐渐消逝,Fading Away
-ENDING_FADING_AWAY_DESC,健康每况愈下，你感到生命力在一点点流逝。,Health declined steadily. You felt vitality ebbing away bit by bit.
-ENDING_FADING_AWAY_PHRASE,在病榻上缓缓闭上了眼,Slowly closed eyes on the sickbed
-ENDING_REGRETFUL_LIFE_NAME,遗憾人生,Regretful Life
-ENDING_REGRETFUL_LIFE_DESC,如果重来一次，你一定会做出不同的选择。,"If you could do it over, you would make different choices."
-ENDING_REGRETFUL_LIFE_PHRASE,带着遗憾离开了这个世界,Left this world with regret
-ENDING_HUMBLE_LIFE_NAME,朴实人生,Humble Life
-ENDING_HUMBLE_LIFE_DESC,你的一生朴实无华，默默无闻地走完了全程。,"A simple, unremarkable life, quietly completed the full journey."
-ENDING_HUMBLE_LIFE_PHRASE,悄无声息地离开了,Departed without a sound
-ENDING_SUFFERING_END_NAME,痛苦终局,Suffering End
-ENDING_SUFFERING_END_DESC,病痛折磨着你最后的时光，你带着痛苦离开了。,Illness tormented your final days. You departed in pain.
-ENDING_SUFFERING_END_PHRASE,在痛苦中挣扎着走完了最后一程,Struggled through the final journey in pain
-ACHIEVEMENT_ACH_FIRST_BLOOD_NAME,第一滴血,First Blood
-ACHIEVEMENT_ACH_FIRST_BLOOD_DESC,首次完成战斗,Completed first battle
-ACHIEVEMENT_ACH_PERFECT_LIFE_NAME,完美一生,Perfect Life
-ACHIEVEMENT_ACH_PERFECT_LIFE_DESC,达成S级结局,Achieved S-rank ending
-ACHIEVEMENT_ACH_SUCCESSFUL_LIFE_NAME,成功人生,Successful Life
-ACHIEVEMENT_ACH_SUCCESSFUL_LIFE_DESC,达成A级结局,Achieved A-rank ending
-ACHIEVEMENT_ACH_BATTLE_MASTER_NAME,百战百胜,Battle Master
-ACHIEVEMENT_ACH_BATTLE_MASTER_DESC,累计赢得10场战斗,Won 10 battles total
-ACHIEVEMENT_ACH_S_RANK_BATTLE_NAME,无伤通关,Flawless Victory
-ACHIEVEMENT_ACH_S_RANK_BATTLE_DESC,以S级评价完成一场战斗,Completed a battle with S-rank rating
-ACHIEVEMENT_ACH_TOP_UNIVERSITY_NAME,名校出身,Top University
-ACHIEVEMENT_ACH_TOP_UNIVERSITY_DESC,考入顶尖大学,Got into a top-tier university
-ACHIEVEMENT_ACH_ENTREPRENEUR_NAME,创业先锋,Entrepreneur
-ACHIEVEMENT_ACH_ENTREPRENEUR_DESC,选择创业路线,Chose the startup path
-ACHIEVEMENT_ACH_MARRIED_NAME,修成正果,Tied the Knot
-ACHIEVEMENT_ACH_MARRIED_DESC,步入婚姻殿堂,Entered marriage
-ACHIEVEMENT_ACH_ALL_STAGES_NAME,人生百态,Full Life Experience
-ACHIEVEMENT_ACH_ALL_STAGES_DESC,经历所有人生阶段,Experienced all life stages
-ACHIEVEMENT_ACH_SURVIVE_DEADLY_NAME,死里逃生,Cheated Death
-ACHIEVEMENT_ACH_SURVIVE_DEADLY_DESC,在致命事件中存活,Survived a fatal event
-ACHIEVEMENT_ACH_FARMER_TO_RICH_NAME,寒门贵子,Rags to Riches
-ACHIEVEMENT_ACH_FARMER_TO_RICH_DESC,以农民家庭出身达成A级以上结局,Achieved A-rank or above starting from farmer family
-ACHIEVEMENT_ACH_ALL_FAMILIES_NAME,百味人生,All Walks of Life
-ACHIEVEMENT_ACH_ALL_FAMILIES_DESC,以所有家庭背景各完成一次游戏,Completed a game with each family background
-ATTR_CHARM_DISPLAY_NAME,魅力,Charm
-ATTR_COURAGE_DISPLAY_NAME,勇气,Courage
-ATTR_HEALTH_DISPLAY_NAME,健康,Health
-ATTR_INTELLIGENCE_DISPLAY_NAME,智力,Intelligence
-ATTR_LUCK_DISPLAY_NAME,运气,Luck
-ATTR_WORK_ABILITY_DISPLAY_NAME,工作能力,Work Ability
-FAMILY_CADRE_NAME,干部家庭,Cadre Family
-FAMILY_CADRE_DESC,父：公务员，母：教师,"Father: Civil servant, Mother: Teacher"
-FAMILY_CADRE_TRAIT_0_TEXT,金币获取+30%,Gold income +30%
-FAMILY_CADRE_TRAIT_1_TEXT,经验获取+10%,Exp gain +10%
-FAMILY_MERCHANT_NAME,商人家庭,Merchant Family
-FAMILY_MERCHANT_DESC,父：个体户，母：家庭主妇,"Father: Self-employed, Mother: Homemaker"
-FAMILY_MERCHANT_TRAIT_0_TEXT,金币获取+50%,Gold income +50%
-FAMILY_MERCHANT_TRAIT_1_TEXT,生命-20,HP -20
-FAMILY_WORKER_NAME,工人家庭,Worker Family
-FAMILY_WORKER_DESC,父：工人，母：工人,"Father: Worker, Mother: Worker"
-FAMILY_WORKER_TRAIT_0_TEXT,建造成本-10%,Build cost -10%
-FAMILY_WORKER_TRAIT_1_TEXT,生命+30,HP +30
-FAMILY_FARMER_NAME,农民家庭,Farmer Family
-FAMILY_FARMER_DESC,父：农民，母：农民,"Father: Farmer, Mother: Farmer"
-FAMILY_FARMER_TRAIT_0_TEXT,建造成本-15%,Build cost -15%
-FAMILY_FARMER_TRAIT_1_TEXT,经验获取+15%,Exp gain +15%
-FAMILY_TEACHER_NAME,教师家庭,Teacher Family
-FAMILY_TEACHER_DESC,父：大学教授，母：中学教师,"Father: Professor, Mother: Teacher"
-FAMILY_TEACHER_TRAIT_0_TEXT,经验获取+20%,Exp gain +20%
-FAMILY_TEACHER_TRAIT_1_TEXT,金币获取+10%,Gold income +10%
-FAMILY_MILITARY_NAME,军人家庭,Military Family
-FAMILY_MILITARY_DESC,父：军官，母：军医,"Father: Officer, Mother: Military Doctor"
-FAMILY_MILITARY_TRAIT_0_TEXT,生命+20,HP +20
-FAMILY_MILITARY_TRAIT_1_TEXT,建造成本-5%,Build cost -5%
-FAMILY_ARTIST_NAME,艺术家庭,Artist Family
-FAMILY_ARTIST_DESC,父：画家，母：音乐家,"Father: Painter, Mother: Musician"
-FAMILY_ARTIST_TRAIT_0_TEXT,金币获取+15%,Gold income +15%
-FAMILY_ARTIST_TRAIT_1_TEXT,经验获取+10%,Exp gain +10%
-FAMILY_DOCTOR_NAME,医生家庭,Doctor Family
-FAMILY_DOCTOR_DESC,父：外科医生，母：药剂师,"Father: Surgeon, Mother: Pharmacist"
-FAMILY_DOCTOR_TRAIT_0_TEXT,生命+25,HP +25
-FAMILY_DOCTOR_TRAIT_1_TEXT,金币获取+20%,Gold income +20%
-FAMILY_RURAL_POOR_NAME,贫困农家,Poor Rural Family
-FAMILY_RURAL_POOR_DESC,父：务农，母：务农，祖产微薄,"Father: Farmer, Mother: Farmer, Meager heritage"
-FAMILY_RURAL_POOR_TRAIT_0_TEXT,建造成本-20%,Build cost -20%
-FAMILY_RURAL_POOR_TRAIT_1_TEXT,金币获取-10%,Gold income -10%
-FAMILY_CELEBRITY_NAME,名流家庭,Celebrity Family
-FAMILY_CELEBRITY_DESC,父：企业家，母：知名人士,"Father: Entrepreneur, Mother: Celebrity"
-FAMILY_CELEBRITY_TRAIT_0_TEXT,金币获取+40%,Gold income +40%
-FAMILY_CELEBRITY_TRAIT_1_TEXT,经验获取+15%,Exp gain +15%
-LIFE_CHOICE_TITLE,人生选择,Life Choice
-LIFE_CHOICE_TAB_BIRTHDAY,生日,Birthday
-LIFE_CHOICE_TAB_FAMILY,家庭,Family
-LIFE_CHOICE_TAB_TRAIT,先天特质,Congenital Traits
-LIFE_CHOICE_TAB_ATTRIBUTE,属性,Attributes
-LIFE_CHOICE_APPEARANCE,换外观,Appearance
-LIFE_CHOICE_POINTS_TOTAL_SHORT,单点数,Destiny Points
-LIFE_CHOICE_POINTS_TOTAL,命运点数,Destiny Points
-LIFE_CHOICE_POINTS_REMAINING,剩余,Remaining
-LIFE_CHOICE_POINTS_SPENT,已消耗,Spent
-LIFE_CHOICE_CONFIRM,确认开始人生,Confirm & Start Life
-LIFE_CHOICE_BACK,返回主菜单,Back to Menu
-LIFE_CHOICE_RANDOMIZE,随机,Randomize
-LIFE_CHOICE_BIRTHDAY_LABEL,选择出生月份,Select Birth Month
-LIFE_CHOICE_FAMILY_COST,点数消耗,Point Cost
-LIFE_CHOICE_FAMILY_INITIAL_TOWERS,初始防御塔,Initial Towers
-LIFE_CHOICE_TRAIT_COST,消耗,Cost
-LIFE_CHOICE_TRAIT_SELECTED,已选,Selected
-LIFE_CHOICE_TRAIT_SELECTED_NONE,暂未选择任何特质,No traits selected
-LIFE_CHOICE_TRAIT_SELECTED_FMT,已选：%s,Selected: %s
-BIRTHDAY_UNIT_YEAR,年,Year
-BIRTHDAY_ZODIAC_PREFIX,星座：,Zodiac:
-ZODIAC_CAPRICORN,摩羯座,Capricorn
-ZODIAC_AQUARIUS,水瓶座,Aquarius
-ZODIAC_PISCES,双鱼座,Pisces
-ZODIAC_ARIES,白羊座,Aries
-ZODIAC_TAURUS,金牛座,Taurus
-ZODIAC_GEMINI,双子座,Gemini
-ZODIAC_CANCER,巨蟹座,Cancer
-ZODIAC_LEO,狮子座,Leo
-ZODIAC_VIRGO,处女座,Virgo
-ZODIAC_LIBRA,天秤座,Libra
-ZODIAC_SCORPIO,天蝎座,Scorpio
-ZODIAC_SAGITTARIUS,射手座,Sagittarius
-LIFE_CHOICE_ATTR_BASE,基础,Base
-LIFE_CHOICE_ATTR_CURRENT,当前,Current
-LIFE_CHOICE_POINTS_NEGATIVE_WARNING,点数不足！,Not enough points!
-BIRTHDAY_SPRING,春季,Spring
-BIRTHDAY_SUMMER,夏季,Summer
-BIRTHDAY_AUTUMN,秋季,Autumn
-BIRTHDAY_WINTER,冬季,Winter
-BIRTHDAY_MONTH_1,一月,January
-BIRTHDAY_MONTH_2,二月,February
-BIRTHDAY_MONTH_3,三月,March
-BIRTHDAY_MONTH_4,四月,April
-BIRTHDAY_MONTH_5,五月,May
-BIRTHDAY_MONTH_6,六月,June
-BIRTHDAY_MONTH_7,七月,July
-BIRTHDAY_MONTH_8,八月,August
-BIRTHDAY_MONTH_9,九月,September
-BIRTHDAY_MONTH_10,十月,October
-BIRTHDAY_MONTH_11,十一月,November
-BIRTHDAY_MONTH_12,十二月,December
-ERA_CHINA_MODERN_NAME,中国现代,Modern China
-ERA_CHINA_MODERN_TIME_PERIOD,1949-至今,1949-Present
-TOWER_TYPE_ACADEMIC,学科塔,Academic Tower
-TOWER_TYPE_SKILL,技能塔,Skill Tower
-TOWER_TYPE_ADVANCED,进阶,Advanced
-TOWER_TYPE_SPECIAL,特殊,Special
-TIER_BASIC,基础,Basic
-TIER_ADVANCED,高级,Advanced
-TIER_MASTER,大师,Master
-TIER_RUIN,废墟,Ruin
-TIER_ELITE,精英,Elite
-TIER_BOSS,BOSS,BOSS
-TIER_ULTIMATE_BOSS,终极BOSS,Ultimate BOSS
-ENEMY_TYPE_ACADEMIC,学业压力,Academic Pressure
-ENEMY_TYPE_ECONOMIC,经济压力,Economic Pressure
-ENEMY_TYPE_SOCIAL,社会压力,Social Pressure
-ENEMY_TYPE_HEALTH,健康威胁,Health Threat
-ENEMY_TYPE_MENTAL,心理压力,Mental Pressure
-ENEMY_TYPE_BOSS,BOSS,BOSS
-SE_SLOW_NAME,减速,Slow
-SE_SLOW_DESC,降低敌人移动速度,Reduces enemy movement speed
-SE_DOT_NAME,持续伤害,Damage Over Time
-SE_DOT_DESC,对敌人造成持续伤害,Deals ongoing damage to enemies
-SE_AOE_NAME,范围攻击,Area Attack
-SE_AOE_DESC,对范围内所有敌人造成伤害,Deals damage to all enemies in range
-SE_CRIT_NAME,暴击,Critical Hit
-SE_CRIT_DESC,有概率造成双倍伤害,Chance to deal double damage
-SE_PIERCE_NAME,穿透,Pierce
-SE_PIERCE_DESC,弹丸可穿透多个敌人,Projectiles can pierce through multiple enemies
-SE_CULTURAL_SUPPRESSION_NAME,文化压制,Cultural Suppression
-SE_CULTURAL_SUPPRESSION_DESC,对特定标签敌人造成额外伤害,Deals bonus damage to enemies with specific tags
-SE_SLOW_AURA_NAME,减速光环,Slow Aura
-SE_SLOW_AURA_DESC,减速范围内所有敌人,Slows all enemies within range
-SE_SINGLE_CONTROL_NAME,单体控制,Single Target Control
-SE_SINGLE_CONTROL_DESC,有概率眩晕敌人,Chance to stun an enemy
-SE_SUMMON_NAME,召唤,Summon
-SE_SUMMON_DESC,召唤临时辅助防御塔,Summons a temporary helper tower
-SE_GOLD_BONUS_NAME,金币加成,Gold Bonus
-SE_GOLD_BONUS_DESC,击杀敌人获得额外金币,Extra gold per enemy kill
-SE_CONFUSION_NAME,混乱,Confusion
-SE_CONFUSION_DESC,使敌人反向移动,Causes enemies to move backwards
-SE_ARMOR_BREAK_NAME,破甲,Armor Break
-SE_ARMOR_BREAK_DESC,降低敌人护甲,Reduces enemy armor
-SE_DEBUFF_NAME,削弱,Debuff
-SE_DEBUFF_DESC,降低敌人属性,Weakens enemy stats
-SE_BUFF_AURA_NAME,增益光环,Buff Aura
-SE_BUFF_AURA_DESC,提升范围内友方防御塔属性,Boosts nearby tower stats
-SE_BURN_NAME,灼烧,Burn
-SE_BURN_DESC,点燃敌人造成持续伤害,Sets enemies ablaze for ongoing damage
-SE_SILENCE_NAME,沉默,Silence
-SE_SILENCE_DESC,使敌人无法使用特殊能力,Prevents enemies from using special abilities
-TRAIT_ENTREPRENEUR_2_NAME,创业者,Entrepreneur
-TRAIT_ENTREPRENEUR_2_DESC,敢于创业，追逐梦想,Dare to start a business, chase dreams
-BTN_SUMMON,立即召唤,Summon Now
-ATTR_FORMAT,%s：%d,%s: %d
-SEPARATOR_DUN,、,", ",  
-SEPARATOR_SEMICOLON,；,; 
-RATING_UNKNOWN,未知评价,Unknown Rating
+keys,zh,en
+PROFESSION_DOCTOR,医生,Doctor
+PROFESSION_TEACHER,教师,Teacher
+PROFESSION_CIVIL_SERVANT,公务员,Civil Servant
+PROFESSION_ENTREPRENEUR,创业者,Entrepreneur
+PROFESSION_NONE,无业,Unemployed
+PROFESSION_LOST,失业,Job Lost
+PROFESSION_CHANGE,职业变动,Career Change
+NPC_RELATION_FAMILY,家人,Family
+NPC_RELATION_FRIEND,朋友,Friend
+NPC_RELATION_COLLEAGUE,同事,Colleague
+NPC_RELATION_SPOUSE,配偶,Spouse
+NPC_LIFE_STAGE_CHILD,童年,Childhood
+NPC_LIFE_STAGE_YOUTH,青年,Youth
+NPC_LIFE_STAGE_ADULT,成年,Adult
+NPC_LIFE_STAGE_MIDDLE_AGE,中年,Middle Age
+NPC_LIFE_STAGE_ELDERLY,老年,Elderly
+NPC_AFFECTION_LOW,关系疏远,Distant
+NPC_AFFECTION_MID,关系一般,Neutral
+NPC_AFFECTION_HIGH,关系亲密,Close
+NPC_FATHER,父亲,Father
+NPC_MOTHER,母亲,Mother
+EVENT_TITLE_FAMILY_REUNION,家庭聚会,Family Reunion
+EVENT_TITLE_FAMILY_CONFLICT,家庭矛盾,Family Conflict
+EVENT_TITLE_FAMILY_SUPPORT,家人支持,Family Support
+EVENT_TITLE_FAMILY_ILLNESS,家人生病,Family Illness
+EVENT_TITLE_FAMILY_CARE,悉心照料,Care
+EVENT_TITLE_FAMILY_SCHOOL,家人上学,Family School
+EVENT_TITLE_FAMILY_GRADUATION,家人毕业,Family Graduation
+EVENT_TITLE_FRIEND_INVITE,朋友邀请,Friend's Invitation
+EVENT_TITLE_FRIEND_FAVOR,朋友求助,Friend's Favor
+EVENT_TITLE_FRIEND_BETRAYAL,朋友反目,Friend's Betrayal
+EVENT_TITLE_FRIEND_REUNION,久别重逢,Reunion
+EVENT_TITLE_FAMILY_TOGETHER,一同出行,Outing Together
+EVENT_TITLE_FAMILY_FEUD,反目成仇,Falling Out
+EVENT_TITLE_FAMILY_WEDDING,家人婚礼,Family Wedding
+EVENT_TITLE_FAMILY_RETIREMENT,家人退休,Family Retirement
+EVENT_TITLE_FAMILY_PASSING,亲人离世,Passing of Loved One
+EVENT_TITLE_FAMILY_INHERITANCE,遗产继承,Inheritance
+EVENT_TITLE_FRIEND_BUSINESS,朋友创业,Friend's Startup
+EVENT_TITLE_FRIEND_LOAN,朋友借钱,Friend's Loan
+EVENT_TITLE_JOB_INTERVIEW,求职面试,Job Interview
+EVENT_TITLE_JOB_OFFER,录用通知,Job Offer
+EVENT_TITLE_JOB_REJECTION,面试失败,Interview Failed
+EVENT_TITLE_PROMOTION,晋升机会,Promotion
+EVENT_TITLE_PROMOTION_SUCCESS,晋升成功,Promoted
+EVENT_TITLE_PROMOTION_FAIL,晋升失败,Passed Over
+EVENT_TITLE_LAYOFF,裁员通知,Layoff Notice
+EVENT_TITLE_JOB_SEARCH,寻找工作,Job Hunting
+EVENT_TITLE_JOB_SEARCH_SUCCESS,找到新工作,New Job Found
+EVENT_TITLE_JOB_SEARCH_FAIL,求职失败,Job Hunt Failed
+EVENT_TITLE_CAREER_CHANGE,转行,Career Change
+EVENT_TITLE_CODE_OVERTIME,加班赶项目,Overtime
+EVENT_TITLE_HOSPITAL_SHIFT,医院值班,Hospital Shift
+EVENT_TITLE_STARTUP_IDEA,创业灵感,Startup Idea
+EVENT_TITLE_STARTUP_STRUGGLE,创业艰难,Startup Struggle
+EVENT_TITLE_STARTUP_SUCCESS,创业成功,Startup Success
+EVENT_TITLE_STARTUP_FAILURE,创业失败,Startup Failure
+EVENT_TITLE_MENTOR_APPEAR,得遇贵人,Mentor Appears
+EVENT_TITLE_MENTOR_GIFT,贵人馈赠,Mentor's Gift
+EVENT_TITLE_ACCIDENT,意外事故,Accident
+EVENT_TITLE_RECOVERY,康复之路,Recovery
+EVENT_TITLE_WINDFALL,意外之财,Windfall
+EVENT_TITLE_INVESTMENT_RETURN,投资回报,Investment Return
+EVENT_TITLE_MIDLIFE_CRISIS,中年危机,Midlife Crisis
+EVENT_TITLE_MIDLIFE_RENEWAL,浴火重生,Phoenix Rising
+EVENT_TITLE_EPIPHANY,人生顿悟,Epiphany
+EVENT_DESC_FAMILY_REUNION,难得的家庭聚会，大家围坐在一起，气氛温馨。,"A rare family gathering, everyone sitting together in a warm atmosphere."
+EVENT_DESC_FAMILY_CONFLICT,家里又吵起来了，矛盾似乎越来越深。,"The family is arguing again, and the conflict seems to be deepening."
+EVENT_DESC_FAMILY_SUPPORT,在你最困难的时候，家人伸出了援手。,"In your most difficult moment, your family reached out to help."
+EVENT_DESC_FAMILY_ILLNESS,家人突然病倒了，需要一大笔医疗费。,"A family member suddenly fell ill, requiring a large medical expense."
+EVENT_DESC_FAMILY_CARE,你日夜守在病床前，悉心照料着家人。,"You watch by the bedside day and night, caring for your family member."
+EVENT_DESC_FAMILY_SCHOOL,家人到了上学的年纪，学费是一笔不小的开支。,"A family member has reached school age, and tuition is a significant expense."
+EVENT_DESC_FAMILY_GRADUATION,经过多年努力，家人终于毕业了！这是值得庆祝的时刻。,"After years of effort, a family member has finally graduated! A moment worth celebrating."
+EVENT_DESC_FRIEND_INVITE,一个新朋友向你发出了邀请，你们聊得很投机。,"A new friend invites you out, and you hit it off well."
+EVENT_DESC_FRIEND_FAVOR,朋友遇到了困难，向你求助。,A friend is in trouble and asks for your help.
+EVENT_DESC_FRIEND_BETRAYAL,你信任的朋友背叛了你，让你损失惨重。,"A friend you trusted has betrayed you, causing significant loss."
+EVENT_DESC_FRIEND_REUNION,多年未见的老朋友突然出现在你面前。,An old friend you haven't seen in years suddenly appears before you.
+EVENT_DESC_FAMILY_TOGETHER,全家人决定一起出去走走，享受难得的团聚时光。,"The whole family decides to go out together, enjoying rare quality time."
+EVENT_DESC_FAMILY_FEUD,矛盾激化到了极点，家人之间的关系降到了冰点。,"The conflict has escalated to the extreme, and family relations have hit rock bottom."
+EVENT_DESC_FAMILY_WEDDING,家人要结婚了！这是一件喜事，但也需要不少花销。,"A family member is getting married! A happy occasion, but also a significant expense."
+EVENT_DESC_FAMILY_RETIREMENT,家人终于退休了，辛苦了大半辈子。,A family member has finally retired after a lifetime of hard work.
+EVENT_DESC_FAMILY_PASSING,亲人永远地离开了……巨大的悲痛笼罩着你。,A loved one has passed away forever... immense grief overwhelms you.
+EVENT_DESC_FAMILY_INHERITANCE,亲人留下了一些遗产，你需要决定如何处理。,"A loved one left some inheritance, and you need to decide how to handle it."
+EVENT_DESC_FRIEND_BUSINESS,朋友邀请你一起创业，这是个机会也是个风险。,A friend invites you to start a business together - an opportunity and a risk.
+EVENT_DESC_FRIEND_LOAN,朋友开口向你借钱，说是急用。,"A friend asks to borrow money, saying it's urgent."
+EVENT_DESC_JOB_INTERVIEW,你获得了一个面试机会，好好准备吧！,"You've got a job interview opportunity, prepare well!"
+EVENT_DESC_JOB_OFFER,面试通过了！公司向你发出了录用通知。,The interview passed! The company has sent you a job offer.
+EVENT_DESC_JOB_REJECTION,很遗憾，面试没有通过。,"Unfortunately, the interview didn't go well."
+EVENT_DESC_PROMOTION,公司有一个晋升机会，你想试试吗？,"There's a promotion opportunity at work, want to try for it?"
+EVENT_DESC_PROMOTION_SUCCESS,恭喜你，晋升成功了！新的职位意味着新的挑战。,Congratulations on the promotion! A new position means new challenges.
+EVENT_DESC_PROMOTION_FAIL,晋升没有成功，继续努力吧。,"The promotion didn't come through, keep working hard."
+EVENT_DESC_LAYOFF,公司裁员了，你也在名单上……,"The company is laying off employees, and you're on the list..."
+EVENT_DESC_JOB_SEARCH,失业后你开始积极寻找新工作。,"After losing your job, you start actively searching for a new one."
+EVENT_DESC_JOB_SEARCH_SUCCESS,好消息！你找到了一份新工作。,Good news! You've found a new job.
+EVENT_DESC_JOB_SEARCH_FAIL,这次求职没有成功，再接再厉。,"This job hunt wasn't successful, keep trying."
+EVENT_DESC_CAREER_CHANGE,你开始考虑转行，换一个全新的方向。,You're considering a career change to a completely new direction.
+EVENT_DESC_CODE_OVERTIME,项目赶进度，需要加班。身体和工作的平衡是个问题。,The project is behind schedule and requires overtime. Balancing health and work is a challenge.
+EVENT_DESC_HOSPITAL_SHIFT,今天又是一个漫长的值班，病人络绎不绝。,"Another long shift today, with an endless stream of patients."
+EVENT_DESC_STARTUP_IDEA,你突然有了一个创业的好点子，要不要放手一搏？,You suddenly have a great startup idea. Should you take the leap?
+EVENT_DESC_STARTUP_STRUGGLE,创业之路比想象中艰难得多，资金越来越紧张。,"The startup journey is much harder than imagined, funds are running tight."
+EVENT_DESC_STARTUP_SUCCESS,你的公司终于盈利了！所有的辛苦都值得了。,Your company is finally profitable! All the hard work was worth it.
+EVENT_DESC_STARTUP_FAILURE,公司撑不下去了，创业以失败告终。,"The company can't hold on anymore, the startup has failed."
+EVENT_DESC_MENTOR_APPEAR,你遇到了一位贵人，他愿意指点你。,You've met a mentor who is willing to guide you.
+EVENT_DESC_MENTOR_GIFT,贵人给了你一份厚礼，帮助你渡过难关。,Your mentor gives you a generous gift to help you through hard times.
+EVENT_DESC_ACCIDENT,意外突然降临，你受了伤！,"An accident strikes, and you're injured!"
+EVENT_DESC_RECOVERY,经过一段时间的治疗，你正在慢慢康复。,"After a period of treatment, you're slowly recovering."
+EVENT_DESC_WINDFALL,你意外获得了一笔钱！怎么使用是个问题。,You unexpectedly received a sum of money! How to use it is the question.
+EVENT_DESC_INVESTMENT_RETURN,之前的投资有了丰厚的回报！,Your previous investment has yielded generous returns!
+EVENT_DESC_MIDLIFE_CRISIS,人到中年，各种压力接踵而来，你感到前所未有的迷茫。,"In middle age, various pressures come one after another, and you feel unprecedentedly lost."
+EVENT_DESC_MIDLIFE_RENEWAL,你决定重新振作，走出低谷！,You decide to pull yourself together and rise from the low point!
+EVENT_DESC_EPIPHANY,经历了大半辈子，你突然对人生有了新的领悟。,"After most of your life, you suddenly have a new understanding of life."
+OPTION_FAMILY_REUNION_A,积极参与，增进感情,"Participate actively, strengthen bonds"
+OPTION_FAMILY_REUNION_B,心不在焉，敷衍了事,"Absent-minded, go through the motions"
+OPTION_FAMILY_CONFLICT_A,据理力争，绝不退让,"Stand your ground, never back down"
+OPTION_FAMILY_CONFLICT_B,找母亲调解,Ask mother to mediate
+OPTION_FAMILY_SUPPORT_A,接受帮助，感恩在心,Accept help with gratitude
+OPTION_FAMILY_SUPPORT_B,婉言谢绝，自己扛,"Politely decline, carry the burden alone"
+OPTION_FAMILY_ILLNESS_A,倾尽所有治病,Spend everything on treatment
+OPTION_FAMILY_ILLNESS_B,无力承担，只能保守治疗,"Can't afford it, opt for conservative treatment"
+OPTION_FAMILY_CARE_A,日夜守候，悉心照料,"Watch day and night, care attentively"
+OPTION_FAMILY_CARE_B,尽力而为，但也要顾自己,"Do your best, but also take care of yourself"
+OPTION_FAMILY_SCHOOL_A,全力支持，交学费,"Fully support, pay the tuition"
+OPTION_FAMILY_SCHOOL_B,暂时搁置，等情况好转再说,Put it on hold for now
+OPTION_FAMILY_GRADUATION_A,为家人感到骄傲,Feel proud of your family member
+OPTION_FAMILY_GRADUATION_B,让家人开始工作补贴家用,Have them start working to help the family
+OPTION_FRIEND_INVITE_A,欣然赴约,Gladly accept the invitation
+OPTION_FRIEND_INVITE_B,婉拒邀请,Politely decline
+OPTION_FRIEND_FAVOR_A,慷慨解囊,Generously help out
+OPTION_FRIEND_FAVOR_B,爱莫能助,Unable to help
+OPTION_FRIEND_BETRAYAL_A,愤怒反击,Angry counterattack
+OPTION_FRIEND_BETRAYAL_B,选择原谅,Choose to forgive
+OPTION_FRIEND_REUNION_A,热情相拥，重拾旧谊,"Embrace warmly, renew old friendship"
+OPTION_FRIEND_REUNION_B,寒暄几句，各奔东西,"Exchange pleasantries, go separate ways"
+OPTION_FAMILY_TOGETHER_A,开心出行，花点钱也值得,"Happy outing, spending a bit is worth it"
+OPTION_FAMILY_TOGETHER_B,找借口推脱,Make an excuse to decline
+OPTION_FAMILY_FEUD_A,断绝关系,Sever ties
+OPTION_FAMILY_FEUD_B,找母亲调解,Ask mother to mediate
+OPTION_FAMILY_WEDDING_A,大力操办，给足面子,"Organize grandly, give full face"
+OPTION_FAMILY_WEDDING_B,简单办一下就好,Keep it simple
+OPTION_FAMILY_RETIREMENT_A,陪伴庆祝，享受天伦,"Celebrate together, enjoy family time"
+OPTION_FAMILY_RETIREMENT_B,各自忙碌，偶尔联系,"Each busy, occasionally in touch"
+OPTION_FAMILY_PASSING_A,悲痛欲绝，难以释怀,"Devastated, unable to let go"
+OPTION_FAMILY_PASSING_B,化悲为痛，坚强面对,"Channel grief into strength, face it bravely"
+OPTION_FAMILY_INHERITANCE_A,接受遗产,Accept the inheritance
+OPTION_FAMILY_INHERITANCE_B,捐出大部分，留一小部分,"Donate most, keep a small portion"
+OPTION_FRIEND_BUSINESS_A,出资支持,Invest to support
+OPTION_FRIEND_BUSINESS_B,祝福但不参与,Wish well but don't participate
+OPTION_FRIEND_LOAN_A,借给他,Lend the money
+OPTION_FRIEND_LOAN_B,委婉拒绝,Politely decline
+OPTION_JOB_INTERVIEW_A,认真准备，全力以赴,"Prepare seriously, go all out"
+OPTION_JOB_INTERVIEW_B,放弃这次机会,Pass on this opportunity
+OPTION_JOB_OFFER_A,接受程序员职位,Accept the programmer position
+OPTION_JOB_OFFER_B,接受教师职位,Accept the teacher position
+OPTION_JOB_REJECTION_A,深受打击,Deeply discouraged
+OPTION_JOB_REJECTION_B,总结经验，继续努力,"Learn from it, keep trying"
+OPTION_PROMOTION_A,争取晋升,Go for the promotion
+OPTION_PROMOTION_B,安于现状,Stay in current position
+OPTION_PROMOTION_SUCCESS_A,大展宏图,Aim high
+OPTION_PROMOTION_SUCCESS_B,稳步前行,Proceed steadily
+OPTION_PROMOTION_FAIL_A,心灰意冷,Feel discouraged
+OPTION_PROMOTION_FAIL_B,加倍努力，来年再战,"Double the effort, try again next year"
+OPTION_LAYOFF_A,接受现实，重新开始,"Accept reality, start over"
+OPTION_LAYOFF_B,争取赔偿金,Fight for severance pay
+OPTION_JOB_SEARCH_A,积极投简历,Actively send out resumes
+OPTION_JOB_SEARCH_B,先休息一段时间,Take a break first
+OPTION_JOB_SEARCH_SUCCESS_A,接受公务员职位,Accept the civil servant position
+OPTION_JOB_SEARCH_SUCCESS_B,接受程序员职位,Accept the programmer position
+OPTION_JOB_SEARCH_FAIL_A,感到沮丧,Feel frustrated
+OPTION_JOB_SEARCH_FAIL_B,自我提升，再接再厉,"Self-improve, keep trying"
+OPTION_CAREER_CHANGE_A,转行当医生,Switch to being a doctor
+OPTION_CAREER_CHANGE_B,维持现状,Maintain the status quo
+OPTION_CODE_OVERTIME_A,加班赶工,Work overtime
+OPTION_CODE_OVERTIME_B,按时下班,Leave on time
+OPTION_HOSPITAL_SHIFT_A,坚守岗位,Stay at your post
+OPTION_HOSPITAL_SHIFT_B,找人替班,Find someone to cover
+OPTION_STARTUP_IDEA_A,辞职创业！,Quit and start a business!
+OPTION_STARTUP_IDEA_B,还是稳妥一些,Better to play it safe
+OPTION_STARTUP_STRUGGLE_A,咬牙坚持,Grit your teeth and persist
+OPTION_STARTUP_STRUGGLE_B,及时止损，放弃创业,"Cut losses, give up the startup"
+OPTION_STARTUP_SUCCESS_A,扩大规模，大展宏图,"Scale up, aim big"
+OPTION_STARTUP_SUCCESS_B,稳健经营，细水长流,"Steady operation, slow and steady"
+OPTION_STARTUP_FAILURE_A,一蹶不振,Unable to recover
+OPTION_STARTUP_FAILURE_B,总结教训，重新出发,"Learn from it, start fresh"
+OPTION_MENTOR_APPEAR_A,虚心请教,Humbly seek guidance
+OPTION_MENTOR_APPEAR_B,婉言谢绝,Politely decline
+OPTION_MENTOR_GIFT_A,感激接受,Accept with gratitude
+OPTION_MENTOR_GIFT_B,婉拒厚礼，只求指点,"Decline the gift, only seek guidance"
+OPTION_ACCIDENT_A,积极治疗,Actively seek treatment
+OPTION_ACCIDENT_B,硬扛过去,Tough it out
+OPTION_RECOVERY_A,积极康复，重拾信心,"Actively recover, regain confidence"
+OPTION_RECOVERY_B,慢慢调养,Slowly recuperate
+OPTION_WINDFALL_A,大胆投资,Boldly invest
+OPTION_WINDFALL_B,存起来以备不时之需,Save it for a rainy day
+OPTION_INVESTMENT_RETURN_A,继续加大投资,Increase investment
+OPTION_INVESTMENT_RETURN_B,见好就收,Take the profits and run
+OPTION_MIDLIFE_CRISIS_A,重新出发，改变现状,"Start fresh, change the status quo"
+OPTION_MIDLIFE_CRISIS_B,默默承受,Silently endure
+OPTION_MIDLIFE_RENEWAL_A,追求新的意义,Pursue new meaning
+OPTION_MIDLIFE_RENEWAL_B,享受当下,Enjoy the present
+OPTION_EPIPHANY_A,领悟人生真谛,Comprehend the true meaning of life
+OPTION_EPIPHANY_B,回归初心,Return to original aspirations
+OPTION_FAMILY_CONFLICT_A_TEXT,据理力争，绝不退让,"Stand your ground, never back down"
+OPTION_FAMILY_CONFLICT_B_TEXT,找母亲调解,Ask mother to mediate
+OPTION_FAMILY_SUPPORT_A_TEXT,接受帮助，感恩在心,Accept help with gratitude
+OPTION_FAMILY_SUPPORT_B_TEXT,婉言谢绝，自己扛,"Politely decline, carry the burden alone"
+OPTION_FAMILY_ILLNESS_A_TEXT,倾尽所有治病,Spend everything on treatment
+OPTION_FAMILY_ILLNESS_B_TEXT,无力承担，只能保守治疗,"Can't afford it, opt for conservative treatment"
+OPTION_FAMILY_CARE_A_TEXT,日夜守候，悉心照料,"Watch day and night, care attentively"
+OPTION_FAMILY_CARE_B_TEXT,尽力而为，但也要顾自己,"Do your best, but also take care of yourself"
+OPTION_FAMILY_SCHOOL_A_TEXT,全力支持，交学费,"Fully support, pay the tuition"
+OPTION_FAMILY_SCHOOL_B_TEXT,暂时搁置，等情况好转再说,Put it on hold for now
+OPTION_FAMILY_GRADUATION_A_TEXT,为家人感到骄傲,Feel proud of your family member
+OPTION_FAMILY_GRADUATION_B_TEXT,让家人开始工作补贴家用,Have them start working to help the family
+OPTION_FAMILY_TOGETHER_A_TEXT,开心出行，花点钱也值得,"Happy outing, spending a bit is worth it"
+OPTION_FAMILY_TOGETHER_B_TEXT,找借口推脱,Make an excuse to decline
+OPTION_FAMILY_FEUD_A_TEXT,断绝关系,Sever ties
+OPTION_FAMILY_FEUD_B_TEXT,找母亲调解,Ask mother to mediate
+OPTION_FAMILY_WEDDING_A_TEXT,大力操办，给足面子,"Organize grandly, give full face"
+OPTION_FAMILY_WEDDING_B_TEXT,简单办一下就好,Keep it simple
+OPTION_FAMILY_RETIREMENT_A_TEXT,陪伴庆祝，享受天伦,"Celebrate together, enjoy family time"
+OPTION_FAMILY_RETIREMENT_B_TEXT,各自忙碌，偶尔联系,"Each busy, occasionally in touch"
+OPTION_FAMILY_PASSING_A_TEXT,悲痛欲绝，难以释怀,"Devastated, unable to let go"
+OPTION_FAMILY_PASSING_B_TEXT,化悲为痛，坚强面对,"Channel grief into strength, face it bravely"
+OPTION_FAMILY_INHERITANCE_A_TEXT,接受遗产,Accept the inheritance
+OPTION_FAMILY_INHERITANCE_B_TEXT,捐出大部分，留一小部分,"Donate most, keep a small portion"
+OPTION_FRIEND_INVITE_A_TEXT,欣然赴约,Gladly accept the invitation
+OPTION_FRIEND_INVITE_B_TEXT,婉拒邀请,Politely decline
+OPTION_FRIEND_FAVOR_A_TEXT,慷慨解囊,Generously help out
+OPTION_FRIEND_FAVOR_B_TEXT,爱莫能助,Unable to help
+OPTION_FRIEND_BETRAYAL_A_TEXT,愤怒反击,Angry counterattack
+OPTION_FRIEND_BETRAYAL_B_TEXT,选择原谅,Choose to forgive
+OPTION_FRIEND_REUNION_A_TEXT,热情相拥，重拾旧谊,"Embrace warmly, renew old friendship"
+OPTION_FRIEND_REUNION_B_TEXT,寒暄几句，各奔东西,"Exchange pleasantries, go separate ways"
+OPTION_FRIEND_BUSINESS_A_TEXT,出资支持,Invest to support
+OPTION_FRIEND_BUSINESS_B_TEXT,祝福但不参与,Wish well but don't participate
+OPTION_FRIEND_LOAN_A_TEXT,借给他,Lend the money
+OPTION_FRIEND_LOAN_B_TEXT,委婉拒绝,Politely decline
+OPTION_JOB_INTERVIEW_A_TEXT,认真准备，全力以赴,"Prepare seriously, go all out"
+OPTION_JOB_INTERVIEW_B_TEXT,放弃这次机会,Pass on this opportunity
+OPTION_JOB_OFFER_A_TEXT,接受程序员职位,Accept the programmer position
+OPTION_JOB_OFFER_B_TEXT,接受教师职位,Accept the teacher position
+OPTION_JOB_REJECTION_A_TEXT,深受打击,Deeply discouraged
+OPTION_JOB_REJECTION_B_TEXT,总结经验，继续努力,"Learn from it, keep trying"
+OPTION_PROMOTION_A_TEXT,争取晋升,Go for the promotion
+OPTION_PROMOTION_B_TEXT,安于现状,Stay in current position
+OPTION_PROMOTION_SUCCESS_A_TEXT,大展宏图,Aim high
+OPTION_PROMOTION_SUCCESS_B_TEXT,稳步前行,Proceed steadily
+OPTION_PROMOTION_FAIL_A_TEXT,心灰意冷,Feel discouraged
+OPTION_PROMOTION_FAIL_B_TEXT,加倍努力，来年再战,"Double the effort, try again next year"
+OPTION_LAYOFF_A_TEXT,接受现实，重新开始,"Accept reality, start over"
+OPTION_LAYOFF_B_TEXT,争取赔偿金,Fight for severance pay
+OPTION_JOB_SEARCH_A_TEXT,积极投简历,Actively send out resumes
+OPTION_JOB_SEARCH_B_TEXT,先休息一段时间,Take a break first
+OPTION_JOB_SEARCH_SUCCESS_A_TEXT,接受公务员职位,Accept the civil servant position
+OPTION_JOB_SEARCH_SUCCESS_B_TEXT,接受程序员职位,Accept the programmer position
+OPTION_JOB_SEARCH_FAIL_A_TEXT,感到沮丧,Feel frustrated
+OPTION_JOB_SEARCH_FAIL_B_TEXT,自我提升，再接再厉,"Self-improve, keep trying"
+OPTION_CAREER_CHANGE_A_TEXT,转行当医生,Switch to being a doctor
+OPTION_CAREER_CHANGE_B_TEXT,维持现状,Maintain the status quo
+OPTION_CODE_OVERTIME_A_TEXT,加班赶工,Work overtime
+OPTION_CODE_OVERTIME_B_TEXT,按时下班,Leave on time
+OPTION_HOSPITAL_SHIFT_A_TEXT,坚守岗位,Stay at your post
+OPTION_HOSPITAL_SHIFT_B_TEXT,找人替班,Find someone to cover
+OPTION_STARTUP_IDEA_A_TEXT,辞职创业！,Quit and start a business!
+OPTION_STARTUP_IDEA_B_TEXT,还是稳妥一些,Better to play it safe
+OPTION_STARTUP_STRUGGLE_A_TEXT,咬牙坚持,Grit your teeth and persist
+OPTION_STARTUP_STRUGGLE_B_TEXT,及时止损，放弃创业,"Cut losses, give up the startup"
+OPTION_STARTUP_SUCCESS_A_TEXT,扩大规模，大展宏图,"Scale up, aim big"
+OPTION_STARTUP_SUCCESS_B_TEXT,稳健经营，细水长流,"Steady operation, slow and steady"
+OPTION_STARTUP_FAILURE_A_TEXT,一蹶不振,Unable to recover
+OPTION_STARTUP_FAILURE_B_TEXT,总结教训，重新出发,"Learn from it, start fresh"
+OPTION_MENTOR_APPEAR_A_TEXT,虚心请教,Humbly seek guidance
+OPTION_MENTOR_APPEAR_B_TEXT,婉言谢绝,Politically decline
+OPTION_MENTOR_GIFT_A_TEXT,感激接受,Accept with gratitude
+OPTION_MENTOR_GIFT_B_TEXT,婉拒厚礼，只求指点,"Decline the gift, only seek guidance"
+OPTION_RECOVERY_A_TEXT,积极康复，重拾信心,"Actively recover, regain confidence"
+OPTION_RECOVERY_B_TEXT,慢慢调养,Slowly recuperate
+OPTION_WINDFALL_A_TEXT,大胆投资,Boldly invest
+OPTION_WINDFALL_B_TEXT,存起来以备不时之需,Save it for a rainy day
+OPTION_INVESTMENT_RETURN_A_TEXT,继续加大投资,Increase investment
+OPTION_INVESTMENT_RETURN_B_TEXT,见好就收,Take the profits and run
+OPTION_MIDLIFE_CRISIS_A_TEXT,重新出发，改变现状,"Start fresh, change the status quo"
+OPTION_MIDLIFE_CRISIS_B_TEXT,默默承受,Silently endure
+OPTION_MIDLIFE_RENEWAL_A_TEXT,追求新的意义,Pursue new meaning
+OPTION_MIDLIFE_RENEWAL_B_TEXT,享受当下,Enjoy the present
+OPTION_EPIPHANY_A_TEXT,领悟人生真谛,Comprehend the true meaning of life
+OPTION_EPIPHANY_B_TEXT,回归初心,Return to original aspirations
+NPC_FRIEND,朋友,Friend
+NPC_MENTOR,贵人,Mentor
+NPC_COLLEAGUE,同事,Colleague
+NPC_SPOUSE,伴侣,Spouse
+PROFESSION_PROGRAMMER,程序员,Programmer
+PROFESSION_CHANGE_TITLE,职业变更,Profession Change
+PROFESSION_GAIN,成为%s,Become %s
+NPC_RELATION_TITLE,人际关系,Relationships
+NPC_RELATION_UP,%s好感度+%d,%s Favor +%d
+NPC_RELATION_DOWN,%s好感度-%d,%s Favor -%d
+EVENT_CHANGE_TITLE,事件变化,Event Changes
+EVENT_UNLOCKED,解锁事件：%s,Unlocked Event: %s
+EVENT_LOCKED,锁定事件：%s,Locked Event: %s
+LOST_TRAITS,失去特质,Lost Traits
+LOST_TOWERS,失去防御塔,Lost Towers
+TOWER_LOST_FORMAT,失去防御塔：%s,Lost Tower: %s
+REQ_PROFESSION,职业为%s,Profession is %s
+REQ_PROFESSION_ABSENT,无职业,No Profession
+REQ_NOT_PROFESSION,职业不是%s,Profession is not %s
+REQ_NPC_RELATION_GTE,%s好感度≥%d,%s Favor ≥ %d
+REQ_NPC_RELATION_LT,%s好感度<%d,%s Favor < %d
+REQ_COMPLETED_EVENT,已完成：%s,Completed: %s
+PROFESSION_LABEL,职业：%s,Profession: %s
+SALARY_LABEL,💰%d,💰%d
+SALARY_INCOME,薪资收入：%d,Salary Income: %d
+FRIENDS_FAMILY_TITLE,亲友,Family & Friends
+NPC_AFFECTION_LABEL,好感度：%d,Favor: %d
+NPC_AGE_LABEL,年龄：%d,Age: %d
+NPC_HEALTH_LOW,⚠健康：%d,⚠Health: %d
+NPC_NONE,暂无亲友,No friends yet
+NPC_FATHER_CADRE,爸爸,Dad
+NPC_MOTHER_CADRE,妈妈,Mom
+NPC_GRANDPA_CADRE,爷爷,Grandpa
+NPC_GRANDMA_CADRE,奶奶,Grandma
+NPC_FATHER_MERCHANT,爸爸,Dad
+NPC_MOTHER_MERCHANT,妈妈,Mom
+NPC_GRANDPA_MERCHANT,爷爷,Grandpa
+NPC_GRANDMA_MERCHANT,奶奶,Grandma
+NPC_FATHER_WORKER,爸爸,Dad
+NPC_MOTHER_WORKER,妈妈,Mom
+NPC_GRANDPA_WORKER,爷爷,Grandpa
+NPC_GRANDMA_WORKER,奶奶,Grandma
+NPC_FATHER_FARMER,爸爸,Dad
+NPC_MOTHER_FARMER,妈妈,Mom
+NPC_GRANDPA_FARMER,爷爷,Grandpa
+NPC_GRANDMA_FARMER,奶奶,Grandma
+NPC_FATHER_TEACHER,爸爸,Dad
+NPC_MOTHER_TEACHER,妈妈,Mom
+NPC_GRANDPA_TEACHER,爷爷,Grandpa
+NPC_GRANDMA_TEACHER,姥姥,Grandma
+NPC_FATHER_MILITARY,爸爸,Dad
+NPC_MOTHER_MILITARY,妈妈,Mom
+NPC_GRANDPA_MILITARY,爷爷,Grandpa
+NPC_FATHER_ARTIST,爸爸,Dad
+NPC_MOTHER_ARTIST,妈妈,Mom
+NPC_GRANDPA_ARTIST,爷爷,Grandpa
+NPC_FATHER_DOCTOR,爸爸,Dad
+NPC_MOTHER_DOCTOR,妈妈,Mom
+NPC_GRANDPA_DOCTOR,爷爷,Grandpa
+NPC_GRANDMA_DOCTOR,姥姥,Grandma
+NPC_FATHER_RURAL,爸爸,Dad
+NPC_MOTHER_RURAL,妈妈,Mom
+NPC_GRANDPA_RURAL,爷爷,Grandpa
+NPC_GRANDMA_RURAL,奶奶,Grandma
+NPC_FATHER_CELEBRITY,爸爸,Dad
+NPC_MOTHER_CELEBRITY,妈妈,Mom
+NPC_GRANDPA_CELEBRITY,爷爷,Grandpa
+NPC_GRANDMA_CELEBRITY,姥姥,Grandma
+NPC_PROFESSION_CIVIL_SERVANT,公务员,Civil Servant
+NPC_PROFESSION_TEACHER,教师,Teacher
+NPC_PROFESSION_RETIRED_CADRE,退休干部,Retired Cadre
+NPC_PROFESSION_RETIRED,退休,Retired
+NPC_PROFESSION_BUSINESS,个体户,Self-employed
+NPC_PROFESSION_HOMEMAKER,家庭主妇,Homemaker
+NPC_PROFESSION_RETIRED_WORKER,退休工人,Retired Worker
+NPC_PROFESSION_WORKER,工人,Worker
+NPC_PROFESSION_FARMER,务农,Farmer
+NPC_PROFESSION_PROFESSOR,大学教授,Professor
+NPC_PROFESSION_OFFICER,军官,Officer
+NPC_PROFESSION_MILITARY_DOCTOR,军医,Military Doctor
+NPC_PROFESSION_RETIRED_MILITARY,退伍军人,Veteran
+NPC_PROFESSION_PAINTER,画家,Painter
+NPC_PROFESSION_MUSICIAN,音乐家,Musician
+NPC_PROFESSION_SURGEON,外科医生,Surgeon
+NPC_PROFESSION_PHARMACIST,药剂师,Pharmacist
+NPC_PROFESSION_RETIRED_DOCTOR,退休医生,Retired Doctor
+NPC_PROFESSION_ENTREPRENEUR,企业家,Entrepreneur
+NPC_PROFESSION_CELEBRITY,知名人士,Celebrity
+NPC_RELATION_FATHER,父亲,Father
+NPC_RELATION_MOTHER,母亲,Mother
+NPC_RELATION_GRANDPA_P,祖父,Paternal Grandfather
+NPC_RELATION_GRANDMA_P,祖母,Paternal Grandmother
+NPC_RELATION_GRANDMA_M,外祖母,Maternal Grandmother
+NPC_RELATION_MENTOR,贵人,Mentor
+NPC_RELATION_OTHER,其他,Other
+NPC_FIRST_CHILD,孩子,Child
+NPC_SECOND_CHILD,二孩,Second Child
+NPC_RELATION_CHILD,子女,Child
+TOWER_REFUND,防御塔返还：%d金币,Tower Refund: %d gold
+TRAIT_TOWER_SELL_BONUS_NAME,出售加成,Sell Bonus
+TRAIT_TOWER_SELL_BONUS_DESC,防御塔出售价格+15%,Tower sell price +15%
+TRAIT_TOWER_SELL_BONUS_2_NAME,出售专家,Sell Expert
+TRAIT_TOWER_SELL_BONUS_2_DESC,防御塔出售价格+30%,Tower sell price +30%
+TRAIT_TOWER_BARGAIN_NAME,建造折扣,Build Discount
+TRAIT_TOWER_BARGAIN_DESC,防御塔建造费用-10%,Tower build cost -10%
+TRAIT_TOWER_BARGAIN_2_NAME,建造达人,Build Master
+TRAIT_TOWER_BARGAIN_2_DESC,防御塔建造费用-20%,Tower build cost -20%
 TRAIT_EFFECT_FORMAT,%s：%s,%s: %s
-REQUIREMENT_FORMAT,%s≥%d,%s>=%d
-TOWER_NAME_LV,%s Lv.%d,%s Lv.%d
-TOWER_NAME_LEVEL,%s  Lv.%d,%s  Lv.%d
-EFFECT_TOWER_DAMAGE_SHORT,塔伤害+%.0f%%,Dmg +%.0f%%
-EFFECT_TOWER_SPEED_SHORT,塔攻速+%.0f%%,Spd +%.0f%%
-EFFECT_GOLD_SHORT,金币%+d,Gold %+d
-EFFECT_HEALTH_SHORT,生命%+d,HP %+d
-EFFECT_GOLD_PER_WAVE_SHORT,每波金币+%d,Gold/Wave +%d
-EFFECT_DAMAGE_REDUCTION_SHORT,伤害减免%.0f%%,DR %.0f%%
-EFFECT_EVENT_TRIGGER_SHORT,事件触发率%+.0f%%,Event Rate %+.0f%%
-TRAITS_SEPARATOR, | , | 
-TRAITS_EFFECT_SEPARATOR,：,: 
-WAVE_ANNOUNCEMENT,⚔ 波次 %d/%d,⚔ Wave %d/%d
-TOWER_SLOT,塔位,Slot
-TOWER_SLOT_TOOLTIP,点击建造防御塔,Click to build tower
-PAUSED,暂停,Paused
-TOWER_STATS_FORMAT,伤害：%d  攻速：%.1f  射程：%.0f,Dmg:%d  Spd:%.1f  Rng:%.0f
-AGE_PLUS_ONE,年龄 +1,Age +1
-BTN_CONTINUE,继续,Continue
-RATING_S,完美防御！老家毫发无损。,Flawless defense! Base took no damage.
-RATING_A,出色表现！老家受损轻微。,Excellent! Base slightly damaged.
-RATING_B,中规中矩，老家受损近半。,Decent. Base about half damaged.
-RATING_C,勉强过关，老家岌岌可危。,Barely passed. Base in critical condition.
-RATING_D,老家沦陷，战斗失败。,Base fallen. Battle failed.
-BUFF_HOME_HEALTH,老家生命+20%,Base HP +20%
-UNLOCK_ERA_ANCIENT_GREECE,Ancient Greece,Ancient Greece
-UNLOCK_ERA_MING_QING,Ming & Qing China,Ming & Qing China
-UNLOCK_PROFESSION_DOCTOR,Doctor,Doctor
-UNLOCK_PROFESSION_LAWYER,Lawyer,Lawyer
-UNLOCK_PROFESSION_PROGRAMMER,Programmer,Programmer
-UNLOCK_DIFFICULTY_EASY,Easy Mode,Easy Mode
-UNLOCK_DIFFICULTY_HARD,Hard Mode,Hard Mode
-UNLOCK_DIFFICULTY_HELL,Hell Mode,Hell Mode
-UNLOCK_BUFF_TOWER_ATTACK,Tower DMG +10%,Tower DMG +10%
-UNLOCK_BUFF_GOLD_BONUS,Gold Income +10%,Gold Income +10%
-SUMMARY_FAMILY_ORIGIN,你出生在一个%s家庭。,You were born into a %s family.
-SUMMARY_UNIVERSITY_PATH,你通过高考进入大学，开启了知识改变命运的道路。,You entered university through Gaokao, starting a path of knowledge changing destiny.
-SUMMARY_VOCATIONAL_PATH,你选择了职高路线，早早步入社会。,You chose vocational school and entered society early.
-SUMMARY_DIFFERENT_PATH,你的求学之路与众不同。,Your educational journey was unique.
-SUMMARY_FOUND_LOVE,大学里你遇到了真爱。,You found true love in college.
-SUMMARY_MARRIED,你组建了家庭，有了温暖的港湾。,You started a family, finding a warm harbor.
-SUMMARY_FIRST_JOB,你凭借努力获得了第一份工作。,You earned your first job through hard work.
-SUMMARY_RICH_LIFE,你的人生经历丰富多彩，积累了深厚的智慧。,Your life was rich and colorful, accumulating deep wisdom.
-SUMMARY_UPS_AND_DOWNS,你的人生有起有落，但始终在前行。,Your life had ups and downs, but you kept moving forward.
-SUMMARY_QUIET_LIFE,你的人生平淡但安稳。,Your life was simple but stable.
-SUMMARY_FINAL_AGE,你走过了%d个春秋，最终%s。,You lived through %d years, and finally %s.
-FAMILY_DEFAULT,普通,Ordinary
-TOWER_COUNT_FORMAT,%d次,%d uses
-BATTLE_VICTORY,胜利,Victory
-BATTLE_DEFEAT,失败,Defeat
-EXP_BONUS_FORMAT,，经验获取提升%.0f%%,, exp bonus +%.0f%%
-EVENT_FATHER_BACK_NAME,父亲的背影,Father's Silhouette
-EVENT_FATHER_BACK_DESC,父亲扛着50斤麻袋从集市回来，汗湿透了衬衫。,"Father carries a 50-pound sack from the market, his shirt soaked with sweat."
-OPTION_FATHER_BACK_A,跑上去帮忙,Run up to help
-OPTION_FATHER_BACK_B,在门口等着,Wait at the door
-OPTION_FATHER_BACK_C,假装没看见,Pretend not to see
-EVENT_FATHER_SICK_NAME,父亲的腰,Father's Back
-EVENT_FATHER_SICK_DESC,电话里母亲说：你爸腰疼得直不起来。,Mother calls: Your father's back hurts so much he can't stand straight.
-OPTION_FATHER_SICK_A,立刻请假回老家,Take leave and go home immediately
-OPTION_FATHER_SICK_B,买了膏药寄回去,Buy medicine patches and mail them
-OPTION_FATHER_SICK_C,工作正忙……再看看,Work is busy... I'll see later
-OPTION_FATHER_SICK_D,带父亲去省城看病,Take father to the provincial hospital
-EVENT_FATHER_RETIRE_NAME,父亲退休了,Father Retires
-EVENT_FATHER_RETIRE_DESC,父亲正式从工地退休了，一辈子没攒下多少钱。,Father officially retires from the construction site. He didn't save much in a lifetime.
-OPTION_FATHER_RETIRE_A,爸，来城里住吧,"Dad, come live in the city"
-OPTION_FATHER_RETIRE_B,每个月寄钱回去,Send money home every month
-OPTION_FATHER_RETIRE_C,爸，接你来住,"Dad, let's have you stay with us"
-OPTION_FATHER_RETIRE_D,自己顾自己吧,Look after yourself
-EVENT_FATHER_FINAL_NAME,父亲病危,Father is Critical
-EVENT_FATHER_FINAL_DESC,你守在父亲床边，他拉着你的手。,You sit by your father's bedside. He holds your hand.
-OPTION_FATHER_FINAL_A,爸，你放心走,"Dad, you can go in peace"
-OPTION_FATHER_FINAL_B,我不舍得你走,I can't bear to let you go
-EVENT_FATHER_ALONE_NAME,孤独的告别,A Lonely Farewell
-EVENT_FATHER_ALONE_DESC,你接到电话时，父亲已经走了。,"By the time you get the call, father is already gone."
-OPTION_FATHER_ALONE_A,赶回老家奔丧,Rush home for the funeral
-OPTION_FATHER_ALONE_B,实在走不开,I really can't leave
-EVENT_FATHER_MEMORY_NAME,父亲的椅子,Father's Chair
-EVENT_FATHER_MEMORY_DESC,你坐在父亲生前坐过的椅子上，忽然明白了什么。,You sit in your father's old chair and suddenly understand something.
-OPTION_FATHER_MEMORY_A,我做得够好了,I did well enough
-OPTION_FATHER_MEMORY_B,子欲养而亲不待,"I wanted to care for him, but it's too late"
-OPTION_FATHER_MEMORY_C,我辜负了他,I failed him
-EVENT_FATHER_LEGACY_NAME,父亲的遗物,Father's Belongings
-EVENT_FATHER_LEGACY_DESC,你发现父亲留下了一本日记。,You find your father's diary.
-OPTION_FATHER_LEGACY_A,把日记传给下一代,Pass the diary to the next generation
-OPTION_FATHER_LEGACY_B,默默珍藏,Cherish it silently
-OPTION_FATHER_LEGACY_C,读了，泪流满面,"Read it, tears streaming down"
-EVENT_MOTHER_NAG_NAME,唠叨,Nagging
-EVENT_MOTHER_NAG_DESC,母亲唠叨你穿秋裤、好好读书。,Mother nags you to wear long johns and study hard.
-OPTION_MOTHER_NAG_A,乖乖听话,Obey obediently
-OPTION_MOTHER_NAG_B,知道了知道了,"I know, I know"
-OPTION_MOTHER_NAG_C,你懂什么,What do you know
-EVENT_MOTHER_VISIT_NAME,母亲来看你,Mother Visits
-EVENT_MOTHER_VISIT_DESC,母亲坐了4小时火车来看你，带了一袋子自家种的菜。,"Mother took a 4-hour train to see you, bringing a bag of homegrown vegetables."
-OPTION_MOTHER_VISIT_A,妈，辛苦了,"Mom, you've worked so hard"
-OPTION_MOTHER_VISIT_B,怎么不提前说一声,Why didn't you tell me in advance
-OPTION_MOTHER_VISIT_C,妈，对不起,"Mom, I'm sorry"
-OPTION_MOTHER_VISIT_D,继续冷淡,Stay cold
-EVENT_MOTHER_SICK_SERIOUS_NAME,母亲重病,Mother is Seriously Ill
-EVENT_MOTHER_SICK_SERIOUS_DESC,母亲查出重病，需要手术。,Mother is diagnosed with a serious illness. Surgery is needed.
-OPTION_MOTHER_SICK_A,花多少都要治,"Whatever it costs, we must treat it"
-OPTION_MOTHER_SICK_B,借钱也要治,Borrow money to treat it
-OPTION_MOTHER_SICK_C,良心发现，全力救治,"Conscience awakens, do everything possible"
-OPTION_MOTHER_SICK_D,实在没钱……,I really don't have the money...
-EVENT_MOTHER_RECOVERY_NAME,母亲康复,Mother Recovers
-EVENT_MOTHER_RECOVERY_DESC,母亲手术成功，恢复得不错。,Mother's surgery was successful. She's recovering well.
-OPTION_MOTHER_RECOVERY_A,接母亲同住,Have mother live with us
-OPTION_MOTHER_RECOVERY_B,经常回去看望,Visit often
-OPTION_MOTHER_RECOVERY_C,雇佣保姆照顾,Hire a caregiver
-EVENT_MOTHER_DECLINE_NAME,母亲衰退,Mother Declines
-EVENT_MOTHER_DECLINE_DESC,母亲的身体越来越差了。,Mother's health keeps declining.
-OPTION_MOTHER_DECLINE_A,尽量多陪伴,Spend as much time as possible with her
-OPTION_MOTHER_DECLINE_B,请护工,Hire a nurse
-OPTION_MOTHER_DECLINE_C,逃避,Avoid it
-EVENT_MOTHER_FINAL_MEMORY_NAME,母亲的遗物,Mother's Belongings
-EVENT_MOTHER_FINAL_MEMORY_DESC,母亲走了。你整理她的遗物，发现了一些东西。,"Mother has passed. While sorting her belongings, you find something."
-OPTION_MOTHER_MEMORY_A,母亲留下了一封长信,Mother left a long letter
-OPTION_MOTHER_MEMORY_B,母亲临终前说：我不怪他,Mother said before passing: I don't blame them
-OPTION_MOTHER_MEMORY_C,一张小时候的照片,A childhood photo
-EVENT_MEET_SPOUSE_NAME,遇见你,Meeting You
-EVENT_MEET_SPOUSE_DESC,你遇到了那个改变你一生的人。,You meet the person who will change your life.
-OPTION_MEET_SPOUSE_A,大学同学,College classmate
-OPTION_MEET_SPOUSE_B,相亲认识,Blind date
-OPTION_MEET_SPOUSE_C,工作中偶遇,Met at work
-EVENT_PROPOSAL_NAME,求婚,The Proposal
-EVENT_PROPOSAL_DESC,你觉得是时候了。,You feel it's time.
-OPTION_PROPOSAL_A,浪漫求婚,Romantic proposal
-OPTION_PROPOSAL_B,简单求婚,Simple proposal
-OPTION_PROPOSAL_C,家人催促,Family is pushing
-EVENT_WEDDING_NAME,婚礼,The Wedding
-EVENT_WEDDING_DESC,婚礼当天。,The wedding day.
-OPTION_WEDDING_A,大办婚礼,Grand wedding
-OPTION_WEDDING_B,简单办,Simple ceremony
-OPTION_WEDDING_C,不办，领证就行,"Just register, no ceremony"
-EVENT_FIRST_CHILD_BIRTH_NAME,孩子出生了,A Child is Born
-EVENT_FIRST_CHILD_BIRTH_DESC,你的孩子出生了！,Your child is born!
-OPTION_FIRST_CHILD_A,是个男孩！,It's a boy!
-OPTION_FIRST_CHILD_B,是个女孩！,It's a girl!
-OPTION_FIRST_CHILD_C,双胞胎！一儿一女,Twins! A boy and a girl
-EVENT_SECOND_CHILD_NAME,再要一个？,Another One?
-EVENT_SECOND_CHILD_DESC,配偶说：要不要再要一个？,Your spouse asks: Should we have another?
-OPTION_SECOND_CHILD_A,要！多子多福,"Yes! More children, more blessings"
-OPTION_SECOND_CHILD_B,一个够了,One is enough
-EVENT_CHILD_SCHOOL_NAME,择校,Choosing a School
-EVENT_CHILD_SCHOOL_DESC,孩子上学了，面临择校选择。,Your child is starting school. Time to choose.
-OPTION_CHILD_SCHOOL_A,选最好的学校,Choose the best school
-OPTION_CHILD_SCHOOL_B,就近上学，快乐童年,"Nearby school, happy childhood"
-OPTION_CHILD_SCHOOL_C,看孩子自己选,Let the child decide
-EVENT_CHILD_REBELLION_NAME,青春期叛逆,Teenage Rebellion
-EVENT_CHILD_REBELLION_DESC,孩子青春期叛逆了。,Your child is rebelling in their teenage years.
-OPTION_CHILD_REBELLION_A,继续施压,Keep the pressure on
-OPTION_CHILD_REBELLION_B,放低姿态谈心,Open up and talk heart to heart
-OPTION_CHILD_REBELLION_C,孩子反而更自觉了,The child becomes more self-disciplined
-OPTION_CHILD_REBELLION_D,孩子选了歪路,The child chose the wrong path
-EVENT_CHILD_COLLEGE_NAME,高考出分,College Entrance Exam Results
-EVENT_CHILD_COLLEGE_DESC,孩子高考出分了！,Your child's exam results are out!
-OPTION_CHILD_COLLEGE_A,考上了！,They got in!
-OPTION_CHILD_COLLEGE_B,考上了！,They got in!
-OPTION_CHILD_COLLEGE_C,没考上……,They didn't get in...
-EVENT_CHILD_CAREER_NAME,孩子的事业,Child's Career
-EVENT_CHILD_CAREER_DESC,孩子有了自己的事业和家庭。,Your child has their own career and family now.
-OPTION_CHILD_CAREER_A,事业有成但不太亲近,Successful but not very close
-OPTION_CHILD_CAREER_B,带着孙子回来看你了,Bringing the grandchild to visit
-OPTION_CHILD_CAREER_C,很少回来,Rarely comes back
-OPTION_CHILD_CAREER_D,谢谢你的理解,Thank you for understanding
-EVENT_SPOUSE_ARGUMENT_NAME,夫妻吵架,Spousal Argument
-EVENT_SPOUSE_ARGUMENT_DESC,你们因为一些事情吵架了。,You had an argument about something.
-OPTION_SPOUSE_ARG_A,主动道歉,Apologize first
-OPTION_SPOUSE_ARG_B,冷战,Cold war
-OPTION_SPOUSE_ARG_C,找朋友倾诉,Talk to a friend
-EVENT_CHILD_SICK_NAME,孩子发烧了,Child Has a Fever
-EVENT_CHILD_SICK_DESC,孩子半夜发烧。,Your child has a fever in the middle of the night.
-OPTION_CHILD_SICK_A,立刻送医院,Take to hospital immediately
-OPTION_CHILD_SICK_B,先在家观察,Observe at home first
-OPTION_CHILD_SICK_C,让配偶去,Let spouse handle it
-EVENT_PARENT_MOVE_IN_NAME,父母想搬来同住,Parents Want to Move In
-EVENT_PARENT_MOVE_IN_DESC,父母年纪大了，想搬来和你同住。,Your parents are getting older and want to live with you.
-OPTION_PARENT_MOVE_IN_A,欢迎,Welcome them
-OPTION_PARENT_MOVE_IN_B,在附近租房,Rent nearby
-OPTION_PARENT_MOVE_IN_C,委婉拒绝,Politely decline
-EVENT_MIDLIFE_CRISIS_NAME,中年危机,Midlife Crisis
-EVENT_MIDLIFE_CRISIS_DESC,人到中年，你觉得人生就这样了。,Middle age hits. You feel like this is it.
-OPTION_MIDLIFE_A,跟配偶深谈,Have a deep talk with spouse
-OPTION_MIDLIFE_B,一个人默默承受,Bear it silently
-OPTION_MIDLIFE_C,出去散心,Go out to clear your mind
-EVENT_GRANDCHILD_BIRTH_NAME,当爷爷奶奶了,Becoming Grandparents
-EVENT_GRANDCHILD_BIRTH_DESC,长子/女生了孩子，你当爷爷奶奶了！,Your child had a baby. You're a grandparent now!
-OPTION_GRANDCHILD_A,高兴得不得了,Overjoyed
-OPTION_GRANDCHILD_B,帮着带孩子,Help take care of the baby
-OPTION_GRANDCHILD_C,不想带,Don't want to babysit
-OPTION_REUNION_A,大办,Big celebration
-OPTION_REUNION_B,简单吃顿饭,Simple dinner
-OPTION_REUNION_C,不聚了,Skip the gathering
-EVENT_SPOUSE_RETIREMENT_NAME,配偶退休,Spouse Retires
-EVENT_SPOUSE_RETIREMENT_DESC,配偶退休了，忽然闲下来。,Your spouse retires and suddenly has free time.
-OPTION_SPOUSE_RETIRE_A,一起规划退休生活,Plan retirement together
-OPTION_SPOUSE_RETIRE_B,各过各的,Live separately
-OPTION_SPOUSE_RETIRE_C,配偶觉得被冷落,Spouse feels neglected
-TRAIT_FILIAL_SON_NAME,孝顺,Filial
-TRAIT_FILIAL_SON_DESC,你总是第一时间帮助家人,You always help family first
-TRAIT_CARELESS_CHILD_NAME,不懂事,Careless Child
-TRAIT_CARELESS_CHILD_DESC,你对家人的辛苦视而不见,You turn a blind eye to family's hardship
-TRAIT_DEVOTED_SON_NAME,尽心儿子,Devoted Son
-TRAIT_DEVOTED_SON_DESC,你放下一切回老家照顾父亲,You dropped everything to care for father
-TRAIT_WORK_OVER_FAMILY_NAME,工作重于家庭,Work Over Family
-TRAIT_WORK_OVER_FAMILY_DESC,你总是把工作放在家人前面,You always put work before family
-TRAIT_GOOD_SON_NAME,好儿子,Good Son
-TRAIT_GOOD_SON_DESC,你带父亲去省城看病,You took father to the provincial hospital
-TRAIT_RECONCILED_NAME,和解,Reconciled
-TRAIT_RECONCILED_DESC,你和疏远的家人和解了,You reconciled with estranged family
-TRAIT_COLD_CHILD_NAME,冷漠子女,Cold Child
-TRAIT_COLD_CHILD_DESC,你对父母的需求漠不关心,You're indifferent to your parents' needs
-TRAIT_PEACEFUL_GOODBYE_NAME,平静告别,Peaceful Goodbye
-TRAIT_PEACEFUL_GOODBYE_DESC,你在父亲身边送他最后一程,You were by father's side at the end
-TRAIT_GRIEF_STRICKEN_NAME,悲痛欲绝,Grief-Stricken
-TRAIT_GRIEF_STRICKEN_DESC,你无法接受亲人的离去,You can't accept the loss
-TRAIT_REGRET_LATE_NAME,子欲养而亲不待,Too Late to Care
-TRAIT_REGRET_LATE_DESC,你想报答时已经来不及了,"When you wanted to repay, it was too late"
-TRAIT_UNFORGIVABLE_NAME,不可原谅,Unforgivable
-TRAIT_UNFORGIVABLE_DESC,你没能赶回来见最后一面,You couldn't make it back in time
-TRAIT_FILIAL_REGRET_NAME,孝道遗憾,Filial Regret
-TRAIT_FILIAL_REGRET_DESC,你后悔没有做得更多,You regret not doing more
-TRAIT_FATHER_GUILT_NAME,父亲内疚,Father's Guilt
-TRAIT_FATHER_GUILT_DESC,你辜负了父亲的期望,You failed your father's expectations
-TRAIT_EMOTIONAL_VOID_NAME,情感空虚,Emotional Void
-TRAIT_EMOTIONAL_VOID_DESC,你和家人之间隔了一道墙,A wall stands between you and your family
-TRAIT_FAMILY_HERITAGE_NAME,家族传承,Family Heritage
-TRAIT_FAMILY_HERITAGE_DESC,你把家族故事传给了下一代,You passed the family story to the next generation
-TRAIT_CHERISHED_MEMORY_NAME,珍贵回忆,Cherished Memory
-TRAIT_CHERISHED_MEMORY_DESC,你默默珍藏父亲的记忆,You silently cherish father's memory
-TRAIT_TEARS_OF_TIME_NAME,时光之泪,Tears of Time
-TRAIT_TEARS_OF_TIME_DESC,读了父亲的日记，泪流满面,"Reading father's diary, tears streaming down"
-TRAIT_OBEDIENT_CHILD_NAME,听话孩子,Obedient Child
-TRAIT_OBEDIENT_CHILD_DESC,你总是听妈妈的话,You always listen to mom
-TRAIT_GRATEFUL_CHILD_NAME,感恩子女,Grateful Child
-TRAIT_GRATEFUL_CHILD_DESC,你懂得感恩母亲的付出,You appreciate mother's sacrifices
-TRAIT_DISTANT_CHILD_NAME,疏远子女,Distant Child
-TRAIT_DISTANT_CHILD_DESC,你和母亲之间有了距离,Distance grew between you and mother
-TRAIT_MATURE_APOLOGY_NAME,成熟道歉,Mature Apology
-TRAIT_MATURE_APOLOGY_DESC,你学会了向母亲道歉,You learned to apologize to mother
-TRAIT_COLD_HEART_NAME,心冷,Cold Heart
-TRAIT_COLD_HEART_DESC,你对母亲的关心无动于衷,You're indifferent to mother's care
-TRAIT_DEVOTED_DAUGHTER_NAME,尽心女儿,Devoted Daughter
-TRAIT_DEVOTED_DAUGHTER_DESC,你花多少都要治好母亲,You'll spend whatever it takes to cure mother
-TRAIT_LATE_FILIAL_PIETY_NAME,迟来孝道,Late Filial Piety
-TRAIT_LATE_FILIAL_PIETY_DESC,你终于良心发现,Your conscience finally awakens
-TRAIT_DUTIFUL_CHILD_NAME,尽责子女,Dutiful Child
-TRAIT_DUTIFUL_CHILD_DESC,你尽了基本义务,You fulfilled basic duties
-TRAIT_HELPLESS_NAME,无能为力,Helpless
-TRAIT_HELPLESS_DESC,你实在没有能力帮助,You truly can't afford to help
-TRAIT_FINAL_COMPANION_NAME,最后陪伴,Final Companion
-TRAIT_FINAL_COMPANION_DESC,你在母亲最后的日子里陪伴她,You stayed by mother in her final days
-TRAIT_AVOIDANT_NAME,逃避者,Avoidant
-TRAIT_AVOIDANT_DESC,你选择了逃避,You chose to avoid
-TRAIT_MOTHER_BLESSED_NAME,母亲祝福,Mother's Blessing
-TRAIT_MOTHER_BLESSED_DESC,母亲的爱永远守护你,Mother's love watches over you forever
-TRAIT_MOTHER_FORGIVEN_NAME,母亲原谅,Mother Forgives
-TRAIT_MOTHER_FORGIVEN_DESC,母亲说：我不怪他,Mother said: I don't blame them
-TRAIT_MOTHER_UNCHANGING_LOVE_NAME,母亲不变的爱,Mother's Unchanging Love
-TRAIT_MOTHER_UNCHANGING_LOVE_DESC,即使你冷漠，母亲依然爱你,"Even when you were cold, mother still loved you"
-TRAIT_COLLEGE_LOVE_NAME,校园爱情,College Love
-TRAIT_COLLEGE_LOVE_DESC,你在大学遇到了真爱,You found true love in college
-TRAIT_WORKPLACE_ROMANCE_NAME,职场恋爱,Workplace Romance
-TRAIT_WORKPLACE_ROMANCE_DESC,你在工作中遇到了另一半,You met your partner at work
-TRAIT_ROMANTIC_PROPOSAL_NAME,浪漫求婚,Romantic Proposal
-TRAIT_ROMANTIC_PROPOSAL_DESC,你用最浪漫的方式求婚,You proposed in the most romantic way
-TRAIT_PRESSURED_MARRIAGE_NAME,被迫婚姻,Pressured Marriage
-TRAIT_PRESSURED_MARRIAGE_DESC,家人催促下你匆忙结婚,You married in haste under family pressure
-TRAIT_GRAND_WEDDING_NAME,盛大婚礼,Grand Wedding
-TRAIT_GRAND_WEDDING_DESC,你办了一场盛大的婚礼,You had a grand wedding
-TRAIT_SIMPLE_WEDDING_NAME,简单婚礼,Simple Wedding
-TRAIT_SIMPLE_WEDDING_DESC,你选择了简单的婚礼,You chose a simple wedding
-TRAIT_PRAGMATIC_MARRIAGE_NAME,务实婚姻,Pragmatic Marriage
-TRAIT_PRAGMATIC_MARRIAGE_DESC,你选择了务实的婚姻方式,You chose a pragmatic approach to marriage
-TRAIT_PROUD_FATHER_NAME,骄傲父亲,Proud Father
-TRAIT_PROUD_FATHER_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
-TRAIT_PROUD_PARENT_NAME,骄傲父母,Proud Parent
-TRAIT_PROUD_PARENT_DESC,你为孩子的出生感到骄傲,You're proud of your child's birth
-TRAIT_TWIN_BLESSING_NAME,双胞胎福,Twin Blessing
-TRAIT_TWIN_BLESSING_DESC,一儿一女，双喜临门,"A boy and a girl, double happiness"
-TRAIT_FREE_RANGE_PARENT_NAME,放养父母,Free-Range Parent
-TRAIT_FREE_RANGE_PARENT_DESC,你让孩子快乐成长,You let your child grow happily
-TRAIT_PATIENT_PARENT_NAME,耐心父母,Patient Parent
-TRAIT_PATIENT_PARENT_DESC,你愿意倾听孩子的心声,You're willing to listen to your child
-TRAIT_WISE_PARENT_NAME,智慧父母,Wise Parent
-TRAIT_WISE_PARENT_DESC,你用理解代替控制,You use understanding instead of control
-TRAIT_STRICT_PARENT_NAME,严厉父母,Strict Parent
-TRAIT_STRICT_PARENT_DESC,你对孩子要求严格,You're strict with your child
-TRAIT_WORRIED_PARENT_NAME,焦虑父母,Worried Parent
-TRAIT_WORRIED_PARENT_DESC,你总是担心孩子的未来,You always worry about your child's future
-TRAIT_WARM_FAMILY_NAME,温暖家庭,Warm Family
-TRAIT_WARM_FAMILY_DESC,你的家庭充满爱和温暖,Your family is full of love and warmth
-TRAIT_LONELY_PARENT_NAME,孤独父母,Lonely Parent
-TRAIT_LONELY_PARENT_DESC,孩子很少回来看你,Your child rarely visits
-TRAIT_MUTUAL_RESPECT_NAME,互相尊重,Mutual Respect
-TRAIT_MUTUAL_RESPECT_DESC,你和孩子之间建立了互相尊重的关系,You and your child built a relationship of mutual respect
-TRAIT_PEACEMAKER_NAME,和事佬,Peacemaker
-TRAIT_PEACEMAKER_DESC,你总是主动化解矛盾,You always take the initiative to resolve conflicts
-TRAIT_RESPONSIBLE_PARENT_NAME,负责任父母,Responsible Parent
-TRAIT_RESPONSIBLE_PARENT_DESC,你总是第一时间照顾孩子,You always take care of your child first
-TRAIT_FORGETFUL_NAME,健忘,Forgetful
-TRAIT_FORGETFUL_DESC,你忘了重要的纪念日,You forgot an important anniversary
-TRAIT_DOTING_GRANDPARENT_NAME,溺爱祖辈,Doting Grandparent
-TRAIT_DOTING_GRANDPARENT_DESC,你对孙子疼爱有加,You spoil your grandchild
-TRAIT_DISTANT_GRANDPARENT_NAME,疏远祖辈,Distant Grandparent
-TRAIT_DISTANT_GRANDPARENT_DESC,你不太想带孙子,You don't really want to babysit
-TRAIT_FAMILY_DRIFTING_NAME,家庭疏远,Family Drifting
-TRAIT_FAMILY_DRIFTING_DESC,你和家人越来越疏远,You and your family grow apart
-TRAIT_GUILTY_SECRET_NAME,愧疚秘密,Guilty Secret
-TRAIT_GUILTY_SECRET_DESC,你心里藏着一个秘密,You carry a secret guilt
-TRAIT_MARRIAGE_CRISIS_NAME,婚姻危机,Marriage Crisis
-TRAIT_MARRIAGE_CRISIS_DESC,你的婚姻出现了严重问题,Your marriage has serious problems
-TRAIT_STRONG_MARRIAGE_NAME,坚固婚姻,Strong Marriage
-TRAIT_STRONG_MARRIAGE_DESC,你和配偶一起度过了难关,You and your spouse weathered the storm together
-TRAIT_FILIAL_SPOUSE_NAME,孝顺配偶,Filial Spouse
-TRAIT_FILIAL_SPOUSE_DESC,你的配偶主动帮你照顾父母,Your spouse helps care for your parents
-TRAIT_ENLIGHTENED_PARENT_NAME,开明父母,Enlightened Parent
-TRAIT_ENLIGHTENED_PARENT_DESC,你因童年经历选择放手教育,Your childhood led you to choose a hands-off approach
-TRAIT_COUPLE_FOUNDERS_NAME,夫妻创业,Couple Founders
-TRAIT_COUPLE_FOUNDERS_DESC,你和配偶一起创业,You and your spouse started a business together
-TRAIT_DOUBLE_REGRET_NAME,双重遗憾,Double Regret
-TRAIT_DOUBLE_REGRET_DESC,你在爱情和师恩上都有遗憾,You have regrets in both love and mentorship
-FAMILY_FATHER_NAME,李建国,Li Jianguo
-FAMILY_MOTHER_NAME,王秀英,Wang Xiuying
-FAMILY_SPOUSE_NAME,陈雅婷,Chen Yating
-FAMILY_FIRST_CHILD_NAME,李天宇,Li Tianyu
-FAMILY_SECOND_CHILD_NAME,李雨欣,Li Yuxin
-FAMILY_GRANDCHILD_NAME,李小宇,Li Xiaoyu
-ENDING_LONELY_END_NAME,孤独终老,Lonely End
-ENDING_LONELY_END_DESC,你和家人越走越远，最终独自一人,You drifted apart from family and ended up alone
-ENDING_LONELY_END_PHRASE,陌路,Strangers
-ENDING_FULFILLED_LIFE_NAME,圆满人生,Fulfilled Life
-ENDING_FULFILLED_LIFE_DESC,家庭和睦，人生圆满,"A harmonious family, a fulfilled life"
-ENDING_FULFILLED_LIFE_PHRASE,圆满,Fulfilled
-SUMMARY_SPOUSE_COMPANION,配偶陪伴左右,Spouse by your side
-SUMMARY_CHILDREN_BORN,有了自己的孩子,Had children of your own
-SUMMARY_WARM_FAMILY,家庭温暖幸福,A warm and happy family
-SUMMARY_LONELY_ENDING,晚年孤独,Lonely in old age
-FAMILY_FATHER,父亲,Father
-FAMILY_MOTHER,母亲,Mother
-FAMILY_SPOUSE,配偶,Spouse
-FAMILY_FIRST_CHILD,长子/女,First Child
-FAMILY_SECOND_CHILD,次子/女,Second Child
-FAMILY_GRANDCHILD,孙辈,Grandchild
-REQ_FAMILY_MEMBER_ALIVE,需要%s在世,Requires %s alive
-REQ_FAMILY_MEMBER_MET,需要已遇见%s,Requires having met %s
-FAMILY_EFFECT_TITLE,家庭变化,Family Changes
-FAMILY_MOOD_CHANGE,%s心情：%s,%s mood: %s
-FAMILY_HEALTH_CHANGE,%s健康%+d,%s health %+d
-FAMILY_ALIVE_TRUE,%s来到身边,%s joins you
-FAMILY_ALIVE_FALSE,%s离世,%s passes away
-FAMILY_BORN,%s出生了,%s is born
-FAMILY_MET,遇见了%s,Met %s
-MOOD_NEUTRAL,平静,Calm
-MOOD_HAPPY,开心,Happy
-MOOD_SLIGHTLY_HURT,有点受伤,Slightly Hurt
-MOOD_HURT,受伤,Hurt
-MOOD_VERY_HURT,很受伤,Very Hurt
-MOOD_GRATEFUL,欣慰,Grateful
-MOOD_DISAPPOINTED,失望,Disappointed
-MOOD_COLD,冷淡,Cold
-MOOD_FURIOUS,愤怒,Furious
-MOOD_SUPPORTIVE,支持,Supportive
-MOOD_LONELY,孤独,Lonely
-TOWER_ATTACK_TOGGLE,攻击开关,Attack Toggle
-BTN_SELECT_TRAIT,选择词条,Select Trait
-TRAIT_SELECT_TITLE,词条选择,Trait Selection
-BTN_CLOSE,关闭,Close
-BTN_DEBUG_TEST_MAP,调试测试地图,Debug Test Map
+TRAIT_LOST_FORMAT,失去词条：%s,Lost Trait: %s
+OPTION_PARENTS_CARE_D_TEXT,让父母自己住，周末去看望,"Let parents live independently, visit on weekends"
