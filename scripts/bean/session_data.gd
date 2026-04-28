@@ -13,16 +13,17 @@ extends Resource
 @export var towers: Dictionary = {}
 var initial_towers: Dictionary = {}
 @export var traits: Array[String] = []
-@export var gold: int = 50
+@export var gold: int = 100
 @export var home_health: float = 100.0
 @export var max_home_health: float = 100.0
 @export var battle_start_health: float = -1.0
+@export var accumulated_damage: float = 0.0
 
 @export var chain_flags: Array[String] = []
 @export var family_members: Dictionary = {
-	"father": {"alive": true, "age_offset": 25, "health": 80, "mood": "neutral"},
-	"mother": {"alive": true, "age_offset": 23, "health": 85, "mood": "neutral"},
-	"spouse": {"alive": false, "age_offset": -1, "health": 100, "mood": "neutral", "met": false},
+	"father": {"alive": true, "age_offset": 25, "health": 80},
+	"mother": {"alive": true, "age_offset": 23, "health": 85},
+	"spouse": {"alive": false, "age_offset": -1, "health": 100, "met": false},
 	"first_child": {"alive": false, "age_offset": -28, "health": 100, "born": false},
 	"second_child": {"alive": false, "age_offset": -32, "health": 100, "born": false, "is_twin": false},
 	"grandchild": {"alive": false, "age_offset": -52, "health": 100, "born": false}
@@ -33,6 +34,18 @@ var initial_towers: Dictionary = {}
 	"courage": 50,
 	"health": 100
 }
+
+@export var hidden_attributes: Dictionary = {
+	"willpower": 50,
+	"craziness": 50,
+	"discipline": 50
+}
+
+@export var karma: int = 0
+@export var fame: int = 0
+@export var education_level: String = ""
+@export var tensions: Array[TensionData] = []
+@export var recent_events: Array[String] = []
 
 @export var completed_events: Array[String] = []
 @export var completed_battles: Array[String] = []
@@ -46,6 +59,10 @@ var initial_towers: Dictionary = {}
 @export var global_difficulty: String = "normal"
 var accumulated_map_weights: Dictionary = {}
 var pending_battle_modifiers: Array[Dictionary] = []
+@export var npcs: Array[NPCData] = []
+@export var current_profession: String = ""
+var unlocked_events: Array[String] = []
+var locked_events: Array[String] = []
 @export var ending_reason: String = ""
 @export var last_battle_rewards: Dictionary = {}
 @export var last_event_traits: Array[String] = []
@@ -118,7 +135,14 @@ func to_dict() -> Dictionary:
 		"gold": gold,
 		"home_health": home_health,
 		"max_home_health": max_home_health,
+		"accumulated_damage": accumulated_damage,
 		"attributes": attributes,
+		"hidden_attributes": hidden_attributes,
+		"karma": karma,
+		"fame": fame,
+		"education_level": education_level,
+		"tensions": _tensions_to_array(),
+		"recent_events": recent_events,
 		"chain_flags": chain_flags,
 		"family_members": family_members,
 		"completed_events": completed_events,
@@ -129,7 +153,9 @@ func to_dict() -> Dictionary:
 		"battle_rating": battle_rating,
 		"current_battle_waves": current_battle_waves,
 		"current_map_id": current_map_id,
-		"global_difficulty": global_difficulty
+		"global_difficulty": global_difficulty,
+		"npcs": _npcs_to_array(),
+		"current_profession": current_profession
 	}
 
 static func from_dict(data: Dictionary) -> GameSessionData:
@@ -154,14 +180,25 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 	session.gold = data.get("gold", 50)
 	session.home_health = data.get("home_health", 100.0)
 	session.max_home_health = data.get("max_home_health", 100.0)
+	session.accumulated_damage = data.get("accumulated_damage", 0.0)
 	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100, "charm": 30, "work_ability": 0, "luck": 30})
+	session.hidden_attributes = data.get("hidden_attributes", {"willpower": 50, "craziness": 50, "discipline": 50})
+	session.karma = int(data.get("karma", 0))
+	session.fame = int(data.get("fame", 0))
+	session.education_level = str(data.get("education_level", ""))
+	session.tensions.clear()
+	for t_data: Dictionary in data.get("tensions", []):
+		session.tensions.append(TensionData.from_dict(t_data))
+	session.recent_events.clear()
+	for item in data.get("recent_events", []):
+		session.recent_events.append(str(item))
 	session.chain_flags.clear()
 	for item in data.get("chain_flags", []):
 		session.chain_flags.append(str(item))
 	var default_family: Dictionary = {
-		"father": {"alive": true, "age_offset": 25, "health": 80, "mood": "neutral"},
-		"mother": {"alive": true, "age_offset": 23, "health": 85, "mood": "neutral"},
-		"spouse": {"alive": false, "age_offset": -1, "health": 100, "mood": "neutral", "met": false},
+		"father": {"alive": true, "age_offset": 25, "health": 80},
+		"mother": {"alive": true, "age_offset": 23, "health": 85},
+		"spouse": {"alive": false, "age_offset": -1, "health": 100, "met": false},
 		"first_child": {"alive": false, "age_offset": -28, "health": 100, "born": false},
 		"second_child": {"alive": false, "age_offset": -32, "health": 100, "born": false, "is_twin": false},
 		"grandchild": {"alive": false, "age_offset": -52, "health": 100, "born": false}
@@ -183,4 +220,26 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 		session.current_battle_waves.append(w)
 	session.current_map_id = data.get("current_map_id", "")
 	session.global_difficulty = data.get("global_difficulty", "normal")
+	session.npcs.clear()
+	for npc_data: Dictionary in data.get("npcs", []):
+		session.npcs.append(NPCData.from_dict(npc_data))
+	session.current_profession = str(data.get("current_profession", ""))
+	session.unlocked_events.clear()
+	for item in data.get("unlocked_events", []):
+		session.unlocked_events.append(str(item))
+	session.locked_events.clear()
+	for item in data.get("locked_events", []):
+		session.locked_events.append(str(item))
 	return session
+
+func _npcs_to_array() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for npc: NPCData in npcs:
+		result.append(npc.to_dict())
+	return result
+
+func _tensions_to_array() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for t: TensionData in tensions:
+		result.append(t.to_dict())
+	return result

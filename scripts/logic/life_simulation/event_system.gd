@@ -1,3 +1,6 @@
+## 事件系统。管理人生事件的触发、筛选、后果执行和状态推进。
+## 核心流程：get_events_for_current_age() → trigger_event() → select_option() → 各 _apply_* 方法
+## 作为 Autoload 全局单例运行，生命周期贯穿整个游戏会话。
 extends Node
 
 signal event_triggered(event_data: EventData)
@@ -12,6 +15,8 @@ func _ready() -> void:
 
 func _on_session_reset() -> void:
 	session = Global.get_game_session()
+	if session.npcs.is_empty():
+		_initialize_npcs()
 
 func _get_config_manager() -> Node:
 	return get_node_or_null("/root/ConfigManager")
@@ -19,16 +24,70 @@ func _get_config_manager() -> Node:
 func _get_age_system() -> Node:
 	return get_node_or_null("/root/AgeSystem")
 
-func get_events_for_current_age() -> Array[EventData]:
+func _initialize_npcs() -> void:
+	session.npcs.clear()
+	var player_age: int = session.current_age
+	var father := NPCData.new()
+	father.npc_id = "npc_father"
+	father.name = "NPC_FATHER"
+	father.relation_type = "family"
+	father.affection = 60
+	father.health = 80
+	father.age = player_age + 25
+	father.life_stage = _get_life_stage_for_age(father.age)
+	father.is_active = true
+	father.willpower = randi_range(30, 70)
+	father.craziness = randi_range(20, 60)
+	father.generosity = randi_range(30, 70)
+	father.loyalty = randi_range(40, 80)
+	father.ambition = randi_range(30, 70)
+	father.wealth = randi_range(0, 5000)
+	father.trust = randi_range(50, 80)
+	session.npcs.append(father)
+	var mother := NPCData.new()
+	mother.npc_id = "npc_mother"
+	mother.name = "NPC_MOTHER"
+	mother.relation_type = "family"
+	mother.affection = 65
+	mother.health = 80
+	mother.age = player_age + 23
+	mother.life_stage = _get_life_stage_for_age(mother.age)
+	mother.is_active = true
+	mother.willpower = randi_range(30, 70)
+	mother.craziness = randi_range(20, 60)
+	mother.generosity = randi_range(40, 80)
+	mother.loyalty = randi_range(50, 90)
+	mother.ambition = randi_range(20, 60)
+	mother.wealth = randi_range(0, 3000)
+	mother.trust = randi_range(50, 80)
+	session.npcs.append(mother)
+	Global.debug_log("[NPC] 初始化完成：父亲(age=%d), 母亲(age=%d)" % [father.age, mother.age])
+
+func _get_life_stage_for_age(age: int) -> String:
+	if age < 18:
+		return "child"
+	elif age <= 35:
+		return "youth"
+	elif age <= 55:
+		return "adult"
+	elif age <= 65:
+		return "middle_age"
+	else:
+		return "elderly"
+
+func get_events_for_current_age() -> EventData:
+	if session.attributes.get("health", 0) <= 0 or session.home_health <= 0.0:
+		_check_health_depleted()
+		return null
 	var cm: Node = _get_config_manager()
 	if not cm or not cm.has_method("load_json"):
-		return []
+		return null
 	var events_data = cm.load_json("res://data/events.json")
 	if not events_data is Dictionary or not events_data.has("events"):
-		return []
+		return null
 	var age_sys: Node = _get_age_system()
 	if not age_sys:
-		return []
+		return null
 	var available_events: Array[EventData] = []
 	var skipped_details: Array[String] = []
 	for event_raw: Dictionary in events_data.events:
@@ -42,15 +101,206 @@ func get_events_for_current_age() -> Array[EventData]:
 					reason = "阶段不匹配(event=%s, session=%s)" % [event.stage, session.current_stage]
 				elif event.event_id in session.completed_events:
 					reason = "已完成"
-				elif event.trigger_chance < 1.0:
-					reason = "概率未通过(%.0f%%)" % (event.trigger_chance * 100.0)
+				elif event.get_trigger_chance() < 1.0:
+					reason = "概率未通过(%.0f%%)" % (event.get_trigger_chance() * 100.0)
 				else:
-					reason = "前置/互斥条件不满足"
+					reason = "前置/互斥/条件不满足"
 				skipped_details.append("%s(%s): %s" % [event.event_id, event.event_name, reason])
 	Global.debug_log("[事件系统] 年龄=%d, 阶段=%s, 可触发事件=%d, 跳过(年龄匹配但不可触发)=%d" % [age_sys.current_age, session.current_stage, available_events.size(), skipped_details.size()])
 	for detail: String in skipped_details:
 		Global.debug_log("[事件系统]   跳过: %s" % detail)
-	return available_events
+	if available_events.is_empty():
+		return null
+	var weights: Array[float] = []
+	for ev: EventData in available_events:
+		weights.append(_calculate_dynamic_weight(ev))
+	return _weighted_random_select(available_events, weights)
+
+func _check_conditions(conditions: Array[Dictionary]) -> bool:
+	for cond: Dictionary in conditions:
+		var cond_type: String = cond.get("type", "")
+		var key: String = str(cond.get("key", ""))
+		var op: String = str(cond.get("op", ">="))
+		var value: Variant = cond.get("value", 0)
+		match cond_type:
+			"attribute":
+				var current: int = session.attributes.get(key, 0)
+				if not _compare_op(current, op, int(value)):
+					return false
+			"trait":
+				if not key in session.traits:
+					return false
+			"trait_absent":
+				if key in session.traits:
+					return false
+			"npc_relation":
+				var npc_id: String = str(cond.get("npc_id", key))
+				var found: bool = false
+				for npc: NPCData in session.npcs:
+					if npc.npc_id == npc_id and npc.is_active:
+						found = true
+						if not _compare_op(npc.affection, op, int(value)):
+							return false
+						break
+				if found:
+					pass
+			"profession":
+				if session.current_profession != key:
+					return false
+			"profession_absent":
+				if session.current_profession != "":
+					return false
+			"trigger_chance", "family_member", "required_family":
+				pass
+	return true
+
+func _compare_op(current: int, op: String, value: int) -> bool:
+	match op:
+		">=": return current >= value
+		">": return current > value
+		"<=": return current <= value
+		"<": return current < value
+		"==": return current == value
+		"!=": return current != value
+		_: return current >= value
+
+func _calculate_dynamic_weight(event: EventData) -> float:
+	var weight: float = event.event_weight
+	if session.current_profession != "":
+		var cm: Node = _get_config_manager()
+		if cm and cm.has_method("load_json"):
+			var prof_data = cm.load_json("res://data/professions.json")
+			if prof_data is Dictionary and prof_data.has("professions"):
+				for prof: Dictionary in prof_data.professions:
+					if prof.get("profession_id", "") == session.current_profession:
+						var event_pool: Array = prof.get("event_pool", [])
+						if event.event_id in event_pool:
+							weight *= 1.5
+						break
+	var family_member: String = event.get_family_member()
+	var required_family: Array[String] = event.get_required_family()
+	for npc: NPCData in session.npcs:
+		if not npc.is_active:
+			continue
+		if family_member == npc.npc_id or npc.npc_id in required_family:
+			if npc.affection > 70:
+				weight *= 1.3
+			elif npc.affection < 30:
+				weight *= 0.5
+	if not event.conditions.is_empty():
+		for cond: Dictionary in event.conditions:
+			if cond.get("type", "") == "trait" and str(cond.get("key", "")) in session.traits:
+				weight *= 1.2
+	if session.gold > 10000:
+		for cond: Dictionary in event.conditions:
+			if cond.get("type", "") == "attribute" and str(cond.get("key", "")) == "gold":
+				weight *= 1.1
+	if session.attributes.get("health", 0) > 200:
+		for cond: Dictionary in event.conditions:
+			if cond.get("type", "") == "attribute" and str(cond.get("key", "")) == "health":
+				weight *= 1.1
+	if event.event_id in session.locked_events:
+		weight = 0.0
+	if event.event_id in session.unlocked_events:
+		weight *= 1.5
+	weight *= _karma_weight_multiplier(event.karma_type)
+	weight *= _personality_weight_modifier(event)
+	weight *= _npc_personality_modifier(event)
+	weight *= _tension_weight_modifier(event)
+	weight *= _trait_boost_modifier(event)
+	weight *= _freshness_modifier(event)
+	weight *= _rarity_modifier(event.rarity)
+	return weight
+
+func _karma_weight_multiplier(karma_type: String) -> float:
+	var k: int = session.karma
+	match karma_type:
+		"positive":
+			return 1.0 + (k / 100.0) * 0.3
+		"negative":
+			return 1.0 - (k / 100.0) * 0.5
+		_:
+			return 1.0
+
+func _personality_weight_modifier(event: EventData) -> float:
+	var modifier: float = 1.0
+	var checks: Dictionary = event.personality_checks
+	if checks.is_empty():
+		return modifier
+	for attr_name: String in checks:
+		var threshold: String = str(checks[attr_name])
+		var current: int = int(session.hidden_attributes.get(attr_name, 50))
+		if threshold == "low" and current < 30:
+			modifier *= 1.4
+		elif threshold == "high" and current > 70:
+			modifier *= 1.5
+	return modifier
+
+func _npc_personality_modifier(event: EventData) -> float:
+	var modifier: float = 1.0
+	if event.related_npcs.is_empty():
+		return modifier
+	for npc: NPCData in session.npcs:
+		if not npc.is_active:
+			continue
+		if npc.npc_id in event.related_npcs:
+			if npc.craziness > 80:
+				modifier *= 1.4
+			if npc.affection > 80:
+				modifier *= 1.3
+			elif npc.affection < 20:
+				modifier *= 0.5
+	return modifier
+
+func _tension_weight_modifier(event: EventData) -> float:
+	var modifier: float = 1.0
+	if event.tension_category == "" or session.tensions.is_empty():
+		return modifier
+	for tension: TensionData in session.tensions:
+		if tension.tension_type == event.tension_category:
+			modifier *= (1.0 + tension.pressure)
+	return modifier
+
+func _trait_boost_modifier(event: EventData) -> float:
+	var modifier: float = 1.0
+	if event.trait_boosts.is_empty():
+		return modifier
+	for trait_id: String in event.trait_boosts:
+		if trait_id in session.traits:
+			modifier *= float(event.trait_boosts[trait_id])
+	return modifier
+
+func _freshness_modifier(event: EventData) -> float:
+	if event.event_id in session.recent_events:
+		return 0.3
+	return 1.0
+
+func _rarity_modifier(rarity: String) -> float:
+	match rarity:
+		"common":
+			return 1.0
+		"uncommon":
+			return 0.5
+		"rare":
+			return 0.1
+		"legendary":
+			return 0.03
+		_:
+			return 1.0
+
+func _weighted_random_select(events: Array[EventData], weights: Array[float]) -> EventData:
+	var total: float = 0.0
+	for w: float in weights:
+		total += maxf(w, 0.0)
+	if total <= 0.0:
+		return events[randi() % events.size()]
+	var roll: float = randf() * total
+	var cumulative: float = 0.0
+	for i: int in range(events.size()):
+		cumulative += maxf(weights[i], 0.0)
+		if roll <= cumulative:
+			return events[i]
+	return events[-1]
 
 func _can_trigger(event: EventData, age_sys: Node) -> bool:
 	if not age_sys.current_age in event.ages:
@@ -75,19 +325,25 @@ func _can_trigger(event: EventData, age_sys: Node) -> bool:
 		if exclude_id in session.completed_events:
 			Global.debug_log("[事件系统] %s 互斥事件已完成: %s" % [event.event_id, exclude_id])
 			return false
-	if not event.required_family.is_empty():
+	var required_family: Array[String] = event.get_required_family()
+	if not required_family.is_empty():
 		var session_bg: String = session.family_background.replace("family_", "")
 		var family_match: bool = false
-		for rf: String in event.required_family:
+		for rf: String in required_family:
 			if rf.replace("family_", "") == session_bg:
 				family_match = true
 				break
 		if not family_match:
-			Global.debug_log("[事件系统] %s 家庭背景不满足: 需要%s, 当前%s" % [event.event_id, str(event.required_family), session.family_background])
+			Global.debug_log("[事件系统] %s 家庭背景不满足: 需要%s, 当前%s" % [event.event_id, str(required_family), session.family_background])
 			return false
-	if event.trigger_chance < 1.0 and randf() > event.trigger_chance:
-		Global.debug_log("[事件系统] %s 概率未通过: %.0f%%" % [event.event_id, event.trigger_chance * 100.0])
+	var trigger_chance: float = event.get_trigger_chance()
+	if trigger_chance < 1.0 and randf() > trigger_chance:
+		Global.debug_log("[事件系统] %s 概率未通过: %.0f%%" % [event.event_id, trigger_chance * 100.0])
 		return false
+	if not event.conditions.is_empty():
+		if not _check_conditions(event.conditions):
+			Global.debug_log("[事件系统] %s 条件不满足" % event.event_id)
+			return false
 	return true
 
 func trigger_event(event: EventData) -> void:
@@ -100,6 +356,16 @@ func select_option(event: Dictionary, option: Dictionary) -> void:
 	session.last_event_towers.clear()
 	_apply_rewards(option.get("rewards", []))
 	_apply_costs(option.get("cost", {}))
+	_apply_attribute_changes(option.get("attribute_changes", {}))
+	_apply_trait_changes(option.get("trait_gains", []), option.get("trait_losses", []))
+	_apply_profession_change(option.get("profession_change", ""), option.get("profession_lost", false))
+	_apply_npc_relation_changes(option.get("npc_relation_changes", []))
+	_apply_tower_changes(option.get("tower_gains", []), option.get("tower_losses", []))
+	_apply_gold_change(option.get("gold_change", 0))
+	_apply_karma_change(option.get("karma_cost", 0))
+	_apply_world_changes(option.get("world_changes", {}))
+	_apply_tension_changes(option.get("tension_changes", []))
+	_apply_event_unlocks(option.get("unlock_events", []), option.get("lock_events", []))
 	if GameState.current_state == GameState.State.ENDING:
 		return
 	var opt_chain_flag: String = str(option.get("chain_flag", ""))
@@ -111,11 +377,23 @@ func select_option(event: Dictionary, option: Dictionary) -> void:
 		return
 	var event_id: String = event.get("event_id", "")
 	session.completed_events.append(event_id)
+	session.recent_events.append(event_id)
+	if session.recent_events.size() > 20:
+		session.recent_events.pop_front()
 	var old_age: int = session.current_age
 	session.current_age += 1
 	Global.debug_log("年龄+1 → %d" % session.current_age)
+	for npc: NPCData in session.npcs:
+		if npc.is_active:
+			npc.age += 1
+			npc.life_stage = _get_life_stage_for_age(npc.age)
 	if session.current_age != old_age:
+		_apply_salary_payment()
 		_apply_stage_attribute_growth()
+		_advance_tensions()
+		var age_sys: Node = _get_age_system()
+		if age_sys and age_sys.has_method("apply_age_penalty"):
+			age_sys.apply_age_penalty()
 		if GameState.current_state == GameState.State.ENDING:
 			return
 	_check_stage_transition()
@@ -196,9 +474,6 @@ func _apply_single_family_effect(fx: Dictionary) -> void:
 	if member_id == "" or not session.family_members.has(member_id):
 		return
 	var member: Dictionary = session.family_members[member_id]
-	if fx.has("mood_change"):
-		member["mood"] = fx.mood_change
-		Global.debug_log("[家庭] %s 心情变更: %s" % [member_id, fx.mood_change])
 	if fx.has("health_change"):
 		member["health"] = int(member.get("health", 100)) + int(fx.health_change)
 		Global.debug_log("[家庭] %s 健康变更: %+d → %d" % [member_id, int(fx.health_change), member["health"]])
@@ -216,8 +491,10 @@ func _apply_single_family_effect(fx: Dictionary) -> void:
 		Global.debug_log("[家庭] %s 相遇" % member_id)
 
 func _check_health_depleted() -> void:
-	if session.attributes.get("health", 0) <= 0:
-		Global.debug_log("健康归零，触发人生结局（当前健康=%d，阶段=%s）" % [session.attributes.get("health", 0), session.current_stage])
+	if session.attributes.get("health", 0) <= 0 or session.home_health <= 0.0:
+		Global.debug_log("健康归零，触发人生结局（属性健康=%d，基地生命=%.0f，阶段=%s）" % [session.attributes.get("health", 0), session.home_health, session.current_stage])
+		if session.attributes.get("health", 0) <= 0:
+			session.home_health = 0.0
 		_trigger_life_ending("health_depleted")
 
 func _apply_costs(costs: Dictionary) -> void:
@@ -268,6 +545,13 @@ func _apply_stage_attribute_growth() -> void:
 		Global.debug_log("生命值同步：max_home_health=%.0f, home_health=%.0f" % [session.max_home_health, session.home_health])
 	_check_health_depleted()
 
+func _apply_salary_payment() -> void:
+	var es: Node = get_node_or_null("/root/EconomySystem")
+	if es and es.has_method("apply_salary"):
+		var salary: int = es.apply_salary()
+		if salary > 0:
+			Global.debug_log("[薪资] 年龄增长，获得薪资：%d 金币" % salary)
+
 func _trigger_life_ending(reason: String) -> void:
 	session.ending_reason = reason
 	GameState.change_state(GameState.State.ENDING)
@@ -281,6 +565,9 @@ func _trigger_battle(battle_trigger: Dictionary) -> void:
 	if force_map != "":
 		selected_map_id = force_map
 		Global.debug_log("[事件系统] 强制地图: %s" % selected_map_id)
+	elif is_deadly:
+		selected_map_id = "map_hospital"
+		Global.debug_log("[事件系统] 致命战斗→医院地图: %s" % selected_map_id)
 	elif not session.accumulated_map_weights.is_empty():
 		selected_map_id = _select_map_by_weights(session.accumulated_map_weights)
 		session.accumulated_map_weights.clear()
@@ -292,10 +579,6 @@ func _trigger_battle(battle_trigger: Dictionary) -> void:
 	session.current_battle_id = battle_id
 	session.current_battle_deadly = is_deadly
 	session.current_battle_waves.clear()
-	var raw_waves: Array = battle_trigger.get("waves", [])
-	for wave_data: Dictionary in raw_waves:
-		session.current_battle_waves.append(wave_data)
-	Global.debug_log("波次配置已写入session，共%d波" % session.current_battle_waves.size())
 	battle_triggered.emit(battle_trigger)
 
 func _select_map_by_weights(weights: Dictionary) -> String:
@@ -372,7 +655,7 @@ func check_option_requirements(option: Dictionary) -> bool:
 
 func _check_stage_transition() -> void:
 	var stage_transitions: Dictionary = {
-		"childhood": {"min_age": 15, "next_stage": "youth"},
+		"childhood": {"min_age": 14, "next_stage": "youth"},
 		"youth": {"min_age": 35, "next_stage": "middle_age"},
 		"middle_age": {"min_age": 50, "next_stage": "old_age"}
 	}
@@ -390,3 +673,207 @@ func _check_stage_transition() -> void:
 					age_sys.current_age = session.current_age
 				if age_sys.has_method("increase_age"):
 					age_sys.increase_age(0)
+
+func _apply_attribute_changes(changes: Dictionary) -> void:
+	if changes.is_empty():
+		return
+	for attr_name: String in changes:
+		var change_val: int = int(changes[attr_name])
+		if session.attributes.has(attr_name):
+			session.attributes[attr_name] += change_val
+			Global.debug_log("[后果] 属性变化：%s %+d → %d" % [attr_name, change_val, session.attributes[attr_name]])
+	_check_health_depleted()
+
+func _apply_trait_changes(gains: Array, losses: Array) -> void:
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	for trait_id: String in gains:
+		if ts and ts.has_method("grant_trait"):
+			ts.grant_trait(trait_id)
+		else:
+			if not trait_id in session.traits:
+				session.traits.append(trait_id)
+				session.last_event_traits.append(trait_id)
+	for trait_id: String in losses:
+		if ts and ts.has_method("remove_trait"):
+			ts.remove_trait(trait_id)
+		else:
+			if trait_id in session.traits:
+				session.traits.erase(trait_id)
+		Global.debug_log("[后果] 失去词条：%s" % trait_id)
+
+func _apply_profession_change(new_profession: String, lost: bool) -> void:
+	if lost:
+		var old: String = session.current_profession
+		session.current_profession = ""
+		Global.debug_log("[后果] 失去职业：%s" % old)
+	if new_profession != "":
+		session.current_profession = new_profession
+		Global.debug_log("[后果] 获得职业：%s" % new_profession)
+
+func _apply_npc_relation_changes(changes: Array) -> void:
+	for change: Dictionary in changes:
+		var npc_id: String = str(change.get("npc_id", ""))
+		var value: int = int(change.get("value", 0))
+		var found: bool = false
+		for npc: NPCData in session.npcs:
+			if npc.npc_id == npc_id:
+				npc.affection = clampi(npc.affection + value, 0, 100)
+				Global.debug_log("[后果] NPC好感度变化：%s %+d → %d" % [npc_id, value, npc.affection])
+				found = true
+				break
+		if not found and value > 0:
+			var new_npc: NPCData = NPCData.new()
+			new_npc.npc_id = npc_id
+			new_npc.name = str(change.get("name", npc_id))
+			new_npc.relation_type = str(change.get("relation_type", _infer_relation_from_id(npc_id)))
+			new_npc.affection = clampi(50 + value, 0, 100)
+			new_npc.health = int(change.get("health", 100))
+			new_npc.age = session.current_age + int(change.get("age_offset", 0))
+			new_npc.life_stage = _get_life_stage_for_age(new_npc.age)
+			new_npc.is_active = true
+			new_npc.willpower = randi_range(30, 70)
+			new_npc.craziness = randi_range(20, 60)
+			new_npc.generosity = randi_range(30, 70)
+			new_npc.loyalty = randi_range(40, 80)
+			new_npc.ambition = randi_range(30, 70)
+			new_npc.wealth = randi_range(0, 3000)
+			new_npc.trust = randi_range(50, 80)
+			session.npcs.append(new_npc)
+			Global.debug_log("[后果] 新增NPC：%s（%s，好感%d）" % [tr(new_npc.name), new_npc.relation_type, new_npc.affection])
+
+func _infer_relation_from_id(npc_id: String) -> String:
+	if npc_id.find("father") >= 0:
+		return "father"
+	elif npc_id.find("mother") >= 0:
+		return "mother"
+	elif npc_id.find("grandma_m") >= 0:
+		return "grandma_m"
+	elif npc_id.find("grandma") >= 0:
+		return "grandma_p"
+	elif npc_id.find("grandpa") >= 0:
+		return "grandpa_p"
+	elif npc_id.find("friend") >= 0:
+		return "friend"
+	elif npc_id.find("mentor") >= 0:
+		return "mentor"
+	elif npc_id.find("colleague") >= 0:
+		return "colleague"
+	elif npc_id.find("child") >= 0:
+		return "child"
+	elif npc_id.find("spouse") >= 0:
+		return "spouse"
+	return "other"
+
+func _apply_tower_changes(gains: Array, losses: Array) -> void:
+	for tower_id: String in gains:
+		session.add_tower(tower_id, -1)
+		session.last_event_towers.append({"tower_id": tower_id, "count": -1})
+		Global.debug_log("[后果] 获得防御塔：%s" % tower_id)
+	for tower_id: String in losses:
+		if session.towers.has(tower_id):
+			session.towers.erase(tower_id)
+			Global.debug_log("[后果] 失去防御塔：%s" % tower_id)
+
+func _apply_gold_change(amount: int) -> void:
+	if amount == 0:
+		return
+	session.gold = maxi(session.gold + amount, 0)
+	if amount > 0:
+		Global.debug_log("[后果] 金币 +%d → %d" % [amount, session.gold])
+	else:
+		Global.debug_log("[后果] 金币 %d → %d" % [amount, session.gold])
+
+func _apply_event_unlocks(unlocks: Array, locks: Array) -> void:
+	for event_id: String in unlocks:
+		if not event_id in session.unlocked_events:
+			session.unlocked_events.append(event_id)
+			Global.debug_log("[后果] 解锁事件：%s" % event_id)
+	for event_id: String in locks:
+		if not event_id in session.locked_events:
+			session.locked_events.append(event_id)
+			Global.debug_log("[后果] 锁定事件：%s" % event_id)
+
+func _apply_karma_change(karma_cost: int) -> void:
+	if karma_cost == 0:
+		return
+	session.karma = clampi(session.karma + karma_cost, -100, 100)
+	Global.debug_log("[后果] 业力 %+d → %d" % [karma_cost, session.karma])
+
+func _apply_world_changes(changes: Dictionary) -> void:
+	if changes.is_empty():
+		return
+	for key: String in changes:
+		var val: int = int(changes[key])
+		if session.attributes.has(key):
+			session.attributes[key] += val
+			Global.debug_log("[后果] 属性变化：%s %+d → %d" % [key, val, session.attributes[key]])
+		elif session.hidden_attributes.has(key):
+			session.hidden_attributes[key] += val
+			Global.debug_log("[后果] 隐性属性变化：%s %+d → %d" % [key, val, session.hidden_attributes[key]])
+		elif key == "karma":
+			_apply_karma_change(val)
+		elif key == "gold":
+			_apply_gold_change(val)
+		elif key == "fame":
+			session.fame = maxi(session.fame + val, 0)
+			Global.debug_log("[后果] 名望 %+d → %d" % [val, session.fame])
+	_check_health_depleted()
+
+func _apply_tension_changes(changes: Array) -> void:
+	for change: Dictionary in changes:
+		var action: String = str(change.get("action", ""))
+		match action:
+			"add":
+				var t := TensionData.new()
+				t.tension_id = str(change.get("tension_id", ""))
+				t.source_event = str(change.get("source_event", ""))
+				t.title = str(change.get("title", ""))
+				t.description = str(change.get("description", ""))
+				t.duration = int(change.get("duration", 3))
+				t.remaining = t.duration
+				t.pressure = float(change.get("pressure", 0.5))
+				t.resolution_event = str(change.get("resolution_event", ""))
+				t.tension_type = str(change.get("tension_type", ""))
+				var existing_idx: int = -1
+				for i: int in range(session.tensions.size()):
+					if session.tensions[i].tension_id == t.tension_id:
+						existing_idx = i
+						break
+				if existing_idx >= 0:
+					session.tensions[existing_idx] = t
+				else:
+					session.tensions.append(t)
+				Global.debug_log("[张力] 添加：%s（类型=%s，持续=%d年，压力=%.1f）" % [t.tension_id, t.tension_type, t.remaining, t.pressure])
+			"resolve":
+				var category: String = str(change.get("tension_category", ""))
+				var tid: String = str(change.get("tension_id", ""))
+				var to_remove: Array[int] = []
+				for i: int in range(session.tensions.size()):
+					if (category != "" and session.tensions[i].tension_type == category) or (tid != "" and session.tensions[i].tension_id == tid):
+						to_remove.append(i)
+				to_remove.reverse()
+				for idx: int in to_remove:
+					var removed: TensionData = session.tensions.pop_at(idx)
+					Global.debug_log("[张力] 解除：%s" % removed.tension_id)
+			"extend":
+				var tid2: String = str(change.get("tension_id", ""))
+				var years: int = int(change.get("years", 1))
+				for tension: TensionData in session.tensions:
+					if tension.tension_id == tid2:
+						tension.remaining += years
+						tension.duration += years
+						Global.debug_log("[张力] 延长：%s +%d年 → 剩余%d年" % [tid2, years, tension.remaining])
+
+func _advance_tensions() -> void:
+	var to_resolve: Array[TensionData] = []
+	for tension: TensionData in session.tensions:
+		tension.remaining -= 1
+		if tension.remaining <= 0:
+			to_resolve.append(tension)
+		else:
+			Global.debug_log("[张力] 推进：%s 剩余%d年" % [tension.tension_id, tension.remaining])
+	for tension: TensionData in to_resolve:
+		session.tensions.erase(tension)
+		Global.debug_log("[张力] 到期：%s → 触发结算事件 %s" % [tension.tension_id, tension.resolution_event])
+		if tension.resolution_event != "":
+			session.unlocked_events.append(tension.resolution_event)
