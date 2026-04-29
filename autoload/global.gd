@@ -8,19 +8,17 @@ var player_save: PlayerSaveData = PlayerSaveData.new()
 
 var game_session: GameSessionData = GameSessionData.new()
 
-var debug_mode: bool = true
-
 var debug_map_id: String = ""
 
 var soft_paused: bool = false
 
 func _ready() -> void:
-	if debug_mode:
+	if OS.is_debug_build():
 		print("[Global] 全局单例初始化完成")
 		print("[Global] 游戏版本：%s" % GAME_VERSION)
 
 func debug_log(message: String) -> void:
-	if debug_mode:
+	if OS.is_debug_build():
 		print("[DEBUG] %s" % message)
 
 func error_log(message: String) -> void:
@@ -35,5 +33,5 @@ func get_game_session() -> GameSessionData:
 func reset_game_session() -> void:
 	game_session = GameSessionData.new()
 	session_reset.emit()
-	if debug_mode:
+	if OS.is_debug_build():
 		print("[Global] 游戏会话已重置")

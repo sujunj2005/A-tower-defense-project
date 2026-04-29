@@ -1,6 +1,10 @@
+## 事件 UI 面板。显示事件标题、描述和选项按钮，处理选项选择和后果弹窗。
+## 生命周期：每回合由场景管理器创建 → _ready 加载事件 → 玩家选择 → 显示后果 → 点击关闭 → 切换状态
 extends Control
 
+## 选项被选中时发射，携带选项索引
 signal option_selected(option_index: int)
+## 事件流程完成时发射（后果弹窗关闭后）
 signal event_completed
 
 var _current_event: EventData = null
@@ -8,6 +12,7 @@ var _option_buttons: Array[Button] = []
 var _title_label: Label
 var _desc_label: Label
 var _options_container: VBoxContainer
+var _debug_weight_container: VBoxContainer
 
 func _get_quiet_year_texts() -> Array[String]:
 	return [
@@ -72,11 +77,27 @@ func _build_ui() -> void:
 	_options_container.add_theme_constant_override("separation", 8)
 	vbox.add_child(_options_container)
 
+	if OS.is_debug_build():
+		var wsep: Control = Control.new()
+		wsep.custom_minimum_size = Vector2(0, 6)
+		vbox.add_child(wsep)
+
+		var wtitle: Label = Label.new()
+		wtitle.text = "⚖ 权重分解"
+		wtitle.add_theme_font_size_override("font_size", 12)
+		wtitle.add_theme_color_override("font_color", Color(0.7, 0.7, 1.0, 1.0))
+		vbox.add_child(wtitle)
+
+		_debug_weight_container = VBoxContainer.new()
+		_debug_weight_container.add_theme_constant_override("separation", 1)
+		vbox.add_child(_debug_weight_container)
+
 	var spacer2: Control = Control.new()
 	spacer2.custom_minimum_size = Vector2(0, 10)
 	vbox.add_child(spacer2)
 
 
+## 加载当前事件：掷骰判断是否触发 → 从 EventSystem 获取 → 显示或显示"平静的一年"
 func _load_current_event() -> void:
 	var session: GameSessionData = Global.get_game_session()
 	if not _roll_event_trigger():
@@ -168,6 +189,7 @@ func _age_distance(event: EventData, current_age: int) -> int:
 			min_dist = dist
 	return min_dist
 
+## 显示事件：更新标题/描述、创建选项按钮（含需求文本和可用性检查）
 func display_event(event: EventData) -> void:
 	_current_event = event
 	if _title_label:
@@ -220,6 +242,55 @@ func display_event(event: EventData) -> void:
 		btn.pressed.connect(_on_option_pressed.bind(i))
 		_options_container.add_child(btn)
 		_option_buttons.append(btn)
+
+	_update_weight_debug()
+
+func _update_weight_debug() -> void:
+	if not _debug_weight_container:
+		return
+	for child: Node in _debug_weight_container.get_children():
+		child.queue_free()
+	if not _current_event:
+		return
+	var es: Node = get_node_or_null("/root/EventSystem")
+	if not es or not es.has_method("get_weight_debug_info"):
+		return
+	var info: Dictionary = es.get_weight_debug_info(_current_event)
+	var ordered_keys: Array[String] = [
+		"基础权重", "职业加成",
+		"① Karma修正", "  (karma=", "② 人格修正", "  (checks=",
+		"③ NPC修正", "  (npcs=", "④ 张力修正", "  (category=",
+		"⑤ 特质加成", "  (boosts=", "⑥ 新鲜度", "  (近期事件)",
+		"⑦ 稀有度", "  (rarity=", "最终权重"
+	]
+	for prefix: String in ordered_keys:
+		for k: String in info:
+			if k.begins_with(prefix):
+				var val = info[k]
+				if val is float:
+					if k == "最终权重":
+						var line: Label = Label.new()
+						line.text = "  → 最终: %.3f" % val
+						line.add_theme_font_size_override("font_size", 12)
+						var c: Color
+						if val >= 2.0:
+							c = Color(0.4, 1.0, 0.4, 1.0)
+						elif val >= 0.5:
+							c = Color(1.0, 1.0, 1.0, 1.0)
+						elif val >= 0.1:
+							c = Color(1.0, 0.7, 0.3, 1.0)
+						else:
+							c = Color(1.0, 0.3, 0.3, 1.0)
+						line.add_theme_color_override("font_color", c)
+						_debug_weight_container.add_child(line)
+					elif not k.begins_with("  "):
+						var line: Label = Label.new()
+						line.text = "  %s: ×%.2f" % [k.replace("① ","").replace("② ","").replace("③ ","").replace("④ ","").replace("⑤ ","").replace("⑥ ","").replace("⑦ ",""), val]
+						line.add_theme_font_size_override("font_size", 10)
+						var lc: Color = Color.RED if val < 0.3 else (Color.YELLOW if val < 0.7 else (Color.GREEN if val > 1.0 else Color.WHITE))
+						line.add_theme_color_override("font_color", lc)
+						_debug_weight_container.add_child(line)
+				break
 
 func _format_event_conditions(conditions: Array[Dictionary], os: Node) -> String:
 	var parts: Array[String] = []
@@ -311,6 +382,7 @@ func _check_requirements(requirements: Dictionary) -> bool:
 				return false
 	return true
 
+## 选项按下：通知 EventSystem 执行后果 → 检查成就 → 显示后果弹窗
 func _on_option_pressed(index: int) -> void:
 	if not is_inside_tree():
 		return
@@ -332,6 +404,7 @@ func _on_option_pressed(index: int) -> void:
 	option_selected.emit(index)
 	_show_consequence_popup(selected_option)
 
+## 显示后果弹窗：汇总金币/属性/词条/塔/职业/NPC/家庭/阶段增长等变化，点击关闭后切换游戏状态
 func _show_consequence_popup(selected_option: OptionData) -> void:
 	var overlay: ColorRect = ColorRect.new()
 	overlay.color = Color(0.0, 0.0, 0.0, 0.5)
@@ -340,6 +413,15 @@ func _show_consequence_popup(selected_option: OptionData) -> void:
 	add_child(overlay)
 
 	var popup: PanelContainer = PanelContainer.new()
+	var popup_style := StyleBoxFlat.new()
+	popup_style.bg_color = Color(0.12, 0.10, 0.18, 1.0)
+	popup_style.corner_radius_top_left = 8
+	popup_style.corner_radius_top_right = 8
+	popup_style.corner_radius_bottom_left = 8
+	popup_style.corner_radius_bottom_right = 8
+	popup_style.set_border_width_all(2)
+	popup_style.border_color = Color(0.4, 0.35, 0.55, 1.0)
+	popup.add_theme_stylebox_override("panel", popup_style)
 	popup.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	popup.offset_left = -280
 	popup.offset_right = 280

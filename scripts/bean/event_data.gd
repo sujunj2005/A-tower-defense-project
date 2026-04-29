@@ -35,6 +35,7 @@ extends Resource
 @export var tension_category: String = ""
 @export var trait_boosts: Dictionary = {}
 @export var rarity: String = "common"
+@export var tension_duration: int = 0
 
 func to_dict() -> Dictionary:
 	var opts: Array[Dictionary] = []
@@ -57,7 +58,8 @@ func to_dict() -> Dictionary:
 		"related_npcs": related_npcs,
 		"tension_category": tension_category,
 		"trait_boosts": trait_boosts,
-		"rarity": rarity
+		"rarity": rarity,
+		"tension_duration": tension_duration
 	}
 
 static func from_dict(data: Dictionary) -> EventData:
@@ -95,6 +97,7 @@ static func from_dict(data: Dictionary) -> EventData:
 	event.tension_category = str(data.get("tension_category", ""))
 	event.trait_boosts = Dictionary(data.get("trait_boosts", {}))
 	event.rarity = str(data.get("rarity", "common"))
+	event.tension_duration = int(data.get("tension_duration", 0))
 	return event
 
 ## 从 conditions 中提取触发概率，默认 1.0

@@ -125,6 +125,8 @@ func _check_conditions(conditions: Array[Dictionary]) -> bool:
 		match cond_type:
 			"attribute":
 				var current: int = session.attributes.get(key, 0)
+				if key == "karma":
+					current = session.karma
 				if not _compare_op(current, op, int(value)):
 					return false
 			"trait":
@@ -287,6 +289,67 @@ func _rarity_modifier(rarity: String) -> float:
 			return 0.03
 		_:
 			return 1.0
+
+func get_weight_debug_info(event: EventData) -> Dictionary:
+	var info: Dictionary = {}
+	var base: float = event.event_weight
+	info["基础权重"] = base
+
+	var prof_mult: float = 1.0
+	if session.current_profession != "":
+		var cm: Node = _get_config_manager()
+		if cm and cm.has_method("load_json"):
+			var prof_data = cm.load_json("res://data/professions.json")
+			if prof_data is Dictionary and prof_data.has("professions"):
+				for prof: Dictionary in prof_data.professions:
+					if prof.get("profession_id", "") == session.current_profession:
+						if event.event_id in prof.get("event_pool", []):
+							prof_mult = 1.5
+						break
+	if prof_mult != 1.0:
+		info["职业加成"] = prof_mult
+
+	var karma_mult: float = _karma_weight_multiplier(event.karma_type)
+	info["① Karma修正"] = karma_mult
+	info["  (karma=%d,type=%s)" % [session.karma, event.karma_type]] = 0
+
+	var pers_mult: float = _personality_weight_modifier(event)
+	info["② 人格修正"] = pers_mult
+	if not event.personality_checks.is_empty():
+		info["  (checks=%s)" % str(event.personality_checks)] = 0
+
+	var npc_mult: float = _npc_personality_modifier(event)
+	info["③ NPC修正"] = npc_mult
+	if not event.related_npcs.is_empty():
+		info["  (npcs=%s)" % str(event.related_npcs)] = 0
+
+	var tension_mult: float = _tension_weight_modifier(event)
+	if tension_mult != 1.0:
+		info["④ 张力修正"] = tension_mult
+		info["  (category=%s)" % event.tension_category] = 0
+
+	var trait_mult: float = _trait_boost_modifier(event)
+	if trait_mult != 1.0:
+		info["⑤ 特质加成"] = trait_mult
+		info["  (boosts=%s)" % str(event.trait_boosts)] = 0
+
+	var fresh_mult: float = _freshness_modifier(event)
+	info["⑥ 新鲜度"] = fresh_mult
+	if fresh_mult != 1.0:
+		info["  (近期事件)"] = 0
+
+	var rarity_mult: float = _rarity_modifier(event.rarity)
+	info["⑦ 稀有度"] = rarity_mult
+	info["  (rarity=%s)" % event.rarity] = 0
+
+	var final: float = base
+	for k: String in info:
+		if k.begins_with("①") or k.begins_with("②") or k.begins_with("③") or k.begins_with("④") or k.begins_with("⑤") or k.begins_with("⑥") or k.begins_with("⑦"):
+			final *= info[k]
+	if prof_mult != 1.0:
+		final *= prof_mult
+	info["最终权重"] = final
+	return info
 
 func _weighted_random_select(events: Array[EventData], weights: Array[float]) -> EventData:
 	var total: float = 0.0

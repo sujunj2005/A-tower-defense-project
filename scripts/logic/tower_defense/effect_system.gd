@@ -1,3 +1,5 @@
+## 特效系统。管理塔攻击产生的所有即时效果（减速/DOT/溅射/暴击等）和持续效果（光环/被动）。
+## 作为 Autoload 全局单例运行，每帧更新定时效果和光环范围。
 extends Node
 
 const EffectType = GameConfig.EffectType
@@ -54,8 +56,8 @@ func apply_effect(effect_type: int, params: Dictionary, source_tower: Tower, tar
 
 func apply_on_kill_effect(effect_type: int, params: Dictionary, source_tower: Tower, killed_enemy: Enemy) -> void:
 	if effect_type == EffectType.GOLD_BONUS:
-		var gold_per_kill: float = float(params.get("gold_per_kill", 0.2))
-		var bonus: int = maxi(1, int(ceilf(killed_enemy.config.gold_drop * gold_per_kill)))
+		var gold_per_kill: float = float(params.get("gold_per_kill", 5))
+		var bonus: int = maxi(1, int(gold_per_kill))
 		var hud: Node = get_tree().get_first_node_in_group("game_hud")
 		if hud and hud.has_method("add_gold"):
 			hud.add_gold(bonus)
@@ -156,6 +158,8 @@ func _apply_cultural_suppression(target: Node2D, params: Dictionary, source_towe
 
 func _register_aura(effect_type: int, params: Dictionary, source_tower: Tower) -> void:
 	for aura: Dictionary in _aura_towers:
+		if not is_instance_valid(aura.source):
+			continue
 		if aura.source == source_tower:
 			return
 	_aura_towers.append({
@@ -167,9 +171,9 @@ func _register_aura(effect_type: int, params: Dictionary, source_tower: Tower) -
 func _update_auras() -> void:
 	var valid_auras: Array[Dictionary] = []
 	for aura: Dictionary in _aura_towers:
-		var tower: Tower = aura.source
-		if not is_instance_valid(tower):
+		if not is_instance_valid(aura.source):
 			continue
+		var tower: Tower = aura.source
 		valid_auras.append(aura)
 		var radius: float = float(aura.params.get("radius", 200.0))
 		var effect_type: int = aura.effect_type

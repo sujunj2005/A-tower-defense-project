@@ -1,3 +1,5 @@
+## 防御塔视图节点。管理塔的渲染、升级、经验、Buff 和销毁流程。
+## 由 MapManager.build_tower() 创建并挂载到场景树。
 extends Node2D
 class_name Tower
 
@@ -38,13 +40,21 @@ var _buff_timer: float = 0.0
 var _base_damage: float = 0.0
 var _base_attack_speed: float = 0.0
 
+## 目标切换时发射
 signal target_changed(new_target: Node2D)
+## 塔放置到场景后发射
 signal tower_placed(tower: Tower)
+## 等级变化时发射
 signal level_changed(new_level: int)
+## 经验值变化时发射
 signal experience_changed(current: int, required: int)
+## 鼠标悬停开始
 signal mouse_hover_started(tower: Tower)
+## 鼠标悬停结束
 signal mouse_hover_ended(tower: Tower)
+## 鼠标点击塔
 signal mouse_clicked(tower: Tower)
+## 属性更新后发射（供信息面板刷新）
 signal stats_updated
 
 func _ready() -> void:
@@ -71,6 +81,7 @@ func _process(delta: float) -> void:
 			_click_cooldown = now
 			mouse_clicked.emit(self)
 
+## 用配置初始化塔：设置元数据、创建精灵和攻击组件、注册光环/被动
 func initialize(tower_config: TowerBean) -> void:
 	config = tower_config
 	set_meta("tower_id", tower_config.tower_id)
@@ -201,6 +212,7 @@ func _on_level_changed(new_level: int) -> void:
 		tween.tween_property(experience_bar, "modulate", Color(1, 1, 1, 0.5), 0.1)
 		tween.tween_property(experience_bar, "modulate", Color(1, 1, 1, 1), 0.1)
 
+## 添加经验值，满足升级条件时自动升级（可连续升级）
 func add_experience(exp_amount: int) -> void:
 	if current_level >= config.max_level:
 		return
@@ -213,6 +225,7 @@ func add_experience(exp_amount: int) -> void:
 
 	experience_changed.emit(current_experience, experience_required)
 
+## 升级：扣除经验、重算属性、发射信号
 func level_up() -> void:
 	if current_level >= config.max_level:
 		Global.debug_log("[Tower] 已达到最大等级：%d" % current_level)
@@ -228,8 +241,11 @@ func level_up() -> void:
 
 	Global.debug_log("[Tower] 升级到 %d 级！" % current_level)
 
+## 根据当前等级重算伤害/攻速/范围，同步到攻击组件并重设定时器
 func update_tower_stats() -> void:
 	if not attack_component or not config:
+		return
+	if config.attack_mode == AttackMode.NONE:
 		return
 
 	var new_damage: float = TowerConfig.get_damage_at_level(config, current_level)
@@ -270,6 +286,7 @@ func set_selected(selected: bool) -> void:
 		if _selection_indicator:
 			_selection_indicator.visible = false
 
+## 销毁塔：移除光环/被动、在原位创建废墟、释放节点
 func destroy() -> void:
 	if is_destroyed:
 		return
@@ -323,6 +340,7 @@ func get_tower_info_text() -> String:
 
 	return info_text
 
+## 应用 Buff：取最大值叠加，不刷新则延长持续时间
 func apply_buff(damage_bonus: float, speed_bonus: float, duration: float) -> void:
 	_buff_damage_bonus = maxf(_buff_damage_bonus, damage_bonus)
 	_buff_speed_bonus = maxf(_buff_speed_bonus, speed_bonus)

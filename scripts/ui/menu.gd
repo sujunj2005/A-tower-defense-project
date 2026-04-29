@@ -93,7 +93,7 @@ func _setup_ui() -> void:
 	_lang_btn = _create_button(tr("BTN_LANGUAGE"), _on_language_pressed)
 	vbox.add_child(_lang_btn)
 
-	if Global.debug_mode:
+	if OS.is_debug_build():
 		_debug_btn = Button.new()
 		_debug_btn.text = tr("BTN_DEBUG_TEST_MAP")
 		_debug_btn.position = Vector2(20, 20)
@@ -157,6 +157,8 @@ func _update_continue_button() -> void:
 		return
 	var saved_state: int = ss.get_saved_game_state(0)
 	if saved_state < 0:
+		return
+	if saved_state == GameState.State.ENDING:
 		return
 	_continue_btn.visible = true
 

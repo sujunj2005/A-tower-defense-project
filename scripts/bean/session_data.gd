@@ -32,7 +32,9 @@ var initial_towers: Dictionary = {}
 @export var attributes: Dictionary = {
 	"intelligence": 50,
 	"courage": 50,
-	"health": 100
+	"health": 100,
+	"happiness": 70,
+	"appearance": 50
 }
 
 @export var hidden_attributes: Dictionary = {
@@ -181,7 +183,7 @@ static func from_dict(data: Dictionary) -> GameSessionData:
 	session.home_health = data.get("home_health", 100.0)
 	session.max_home_health = data.get("max_home_health", 100.0)
 	session.accumulated_damage = data.get("accumulated_damage", 0.0)
-	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100, "charm": 30, "work_ability": 0, "luck": 30})
+	session.attributes = data.get("attributes", {"intelligence": 50, "courage": 50, "health": 100, "charm": 30, "work_ability": 0, "luck": 30, "happiness": 70, "appearance": 50})
 	session.hidden_attributes = data.get("hidden_attributes", {"willpower": 50, "craziness": 50, "discipline": 50})
 	session.karma = int(data.get("karma", 0))
 	session.fame = int(data.get("fame", 0))

@@ -56,7 +56,7 @@ YOU_RECEIVED,你获得,You Received
 NEW_TRAITS,——新获得词条——,——New Traits——
 NEW_TOWERS,——新获得防御塔——,——New Towers——
 GOLD_PLUS,金币 +%d,Gold +%d
-GOLD_MINUS,金币 %d,Gold %d
+GOLD_MINUS,金币 -%d,Gold -%d
 BATTLE_RATING,战斗评价：%s,Battle Rating: %s
 INTEREST_INCOME,利息收入：%d,Interest Income: %d
 STAGE_GROWTH,—— 阶段属性增长 ——,—— Stage Attribute Growth ——
@@ -167,28 +167,18 @@ TOWER_CHINESE_ADVANCED_NAME,语文之塔·进阶,Chinese Advanced Tower
 TOWER_MATH_BASIC_NAME,数学之塔,Math Tower
 TOWER_MATH_ADVANCED_NAME,数学之塔·进阶,Math Advanced Tower
 TOWER_MATH_MASTER_NAME,数学之塔·大师,Math Master Tower
-TOWER_ENGLISH_BASIC_NAME,英语之塔,English Tower
-TOWER_SCIENCE_BASIC_NAME,理综之塔,Science Tower
+TOWER_SCHOLARSHIP_BASIC_NAME,学问之塔,Scholarship Tower
+TOWER_MATH_BASIC_NAME,数学之塔,Math Tower
 TOWER_SCIENCE_ADVANCED_NAME,理综之塔·进阶,Science Advanced Tower
 TOWER_PROGRAMMING_BASIC_NAME,编程之塔,Programming Tower
-TOWER_PROGRAMMING_ADVANCED_NAME,编程之塔·进阶,Programming Advanced Tower
-TOWER_TIME_BASIC_NAME,时间管理塔,Time Management Tower
-TOWER_TIME_ADVANCED_NAME,时间管理塔·进阶,Time Management Adv. Tower
-TOWER_COMMUNICATION_BASIC_NAME,沟通能力塔,Communication Tower
-TOWER_COMMUNICATION_ADVANCED_NAME,沟通能力塔·进阶,Communication Adv. Tower
-TOWER_NETWORK_BASIC_NAME,人脉关系塔,Networking Tower
-TOWER_FINANCE_BASIC_NAME,理财能力塔,Finance Tower
 TOWER_SPORTS_BASIC_NAME,体育之塔,Sports Tower
-TOWER_ARTIST_BASIC_NAME,艺术之塔,Art Tower
 TOWER_ENGINEER_BASIC_NAME,工程之塔,Engineering Tower
-TOWER_PROFESSION_BASIC_NAME,职业之塔,Profession Tower
-TOWER_BUSINESS_BASIC_NAME,商业之塔,Business Tower
-TOWER_BUSINESS_ADVANCED_NAME,商业之塔·进阶,Business Advanced Tower
-TOWER_HISTORY_ADVANCED_NAME,历史之塔·进阶,History Advanced Tower
-TOWER_HISTORY_MASTER_NAME,历史之塔·大师,History Master Tower
+TOWER_COMMUNICATION_ADVANCED_NAME,沟通能力塔·进阶,Communication Adv. Tower
+TOWER_FINANCE_ADVANCED_NAME,金融之塔·进阶,Finance Adv. Tower
+TOWER_TIME_ADVANCED_NAME,时间管理塔·进阶,Time Management Adv. Tower
 TOWER_LEADERSHIP_ADVANCED_NAME,领导力之塔·进阶,Leadership Adv. Tower
-TOWER_FIRE_ADVANCED_NAME,烈焰塔,Flame Tower
-TOWER_ICE_ADVANCED_NAME,寒冰塔,Ice Tower
+TOWER_PHILOSOPHY_MASTER_NAME,哲学之塔·大师,Philosophy Master Tower
+TOWER_FATE_MASTER_NAME,命运之塔·大师,Fate Master Tower
 TOWER_RUINS_NAME,防御塔废墟,Tower Ruins
 ENEMY_HOMEWORK_NAME,作业怪,Homework Monster
 ENEMY_EXAM_NAME,考试怪,Exam Monster
@@ -202,6 +192,28 @@ ENEMY_PRESSURE_SCHOOL_NAME,升学压力,School Pressure
 ENEMY_INVOLUTION_NAME,内卷怪,Involution Monster
 ENEMY_BOSS_MIDLIFE_CRISIS_NAME,中年危机,Midlife Crisis Boss
 ENEMY_BOSS_FINAL_JUDGMENT_NAME,最终审判,Final Judgment Boss
+ABILITY_SPEED_BURST_NAME,加速冲刺,Speed Burst
+ABILITY_SPEED_BURST_DESC,低血量时速度大幅提升,Speed greatly increases at low health
+ABILITY_REGEN_NAME,自愈,Regeneration
+ABILITY_REGEN_DESC,持续恢复生命值,Continuously restores health
+ABILITY_PHASE_SHIFT_NAME,相位转移,Phase Shift
+ABILITY_PHASE_SHIFT_DESC,周期性隐身无法被攻击,Periodically becomes invisible and untargetable
+ABILITY_GOLD_DRAIN_NAME,经济侵蚀,Gold Drain
+ABILITY_GOLD_DRAIN_DESC,持续偷取玩家金币,Continuously steals player gold
+ABILITY_SHIELD_BURST_NAME,护盾爆发,Shield Burst
+ABILITY_SHIELD_BURST_DESC,周期性获得护盾,Periodically gains a shield
+ABILITY_PHASE_2_NAME,二阶段变身,Phase 2 Transform
+ABILITY_PHASE_2_DESC,血量低于50%时强化,Empowered when health drops below 50%
+ABILITY_RAGE_SLAM_NAME,狂暴猛击,Rage Slam
+ABILITY_RAGE_SLAM_DESC,对范围内防御塔造成伤害,Deals damage to towers in range
+ABILITY_JUDGMENT_NAME,审判,Judgment
+ABILITY_JUDGMENT_DESC,低血量时消灭防御塔,Destroys towers at low health
+ABILITY_REGRET_STORM_NAME,遗憾风暴,Regret Storm
+ABILITY_REGRET_STORM_DESC,全图AOE伤害防御塔,Deals AOE damage to all towers
+STAGE_GOLD_BONUS_NAME,阶段金币奖励,Stage Gold Bonus
+STAGE_GOLD_BONUS_DESC,阶段开始时获得额外金币,Extra gold at stage start
+DIFFICULTY_GOLD_BONUS_NAME,难度金币调整,Difficulty Gold Adjustment
+DIFFICULTY_GOLD_BONUS_DESC,根据难度调整初始金币,Starting gold adjusted by difficulty
 EVENT_KINDERGARTEN_SHOW_NAME,幼儿园表演,Kindergarten Performance
 EVENT_KINDERGARTEN_SHOW_DESC,幼儿园要举办六一表演，老师问你想参加什么节目。,The kindergarten is holding a Children's Day show. The teacher asks what you'd like to perform.
 EVENT_MATH_CONTEST_NAME,数学竞赛,Math Competition
@@ -605,6 +617,7 @@ LIFE_CHOICE_TRAIT_SELECTED_NONE,暂未选择任何特质,No traits selected
 LIFE_CHOICE_TRAIT_SELECTED_FMT,已选：%s,Selected: %s
 BIRTHDAY_UNIT_YEAR,年,Year
 BIRTHDAY_ZODIAC_PREFIX,星座：,Zodiac:
+BIRTHDAY_MOON_ZODIAC_PREFIX,月亮星座：,Moon Zodiac:
 ZODIAC_CAPRICORN,摩羯座,Capricorn
 ZODIAC_AQUARIUS,水瓶座,Aquarius
 ZODIAC_PISCES,双鱼座,Pisces
@@ -1344,3 +1357,109 @@ TRAIT_TOWER_BARGAIN_2_DESC,防御塔建造费用-20%,Tower build cost -20%
 TRAIT_EFFECT_FORMAT,%s：%s,%s: %s
 TRAIT_LOST_FORMAT,失去词条：%s,Lost Trait: %s
 OPTION_PARENTS_CARE_D_TEXT,让父母自己住，周末去看望,"Let parents live independently, visit on weekends"
+SKILL_PANEL_TITLE,羁绊,Bonds
+SKILL_INSPIRE_NAME,鼓舞,Inspire
+SKILL_INSPIRE_DESC,所有防御塔攻击力+50%，攻速+20%，持续8秒,All towers +50% DMG, +20% ATK SPD for 8s
+SKILL_TIME_FREEZE_NAME,时间冻结,Time Freeze
+SKILL_TIME_FREEZE_DESC,冻结所有敌人3秒,Freeze all enemies for 3s
+SKILL_POISON_ZONE_NAME,毒圈,Poison Zone
+SKILL_POISON_ZONE_DESC,在指定位置释放毒圈，范围内敌人每秒受到8点伤害，持续10秒,Deploy poison zone at target. 8 DPS in range for 10s
+SKILL_LOCKED_HINT,需要%s好感度≥%d解锁,Requires %s Favor ≥%d to unlock
+NPC_GRANDPA_P,爷爷,Grandpa
+NPC_GRANDMA_P,奶奶,Grandma
+NPC_GRANDMA_M,姥姥,Grandma
+EVENT_DIVINE_ENCOUNTER_NAME,神圣邂逅,Divine Encounter
+EVENT_DIVINE_ENCOUNTER_DESC,一道金光闪过，一个声音在你脑海中响起...,"A golden light flashes, a voice echoes in your mind..."
+OPTION_DIVINE_ENCOUNTER_A_TEXT,接受祝福，踏上非凡之路,Accept the blessing
+OPTION_DIVINE_ENCOUNTER_B_TEXT,拒绝并坚守本心,Refuse and stay true
+OPTION_DIVINE_ENCOUNTER_C_TEXT,讨价还价，索要更多,Negotiate for more
+EVENT_LOTTERY_JACKPOT_NAME,彩票中奖,Lottery Jackpot
+EVENT_LOTTERY_JACKPOT_DESC,你随手买了一张彩票，然后...,You bought a lottery ticket on a whim...
+OPTION_LOTTERY_JACKPOT_A_TEXT,辞去工作，享受人生,Quit and enjoy life
+OPTION_LOTTERY_JACKPOT_B_TEXT,继续低调生活,Stay humble
+OPTION_LOTTERY_JACKPOT_C_TEXT,全部捐出，造福社会,Donate it all
+EVENT_CHILDHOOD_PRODIGY_NAME,天赋异禀,Childhood Prodigy
+EVENT_CHILDHOOD_PRODIGY_DESC,你展现出远超同龄人的天赋...,You show extraordinary talent...
+OPTION_CHILDHOOD_PRODIGY_A_TEXT,全力培养，牺牲童年,Push for greatness
+OPTION_CHILDHOOD_PRODIGY_B_TEXT,顺其自然,Let it develop naturally
+OPTION_CHILDHOOD_PRODIGY_C_TEXT,过度施压，急功近利,Over-push for results
+EVENT_WITNESS_CRIME_NAME,目睹犯罪,Witness a Crime
+EVENT_WITNESS_CRIME_DESC,你目睹了一场犯罪，你的选择将改变一切...,You witness a crime unfolding...
+OPTION_WITNESS_CRIME_A_TEXT,勇敢报警,Report to police
+OPTION_WITNESS_CRIME_B_TEXT,装作没看见,Pretend you saw nothing
+OPTION_WITNESS_CRIME_C_TEXT,参与其中,Join in
+EVENT_NEAR_DEATH_EXPERIENCE_NAME,死里逃生,Near Death
+EVENT_NEAR_DEATH_EXPERIENCE_DESC,一场意外让你与死神擦肩而过...,An accident brings you face to face with death...
+OPTION_NEAR_DEATH_EXPERIENCE_A_TEXT,重新审视人生,Re-examine your life
+OPTION_NEAR_DEATH_EXPERIENCE_B_TEXT,更加谨慎,Become more cautious
+OPTION_NEAR_DEATH_EXPERIENCE_C_TEXT,活在当下,Live in the moment
+EVENT_SECOND_CHANCE_NAME,第二人生,Second Chance
+EVENT_SECOND_CHANCE_DESC,人生到了晚年，你得到了一个意想不到的机会...,"Late in life, an unexpected opportunity..."
+OPTION_SECOND_CHANCE_A_TEXT,全力以赴,Go all in
+OPTION_SECOND_CHANCE_B_TEXT,稳健投资,Invest wisely
+OPTION_SECOND_CHANCE_C_TEXT,安享晚年,Enjoy retirement
+EVENT_SCHOOL_BULLY_NAME,校园霸凌,School Bully
+EVENT_SCHOOL_BULLY_DESC,学校里有人在欺负你...,Someone is bullying you at school...
+OPTION_SCHOOL_BULLY_A_TEXT,勇敢反击,Fight back
+OPTION_SCHOOL_BULLY_B_TEXT,默默忍受,Endure silently
+OPTION_SCHOOL_BULLY_C_TEXT,告诉老师/家长,Tell a teacher
+EVENT_SECRET_HIDING_PLACE_NAME,秘密基地,Secret Hiding Place
+EVENT_SECRET_HIDING_PLACE_DESC,你发现了一个完美的秘密基地...,You found a perfect secret hiding place...
+OPTION_SECRET_HIDING_PLACE_A_TEXT,和小伙伴一起玩,Play with friends
+OPTION_SECRET_HIDING_PLACE_B_TEXT,独自看书学习,Study alone
+OPTION_SECRET_HIDING_PLACE_C_TEXT,探索周围环境,Explore the surroundings
+EVENT_SCHOOL_ELECTION_NAME,竞选班委,School Election
+EVENT_SCHOOL_ELECTION_DESC,班级要选班长了...,The class is electing a monitor...
+OPTION_SCHOOL_ELECTION_A_TEXT,勇敢竞选,Run for election
+OPTION_SCHOOL_ELECTION_B_TEXT,专心学习,Focus on studies
+OPTION_SCHOOL_ELECTION_C_TEXT,支持好友,Support a friend
+EVENT_FIRST_PART_TIME_JOB_NAME,第一份兼职,First Part-time Job
+EVENT_FIRST_PART_TIME_JOB_DESC,你找到了第一份兼职工作...,You found your first part-time job...
+OPTION_FIRST_PART_TIME_JOB_A_TEXT,认真工作,Work diligently
+OPTION_FIRST_PART_TIME_JOB_B_TEXT,兼顾学习,Balance with studies
+OPTION_FIRST_PART_TIME_JOB_C_TEXT,辞职享受青春,Quit and enjoy youth
+EVENT_EMPTY_NEST_NAME,空巢综合症,Empty Nest
+EVENT_EMPTY_NEST_DESC,孩子长大了，要离开家了...,The kids are grown and leaving home...
+OPTION_EMPTY_NEST_A_TEXT,投入事业,Dive into career
+OPTION_EMPTY_NEST_B_TEXT,难以适应,Struggle to adapt
+OPTION_EMPTY_NEST_C_TEXT,重拾二人世界,Rekindle romance
+EVENT_KARMA_BLESSING_NAME,善有善报,Good Karma
+EVENT_KARMA_BLESSING_DESC,你做了太多好事，命运决定给你回报...,Fate rewards your good deeds...
+OPTION_KARMA_BLESSING_A_TEXT,心中充满喜悦,Feel joy
+OPTION_KARMA_BLESSING_B_TEXT,更加坚定,Stay resolved
+OPTION_KARMA_BLESSING_C_TEXT,获得智慧启迪,Receive wisdom
+EVENT_KARMA_RETRIBUTION_NAME,恶有恶报,Karma Strikes
+EVENT_KARMA_RETRIBUTION_DESC,你做了太多坏事，命运来讨债了...,Fate comes to collect...
+OPTION_KARMA_RETRIBUTION_A_TEXT,破罐破摔,Double down
+OPTION_KARMA_RETRIBUTION_B_TEXT,赎罪改过,Seek redemption
+OPTION_KARMA_RETRIBUTION_C_TEXT,无所谓,Don't care
+EVENT_FATHER_DRUNK_NAME,醉酒的父亲,Drunk Father
+EVENT_FATHER_DRUNK_DESC,父亲又喝醉了...,Father is drunk again...
+OPTION_FATHER_DRUNK_A_TEXT,扶他回家,Help him home
+OPTION_FATHER_DRUNK_B_TEXT,视而不见,Ignore him
+OPTION_FATHER_DRUNK_C_TEXT,和他谈一谈,Talk to him
+EVENT_BUCKET_LIST_NAME,遗愿清单,Bucket List
+EVENT_BUCKET_LIST_DESC,人生苦短，是时候列个清单了...,"Life is short, time to make a list..."
+OPTION_BUCKET_LIST_A_TEXT,环球旅行,Travel the world
+OPTION_BUCKET_LIST_B_TEXT,安度晚年,Peaceful retirement
+OPTION_BUCKET_LIST_C_TEXT,传道授业,Teach the next generation
+EVENT_WILL_WRITING_NAME,遗嘱,Will Writing
+EVENT_WILL_WRITING_DESC,是时候考虑身后事了...,Time to think about what comes after...
+OPTION_WILL_WRITING_A_TEXT,公平分配,Fair distribution
+OPTION_WILL_WRITING_B_TEXT,暂时不考虑,Not yet
+OPTION_WILL_WRITING_C_TEXT,偏袒特定子女,Favor certain children
+EVENT_PROFESSION_MILESTONE_NAME,职业里程碑,Career Milestone
+EVENT_PROFESSION_MILESTONE_DESC,你在职业生涯中达到了一个重要节点...,A major career milestone...
+OPTION_PROFESSION_MILESTONE_A_TEXT,再接再厉,Push further
+OPTION_PROFESSION_MILESTONE_B_TEXT,保持现状,Stay the course
+OPTION_PROFESSION_MILESTONE_C_TEXT,换个方向,Change direction
+EVENT_TALENT_DISCOVERY_NAME,发现天赋,Talent Discovery
+EVENT_TALENT_DISCOVERY_DESC,你发现自己在某个领域特别有天赋...,You discover a special talent...
+OPTION_TALENT_DISCOVERY_A_TEXT,深入钻研,Dive deep
+OPTION_TALENT_DISCOVERY_B_TEXT,当作爱好,Keep as hobby
+OPTION_TALENT_DISCOVERY_C_TEXT,展示给朋友,Show off to friends
+EVENT_TALENT_MASTERY_NAME,天赋大成,Talent Mastery
+EVENT_TALENT_MASTERY_DESC,多年的努力，你的天赋终于开花结果...,Years of effort bear fruit...
+OPTION_TALENT_MASTERY_A_TEXT,走向世界,Go global
+OPTION_TALENT_MASTERY_B_TEXT,知足常乐,Be content
+OPTION_TALENT_MASTERY_C_TEXT,追求极致,Pursue perfection
