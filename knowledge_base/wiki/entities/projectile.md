@@ -595,7 +595,7 @@ func _handle_enemy_hit(enemy: Node2D):
 ### Wiki 层相关
 - [物理系统介绍](../concepts/physics-intro.md) - 物理核心概念
 - [Area2D 概念](../concepts/area2d-concept.md) - Area2D 使用
-- [碰撞检测方案对比](./collision-detection-comparison.md) - 碰撞方案选择
+- [碰撞检测方案对比](../comparisons/collision-detection-comparison.md) - 碰撞方案选择
 - [敌人实体设计](./enemy.md) - 敌人受伤处理
 - [防御塔设计](./tower.md) - 塔的投射物发射
 - [玩家实体设计](./player.md) - 玩家发射的投射物

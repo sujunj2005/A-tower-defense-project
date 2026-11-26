@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **Godot 版本**: 4.6+  
-> **来源**: [10C_Canvas_Item_Shader.md](../base/shaders/10C_Canvas_Item_Shader.md)
+> **来源**: [10C_Canvas_Item_Shader.md](../../base/shaders/10C_Canvas_Item_Shader.md)
 
 ---
 
@@ -447,10 +447,10 @@ void fragment() {
 
 ## 🔗 相关链接
 
-- **Base 层来源**: [10C_Canvas_Item_Shader.md](../base/shaders/10C_Canvas_Item_Shader.md)
+- **Base 层来源**: [10C_Canvas_Item_Shader.md](../../base/shaders/10C_Canvas_Item_Shader.md)
 - **Wiki 概念**: 
-  - [着色器核心概念](./shader-concepts.md)
-  - [着色器语言参考](./shading-language-reference.md)
+  - [着色器核心概念](../concepts/shader-concepts.md)
+  - [着色器语言参考](../concepts/shading-language-reference.md)
 - **Wiki 指南**: [Spatial 着色器指南](./spatial-shader-guide.md)
 
 ---

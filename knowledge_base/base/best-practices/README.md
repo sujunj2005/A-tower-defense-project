@@ -1,14 +1,8 @@
-# Base 层 - 最佳实践（精简速查版）
+# Base 层 - 最佳实践（已迁移）
 
-**位置**: `base/best-practices/`
-
-**来源**: Godot 官方文档 + 实战经验  
-**最后更新**: 2026-04-07  
-**文档数**: 6 份
-
-> **📚 版本说明**：  
-> - 📙 **精简速查版**（本目录）：适合快速查阅核心要点  
-> - 📘 **完整深度版**：需要系统学习？查看 [code-standards 目录](../practical-experiences/code-standards/)
+> **重要**: 主要的最佳实践目录已迁移至 **[base/practical-experiences/best-practices/](../practical-experiences/best-practices/)**。  
+> 本目录保留通用场景组织/数据偏好/逻辑偏好文档供兼容查阅。  
+> **最后更新**: 2026-04-29
 
 ---
 
@@ -26,9 +20,9 @@
 
 | 文档 | 描述 | 版本 | 完整版链接 |
 |------|------|------|-----------|
-| [20A_Godot_Large_Project_Pitfalls_Deep_Dive.md](./20A_Godot_Large_Project_Pitfalls_Deep_Dive.md) | **大型项目深度避坑指南（精简速查版）** | v1.0 | [完整深度版](../practical-experiences/code-standards/20A_Godot_Large_Project_Pitfalls_Deep_Dive.md) |
-| [20B_Godot_Pitfalls_Verification_Guidelines.md](./20B_Godot_Pitfalls_Verification_Guidelines.md) | **避坑验证准则（精简指南版）** | v1.0 | [完整系统版](../practical-experiences/code-standards/20B_Godot_Pitfalls_Verification_Guidelines.md) |
-| [20C_Godot_Best_Practices_Quick_Reference.md](./20C_Godot_Best_Practices_Quick_Reference.md) | **最佳实践速查（精简速查版）** | v1.0 | [详细实践版](../practical-experiences/code-standards/20C_Godot_Best_Practices_Quick_Reference.md) |
+| [20A_Godot_Large_Project_Pitfalls_Deep_Dive.md](../practical-experiences/best-practices/20A_Godot_Large_Project_Pitfalls_Deep_Dive.md) | **大型项目深度避坑指南（精简速查版）** | v1.0 | [完整深度版](../practical-experiences/code-standards/20A_Godot_Large_Project_Pitfalls_Deep_Dive.md) |
+| [20B_Godot_Pitfalls_Verification_Guidelines.md](../practical-experiences/best-practices/20B_Godot_Pitfalls_Verification_Guidelines.md) | **避坑验证准则（精简指南版）** | v1.0 | [完整系统版](../practical-experiences/code-standards/20B_Godot_Pitfalls_Verification_Guidelines.md) |
+| [20C_Godot_Best_Practices_Quick_Reference.md](../practical-experiences/best-practices/20C_Godot_Best_Practices_Quick_Reference.md) | **最佳实践速查（精简速查版）** | v1.0 | [详细实践版](../practical-experiences/code-standards/20C_Godot_Best_Practices_Quick_Reference.md) |
 
 ---
 

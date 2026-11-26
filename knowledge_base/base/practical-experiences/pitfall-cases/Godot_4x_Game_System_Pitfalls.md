@@ -9,30 +9,30 @@
 
 ## 目录
 
-- [§40 Tooltip遮挡触发元素导致闪烁循环](#40-tooltip遮挡触发元素导致闪烁循环-🟡-中)
-- [§41 场景切换绕过导致UI不更新](#41-场景切换绕过导致ui不更新-🔴-高)
-- [§42 分裂/召唤敌人未被计入存活数](#42-分裂召唤敌人未被计入存活数-🟡-中)
-- [§43 字典中保留已释放节点引用导致freed instance报错](#43-字典中保留已释放节点引用导致freed-instance报错-🔴-高)
-- [§44 击退效果与路径移动冲突](#44-击退效果与路径移动冲突-🟡-中)
-- [§45 事件/战斗奖励重复显示](#45-事件战斗奖励重复显示-🟡-中)
-- [§46 词条效果字段名不一致](#46-词条效果字段名不一致-🟡-中)
-- [§47 UI计数显示语义错误——"已放置/最大"vs"剩余可放/最大"](#47-ui计数显示语义错误已放置最大vs剩余可放最大-🟡-中)
-- [§48 变量命名与GDScript内置标识符冲突](#48-变量命名与gdscript内置标识符冲突-🟡-中)
-- [§49 已满的塔从UI消失而非变灰](#49-已满的塔从ui消失而非变灰-🟡-中)
-- [§50 调试误判——在正确的逻辑上反复修改](#50-调试误判在正确的逻辑上反复修改-🟢-低)
-- [§51 节点被移出场景树后调用get_node_or_null报错](#51-节点被移出场景树后调用get_node_or_null报错-🔴-高)
-- [§52 以freed对象为key的Dictionary遍历崩溃](#52-以freed对象为key的dictionary遍历崩溃-🔴-高)
-- [§53 怪物路径偏移不能用侧向力实现](#53-怪物路径偏移不能用侧向力实现-🟡-中)
-- [§54 分裂/召唤怪偏移需叠加父怪偏移](#54-分裂召唤怪偏移需叠加父怪偏移-🟡-中)
-- [§55 怪出生时current_path_index应从1开始](#55-怪出生时current_path_index应从1开始-🟡-中)
-- [§56 实际生成路径可能与预期不同](#56-实际生成路径可能与预期不同-🟡-中)
-- [§57 Dictionary.has()对null值返回true](#57-dictionaryhas对null值返回true-🟡-中)
-- [§58 老年阶段不应无条件触发终局](#58-老年阶段不应无条件触发终局-🔴-高)
-- [§81 暴击特效不应作为额外伤害实例](#81-暴击特效不应作为额外伤害实例-🔴-高)
-- [§82 debuff_amount设置但未使用导致效果不生效](#82-debuff_amount设置但未使用导致效果不生效-🟡-中)
-- [§83 翻译键不匹配导致格式化报错](#83-翻译键不匹配导致格式化报错-🔴-高)
-- [§84 终局状态机被UI回调覆盖](#84-终局状态机被ui回调覆盖-🔴-高)
-- [§85 ParticleProcessMaterial.color_ramp类型限制](#85-particleprocessmaterialcolor_ramp类型限制-🟡-中)
+- [§40 Tooltip遮挡触发元素导致闪烁循环](#40-tooltip遮挡触发元素导致闪烁循环--中)
+- [§41 场景切换绕过导致UI不更新](#41-场景切换绕过导致ui不更新--高)
+- [§42 分裂/召唤敌人未被计入存活数](#42-分裂召唤敌人未被计入存活数--中)
+- [§43 字典中保留已释放节点引用导致freed instance报错](#43-字典中保留已释放节点引用导致freed-instance报错--高)
+- [§44 击退效果与路径移动冲突](#44-击退效果与路径移动冲突--中)
+- [§45 事件/战斗奖励重复显示](#45-事件战斗奖励重复显示--中)
+- [§46 词条效果字段名不一致](#46-词条效果字段名不一致--中)
+- [§47 UI计数显示语义错误——"已放置/最大"vs"剩余可放/最大"](#47-ui计数显示语义错误已放置最大vs剩余可放最大--中)
+- [§48 变量命名与GDScript内置标识符冲突](#48-变量命名与gdscript内置标识符冲突--中)
+- [§49 已满的塔从UI消失而非变灰](#49-已满的塔从ui消失而非变灰--中)
+- [§50 调试误判——在正确的逻辑上反复修改](#50-调试误判在正确的逻辑上反复修改--低)
+- [§51 节点被移出场景树后调用get_node_or_null报错](#51-节点被移出场景树后调用get_node_or_null报错--高)
+- [§52 以freed对象为key的Dictionary遍历崩溃](#52-以freed对象为key的dictionary遍历崩溃--高)
+- [§53 怪物路径偏移不能用侧向力实现](#53-怪物路径偏移不能用侧向力实现--中)
+- [§54 分裂/召唤怪偏移需叠加父怪偏移](#54-分裂召唤怪偏移需叠加父怪偏移--中)
+- [§55 怪出生时current_path_index应从1开始](#55-怪出生时current_path_index应从1开始--中)
+- [§56 实际生成路径可能与预期不同](#56-实际生成路径可能与预期不同--中)
+- [§57 Dictionary.has()对null值返回true](#57-dictionaryhas对null值返回true--中)
+- [§58 老年阶段不应无条件触发终局](#58-老年阶段不应无条件触发终局--高)
+- [§81 暴击特效不应作为额外伤害实例](#81-暴击特效不应作为额外伤害实例--高)
+- [§82 debuff_amount设置但未使用导致效果不生效](#82-debuff_amount设置但未使用导致效果不生效--中)
+- [§83 翻译键不匹配导致格式化报错](#83-翻译键不匹配导致格式化报错--高)
+- [§84 终局状态机被UI回调覆盖](#84-终局状态机被ui回调覆盖--高)
+- [§85 ParticleProcessMaterial.color_ramp类型限制](#85-particleprocessmaterialcolor_ramp类型限制--中)
 
 ---
 
@@ -77,7 +77,7 @@ func _set_mouse_filter_ignore_recursive(node: Node) -> void:
 
 **规范**: 所有动态创建的悬浮UI组件，必须设置 `mouse_filter = MOUSE_FILTER_IGNORE`，避免遮挡触发元素
 
-**相关规范**: [Godot 编码规范汇总 - 15.3 悬浮UI组件设置mouse_filter=IGNORE](../../../Godot%20编码规范汇总.md#153-悬浮-ui-组件设置-mouse_filterignore-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.3 悬浮UI组件设置mouse_filter=IGNORE](../../../outline/Godot%20编码规范汇总.md#153-悬浮-ui-组件设置-mouse_filterignore--建议)
 
 ---
 
@@ -111,7 +111,7 @@ func _show_battle_result():
 
 **规范**: 场景切换逻辑必须统一入口，避免多处独立实现相同功能导致绕过
 
-**相关规范**: [Godot 编码规范汇总 - 15.5 场景切换逻辑统一入口](../../../Godot%20编码规范汇总.md#155-场景切换逻辑统一入口-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 15.5 场景切换逻辑统一入口](../../../outline/Godot%20编码规范汇总.md#155-场景切换逻辑统一入口--强制)
 
 ---
 
@@ -159,7 +159,7 @@ func _spawn_split_enemy(pos: Vector2) -> void:
 
 **规范**: 优先使用group动态查询而非手动维护计数器；动态创建的实体必须正确连接生命周期信号
 
-**相关规范**: [Godot 编码规范汇总 - 15.1 动态敌人管理使用group而非手动计数](../../../Godot%20编码规范汇总.md#151-动态敌人管理使用-group-而非手动计数-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.1 动态敌人管理使用group而非手动计数](../../../outline/Godot%20编码规范汇总.md#151-动态敌人管理使用-group-而非手动计数--建议)
 
 ---
 
@@ -201,7 +201,7 @@ func _process(delta: float) -> void:
 
 **规范**: 缓存节点引用的字典/数组，必须在节点释放时同步清理；访问前必须用 `is_instance_valid()` 检查；用 `.get()` 而非 `[]` 访问避免赋值时触发错误
 
-**相关规范**: [Godot 编码规范汇总 - 15.2 缓存节点引用必须同步清理](../../../Godot%20编码规范汇总.md#152-缓存节点引用必须同步清理-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 15.2 缓存节点引用必须同步清理](../../../outline/Godot%20编码规范汇总.md#152-缓存节点引用必须同步清理--强制)
 
 ---
 
@@ -247,7 +247,7 @@ func apply_knockback(direction: Vector2, force: float) -> void:
 
 **规范**: 位移效果（击退、拉拽等）与常规移动逻辑必须互斥，不能同时执行
 
-**相关规范**: [Godot 编码规范汇总 - 15.4 位移效果与常规移动互斥](../../../Godot%20编码规范汇总.md#154-位移效果与常规移动互斥-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.4 位移效果与常规移动互斥](../../../outline/Godot%20编码规范汇总.md#154-位移效果与常规移动互斥--建议)
 
 ---
 
@@ -286,7 +286,7 @@ func _show_battle_result():
 
 **规范**: 不同阶段的奖励数据必须分开存储和展示，避免跨阶段重复显示
 
-**相关规范**: [Godot 编码规范汇总 - 15.6 不同阶段奖励数据分开存储](../../../Godot%20编码规范汇总.md#156-不同阶段奖励数据分开存储-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.6 不同阶段奖励数据分开存储](../../../outline/Godot%20编码规范汇总.md#156-不同阶段奖励数据分开存储--建议)
 
 ---
 
@@ -327,7 +327,7 @@ func _format_effect(effect: Dictionary) -> String:
 
 **规范**: 效果格式化函数必须根据effect type读取对应字段，不能假设所有效果都用value字段
 
-**相关规范**: [Godot 编码规范汇总 - 15.7 效果格式化按type读取对应字段](../../../Godot%20编码规范汇总.md#157-效果格式化按-type-读取对应字段-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.7 效果格式化按type读取对应字段](../../../outline/Godot%20编码规范汇总.md#157-效果格式化按-type-读取对应字段--建议)
 
 ---
 
@@ -361,7 +361,7 @@ count_label.text = "%d/%d" % [tower_remaining, tower_max]
 
 **规范**: UI显示的数字语义必须与用户心智模型一致。"还可以放几个"比"已经放了几个"更有用
 
-**相关规范**: [Godot 编码规范汇总 - 15.9 UI计数显示使用"剩余/最大"格式](../../../Godot%20编码规范汇总.md#159-ui计数显示使用剩余最大格式-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.9 UI计数显示使用"剩余/最大"格式](../../../outline/Godot%20编码规范汇总.md#159-ui计数显示使用剩余最大格式--建议)
 
 ---
 
@@ -427,7 +427,7 @@ var attr_text: String = "hello"       # 属性文本
 
 **规范**: 局部变量命名必须避免与GDScript内置标识符冲突，使用更具体的语义化名称。Godot 会在控制台报 SHADOWED_GLOBAL_IDENTIFIER 警告，必须修复
 
-**相关规范**: [Godot 编码规范汇总 - 2.1.3 变量命名禁止与内置标识符冲突](../../../Godot%20编码规范汇总.md#213-变量命名禁止与内置标识符冲突-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 2.1.3 变量命名禁止与内置标识符冲突](../../../outline/Godot%20编码规范汇总.md#213-变量命名禁止与内置标识符冲突--强制)
 
 ---
 
@@ -477,7 +477,7 @@ func update_tower_counts() -> void:
 
 **规范**: UI中"不可用"的选项应该变灰禁用而非消失，保持用户对完整选项的认知
 
-**相关规范**: [Godot 编码规范汇总 - 15.9 UI计数显示使用"剩余/最大"格式](../../../Godot%20编码规范汇总.md#159-ui计数显示使用剩余最大格式-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.9 UI计数显示使用"剩余/最大"格式](../../../outline/Godot%20编码规范汇总.md#159-ui计数显示使用剩余最大格式--建议)
 
 ---
 
@@ -512,7 +512,7 @@ func update_tower_counts() -> void:
 
 **规范**: 调试bug时先确认"正确行为"的定义，避免在正确的逻辑上反复修改。先问清楚"期望显示什么"再动手
 
-**相关规范**: [Godot 编码规范汇总 - 15.10 调试前确认"正确行为"定义](../../../Godot%20编码规范汇总.md#1510-调试前确认正确行为定义-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 15.10 调试前确认"正确行为"定义](../../../outline/Godot%20编码规范汇总.md#1510-调试前确认正确行为定义--建议)
 
 ---
 
@@ -548,7 +548,7 @@ func _on_option_pressed():
 
 **来源**: event_ui.gd _on_option_pressed()
 
-**相关规范**: [Godot 编码规范汇总 - 16.2 可能触发场景切换的调用后必须检查is_inside_tree()](../../../Godot%20编码规范汇总.md#162-可能触发场景切换的调用后必须检查is_inside_tree-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 16.2 可能触发场景切换的调用后必须检查is_inside_tree()](../../../outline/Godot%20编码规范汇总.md#162-可能触发场景切换的调用后必须检查is_inside_tree--强制)
 
 ---
 
@@ -588,7 +588,7 @@ for entry in damage_dealers:
 
 **来源**: enemy.gd distribute_experience()
 
-**相关规范**: [Godot 编码规范汇总 - 16.3 不要以对象实例作为Dictionary的key](../../../Godot%20编码规范汇总.md#163-不要以对象实例作为dictionary的key-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 16.3 不要以对象实例作为Dictionary的key](../../../outline/Godot%20编码规范汇总.md#163-不要以对象实例作为dictionary的key--强制)
 
 ---
 
@@ -631,7 +631,7 @@ func _apply_lateral_offset() -> void:
 
 **来源**: enemy.gd set_path() / _apply_lateral_offset()
 
-**相关规范**: [Godot 编码规范汇总 - 16.4 路径偏移必须一次性应用到所有路径点](../../../Godot%20编码规范汇总.md#164-路径偏移必须一次性应用到所有路径点-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 16.4 路径偏移必须一次性应用到所有路径点](../../../outline/Godot%20编码规范汇总.md#164-路径偏移必须一次性应用到所有路径点--强制)
 
 ---
 
@@ -720,7 +720,7 @@ enemy.current_path_index = 1  # 怪直接走向第二个转弯点
 
 **来源**: map_manager.gd vs enemy_spawner.gd
 
-**相关规范**: [Godot 编码规范汇总 - 16.1 修改代码前必须确认实际调用路径](../../../Godot%20编码规范汇总.md#161-修改代码前必须确认实际调用路径-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 16.1 修改代码前必须确认实际调用路径](../../../outline/Godot%20编码规范汇总.md#161-修改代码前必须确认实际调用路径--强制)
 
 ---
 
@@ -752,7 +752,7 @@ if option.get("battle_trigger") is Dictionary:
 
 **来源**: event_ui.gd display_event() / _show_consequence_popup()
 
-**相关规范**: [Godot 编码规范汇总 - 16.5 Dictionary值判断用.get()而非.has()](../../../Godot%20编码规范汇总.md#165-dictionary值判断用get而非has-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 16.5 Dictionary值判断用.get()而非.has()](../../../outline/Godot%20编码规范汇总.md#165-dictionary值判断用get而非has--建议)
 
 ---
 
@@ -850,7 +850,7 @@ func execute_effects(effects: Array, source: Node2D, target: Node2D) -> void:
 
 **涉及文件**: tower_attack_component.gd, enemy.gd, projectile.gd, effect_system.gd
 
-**相关规范**: [Godot 编码规范汇总 - 24.1 暴击=伤害倍率而非额外伤害实例](../../../Godot%20编码规范汇总.md#241-暴击伤害倍率而非额外伤害实例-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 24.1 暴击=伤害倍率而非额外伤害实例](../../../outline/Godot%20编码规范汇总.md#241-暴击伤害倍率而非额外伤害实例--强制)
 
 ---
 
@@ -887,7 +887,7 @@ func take_damage(amount: float, is_crit: bool = false) -> void:
 
 **涉及文件**: enemy.gd
 
-**相关规范**: [Godot 编码规范汇总 - 24.2 debuff效果验证](../../../Godot%20编码规范汇总.md#242-debuff效果验证-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 24.2 debuff效果验证](../../../outline/Godot%20编码规范汇总.md#242-debuff效果验证--建议)
 
 ---
 
@@ -925,7 +925,7 @@ var text: String = tr("ENEMY_DEBUFF") % [slow_amount, slow_timer]
 
 **涉及文件**: enemy_info_panel.gd, translations.csv
 
-**相关规范**: [Godot 编码规范汇总 - 24.3 翻译键一致性](../../../Godot%20编码规范汇总.md#243-翻译键一致性-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 24.3 翻译键一致性](../../../outline/Godot%20编码规范汇总.md#243-翻译键一致性--强制)
 
 ---
 
@@ -962,7 +962,7 @@ func _on_option_selected(option: Dictionary) -> void:
 
 **涉及文件**: event_ui.gd
 
-**相关规范**: [Godot 编码规范汇总 - 24.4 状态机回调防护](../../../Godot%20编码规范汇总.md#244-状态机回调防护-🔴-强制)
+**相关规范**: [Godot 编码规范汇总 - 24.4 状态机回调防护](../../../outline/Godot%20编码规范汇总.md#244-状态机回调防护--强制)
 
 ---
 
@@ -1001,7 +1001,7 @@ process_mat.color = Color(1.0, 0.3, 0.3)  # 简单纯色，无需渐变
 
 **涉及文件**: enemy.gd
 
-**相关规范**: [Godot 编码规范汇总 - 24.5 ParticleProcessMaterial颜色设置](../../../Godot%20编码规范汇总.md#245-particleprocessmaterial颜色设置-🟡-建议)
+**相关规范**: [Godot 编码规范汇总 - 24.5 ParticleProcessMaterial颜色设置](../../../outline/Godot%20编码规范汇总.md#245-particleprocessmaterial颜色设置--建议)
 
 ---
 
@@ -1026,12 +1026,12 @@ process_mat.color = Color(1.0, 0.3, 0.3)  # 简单纯色，无需渐变
 - [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md) - GDScript 代码规范
 
 ### Wiki 层相关
-- [常见踩坑避雷指南](../../wiki/guides/common-pitfalls.md)
-- [GDScript 代码规范](../../wiki/concepts/gdscript-standards.md)
+- [常见踩坑避雷指南](../../../wiki/guides/common-pitfalls.md)
+- [GDScript 代码规范](../../../wiki/concepts/gdscript-standards.md)
 
 ### 索引层相关
-- [踩坑记录完整索引](../../../踩坑记录完整索引.md)
-- [Godot 编码规范汇总](../../../Godot%20编码规范汇总.md)
+- [踩坑记录完整索引](../../../outline/踩坑记录完整索引.md)
+- [Godot 编码规范汇总](../../../outline/Godot%20编码规范汇总.md)
 
 ---
 

@@ -73,7 +73,7 @@
 | 方法 | 适用场景 | 详细说明 |
 |------|----------|----------|
 | **计时器** | 精确测量代码段耗时 | 使用 `Time.get_ticks_usec()` |
-| **Godot Profiler** | 内置分析，查看函数调用 | 📖 [17B_Profiler](../../07_Debug_and_Testing/17B_Profiler.md) |
+| **Godot Profiler** | 内置分析，查看函数调用 | 📖 [17B_Profiler](../../base/debug-and-testing/17B_Profiler.md) |
 | **外部 CPU Profiler** | 深度 CPU 分析 | VeryL、Instruments 等 |
 | **GPU Profiler** | GPU 瓶颈诊断 | Nsight、Radeon Profiler |
 | **帧率检查** | 快速判断是否达标 | `Engine.get_frames_per_second()` |
@@ -479,7 +479,7 @@ get_viewport().scaling_3d_scale = 0.7  # 以 70% 分辨率渲染
 
 - **[CPU 优化深度指南](../../base/practical-experiences/optimization-tips/14B_CPU_Optimization.md)** - Profiler 详解、脚本/物理/AI/GC 优化实战
 - **[GPU 优化深度指南](../../base/practical-experiences/optimization-tips/14C_GPU_Optimization.md)** - Draw Call 优化、Instancing、LOD、灯光、材质、后期处理、FSR
-- **[性能测量工具使用](../../07_Debug_and_Testing/17B_Profiler.md)** - Godot Profiler 详细教程
+- **[性能测量工具使用](../../base/debug-and-testing/17B_Profiler.md)** - Godot Profiler 详细教程
 
 ### 相关概念页面
 

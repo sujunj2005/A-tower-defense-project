@@ -26,7 +26,7 @@
 2. [测量性能](#2-测量性能)
 3. [性能问题类型](#3-性能问题类型)
 4. [优化原则](#4-优化原则)
-5. [常用优化技术](#5-常用优化技术)
+5. [常用优化技术](#5-常用优化技术概要索引)
 
 ---
 
@@ -50,7 +50,7 @@
 | 方法 | 适用场景 | 详细文档 |
 |------|----------|----------|
 | **计时器** | 精确测量代码段耗时 | 本节下方示例 |
-| **Godot Profiler** | 内置分析，查看函数调用 | 📖 [17B_Profiler](17B_Debug_and_Testing/17B_Profiler.md) |
+| **Godot Profiler** | 内置分析，查看函数调用 | 📖 [17B_Profiler](../../debug-and-testing/17B_Profiler.md) |
 | **外部 CPU Profiler** | 深度 CPU 分析（VeryL、Instruments） | 第三方工具 |
 | **GPU Profiler** | GPU 瓶颈诊断（Nsight、Radeon Profiler） | 📖 [14C_GPU_Optimization](14C_GPU_Optimization.md) |
 | **帧率检查** | 快速判断是否达标 | `Engine.get_frames_per_second()` |
@@ -68,7 +68,7 @@ func _process(_delta):
 ```
 
 > **踩坑点**：不同硬件的性能特征可能不同。建议在多种设备上测量，特别是移动设备。
-> 📖 **详细 Profiler 使用教程见 [17B_Profiler](17B_Debug_and_Testing/17B_Profiler.md) 和 [14B_CPU_Optimization](14B_CPU_Optimization.md)**
+> 📖 **详细 Profiler 使用教程见 [17B_Profiler](../../debug-and-testing/17B_Profiler.md) 和 [14B_CPU_Optimization](14B_CPU_Optimization.md)**
 
 ---
 

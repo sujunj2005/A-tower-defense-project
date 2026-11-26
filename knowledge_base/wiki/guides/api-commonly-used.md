@@ -1,7 +1,7 @@
 # Godot 常用 API 速查
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 19C_API_Commonly_Used.md](../../base/quick-reference/19C_API_Commonly_Used.md)  
+> **来源**: [Base 层 - 20C_API_Commonly_Used.md](../../base/quick-reference/20C_API_Commonly_Used.md)  
 > **重要性**: 🟡 推荐 - 高频 API 快速查询
 
 ---
@@ -181,7 +181,7 @@ Performance.get_monitor(Performance.OBJECT_COUNT)
 ## 🔗 相关资源
 
 ### Base 层
-- [19C_API_Commonly_Used.md](../../base/quick-reference/19C_API_Commonly_Used.md) - 常用 API 详解
+- [20C_API_Commonly_Used.md](../../base/quick-reference/20C_API_Commonly_Used.md) - 常用 API 详解
 
 ### Wiki 层
 - [GDScript 速查表](../guides/gdscript-cheatsheet.md) - 语法速查

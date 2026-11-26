@@ -8,8 +8,9 @@
 
 ```
 practical-experiences/
-├── pitfall-cases/        # 踩坑案例
+├── pitfall-cases/        # 踩坑案例（§ 系列 + P 系列项目实战踩坑）
 ├── code-standards/       # 代码规范
+├── best-practices/       # 最佳实践模式（项目实战提炼）
 ├── case-studies/         # 案例研究
 └── optimization-tips/    # 优化技巧
 ```
@@ -29,6 +30,36 @@ practical-experiences/
 | [Warning_Fix_Quick_Reference.md](./pitfall-cases/Warning_Fix_Quick_Reference.md) | 警告修复速查表 | 🟢 速查 |
 | [Godot_4x_Resource_File_Comment_Issue.md](./pitfall-cases/Godot_4x_Resource_File_Comment_Issue.md) | 资源文件注释导致加载失败 | 🔴 严重 |
 | [20_TileMap_Shader_Border_Pitfall.md](./pitfall-cases/20_TileMap_Shader_Border_Pitfall.md) | TileMap Shader 边框对齐问题 | 🔴 严重 |
+| [Godot_4x_Window_Size_Detection_Issue.md](./pitfall-cases/Godot_4x_Window_Size_Detection_Issue.md) | 窗口尺寸检测问题 | 🔴 严重 |
+| [GDScript_Setter_Getter_Dual_State_Pitfall.md](./pitfall-cases/GDScript_Setter_Getter_Dual_State_Pitfall.md) | 内嵌 get/set 双重状态踩坑 | 🔴 严重 |
+| [Godot_4x_Autoload_Pitfalls.md](./pitfall-cases/Godot_4x_Autoload_Pitfalls.md) | Autoload 单例踩坑 | 🔴 严重 |
+| [GUT_Testing_Pitfalls.md](./pitfall-cases/GUT_Testing_Pitfalls.md) | GUT 测试框架踩坑 | 🔴 严重 |
+| [Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md](./pitfall-cases/Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md) | 资源引用与数据一致性踩坑 | 🔴 严重 |
+| [Godot_4x_Game_System_Pitfalls.md](./pitfall-cases/Godot_4x_Game_System_Pitfalls.md) | 游戏系统实战踩坑 | 🔴 严重 |
+| [Godot_4x_i18n_Pitfalls.md](./pitfall-cases/Godot_4x_i18n_Pitfalls.md) | 国际化(i18n)踩坑 | 🔴 严重 |
+| [GDScript_Indentation_Editor_Crash_Pitfall.md](./pitfall-cases/GDScript_Indentation_Editor_Crash_Pitfall.md) | GDScript缩进错误导致编辑器崩溃 | 🔴 严重 |
+| [Godot_4x_Area2D_Mouse_Signal_And_Parallel_Systems_Pitfall.md](./pitfall-cases/Godot_4x_Area2D_Mouse_Signal_And_Parallel_Systems_Pitfall.md) | Area2D鼠标信号与并行交互系统踩坑 | 🔴 严重 |
+| [Godot_4x_PNG_Generation_Pitfall.md](./pitfall-cases/Godot_4x_PNG_Generation_Pitfall.md) | 程序化生成PNG图片踩坑 | 🔴 严重 |
+| [Godot_4x_Buff_Crit_ThemeOverride_Pitfalls.md](./pitfall-cases/Godot_4x_Buff_Crit_ThemeOverride_Pitfalls.md) | Buff/暴击/主题API踩坑 | 🔴 严重 |
+
+**P系列项目实战踩坑（13 个）** 🆕:
+> 聚焦于项目实战中的完整踩坑过程（现象 -> 根因 -> 修复 -> 预防），详见 [pitfall-cases/INDEX.md](./pitfall-cases/INDEX.md) P系列章节。
+
+| ID | 标题 | 严重程度 |
+|----|------|----------|
+| P1 | PanelContainer默认透明 | 🟡 中 |
+| P2 | 翻译键命名不统一 | 🟡 中 |
+| P3 | 选项奖励数据源不一致 | 🔴 高 |
+| P4 | 条件格式化缺少自定义类型 | 🟡 中 |
+| P5 | 事件链前置条件显示混淆 | 🟢 低 |
+| P6 | 重复变量声明导致脚本加载失败 | 🔴 高 |
+| P7 | 场景树访问崩溃 | 🔴 高 |
+| P8 | 防御塔奖励缺失 | 🔴 高 |
+| P9 | class_name命名冲突导致脚本无法加载 | 🔴 高 |
+| P10 | validate_script error_code 43 不等于有实际错误 | 🟡 中 |
+| P11 | get_canvas_transform() 方法位置错误 | 🟡 中 |
+| P12 | 编造不存在的NPC ID | 🔴 高 |
+| P13 | 战斗HP跨会话持久化导致不满血 | 🔴 高 |
 
 **核心踩坑分类：**
 - GDScript 语言踩坑（整数除法、变量遮蔽等）
@@ -66,27 +97,22 @@ practical-experiences/
 - 代码审查清单
 - 资源文件规范
 
+### 2A. 最佳实践模式 (best-practices/) 🆕
+
+> **来源**: practice/ 层迁移（2026-04-29）——基于「人生塔防」项目实战提炼的开发模式
+
+| 文档 | 描述 | 适用场景 |
+|------|------|---------|
+| [UI 开发模式.md](./best-practices/UI%20开发模式.md) | 动态 UI 构建、样式管理、PanelContainer 显式化 | UI 开发 |
+| [事件系统模式.md](./best-practices/事件系统模式.md) | 事件数据流、OptionData 字段联动、条件格式化 | 事件系统 |
+| [翻译管理实践.md](./best-practices/翻译管理实践.md) | 翻译键命名规范、CSV 管理、多语言同步 | 国际化 |
+| [数据流规范.md](./best-practices/数据流规范.md) | 数据结构变更联动清单、Bean 定义与消费者同步 | 数据管理 |
+| [运行时安全实践.md](./best-practices/运行时安全实践.md) | 场景树访问保护、queue_free 安全模式 | 运行时安全 |
+
 ### 3. 案例研究 (case-studies/)
 
-完整的项目案例研究和架构设计文档：
-
-| 文档 | 描述 | 项目来源 |
-|------|------|---------|
-| [14_Tower_Defense_Case_Study.md](./case-studies/14_Tower_Defense_Case_Study.md) | **塔防游戏完整案例研究** ⭐⭐⭐ | tower_defense 项目 |
-
-**核心章节：**
-1. 项目架构概览（目录结构、Autoload 单例）
-2. 数据模型架构（BaseModel 模式）
-3. 加密存档系统
-4. 异步场景加载管理器
-5. 配置管理器（ConfigFile）
-6. Camera2D 完整控制器
-7. 建造系统：弹出面板与类型匹配
-8. 角色继承体系（攻击/受击分离）
-9. 动态脚本挂载（运行时 set_script）
-10. 节点组（Group）在地图设计中的应用
-11. 自定义 Tooltip 实现
-12. 项目踩坑记录与最佳实践
+- [历史塔防案例资料入口](./case-studies/14_Tower_Defense_Case_Study.md) · 通用库第 14 篇。
+- [TestMCP 塔防战斗架构](../../wiki/guides/tower-defense-architecture.md) · 项目实现和验证记录。
 
 ### 4. 优化技巧 (optimization-tips/)
 
@@ -119,7 +145,7 @@ practical-experiences/
 ### 新手开发者
 1. 先阅读 [code-standards/GDScript_Code_Standards.md](./code-standards/GDScript_Code_Standards.md) 了解代码规范
 2. 查看 [pitfall-cases/19_Pitfall_Records.md](./pitfall-cases/19_Pitfall_Records.md) 避免常见错误
-3. 参考 [case-studies/14_Tower_Defense_Case_Study.md](./case-studies/14_Tower_Defense_Case_Study.md) 学习完整架构
+3. 参考 [TestMCP 塔防战斗架构](../../wiki/guides/tower-defense-architecture.md) 查阅项目入口和验证记录
 
 ### 有经验开发者
 1. 遇到性能问题时查阅 [optimization-tips/](./optimization-tips/) 系列文档
@@ -137,11 +163,12 @@ practical-experiences/
 
 | 分类 | 文档数 | 字数估算 | 重要性 |
 |------|--------|---------|--------|
-| 踩坑案例 | 5 | 30,000+ | 🔴 必读 |
+| 踩坑案例 | 29 | 65,000+ | 🔴 必读 |
 | 代码规范 | 1 | 25,000+ | 🔴 必读 |
+| 最佳实践模式 | 5 | 15,000+ | 🔴 必读 |
 | 案例研究 | 1 | 40,000+ | ⭐⭐⭐ 推荐 |
 | 优化技巧 | 3 | 35,000+ | ⭐⭐ 参考 |
-| **总计** | **10** | **130,000+** | - |
+| **总计** | **39** | **180,000+** | - |
 
 ---
 
@@ -149,6 +176,7 @@ practical-experiences/
 
 - **踩坑案例**: 遇到新问题时及时记录和更新
 - **代码规范**: 项目迭代中持续完善
+- **最佳实践模式**: 项目实战经验提炼后补充
 - **案例研究**: 完成新项目后补充
 - **优化技巧**: 性能优化实践后总结
 
@@ -157,10 +185,10 @@ practical-experiences/
 ## 🔗 相关资源
 
 - **Wiki 层**: [../../wiki/](../../wiki/) - 经过整理和提炼的结构化知识
-- **Architecture 层**: [../../architecture/](../../architecture/) - 完整的知识索引和日志
+- **主索引**: [../../index.md](../../index.md) - 完整的知识索引
 - **Godot 官方文档**: [../godot-official-docs/](../godot-official-docs/) - 官方原始资料
 
 ---
 
-**最后更新**: 2026-04-07  
+**最后更新**: 2026-04-29  
 **资料来源**: tower_defense 项目实战经验

@@ -89,7 +89,7 @@
 
 - **Base 层首页**: [../](../)
 - **Wiki 层首页**: [../../wiki/](../../wiki/)
-- **Architecture 层索引**: [../../architecture/index.md](../../architecture/index.md)
+- **Architecture 层索引**: [../../architecture/index.md](../../index.md)
 
 ---
 

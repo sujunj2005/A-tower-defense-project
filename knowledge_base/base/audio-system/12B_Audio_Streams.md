@@ -44,7 +44,7 @@ $AudioStreamPlayer.play()
 
 ### 3.1 AudioStreamPlayer（标准）
 
-![AudioStreamPlayer](img/audio_stream_player.webp)
+![AudioStreamPlayer](../godot-official-docs/tutorials/audio/img/audio_stream_player.webp)
 
 - **非位置性**：无立体声定位
 - **适用场景**：背景音乐、UI音效、全局音效
@@ -64,7 +64,7 @@ $AudioStreamPlayer.play()
 
 ### 3.2 AudioStreamPlayer2D（2D位置音频）
 
-![AudioStreamPlayer2D](img/audio_stream_2d.webp)
+![AudioStreamPlayer2D](../godot-official-docs/tutorials/audio/img/audio_stream_2d.webp)
 
 - **位置感知**：根据屏幕位置自动调整声道平衡
 - **左边缘** → 声音偏左
@@ -93,7 +93,7 @@ func _on_Area2D_body_entered(body):
 
 ### 3.3 AudioStreamPlayer3D（3D位置音频）
 
-![AudioStreamPlayer3D](img/audio_stream_3d.webp)
+![AudioStreamPlayer3D](../godot-official-docs/tutorials/audio/img/audio_stream_3d.webp)
 
 - **完整3D空间音频**
 - 支持 stereo / 5.1 / 7.1 输出（取决于音频设置）

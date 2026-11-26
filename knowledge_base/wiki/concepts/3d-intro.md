@@ -1,7 +1,7 @@
 # 3D 开发入门
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 14A_3D_Intro.md](../../base/3d-development/14A_3D_Intro.md)  
+> **来源**: [Base 层 - 13A_Introduction_to_3D.md](../../base/3d-development/13A_Introduction_to_3D.md)  
 > **重要性**: 🔴 必读 - 3D 开发基础概念
 
 ---
@@ -92,8 +92,8 @@ func _process(delta):
 ## 🔗 相关资源
 
 ### Base 层
-- [14A_3D_Intro.md](../../base/3d-development/14A_3D_Intro.md) - 3D 入门
-- [14B_3D_Transforms.md](../../base/3d-development/14B_3D_Transforms.md) - 3D 变换
+- [13A_Introduction_to_3D.md](../../base/3d-development/13A_Introduction_to_3D.md) - 3D 入门
+- [13B_3D_Transforms.md](../../base/3d-development/13B_3D_Transforms.md) - 3D 变换
 
 ### Wiki 层
 - [3D 变换概念](../concepts/3d-transforms-concept.md) - Transform3D 详解

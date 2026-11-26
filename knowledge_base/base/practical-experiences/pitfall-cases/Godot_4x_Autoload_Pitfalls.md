@@ -248,11 +248,11 @@ var result := some_dict.get("key") as String
 ## 🔗 相关文档
 
 ### 本项目知识库
-- [踩坑记录完整索引](../../../踩坑记录完整索引.md)
-- [GDScript 编码规范汇总](../../../Godot%20编码规范汇总.md)
-- [Autoload 单例概念](../../wiki/concepts/autoload-singletons.md)
-- [常见踩坑避雷指南](../../wiki/guides/common-pitfalls.md)
-- [GDScript 代码规范](../../wiki/concepts/gdscript-standards.md)
+- [踩坑记录完整索引](../../../outline/踩坑记录完整索引.md)
+- [GDScript 编码规范汇总](../../../outline/Godot%20编码规范汇总.md)
+- [Autoload 单例概念](../../../wiki/concepts/autoload-singletons.md)
+- [常见踩坑避雷指南](../../../wiki/guides/common-pitfalls.md)
+- [GDScript 代码规范](../../../wiki/concepts/gdscript-standards.md)
 
 ### Base 层相关文档
 - [19_Pitfall_Records.md](./19_Pitfall_Records.md)

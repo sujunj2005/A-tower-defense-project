@@ -1,7 +1,7 @@
 # GDScript 常用模式指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 19B_Common_Patterns.md](../../base/quick-reference/19B_Common_Patterns.md)  
+> **来源**: [Base 层 - 20B_Common_Patterns.md](../../base/quick-reference/20B_Common_Patterns.md)  
 > **重要性**: 🟡 推荐 - 常用设计模式
 
 ---
@@ -193,7 +193,7 @@ func _process(delta):
 ## 🔗 相关资源
 
 ### Base 层
-- [19B_Common_Patterns.md](../../base/quick-reference/19B_Common_Patterns.md) - 常用模式详解
+- [20B_Common_Patterns.md](../../base/quick-reference/20B_Common_Patterns.md) - 常用模式详解
 
 ### Wiki 层
 - [GDScript 速查表](../guides/gdscript-cheatsheet.md) - 语法速查

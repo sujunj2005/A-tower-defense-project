@@ -1,5 +1,7 @@
 # GUT 测试框架踩坑记录
 
+> 本页记录 2026 年 4 月的历史排查。Godot 4.6.2 与 GUT 9.6.0 的当前运行方式、会话重置和信号观察，请见[项目测试编码守则](../../../outline/Godot%20编码规范汇总.md#13-测试编码守则-)。下文的挂起结论适用于原复现场景。
+
 > **适用版本**: Godot 4.x + GUT v9.6.0+  
 > **最后更新**: 2026-04-09  
 > **来源**: Layer 2-4 测试调试过程  
@@ -9,11 +11,11 @@
 
 ## 目录
 
-1. [§32 GUT 测试运行器模式导致框架挂起](#32-gut-测试运行器模式导致框架挂起-🔴-高)
-2. [§33 before_each/after_each 修改 Autoload 全局引用导致 GUT 挂起](#33-before_eachafter_each-修改-autoload-全局引用导致-gut-挂起-🔴-高)
-3. [§34 watch_signals() 在 Autoload 实例上导致 GUT 挂起](#34-watch_signals-在-autoload-实例上导致-gut-挂起-🔴-高)
-4. [§35 测试中引用了不存在的类属性](#35-测试中引用了不存在的类属性-🟡-中)
-5. [§36 select_option() 第二个参数类型错误](#36-select_option-第二个参数类型错误-🟡-中)
+1. [§32 GUT 测试运行器模式导致框架挂起](#32-gut-测试运行器模式导致框架挂起--高)
+2. [§33 before_each/after_each 修改 Autoload 全局引用导致 GUT 挂起](#33-before_eachafter_each-修改-autoload-全局引用导致-gut-挂起--高)
+3. [§34 watch_signals() 在 Autoload 实例上导致 GUT 挂起](#34-watch_signals-在-autoload-实例上导致-gut-挂起--高)
+4. [§35 测试中引用了不存在的类属性](#35-测试中引用了不存在的类属性--中)
+5. [§36 select_option() 第二个参数类型错误](#36-select_option-第二个参数类型错误--中)
 
 ---
 
@@ -217,8 +219,8 @@ if options.size() > 0:
 - [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md) - GDScript 代码规范标准
 
 ### Wiki 层相关文档
-- [常见踩坑避雷指南](../../wiki/guides/common-pitfalls.md)
-- [GDScript 代码规范](../../wiki/concepts/gdscript-standards.md)
+- [常见踩坑避雷指南](../../../wiki/guides/common-pitfalls.md)
+- [GDScript 代码规范](../../../wiki/concepts/gdscript-standards.md)
 
 ---
 

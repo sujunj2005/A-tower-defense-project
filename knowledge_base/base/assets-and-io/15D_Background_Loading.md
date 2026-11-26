@@ -345,4 +345,4 @@ tutorials/io/files/resource_queue.gd
 - [ResourceQueue 示例](https://github.com/godotengine/godot-demo-projects/tree/master/gui/resource_queue)
 - [文件系统教程](15A_File_System.md)
 - [游戏存档教程](15C_Saving_Games.md)
-- [性能优化教程](14A_General_Optimization.md)
+- [性能优化教程](../practical-experiences/optimization-tips/14A_General_Optimization.md)

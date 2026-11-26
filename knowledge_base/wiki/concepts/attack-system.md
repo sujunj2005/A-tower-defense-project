@@ -1,7 +1,7 @@
 # 攻击系统设计
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - Tower Defense Case Study](../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md)  
+> **来源**: [通用库历史塔防案例入口](../../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md)  
 > **重要性**: ⭐⭐⭐ 核心系统设计
 
 ---
@@ -352,7 +352,7 @@ enum AttackType {
 ## 📚 相关资源
 
 ### Base 层资料来源
-- [Tower Defense Case Study](../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md) - 完整塔防案例
+- [通用库历史塔防案例入口](../../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md) - 通用库第 14 篇
 
 ### Wiki 层相关页面
 - [GDScript 代码规范](./gdscript-standards.md)

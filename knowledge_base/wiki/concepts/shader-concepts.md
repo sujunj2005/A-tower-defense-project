@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **Godot 版本**: 4.6+  
-> **来源**: [10A_Shader_Introduction.md](../base/shaders/10A_Shader_Introduction.md), [10B_Shading_Language.md](../base/shaders/10B_Shading_Language.md)
+> **来源**: [10A_Shader_Introduction.md](../../base/shaders/10A_Shader_Introduction.md), [10B_Shading_Language.md](../../base/shaders/10B_Shading_Language.md)
 
 ---
 
@@ -229,11 +229,11 @@ void fragment() {
 ## 🔗 相关链接
 
 - **Base 层来源**:
-  - [10A_Shader_Introduction.md](../base/shaders/10A_Shader_Introduction.md) - 着色器入门
-  - [10B_Shading_Language.md](../base/shaders/10B_Shading_Language.md) - 着色器语言参考
+  - [10A_Shader_Introduction.md](../../base/shaders/10A_Shader_Introduction.md) - 着色器入门
+  - [10B_Shading_Language.md](../../base/shaders/10B_Shading_Language.md) - 着色器语言参考
 - **Wiki 指南**:
-  - [Canvas Item 着色器指南](./canvas-item-shader-guide.md) - 2D 着色器实战
-  - [Spatial 着色器指南](./spatial-shader-guide.md) - 3D 着色器实战
+  - [Canvas Item 着色器指南](../guides/canvas-item-shader-guide.md) - 2D 着色器实战
+  - [Spatial 着色器指南](../guides/spatial-shader-guide.md) - 3D 着色器实战
 
 ---
 

@@ -170,9 +170,9 @@ func hello():
 - [01F_Export_Properties.md](../../base/gdscript-reference/01F_Export_Properties.md) - 完整导出属性文档
 
 ### Wiki 层相关
-- [GDScript 基础语法](./gdscript-basics.md) - 基础语法
-- [GDScript 类型系统](./gdscript-types.md) - 类型和变量
-- [GDScript 代码规范](./gdscript-standards.md) - 代码风格
+- [GDScript 基础语法](../concepts/gdscript-basics.md) - 基础语法
+- [GDScript 类型系统](../concepts/gdscript-types.md) - 类型和变量
+- [GDScript 代码规范](../concepts/gdscript-standards.md) - 代码风格
 
 ### 实体页面
 - [防御塔实体设计](../entities/tower.md) - 导出属性实战

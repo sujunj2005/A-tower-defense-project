@@ -138,5 +138,5 @@ func _load_translations() -> void:
 
 ## 关联文档
 
-- [踩坑记录完整索引 §65](../../踩坑记录完整索引.md#65-gdscript-缩进错误导致-godot-编辑器崩溃-🔴-高)
-- [Godot 编码规范汇总 - 第19章 GDScript编辑工作流规范](../../Godot%20编码规范汇总.md#19-gdscript编辑工作流规范)
+- [踩坑记录完整索引 §65](../../../outline/踩坑记录完整索引.md#65-gdscript-缩进错误导致-godot-编辑器崩溃--高)
+- [Godot 编码规范汇总 - 第19章 GDScript编辑工作流规范](../../../outline/Godot%20编码规范汇总.md#19-gdscript编辑工作流规范-)

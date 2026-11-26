@@ -7,18 +7,18 @@
 ## 目录
 
 1. [GDScript 踩坑](#1-gdscript-踩坑)
-2. [节点系统踩坑](#2-节点系统-踩坑)
-3. [物理系统踩坑](#3-物理系统-踩坑)
-4. [UI 系统踩坑](#4-ui-系统-踩坑)
-5. [渲染系统踩坑](#5-渲染系统-踩坑)
-6. [相关文档](#6-相关文档)
+2. [节点系统踩坑](#2-节点系统踩坑)
+3. [物理系统踩坑](#3-物理系统踩坑)
+4. [UI 系统踩坑](#4-ui-系统踩坑)
+5. [渲染系统踩坑](#5-渲染系统踩坑)
+7. [相关文档](#7-相关文档)
 
 ---
 
 ## ⭐ 新增：GDScript 警告处理最佳实践
 
 > 详细说明见：[GDScript_Warning_Best_Practices.md](./GDScript_Warning_Best_Practices.md)  
-> **代码规范**请查看：[GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)
+> **代码规范**请查看：[GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)
 
 **快速参考：**
 
@@ -50,7 +50,7 @@ grep -rn "emission_shape = [0-9]" --include="*.gd" .
 ```
 
 **规范文档：**
-- [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md) - 完整代码规范标准
+- [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md) - 完整代码规范标准
 
 ---
 
@@ -273,7 +273,7 @@ texture_path = "res://images/enemies/marble_0_0.png"
 
 ## 7. 相关文档
 
-- **[GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)** - **代码规范标准** ⭐
+- **[GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)** - **代码规范标准** ⭐
 - **[GDScript_Warning_Best_Practices.md](./GDScript_Warning_Best_Practices.md)** - GDScript 警告处理最佳实践详细指南
   - 警告分类与影响分析
   - 常见警告原因与解决方案

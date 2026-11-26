@@ -385,6 +385,6 @@ amount = 1000
 - [GPUParticles3D 官方文档](https://docs.godotengine.org/en/stable/classes/class_gpuparticles3d.html)
 - [ParticleProcessMaterial 官方文档](https://docs.godotengine.org/en/stable/classes/class_particleprocessmaterial.html)
 - [CPUParticles3D 官方文档](https://docs.godotengine.org/en/stable/classes/class_cpuparticles3d.html)
-- [2D 粒子系统](05F_Particle_Systems_2D.md)
+- [2D 粒子系统](../2d-development/05F_Particle_Systems_2D.md)
 - [StandardMaterial3D](13D_Standard_Material_3D.md)
-- [Spatial Shader](10D_Spatial_Shader.md)
+- [Spatial Shader](../shaders/10D_Spatial_Shader.md)

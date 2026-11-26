@@ -7,8 +7,8 @@
 .godot/scene_groups_cache.cfg
 .godot/uid_cache.bin
 
-# 排除知识库文件夹
-knowledge_base/
+# 默认忽略知识库新增文件，保留已跟踪的资料
+/knowledge_base/*
 docs/
 node_modules/
 stable/
@@ -25,6 +25,8 @@ gsd-file-manifest.json
 
 # 其他常见忽略规则
 *.import
+/locale/translations.en.translation
+/locale/translations.zh.translation
 *.pid
 *.pot
 *.mo
@@ -36,6 +38,37 @@ gsd-file-manifest.json
 *.userosscache
 *.sln.docstates
 *.md
+
+# Reproducible Godot development and CI entry points
+!/README.md
+/AGENTS.md
+/TODO.md
+/.codex/
+/.agents/
+/.trae/
+!/.gutconfig_all.json
+!/.github/
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/godot-tests.yml
+
+# 项目检出需要包含知识库入口、项目规范及其余项目资料
+!/knowledge_base/index.md
+!/knowledge_base/outline/
+!/knowledge_base/outline/*.md
+!/knowledge_base/base/
+/knowledge_base/base/*
+!/knowledge_base/base/*.md
+/knowledge_base/base/health-check-report.md
+/knowledge_base/base/log.md
+!/knowledge_base/base/practical-experiences/
+/knowledge_base/base/practical-experiences/*
+!/knowledge_base/base/practical-experiences/best-practices/
+!/knowledge_base/base/practical-experiences/best-practices/*.md
+!/knowledge_base/base/practical-experiences/pitfall-cases/
+!/knowledge_base/base/practical-experiences/pitfall-cases/*.md
+
 [Dd]ebug/
 [Rr]elease/
 x64/

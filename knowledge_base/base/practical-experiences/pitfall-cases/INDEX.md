@@ -1,8 +1,8 @@
 # 19_Common_Pitfalls 索引
 
-> **最后更新**: 2026-04-14
+> **最后更新**: 2026-04-29
 > **适用版本**: Godot 4.x
-> **文档数**: 11
+> **文档数**: 29（16 个 § 类 + 13 个 P 系列项目实战踩坑）
 
 ---
 
@@ -21,6 +21,11 @@
 | [GUT_Testing_Pitfalls.md](./GUT_Testing_Pitfalls.md) | GUT 测试框架踩坑（§32-§36）🆕 | 推荐 |
 | [Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md](./Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md) | 资源引用与数据一致性踩坑（§37-§39）🆕 | 推荐 |
 | [Godot_4x_Game_System_Pitfalls.md](./Godot_4x_Game_System_Pitfalls.md) | 游戏系统实战踩坑（§40-§58）🆕 | 推荐 |
+| [Godot_4x_i18n_Pitfalls.md](./Godot_4x_i18n_Pitfalls.md) | 国际化(i18n)踩坑（§59-§64）🆕 | 推荐 |
+| [GDScript_Indentation_Editor_Crash_Pitfall.md](./GDScript_Indentation_Editor_Crash_Pitfall.md) | GDScript缩进错误导致编辑器崩溃（§65）🆕 | 推荐 |
+| [Godot_4x_Area2D_Mouse_Signal_And_Parallel_Systems_Pitfall.md](./Godot_4x_Area2D_Mouse_Signal_And_Parallel_Systems_Pitfall.md) | Area2D鼠标信号与并行交互系统踩坑（§66-§67）🆕 | 推荐 |
+| [Godot_4x_PNG_Generation_Pitfall.md](./Godot_4x_PNG_Generation_Pitfall.md) | 程序化生成PNG图片踩坑（§68）🆕 | 推荐 |
+| [Godot_4x_Buff_Crit_ThemeOverride_Pitfalls.md](./Godot_4x_Buff_Crit_ThemeOverride_Pitfalls.md) | Buff/暴击/主题API踩坑（§78-§80）🆕 | 推荐 |
 
 ---
 
@@ -242,13 +247,13 @@
 - **[Godot_4x_Autoload_Pitfalls.md](./Godot_4x_Autoload_Pitfalls.md)** - Autoload 单例踩坑（§27-§31）🆕
 - **[GUT_Testing_Pitfalls.md](./GUT_Testing_Pitfalls.md)** - GUT 测试框架踩坑（§32-§36）🆕
 - **[Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md](./Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md)** - 资源引用与数据一致性踩坑（§37-§39）🆕
-- **[TileMaps.md](../../../2d-development/05G_TileMaps.md)** - TileMap 系统完整文档
+- **[TileMaps.md](../../2d-development/05G_TileMaps.md)** - TileMap 系统完整文档
 
 ### 外部资源
 
 - [Godot 资源系统文档](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
 - [Godot 4.x 已知问题列表](https://github.com/godotengine/godot/issues)
-- [本项目知识库：Resources](../../../core-systems/02C_Resources.md)
+- [本项目知识库：Resources](../../core-systems/02C_Resources.md)
 - [CanvasItem Shader](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvasitem_shader.html)
 - [TileMapLayer](https://docs.godotengine.org/en/stable/classes/class_tilemaplayer.html)
 
@@ -277,4 +282,48 @@
 
 ---
 
-*索引版本：1.6 | 最后更新：2026-04-14*
+*索引版本：1.7 | 最后更新：2026-04-22*
+
+---
+
+## 📂 P系列项目实战踩坑
+
+> **来源**: 人生塔防项目实际开发 | **新增日期**: 2026-04-29 | **条目数**: 13（🔴 高 6 个 | 🟡 中 6 个 | 🟢 低 1 个）
+
+P 系列踩坑聚焦于项目实战中的完整踩坑过程（现象 -> 根因 -> 修复 -> 预防），与 § 系列的索引摘要互补。
+
+| 文件 | 描述 | 严重程度 |
+|------|------|----------|
+| [P1_PanelContainer默认透明.md](./P1_PanelContainer默认透明.md) | PanelContainer默认透明 | 🟡 中 |
+| [P2_翻译键命名不统一.md](./P2_翻译键命名不统一.md) | 翻译键命名不统一 | 🟡 中 |
+| [P3_选项奖励数据源不一致.md](./P3_选项奖励数据源不一致.md) | 选项奖励数据源不一致 | 🔴 高 |
+| [P4_条件格式化缺少自定义类型.md](./P4_条件格式化缺少自定义类型.md) | 条件格式化缺少自定义类型 | 🟡 中 |
+| [P5_事件链前置条件显示混淆.md](./P5_事件链前置条件显示混淆.md) | 事件链前置条件显示混淆 | 🟢 低 |
+| [P6_重复变量声明导致脚本加载失败.md](./P6_重复变量声明导致脚本加载失败.md) | 重复变量声明导致脚本加载失败 | 🔴 高 |
+| [P7_场景树访问崩溃.md](./P7_场景树访问崩溃.md) | 场景树访问崩溃 | 🔴 高 |
+| [P8_防御塔奖励缺失.md](./P8_防御塔奖励缺失.md) | 防御塔奖励缺失 | 🔴 高 |
+| [P9_class_name命名冲突导致脚本无法加载.md](./P9_class_name命名冲突导致脚本无法加载.md) | class_name 命名冲突导致脚本无法加载 | 🔴 高 |
+| [P10_validate_script_error_code_43不等于有实际错误.md](./P10_validate_script_error_code_43不等于有实际错误.md) | validate_script error_code 43 不等于有实际错误 | 🟡 中 |
+| [P11_get_canvas_transform方法位置错误.md](./P11_get_canvas_transform方法位置错误.md) | get_canvas_transform() 方法位置错误 | 🟡 中 |
+| [P12_编造不存在的NPC_ID.md](./P12_编造不存在的NPC_ID.md) | 编造不存在的 NPC ID | 🔴 高 |
+| [P13_战斗HP跨会话持久化导致不满血.md](./P13_战斗HP跨会话持久化导致不满血.md) | 战斗 HP 跨会话持久化导致不满血 | 🔴 高 |
+
+### P 系列与 § 系列的对照
+
+P 系列踩坑与 § 系列踩坑可能存在主题重叠，但 P 系列聚焦于项目实战中的完整踩坑过程，与 § 系列的索引摘要互补。分析实践问题时建议两系列交叉查阅。
+
+| P系列 | 相关§系列 | 关联说明 |
+|-------|-----------|----------|
+| P1 | §69, §70, §71 | 同属 UI 程序化构建领域的踩坑 |
+| P2 | §62 | 翻译键命名规范相关 |
+| P3 | §45, §38 | 事件奖励与数据一致性相关 |
+| P4 | §76 | match 分支与效果格式化相关 |
+| P5 | §E10 | 事件链前置条件校验相关 |
+| P6 | §65 | GDScript 变量声明与编辑器稳定性相关 |
+| P7 | §51, §43 | 场景树与节点引用安全相关 |
+| P8 | §46, §79 | 数据字段与伤害计算一致性相关 |
+| P9 | §27, §29 | class_name 命名冲突与保留字相关 |
+| P10 | §30 | GUT/脚本验证工具误判相关 |
+| P11 | — | CanvasLayer vs Viewport API 归属（新问题领域） |
+| P12 | §38, §39 | 数据来源确认与引用完整性 |
+| P13 | §78 | 共享状态/资源不可变原则相关 |

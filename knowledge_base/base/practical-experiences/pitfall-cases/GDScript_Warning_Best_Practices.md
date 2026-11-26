@@ -10,7 +10,7 @@
 2. [常见警告原因与解决方案](#2-常见警告原因与解决方案)
 3. [警告处理原则](#3-警告处理原则)
 4. [实战案例](#4-实战案例)
-5. [参考资料](#5-参考资料)
+6. [参考资料](#6-参考资料)
 
 ---
 
@@ -455,7 +455,7 @@ grep -rn "uid://.*_unique_id" --include="*.tres" .
 ## 6. 参考资料
 
 - **相关文档**：
-  - [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md) - **代码规范标准** ⭐
+  - [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md) - **代码规范标准** ⭐
   - [Warning_Fix_Quick_Reference.md](./Warning_Fix_Quick_Reference.md) - 快速参考手册
   - [19_Pitfall_Records.md](./19_Pitfall_Records.md) - 通用踩坑记录
 
@@ -474,7 +474,7 @@ grep -rn "uid://.*_unique_id" --include="*.tres" .
 | 2026-04-03 | 1.0 | 初始版本，基于实战经验整理 | AI Assistant |
 
 **版本 1.2 变更：**
-- 📋 移除代码规范章节，整合到 [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)
+- 📋 移除代码规范章节，整合到 [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)
 - ✅ 保留实战案例和批量检查脚本
 - 🔗 更新参考资料链接
 
@@ -490,7 +490,7 @@ grep -rn "uid://.*_unique_id" --include="*.tres" .
 ---
 
 **文档说明：**
-本文档聚焦于 GDScript 警告的实战处理和案例分析，代码规范相关内容已移至 [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)。
+本文档聚焦于 GDScript 警告的实战处理和案例分析，代码规范相关内容已移至 [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)。
 
 **实战统计：**
 - 整数除法：修复 11 处

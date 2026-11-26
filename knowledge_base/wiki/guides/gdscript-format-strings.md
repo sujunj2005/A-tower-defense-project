@@ -178,8 +178,8 @@ var s = "Hi, {0} v{version}".format({
 - [01G_Format_Strings.md](../../base/gdscript-reference/01G_Format_Strings.md) - 完整格式化字符串文档
 
 ### Wiki 层相关
-- [GDScript 基础语法](./gdscript-basics.md) - 基础语法
-- [GDScript 代码规范](./gdscript-standards.md) - 代码风格
+- [GDScript 基础语法](../concepts/gdscript-basics.md) - 基础语法
+- [GDScript 代码规范](../concepts/gdscript-standards.md) - 代码风格
 
 ---
 

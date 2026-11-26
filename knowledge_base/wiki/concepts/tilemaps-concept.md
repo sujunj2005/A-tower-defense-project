@@ -25,7 +25,7 @@ TileMap 是用于创建游戏布局的瓦片网格。使用 TileMapLayer 节点�
 ### TileMap vs TileMapLayer
 
 - **TileMapLayer**: 核心节点，继承自 Node2D（**Godot 4.x（4.6+）推荐**）
-- **TileMap**: 旧版本（Godot 3.x），Godot 4.x 已弃用
+- **TileMap**: Godot 4.6.2 仍提供的旧多层节点，已弃用。现有场景可以逐步迁移
 
 > 💡 **Godot 4.x（4.6+）新特性**
 > 
@@ -35,7 +35,7 @@ TileMap 是用于创建游戏布局的瓦片网格。使用 TileMapLayer 节点�
 > - **性能优化**: 更好的渲染性能和内存管理
 > - **新 API**: `set_cell()`、`get_cell_tile_data()` 等方法更直观
 > 
-> **迁移指南**: 如果你使用的是 Godot 4.0-4.2，升级到 4.3+ 后需要将 TileMap 节点替换为 TileMapLayer。
+> **迁移指南**: 如果你使用的是 Godot 4.0-4.2，Godot 4.3 起可把旧 TileMap 的各层迁移为独立的 TileMapLayer。
 
 ---
 
@@ -145,11 +145,11 @@ TileSet 可以内置于 TileMapLayer 节点，适合原型开发，但实际项�
 ### 获取瓦片
 
 ```gdscript
-@onready var tilemap = $TileMapLayer
+@onready var tilemap: TileMapLayer = $TileMapLayer
 
 func _ready():
     # 检查瓦片是否存在
-    var tile_data = tilemap.get_cell_tile_data(0, Vector2i(5, 5))
+    var tile_data = tilemap.get_cell_tile_data(Vector2i(5, 5))
     if tile_data:
         print("瓦片存在")
 ```
@@ -158,23 +158,23 @@ func _ready():
 
 ```gdscript
 func place_tile(x: int, y: int, source_id: int):
-    tilemap.set_cell(0, Vector2i(x, y), 0, source_id, Vector2i(0, 0))
+    tilemap.set_cell(Vector2i(x, y), source_id, Vector2i.ZERO)
 ```
 
 ### 清除瓦片
 
 ```gdscript
 func clear_tile(x: int, y: int):
-    tilemap.set_cell(0, Vector2i(x, y), -1)
+    tilemap.erase_cell(Vector2i(x, y))
 ```
 
 ### 遍历所有瓦片
 
 ```gdscript
 func list_all_tiles():
-    for cell in tilemap.get_used_cells(0):
+    for cell in tilemap.get_used_cells():
         var pos = cell
-        var tile_data = tilemap.get_cell_tile_data(0, pos)
+        var tile_data = tilemap.get_cell_tile_data(pos)
         if tile_data:
             print("瓦片位置：", pos)
 ```
@@ -267,13 +267,7 @@ Peering Bits: 左上=0（草地），其他=1（道路）
 @onready var tilemap: TileMapLayer = $TileMapLayer
 
 func set_tile_with_terrain(coords: Vector2i, terrain_set: int, terrain: int):
-    tilemap.set_cell(
-        coords,           # 瓦片坐标
-        0,                # source_id
-        Vector2i(0, 0),   # atlas_coords（会自动选择）
-        terrain_set,      # terrain_set
-        terrain           # terrain
-    )
+    tilemap.set_cells_terrain_connect([coords], terrain_set, terrain, false)
 ```
 
 #### 批量设置地形连接
@@ -284,21 +278,22 @@ func paint_terrain_area(cells: Array[Vector2i], terrain_set: int, terrain: int):
         cells,           # 瓦片坐标数组
         terrain_set,     # 地形集索引
         terrain,         # 地形索引
-        false            # 忽略空瓦片
+        false            # 将空地形纳入接边匹配
     )
 ```
 
 #### 填充矩形区域
 
 ```gdscript
-func fill_terrain_rect(start: Vector2i, end: Vector2i, terrain_set: int, terrain: int):
-    tilemap.set_cells_terrain_path(
-        [start, end],    # 路径点数组
-        terrain_set,     # 地形集索引
-        terrain,         # 地形索引
-        false            # 忽略空瓦片
-    )
+func fill_terrain_rect(area: Rect2i, terrain_set: int, terrain: int) -> void:
+    var cells: Array[Vector2i] = []
+    for y in range(area.position.y, area.end.y):
+        for x in range(area.position.x, area.end.x):
+            cells.append(Vector2i(x, y))
+    tilemap.set_cells_terrain_connect(cells, terrain_set, terrain, false)
 ```
+
+矩形示例枚举区域内的格子。铺设连续线路时，`set_cells_terrain_path()` 接收按顺序排列的路径格，两个角点无法填满矩形。
 
 ---
 
@@ -320,7 +315,7 @@ func fill_terrain_rect(start: Vector2i, end: Vector2i, terrain_set: int, terrain
 **解决方案**:
 - 避免在同一区域堆叠导航网格
 - 使用不同的导航层（navigation layers）
-- 使用 visibility_layer 和 canvas_cull_mask 分离
+- 为不同寻路对象配置导航层和查询掩码。渲染可见性图层只控制绘制
 
 ### 踩坑 3: 删除图层丢失瓦片
 
@@ -329,7 +324,7 @@ func fill_terrain_rect(start: Vector2i, end: Vector2i, terrain_set: int, terrain
 **解决方案**:
 - 删除前备份瓦片数据
 - 使用多个图层而不是删除
-- 使用 enabled 属性隐藏而非删除
+- 只隐藏画面时使用 `visible`。设置 `enabled = false` 会同时禁用图层的渲染、碰撞、导航等功能
 
 ---
 
@@ -348,6 +343,6 @@ func fill_terrain_rect(start: Vector2i, end: Vector2i, terrain_set: int, terrain
 
 ---
 
-**最后更新**: 2026-04-07  
+**最近核对**：2026-11-27，Godot 4.6.2  
 **维护者**: Knowledge Base Administrator  
 **版本**: 1.0

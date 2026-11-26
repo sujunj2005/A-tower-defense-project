@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **适用版本**: Godot 4.x  
-> **来源**: [14_Tower_Defense_Case_Study.md](../../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md)
+> **来源**: [通用库历史塔防案例入口](../../base/practical-experiences/case-studies/14_Tower_Defense_Case_Study.md)
 
 ---
 

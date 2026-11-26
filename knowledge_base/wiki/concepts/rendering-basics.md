@@ -1,6 +1,6 @@
 # 渲染基础概念
 
-> **来源**: [09A_Rendering_Basics.md](../base/rendering/09A_Rendering_Basics.md)  
+> **来源**: [09A_Rendering_Basics.md](../../base/rendering/09A_Rendering_Basics.md)  
 > **适用版本**: Godot 4.x  
 > **最后更新**: 2026-04-07
 
@@ -315,7 +315,7 @@ Window.ContentScaleAspect.EXPAND      # 扩展
 
 ## 🔗 相关链接
 
-- **Base 层来源**: [09A_Rendering_Basics.md](../base/rendering/09A_Rendering_Basics.md)
+- **Base 层来源**: [09A_Rendering_Basics.md](../../base/rendering/09A_Rendering_Basics.md)
 - **官方文档**: https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html
 - **相关概念**: 
   - [2D 变换概念](./2d-transforms.md)

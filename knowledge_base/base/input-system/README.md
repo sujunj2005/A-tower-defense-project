@@ -77,8 +77,8 @@ velocity = direction * speed
 
 | Base 层文档 | Wiki 概念页面 | Wiki 指南页面 |
 |------------|--------------|--------------|
-| [08A_InputEvent.md](./08A_InputEvent.md) | [input-events.md](../wiki/concepts/input-events.md) - 输入事件概念 | - |
-| [08B_InputMap.md](./08B_InputMap.md) | - | [input-map-guide.md](../wiki/guides/input-map-guide.md) - 输入映射指南 |
+| [08A_InputEvent.md](./08A_InputEvent.md) | [input-events.md](../../wiki/concepts/input-events.md) - 输入事件概念 | - |
+| [08B_InputMap.md](./08B_InputMap.md) | - | [input-map-guide.md](../../wiki/guides/input-map-guide.md) - 输入映射指南 |
 
 ---
 
@@ -144,8 +144,8 @@ velocity = direction * speed
 
 ## 🔗 相关链接
 
-- **Wiki 概念页面**: [input-events.md](../wiki/concepts/input-events.md) - 输入事件核心概念
-- **Wiki 指南页面**: [input-map-guide.md](../wiki/guides/input-map-guide.md) - 输入映射实战指南
+- **Wiki 概念页面**: [input-events.md](../../wiki/concepts/input-events.md) - 输入事件核心概念
+- **Wiki 指南页面**: [input-map-guide.md](../../wiki/guides/input-map-guide.md) - 输入映射实战指南
 - **Godot 官方文档**: [Input 类参考](https://docs.godotengine.org/en/stable/classes/class_input.html)
 - **Godot 官方文档**: [InputEvent 类参考](https://docs.godotengine.org/en/stable/classes/class_inputevent.html)
 

@@ -335,7 +335,7 @@ func _draw():
 
 ### Wiki 层相关
 - [插值运算指南](./interpolation-guide.md) - 插值基础
-- [向量数学概念](./vector-math.md) - 向量操作
+- [向量数学概念](../concepts/vector-math.md) - 向量操作
 
 ### 外部资源
 - [Godot 官方贝塞尔曲线教程](https://docs.godotengine.org/en/stable/tutorials/math/beziers_and_curves.html)

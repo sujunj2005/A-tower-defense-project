@@ -176,7 +176,7 @@ grep -rn "uid://.*_unique_id" --include="*.tres" .
 
 ## 📚 相关文档
 
-- **[GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)** - **代码规范标准** ⭐
+- **[GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)** - **代码规范标准** ⭐
 - [GDScript_Warning_Best_Practices.md](./GDScript_Warning_Best_Practices.md) - 警告处理详细指南
 - [19_Pitfall_Records.md](./19_Pitfall_Records.md) - 通用踩坑记录
 

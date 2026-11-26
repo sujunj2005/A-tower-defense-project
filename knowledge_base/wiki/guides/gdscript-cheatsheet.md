@@ -1,7 +1,7 @@
 # GDScript 速查表
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 19A_GDScript_Cheatsheet.md](../../base/quick-reference/19A_GDScript_Cheatsheet.md)  
+> **来源**: [Base 层 - 20A_GDScript_Cheat_Sheet.md](../../base/quick-reference/20A_GDScript_Cheat_Sheet.md)  
 > **重要性**: 🔴 必读 - 快速查询手册
 
 ---
@@ -188,9 +188,9 @@ get("property")
 ## 🔗 相关资源
 
 ### Base 层
-- [19A_GDScript_Cheatsheet.md](../../base/quick-reference/19A_GDScript_Cheatsheet.md) - GDScript 速查表
-- [19B_Common_Patterns.md](../../base/quick-reference/19B_Common_Patterns.md) - 常用模式
-- [19C_API_Commonly_Used.md](../../base/quick-reference/19C_API_Commonly_Used.md) - 常用 API
+- [20A_GDScript_Cheat_Sheet.md](../../base/quick-reference/20A_GDScript_Cheat_Sheet.md) - GDScript 速查表
+- [20B_Common_Patterns.md](../../base/quick-reference/20B_Common_Patterns.md) - 常用模式
+- [20C_API_Commonly_Used.md](../../base/quick-reference/20C_API_Commonly_Used.md) - 常用 API
 
 ### Wiki 层
 - [常用模式指南](../guides/common-patterns-guide.md) - GDScript 设计模式

@@ -1,9 +1,9 @@
 # GDScript 代码规范
 
 > **适用版本**: Godot 4.x（4.6+）  
-> **来源**: [Base 层 - GDScript_Code_Standards.md](../base/practical-experiences/code-standards/GDScript_Code_Standards.md)  
+> **来源**: [Base 层 - GDScript_Code_Standards.md](../../base/practical-experiences/code-standards/GDScript_Code_Standards.md)  
 > **重要性**: 🔴 必读 - 所有 GDScript 代码必须遵循
-> **说明**: 本文档为概念层摘要，章节编号已简化。完整编号体系请参考 [Base 层 - GDScript 代码规范](../base/practical-experiences/code-standards/GDScript_Code_Standards.md)
+> **说明**: 本文档为概念层摘要，章节编号已简化。完整编号体系请参考 [Base 层 - GDScript 代码规范](../../base/practical-experiences/code-standards/GDScript_Code_Standards.md)
 
 ---
 
@@ -257,7 +257,7 @@ var tower = $TowerNode  # 类型不明确
 - 使用 `as` 后必须检查是否为 `null`
 - 关键代码使用 `is` 先检查再转换
 
-详细文档：[GDScript 静态类型指南](../guides/gdscript-static-typing.md#6-类型转换)
+详细文档：[GDScript 静态类型指南](../guides/gdscript-static-typing.md#7-类型转换)
 
 ### 3. 内嵌 set/get 函数规范 🆕
 
@@ -548,55 +548,7 @@ var is_panel_visible: bool = false:
 
 ##### 3.5.3 常见错误与踩坑
 
-**❌ 错误用法：创建双重状态**
-
-```gdscript
-# ❌ 错误：包装属性时创建了两个独立状态
-extends Panel
-
-var is_panel_visible: bool = false:
-    set(value):
-        if is_panel_visible != value:  # ❌ 检查自身（应该检查 visible）
-            is_panel_visible = value    # ❌ 自赋值（冗余，应该直接设置 visible）
-            visible = value             # ❌ 同步另一个属性
-            if is_panel_visible:
-                _on_panel_shown()
-            else:
-                _on_panel_hidden()
-    get:
-        return is_panel_visible  # ❌ 返回自身（应该返回 visible）
-```
-
-**问题分析**：
-1. **两个独立状态**：创建了 `is_panel_visible` 和 `visible` 两个独立变量
-2. **冗余自赋值**：`is_panel_visible = value` 是多余的
-3. **手动同步风险**：需要手动同步两个属性，容易导致状态不一致
-4. **真实踩坑案例**：TowerSelectUI 重构中，由于直接设置 `visible = false` 而不是 `is_panel_visible = false`，导致状态不同步，面板无法显示
-
-**✅ 正确做法**：
-
-```gdscript
-# ✅ 正确：包装 visible 属性
-extends Panel
-
-var is_panel_visible: bool = false:
-    set(value):
-        if visible != value:  # ✅ 检查实际的 visible
-            visible = value    # ✅ 直接设置 visible
-            if visible:
-                _on_panel_shown()
-            else:
-                _on_panel_hidden()
-    get:
-        return visible  # ✅ 返回实际的 visible
-
-func _complete_tower_building():
-    is_panel_visible = false  # ✅ 始终使用包装属性，状态保持一致
-
-func show_at_position(pos: Vector2):
-    is_panel_visible = true  # ✅ 正常工作
-    position = pos
-```
+[§26 内嵌 get/set 创建双重状态](../guides/common-pitfalls.md#26-内嵌-getset-创建双重状态--高)
 
 ##### 3.5.4 使用场景对比表
 
@@ -638,7 +590,7 @@ var health_percent: float:
 - [ ] 避免了直接访问底层属性（包装属性场景）
 - [ ] 状态始终保持一致
 
-详细文档：[Base 层 - GDScript 代码规范](../base/practical-experiences/code-standards/GDScript_Code_Standards.md#34-内嵌-getset-使用场景与常见错误)
+详细文档：[Base 层 - GDScript 代码规范](../../base/practical-experiences/code-standards/GDScript_Code_Standards.md#34-内嵌-getset-使用场景与常见错误-)
 
 ---
 
@@ -777,29 +729,11 @@ if OS.is_debug_build():
 
 ### 1. 禁止 class_name 声明 🔴 强制
 
-Autoload 脚本不得声明 `class_name`。Autoload 注册名本身就是全局标识符，再声明 `class_name` 会产生命名冲突。
-
-```gdscript
-# ❌ 错误：Autoload 脚本中声明 class_name
-class_name Global  # 报错：Class "Global" hides an autoload singleton
-extends Node
-
-# ✅ 正确：Autoload 脚本不声明 class_name
-extends Node
-# "Global" 已通过 Autoload 注册成为全局标识符
-```
+[§27 Autoload 脚本禁止 class_name 声明](../guides/common-pitfalls.md#27-autoload-脚本禁止-class_name-声明)
 
 ### 2. 直接名称访问 🔴 强制
 
-Autoload 间互访直接使用注册名称，禁止 `Global.get_node("XXX")`。所有 Autoload 都挂载在 `/root/` 下，互为兄弟节点。
-
-```gdscript
-# ❌ 错误：通过 Global.get_node() 访问兄弟 Autoload
-config_manager = Global.get_node("ConfigManager")  # Node not found!
-
-# ✅ 正确：直接使用 Autoload 全局名称
-config_manager = ConfigManager  # Autoload 名称即全局变量
-```
+[§28 Autoload 单例间互访不能用 Global.get_node()](../guides/common-pitfalls.md#28-autoload-单例间互访不能用-globalget_node)
 
 ### 3. 类型注解适配 🟡 建议
 
@@ -833,19 +767,7 @@ var current_stage: int = AgeSystem.STAGE_OLD_AGE
 
 ### 5. 保留关键字避让 🟡 建议
 
-禁止使用 `trait` 等系统保留关键字作为变量名。
-
-```gdscript
-# ❌ 错误：trait 是保留关键字
-for trait in initial_res.traits:
-    session.traits.append(trait)
-
-# ✅ 正确：使用替代命名
-for trait_item in initial_res.traits:
-    session.traits.append(trait_item)
-```
-
-**详细踩坑记录**: [Godot_4x_Autoload_Pitfalls.md](../base/practical-experiences/pitfall-cases/Godot_4x_Autoload_Pitfalls.md)
+[§29 trait 是 GDScript 4.x 保留关键字](../guides/common-pitfalls.md#29-trait-是-gdscript-4x-保留关键字)
 
 ---
 
@@ -853,119 +775,31 @@ for trait_item in initial_res.traits:
 
 ### 1. GUT 测试运行器模式 🔴 强制
 
-**规则**: GUT 测试运行器必须使用 `GutConfig` + `run_tests()` 模式，禁止使用 `add_script()` + `test_scripts()` 模式
+[§32 GUT 测试运行器模式导致框架挂起](../../outline/Godot%20编码规范汇总.md#131-gut-测试运行器模式--强制)
 
-**原因**: `add_script()` + `test_scripts()` 模式在 Godot 4.x 中会导致测试框架无限挂起，特别是涉及 Autoload 的测试场景
+<a id="2-禁止替换-autoload-引用--强制"></a>
 
-```gdscript
-# ❌ 错误：使用 add_script + test_scripts 模式
-var gut = load("res://addons/gut/gut.gd").new()
-add_child(gut)
-gut.add_script("res://tests/unit/test_xxx.gd")
-gut.test_scripts()  # 会导致框架挂起！
+### 2. Autoload 会话引用与重置
 
-# ✅ 正确：使用 GutConfig + run_tests 模式
-var Gut = load("res://addons/gut/gut.gd")
-var GutConfig = load("res://addons/gut/gut_config.gd")
+[§33 before_each/after_each 修改 Autoload 全局引用导致 GUT 挂起](../../outline/Godot%20编码规范汇总.md#132-autoload-会话引用与重置)
 
-func _ready() -> void:
-    var gut = Gut.new()
-    add_child(gut)
-    var gut_config = GutConfig.new()
-    var config_result: int = gut_config._load_options_from_config_file(
-        "res://.gutconfig_xxx.json",
-        gut_config.options
-    )
-    if config_result != 1:
-        push_error("加载 GUT 配置文件失败")
-        return
-    gut_config._apply_options(gut_config.options, gut)
-    gut.run_tests()  # 关键：用 run_tests() 而非 test_scripts()
-```
+<a id="3-禁止-watch_signals-autoload--强制"></a>
 
-### 2. 禁止替换 Autoload 引用 🔴 强制
+### 3. Autoload 信号测试
 
-**规则**: 测试中禁止在 `before_each`/`after_each` 中替换 Autoload 全局引用（如 `Global.game_session = newObj`），改为直接操作 Autoload 持有的引用字段
-
-**原因**: 替换 Autoload 引用的对象本身会导致其他 Autoload 持有的旧引用与全局引用不一致，同时 GUT 框架对全局 Autoload 状态的变更非常敏感
-
-```gdscript
-# ❌ 错误：替换 Autoload 引用的对象本身
-func before_each() -> void:
-    _old_session = Global.game_session
-    Global.game_session = GameSessionData.new()  # 导致 GUT 挂起！
-
-# ✅ 正确：直接操作 Autoload 持有的引用字段
-func test_something() -> void:
-    var session: GameSessionData = EventSystem.session
-    var old_gold: int = session.gold
-    # ... 执行测试 ...
-    session.gold = old_gold  # 恢复
-
-# ✅ 推荐：纯数据类直接创建独立实例
-func test_session_data() -> void:
-    var session: GameSessionData = GameSessionData.new()
-    session.gold = 100
-    assert_eq(session.gold, 100, "金币应正确设置")
-```
-
-### 3. 禁止 watch_signals Autoload 🔴 强制
-
-**规则**: 禁止对 Autoload 单例调用 `watch_signals()`，改用基于状态的断言
-
-**原因**: Autoload 单例的生命周期由 Godot 引擎管理，与测试框架的生命周期不一致，导致信号监听无法正常清理
-
-```gdscript
-# ❌ 错误：对 Autoload 使用 watch_signals
-watch_signals(EventSystem)  # 导致 GUT 挂起！
-
-# ✅ 正确：基于状态的断言
-var session: GameSessionData = EventSystem.session
-var old_gold: int = session.gold
-EventSystem.select_option(event_data, gold_option)
-assert_gt(session.gold, old_gold, "选择金币选项后金币应增加")
-```
+[§34 watch_signals() 在 Autoload 实例上导致 GUT 挂起](../../outline/Godot%20编码规范汇总.md#133-autoload-信号测试)
 
 ### 4. 测试前校验字段名 🟡 建议
 
-**规则**: 编写测试前必须先读取被测类源码，确认属性名和方法签名
-
-**原因**: 凭记忆假设字段名容易导致测试引用不存在的属性
-
-```gdscript
-# ❌ 错误：凭记忆假设字段名
-assert_eq(session.owned_towers.size(), 0)  # owned_towers 不存在！
-
-# ✅ 正确：先确认类定义再编写测试
-assert_eq(session.towers.size(), 0, "初始塔列表应为空")
-```
+[§35 测试中引用了不存在的类属性](../../outline/Godot%20编码规范汇总.md#134-测试前校验字段名--建议)
 
 ### 5. Autoload 测试字段恢复 🟡 建议
 
-**规则**: 涉及 Autoload 状态修改的测试，在每个测试函数内手动保存/恢复被修改的字段值
-
-**原因**: `before_each`/`after_each` 中替换 Autoload 全局引用会导致框架挂起
-
-```gdscript
-# ✅ 推荐：在每个测试函数内手动保存/恢复
-func test_gold_change() -> void:
-    var session: GameSessionData = EventSystem.session
-    var old_gold: int = session.gold
-    session.gold = 500
-    # ... 执行测试断言 ...
-    session.gold = old_gold  # 恢复
-```
+[查看项目规范](../../outline/Godot%20编码规范汇总.md#135-autoload-测试字段恢复--建议)
 
 ### 6. GUT 测试代码审查清单
 
-- [ ] 测试运行器使用 `GutConfig` + `run_tests()` 模式
-- [ ] 没有在 `before_each`/`after_each` 中替换 Autoload 全局引用
-- [ ] 没有对 Autoload 单例调用 `watch_signals()`
-- [ ] 测试中引用的属性名和方法签名已与源码校验
-- [ ] 涉及 Autoload 状态修改的测试有手动保存/恢复逻辑
-- [ ] 纯数据类的测试使用独立实例而非 Autoload 引用
-
-**详细踩坑记录**: [GUT_Testing_Pitfalls.md](../base/practical-experiences/pitfall-cases/GUT_Testing_Pitfalls.md)
+[查看项目规范](../../outline/Godot%20编码规范汇总.md#136-gut-测试代码审查清单)
 
 ---
 
@@ -973,92 +807,19 @@ func test_gold_change() -> void:
 
 ### 14.1 删除 .tres 资源文件必须清理引用 🔴 强制
 
-**规则**: 删除任何 `.tres` / `.resource` 文件前，必须全局搜索并清理所有引用该文件的 `ext_resource` 声明
-
-**原因**: Godot 的 `.tres` 文件加载是原子操作——任何一个 `[ext_resource]` 找不到，整个 `.tres` 都无法加载，而非仅跳过缺失资源
-
-```gdscript
-# ❌ 错误：删除 .tres 后不清理引用
-# 删除了 res://resources/enemies/heavy_armor.tres
-# 但 map_01.tres 中仍有：
-# [ext_resource id="3" type="Resource" path="res://resources/enemies/heavy_armor.tres"]
-# → map_01.tres 整体加载失败！
-
-# ✅ 正确：删除前全局搜索引用，同步清理
-# 1. 搜索被删文件路径
-# 2. 移除引用方 .tres 中的 [ext_resource] 行
-# 3. 移除 [resource] 中使用该 id 的属性
-# 4. 更新 load_steps 计数
-```
-
-**预防措施**:
-- 删除资源前全局搜索文件路径（含 .gd / .json / .tres / .tscn）
-- 使用 `.bak` 后缀代替直接删除，便于追溯
-- 逐步迁移到 JSON 配置，避免 .tres 引用链
+[§37 .tres 文件 ext_resource 引用已删除文件导致整体加载失败](../guides/common-pitfalls.md#37-tres-文件-ext_resource-引用已删除文件导致整体加载失败--高)
 
 ### 14.2 数据格式在源头统一 🔴 强制
 
-**规则**: 数据格式转换只在数据入口处完成一次，所有消费者使用统一格式，禁止在消费者处做运行时格式转换
-
-**原因**: 在每个消费者处做运行时转换会导致：1) 重复代码 2) 遗漏某个消费者 3) 转换逻辑不一致
-
-```gdscript
-# ❌ 错误：在每个消费者处提取短名
-# event_ui.gd
-var session_bg_short: String = session.family_background.replace("family_", "")
-if session_bg_short == "farmer":
-
-# event_system.gd
-var session_bg_short: String = session.family_background.replace("family_", "")
-if session_bg_short == "farmer":
-
-# ✅ 正确：在数据源统一格式
-# era_system.gd（数据入口）
-session.family_background = raw_family_id.replace("family_", "")
-
-# 所有消费者直接比较
-if session.family_background == "farmer":
-```
-
-**核心原则**: 数据格式应在源头统一，而非在每个消费者处转换
+[§38 数据格式不一致导致条件判断永远失败](../guides/common-pitfalls.md#38-数据格式不一致导致条件判断永远失败--中)
 
 ### 14.3 修改数据格式必须同步更新配置文件 🟡 建议
 
-**规则**: 修改 session 字段或其他运行时数据格式后，必须同步检查并更新所有 JSON 配置文件中的硬编码值
-
-**原因**: JSON 配置文件也是数据消费者，其中的硬编码值必须与代码中的数据格式保持一致。遗漏配置文件会导致匹配失败且难以排查
-
-```json
-// ❌ 修改 session.family_background 为短名后，遗漏 achievements.json
-{
-  "condition": {
-    "type": "family_ending_combo",
-    "family": "family_farmer"  // 与 session.family_background("farmer") 不一致
-  }
-}
-
-// ✅ 同步更新配置文件
-{
-  "condition": {
-    "type": "family_ending_combo",
-    "family": "farmer"  // 与 session.family_background 一致
-  }
-}
-```
+[§39 修改数据格式时遗漏配置文件消费者](../guides/common-pitfalls.md#39-修改数据格式时遗漏配置文件消费者--中)
 
 ### 14.4 修改数据格式完整检查清单
 
-```
-- [ ] 全局搜索字段名（含 .gd / .json / .tres / .tscn）
-- [ ] 逐一确认每个引用点的兼容性
-- [ ] 更新代码中的比较逻辑
-- [ ] 更新 JSON 配置中的硬编码值
-- [ ] 更新默认值（如 session_data.gd 的 @export 默认值）
-- [ ] 更新测试用例中的测试数据
-- [ ] 运行场景验证
-```
-
-**详细踩坑记录**: [Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md](../base/practical-experiences/pitfall-cases/Godot_4x_Resource_Ref_Data_Consistency_Pitfall.md)
+[§39 修改数据格式时遗漏配置文件消费者](../guides/common-pitfalls.md#39-修改数据格式时遗漏配置文件消费者--中)
 
 ---
 
@@ -1066,131 +827,31 @@ if session.family_background == "farmer":
 
 ### 15.1 动态敌人管理使用 group 而非手动计数 🟡 建议
 
-**规则**: 使用 Group 系统动态查询存活敌人数量，而非手动维护计数器
-
-**原因**: 手动维护计数器容易遗漏分裂/召唤等动态创建的敌人，导致计数不准确，战斗结算提前弹出
-
-```gdscript
-# ❌ 错误：手动维护计数器
-var _enemies_alive: int = 0
-
-# ✅ 正确：使用 group 动态查询
-func get_alive_enemy_count() -> int:
-    return get_tree().get_nodes_in_group("enemies").size()
-
-# ✅ 分裂/召唤的敌人自动加入 group 并连接信号
-func _spawn_split_enemy(pos: Vector2) -> void:
-    var enemy: CharacterBody2D = enemy_scene.instantiate()
-    enemy.add_to_group("enemies")
-    enemy.died.connect(_on_enemy_died)
-    enemy.global_position = pos
-    add_child(enemy)
-```
+[§42 分裂/召唤敌人未被计入存活数](../guides/common-pitfalls.md#42-分裂召唤敌人未被计入存活数--中)
 
 ### 15.2 缓存节点引用必须同步清理 🔴 强制
 
-**规则**: 节点被 queue_free() 时，必须从所有缓存字典/数组中移除引用；访问缓存引用前必须用 `is_instance_valid()` 检查
-
-**原因**: 字典/数组中保留已释放节点的引用会导致 `Trying to assign invalid previously freed instance` 报错
-
-```gdscript
-# ✅ 正确：使用 .get() 获取引用，先检查 is_instance_valid() 再类型转换
-var tower_ref = built_towers.get(key)
-if is_instance_valid(tower_ref):
-    var tower: Tower = tower_ref as Tower
-    tower.do_something()
-
-# ✅ 节点释放时同步清理
-func _on_tower_destroyed(tower: Tower) -> void:
-    var key: String = _get_tower_key(tower)
-    built_towers.erase(key)
-```
+[§43 字典中保留已释放节点引用导致freed instance报错](../guides/common-pitfalls.md#43-字典中保留已释放节点引用导致freed-instance报错--高)
 
 ### 15.3 悬浮 UI 组件设置 mouse_filter=IGNORE 🟡 建议
 
-**规则**: Tooltip、弹窗等悬浮组件及其子节点应设置 `mouse_filter = MOUSE_FILTER_IGNORE`
-
-**原因**: 悬浮组件遮挡触发元素会导致 MOUSE_EXIT/MOUSE_ENTER 循环闪烁
-
-```gdscript
-# ✅ 正确：tooltip 及其所有子节点设置 mouse_filter = IGNORE
-func _create_tooltip(text: String) -> PanelContainer:
-    var tooltip: PanelContainer = PanelContainer.new()
-    tooltip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    var label: Label = Label.new()
-    label.text = text
-    label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    tooltip.add_child(label)
-    return tooltip
-```
+[§40 Tooltip遮挡触发元素导致闪烁循环](../guides/common-pitfalls.md#40-tooltip遮挡触发元素导致闪烁循环--中)
 
 ### 15.4 位移效果与常规移动互斥 🟡 建议
 
-**规则**: 击退、拉拽等位移效果执行期间，跳过常规路径移动
-
-**原因**: 位移效果直接修改 global_position，与路径移动同时执行会导致位置冲突
-
-```gdscript
-# ✅ 正确：使用状态标志控制互斥
-var is_being_knocked_back: bool = false
-
-func _process(delta: float) -> void:
-    if is_being_knocked_back:
-        return
-    _move_along_path(delta)
-
-func apply_knockback(direction: Vector2, force: float) -> void:
-    is_being_knocked_back = true
-    var tween: Tween = create_tween()
-    tween.tween_property(self, "global_position", global_position + direction * force, 0.3)
-    tween.tween_callback(func(): is_being_knocked_back = false)
-```
+[§44 击退效果与路径移动冲突](../guides/common-pitfalls.md#44-击退效果与路径移动冲突--中)
 
 ### 15.5 场景切换逻辑统一入口 🔴 强制
 
-**规则**: 场景切换逻辑必须统一入口，避免多处独立实现相同功能导致绕过
-
-**原因**: 多处独立实现场景切换会导致修改某一处时另一处不受影响，UI不更新
-
-```gdscript
-# ❌ 错误：map_manager 中独立实现场景切换
-func _show_battle_result():
-    await get_tree().create_timer(2.5).timeout
-    GameState.change_state(State.STAGE)  # 绕过了 result_ui.gd！
-
-# ✅ 正确：统一入口
-func _show_battle_result():
-    GameState.change_state(State.RESULT)
-```
+[§41 场景切换绕过导致UI不更新](../guides/common-pitfalls.md#41-场景切换绕过导致ui不更新--高)
 
 ### 15.6 不同阶段奖励数据分开存储 🟡 建议
 
-**规则**: 不同阶段的奖励数据必须分开存储和展示，避免跨阶段重复显示
-
-```gdscript
-# ✅ 正确：每个阶段使用独立的数据字段
-var last_event_traits: Array = []        # 事件选择阶段奖励
-var last_event_towers: Array = []        # 事件选择阶段奖励
-var last_battle_rewards: Dictionary = {} # 战斗阶段奖励
-```
+[§45 事件/战斗奖励重复显示](../guides/common-pitfalls.md#45-事件战斗奖励重复显示--中)
 
 ### 15.7 效果格式化按 type 读取对应字段 🟡 建议
 
-**规则**: 效果格式化函数必须根据 effect type 读取对应字段，不能假设所有效果都用 value 字段
-
-```gdscript
-# ✅ 正确：根据 effect type 读取对应字段，回退到 value
-func _format_effect(effect: Dictionary) -> String:
-    var effect_type: String = effect.get("type", "")
-    var val: float = effect.get(effect_type, effect.get("value", 0))
-    match effect_type:
-        "tower_damage_bonus":
-            return "塔伤害+%.0f%%" % (val * 100)
-        "tower_attack_speed_bonus":
-            return "攻速+%.0f%%" % (val * 100)
-        _:
-            return str(val)
-```
+[§46 词条效果字段名不一致](../guides/common-pitfalls.md#46-词条效果字段名不一致--中)
 
 ### 15.8 游戏系统代码审查清单
 
@@ -1211,26 +872,11 @@ func _format_effect(effect: Dictionary) -> String:
 
 ### 15.9 UI计数显示使用"剩余/最大"格式 🟡 建议
 
-**规则**: 有数量限制的UI元素，优先显示"剩余可用数/最大数"而非"已使用数/最大数"；已用完的选项应变灰禁用(disabled + modulate)，而非从界面移除
-
-```gdscript
-# ❌ 错误：显示"已放置/最大"
-count_label.text = "%d/%d" % [tower_placed, tower_max]  # 0/1
-
-# ✅ 正确：显示"剩余可放/最大"
-var tower_remaining: int = tower_max - tower_placed
-count_label.text = "%d/%d" % [tower_remaining, tower_max]  # 1/1
-```
-
-**踩坑记录**: [§47](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#47-ui计数显示语义错误已放置最大vs剩余可放最大-🟡-中) | [§49](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#49-已满的塔从ui消失而非变灰-🟡-中)
+[§47 UI计数显示语义错误——"已放置/最大"vs"剩余可放/最大"](../guides/common-pitfalls.md#47-ui计数显示语义错误已放置最大vs剩余可放最大--中) · [§49 已满的塔从UI消失而非变灰](../guides/common-pitfalls.md#49-已满的塔从ui消失而非变灰--中)
 
 ### 15.10 调试前确认"正确行为"定义 🟡 建议
 
-**规则**: 调试bug时先确认"正确行为"的定义，避免在正确的逻辑上反复修改。先问清楚"期望显示什么"再动手
-
-**踩坑记录**: [§50](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#50-调试误判在正确的逻辑上反复修改-🟢-低)
-
-**详细踩坑记录**: [Godot_4x_Game_System_Pitfalls.md](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§50 调试误判——在正确的逻辑上反复修改](../guides/common-pitfalls.md#50-调试误判在正确的逻辑上反复修改--低)
 
 ---
 
@@ -1238,115 +884,23 @@ count_label.text = "%d/%d" % [tower_remaining, tower_max]  # 1/1
 
 ### 16.1 修改代码前必须确认实际调用路径 🔴 强制
 
-**规则**: 修改代码前必须用Grep搜索所有引用点，确认实际执行路径，不要假设某个文件/函数是被调用的入口
-
-**原因**: 项目中可能存在多个同名或相似功能的文件，实际调用路径可能与预期不同，修改错误的文件不会生效
-
-```gdscript
-# ❌ 错误：假设某个文件/函数是被调用的入口
-# 修改了 enemy_spawner.gd 但实际调用路径不经过它
-# 实际路径：wave_manager.gd -> map_manager.gd
-
-# ✅ 正确：修改前用Grep搜索确认实际调用路径
-# 1. 搜索信号名：grep -rn "enemy_spawn_requested" --include="*.gd"
-# 2. 确认emit和connect的位置
-# 3. 追踪完整的调用链
-```
-
-**踩坑记录**: [§56 实际生成路径可能与预期不同](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§56 实际生成路径可能与预期不同](../guides/common-pitfalls.md#56-实际生成路径可能与预期不同--中)
 
 ### 16.2 可能触发场景切换的调用后必须检查is_inside_tree() 🔴 强制
 
-**规则**: `select_option()`、`change_state()`等可能触发场景切换的调用后，节点可能被移出场景树，后续的`get_node_or_null()`、`get_tree()`等调用前必须检查`is_inside_tree()`
-
-**原因**: 场景切换会将当前UI节点移出场景树，后续对场景树的访问会报错 `Can't use get_node() with absolute paths from outside the active scene tree`
-
-```gdscript
-# ❌ 错误：场景切换调用后继续访问节点
-func _on_option_pressed():
-    EventSystem.select_option(event_data, option)  # 可能触发场景切换
-    var node = get_node_or_null("/root/SomeNode")  # 报错！
-
-# ✅ 正确：在可能触发场景切换的调用之后，加is_inside_tree()检查
-func _on_option_pressed():
-    EventSystem.select_option(event_data, option)
-    if not is_inside_tree():
-        return
-    var node = get_node_or_null("/root/SomeNode")
-```
-
-**踩坑记录**: [§51 节点被移出场景树后调用get_node_or_null报错](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§51 节点被移出场景树后调用get_node_or_null报错](../guides/common-pitfalls.md#51-节点被移出场景树后调用get_node_or_null报错--高)
 
 ### 16.3 不要以对象实例作为Dictionary的key 🔴 强制
 
-**规则**: 不要以对象实例（如Node、Tower等）作为Dictionary的key，改用`Array[Dictionary]`存储，如`{"tower": tower_ref, "damage": 100.0}`
-
-**原因**: 对象被释放后遍历Dictionary时，GDScript内部类型验证会失败，导致 `Attempted to next an invalid (previously freed?) object instance` 崩溃
-
-```gdscript
-# ❌ 错误：以对象实例作为Dictionary的key
-var damage_dealers: Dictionary = {}  # key = Tower对象
-damage_dealers[tower] = 100.0
-# Tower被释放后遍历 → 崩溃！
-
-# ✅ 正确：用Array[Dictionary]存储，不以对象为key
-var damage_dealers: Array[Dictionary] = []
-damage_dealers.append({"tower": tower_ref, "damage": 100.0})
-
-# ✅ 遍历时用is_instance_valid()过滤
-for entry in damage_dealers:
-    if is_instance_valid(entry["tower"]):
-        var tower: Tower = entry["tower"] as Tower
-        tower.do_something()
-```
-
-**踩坑记录**: [§52 以freed对象为key的Dictionary遍历崩溃](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§52 以freed对象为key的Dictionary遍历崩溃](../guides/common-pitfalls.md#52-以freed对象为key的dictionary遍历崩溃--高)
 
 ### 16.4 路径偏移必须一次性应用到所有路径点 🔴 强制
 
-**规则**: 路径偏移必须在`set_path()`时一次性计算偏移后的路径点，不要用侧向力/每帧偏移实现路径偏移
-
-**原因**: 侧向力与路径追踪的`global_position = target_pos`互相打架，每帧先移向目标点再被侧向力推开，导致怪物抖动/转圈
-
-```gdscript
-# ❌ 错误：用侧向力实现路径偏移
-func _process(delta: float):
-    _move_along_path(delta)
-    global_position += perpendicular * lateral_offset * delta  # 与路径移动冲突！
-
-# ✅ 正确：在set_path()时一次性偏移所有路径点
-func set_path(points: Array[Vector2]) -> void:
-    path_points = points
-    _apply_lateral_offset()  # 一次性偏移所有路径点
-
-func _apply_lateral_offset() -> void:
-    if lateral_offset == 0.0:
-        return
-    for i in range(path_points.size()):
-        var direction: Vector2 = (path_points[i] - path_points[max(0, i - 1)]).normalized()
-        var perpendicular: Vector2 = Vector2(-direction.y, direction.x)
-        path_points[i] += perpendicular * lateral_offset
-```
-
-**踩坑记录**: [§53 怪物路径偏移不能用侧向力实现](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§53 怪物路径偏移不能用侧向力实现](../guides/common-pitfalls.md#53-怪物路径偏移不能用侧向力实现--中)
 
 ### 16.5 Dictionary值判断用.get()而非.has() 🟡 建议
 
-**规则**: Dictionary值判断使用`.get("key") is ExpectedType`而非`.has("key")`，类型安全且不受null值影响
-
-**原因**: `has("key")`检查的是key是否存在，而非value是否有效。key存在但value为null时，`has()`仍返回true，可能导致逻辑分支错误
-
-```gdscript
-# ❌ 错误：用has()判断，null值时仍返回true
-if option.has("battle_trigger"):  # battle_trigger: null 时也返回true！
-    _enter_battle()  # 误触发战斗
-
-# ✅ 正确：用.get() + 类型检查，类型安全且不受null值影响
-if option.get("battle_trigger") is Dictionary:
-    _enter_battle()  # 只在battle_trigger是Dictionary时触发
-```
-
-**踩坑记录**: [§57 Dictionary.has()对null值返回true](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§57 Dictionary.has()对null值返回true](../guides/common-pitfalls.md#57-dictionaryhas对null值返回true--中)
 
 ### 16.6 场景树与路径系统代码审查清单
 
@@ -1358,7 +912,7 @@ if option.get("battle_trigger") is Dictionary:
 - [ ] 分裂/召唤子怪的路径偏移叠加父怪偏移
 - [ ] 怪出生时`current_path_index`从1开始
 
-**详细踩坑记录**: [Godot_4x_Game_System_Pitfalls.md](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+**详细踩坑记录**: [Godot_4x_Game_System_Pitfalls.md](../../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
 
 ---
 
@@ -1366,84 +920,23 @@ if option.get("battle_trigger") is Dictionary:
 
 ### 暴击=伤害倍率而非额外伤害实例 🔴 强制
 
-**规则**: CRIT类特效必须在攻击流程中判定为伤害倍率，通过is_crit参数控制UI显示。禁止在effect_system中单独调用take_damage造成额外伤害实例
-
-```gdscript
-# ✅ 暴击作为伤害倍率，在攻击流程中判定
-func _on_projectile_hit(target: Node2D) -> void:
-    var final_damage: float = base_damage
-    var is_crit: bool = _check_crit()
-    if is_crit:
-        final_damage *= crit_multiplier
-    target.take_damage(final_damage, is_crit)
-
-# effect_system.gd - execute_effects跳过CRIT类型
-func execute_effects(effects: Array, source: Node2D, target: Node2D) -> void:
-    for effect in effects:
-        match effect.get("type", ""):
-            "CRIT":
-                continue  # 跳过CRIT
-            "SLOW":
-                _apply_slow(target, effect)
-```
-
-**踩坑记录**: [§81 暴击特效不应作为额外伤害实例](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#81-暴击特效不应作为额外伤害实例-🔴-高)
+[§81 暴击特效不应作为额外伤害实例](../guides/common-pitfalls.md#81-暴击特效不应作为额外伤害实例--高)
 
 ### debuff效果验证 🟡 建议
 
-**规则**: 添加新的状态效果时，必须验证效果值在take_damage中被实际使用，避免"设置了但不生效"
-
-```gdscript
-# ✅ 在take_damage中将debuff_amount加入抗性计算
-func take_damage(amount: float, is_crit: bool = false) -> void:
-    var resistance: float = maxf(0.0, resistance - armor_break_amount - debuff_amount)
-```
-
-**踩坑记录**: [§82 debuff_amount设置但未使用导致效果不生效](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#82-debuff_amount设置但未使用导致效果不生效-🟡-中)
+[§82 debuff_amount设置但未使用导致效果不生效](../guides/common-pitfalls.md#82-debuff_amount设置但未使用导致效果不生效--中)
 
 ### 翻译键一致性 🔴 强制
 
-**规则**: 代码中使用的tr()键名必须与translations.csv中完全一致，包括大小写和后缀
-
-```gdscript
-# ✅ 确保键名完全一致
-var text: String = tr("ENEMY_DEBUFF") % [slow_amount, slow_timer]
-```
-
-**踩坑记录**: [§83 翻译键不匹配导致格式化报错](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#83-翻译键不匹配导致格式化报错-🔴-高)
+[§83 翻译键不匹配导致格式化报错](../guides/common-pitfalls.md#83-翻译键不匹配导致格式化报错--高)
 
 ### 状态机回调防护 🔴 强制
 
-**规则**: UI回调中切换GameState状态前，必须检查当前状态是否已被其他逻辑修改
-
-```gdscript
-# ✅ 回调中先检查当前状态
-func _on_option_selected(option: Dictionary) -> void:
-    EventSystem.select_option(event_data, option)
-    if GameState.current_state == GameState.State.ENDING:
-        return
-    GameState.change_state(State.STAGE)
-```
-
-**踩坑记录**: [§84 终局状态机被UI回调覆盖](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#84-终局状态机被ui回调覆盖-🔴-高)
+[§84 终局状态机被UI回调覆盖](../guides/common-pitfalls.md#84-终局状态机被ui回调覆盖--高)
 
 ### ParticleProcessMaterial颜色设置 🟡 建议
 
-**规则**: 优先使用`process_mat.color`设置纯色粒子；需要渐变时必须用`GradientTexture1D`包装Gradient对象
-
-```gdscript
-# ✅ 用GradientTexture1D包装
-var gradient_tex: GradientTexture1D = GradientTexture1D.new()
-gradient_tex.gradient = gradient
-process_mat.color_ramp = gradient_tex
-
-# ✅ 纯色粒子直接用color属性
-process_mat.color = Color(1.0, 0.3, 0.3)
-```
-
-**踩坑记录**: [§85 ParticleProcessMaterial.color_ramp类型限制](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md#85-particleprocessmaterialcolor_ramp类型限制-🟡-中)
-
-**详细踩坑记录**: [Godot_4x_Game_System_Pitfalls.md](../base/practical-experiences/pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
+[§85 ParticleProcessMaterial.color_ramp类型限制](../guides/common-pitfalls.md#85-particleprocessmaterialcolor_ramp类型限制--中)
 
 ---
 
@@ -1519,16 +1012,16 @@ process_mat.color = Color(1.0, 0.3, 0.3)
 ## 📚 相关资源
 
 ### Base 层资料来源
-- [GDScript_Code_Standards.md](../base/practical-experiences/code-standards/GDScript_Code_Standards.md) - 完整代码规范标准
+- [GDScript_Code_Standards.md](../../base/practical-experiences/code-standards/GDScript_Code_Standards.md) - 完整代码规范标准
 
 ### 踩坑记录
-- [GDScript 警告处理最佳实践](../base/practical-experiences/pitfall-cases/GDScript_Warning_Best_Practices.md)
-- [19 个常见踩坑记录](../base/practical-experiences/pitfall-cases/19_Pitfall_Records.md)
-- [GUT 测试框架踩坑](../base/practical-experiences/pitfall-cases/GUT_Testing_Pitfalls.md) 🆕
+- [GDScript 警告处理最佳实践](../../base/practical-experiences/pitfall-cases/GDScript_Warning_Best_Practices.md)
+- [19 个常见踩坑记录](../../base/practical-experiences/pitfall-cases/19_Pitfall_Records.md)
+- [GUT 测试框架踩坑](../../base/practical-experiences/pitfall-cases/GUT_Testing_Pitfalls.md) 🆕
 
 ### Wiki 层相关页面
-- [常见踩坑避雷指南](./common-pitfalls.md)
-- [性能优化实战指南](../guides/performance-optimization.md)
+- [常见踩坑避雷指南](../guides/common-pitfalls.md)
+- [性能优化实战指南](../guides/performance-optimization-guide.md)
 
 ---
 

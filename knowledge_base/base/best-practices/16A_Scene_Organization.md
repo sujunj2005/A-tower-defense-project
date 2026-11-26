@@ -172,7 +172,7 @@ func _process(delta):
         # ...
 ```
 
-详见 [常见模式文档](20B_Common_Patterns.md)
+详见 [常见模式文档](../quick-reference/20B_Common_Patterns.md)
 
 ---
 
@@ -406,5 +406,5 @@ func _enter_phase_2():
 - [数据偏好](16B_Data_Preferences.md)
 - [逻辑偏好](16C_Logic_Preferences.md)
 - [Godot 接口设计](https://docs.godotengine.org/en/stable/tutorials/best_practices/godot_interfaces.html)
-- [信号详解](03A_Signals_Detailed.md)
-- [节点操作](02A_Node_Operations.md)
+- [信号详解](../signals-events/03A_Signals_Detailed.md)
+- [节点操作](../core-systems/02A_Node_Operations.md)

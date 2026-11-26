@@ -3,7 +3,11 @@
     "version": "4.7.2",
     "console": "Godot_v4.7.2-stable_win64_console.exe",
     "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip",
-    "sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953"
+    "sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953",
+    "exportTemplates": {
+      "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz",
+      "sha256": "f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011"
+    }
   },
   "addons": [
     {
@@ -13,14 +17,6 @@
       "entry": "gut_cmdln.gd",
       "url": "https://codeload.github.com/bitwes/Gut/zip/refs/tags/v9.6.0",
       "sha256": "d01311bedab7b96caec275b1646757a52a1e13b8475eabfe76ac62b7134433f3"
-    },
-    {
-      "name": "godot_ai",
-      "version": "4.4.2",
-      "archivePath": "addons/godot_ai",
-      "entry": "plugin.gd",
-      "url": "https://github.com/hi-godot/godot-ai/releases/download/v4.4.2/godot-ai-v4-plugin.zip",
-      "sha256": "93b976b68df03352073d36c30b6daa593cdc42322cd10f6dacdec10d049ac9a0"
     }
   ]
 }

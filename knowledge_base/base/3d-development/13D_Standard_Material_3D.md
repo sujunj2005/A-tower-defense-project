@@ -238,6 +238,6 @@ material.roughness = 0.1  # 锐利高光
 
 - [StandardMaterial3D 官方文档](https://docs.godotengine.org/en/stable/classes/class_standard_material3d.html)
 - [BaseMaterial3D 官方文档](https://docs.godotengine.org/en/stable/classes/class_basematerial3d.html)
-- [Spatial Shader 教程](10D_Spatial_Shader.md)
+- [Spatial Shader 教程](../shaders/10D_Spatial_Shader.md)
 - [3D 光照阴影](13C_Lights_and_Shadows.md)
 - [3D 渲染限制](https://docs.godotengine.org/en/stable/tutorials/3d/3d_rendering_limitations.html)

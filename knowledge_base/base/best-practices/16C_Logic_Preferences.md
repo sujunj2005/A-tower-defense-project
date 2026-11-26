@@ -370,7 +370,7 @@ func cleanup():
 
 ### 8.2 对象池模式
 
-详见 [Common Patterns 文档](20B_Common_Patterns.md) 中的 Object Pool 章节。
+详见 [Common Patterns 文档](../quick-reference/20B_Common_Patterns.md) 中的 Object Pool 章节。
 
 ### 8.3 避免内存泄漏
 
@@ -518,9 +518,9 @@ assert(not is_inside_tree() or get_parent() != null, "树中节点必须有父�
 ## 十一、参考链接
 
 - [GDScript 官方文档](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)
-- [GDScript 风格指南](01H_Style_Guide.md)
-- [静态类型](01E_Static_Typing.md)
+- [GDScript 风格指南](../gdscript-reference/01H_Style_Guide.md)
+- [静态类型](../gdscript-reference/01E_Static_Typing.md)
 - [数据偏好](16B_Data_Preferences.md)
 - [场景组织](16A_Scene_Organization.md)
-- [通用优化](14A_General_Optimization.md)
-- [调试工具](17A_Debugging_Tools.md)
+- [通用优化](../practical-experiences/optimization-tips/14A_General_Optimization.md)
+- [调试工具](../debug-and-testing/17A_Debugging_Tools.md)

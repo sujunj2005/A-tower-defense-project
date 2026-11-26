@@ -136,11 +136,11 @@ TileSet 可以内置于 TileMapLayer 节点，适合原型开发，但实际项�
 ### 5.1 获取瓦片
 
 ```gdscript
-@onready var tilemap = $TileMapLayer
+@onready var tilemap: TileMapLayer = $TileMapLayer
 
 func _ready():
     # 检查瓦片是否存在
-    var tile_data = tilemap.get_cell_tile_data(0, Vector2i(5, 5))
+    var tile_data = tilemap.get_cell_tile_data(Vector2i(5, 5))
     if tile_data:
         print("瓦片存在")
 ```
@@ -149,23 +149,23 @@ func _ready():
 
 ```gdscript
 func place_tile(x: int, y: int, source_id: int):
-    tilemap.set_cell(0, Vector2i(x, y), 0, source_id, Vector2i(0, 0))
+    tilemap.set_cell(Vector2i(x, y), source_id, Vector2i.ZERO)
 ```
 
 ### 5.3 清除瓦片
 
 ```gdscript
 func clear_tile(x: int, y: int):
-    tilemap.set_cell(0, Vector2i(x, y), -1)
+    tilemap.erase_cell(Vector2i(x, y))
 ```
 
 ### 5.4 遍历所有瓦片
 
 ```gdscript
 func list_all_tiles():
-    for cell in tilemap.get_used_cells(0):
+    for cell in tilemap.get_used_cells():
         var pos = cell
-        var tile_data = tilemap.get_cell_tile_data(0, pos)
+        var tile_data = tilemap.get_cell_tile_data(pos)
         if tile_data:
             print("瓦片位置：", pos)
 ```
@@ -316,13 +316,7 @@ Peering Bits: 左上=0（草地），其他=1（道路）
 @onready var tilemap: TileMapLayer = $TileMapLayer
 
 func set_tile_with_terrain(coords: Vector2i, terrain_set: int, terrain: int):
-    tilemap.set_cell(
-        coords,           # 瓦片坐标
-        0,                # source_id
-        Vector2i(0, 0),   # atlas_coords（会自动选择）
-        terrain_set,      # terrain_set
-        terrain           # terrain
-    )
+    tilemap.set_cells_terrain_connect([coords], terrain_set, terrain, false)
 ```
 
 #### 6.4.2 批量设置地形连接
@@ -333,21 +327,22 @@ func paint_terrain_area(cells: Array[Vector2i], terrain_set: int, terrain: int):
         cells,           # 瓦片坐标数组
         terrain_set,     # 地形集索引
         terrain,         # 地形索引
-        false            # 忽略空瓦片
+        false            # 将空地形纳入接边匹配
     )
 ```
 
 #### 6.4.3 填充矩形区域
 
 ```gdscript
-func fill_terrain_rect(start: Vector2i, end: Vector2i, terrain_set: int, terrain: int):
-    tilemap.set_cells_terrain_path(
-        [start, end],    # 路径点数组
-        terrain_set,     # 地形集索引
-        terrain,         # 地形索引
-        false            # 忽略空瓦片
-    )
+func fill_terrain_rect(area: Rect2i, terrain_set: int, terrain: int) -> void:
+    var cells: Array[Vector2i] = []
+    for y in range(area.position.y, area.end.y):
+        for x in range(area.position.x, area.end.x):
+            cells.append(Vector2i(x, y))
+    tilemap.set_cells_terrain_connect(cells, terrain_set, terrain, false)
 ```
+
+矩形示例枚举区域内的格子。铺设连续线路时，`set_cells_terrain_path()` 接收按顺序排列的路径格，两个角点无法填满矩形。
 
 #### 6.4.4 完整示例：创建草地地图
 

@@ -3,7 +3,7 @@
 > **问题分类**: 已知限制  
 > **影响版本**: Godot 4.x  
 > **发现时间**: 2026-04-07  
-> **来源**: [10_Other/10A_Known_Issues/Godot_4x_Window_Size_Detection_Issue.md](../../../10_Other/10A_Known_Issues/Godot_4x_Window_Size_Detection_Issue.md)
+> **原始归档路径**: `10_Other/10A_Known_Issues/Godot_4x_Window_Size_Detection_Issue.md`
 
 ---
 

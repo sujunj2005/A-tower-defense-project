@@ -1,7 +1,7 @@
 # 文件系统与资源管理指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 15A_File_System.md](../../base/assets-and-io/15A_File_System.md), [15B_Saving_Games.md](../../base/assets-and-io/15B_Saving_Games.md)  
+> **来源**: [Base 层 - 15A_File_System.md](../../base/assets-and-io/15A_File_System.md), [15C_Saving_Games.md](../../base/assets-and-io/15C_Saving_Games.md)  
 > **重要性**: 🔴 必读 - 文件操作完整指南
 
 ---
@@ -127,8 +127,8 @@ static func load_game(player: Node, filename: String = "user://save.dat"):
 
 ### Base 层
 - [15A_File_System.md](../../base/assets-and-io/15A_File_System.md) - 文件系统详解
-- [15B_Saving_Games.md](../../base/assets-and-io/15B_Saving_Games.md) - 游戏存档
-- [15C_Importing_Images.md](../../base/assets-and-io/15C_Importing_Images.md) - 图片导入
+- [15C_Saving_Games.md](../../base/assets-and-io/15C_Saving_Games.md) - 游戏存档
+- [15B_Importing_Images.md](../../base/assets-and-io/15B_Importing_Images.md) - 图片导入
 - [15D_Background_Loading.md](../../base/assets-and-io/15D_Background_Loading.md) - 后台加载
 
 ### Wiki 层

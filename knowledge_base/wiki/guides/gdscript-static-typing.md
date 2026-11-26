@@ -272,9 +272,9 @@ if node_2d is MyScript:
 - [01E_Static_Typing.md](../../base/gdscript-reference/01E_Static_Typing.md) - 完整静态类型文档
 
 ### Wiki 层相关
-- [GDScript 基础语法](./gdscript-basics.md) - 基础语法
-- [GDScript 类型系统](./gdscript-types.md) - 类型和变量
-- [GDScript 代码规范](./gdscript-standards.md) - 代码风格
+- [GDScript 基础语法](../concepts/gdscript-basics.md) - 基础语法
+- [GDScript 类型系统](../concepts/gdscript-types.md) - 类型和变量
+- [GDScript 代码规范](../concepts/gdscript-standards.md) - 代码风格
 
 ---
 

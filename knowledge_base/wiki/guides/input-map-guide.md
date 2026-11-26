@@ -1,7 +1,7 @@
 # 输入映射实战指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [08B_InputMap.md](../base/input-system/08B_InputMap.md)  
+> **来源**: [08B_InputMap.md](../../base/input-system/08B_InputMap.md)  
 > **最后更新**: 2026-04-07
 
 ---
@@ -443,15 +443,15 @@ func _input(event):
 
 ## 🔗 相关概念
 
-- **输入事件**: [input-events.md](../wiki/concepts/input-events.md) - 输入事件核心概念
-- **UI 输入处理**: [ui-input-handling.md](../wiki/guides/ui-input-handling.md) - UI 输入实战
-- **2D 移动**: [2d-movement-guide.md](../wiki/guides/2d-movement-guide.md) - 2D 移动实现
+- **输入事件**: [input-events.md](../concepts/input-events.md) - 输入事件核心概念
+- **UI 输入处理**: [ui-input-handling.md](./ui-input-handling.md) - UI 输入实战
+- **2D 移动**: [2d-movement-guide.md](./2d-movement-guide.md) - 2D 移动实现
 
 ---
 
 ## 📚 参考资料
 
-- **Base 层来源**: [08B_InputMap.md](../base/input-system/08B_InputMap.md)
+- **Base 层来源**: [08B_InputMap.md](../../base/input-system/08B_InputMap.md)
 - **Godot 官方文档**: [Input 类参考](https://docs.godotengine.org/en/stable/classes/class_input.html)
 - **Godot 官方文档**: [InputMap 类参考](https://docs.godotengine.org/en/stable/classes/class_inputmap.html)
 

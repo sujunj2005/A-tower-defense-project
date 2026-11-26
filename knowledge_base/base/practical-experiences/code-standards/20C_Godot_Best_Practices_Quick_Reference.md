@@ -18,7 +18,7 @@
 | 屏幕外性能浪费 | 🟡 中 | VisibleOnScreenNotifier2D | [第 5 节](#5-屏幕外优化) |
 | 分辨率设置不当 | 🟡 中 | 640×360 + 整数缩放 | [第 6 节](#6-分辨率与缩放) |
 | 缺少静态类型 | 🟡 中 | 渐进式类型化 | [第 7 节](#7-静态类型) |
-| **.tres 文件注释** 🆕 | 🔴 严重 | **禁止行内注释** | [第 11 节](#11-tres-文件注释问题) |
+| **.tres 文件注释** 🆕 | 🔴 严重 | **禁止行内注释** | [第 11 节](#11-tres-文件注释问题-) |
 
 ---
 
@@ -624,8 +624,8 @@ grep -rn "texture_path.*#" --include="*.tres" .
 ```
 
 ### 📚 参考
-- [Godot_4x_Resource_File_Comment_Issue.md](../19_Common_Pitfalls/Godot_4x_Resource_File_Comment_Issue.md)
-- [19_Pitfall_Records.md#§23](../19_Common_Pitfalls/19_Pitfall_Records.md)
+- [Godot_4x_Resource_File_Comment_Issue.md](../pitfall-cases/Godot_4x_Resource_File_Comment_Issue.md)
+- [19_Pitfall_Records.md#§23](../pitfall-cases/19_Pitfall_Records.md)
 
 ---
 

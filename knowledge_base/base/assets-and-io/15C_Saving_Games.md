@@ -32,7 +32,7 @@
 |------|------|------|
 | JSON | 可读、易调试 | 可被玩家修改 |
 | ConfigFile | Godot 原生支持 | 结构较复杂 |
-| 二进制 | 安全、紧凑 | 不可读 |
+| 二进制 | 支持 Godot 内置值类型、较紧凑 | 需要专门工具读取，数据仍可能被改动 |
 
 ---
 
@@ -83,7 +83,8 @@ func load_json() -> Dictionary:
         var json = JSON.new()
         var error = json.parse(file.get_as_text())
         if error == OK:
-            return json.data
+            if json.data is Dictionary:
+                return json.data
     return {}
 ```
 
@@ -124,22 +125,27 @@ func ensure_dir():
 
 ## 4. 加密存档
 
-### 4.1 使用 AES 加密
+### 4.1 使用 Godot 的加密文件接口
 
 ```gdscript
-func encrypt(data: String, key: String) -> PackedByteArray:
-    var key_bytes = key.to_utf8_buffer()
-    var data_bytes = data.to_utf8_buffer()
-    # 使用 Crypto 扩展或自定义加密
-    return data_bytes
+func save_encrypted_text(path: String, text: String, password: String) -> bool:
+    var file := FileAccess.open_encrypted_with_pass(path, FileAccess.WRITE, password)
+    if file == null:
+        return false
+    var stored := file.store_string(text)
+    file.close()
+    return stored
 
-func decrypt(data: PackedByteArray, key: String) -> String:
-    var key_bytes = key.to_utf8_buffer()
-    # 解密并返回字符串
-    return data_bytes.get_string_from_utf8()
+func read_encrypted_text(path: String, password: String) -> String:
+    var file := FileAccess.open_encrypted_with_pass(path, FileAccess.READ, password)
+    if file == null:
+        return ""
+    var text := file.get_as_text()
+    file.close()
+    return text
 ```
 
-> **注意**：真正的加密需要使用 Godot 的 Crypto 类或第三方插件。
+Godot 4.6.2 已验证该接口能往返读写加密文本。读取 JSON 时再校验解析结果和数据形状。若空字符串本身是有效存档，可让调用方另收读取是否成功的状态。[FileAccess 类参考](../godot-official-docs/classes/class_fileaccess.rst)
 
 ---
 

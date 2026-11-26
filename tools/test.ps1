@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 $projectRoot = Split-Path -Parent $PSScriptRoot
 
-foreach ($entry in @('addons/gut/gut_cmdln.gd', 'addons/godot_ai/runtime/game_helper.gd', '.gutconfig_all.json')) {
+foreach ($entry in @('addons/gut/gut_cmdln.gd', '.gutconfig_all.json')) {
     if (-not (Test-Path -LiteralPath (Join-Path $projectRoot $entry) -PathType Leaf)) {
         throw "Missing $entry. Run tools/bootstrap.ps1 and check the project files."
     }
@@ -36,8 +36,8 @@ try {
 
     $suites = if ($Suite -eq 'All') { @('unit', 'integration') } else { @($Suite.ToLowerInvariant()) }
     $exitCode = 0
-    if (Select-String -LiteralPath $importLog -Pattern '^SCRIPT ERROR: (Parse|Compile) Error:' -Quiet) {
-        Write-Warning "Godot reported a script compilation error during import. See $importLog"
+    if (Select-String -LiteralPath $importLog -Pattern '^(SCRIPT )?ERROR:' -Quiet) {
+        Write-Warning "Godot reported an error during import. See $importLog"
         $exitCode = 1
     }
     foreach ($name in $suites) {

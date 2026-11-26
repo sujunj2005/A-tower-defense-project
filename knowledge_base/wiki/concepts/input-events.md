@@ -1,7 +1,7 @@
 # 输入事件核心概念
 
 > **适用版本**: Godot 4.x  
-> **来源**: [08A_InputEvent.md](../base/input-system/08A_InputEvent.md)  
+> **来源**: [08A_InputEvent.md](../../base/input-system/08A_InputEvent.md)  
 > **最后更新**: 2026-04-07
 
 ---
@@ -314,15 +314,15 @@ func _unhandled_input(event):
 
 ## 🔗 相关概念
 
-- **InputMap**: [input-map-guide.md](../wiki/guides/input-map-guide.md) - 输入映射指南
-- **信号系统**: [signals-events.md](../wiki/concepts/signals-events.md) - 信号核心概念
-- **UI 输入处理**: [ui-input-handling.md](../wiki/guides/ui-input-handling.md) - UI 输入实战
+- **InputMap**: [input-map-guide.md](../guides/input-map-guide.md) - 输入映射指南
+- **信号系统**: [signals-events.md](./signals-events.md) - 信号核心概念
+- **UI 输入处理**: [ui-input-handling.md](../guides/ui-input-handling.md) - UI 输入实战
 
 ---
 
 ## 📚 参考资料
 
-- **Base 层来源**: [08A_InputEvent.md](../base/input-system/08A_InputEvent.md)
+- **Base 层来源**: [08A_InputEvent.md](../../base/input-system/08A_InputEvent.md)
 - **Godot 官方文档**: [InputEvent 类参考](https://docs.godotengine.org/en/stable/classes/class_inputevent.html)
 - **Godot 官方文档**: [Input 类参考](https://docs.godotengine.org/en/stable/classes/class_input.html)
 

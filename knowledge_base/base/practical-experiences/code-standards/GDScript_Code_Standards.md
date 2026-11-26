@@ -12,7 +12,7 @@
 3. [变量与常量](#3-变量与常量)
    - [3.1 整数除法规范](#31-整数除法规范)
    - [3.2 显性声明变量类型](#32-显性声明变量类型-强制要求)
-   - [3.3 内嵌 set/get 函数规范](#33-内嵌-setget-函数规范) 🆕
+   - [3.3 内嵌 set/get 函数规范](#33-内嵌-setget-函数规范-) 🆕
 4. [函数规范](#4-函数规范)
 5. [枚举处理](#5-枚举处理)
 6. [资源管理](#6-资源管理)
@@ -20,11 +20,11 @@
 8. [错误与日志处理](#8-错误与日志处理)
 9. [测试规范](#9-测试规范)
 10. [代码审查清单](#10-代码审查清单)
-11. [资源文件规范](#11-资源文件规范) 🆕
-12. [Autoload 单例规范](#12-autoload-单例规范) 🆕
-13. [测试编码守则](#13-测试编码守则) 🆕
-14. [资源引用与数据一致性规范](#14-资源引用与数据一致性规范) 🆕
-15. [游戏系统实战规范](#15-游戏系统实战规范) 🆕
+11. [资源文件规范](#11-资源文件规范-) 🆕
+12. [Autoload 单例规范](#12-autoload-单例规范-) 🆕
+13. [测试编码守则](#13-测试编码守则-) 🆕
+14. [资源引用与数据一致性规范](#14-资源引用与数据一致性规范-) 🆕
+15. [游戏系统实战规范](#15-游戏系统实战规范-) 🆕
 
 ---
 
@@ -157,7 +157,7 @@ var img_size: Vector2 = Vector2(32, 32)  # 图片尺寸
 var attr_text: String = "hello"       # 属性文本
 ```
 
-**踩坑记录**: [§48 变量命名与GDScript内置标识符冲突](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#48-变量命名与gdscript内置标识符冲突-🟡-中)
+**踩坑记录**: [§48 变量命名与GDScript内置标识符冲突](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#48-变量命名与gdscript内置标识符冲突--中)
 
 ### 2.2 常量和枚举
 
@@ -1205,8 +1205,8 @@ texture_path = "res://images/enemies/marble_0_0.png"
 4. **验证加载**：运行游戏验证配置正确加载
 
 **详细说明：**
-- [Godot_4x_Resource_File_Comment_Issue.md](../19_Common_Pitfalls/Godot_4x_Resource_File_Comment_Issue.md)
-- [19_Pitfall_Records.md#§23](../19_Common_Pitfalls/19_Pitfall_Records.md)
+- [Godot_4x_Resource_File_Comment_Issue.md](../pitfall-cases/Godot_4x_Resource_File_Comment_Issue.md)
+- [19_Pitfall_Records.md#§23](../pitfall-cases/19_Pitfall_Records.md)
 
 ### 11.2 资源文件最佳实践
 
@@ -1739,10 +1739,10 @@ grep -rn "print\(" --include="*.gd" . | grep -v "push_"
 
 ### 9.4 学习资源
 
-- [GDScript_Warning_Best_Practices.md](./GDScript_Warning_Best_Practices.md) - 警告处理详细指南
-- [Warning_Fix_Quick_Reference.md](./Warning_Fix_Quick_Reference.md) - 快速参考手册
-- [19_Pitfall_Records.md](../19_Common_Pitfalls/19_Pitfall_Records.md) - 完整踩坑记录
-- [01H_Style_Guide.md](../01_GDScript_Language/01H_Style_Guide.md) - 官方风格指南
+- [GDScript_Warning_Best_Practices.md](../pitfall-cases/GDScript_Warning_Best_Practices.md) - 警告处理详细指南
+- [Warning_Fix_Quick_Reference.md](../pitfall-cases/Warning_Fix_Quick_Reference.md) - 快速参考手册
+- [19_Pitfall_Records.md](../pitfall-cases/19_Pitfall_Records.md) - 完整踩坑记录
+- [01H_Style_Guide.md](../../gdscript-reference/01H_Style_Guide.md) - 官方风格指南
 
 ---
 
@@ -2153,7 +2153,7 @@ func load_tower_configs() -> void:
             button.modulate = Color(0.5, 0.5, 0.5, 1.0)  # 变灰
 ```
 
-**踩坑记录**: [§47 UI计数显示语义错误](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#47-ui计数显示语义错误已放置最大vs剩余可放最大-🟡-中) | [§49 已满的塔从UI消失而非变灰](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#49-已满的塔从ui消失而非变灰-🟡-中)
+**踩坑记录**: [§47 UI计数显示语义错误](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#47-ui计数显示语义错误已放置最大vs剩余可放最大--中) | [§49 已满的塔从UI消失而非变灰](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#49-已满的塔从ui消失而非变灰--中)
 
 ### 15.10 调试前确认"正确行为"定义 🟡 建议
 
@@ -2176,7 +2176,7 @@ func load_tower_configs() -> void:
 # 4. 修改显示格式 → "剩余/最大"
 ```
 
-**踩坑记录**: [§50 调试误判——在正确的逻辑上反复修改](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#50-调试误判在正确的逻辑上反复修改-🟢-低)
+**踩坑记录**: [§50 调试误判——在正确的逻辑上反复修改](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#50-调试误判在正确的逻辑上反复修改--低)
 
 **详细踩坑记录**: [Godot_4x_Game_System_Pitfalls.md](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md)
 
@@ -2205,7 +2205,7 @@ func _on_projectile_hit(target: Node2D) -> void:
     target.take_damage(final_damage, is_crit)
 ```
 
-**踩坑记录**: [§81 暴击特效不应作为额外伤害实例](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#81-暴击特效不应作为额外伤害实例-🔴-高)
+**踩坑记录**: [§81 暴击特效不应作为额外伤害实例](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#81-暴击特效不应作为额外伤害实例--高)
 
 ### 16.2 debuff效果验证 🟡 建议
 
@@ -2226,7 +2226,7 @@ func take_damage(amount: float, is_crit: bool = false) -> void:
     var resistance: float = maxf(0.0, resistance - armor_break_amount - debuff_amount)
 ```
 
-**踩坑记录**: [§82 debuff_amount设置但未使用导致效果不生效](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#82-debuff_amount设置但未使用导致效果不生效-🟡-中)
+**踩坑记录**: [§82 debuff_amount设置但未使用导致效果不生效](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#82-debuff_amount设置但未使用导致效果不生效--中)
 
 ### 16.3 翻译键一致性 🔴 强制
 
@@ -2242,7 +2242,7 @@ var text: String = tr("ENEMY_DEBUFFED") % [slow_amount, slow_timer]  # CSV中只
 var text: String = tr("ENEMY_DEBUFF") % [slow_amount, slow_timer]
 ```
 
-**踩坑记录**: [§83 翻译键不匹配导致格式化报错](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#83-翻译键不匹配导致格式化报错-🔴-高)
+**踩坑记录**: [§83 翻译键不匹配导致格式化报错](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#83-翻译键不匹配导致格式化报错--高)
 
 ### 16.4 状态机回调防护 🔴 强制
 
@@ -2264,7 +2264,7 @@ func _on_option_selected(option: Dictionary) -> void:
     GameState.change_state(State.STAGE)
 ```
 
-**踩坑记录**: [§84 终局状态机被UI回调覆盖](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#84-终局状态机被ui回调覆盖-🔴-高)
+**踩坑记录**: [§84 终局状态机被UI回调覆盖](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#84-终局状态机被ui回调覆盖--高)
 
 ### 16.5 ParticleProcessMaterial颜色设置 🟡 建议
 
@@ -2287,7 +2287,7 @@ process_mat.color_ramp = gradient_tex
 process_mat.color = Color(1.0, 0.3, 0.3)
 ```
 
-**踩坑记录**: [§85 ParticleProcessMaterial.color_ramp类型限制](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#85-particleprocessmaterialcolor_ramp类型限制-🟡-中)
+**踩坑记录**: [§85 ParticleProcessMaterial.color_ramp类型限制](../pitfall-cases/Godot_4x_Game_System_Pitfalls.md#85-particleprocessmaterialcolor_ramp类型限制--中)
 
 ### 16.6 战斗系统代码审查清单
 

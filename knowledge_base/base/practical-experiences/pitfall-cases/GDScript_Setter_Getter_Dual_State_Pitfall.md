@@ -165,9 +165,9 @@ var health_percent: float:
 ## 🔗 相关文档
 
 ### 本项目知识库
-- [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md#34-内嵌-getset-使用场景与常见错误) - GDScript 代码规范（含完整 set/get 规范）
-- [gdscript-standards.md](../../../wiki/concepts/gdscript-standards.md#3-内嵌-setget-函数规范) - Wiki 层代码规范
-- [踩坑记录完整索引.md](../../../踩坑记录完整索引.md#26-内嵌-getset-创建双重状态-🔴-高) - 踩坑索引 §26
+- [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md#34-内嵌-getset-使用场景与常见错误-) - GDScript 代码规范（含完整 set/get 规范）
+- [gdscript-standards.md](../../../wiki/concepts/gdscript-standards.md#3-内嵌-setget-函数规范-) - Wiki 层代码规范
+- [踩坑记录完整索引.md](../../../wiki/guides/common-pitfalls.md#26-内嵌-getset-创建双重状态--高) - 踩坑索引 §26
 
 ### 外部资源
 - [GDScript 参考：属性](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#properties-setters-and-getters)

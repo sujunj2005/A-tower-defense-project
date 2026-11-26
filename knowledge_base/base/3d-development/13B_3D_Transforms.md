@@ -301,6 +301,6 @@ func _process(delta):
 - [Basis 官方文档](https://docs.godotengine.org/en/stable/classes/class_basis.html)
 - [Quaternion 官方文档](https://docs.godotengine.org/en/stable/classes/class_quaternion.html)
 - [Node3D 官方文档](https://docs.godotengine.org/en/stable/classes/class_node3d.html)
-- [向量数学教程](04A_Vector_Math.md)
-- [矩阵与变换教程](04B_Matrices_and_Transforms.md)
+- [向量数学教程](../math-transforms/04A_Vector_Math.md)
+- [矩阵与变换教程](../math-transforms/04B_Matrices_and_Transforms.md)
 - [3D 开发概述](13A_Introduction_to_3D.md)

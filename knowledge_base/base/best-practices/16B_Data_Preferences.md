@@ -386,4 +386,4 @@ packed.append(42)  # 4 bytes per element
 - [Variant 官方文档](https://docs.godotengine.org/en/stable/classes/class_variant.html)
 - [Packed*Array 文档系列](https://docs.godotengine.org/en/stable/classes/class_packed*array.html)
 - [场景组织](16A_Scene_Organization.md)
-- [静态类型](01E_Static_Typing.md)
+- [静态类型](../gdscript-reference/01E_Static_Typing.md)

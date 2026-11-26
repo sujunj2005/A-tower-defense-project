@@ -18,7 +18,6 @@ CONFIG_FILES = [
     "towers.json",
     "enemies.json",
     "events.json",
-    "options.json",
     "stages.json",
     "traits.json",
     "endings.json",
@@ -29,13 +28,30 @@ CONFIG_FILES = [
     "attributes.json",
     "game_config.json",
     "special_effects.json",
+    "professions.json",
+    "congenital_traits.json",
+]
+
+EVENT_OPTION_FIELDS = [
+    "option_id", "text", "requirements", "rewards", "cost",
+    "battle_trigger", "map_weights", "force_map_id", "battle_modifiers",
+    "triggers_ending", "ending_reason", "chain_flag", "family_effect",
+    "attribute_changes", "trait_gains", "trait_losses",
+    "profession_change", "profession_lost", "npc_relation_changes",
+    "tower_gains", "tower_losses", "gold_change",
+    "unlock_events", "lock_events",
+]
+
+EVENT_EVENT_FIELDS = [
+    "event_id", "event_name", "description", "ages", "stage",
+    "is_deadly", "chain_prerequisites", "chain_prerequisites_any", "chain_excludes",
+    "conditions", "event_weight", "weight",
 ]
 
 I18N_FIELDS = {
     "towers": ["tower_name", "tower_type", "tier"],
     "enemies": ["enemy_name", "enemy_type", "tier"],
-    "events": ["event_name", "description"],
-    "options": ["text"],
+    "events": ["event_name", "description", "text"],
     "stages": ["stage_name", "description"],
     "traits": ["name", "description"],
     "endings": ["ending_name", "description", "ending_phrase"],
@@ -44,6 +60,8 @@ I18N_FIELDS = {
     "family_backgrounds": ["family_name", "description", "traits.text"],
     "eras": ["era_name", "time_period"],
     "special_effects": ["effect_name", "description"],
+    "professions": ["name"],
+    "congenital_traits": [],
 }
 
 HEADER_FONT = Font(bold=True, color="FFFFFF", size=11)
@@ -555,6 +573,185 @@ def validate_sheet(ws, original_data):
     return errors
 
 
+def write_events_sheet(ws, data, csv_map=None):
+    events = data.get("events", [])
+    version = data.get("version", "")
+    meta_row = [META_ROW_TAG, f"version={version}", "list_key=events", "merged=options"]
+    ws.append(meta_row)
+
+    flat_rows = []
+    all_keys = []
+    for event in events:
+        event_flat = {}
+        for field in EVENT_EVENT_FIELDS:
+            if field in event:
+                sub = flatten(event[field], field) if isinstance(event[field], (dict, list)) else {field: event[field]}
+                event_flat.update(sub)
+        options = event.get("options", [])
+        if not options:
+            row_data = dict(event_flat)
+            flat_rows.append(row_data)
+            for k in row_data:
+                if k not in all_keys:
+                    all_keys.append(k)
+        else:
+            for opt in options:
+                opt_flat = {}
+                for field in EVENT_OPTION_FIELDS:
+                    if field in opt and opt[field] is not None:
+                        val = opt[field]
+                        if isinstance(val, bool):
+                            opt_flat[field] = val
+                        elif isinstance(val, (dict, list)):
+                            sub = flatten(val, field)
+                            opt_flat.update(sub)
+                        else:
+                            opt_flat[field] = val
+                row_data = dict(event_flat)
+                row_data.update(opt_flat)
+                flat_rows.append(row_data)
+                for k in row_data:
+                    if k not in all_keys:
+                        all_keys.append(k)
+
+    id_cols = ["event_id", "option_id"]
+    for id_col in id_cols:
+        if id_col not in all_keys:
+            all_keys.insert(0, id_col) if id_col == "event_id" else None
+    ordered_keys = []
+    for id_col in id_cols:
+        if id_col in all_keys:
+            ordered_keys.append(id_col)
+            all_keys.remove(id_col)
+    ordered_keys.extend(all_keys)
+
+    ws.append(ordered_keys)
+    for row_data in flat_rows:
+        row = []
+        for k in ordered_keys:
+            val = row_data.get(k, "")
+            if csv_map and is_i18n_field("events", k) and is_translation_key(val):
+                zh_text = csv_map.get(val, {}).get("zh", val)
+                row.append(zh_text)
+            else:
+                row.append(val)
+        ws.append(row)
+
+    if csv_map:
+        for col_idx, k in enumerate(ordered_keys, 1):
+            if not is_i18n_field("events", k):
+                continue
+            for row_idx in range(3, ws.max_row + 1):
+                cell = ws.cell(row=row_idx, column=col_idx)
+                flat_row = flat_rows[row_idx - 3]
+                original_val = flat_row.get(k, "")
+                if is_translation_key(original_val):
+                    cell.comment = Comment(f"{I18N_COMMENT_TAG}{original_val}", "config_tool")
+
+    for col in ws.columns:
+        max_length = 0
+        for cell in col:
+            if cell.value:
+                max_length = max(max_length, len(str(cell.value)))
+            cell.border = THIN_BORDER
+        ws.column_dimensions[col[0].column_letter].width = min(max_length + 4, 60)
+
+    if ws.max_row >= 1:
+        for cell in ws[1]:
+            cell.font = HEADER_FONT
+            cell.fill = HEADER_FILL
+            cell.alignment = HEADER_ALIGN
+        if ws.max_row >= 2:
+            for cell in ws[2]:
+                cell.font = HEADER_FONT
+                cell.fill = HEADER_FILL
+                cell.alignment = HEADER_ALIGN
+
+
+def read_events_sheet(ws, csv_map=None, zh_to_key=None):
+    rows = list(ws.iter_rows(values_only=False))
+    if not rows:
+        return None, []
+
+    first_row_vals = [c.value for c in rows[0]]
+    if not first_row_vals or first_row_vals[0] != META_ROW_TAG:
+        return None, []
+
+    version = ""
+    for cell in first_row_vals[1:]:
+        if cell and str(cell).startswith("version="):
+            version = str(cell).split("=", 1)[1]
+
+    if len(rows) < 3:
+        return None, []
+
+    headers = [str(c.value) for c in rows[1] if c.value is not None]
+    csv_updates = []
+
+    event_groups = {}
+    event_order = []
+
+    for row in rows[2:]:
+        row_vals = [c.value for c in row]
+        if row_vals[0] is None:
+            continue
+        row_dict = {}
+        for h, cell, val in zip(headers, row, row_vals):
+            if val is None or val == "":
+                continue
+            if is_i18n_field("events", h):
+                resolved = _resolve_i18n_value(cell, val, csv_map, zh_to_key, "events", h)
+                if isinstance(resolved, tuple):
+                    row_dict[h] = resolved[0]
+                    if resolved[1]:
+                        csv_updates.append(resolved[1])
+                else:
+                    row_dict[h] = resolved
+            else:
+                row_dict[h] = val
+
+        event_id = row_dict.get("event_id", "")
+        if event_id not in event_groups:
+            event_groups[event_id] = []
+            event_order.append(event_id)
+        event_groups[event_id].append(row_dict)
+
+    events = []
+    for eid in event_order:
+        rows_for_event = event_groups[eid]
+        event_data = {}
+        options = []
+
+        for row_dict in rows_for_event:
+            opt_data = {}
+            for k, v in row_dict.items():
+                if k in EVENT_OPTION_FIELDS or k.startswith(tuple(f + "." for f in EVENT_OPTION_FIELDS)) or k.startswith(tuple(f + "[" for f in EVENT_OPTION_FIELDS)):
+                    opt_data[k] = v
+                elif k == "event_id":
+                    pass
+                else:
+                    if k not in opt_data:
+                        event_data[k] = v
+
+            if opt_data:
+                opt_unflat = unflatten(opt_data)
+                if "option_id" in opt_unflat:
+                    options.append(opt_unflat)
+
+        event_unflat = unflatten(event_data)
+        if options:
+            event_unflat["options"] = options
+        if "event_id" not in event_unflat:
+            event_unflat["event_id"] = eid
+        events.append(event_unflat)
+
+    result = {}
+    if version:
+        result["version"] = version
+    result["events"] = events
+    return result, csv_updates
+
+
 def cmd_export():
     XLSX_PATH.parent.mkdir(parents=True, exist_ok=True)
     csv_map, _ = load_translations()
@@ -575,12 +772,17 @@ def cmd_export():
         ws = wb.create_sheet(title=sheet_name)
 
         try:
-            write_sheet_from_json(ws, data, sheet_name=sheet_name, csv_map=csv_map)
-            i18n_count = len(I18N_FIELDS.get(sheet_name, []))
-            if i18n_count > 0:
-                print(f"  -> sheet [{sheet_name}] (含 {i18n_count} 个 i18n 字段)")
+            if sheet_name == "events":
+                write_events_sheet(ws, data, csv_map=csv_map)
+                i18n_count = len(I18N_FIELDS.get(sheet_name, []))
+                print(f"  -> sheet [{sheet_name}] (合并事件+选项, 含 {i18n_count} 个 i18n 字段)")
             else:
-                print(f"  -> sheet [{sheet_name}]")
+                write_sheet_from_json(ws, data, sheet_name=sheet_name, csv_map=csv_map)
+                i18n_count = len(I18N_FIELDS.get(sheet_name, []))
+                if i18n_count > 0:
+                    print(f"  -> sheet [{sheet_name}] (含 {i18n_count} 个 i18n 字段)")
+                else:
+                    print(f"  -> sheet [{sheet_name}]")
         except Exception as e:
             print(f"  !! {filename} 导出失败: {e}")
             wb.remove(ws)
@@ -629,7 +831,10 @@ def cmd_import():
             fail_count += 1
             continue
 
-        result, csv_updates = read_sheet_to_json(ws, sheet_name=sheet_name, csv_map=csv_map, zh_to_key=zh_to_key)
+        if sheet_name == "events":
+            result, csv_updates = read_events_sheet(ws, csv_map=csv_map, zh_to_key=zh_to_key)
+        else:
+            result, csv_updates = read_sheet_to_json(ws, sheet_name=sheet_name, csv_map=csv_map, zh_to_key=zh_to_key)
         if result is None:
             print(f"  !! sheet [{sheet_name}] 读取失败，跳过")
             fail_count += 1

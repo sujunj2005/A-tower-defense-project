@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **Godot 版本**: 4.6+  
-> **来源**: [07D_UI_Input_Handling.md](../base/ui-system/07D_UI_Input_Handling.md)
+> **来源**: [07D_UI_Input_Handling.md](../../base/ui-system/07D_UI_Input_Handling.md)
 
 ---
 
@@ -397,9 +397,9 @@ func _gui_input(event):
 
 ## 🔗 相关链接
 
-- **Base 层来源**: [07D_UI_Input_Handling.md](../base/ui-system/07D_UI_Input_Handling.md)
-- **相关概念**: [UI 容器概念](./ui-containers.md)
-- **相关概念**: [UI 尺寸和锚点概念](./ui-size-anchors.md)
+- **Base 层来源**: [07D_UI_Input_Handling.md](../../base/ui-system/07D_UI_Input_Handling.md)
+- **相关概念**: [UI 容器概念](../concepts/ui-containers.md)
+- **相关概念**: [UI 尺寸和锚点概念](../concepts/ui-size-anchors.md)
 
 ---
 

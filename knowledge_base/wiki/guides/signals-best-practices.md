@@ -337,9 +337,9 @@ signal complex_operation(config: OperationConfig)
 ## 🔗 相关资源
 
 ### Wiki 页面
-- [信号系统概念](./signals-events.md) - 核心概念和语法
-- [场景树](./scene-tree.md) - 节点生命周期
-- [单例模式](./autoload-singletons.md) - 全局事件总线
+- [信号系统概念](../concepts/signals-events.md) - 核心概念和语法
+- [场景树](../concepts/scene-tree.md) - 节点生命周期
+- [单例模式](../concepts/autoload-singletons.md) - 全局事件总线
 
 ### Base 层文档
 - [03A_Signals_Detailed.md](../../base/signals-events/03A_Signals_Detailed.md) - 完整原始文档

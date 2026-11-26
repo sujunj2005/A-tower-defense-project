@@ -135,8 +135,8 @@
 
 - **Wiki 概念页面**: [../../wiki/concepts/signals-events.md](../../wiki/concepts/signals-events.md)
 - **Wiki 指南页面**: [../../wiki/guides/signals-best-practices.md](../../wiki/guides/signals-best-practices.md)
-- **Base 层首页**: [../README.md](../README.md)
-- **Architecture 索引**: [../../architecture/index.md](../../architecture/index.md)
+- **Base 层首页**: [../README.md](../index.md)
+- **Architecture 索引**: [../../architecture/index.md](../../index.md)
 
 ---
 

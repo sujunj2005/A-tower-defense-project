@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **Godot 版本**: 4.6+  
-> **来源**: [10B_Shading_Language.md](../base/shaders/10B_Shading_Language.md)
+> **来源**: [10B_Shading_Language.md](../../base/shaders/10B_Shading_Language.md)
 
 ---
 
@@ -335,11 +335,11 @@ render_mode ensure_correct_normals;
 
 ## 🔗 相关链接
 
-- **Base 层来源**: [10B_Shading_Language.md](../base/shaders/10B_Shading_Language.md)
+- **Base 层来源**: [10B_Shading_Language.md](../../base/shaders/10B_Shading_Language.md)
 - **Wiki 概念**: [着色器核心概念](./shader-concepts.md)
 - **Wiki 指南**: 
-  - [Canvas Item 着色器指南](./canvas-item-shader-guide.md)
-  - [Spatial 着色器指南](./spatial-shader-guide.md)
+  - [Canvas Item 着色器指南](../guides/canvas-item-shader-guide.md)
+  - [Spatial 着色器指南](../guides/spatial-shader-guide.md)
 
 ---
 

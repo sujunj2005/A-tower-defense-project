@@ -1,6 +1,6 @@
 # Godot 4.x 知识库 Wiki
 
-> **版本**: 1.3 | **最后更新**: 2026-04-11 | **适用 Godot 版本**: 4.x（4.6+）
+> **版本**: 1.4 | **最后更新**: 2026-04-29 | **适用 Godot 版本**: 4.x（4.6+）
 
 ---
 
@@ -17,8 +17,8 @@
 | 类别 | 说明 | 文档数 |
 |------|------|--------|
 | [实体页面](./entities/) | 游戏实体详解（Enemy, Tower, Projectile 等） | 4 |
-| [概念页面](./concepts/) | 核心概念和系统（攻击系统、移动系统等） | 26 |
-| [指南页面](./guides/) | 开发指南和教程（快速入门、优化指南等） | 23 |
+| [概念页面](./concepts/) | 核心概念和系统（攻击系统、移动系统等） | 34 |
+| [指南页面](./guides/) | 开发指南和教程（快速入门、优化指南等） | 46 |
 | [对比分析](./comparisons/) | 技术方案对比（攻击方式对比、加载方式对比等） | 3 |
 | [概述页面](./overviews/) | 领域概述和导论 | 3 |
 
@@ -30,11 +30,11 @@
 
 1. **[开发快速入门](./guides/gdscript-static-typing.md)** - GDScript 静态类型入门
 2. **[GDScript 代码规范](./concepts/gdscript-standards.md)** - 编写高质量 GDScript 代码
-3. **[常见踩坑避雷](./guides/common-pitfalls.md)** - 39 个常见陷阱及解决方案
+3. **[常见踩坑避雷](./guides/common-pitfalls.md)** - 常见踩坑正文、原始案例与验证依据
 
 ### 进阶提升
 
-1. **[塔防游戏架构设计](./guides/tower-defense-architecture.md)** - 完整的游戏架构案例
+1. **[TestMCP 塔防战斗架构](./guides/tower-defense-architecture.md)** - 项目源码和验证记录
 2. **[性能优化实战](./guides/performance-optimization-guide.md)** - CPU/GPU 优化技巧
 3. **[攻击系统设计](./concepts/attack-system.md)** - 近战/远程攻击实现
 
@@ -48,8 +48,8 @@
 
 - **Godot 官方文档** - 完整的技术参考和教程
 - **实战经验汇编** - 来自 tower_defense 项目的第一手经验
-  - 踩坑案例（8 份文档）
-  - 代码规范（1 份文档）
+  - 踩坑案例（29 份文档）
+  - 代码规范（4 份文档）
   - 案例研究（1 份文档）
   - 优化技巧（3 份文档）
 
@@ -65,7 +65,7 @@
 
 ### 架构层（Architecture Layer）
 
-[查看完整索引和日志](../architecture/)
+[查看主索引](../index.md)
 
 ---
 
@@ -86,7 +86,7 @@
 ### 中级开发者（6-12 个月）
 
 ```
-1. [塔防游戏架构](./guides/tower-defense-architecture.md)
+1. [TestMCP 塔防战斗架构](./guides/tower-defense-architecture.md)
    ↓
 2. [性能优化实战](./guides/performance-optimization-guide.md)
    ↓
@@ -98,9 +98,9 @@
 ```
 1. [对比分析](./comparisons/) - 技术方案选型参考
    ↓
-2. [实战案例](./guides/tower-defense-architecture.md) - 架构设计参考
+2. [TestMCP 战斗架构和验证](./guides/tower-defense-architecture.md)
    ↓
-3. [贡献知识](../architecture/log.md) - 分享经验，反哺社区
+3. [贡献知识](../archive/log.md) - 分享经验，反哺社区
 ```
 
 ---
@@ -148,7 +148,7 @@ Godot 4.x 游戏开发
 
 1. **按关键词搜索**: 使用 IDE 的全局搜索功能（Ctrl+Shift+F）
 2. **按类别浏览**: 通过上方的分类导航快速定位
-3. **查看索引**: [完整索引](../architecture/index.md) 提供所有页面的详细列表
+3. **查看索引**: [完整索引](../index.md) 提供所有页面的详细列表
 
 ### 引用资料
 
@@ -158,7 +158,7 @@ Godot 4.x 游戏开发
 
 ### 持续更新
 
-知识库持续更新中，查看 [更新日志](../architecture/log.md) 了解最新动态。
+专题入口和最近核对日期见[项目主索引](../index.md)。旧更新日志保存在本地 `archive/log.md`。
 
 ---
 
@@ -174,11 +174,11 @@ Godot 4.x 游戏开发
 ## 📞 相关资源
 
 - **Base 层（原始资料）**: [../base/](../base/)
-- **Architecture 层（索引和日志）**: [../architecture/](../architecture/)
+- **主索引**: [../index.md](../index.md)
 - **原始知识库**: [../../knowledge_base/](../../knowledge_base/)
 
 ---
 
-**最后更新**: 2026-04-11（资源引用与数据一致性踩坑 + 编码规范第14章同步）  
+**最后更新**: 2026-04-29（健康检查修复：更新统计数字）  
 **维护者**: Knowledge Base Administrator  
 **许可**: MIT

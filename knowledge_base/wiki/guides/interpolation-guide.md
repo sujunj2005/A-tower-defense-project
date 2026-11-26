@@ -265,9 +265,9 @@ func _process(delta):
 - [04C_Interpolation.md](../../base/math-transforms/04C_Interpolation.md) - 完整原始文档
 
 ### Wiki 层相关
-- [向量数学概念](./vector-math.md) - 向量插值基础
+- [向量数学概念](../concepts/vector-math.md) - 向量插值基础
 - [贝塞尔曲线指南](./bezier-curves-guide.md) - 高级曲线插值
-- [矩阵与变换概念](./matrices-transforms.md) - 变换插值
+- [矩阵与变换概念](../concepts/matrices-transforms.md) - 变换插值
 
 ### 外部资源
 - [Godot 官方插值教程](https://docs.godotengine.org/en/stable/tutorials/math/interpolation.html)

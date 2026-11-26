@@ -224,4 +224,4 @@ func set_parallax_speed(layer_name: String, speed_multiplier: float):
 
 - [Parallax2D 官方文档](https://docs.godotengine.org/en/stable/classes/class_parallax2d.html)
 - [2D transforms 文档](05C_2D_Transforms.md)
-- [Camera2D 文档](../05_2D_Development/)
+- [Camera2D 文档](./README.md)

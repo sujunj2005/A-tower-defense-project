@@ -1,7 +1,7 @@
 # 3D 变换核心概念
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 14B_3D_Transforms.md](../../base/3d-development/14B_3D_Transforms.md)  
+> **来源**: [Base 层 - 13B_3D_Transforms.md](../../base/3d-development/13B_3D_Transforms.md)  
 > **重要性**: 🔴 必读 - 3D 数学基础
 
 ---
@@ -74,7 +74,7 @@ func follow_target(target: Node3D, offset: Vector3):
 ## 🔗 相关资源
 
 ### Base 层
-- [14B_3D_Transforms.md](../../base/3d-development/14B_3D_Transforms.md) - 3D 变换详解
+- [13B_3D_Transforms.md](../../base/3d-development/13B_3D_Transforms.md) - 3D 变换详解
 
 ### Wiki 层
 - [3D 开发入门](../concepts/3d-intro.md) - 3D 基础

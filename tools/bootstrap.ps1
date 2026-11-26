@@ -96,3 +96,6 @@ foreach ($addon in $toolchain.addons) {
     }
     Write-Host "$($addon.name) $($addon.version)"
 }
+
+& python (Join-Path $PSScriptRoot 'prepare-placeholder-assets.py')
+if ($LASTEXITCODE -ne 0) { throw 'Could not prepare development textures.' }

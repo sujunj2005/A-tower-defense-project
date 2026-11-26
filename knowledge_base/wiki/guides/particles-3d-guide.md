@@ -1,7 +1,7 @@
 # 3D 粒子系统实战指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 14E_Particles_3D.md](../../base/3d-development/14E_Particles_3D.md)  
+> **来源**: [Base 层 - 13E_Particles_3D.md](../../base/3d-development/13E_Particles_3D.md)  
 > **重要性**: 🟡 推荐 - 3D 特效制作
 
 ---
@@ -73,7 +73,7 @@ material.initial_velocity_max = 30.0
 ## 🔗 相关资源
 
 ### Base 层
-- [14E_Particles_3D.md](../../base/3d-development/14E_Particles_3D.md) - 3D 粒子系统详解
+- [13E_Particles_3D.md](../../base/3d-development/13E_Particles_3D.md) - 3D 粒子系统详解
 
 ### Wiki 层
 - [3D 开发入门](../concepts/3d-intro.md) - 3D 基础

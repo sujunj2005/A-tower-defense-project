@@ -3,7 +3,7 @@
 **最后更新**: 2026-04-03  
 **适用版本**: Godot 4.x  
 **重要性**: ⭐⭐⭐⭐⭐  
-**相关文档**: [TileMaps.md](../05_2D_Development/05G_TileMaps.md), [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md)
+**相关文档**: [TileMaps.md](../../2d-development/05G_TileMaps.md), [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md)
 
 ---
 
@@ -297,8 +297,8 @@ func apply_grid_shader():
 ## 🔗 相关资源
 
 ### 本项目知识库
-- [TileMaps.md](../05_2D_Development/05G_TileMaps.md) - TileMap 系统完整文档
-- [GDScript_Code_Standards.md](../20_Best_Practices/GDScript_Code_Standards.md) - GDScript 代码规范
+- [TileMaps.md](../../2d-development/05G_TileMaps.md) - TileMap 系统完整文档
+- [GDScript_Code_Standards.md](../code-standards/GDScript_Code_Standards.md) - GDScript 代码规范
 
 ### Godot 官方文档
 - [CanvasItem Shader](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvasitem_shader.html)

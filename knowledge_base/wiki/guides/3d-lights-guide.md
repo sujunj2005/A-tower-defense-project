@@ -1,7 +1,7 @@
 # 3D 灯光实战指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 14C_3D_Lights.md](../../base/3d-development/14C_3D_Lights.md)  
+> **来源**: [Base 层 - 13C_Lights_and_Shadows.md](../../base/3d-development/13C_Lights_and_Shadows.md)  
 > **重要性**: 🟡 推荐 - 3D 场景布光技巧
 
 ---
@@ -68,7 +68,7 @@ $DirectionalLight3D.shadow_color = Color(0, 0, 0, 0.5)
 ## 🔗 相关资源
 
 ### Base 层
-- [14C_3D_Lights.md](../../base/3d-development/14C_3D_Lights.md) - 3D 灯光详解
+- [13C_Lights_and_Shadows.md](../../base/3d-development/13C_Lights_and_Shadows.md) - 3D 灯光详解
 
 ### Wiki 层
 - [标准材质指南](../guides/standard-material-guide.md) - 材质与灯光交互

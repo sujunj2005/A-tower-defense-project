@@ -182,7 +182,7 @@ func test_tower_config_loading():
 
 - [Godot 资源系统文档](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
 - [Godot 4.x 已知问题列表](https://github.com/godotengine/godot/issues)
-- [本项目知识库：Resources](file:///e:/Test_MCP/first/TestMCP/knowledge_base/02_Core_Systems/02C_Resources.md)
+- [本项目知识库：Resources](../../core-systems/02C_Resources.md)
 
 ---
 

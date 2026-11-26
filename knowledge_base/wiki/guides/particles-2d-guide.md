@@ -334,7 +334,7 @@ particles.material_override = canvas_material
 
 ### 后续学习
 - [自定义 2D 绘制指南](custom-drawing-2d-guide.md) - 自定义粒子效果
-- [2D 灯光和阴影指南](../guides/2d-lights-shadows-guide.md) - 灯光与粒子结合
+- [2D 灯光和阴影指南](../concepts/2d-lights-shadows.md) - 灯光与粒子结合
 
 ### Base 层来源
 - [05F_Particle_Systems_2D.md](../../base/2d-development/05F_Particle_Systems_2D.md) - 完整文档

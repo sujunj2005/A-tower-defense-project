@@ -1,7 +1,7 @@
 # 图片资源导入指南
 
 > **适用版本**: Godot 4.x  
-> **来源**: [Base 层 - 15C_Importing_Images.md](../../base/assets-and-io/15C_Importing_Images.md)  
+> **来源**: [Base 层 - 15B_Importing_Images.md](../../base/assets-and-io/15B_Importing_Images.md)  
 > **重要性**: 🟡 推荐 - 2D/3D 纹理导入规范
 
 ---
@@ -69,7 +69,7 @@ Godot 支持多种图片格式，并提供了丰富的导入选项。正确的�
 ## 🔗 相关资源
 
 ### Base 层
-- [15C_Importing_Images.md](../../base/assets-and-io/15C_Importing_Images.md) - 图片导入详解
+- [15B_Importing_Images.md](../../base/assets-and-io/15B_Importing_Images.md) - 图片导入详解
 
 ### Wiki 层
 - [文件系统指南](../guides/filesystem-guide.md) - 文件操作基础

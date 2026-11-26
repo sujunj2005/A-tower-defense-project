@@ -323,8 +323,8 @@ var direction: Vector3 = Vector3(1, 2, 3)
 - [01H_Style_Guide.md](../../base/gdscript-reference/01H_Style_Guide.md) - 完整代码风格指南
 
 ### Wiki 层相关
-- [GDScript 基础语法](./gdscript-basics.md) - 基础语法
-- [GDScript 代码规范](./gdscript-standards.md) - 代码规范标准
+- [GDScript 基础语法](../concepts/gdscript-basics.md) - 基础语法
+- [GDScript 代码规范](../concepts/gdscript-standards.md) - 代码规范标准
 - [GDScript 静态类型指南](./gdscript-static-typing.md) - 类型注解
 
 ---

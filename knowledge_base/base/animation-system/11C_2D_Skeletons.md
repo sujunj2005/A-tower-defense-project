@@ -339,4 +339,4 @@ func on_foot_down():
 - [AnimationPlayer 教程](11A_Animation_Player.md)
 - [AnimationTree 教程](11B_Animation_Tree.md)
 - [剪纸动画教程](11D_Cutout_Animation.md)
-- [2D 自定义绘制](05I_Custom_Drawing_2D.md)
+- [2D 自定义绘制](../2d-development/05I_Custom_Drawing_2D.md)

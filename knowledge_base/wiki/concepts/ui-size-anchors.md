@@ -2,7 +2,7 @@
 
 > **最后更新**: 2026-04-07  
 > **Godot 版本**: 4.6+  
-> **来源**: [07B_Size_and_Anchors_Detailed.md](../base/ui-system/07B_Size_and_Anchors_Detailed.md)
+> **来源**: [07B_Size_and_Anchors_Detailed.md](../../base/ui-system/07B_Size_and_Anchors_Detailed.md)
 
 ---
 
@@ -277,7 +277,7 @@ func _ready():
 
 ## 🔗 相关链接
 
-- **Base 层来源**: [07B_Size_and_Anchors_Detailed.md](../base/ui-system/07B_Size_and_Anchors_Detailed.md)
+- **Base 层来源**: [07B_Size_and_Anchors_Detailed.md](../../base/ui-system/07B_Size_and_Anchors_Detailed.md)
 - **相关概念**: [UI 容器概念](./ui-containers.md)
 - **相关指南**: [UI 输入处理指南](../guides/ui-input-handling.md)
 
