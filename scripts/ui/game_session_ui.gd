@@ -25,6 +25,7 @@ var _debug_happiness_label: Label
 var _debug_appearance_label: Label
 var _debug_education_label: Label
 var _debug_tension_container: VBoxContainer
+var _debug_toggle_btn: Button
 
 var _pause_canvas: CanvasLayer
 var _pause_menu: Control
@@ -93,14 +94,17 @@ func _build_ui() -> void:
 
 	_health_label = Label.new()
 	_health_label.text = tr("ATTR_FORMAT") % [_attr_display("health"), 100]
+	_health_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	left_vbox.add_child(_health_label)
 
 	_intelligence_label = Label.new()
 	_intelligence_label.text = tr("ATTR_FORMAT") % [_attr_display("intelligence"), 50]
+	_intelligence_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	left_vbox.add_child(_intelligence_label)
 
 	_courage_label = Label.new()
 	_courage_label.text = tr("ATTR_FORMAT") % [_attr_display("courage"), 50]
+	_courage_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	left_vbox.add_child(_courage_label)
 
 	var traits_title: Label = Label.new()
@@ -112,63 +116,74 @@ func _build_ui() -> void:
 	_traits_container.add_theme_constant_override("v_separation", 4)
 	left_vbox.add_child(_traits_container)
 
-	if OS.is_debug_build():
-		_debug_container = VBoxContainer.new()
-		_debug_container.name = "DebugPanel"
-		_debug_container.add_theme_constant_override("separation", 2)
-		left_vbox.add_child(_debug_container)
+	_debug_container = VBoxContainer.new()
+	_debug_container.name = "DebugPanel"
+	_debug_container.add_theme_constant_override("separation", 2)
+	_debug_container.visible = Global.god_mode_visible
+	left_vbox.add_child(_debug_container)
 
-		var debug_sep: Control = Control.new()
-		debug_sep.custom_minimum_size = Vector2(0, 6)
-		_debug_container.add_child(debug_sep)
+	var debug_sep: Control = Control.new()
+	debug_sep.custom_minimum_size = Vector2(0, 6)
+	_debug_container.add_child(debug_sep)
 
-		var debug_title: Label = Label.new()
-		debug_title.text = "👁 上帝模式"
-		debug_title.add_theme_font_size_override("font_size", 13)
-		debug_title.add_theme_color_override("font_color", Color(1.0, 0.55, 0.0, 1.0))
-		_debug_container.add_child(debug_title)
+	var debug_title: Label = Label.new()
+	debug_title.text = tr("DEBUG_GOD_MODE")
+	debug_title.add_theme_font_size_override("font_size", 13)
+	debug_title.add_theme_color_override("font_color", Color(1.0, 0.55, 0.0, 1.0))
+	_debug_container.add_child(debug_title)
 
-		_debug_willpower_label = Label.new()
-		_debug_willpower_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_willpower_label)
+	_debug_willpower_label = Label.new()
+	_debug_willpower_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_willpower_label)
 
-		_debug_craziness_label = Label.new()
-		_debug_craziness_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_craziness_label)
+	_debug_craziness_label = Label.new()
+	_debug_craziness_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_craziness_label)
 
-		_debug_discipline_label = Label.new()
-		_debug_discipline_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_discipline_label)
+	_debug_discipline_label = Label.new()
+	_debug_discipline_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_discipline_label)
 
-		_debug_karma_label = Label.new()
-		_debug_karma_label.add_theme_font_size_override("font_size", 12)
-		_debug_container.add_child(_debug_karma_label)
+	_debug_karma_label = Label.new()
+	_debug_karma_label.add_theme_font_size_override("font_size", 12)
+	_debug_container.add_child(_debug_karma_label)
 
-		_debug_fame_label = Label.new()
-		_debug_fame_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_fame_label)
+	_debug_fame_label = Label.new()
+	_debug_fame_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_fame_label)
 
-		_debug_happiness_label = Label.new()
-		_debug_happiness_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_happiness_label)
+	_debug_happiness_label = Label.new()
+	_debug_happiness_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_happiness_label)
 
-		_debug_appearance_label = Label.new()
-		_debug_appearance_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_appearance_label)
+	_debug_appearance_label = Label.new()
+	_debug_appearance_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_appearance_label)
 
-		_debug_education_label = Label.new()
-		_debug_education_label.add_theme_font_size_override("font_size", 11)
-		_debug_container.add_child(_debug_education_label)
+	_debug_education_label = Label.new()
+	_debug_education_label.add_theme_font_size_override("font_size", 11)
+	_debug_container.add_child(_debug_education_label)
 
-		var tension_title: Label = Label.new()
-		tension_title.text = "⏳ 活跃张力"
-		tension_title.add_theme_font_size_override("font_size", 12)
-		tension_title.add_theme_color_override("font_color", Color(0.8, 0.4, 1.0, 1.0))
-		_debug_container.add_child(tension_title)
+	var tension_title: Label = Label.new()
+	tension_title.text = tr("DEBUG_ACTIVE_TENSIONS")
+	tension_title.add_theme_font_size_override("font_size", 12)
+	tension_title.add_theme_color_override("font_color", Color(0.8, 0.4, 1.0, 1.0))
+	_debug_container.add_child(tension_title)
 
-		_debug_tension_container = VBoxContainer.new()
-		_debug_tension_container.add_theme_constant_override("separation", 1)
-		_debug_container.add_child(_debug_tension_container)
+	_debug_tension_container = VBoxContainer.new()
+	_debug_tension_container.add_theme_constant_override("separation", 1)
+	_debug_container.add_child(_debug_tension_container)
+
+	var toggle_row: HBoxContainer = HBoxContainer.new()
+	toggle_row.add_theme_constant_override("separation", 4)
+	left_vbox.add_child(toggle_row)
+
+	_debug_toggle_btn = Button.new()
+	_debug_toggle_btn.text = tr("DEBUG_TOGGLE_GOD_MODE")
+	_debug_toggle_btn.add_theme_font_size_override("font_size", 11)
+	_debug_toggle_btn.custom_minimum_size = Vector2(0, 22)
+	_debug_toggle_btn.pressed.connect(_on_toggle_god_mode)
+	toggle_row.add_child(_debug_toggle_btn)
 
 	var spacer: Control = Control.new()
 	spacer.custom_minimum_size = Vector2(0, 15)
@@ -258,10 +273,13 @@ func _update_display() -> void:
 		_gold_label.text = tr("GOLD_LABEL") % session.gold
 	if _health_label:
 		_health_label.text = tr("ATTR_FORMAT") % [_attr_display("health"), session.attributes.get("health", 0)]
+		_set_attr_tooltip(_health_label, "health")
 	if _intelligence_label:
 		_intelligence_label.text = tr("ATTR_FORMAT") % [_attr_display("intelligence"), session.attributes.get("intelligence", 0)]
+		_set_attr_tooltip(_intelligence_label, "intelligence")
 	if _courage_label:
 		_courage_label.text = tr("ATTR_FORMAT") % [_attr_display("courage"), session.attributes.get("courage", 0)]
+		_set_attr_tooltip(_courage_label, "courage")
 	if _traits_container:
 		for child: Node in _traits_container.get_children():
 			child.queue_free()
@@ -350,44 +368,52 @@ func _update_debug_panel() -> void:
 		return
 	var session: GameSessionData = Global.get_game_session()
 	if _debug_willpower_label:
-		_debug_willpower_label.text = "意志力: %d" % session.hidden_attributes.get("willpower", 0)
+		_debug_willpower_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_WILLPOWER"), session.hidden_attributes.get("willpower", 0)]
+		_set_attr_tooltip(_debug_willpower_label, "willpower")
 		var w: int = session.hidden_attributes.get("willpower", 50)
 		_debug_willpower_label.add_theme_color_override("font_color", Color.RED if w < 30 else (Color.GREEN if w > 70 else Color.WHITE))
 	if _debug_craziness_label:
-		_debug_craziness_label.text = "疯狂度: %d" % session.hidden_attributes.get("craziness", 0)
+		_debug_craziness_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_CRAZINESS"), session.hidden_attributes.get("craziness", 0)]
+		_set_attr_tooltip(_debug_craziness_label, "craziness")
 		var c: int = session.hidden_attributes.get("craziness", 50)
 		_debug_craziness_label.add_theme_color_override("font_color", Color.RED if c > 70 else Color.WHITE)
 	if _debug_discipline_label:
-		_debug_discipline_label.text = "纪律性: %d" % session.hidden_attributes.get("discipline", 0)
+		_debug_discipline_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_DISCIPLINE"), session.hidden_attributes.get("discipline", 0)]
+		_set_attr_tooltip(_debug_discipline_label, "discipline")
 		var d: int = session.hidden_attributes.get("discipline", 50)
 		_debug_discipline_label.add_theme_color_override("font_color", Color.RED if d < 30 else (Color.GREEN if d > 70 else Color.WHITE))
 	if _debug_karma_label:
-		var ktext: String = "业力: %+d" % session.karma
+		var ktext: String = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_KARMA"), session.karma]
 		if session.karma >= 70:
-			ktext += " 🌟主角光环"
+			ktext += tr("DEBUG_KARMA_HERO")
 		elif session.karma >= 30:
-			ktext += " ✨好运"
+			ktext += tr("DEBUG_KARMA_LUCKY")
 		elif session.karma <= -70:
-			ktext += " 💀厄运缠身"
+			ktext += tr("DEBUG_KARMA_DOOMED")
 		elif session.karma <= -30:
-			ktext += " ⚠走背运"
+			ktext += tr("DEBUG_KARMA_UNLUCKY")
 		_debug_karma_label.text = ktext
+		_set_attr_tooltip(_debug_karma_label, "karma")
 		var kc: Color = Color.GREEN if session.karma >= 30 else (Color.RED if session.karma <= -30 else Color.WHITE)
 		_debug_karma_label.add_theme_color_override("font_color", kc)
 	if _debug_fame_label:
-		_debug_fame_label.text = "名望: %d" % session.fame
+		_debug_fame_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_FAME"), session.fame]
+		_set_attr_tooltip(_debug_fame_label, "fame")
 	if _debug_happiness_label:
-		_debug_happiness_label.text = "幸福感: %d" % session.attributes.get("happiness", 0)
+		_debug_happiness_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_HAPPINESS"), session.attributes.get("happiness", 0)]
+		_set_attr_tooltip(_debug_happiness_label, "happiness")
 	if _debug_appearance_label:
-		_debug_appearance_label.text = "外貌值: %d" % session.attributes.get("appearance", 0)
+		_debug_appearance_label.text = tr("DEBUG_LEVEL_FMT") % [tr("DEBUG_APPEARANCE"), session.attributes.get("appearance", 0)]
+		_set_attr_tooltip(_debug_appearance_label, "appearance")
 	if _debug_education_label:
-		_debug_education_label.text = "学历: %s" % (session.education_level if session.education_level != "" else "无")
+		_debug_education_label.text = tr("DEBUG_EDUCATION_VALUE") % (session.education_level if session.education_level != "" else tr("DEBUG_NONE"))
+		_set_attr_tooltip(_debug_education_label, "education")
 	if _debug_tension_container:
 		for child: Node in _debug_tension_container.get_children():
 			child.queue_free()
 		if session.tensions.is_empty():
 			var no_t: Label = Label.new()
-			no_t.text = "  无"
+			no_t.text = "  " + tr("DEBUG_NONE")
 			no_t.add_theme_font_size_override("font_size", 10)
 			no_t.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4, 1.0))
 			_debug_tension_container.add_child(no_t)
@@ -399,7 +425,7 @@ func _update_debug_panel() -> void:
 				var filled: int = ceil((1.0 - float(t.remaining) / maxf(float(t.duration), 1.0)) * bar_len)
 				for i: int in bar_len:
 					bar += "█" if i < filled else "░"
-				tl.text = "  %s [%s] %d年" % [tr(t.title) if t.title != "" else t.tension_type, bar, t.remaining]
+				tl.text = "  " + tr("DEBUG_TENSION_FMT") % [tr(t.title) if t.title != "" else t.tension_type, bar, t.remaining]
 				tl.add_theme_font_size_override("font_size", 10)
 				var tc: Color = Color.RED if t.pressure > 0.7 else (Color.YELLOW if t.pressure > 0.3 else Color(0.6, 0.8, 0.6, 1.0))
 				tl.add_theme_color_override("font_color", tc)
@@ -413,6 +439,14 @@ func _on_event_pressed() -> void:
 		return
 	event_requested.emit()
 	GameState.change_state(GameState.State.EVENT)
+
+func _on_toggle_god_mode() -> void:
+	Global.god_mode_visible = not Global.god_mode_visible
+	if _debug_container:
+		_debug_container.visible = Global.god_mode_visible
+	if _debug_toggle_btn:
+		_debug_toggle_btn.text = tr("DEBUG_GOD_MODE_ON") if Global.god_mode_visible else tr("DEBUG_TOGGLE_GOD_MODE")
+	Global.debug_log(tr("DEBUG_GOD_MODE_ON") if Global.god_mode_visible else tr("DEBUG_GOD_MODE_OFF"))
 
 func _on_stage_changed(new_stage: String) -> void:
 	_update_display()
@@ -436,8 +470,18 @@ func _attr_display(attr_id: String) -> String:
 		return ac.get_display_with_icon(attr_id)
 	return attr_id
 
+func _set_attr_tooltip(lbl: Label, attr_id: String) -> void:
+	var ac: Node = get_node_or_null("/root/AttributeConfig")
+	if ac and ac.has_method("get_description"):
+		var desc: String = ac.get_description(attr_id)
+		if desc != "":
+			lbl.tooltip_text = desc
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_G and event.ctrl_pressed:
+			_on_toggle_god_mode()
+			return
 		if event.keycode == KEY_ESCAPE:
 			if _is_paused:
 				_resume_game()

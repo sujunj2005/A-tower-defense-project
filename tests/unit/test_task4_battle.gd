@@ -4,12 +4,14 @@ extends GutTest
 
 var battle_manager: BattleManager
 var session: GameSessionData
+var _previous_session: GameSessionData
 
 func before_each() -> void:
 	session = GameSessionData.new()
 	session.home_health = 100
 	session.max_home_health = 100
 	session.gold = 50
+	_previous_session = Global.game_session
 	Global.game_session = session
 	
 	battle_manager = BattleManager.new()
@@ -17,7 +19,7 @@ func before_each() -> void:
 	watch_signals(battle_manager)
 
 func after_each() -> void:
-	Global.game_session = null
+	Global.game_session = _previous_session
 
 ## 测试 1: BattleManager 初始化
 func test_battle_manager_initialization() -> void:
@@ -56,8 +58,7 @@ func test_gold_reward_system() -> void:
 	success = battle_manager.spend_gold(50)
 	assert_false(success, "金币不足时不能消耗")
 	
-	var mock_enemy = Enemy.new()
-	battle_manager.on_enemy_died(mock_enemy, 5)
+	battle_manager.on_enemy_died(null, 5)
 	assert_eq(battle_manager.get_gold(), 25, 
 		"敌人死亡后金币应增加 5")
 	assert_signal_emitted(battle_manager, "enemy_died", 
@@ -72,12 +73,23 @@ func test_battle_state_transitions() -> void:
 		BattleManager.BattleState.IN_PROGRESS, 
 		"状态应变为 IN_PROGRESS")
 	
-	battle_manager._on_victory()
+	battle_manager.on_enemy_died(null, 0)
+	assert_eq(battle_manager.battle_state, BattleManager.BattleState.IN_PROGRESS,
+		"胜利延迟期间战斗仍在进行")
+	await wait_for_signal(battle_manager.battle_ended, 4.0)
 	assert_eq(battle_manager.battle_state, 
 		BattleManager.BattleState.VICTORY, 
 		"状态应变为 VICTORY")
 	assert_signal_emitted(battle_manager, "battle_ended", 
 		"battle_ended 信号应触发")
+
+func test_defeat_cancels_pending_victory() -> void:
+	battle_manager.start_battle()
+	battle_manager.on_enemy_died(null, 0)
+	battle_manager.home_take_damage(100.0)
+	battle_manager._on_victory()
+	assert_eq(battle_manager.battle_state, BattleManager.BattleState.DEFEAT)
+	assert_signal_emit_count(battle_manager, "battle_ended", 1)
 
 ## 测试 5: 失败判定
 func test_defeat_condition() -> void:
@@ -97,7 +109,7 @@ func test_tower_data_validation() -> void:
 	tower_data.tower_name = "语文之塔"
 	tower_data.damage = 15.0
 	tower_data.attack_speed = 1.2
-	tower_data.range = 120.0
+	tower_data.attack_range = 120.0
 	
 	assert_eq(tower_data.tower_id, "tower_chinese_basic", 
 		"塔 ID 应匹配")
@@ -113,6 +125,7 @@ func test_tower_data_validation() -> void:
 		"序列化后 ID 应匹配")
 	assert_eq(restored.damage, tower_data.damage, 
 		"序列化后伤害应匹配")
+	assert_eq(restored.attack_range, tower_data.attack_range, "序列化后范围应匹配")
 
 ## 测试 7: 敌人数据验证
 func test_enemy_data_validation() -> void:
@@ -134,8 +147,7 @@ func test_enemy_data_validation() -> void:
 	enemy_data.armor_type = "light"
 	
 	var damage = enemy_data.take_damage(20.0)
-	assert_eq(damage, 16.0, 
-		"轻甲应减少 20% 伤害")
+	assert_eq(damage, 18.0, "轻甲应减少 10% 伤害")
 	
 	enemy_data.current_health = 0.0
 	assert_true(enemy_data.is_dead(), 
@@ -179,8 +191,7 @@ func test_vertical_slice_full_flow() -> void:
 	battle_manager.home_take_damage(20.0)
 	assert_eq(battle_manager.home_health, 80.0)
 	
-	var mock_enemy = Enemy.new()
-	battle_manager.on_enemy_died(mock_enemy, 10)
+	battle_manager.on_enemy_died(null, 10)
 	assert_eq(battle_manager.get_gold(), 60)
 	
 	battle_manager._on_victory()

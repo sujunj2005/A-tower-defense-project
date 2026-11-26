@@ -164,11 +164,12 @@ QUIET_YEAR_TITLE,今年无事发生,Nothing happened this year
 SELL_TOWER,💰 出售防御塔,💰 Sell Tower
 TOWER_CHINESE_BASIC_NAME,语文之塔,Chinese Basics Tower
 TOWER_CHINESE_ADVANCED_NAME,语文之塔·进阶,Chinese Advanced Tower
+TOWER_ARTIST_BASIC_NAME,美术之塔,Art Tower
+TOWER_ENGLISH_BASIC_NAME,英语之塔,English Tower
 TOWER_MATH_BASIC_NAME,数学之塔,Math Tower
 TOWER_MATH_ADVANCED_NAME,数学之塔·进阶,Math Advanced Tower
 TOWER_MATH_MASTER_NAME,数学之塔·大师,Math Master Tower
 TOWER_SCHOLARSHIP_BASIC_NAME,学问之塔,Scholarship Tower
-TOWER_MATH_BASIC_NAME,数学之塔,Math Tower
 TOWER_SCIENCE_ADVANCED_NAME,理综之塔·进阶,Science Advanced Tower
 TOWER_PROGRAMMING_BASIC_NAME,编程之塔,Programming Tower
 TOWER_SPORTS_BASIC_NAME,体育之塔,Sports Tower
@@ -959,7 +960,6 @@ GLOBAL_DIFFICULTY_SELECT,选择难度,Select Difficulty
 GLOBAL_DIFFICULTY_DESC,影响所有敌人的属性,Affects all enemy attributes
 TERRAIN_SAND,沙地,Sand
 TERRAIN_WATER,水域,Water
-keys,zh,en
 PROFESSION_DOCTOR,医生,Doctor
 PROFESSION_TEACHER,教师,Teacher
 PROFESSION_CIVIL_SERVANT,公务员,Civil Servant
@@ -1463,3 +1463,100 @@ EVENT_TALENT_MASTERY_DESC,多年的努力，你的天赋终于开花结果...,Ye
 OPTION_TALENT_MASTERY_A_TEXT,走向世界,Go global
 OPTION_TALENT_MASTERY_B_TEXT,知足常乐,Be content
 OPTION_TALENT_MASTERY_C_TEXT,追求极致,Pursue perfection
+DEBUG_GOD_MODE,👁 上帝模式,👁 God Mode
+DEBUG_ACTIVE_TENSIONS,⏳ 活跃张力,⏳ Active Tensions
+DEBUG_WILLPOWER,意志力,Willpower
+DEBUG_CRAZINESS,疯狂度,Craziness
+DEBUG_DISCIPLINE,纪律性,Discipline
+DEBUG_KARMA,业力,Karma
+DEBUG_FAME,名望,Fame
+DEBUG_HAPPINESS,幸福感,Happiness
+DEBUG_APPEARANCE,外貌值,Appearance
+DEBUG_EDUCATION,学历,Education
+DEBUG_NONE,无,None
+DEBUG_KARMA_HERO,🌟主角光环,🌟Protagonist Halo
+DEBUG_KARMA_LUCKY,✨好运,✨Lucky
+DEBUG_KARMA_DOOMED,💀厄运缠身,💀Doomed
+DEBUG_KARMA_UNLUCKY,⚠走背运,⚠Unlucky
+DEBUG_TENSION_FMT,%s [%s] %d年,%s [%s] %dy
+DEBUG_TOGGLE_GOD_MODE,开关上帝模式,Toggle God Mode
+DEBUG_GOD_MODE_OFF,上帝模式已关闭,God Mode Off
+DEBUG_GOD_MODE_ON,上帝模式已开启,God Mode On
+TOWER_INFO_TITLE_FMT,🏰 %s  Lv.%d,🏰 %s  Lv.%d
+ENEMY_INFO_TITLE_FMT,👹 %s,👹 %s
+DEBUG_WEIGHT_BREAKDOWN,⚖ 权重分解,⚖ Weight Breakdown
+DEBUG_EDUCATION_VALUE,学历: %s,Education: %s
+DEBUG_LEVEL_FMT,%s: %d,%s: %d
+DEBUG_NONE_SHORT,无,None
+ATTR_DESC_INTELLIGENCE,智力：影响学习效率、解题能力和事件判断力,Intelligence: Affects learning efficiency, problem-solving, and event judgment
+ATTR_DESC_COURAGE,勇气：影响战斗能力、冒险选择和压力抵抗,Courage: Affects combat ability, risk-taking, and stress resistance
+ATTR_DESC_HEALTH,健康：影响生命值上限、抗病能力和生存概率,Health: Affects max HP, disease resistance, and survival probability
+ATTR_DESC_CHARM,魅力：影响社交效果、感情关系和他人好感度,Charm: Affects social outcomes, relationships, and favorability
+ATTR_DESC_WORK_ABILITY,工作能力：影响收入水平、晋升概率和职业发展,Work Ability: Affects income level, promotion chance, and career growth
+ATTR_DESC_LUCK,运气：影响随机事件结果、暴击率和意外收获,Luck: Affects random event results, critical hit rate, and windfalls
+ATTR_DESC_HAPPINESS,幸福感：隐藏属性，影响事件体验和生活满意度,Happiness: Hidden stat, affects event experience and life satisfaction
+ATTR_DESC_APPEARANCE,外貌值：隐藏属性，影响社交和第一印象,Appearance: Hidden stat, affects social interactions and first impressions
+ATTR_DESC_WILLPOWER,意志力：隐藏属性，影响逆境中的韧性、抗压和决策力,Willpower: Hidden stat, affects resilience under pressure and decision-making
+ATTR_DESC_CRAZINESS,疯狂度：隐藏属性，过高可能导致不可预测的行为选择,Craziness: Hidden stat, too high may cause unpredictable choices
+ATTR_DESC_DISCIPLINE,纪律性：隐藏属性，影响自律程度、任务完成率和成长速度,Discipline: Hidden stat, affects self-control, task completion, and growth rate
+ATTR_DESC_FAME,名望：影响社会地位和某些事件的触发条件,Fame: Affects social status and event trigger conditions
+ATTR_DESC_KARMA,业力：善恶有报，影响命运走势和结局走向,Karma: What goes around comes around, affects destiny and ending direction
+ATTR_DESC_EDUCATION,学历：影响职业选择和部分事件的门槛,Education: Affects career options and event thresholds
+TRAIT_CHILD_PRODIGY_NAME,天赋异禀,Child Prodigy
+TRAIT_CHILD_PRODIGY_DESC,从小就展现出惊人的天赋，全塔伤害+15%,Extraordinary talent from birth, all tower damage +15%
+TRAIT_VIGILANTE_NAME,正义使者,Vigilante
+TRAIT_VIGILANTE_DESC,敢于对抗不公，伤害减免+5%,Fearless against injustice, damage reduction +5%
+TRAIT_BORN_AGAIN_NAME,重生,Born Again
+TRAIT_BORN_AGAIN_DESC,在危难中获得新生，生命+15,Reborn through adversity, HP +15
+TRAIT_LATE_BLOOMER_NAME,大器晚成,Late Bloomer
+TRAIT_LATE_BLOOMER_DESC,随时间绽放的潜力，全塔伤害+12%,Potential blooming over time, all tower damage +12%
+TRAIT_BLESSED_ONE_NAME,天选之人,Blessed One
+TRAIT_BLESSED_ONE_DESC,命运眷顾于你，金币加成+20%,Blessed by fate, gold bonus +20%
+TRAIT_UNSHAKEABLE_NAME,不动如山,Unshakeable
+TRAIT_UNSHAKEABLE_DESC,无论风雨始终坚定，伤害减免+8%,Unwavering through storms, damage reduction +8%
+TRAIT_LUCKY_BASTARD_NAME,幸运混蛋,Lucky Bastard
+TRAIT_LUCKY_BASTARD_DESC,运气好到离谱，每波额外+8金币,Ridiculously lucky, +8 gold per wave
+TRAIT_HUMBLE_MILLIONAIRE_NAME,低调富豪,Humble Millionaire
+TRAIT_HUMBLE_MILLIONAIRE_DESC,有钱但不忘本，金币加成+25%,Rich but down-to-earth, gold bonus +25%
+TRAIT_PHILANTHROPIST_NAME,慈善家,Philanthropist
+TRAIT_PHILANTHROPIST_DESC,慷慨解囊回馈社会，金币加成+30%,Giving back generously, gold bonus +30%
+TRAIT_LITTLE_GENIUS_NAME,小天才,Little Genius
+TRAIT_LITTLE_GENIUS_DESC,解题奇才，全塔伤害+12%,Problem-solving prodigy, all tower damage +12%
+TRAIT_HARDWORKING_NAME,勤奋刻苦,Hardworking
+TRAIT_HARDWORKING_DESC,比别人付出更多努力，全塔伤害+8%,Working harder than others, all tower damage +8%
+TRAIT_PURE_HEART_NAME,纯净之心,Pure Heart
+TRAIT_PURE_HEART_DESC,心地纯净信仰坚定，生命+10,A pure and faithful heart, HP +10
+BATTLE_TIMER_LABEL,战斗时间,Battle Time
+EVENT_OVERVIEW_TITLE,📊 事件总览,📊 Event Overview
+EVENT_OVERVIEW_TRIGGERABLE,✅ 可触发: %d,✅ Triggerable: %d
+EVENT_OVERVIEW_BLOCKED,❌ 不可触发: %d,❌ Blocked: %d
+EVENT_OVERVIEW_TOTAL,📋 年龄段总计: %d,📋 Age Total: %d
+EVENT_BLOCKED_REASON,不可触发原因,Block Reason
+EVENT_MATH_CLUB_INVITATION_NAME,老师留了一张纸条,A Note From Your Teacher
+EVENT_MATH_CLUB_INVITATION_DESC,老师记得你参加过数学竞赛。午休时有个解题小组，她问你要不要来看看。,Your teacher remembers you entering the math contest. She invites you to a lunchtime problem-solving club.
+OPTION_MATH_CLUB_INVITATION_A_TEXT,加入小组，每周留一次午休,Join the club and give it one lunch break a week
+OPTION_MATH_CLUB_INVITATION_B_TEXT,把题册带回家，按自己的节奏做,Take the booklet home and work at your own pace
+EVENT_SCHOOL_TRACK_TRIAL_NAME,球场边的邀请,An Invitation From the Sideline
+EVENT_SCHOOL_TRACK_TRIAL_DESC,那次你没去参加数学竞赛，反而在球场踢了一下午。体育老师记住了你，问你要不要来试试接力。,You spent the afternoon playing football when you skipped the math contest. The PE teacher noticed and asks you to try the relay.
+OPTION_SCHOOL_TRACK_TRIAL_A_TEXT,去接力队，跟大家一起训练,Join the relay team and train together
+OPTION_SCHOOL_TRACK_TRIAL_B_TEXT,踢球就好，留一点自己的时间,Keep playing football on your own time
+EVENT_MATH_PEER_TUTORING_NAME,放学后的解题桌,The After-School Math Table
+EVENT_MATH_PEER_TUTORING_DESC,班里有人跟不上这学期的数学。你想起小时候的小组，总有人愿意停下来把一道题再讲一遍。,"A classmate is falling behind in math. You remember your old club, where someone always made time to explain a problem twice."
+OPTION_MATH_PEER_TUTORING_A_TEXT,放学后陪同学把例题讲一遍,Stay after class and walk them through an example
+OPTION_MATH_PEER_TUTORING_B_TEXT,把以前的小组笔记借给同学,Lend them your old club notes
+EVENT_YOUTH_RELAY_NAME,接力队缺一棒,One Runner Short
+EVENT_YOUTH_RELAY_DESC,校运会前，班里的接力队临时少了一个人。你还记得小时候训练时，队友是怎么喊你接棒的。,"Before sports day, your class relay team loses a runner. You still remember the handoff calls from your childhood team."
+OPTION_YOUTH_RELAY_A_TEXT,替补上场，跑完这一棒,Fill in and run the leg
+OPTION_YOUTH_RELAY_B_TEXT,陪他们练交棒，找另一位同学上场,Help them practice handoffs and find another runner
+EVENT_RENTAL_WATER_LEAK_NAME,雨夜漏水,A Leak on a Rainy Night
+EVENT_RENTAL_WATER_LEAK_DESC,一场大雨后，租屋的天花板开始滴水。房东愿意提供临时住处，也同意你提前退租。,"After heavy rain, water drips through your rental ceiling. The landlord offers temporary lodging or an early end to the lease."
+OPTION_RENTAL_WATER_LEAK_A_TEXT,接受临住安排，等房东修好,Take the temporary lodging and wait for repairs
+OPTION_RENTAL_WATER_LEAK_B_TEXT,提前退租，花钱搬去别处,End the lease early and pay to move
+EVENT_RENTAL_FOLLOW_UP_NAME,漏水之后,After the Leak
+EVENT_RENTAL_FOLLOW_UP_DESC,当初相约晚些再处理漏水的事，现在该办交接了。你带上了当时留下的照片和聊天记录。,It is time to settle the rental after the leak. You bring the photos and messages you saved.
+OPTION_RENTAL_FOLLOW_UP_A_TEXT,验收修缮，搬回原来的住处,Check the repairs and move back in
+OPTION_RENTAL_FOLLOW_UP_B_TEXT,核对退租账目，取回剩余押金,Review the final bill and collect the remaining deposit
+EVENT_RECOVERY_NEW_ROUTINE_NAME,重新安排日常,Finding a New Routine
+EVENT_RECOVERY_NEW_ROUTINE_DESC,车祸后的康复暂告一段落。重新翻开日历时，你发现有些过去排得满满的日子，可以留一点空。,"Your first stretch of recovery after the accident is over. Looking at your calendar, you realize some days could stay a little less full."
+OPTION_RECOVERY_NEW_ROUTINE_A_TEXT,每周留出一段休息时间,Save some time to rest each week
+OPTION_RECOVERY_NEW_ROUTINE_B_TEXT,恢复原有安排，先接回手头的事,Resume your usual routine and pick up where you left off

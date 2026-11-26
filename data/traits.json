@@ -1,26 +1,34 @@
 {
-	"version": "1.0",
+	"version": "2.0",
 	"traits": [
 		{
-			"trait_id": "little_singer",
-			"name": "TRAIT_LITTLE_SINGER_NAME",
-			"description": "TRAIT_LITTLE_SINGER_DESC",
+			"trait_id": "top_university",
+			"name": "TRAIT_TOP_UNIVERSITY_NAME",
+			"description": "TRAIT_TOP_UNIVERSITY_DESC",
 			"effect": {
 				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": [
-					"tower_chinese_basic",
-					"tower_chinese_advanced"
-				]
+				"tower_damage_bonus": 0.2,
+				"tower_types": []
 			}
 		},
 		{
-			"trait_id": "happy_childhood",
-			"name": "TRAIT_HAPPY_CHILDHOOD_NAME",
-			"description": "TRAIT_HAPPY_CHILDHOOD_DESC",
+			"trait_id": "master_student",
+			"name": "TRAIT_MASTER_STUDENT_NAME",
+			"description": "TRAIT_MASTER_STUDENT_DESC",
 			"effect": {
-				"type": "health_bonus",
-				"value": 10
+				"type": "tower_damage_bonus",
+				"tower_damage_bonus": 0.15,
+				"tower_types": []
+			}
+		},
+		{
+			"trait_id": "wise_elder",
+			"name": "TRAIT_WISE_ELDER_NAME",
+			"description": "TRAIT_WISE_ELDER_DESC",
+			"effect": {
+				"type": "tower_damage_bonus",
+				"tower_damage_bonus": 0.1,
+				"tower_types": []
 			}
 		},
 		{
@@ -31,41 +39,9 @@
 				"type": "tower_damage_bonus",
 				"tower_damage_bonus": 0.15,
 				"tower_types": [
-					"tower_math_basic",
-					"tower_math_advanced",
-					"tower_math_master"
+					"tower_science_basic",
+					"tower_science_advanced"
 				]
-			}
-		},
-		{
-			"trait_id": "participation_spirit",
-			"name": "TRAIT_PARTICIPATION_SPIRIT_NAME",
-			"description": "TRAIT_PARTICIPATION_SPIRIT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "sports_youth",
-			"name": "TRAIT_SPORTS_YOUTH_NAME",
-			"description": "TRAIT_SPORTS_YOUTH_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 15
-			}
-		},
-		{
-			"trait_id": "music_culture",
-			"name": "TRAIT_MUSIC_CULTURE_NAME",
-			"description": "TRAIT_MUSIC_CULTURE_DESC",
-			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [
-					"tower_artist_basic"
-				],
-				"value": 0.1
 			}
 		},
 		{
@@ -82,31 +58,108 @@
 			}
 		},
 		{
-			"trait_id": "self_learning",
-			"name": "TRAIT_SELF_LEARNING_NAME",
-			"description": "TRAIT_SELF_LEARNING_DESC",
+			"trait_id": "little_singer",
+			"name": "TRAIT_LITTLE_SINGER_NAME",
+			"description": "TRAIT_LITTLE_SINGER_DESC",
 			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "intelligence"
+				"type": "tower_damage_bonus",
+				"tower_damage_bonus": 0.1,
+				"tower_types": [
+					"tower_chinese_basic",
+					"tower_chinese_advanced"
+				]
 			}
 		},
 		{
-			"trait_id": "early_responsibility",
-			"name": "TRAIT_EARLY_RESPONSIBILITY_NAME",
-			"description": "TRAIT_EARLY_RESPONSIBILITY_DESC",
+			"trait_id": "tower_sell_bonus",
+			"name": "TRAIT_TOWER_SELL_BONUS_NAME",
+			"description": "TRAIT_TOWER_SELL_BONUS_DESC",
 			"effect": {
-				"type": "gold_bonus",
-				"value": 20
+				"type": "tower_sell_ratio_bonus",
+				"value": 0.15
 			}
 		},
 		{
-			"trait_id": "follow_rules",
-			"name": "TRAIT_FOLLOW_RULES_NAME",
-			"description": "TRAIT_FOLLOW_RULES_DESC",
+			"trait_id": "tower_sell_bonus_2",
+			"name": "TRAIT_TOWER_SELL_BONUS_2_NAME",
+			"description": "TRAIT_TOWER_SELL_BONUS_2_DESC",
+			"effect": {
+				"type": "tower_sell_ratio_bonus",
+				"value": 0.3
+			},
+			"requires_trait": "tower_sell_bonus"
+		},
+		{
+			"trait_id": "tower_bargain",
+			"name": "TRAIT_TOWER_BARGAIN_NAME",
+			"description": "TRAIT_TOWER_BARGAIN_DESC",
+			"effect": {
+				"type": "tower_build_discount",
+				"value": 0.1
+			}
+		},
+		{
+			"trait_id": "tower_bargain_2",
+			"name": "TRAIT_TOWER_BARGAIN_2_NAME",
+			"description": "TRAIT_TOWER_BARGAIN_2_DESC",
+			"effect": {
+				"type": "tower_build_discount",
+				"value": 0.2
+			},
+			"requires_trait": "tower_bargain"
+		},
+		{
+			"trait_id": "entrepreneur",
+			"name": "TRAIT_ENTREPRENEUR_NAME",
+			"description": "TRAIT_ENTREPRENEUR_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 10
+			}
+		},
+		{
+			"trait_id": "career_focus",
+			"name": "TRAIT_CAREER_FOCUS_NAME",
+			"description": "TRAIT_CAREER_FOCUS_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 8
+			}
+		},
+		{
+			"trait_id": "early_starter",
+			"name": "TRAIT_EARLY_STARTER_NAME",
+			"description": "TRAIT_EARLY_STARTER_DESC",
+			"effect": {
+				"type": "gold_per_wave",
+				"value": 5
+			}
+		},
+		{
+			"trait_id": "accept_fate",
+			"name": "TRAIT_ACCEPT_FATE_NAME",
+			"description": "TRAIT_ACCEPT_FATE_DESC",
 			"effect": {
 				"type": "damage_reduction",
-				"value": 0.05
+				"value": 0.1
+			}
+		},
+		{
+			"trait_id": "strong_will",
+			"name": "TRAIT_STRONG_WILL_NAME",
+			"description": "TRAIT_STRONG_WILL_DESC",
+			"effect": {
+				"type": "damage_reduction",
+				"value": 0.08
+			}
+		},
+		{
+			"trait_id": "family_happiness",
+			"name": "TRAIT_FAMILY_HAPPINESS_NAME",
+			"description": "TRAIT_FAMILY_HAPPINESS_DESC",
+			"effect": {
+				"type": "damage_reduction",
+				"value": 0.06
 			}
 		},
 		{
@@ -119,74 +172,28 @@
 			}
 		},
 		{
-			"trait_id": "patience",
-			"name": "TRAIT_PATIENCE_NAME",
-			"description": "TRAIT_PATIENCE_DESC",
+			"trait_id": "happy_childhood",
+			"name": "TRAIT_HAPPY_CHILDHOOD_NAME",
+			"description": "TRAIT_HAPPY_CHILDHOOD_DESC",
 			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [],
-				"value": 0.08
-			}
+				"type": "health_bonus",
+				"value": 10
+			},
+			"side_effects": [
+				{
+					"type": "attribute_bonus",
+					"value": 5,
+					"attribute": "intelligence"
+				}
+			]
 		},
 		{
-			"trait_id": "has_backing",
-			"name": "TRAIT_HAS_BACKING_NAME",
-			"description": "TRAIT_HAS_BACKING_DESC",
+			"trait_id": "filial_child",
+			"name": "TRAIT_FILIAL_CHILD_NAME",
+			"description": "TRAIT_FILIAL_CHILD_DESC",
 			"effect": {
-				"type": "gold_bonus",
-				"value": 30
-			}
-		},
-		{
-			"trait_id": "sensible_child",
-			"name": "TRAIT_SENSIBLE_CHILD_NAME",
-			"description": "TRAIT_SENSIBLE_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			}
-		},
-		{
-			"trait_id": "early_worker",
-			"name": "TRAIT_EARLY_WORKER_NAME",
-			"description": "TRAIT_EARLY_WORKER_DESC",
-			"effect": {
-				"type": "gold_bonus",
-				"value": 25
-			}
-		},
-		{
-			"trait_id": "dropout",
-			"name": "TRAIT_DROPOUT_NAME",
-			"description": "TRAIT_DROPOUT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 10,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "key_high_school",
-			"name": "TRAIT_KEY_HIGH_SCHOOL_NAME",
-			"description": "TRAIT_KEY_HIGH_SCHOOL_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": [
-					"tower_science_basic",
-					"tower_science_advanced"
-				]
-			}
-		},
-		{
-			"trait_id": "top_university",
-			"name": "TRAIT_TOP_UNIVERSITY_NAME",
-			"description": "TRAIT_TOP_UNIVERSITY_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.2,
-				"tower_types": []
+				"type": "health_bonus",
+				"value": 20
 			}
 		},
 		{
@@ -200,165 +207,13 @@
 			}
 		},
 		{
-			"trait_id": "early_starter",
-			"name": "TRAIT_EARLY_STARTER_NAME",
-			"description": "TRAIT_EARLY_STARTER_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 5
-			}
-		},
-		{
-			"trait_id": "lover",
-			"name": "TRAIT_LOVER_NAME",
-			"description": "TRAIT_LOVER_DESC",
+			"trait_id": "dropout",
+			"name": "TRAIT_DROPOUT_NAME",
+			"description": "TRAIT_DROPOUT_DESC",
 			"effect": {
 				"type": "attribute_bonus",
-				"value": 5,
+				"value": 10,
 				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "secret_crush",
-			"name": "TRAIT_SECRET_CRUSH_NAME",
-			"description": "TRAIT_SECRET_CRUSH_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "intelligence"
-			}
-		},
-		{
-			"trait_id": "study_focus",
-			"name": "TRAIT_STUDY_FOCUS_NAME",
-			"description": "TRAIT_STUDY_FOCUS_DESC",
-			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [
-					"tower_history_advanced",
-					"tower_history_master"
-				],
-				"value": 0.1
-			}
-		},
-		{
-			"trait_id": "master_student",
-			"name": "TRAIT_MASTER_STUDENT_NAME",
-			"description": "TRAIT_MASTER_STUDENT_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.15,
-				"tower_types": []
-			}
-		},
-		{
-			"trait_id": "entrepreneur",
-			"name": "TRAIT_ENTREPRENEUR_NAME",
-			"description": "TRAIT_ENTREPRENEUR_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 10
-			}
-		},
-		{
-			"trait_id": "big_tech",
-			"name": "TRAIT_BIG_TECH_NAME",
-			"description": "TRAIT_BIG_TECH_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.15,
-				"tower_types": [
-					"tower_programming_advanced"
-				]
-			}
-		},
-		{
-			"trait_id": "stable_job",
-			"name": "TRAIT_STABLE_JOB_NAME",
-			"description": "TRAIT_STABLE_JOB_DESC",
-			"effect": {
-				"type": "gold_bonus",
-				"value": 15
-			}
-		},
-		{
-			"trait_id": "startup_employee",
-			"name": "TRAIT_STARTUP_EMPLOYEE_NAME",
-			"description": "TRAIT_STARTUP_EMPLOYEE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "city_center",
-			"name": "TRAIT_CITY_CENTER_NAME",
-			"description": "TRAIT_CITY_CENTER_DESC",
-			"effect": {
-				"type": "gold_bonus",
-				"value": 20
-			}
-		},
-		{
-			"trait_id": "roommate",
-			"name": "TRAIT_ROOMMATE_NAME",
-			"description": "TRAIT_ROOMMATE_DESC",
-			"effect": {
-				"type": "gold_bonus",
-				"value": 10
-			}
-		},
-		{
-			"trait_id": "hard_worker",
-			"name": "TRAIT_HARD_WORKER_NAME",
-			"description": "TRAIT_HARD_WORKER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "speak_up",
-			"name": "TRAIT_SPEAK_UP_NAME",
-			"description": "TRAIT_SPEAK_UP_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": [
-					"tower_communication_basic",
-					"tower_communication_advanced"
-				]
-			}
-		},
-		{
-			"trait_id": "tit_for_tat",
-			"name": "TRAIT_TIT_FOR_TAT_NAME",
-			"description": "TRAIT_TIT_FOR_TAT_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": []
-			}
-		},
-		{
-			"trait_id": "blind_date",
-			"name": "TRAIT_BLIND_DATE_NAME",
-			"description": "TRAIT_BLIND_DATE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "single_forever",
-			"name": "TRAIT_SINGLE_FOREVER_NAME",
-			"description": "TRAIT_SINGLE_FOREVER_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 8
 			}
 		},
 		{
@@ -380,12 +235,12 @@
 			}
 		},
 		{
-			"trait_id": "small_house",
-			"name": "TRAIT_SMALL_HOUSE_NAME",
-			"description": "TRAIT_SMALL_HOUSE_DESC",
+			"trait_id": "has_backing",
+			"name": "TRAIT_HAS_BACKING_NAME",
+			"description": "TRAIT_HAS_BACKING_DESC",
 			"effect": {
-				"type": "health_bonus",
-				"value": 8
+				"type": "gold_bonus",
+				"value": 30
 			}
 		},
 		{
@@ -398,45 +253,6 @@
 			}
 		},
 		{
-			"trait_id": "tiger_parent",
-			"name": "TRAIT_TIGER_PARENT_NAME",
-			"description": "TRAIT_TIGER_PARENT_DESC",
-			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [],
-				"value": 0.1
-			}
-		},
-		{
-			"trait_id": "relaxed_parent",
-			"name": "TRAIT_RELAXED_PARENT_NAME",
-			"description": "TRAIT_RELAXED_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "overseas_child",
-			"name": "TRAIT_OVERSEAS_CHILD_NAME",
-			"description": "TRAIT_OVERSEAS_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			}
-		},
-		{
-			"trait_id": "filial_child",
-			"name": "TRAIT_FILIAL_CHILD_NAME",
-			"description": "TRAIT_FILIAL_CHILD_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 20
-			}
-		},
-		{
 			"trait_id": "hire_nanny",
 			"name": "TRAIT_HIRE_NANNY_NAME",
 			"description": "TRAIT_HIRE_NANNY_DESC",
@@ -444,757 +260,6 @@
 				"type": "gold_bonus",
 				"value": -15
 			}
-		},
-		{
-			"trait_id": "work_life_balance",
-			"name": "TRAIT_WORK_LIFE_BALANCE_NAME",
-			"description": "TRAIT_WORK_LIFE_BALANCE_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 15
-			}
-		},
-		{
-			"trait_id": "job_hopper",
-			"name": "TRAIT_JOB_HOPPER_NAME",
-			"description": "TRAIT_JOB_HOPPER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "courage"
-			}
-		},
-		{
-			"trait_id": "fitness_habit",
-			"name": "TRAIT_FITNESS_HABIT_NAME",
-			"description": "TRAIT_FITNESS_HABIT_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 15
-			}
-		},
-		{
-			"trait_id": "supplement_user",
-			"name": "TRAIT_SUPPLEMENT_USER_NAME",
-			"description": "TRAIT_SUPPLEMENT_USER_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			}
-		},
-		{
-			"trait_id": "accept_fate",
-			"name": "TRAIT_ACCEPT_FATE_NAME",
-			"description": "TRAIT_ACCEPT_FATE_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.1
-			}
-		},
-		{
-			"trait_id": "career_focus",
-			"name": "TRAIT_CAREER_FOCUS_NAME",
-			"description": "TRAIT_CAREER_FOCUS_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 8
-			}
-		},
-		{
-			"trait_id": "peaceful_elder",
-			"name": "TRAIT_PEACEFUL_ELDER_NAME",
-			"description": "TRAIT_PEACEFUL_ELDER_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 15
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "community_elder",
-			"name": "TRAIT_COMMUNITY_ELDER_NAME",
-			"description": "TRAIT_COMMUNITY_ELDER_DESC",
-			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [
-					"tower_communication_basic",
-					"tower_communication_advanced"
-				],
-				"value": 0.08
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "lifelong_learner",
-			"name": "TRAIT_LIFELONG_LEARNER_NAME",
-			"description": "TRAIT_LIFELONG_LEARNER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 10,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "strong_will",
-			"name": "TRAIT_STRONG_WILL_NAME",
-			"description": "TRAIT_STRONG_WILL_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.08
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "carefree_elder",
-			"name": "TRAIT_CAREFREE_ELDER_NAME",
-			"description": "TRAIT_CAREFREE_ELDER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "courage"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -8
-				}
-			]
-		},
-		{
-			"trait_id": "family_happiness",
-			"name": "TRAIT_FAMILY_HAPPINESS_NAME",
-			"description": "TRAIT_FAMILY_HAPPINESS_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.06
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -4
-				}
-			]
-		},
-		{
-			"trait_id": "travel_elder",
-			"name": "TRAIT_TRAVEL_ELDER_NAME",
-			"description": "TRAIT_TRAVEL_ELDER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -2
-				}
-			]
-		},
-		{
-			"trait_id": "nostalgic",
-			"name": "TRAIT_NOSTALGIC_NAME",
-			"description": "TRAIT_NOSTALGIC_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "courage"
-				}
-			]
-		},
-		{
-			"trait_id": "social_elder",
-			"name": "TRAIT_SOCIAL_ELDER_NAME",
-			"description": "TRAIT_SOCIAL_ELDER_DESC",
-			"effect": {
-				"type": "tower_attack_speed_bonus",
-				"tower_types": [
-					"tower_network_basic"
-				],
-				"value": 0.08
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -2
-				}
-			]
-		},
-		{
-			"trait_id": "memoirist",
-			"name": "TRAIT_MEMOIRIST_NAME",
-			"description": "TRAIT_MEMOIRIST_DESC",
-			"effect": {
-				"type": "gold_bonus",
-				"value": 30
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "intelligence"
-				}
-			]
-		},
-		{
-			"trait_id": "mentor",
-			"name": "TRAIT_MENTOR_NAME",
-			"description": "TRAIT_MENTOR_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": [
-					"tower_business_basic",
-					"tower_business_advanced"
-				]
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "quiet_observer",
-			"name": "TRAIT_QUIET_OBSERVER_NAME",
-			"description": "TRAIT_QUIET_OBSERVER_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "solitary_peace",
-			"name": "TRAIT_SOLITARY_PEACE_NAME",
-			"description": "TRAIT_SOLITARY_PEACE_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.08
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "courage"
-				}
-			]
-		},
-		{
-			"trait_id": "accept_mortality",
-			"name": "TRAIT_ACCEPT_MORTALITY_NAME",
-			"description": "TRAIT_ACCEPT_MORTALITY_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.1
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "final_peace",
-			"name": "TRAIT_FINAL_PEACE_NAME",
-			"description": "TRAIT_FINAL_PEACE_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.15
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -10
-				}
-			]
-		},
-		{
-			"trait_id": "no_regrets",
-			"name": "TRAIT_NO_REGRETS_NAME",
-			"description": "TRAIT_NO_REGRETS_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": []
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "at_peace",
-			"name": "TRAIT_AT_PEACE_NAME",
-			"description": "TRAIT_AT_PEACE_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": 5
-				}
-			]
-		},
-		{
-			"trait_id": "regretful",
-			"name": "TRAIT_REGRETFUL_NAME",
-			"description": "TRAIT_REGRETFUL_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -5,
-					"attribute": "courage"
-				}
-			]
-		},
-		{
-			"trait_id": "rebel",
-			"name": "TRAIT_REBEL_NAME",
-			"description": "TRAIT_REBEL_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "courage"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "diarist",
-			"name": "TRAIT_DIARIST_NAME",
-			"description": "TRAIT_DIARIST_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "empathy",
-			"name": "TRAIT_EMPATHY_NAME",
-			"description": "TRAIT_EMPATHY_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "first_love",
-			"name": "TRAIT_FIRST_LOVE_NAME",
-			"description": "TRAIT_FIRST_LOVE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "self_aware",
-			"name": "TRAIT_SELF_AWARE_NAME",
-			"description": "TRAIT_SELF_AWARE_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "freedom_seeker",
-			"name": "TRAIT_FREEDOM_SEEKER_NAME",
-			"description": "TRAIT_FREEDOM_SEEKER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "courage"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "calligraphy",
-			"name": "TRAIT_CALLIGRAPHY_NAME",
-			"description": "TRAIT_CALLIGRAPHY_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "dancer",
-			"name": "TRAIT_DANCER_NAME",
-			"description": "TRAIT_DANCER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": 5
-				}
-			]
-		},
-		{
-			"trait_id": "gardener",
-			"name": "TRAIT_GARDENER_NAME",
-			"description": "TRAIT_GARDENER_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 10
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "memorialist",
-			"name": "TRAIT_MEMORIALIST_NAME",
-			"description": "TRAIT_MEMORIALIST_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "intelligence"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "cherish_people",
-			"name": "TRAIT_CHERISH_PEOPLE_NAME",
-			"description": "TRAIT_CHERISH_PEOPLE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "wise_elder",
-			"name": "TRAIT_WISE_ELDER_NAME",
-			"description": "TRAIT_WISE_ELDER_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": []
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "traveler",
-			"name": "TRAIT_TRAVELER_NAME",
-			"description": "TRAIT_TRAVELER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "health"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "career_changer",
-			"name": "TRAIT_CAREER_CHANGER_NAME",
-			"description": "TRAIT_CAREER_CHANGER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "courage"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "confrontational",
-			"name": "TRAIT_CONFRONTATIONAL_NAME",
-			"description": "TRAIT_CONFRONTATIONAL_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "courage"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -2,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "peace_seeker",
-			"name": "TRAIT_PEACE_SEEKER_NAME",
-			"description": "TRAIT_PEACE_SEEKER_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "open_parent",
-			"name": "TRAIT_OPEN_PARENT_NAME",
-			"description": "TRAIT_OPEN_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "home_chef",
-			"name": "TRAIT_HOME_CHEF_NAME",
-			"description": "TRAIT_HOME_CHEF_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": 5
-				}
-			]
-		},
-		{
-			"trait_id": "tai_chi",
-			"name": "TRAIT_TAI_CHI_NAME",
-			"description": "TRAIT_TAI_CHI_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.08
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "entrepreneur_2",
-			"name": "TRAIT_ENTREPRENEUR_2_NAME",
-			"description": "TRAIT_ENTREPRENEUR_2_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 5
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "homeowner",
-			"name": "TRAIT_HOMEOWNER_NAME",
-			"description": "TRAIT_HOMEOWNER_DESC",
-			"effect": {
-				"type": "damage_reduction",
-				"value": 0.05
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "hometown_return",
-			"name": "TRAIT_HOMETOWN_RETURN_NAME",
-			"description": "TRAIT_HOMETOWN_RETURN_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "health"
-			},
-			"side_effects": []
-		},
-		{
-			"trait_id": "pet_owner",
-			"name": "TRAIT_PET_OWNER_NAME",
-			"description": "TRAIT_PET_OWNER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": 3
-				}
-			]
-		},
-		{
-			"trait_id": "filial_son",
-			"name": "TRAIT_FILIAL_SON_NAME",
-			"description": "TRAIT_FILIAL_SON_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -2
-				}
-			]
-		},
-		{
-			"trait_id": "careless_child",
-			"name": "TRAIT_CARELESS_CHILD_NAME",
-			"description": "TRAIT_CARELESS_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 2,
-				"attribute": "courage"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -2,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "devoted_son",
-			"name": "TRAIT_DEVOTED_SON_NAME",
-			"description": "TRAIT_DEVOTED_SON_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "work_over_family",
-			"name": "TRAIT_WORK_OVER_FAMILY_NAME",
-			"description": "TRAIT_WORK_OVER_FAMILY_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 5
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -5,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "good_son",
-			"name": "TRAIT_GOOD_SON_NAME",
-			"description": "TRAIT_GOOD_SON_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -10,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "reconciled",
-			"name": "TRAIT_RECONCILED_NAME",
-			"description": "TRAIT_RECONCILED_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "cold_child",
-			"name": "TRAIT_COLD_CHILD_NAME",
-			"description": "TRAIT_COLD_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 10,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -8,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "peaceful_goodbye",
-			"name": "TRAIT_PEACEFUL_GOODBYE_NAME",
-			"description": "TRAIT_PEACEFUL_GOODBYE_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			}
-		},
-		{
-			"trait_id": "grief_stricken",
-			"name": "TRAIT_GRIEF_STRICKEN_NAME",
-			"description": "TRAIT_GRIEF_STRICKEN_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "regret_late",
-			"name": "TRAIT_REGRET_LATE_NAME",
-			"description": "TRAIT_REGRET_LATE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
 		},
 		{
 			"trait_id": "unforgivable",
@@ -1213,193 +278,6 @@
 			]
 		},
 		{
-			"trait_id": "filial_regret",
-			"name": "TRAIT_FILIAL_REGRET_NAME",
-			"description": "TRAIT_FILIAL_REGRET_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "father_guilt",
-			"name": "TRAIT_FATHER_GUILT_NAME",
-			"description": "TRAIT_FATHER_GUILT_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -8
-			}
-		},
-		{
-			"trait_id": "emotional_void",
-			"name": "TRAIT_EMOTIONAL_VOID_NAME",
-			"description": "TRAIT_EMOTIONAL_VOID_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -5
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "family_heritage",
-			"name": "TRAIT_FAMILY_HERITAGE_NAME",
-			"description": "TRAIT_FAMILY_HERITAGE_DESC",
-			"effect": {
-				"type": "tower_damage_bonus",
-				"tower_damage_bonus": 0.1,
-				"tower_types": []
-			}
-		},
-		{
-			"trait_id": "cherished_memory",
-			"name": "TRAIT_CHERISHED_MEMORY_NAME",
-			"description": "TRAIT_CHERISHED_MEMORY_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			}
-		},
-		{
-			"trait_id": "tears_of_time",
-			"name": "TRAIT_TEARS_OF_TIME_NAME",
-			"description": "TRAIT_TEARS_OF_TIME_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "obedient_child",
-			"name": "TRAIT_OBEDIENT_CHILD_NAME",
-			"description": "TRAIT_OBEDIENT_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -2,
-					"attribute": "courage"
-				}
-			]
-		},
-		{
-			"trait_id": "grateful_child",
-			"name": "TRAIT_GRATEFUL_CHILD_NAME",
-			"description": "TRAIT_GRATEFUL_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "distant_child",
-			"name": "TRAIT_DISTANT_CHILD_NAME",
-			"description": "TRAIT_DISTANT_CHILD_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "mature_apology",
-			"name": "TRAIT_MATURE_APOLOGY_NAME",
-			"description": "TRAIT_MATURE_APOLOGY_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "cold_heart",
-			"name": "TRAIT_COLD_HEART_NAME",
-			"description": "TRAIT_COLD_HEART_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -8,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "devoted_daughter",
-			"name": "TRAIT_DEVOTED_DAUGHTER_NAME",
-			"description": "TRAIT_DEVOTED_DAUGHTER_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 10
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "late_filial_piety",
-			"name": "TRAIT_LATE_FILIAL_PIETY_NAME",
-			"description": "TRAIT_LATE_FILIAL_PIETY_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "dutiful_child",
-			"name": "TRAIT_DUTIFUL_CHILD_NAME",
-			"description": "TRAIT_DUTIFUL_CHILD_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 0
-			}
-		},
-		{
 			"trait_id": "helpless",
 			"name": "TRAIT_HELPLESS_NAME",
 			"description": "TRAIT_HELPLESS_DESC",
@@ -1416,492 +294,112 @@
 			]
 		},
 		{
-			"trait_id": "final_companion",
-			"name": "TRAIT_FINAL_COMPANION_NAME",
-			"description": "TRAIT_FINAL_COMPANION_DESC",
+			"trait_id": "child_prodigy",
+			"name": "TRAIT_CHILD_PRODIGY_NAME",
+			"description": "TRAIT_CHILD_PRODIGY_DESC",
 			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "avoidant",
-			"name": "TRAIT_AVOIDANT_NAME",
-			"description": "TRAIT_AVOIDANT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": -3,
-				"attribute": "courage"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "mother_blessed",
-			"name": "TRAIT_MOTHER_BLESSED_NAME",
-			"description": "TRAIT_MOTHER_BLESSED_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 10
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 10,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "mother_forgiven",
-			"name": "TRAIT_MOTHER_FORGIVEN_NAME",
-			"description": "TRAIT_MOTHER_FORGIVEN_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 5,
-					"attribute": "intelligence"
-				}
-			]
-		},
-		{
-			"trait_id": "mother_unchanging_love",
-			"name": "TRAIT_MOTHER_UNCHANGING_LOVE_NAME",
-			"description": "TRAIT_MOTHER_UNCHANGING_LOVE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "college_love",
-			"name": "TRAIT_COLLEGE_LOVE_NAME",
-			"description": "TRAIT_COLLEGE_LOVE_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
+				"type": "tower_damage_bonus",
+				"value": 0.15
 			}
 		},
 		{
-			"trait_id": "workplace_romance",
-			"name": "TRAIT_WORKPLACE_ROMANCE_NAME",
-			"description": "TRAIT_WORKPLACE_ROMANCE_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 3
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 3,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "romantic_proposal",
-			"name": "TRAIT_ROMANTIC_PROPOSAL_NAME",
-			"description": "TRAIT_ROMANTIC_PROPOSAL_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -10,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "pressured_marriage",
-			"name": "TRAIT_PRESSURED_MARRIAGE_NAME",
-			"description": "TRAIT_PRESSURED_MARRIAGE_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -5
-			}
-		},
-		{
-			"trait_id": "grand_wedding",
-			"name": "TRAIT_GRAND_WEDDING_NAME",
-			"description": "TRAIT_GRAND_WEDDING_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 8,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -20,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "simple_wedding",
-			"name": "TRAIT_SIMPLE_WEDDING_NAME",
-			"description": "TRAIT_SIMPLE_WEDDING_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "pragmatic_marriage",
-			"name": "TRAIT_PRAGMATIC_MARRIAGE_NAME",
-			"description": "TRAIT_PRAGMATIC_MARRIAGE_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 3
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -2,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "proud_father",
-			"name": "TRAIT_PROUD_FATHER_NAME",
-			"description": "TRAIT_PROUD_FATHER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -2
-				}
-			]
-		},
-		{
-			"trait_id": "proud_parent",
-			"name": "TRAIT_PROUD_PARENT_NAME",
-			"description": "TRAIT_PROUD_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "twin_blessing",
-			"name": "TRAIT_TWIN_BLESSING_NAME",
-			"description": "TRAIT_TWIN_BLESSING_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "free_range_parent",
-			"name": "TRAIT_FREE_RANGE_PARENT_NAME",
-			"description": "TRAIT_FREE_RANGE_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "patient_parent",
-			"name": "TRAIT_PATIENT_PARENT_NAME",
-			"description": "TRAIT_PATIENT_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "wise_parent",
-			"name": "TRAIT_WISE_PARENT_NAME",
-			"description": "TRAIT_WISE_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 2,
-					"attribute": "intelligence"
-				}
-			]
-		},
-		{
-			"trait_id": "strict_parent",
-			"name": "TRAIT_STRICT_PARENT_NAME",
-			"description": "TRAIT_STRICT_PARENT_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -3
-			}
-		},
-		{
-			"trait_id": "worried_parent",
-			"name": "TRAIT_WORRIED_PARENT_NAME",
-			"description": "TRAIT_WORRIED_PARENT_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -3
-			}
-		},
-		{
-			"trait_id": "warm_family",
-			"name": "TRAIT_WARM_FAMILY_NAME",
-			"description": "TRAIT_WARM_FAMILY_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": 5
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 5,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "lonely_parent",
-			"name": "TRAIT_LONELY_PARENT_NAME",
-			"description": "TRAIT_LONELY_PARENT_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -5
-			}
-		},
-		{
-			"trait_id": "mutual_respect",
-			"name": "TRAIT_MUTUAL_RESPECT_NAME",
-			"description": "TRAIT_MUTUAL_RESPECT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 5,
-					"attribute": "intelligence"
-				}
-			]
-		},
-		{
-			"trait_id": "peacemaker",
-			"name": "TRAIT_PEACEMAKER_NAME",
-			"description": "TRAIT_PEACEMAKER_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "responsible_parent",
-			"name": "TRAIT_RESPONSIBLE_PARENT_NAME",
-			"description": "TRAIT_RESPONSIBLE_PARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 3,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "forgetful",
-			"name": "TRAIT_FORGETFUL_NAME",
-			"description": "TRAIT_FORGETFUL_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": -2,
-				"attribute": "charm"
-			}
-		},
-		{
-			"trait_id": "doting_grandparent",
-			"name": "TRAIT_DOTING_GRANDPARENT_NAME",
-			"description": "TRAIT_DOTING_GRANDPARENT_DESC",
-			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -3
-				}
-			]
-		},
-		{
-			"trait_id": "distant_grandparent",
-			"name": "TRAIT_DISTANT_GRANDPARENT_NAME",
-			"description": "TRAIT_DISTANT_GRANDPARENT_DESC",
-			"effect": {
-				"type": "gold_per_wave",
-				"value": 3
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "family_drifting",
-			"name": "TRAIT_FAMILY_DRIFTING_NAME",
-			"description": "TRAIT_FAMILY_DRIFTING_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -3
-			}
-		},
-		{
-			"trait_id": "guilty_secret",
-			"name": "TRAIT_GUILTY_SECRET_NAME",
-			"description": "TRAIT_GUILTY_SECRET_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -3
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": -3,
-					"attribute": "charm"
-				}
-			]
-		},
-		{
-			"trait_id": "marriage_crisis",
-			"name": "TRAIT_MARRIAGE_CRISIS_NAME",
-			"description": "TRAIT_MARRIAGE_CRISIS_DESC",
-			"effect": {
-				"type": "health_bonus",
-				"value": -10
-			},
-			"side_effects": [
-				{
-					"type": "gold_per_wave",
-					"value": -5
-				}
-			]
-		},
-		{
-			"trait_id": "strong_marriage",
-			"name": "TRAIT_STRONG_MARRIAGE_NAME",
-			"description": "TRAIT_STRONG_MARRIAGE_DESC",
+			"trait_id": "vigilante",
+			"name": "TRAIT_VIGILANTE_NAME",
+			"description": "TRAIT_VIGILANTE_DESC",
 			"effect": {
 				"type": "damage_reduction",
 				"value": 0.05
 			}
 		},
 		{
-			"trait_id": "filial_spouse",
-			"name": "TRAIT_FILIAL_SPOUSE_NAME",
-			"description": "TRAIT_FILIAL_SPOUSE_DESC",
+			"trait_id": "born_again",
+			"name": "TRAIT_BORN_AGAIN_NAME",
+			"description": "TRAIT_BORN_AGAIN_DESC",
 			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
+				"type": "health_bonus",
+				"value": 15
 			}
 		},
 		{
-			"trait_id": "enlightened_parent",
-			"name": "TRAIT_ENLIGHTENED_PARENT_NAME",
-			"description": "TRAIT_ENLIGHTENED_PARENT_DESC",
+			"trait_id": "late_bloomer",
+			"name": "TRAIT_LATE_BLOOMER_NAME",
+			"description": "TRAIT_LATE_BLOOMER_DESC",
 			"effect": {
-				"type": "attribute_bonus",
-				"value": 5,
-				"attribute": "charm"
-			},
-			"side_effects": [
-				{
-					"type": "attribute_bonus",
-					"value": 3,
-					"attribute": "intelligence"
-				}
-			]
+				"type": "tower_damage_bonus",
+				"value": 0.12
+			}
 		},
 		{
-			"trait_id": "couple_founders",
-			"name": "TRAIT_COUPLE_FOUNDERS_NAME",
-			"description": "TRAIT_COUPLE_FOUNDERS_DESC",
+			"trait_id": "blessed_one",
+			"name": "TRAIT_BLESSED_ONE_NAME",
+			"description": "TRAIT_BLESSED_ONE_DESC",
+			"effect": {
+				"type": "gold_bonus",
+				"value": 20
+			}
+		},
+		{
+			"trait_id": "unshakeable",
+			"name": "TRAIT_UNSHAKEABLE_NAME",
+			"description": "TRAIT_UNSHAKEABLE_DESC",
+			"effect": {
+				"type": "damage_reduction",
+				"value": 0.08
+			}
+		},
+		{
+			"trait_id": "lucky_bastard",
+			"name": "TRAIT_LUCKY_BASTARD_NAME",
+			"description": "TRAIT_LUCKY_BASTARD_DESC",
 			"effect": {
 				"type": "gold_per_wave",
-				"value": 15
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -5
-				}
-			]
+				"value": 8
+			}
 		},
 		{
-			"trait_id": "double_regret",
-			"name": "TRAIT_DOUBLE_REGRET_NAME",
-			"description": "TRAIT_DOUBLE_REGRET_DESC",
+			"trait_id": "humble_millionaire",
+			"name": "TRAIT_HUMBLE_MILLIONAIRE_NAME",
+			"description": "TRAIT_HUMBLE_MILLIONAIRE_DESC",
 			"effect": {
-				"type": "attribute_bonus",
-				"value": 10,
-				"attribute": "intelligence"
-			},
-			"side_effects": [
-				{
-					"type": "health_bonus",
-					"value": -15
-				},
-				{
-					"type": "attribute_bonus",
-					"value": -8,
-					"attribute": "courage"
-				}
-			]
+				"type": "gold_bonus",
+				"value": 25
+			}
+		},
+		{
+			"trait_id": "philanthropist",
+			"name": "TRAIT_PHILANTHROPIST_NAME",
+			"description": "TRAIT_PHILANTHROPIST_DESC",
+			"effect": {
+				"type": "gold_bonus",
+				"value": 30
+			}
+		},
+		{
+			"trait_id": "little_genius",
+			"name": "TRAIT_LITTLE_GENIUS_NAME",
+			"description": "TRAIT_LITTLE_GENIUS_DESC",
+			"effect": {
+				"type": "tower_damage_bonus",
+				"value": 0.12
+			}
+		},
+		{
+			"trait_id": "hardworking",
+			"name": "TRAIT_HARDWORKING_NAME",
+			"description": "TRAIT_HARDWORKING_DESC",
+			"effect": {
+				"type": "tower_damage_bonus",
+				"value": 0.08
+			}
+		},
+		{
+			"trait_id": "pure_heart",
+			"name": "TRAIT_PURE_HEART_NAME",
+			"description": "TRAIT_PURE_HEART_DESC",
+			"effect": {
+				"type": "health_bonus",
+				"value": 10
+			}
 		}
 	]
 }

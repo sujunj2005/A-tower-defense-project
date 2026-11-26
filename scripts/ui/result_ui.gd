@@ -130,11 +130,14 @@ func display_result(rating: String, rewards: Dictionary) -> void:
 		if rewards.has("gold") and rewards.gold > 0:
 			_add_reward_row("💰", tr("GOLD_PLUS") % rewards.gold, Color(1.0, 0.85, 0.0, 1.0))
 
+		if rewards.has("tower_refund") and rewards.tower_refund > 0:
+			_add_reward_row("🏗️", tr("TOWER_REFUND") % rewards.tower_refund, Color(0.7, 0.9, 1.0, 1.0))
+
 		var es: Node = get_node_or_null("/root/EconomySystem")
-		if es and es.has_method("calculate_interest"):
-			var interest: int = es.calculate_interest()
-			if interest > 0:
-				_add_reward_row("🏦", tr("INTEREST_INCOME") % interest, Color(0.4, 1.0, 0.4, 1.0))
+		if es and es.has_method("calculate_salary"):
+			var salary: int = es.calculate_salary()
+			if salary > 0:
+				_add_reward_row("💼", tr("SALARY_INCOME") % salary, Color(0.4, 1.0, 0.4, 1.0))
 
 		var session: GameSessionData = Global.get_game_session()
 		var battle_tower_id: String = rewards.get("tower_id", "")
@@ -335,10 +338,20 @@ func _format_effect(effect: Dictionary) -> String:
 			return "%s: %s" % [effect_type, str(val)]
 
 func _close_result() -> void:
+	var session: GameSessionData = Global.get_game_session()
+	if session.attributes.get("health", 0) <= 0:
+		session.ending_reason = "health_depleted"
+		GameState.change_state(GameState.State.ENDING)
+		return
 	GameState.change_state(GameState.State.STAGE)
 
 func _on_continue() -> void:
 	continue_pressed.emit()
+	var session: GameSessionData = Global.get_game_session()
+	if session.attributes.get("health", 0) <= 0:
+		session.ending_reason = "health_depleted"
+		GameState.change_state(GameState.State.ENDING)
+		return
 	GameState.change_state(GameState.State.STAGE)
 
 func _on_ending() -> void:

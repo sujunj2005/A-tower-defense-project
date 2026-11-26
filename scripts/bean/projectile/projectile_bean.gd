@@ -25,8 +25,8 @@ static func from_tower_bean(bean: TowerBean) -> ProjectileBean:
 	var pbean := ProjectileBean.new()
 	if bean.attack_mode != GameConfig.AttackMode.RANGED:
 		return pbean
-	pbean.projectile_type = GameConfig.ProjectileType.TARGET_LOCKED
-	pbean.movement_type = 0
+	pbean.projectile_type = GameConfig.ProjectileType.POSITION_FIXED if bean.pierce_enabled else bean.projectile_type
+	pbean.movement_type = pbean.projectile_type
 	pbean.speed = bean.projectile_speed
 	pbean.damage = bean.damage
 	pbean.damage_type = bean.damage_type

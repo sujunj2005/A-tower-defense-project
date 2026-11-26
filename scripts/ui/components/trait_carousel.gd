@@ -131,8 +131,18 @@ func _update_display() -> void:
 	var entry: Dictionary = _traits_data[_current_index]
 	var tid: String = entry["trait_id"]
 	var cfg: Dictionary = get_node("/root/TraitSystem").get_trait_config(tid)
-	var name_text: String = tr(cfg["name"])
-	var desc_text: String = tr(cfg["description"])
+	if cfg.is_empty():
+		_name_label.text = tid
+		_desc_label.text = ""
+		_effect_label.text = ""
+		_cost_label.text = tr("LIFE_CHOICE_TRAIT_COST") + "：%d" % entry["cost"]
+		var is_selected: bool = _selected_traits.has(tid)
+		_select_btn.text = tr("LIFE_CHOICE_TRAIT_SELECTED") if is_selected else "+"
+		_select_btn.disabled = false
+		_counter_label.text = "%d/%d" % [_selected_count, _max_selectable]
+		return
+	var name_text: String = tr(cfg.get("name", tid))
+	var desc_text: String = tr(cfg.get("description", ""))
 	var effect_text: String = ""
 	if cfg.has("effect"):
 		effect_text = _format_effect(cfg.effect)
@@ -164,5 +174,9 @@ func _format_effect(effect: Dictionary) -> String:
 			return "ASPD +%.0f%%" % (effect["value"] * 100.0)
 		"damage_reduction":
 			return "DR +%.0f%%" % (effect["value"] * 100.0)
+		"tower_sell_ratio_bonus":
+			return "Sell +%.0f%%" % (effect["value"] * 100.0)
+		"tower_build_discount":
+			return "Cost -%.0f%%" % (effect["value"] * 100.0)
 		_:
 			return etype

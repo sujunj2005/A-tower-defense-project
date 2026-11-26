@@ -1,0 +1,80 @@
+{
+	"professions": [
+		{
+			"profession_id": "programmer",
+			"name": "PROFESSION_PROGRAMMER",
+			"category": "tech",
+			"age_range": [
+				22,
+				55
+			],
+			"salary": 150,
+			"weight_modifier": 1,
+			"event_pool": [
+				"event_code_overtime",
+				"event_code_project",
+				"event_code_layoff"
+			]
+		},
+		{
+			"profession_id": "doctor",
+			"name": "PROFESSION_DOCTOR",
+			"category": "medical",
+			"age_range": [
+				26,
+				60
+			],
+			"salary": 200,
+			"weight_modifier": 1,
+			"event_pool": [
+				"event_hospital_shift",
+				"event_patient_emergency"
+			]
+		},
+		{
+			"profession_id": "teacher",
+			"name": "PROFESSION_TEACHER",
+			"category": "education",
+			"age_range": [
+				22,
+				60
+			],
+			"salary": 100,
+			"weight_modifier": 1,
+			"event_pool": [
+				"event_student_issue",
+				"event_school_meeting"
+			]
+		},
+		{
+			"profession_id": "civil_servant",
+			"name": "PROFESSION_CIVIL_SERVANT",
+			"category": "government",
+			"age_range": [
+				22,
+				60
+			],
+			"salary": 120,
+			"weight_modifier": 1,
+			"event_pool": [
+				"event_office_politics",
+				"event_promotion_exam"
+			]
+		},
+		{
+			"profession_id": "entrepreneur",
+			"name": "PROFESSION_ENTREPRENEUR",
+			"category": "business",
+			"age_range": [
+				22,
+				55
+			],
+			"salary": 0,
+			"weight_modifier": 1.5,
+			"event_pool": [
+				"event_business_deal",
+				"event_bankruptcy_risk"
+			]
+		}
+	]
+}

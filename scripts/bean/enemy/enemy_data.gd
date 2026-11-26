@@ -87,9 +87,11 @@ func take_damage(amount: float) -> float:
 	var damage_reduction = 0.0
 	match armor_type:
 		"light":
+			damage_reduction = 0.1
+		"medium":
 			damage_reduction = 0.2
 		"heavy":
-			damage_reduction = 0.4
+			damage_reduction = 0.35
 	
 	var actual_damage = amount * (1.0 - damage_reduction)
 	current_health = maxf(current_health - actual_damage, 0.0)

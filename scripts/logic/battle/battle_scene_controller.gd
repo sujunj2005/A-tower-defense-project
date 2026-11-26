@@ -15,6 +15,7 @@ func _ready() -> void:
 	_initialize_battle_manager()
 	_setup_signals()
 	_initialize_wave()
+	_check_skill_unlocks()
 
 func _create_scene_structure() -> void:
 	towers_container = Node2D.new()
@@ -76,3 +77,8 @@ func _on_battle_ended(victory: bool) -> void:
 		if "gold" in battle_manager:
 			session.gold = battle_manager.gold
 	GameState.change_state(GameState.State.RESULT)
+
+func _check_skill_unlocks() -> void:
+	var ss: Node = get_node_or_null("/root/SkillSystem")
+	if ss and ss.has_method("check_and_unlock_skills"):
+		ss.check_and_unlock_skills()

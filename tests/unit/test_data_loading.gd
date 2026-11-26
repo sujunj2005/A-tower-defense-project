@@ -8,14 +8,10 @@ func test_events_json_loads() -> void:
 
 func test_events_have_required_fields() -> void:
 	var data: Dictionary = ConfigManager.load_json("res://data/events.json")
-	var options_data: Dictionary = ConfigManager.load_json("res://data/options.json")
 	for event: Dictionary in data.events:
 		assert_true(event.has("event_id"), "事件应包含 event_id")
 		assert_true(event.has("event_name"), "事件应包含 event_name")
-		var event_options: Array = []
-		for opt: Dictionary in options_data.get("options", []):
-			if opt.get("event_id", "") == event.event_id:
-				event_options.append(opt)
+		var event_options: Array = event.get("options", [])
 		assert_true(event_options.size() >= 2, "事件 %s 应至少有 2 个选项，实际：%d" % [event.event_id, event_options.size()])
 
 func test_endings_json_loads() -> void:
@@ -45,14 +41,11 @@ func test_stages_json_loads() -> void:
 
 func test_stages_have_required_fields() -> void:
 	var data: Dictionary = ConfigManager.load_json("res://data/stages.json")
-	var stage_names: Array = []
-	for stage: Dictionary in data.stages:
-		assert_true(stage.has("stage_id"), "阶段应包含 stage_id")
-		assert_true(stage.has("stage_name"), "阶段应包含 stage_name")
-		assert_true(stage.has("enemy_pool"), "阶段应包含 enemy_pool")
-		stage_names.append(stage.stage_name)
-	assert_true("童年" in stage_names, "应包含童年阶段")
-	assert_true("老年" in stage_names, "应包含老年阶段")
+	assert_has(data.stages, "childhood")
+	assert_has(data.stages, "old_age")
+	for stage: Dictionary in data.stages.values():
+		assert_false(str(stage.get("display_name", "")).is_empty(), "阶段应包含显示名称")
+		assert_true(stage.get("enemy_pool") is Dictionary, "阶段敌人池应为权重字典")
 
 func test_towers_json_loads() -> void:
 	var data: Dictionary = ConfigManager.load_json("res://data/towers.json")

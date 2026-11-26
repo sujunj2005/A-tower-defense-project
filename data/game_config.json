@@ -1,17 +1,20 @@
 {
-	"victory_delay_seconds": 2,
 	"difficulty_presets": {
 		"easy": {
+			"enemy_damage_multiplier": 0.8,
 			"enemy_health_multiplier": 0.8,
-			"enemy_damage_multiplier": 0.8
-		},
-		"normal": {
-			"enemy_health_multiplier": 1.0,
-			"enemy_damage_multiplier": 1.0
+			"starting_gold_bonus": 30
 		},
 		"hard": {
+			"enemy_damage_multiplier": 1.3,
 			"enemy_health_multiplier": 1.5,
-			"enemy_damage_multiplier": 1.3
+			"starting_gold_bonus": -20
+		},
+		"normal": {
+			"enemy_damage_multiplier": 1,
+			"enemy_health_multiplier": 1,
+			"starting_gold_bonus": 0
 		}
-	}
+	},
+	"victory_delay_seconds": 2
 }

@@ -90,32 +90,31 @@ func increment_stage_events() -> void:
 func can_continue() -> bool:
 	return current_age < 80
 
-## 获取当前阶段可用的事件池
+## 获取当前阶段的敌人池，保留旧方法名供现有调用方使用。
 func get_stage_event_pool() -> Array[Dictionary]:
-	var cm: Node = get_node_or_null("/root/ConfigManager")
-	var stages_data: Dictionary = {}
-	if cm and cm.has_method("load_json"):
-		stages_data = cm.load_json("res://data/stages.json")
-	if not stages_data.has("stages"):
-		return []
-	var stages: Dictionary = stages_data.stages
-	var sid: String = get_stage_id()
-	if not stages.has(sid):
-		return []
-	var pool: Array = stages[sid].get("enemy_pool", [])
-	var result: Array[Dictionary] = []
-	for entry: Dictionary in pool:
-		result.append(entry)
-	return result
+	return EnemyConfig.get_enemies_for_stage(get_stage_id())
 
-## 应用老年属性递减
-func apply_old_age_penalty() -> void:
-	if current_stage == Stage.OLD_AGE:
-		# 每年属性 -1%
+## 应用年龄属性递减（中年和老年）
+func apply_age_penalty() -> void:
+	if current_stage == Stage.MIDDLE_AGE:
+		# 中年：每年属性 -0.5%
+		var years_middle = current_age - STAGE_AGES[Stage.MIDDLE_AGE].start
+		var penalty_rate: float = 1.0 - (years_middle * 0.005)
+		
+		for attr in session.attributes:
+			session.attributes[attr] = maxi(int(float(session.attributes[attr]) * penalty_rate), 1)
+		
+		Global.debug_log("中年属性递减：%d%%" % int(penalty_rate * 100.0))
+	elif current_stage == Stage.OLD_AGE:
+		# 老年：每年属性 -1%
 		var years_old = current_age - STAGE_AGES[Stage.OLD_AGE].start
 		var penalty_rate: float = 1.0 - (years_old * 0.01)
 		
 		for attr in session.attributes:
-			session.attributes[attr] = int(float(session.attributes[attr]) * penalty_rate)
+			session.attributes[attr] = maxi(int(float(session.attributes[attr]) * penalty_rate), 1)
 		
 		Global.debug_log("老年属性递减：%d%%" % int(penalty_rate * 100.0))
+
+## 应用老年属性递减（已废弃，保留兼容）
+func apply_old_age_penalty() -> void:
+	apply_age_penalty()

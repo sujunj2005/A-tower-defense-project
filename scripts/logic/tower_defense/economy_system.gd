@@ -1,14 +1,12 @@
+## 经济系统。管理金币收支、利息计算、战斗评级奖励和塔奖励发放。
+## 作为 Autoload 全局单例运行，通过信号通知 UI 金币变化。
 extends Node
 
 signal gold_changed(new_gold: int)
-signal interest_earned(amount: int)
+signal salary_earned(amount: int)
 
 var session: GameSessionData
 var _balance_config: Dictionary = {}
-
-const INTEREST_MULTIPLIER: int = 5
-const INTEREST_DIVISOR: int = 10
-const MAX_INTEREST: int = 50
 
 const RATING_GOLD_REWARDS: Dictionary = {
 	"S": 100,
@@ -46,19 +44,28 @@ func _load_balance_config() -> void:
 		return
 	_balance_config = cm.load_json("res://data/economy_balance.json")
 
-func calculate_interest() -> int:
-	var saved_gold: int = session.gold
-	var interest: int = mini(int(floorf(float(saved_gold) / float(INTEREST_DIVISOR)) * INTEREST_MULTIPLIER), MAX_INTEREST)
-	return interest
+func calculate_salary() -> int:
+	if session.current_profession == "":
+		return 0
+	var cm: Node = _get_config_manager()
+	if not cm or not cm.has_method("load_json"):
+		return 0
+	var prof_data = cm.load_json("res://data/professions.json")
+	if not prof_data is Dictionary or not prof_data.has("professions"):
+		return 0
+	for prof: Dictionary in prof_data.professions:
+		if prof.get("profession_id", "") == session.current_profession:
+			return int(prof.get("salary", 0))
+	return 0
 
-func apply_interest() -> int:
-	var interest: int = calculate_interest()
-	if interest > 0:
-		session.gold += interest
+func apply_salary() -> int:
+	var salary: int = calculate_salary()
+	if salary > 0:
+		session.gold += salary
 		gold_changed.emit(session.gold)
-		interest_earned.emit(interest)
-		Global.debug_log("利息收入：%d 金币（留存 %d）" % [interest, session.gold - interest])
-	return interest
+		salary_earned.emit(salary)
+		Global.debug_log("薪资收入：%d 金币（职业：%s）" % [salary, session.current_profession])
+	return salary
 
 func get_rating_gold_reward(rating: String) -> int:
 	return RATING_GOLD_REWARDS.get(rating, 0)
@@ -105,7 +112,6 @@ func apply_battle_rewards(rating: String) -> Dictionary:
 			rewards.tower_id = tower_id
 			session.add_tower(tower_id, -1)
 			Global.debug_log("评价出塔奖励：%s" % tower_id)
-	apply_interest()
 	return rewards
 
 func spend_gold(amount: int) -> bool:

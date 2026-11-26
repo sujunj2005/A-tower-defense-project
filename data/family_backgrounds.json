@@ -36,7 +36,45 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": 0,
 				"experience_bonus": 0.1
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_CADRE",
+					"relation_type": "father",
+					"affection": 70,
+					"health": 85,
+					"age_offset": 25,
+					"profession": "NPC_PROFESSION_CIVIL_SERVANT"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_CADRE",
+					"relation_type": "mother",
+					"affection": 75,
+					"health": 90,
+					"age_offset": 23,
+					"profession": "NPC_PROFESSION_TEACHER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_CADRE",
+					"relation_type": "grandpa_p",
+					"affection": 60,
+					"health": 65,
+					"age_offset": 50,
+					"profession": "NPC_PROFESSION_RETIRED_CADRE"
+				},
+				{
+					"npc_id": "npc_grandma_p",
+					"name": "NPC_GRANDMA_CADRE",
+					"relation_type": "grandma_p",
+					"affection": 65,
+					"health": 70,
+					"age_offset": 48,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_merchant",
@@ -73,7 +111,45 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": -20,
 				"experience_bonus": 0.05
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_MERCHANT",
+					"relation_type": "father",
+					"affection": 65,
+					"health": 75,
+					"age_offset": 26,
+					"profession": "NPC_PROFESSION_BUSINESS"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_MERCHANT",
+					"relation_type": "mother",
+					"affection": 70,
+					"health": 85,
+					"age_offset": 24,
+					"profession": "NPC_PROFESSION_HOMEMAKER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_MERCHANT",
+					"relation_type": "grandpa_p",
+					"affection": 55,
+					"health": 60,
+					"age_offset": 52,
+					"profession": "NPC_PROFESSION_BUSINESS"
+				},
+				{
+					"npc_id": "npc_grandma_p",
+					"name": "NPC_GRANDMA_MERCHANT",
+					"relation_type": "grandma_p",
+					"affection": 60,
+					"health": 68,
+					"age_offset": 50,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_worker",
@@ -110,7 +186,45 @@
 				"tower_cost_modifier": -0.1,
 				"health_bonus": 30,
 				"experience_bonus": 0.05
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_WORKER",
+					"relation_type": "father",
+					"affection": 70,
+					"health": 90,
+					"age_offset": 24,
+					"profession": "NPC_PROFESSION_WORKER"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_WORKER",
+					"relation_type": "mother",
+					"affection": 75,
+					"health": 88,
+					"age_offset": 22,
+					"profession": "NPC_PROFESSION_WORKER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_WORKER",
+					"relation_type": "grandpa_p",
+					"affection": 65,
+					"health": 55,
+					"age_offset": 49,
+					"profession": "NPC_PROFESSION_RETIRED_WORKER"
+				},
+				{
+					"npc_id": "npc_grandma_p",
+					"name": "NPC_GRANDMA_WORKER",
+					"relation_type": "grandma_p",
+					"affection": 70,
+					"health": 60,
+					"age_offset": 47,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_farmer",
@@ -147,7 +261,45 @@
 				"tower_cost_modifier": -0.15,
 				"health_bonus": 0,
 				"experience_bonus": 0.15
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_FARMER",
+					"relation_type": "father",
+					"affection": 70,
+					"health": 92,
+					"age_offset": 24,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_FARMER",
+					"relation_type": "mother",
+					"affection": 75,
+					"health": 90,
+					"age_offset": 22,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_FARMER",
+					"relation_type": "grandpa_p",
+					"affection": 60,
+					"health": 50,
+					"age_offset": 51,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_grandma_p",
+					"name": "NPC_GRANDMA_FARMER",
+					"relation_type": "grandma_p",
+					"affection": 65,
+					"health": 55,
+					"age_offset": 49,
+					"profession": "NPC_PROFESSION_FARMER"
+				}
+			]
 		},
 		{
 			"family_id": "family_teacher",
@@ -184,7 +336,45 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": 0,
 				"experience_bonus": 0.2
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_TEACHER",
+					"relation_type": "father",
+					"affection": 65,
+					"health": 80,
+					"age_offset": 28,
+					"profession": "NPC_PROFESSION_PROFESSOR"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_TEACHER",
+					"relation_type": "mother",
+					"affection": 70,
+					"health": 85,
+					"age_offset": 26,
+					"profession": "NPC_PROFESSION_TEACHER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_TEACHER",
+					"relation_type": "grandpa_p",
+					"affection": 55,
+					"health": 60,
+					"age_offset": 55,
+					"profession": "NPC_PROFESSION_RETIRED"
+				},
+				{
+					"npc_id": "npc_grandma_m",
+					"name": "NPC_GRANDMA_TEACHER",
+					"relation_type": "grandma_m",
+					"affection": 60,
+					"health": 65,
+					"age_offset": 53,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_military",
@@ -205,6 +395,7 @@
 			],
 			"initial_resources": {
 				"gold": 110,
+				"traits": [],
 				"towers": [
 					{
 						"tower_sports_basic": 3
@@ -212,8 +403,7 @@
 					{
 						"tower_chinese_basic": 1
 					}
-				],
-				"traits": []
+				]
 			},
 			"max_home_health": 100,
 			"modifiers": {
@@ -221,7 +411,36 @@
 				"tower_cost_modifier": -0.05,
 				"health_bonus": 20,
 				"experience_bonus": 0.05
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_MILITARY",
+					"relation_type": "father",
+					"affection": 60,
+					"health": 95,
+					"age_offset": 26,
+					"profession": "NPC_PROFESSION_OFFICER"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_MILITARY",
+					"relation_type": "mother",
+					"affection": 70,
+					"health": 88,
+					"age_offset": 24,
+					"profession": "NPC_PROFESSION_MILITARY_DOCTOR"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_MILITARY",
+					"relation_type": "grandpa_p",
+					"affection": 55,
+					"health": 50,
+					"age_offset": 53,
+					"profession": "NPC_PROFESSION_RETIRED_MILITARY"
+				}
+			]
 		},
 		{
 			"family_id": "family_artist",
@@ -242,6 +461,7 @@
 			],
 			"initial_resources": {
 				"gold": 120,
+				"traits": [],
 				"towers": [
 					{
 						"tower_artist_basic": 3
@@ -249,8 +469,7 @@
 					{
 						"tower_chinese_basic": 1
 					}
-				],
-				"traits": []
+				]
 			},
 			"max_home_health": 100,
 			"modifiers": {
@@ -258,7 +477,36 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": 0,
 				"experience_bonus": 0.1
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_ARTIST",
+					"relation_type": "father",
+					"affection": 65,
+					"health": 80,
+					"age_offset": 27,
+					"profession": "NPC_PROFESSION_PAINTER"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_ARTIST",
+					"relation_type": "mother",
+					"affection": 70,
+					"health": 82,
+					"age_offset": 25,
+					"profession": "NPC_PROFESSION_MUSICIAN"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_ARTIST",
+					"relation_type": "grandpa_p",
+					"affection": 50,
+					"health": 55,
+					"age_offset": 54,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_doctor",
@@ -279,6 +527,7 @@
 			],
 			"initial_resources": {
 				"gold": 160,
+				"traits": [],
 				"towers": [
 					{
 						"tower_math_basic": 2
@@ -286,8 +535,7 @@
 					{
 						"tower_programming_basic": 1
 					}
-				],
-				"traits": []
+				]
 			},
 			"max_home_health": 100,
 			"modifiers": {
@@ -295,7 +543,45 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": 25,
 				"experience_bonus": 0.08
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_DOCTOR",
+					"relation_type": "father",
+					"affection": 65,
+					"health": 85,
+					"age_offset": 28,
+					"profession": "NPC_PROFESSION_SURGEON"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_DOCTOR",
+					"relation_type": "mother",
+					"affection": 70,
+					"health": 88,
+					"age_offset": 26,
+					"profession": "NPC_PROFESSION_PHARMACIST"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_DOCTOR",
+					"relation_type": "grandpa_p",
+					"affection": 55,
+					"health": 58,
+					"age_offset": 56,
+					"profession": "NPC_PROFESSION_RETIRED_DOCTOR"
+				},
+				{
+					"npc_id": "npc_grandma_m",
+					"name": "NPC_GRANDMA_DOCTOR",
+					"relation_type": "grandma_m",
+					"affection": 60,
+					"health": 62,
+					"age_offset": 54,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		},
 		{
 			"family_id": "family_rural_poor",
@@ -316,12 +602,12 @@
 			],
 			"initial_resources": {
 				"gold": 60,
+				"traits": [],
 				"towers": [
 					{
 						"tower_sports_basic": 2
 					}
-				],
-				"traits": []
+				]
 			},
 			"max_home_health": 100,
 			"modifiers": {
@@ -329,7 +615,45 @@
 				"tower_cost_modifier": -0.2,
 				"health_bonus": 0,
 				"experience_bonus": 0.1
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_RURAL",
+					"relation_type": "father",
+					"affection": 70,
+					"health": 85,
+					"age_offset": 24,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_RURAL",
+					"relation_type": "mother",
+					"affection": 75,
+					"health": 82,
+					"age_offset": 22,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_RURAL",
+					"relation_type": "grandpa_p",
+					"affection": 60,
+					"health": 45,
+					"age_offset": 50,
+					"profession": "NPC_PROFESSION_FARMER"
+				},
+				{
+					"npc_id": "npc_grandma_p",
+					"name": "NPC_GRANDMA_RURAL",
+					"relation_type": "grandma_p",
+					"affection": 65,
+					"health": 48,
+					"age_offset": 48,
+					"profession": "NPC_PROFESSION_FARMER"
+				}
+			]
 		},
 		{
 			"family_id": "family_celebrity",
@@ -369,7 +693,45 @@
 				"tower_cost_modifier": 0,
 				"health_bonus": 0,
 				"experience_bonus": 0.15
-			}
+			},
+			"family_npcs": [
+				{
+					"npc_id": "npc_father",
+					"name": "NPC_FATHER_CELEBRITY",
+					"relation_type": "father",
+					"affection": 55,
+					"health": 78,
+					"age_offset": 28,
+					"profession": "NPC_PROFESSION_ENTREPRENEUR"
+				},
+				{
+					"npc_id": "npc_mother",
+					"name": "NPC_MOTHER_CELEBRITY",
+					"relation_type": "mother",
+					"affection": 60,
+					"health": 82,
+					"age_offset": 26,
+					"profession": "NPC_PROFESSION_CELEBRITY"
+				},
+				{
+					"npc_id": "npc_grandpa_p",
+					"name": "NPC_GRANDPA_CELEBRITY",
+					"relation_type": "grandpa_p",
+					"affection": 50,
+					"health": 55,
+					"age_offset": 56,
+					"profession": "NPC_PROFESSION_RETIRED"
+				},
+				{
+					"npc_id": "npc_grandma_m",
+					"name": "NPC_GRANDMA_CELEBRITY",
+					"relation_type": "grandma_m",
+					"affection": 55,
+					"health": 60,
+					"age_offset": 54,
+					"profession": "NPC_PROFESSION_RETIRED"
+				}
+			]
 		}
 	]
 }

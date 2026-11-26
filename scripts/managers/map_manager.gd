@@ -1,11 +1,18 @@
+## 地图与战斗管理器。负责地图渲染、塔位管理、波次调度、战斗结算和 UI 组装。
+## 生命周期：场景加载 → _ready → _start_battle → 战斗循环 → _end_battle → 切换场景
 extends Node2D
 
+## 地形集索引
 const TERRAIN_SET: int = 0
+## 草地地形 ID
 const TERRAIN_GRASS: int = 0
+## 边缘地形 ID
 const TERRAIN_EDGE: int = 1
+## 道路地形 ID
 const TERRAIN_ROAD: int = 2
 const TERRAIN_SAND: int = 3
 const TERRAIN_WATER: int = 4
+## 生成点/基地标记贴图尺寸
 const MARKER_SIZE: int = 200
 const MARKER_RADIUS: int = 90
 const LETTER_SIZE: int = 60
@@ -68,6 +75,7 @@ var damage_stats_panel: Node
 @onready var path_markers: Node2D = $PathMarkers
 @onready var ground_layer: TileMapLayer = $GroundLayer
 
+## 入口：加载地图 → 初始化对象 → 组装 UI → 启动战斗
 func _ready() -> void:
 	add_to_group("map_manager")
 	if Global.debug_map_id != "":
@@ -82,6 +90,7 @@ func _ready() -> void:
 	_setup_ui_components()
 	_start_battle()
 
+## 每帧更新：推进游戏时间、路径标记动画、波次公告、召唤按钮、战斗结束检测
 func _process(delta: float) -> void:
 	if not _soft_paused and _battle_active and wave_manager:
 		var is_waiting_first: bool = wave_manager._waiting_for_summon and wave_manager._is_first_wave
@@ -111,6 +120,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_handle_left_click()
 
+## 从 MapConfig 加载地图数据，计算路径点和塔位
 func _load_map_data(map_id: String) -> void:
 	map_config = MapConfig.load_map(map_id)
 	if not map_config:
@@ -140,6 +150,7 @@ func _setup_ui_components() -> void:
 	if current_map_id == "map_test":
 		_create_trait_select_button()
 
+## 初始化战斗：校验健康值、应用阶段金币加成、设置 HUD、启动波次管理器
 func _start_battle() -> void:
 	_battle_active = true
 	_all_enemies_spawned = false
@@ -147,10 +158,21 @@ func _start_battle() -> void:
 	_kill_gold_earned = 0
 	_victory_scheduled = false
 	var session: GameSessionData = Global.get_game_session()
+	if session.attributes.get("health", 0) <= 0:
+		session.ending_reason = "health_depleted"
+		Global.debug_log("进入战斗前健康归零，触发终局（健康=%d）" % session.attributes.get("health", 0))
+		GameState.change_state(GameState.State.ENDING)
+		return
+	session.home_health = float(session.attributes.get("health", 0))
+	if session.home_health > session.max_home_health:
+		session.max_home_health = session.home_health
+	session.home_health = maxf(session.max_home_health - session.accumulated_damage, 0.0)
 	if current_map_id == "map_test":
 		session.gold = 1000
 		session.home_health = 100.0
 		session.max_home_health = 100.0
+	else:
+		_apply_stage_gold_bonus()
 	if game_hud:
 		game_hud.max_base_hp = int(session.max_home_health)
 		game_hud.base_hp = int(session.home_health)
@@ -161,6 +183,7 @@ func _start_battle() -> void:
 		_place_initial_towers()
 	_setup_wave_manager()
 
+## 连接 WaveManager 信号并根据会话数据选择事件战斗或标准战斗
 func _setup_wave_manager() -> void:
 	var session: GameSessionData = Global.get_game_session()
 	wave_manager = get_node_or_null("/root/WaveManager")
@@ -177,21 +200,19 @@ func _setup_wave_manager() -> void:
 			wave_manager.enemy_spawn_requested.connect(_on_enemy_spawn_requested)
 		if wave_manager.has_signal("summon_button_requested"):
 			wave_manager.summon_button_requested.connect(_on_summon_button_requested)
-		if not session.current_battle_waves.is_empty() and wave_manager.has_method("start_event_battle"):
-			var extra_waves: int = _apply_battle_modifiers()
-			if map_config and map_config.wave_count_modifier > 0:
-				extra_waves += map_config.wave_count_modifier
-			wave_manager.start_event_battle(session.current_battle_waves, extra_waves)
-			Global.debug_log("WaveManager 启动事件战斗，波次：%d，额外：%d" % [session.current_battle_waves.size(), extra_waves])
-		else:
-			var stage_id: String = session.current_stage
-			if stage_id == "":
-				var age_sys: Node = get_node_or_null("/root/AgeSystem")
-				if age_sys and age_sys.has_method("get_stage_id"):
-					stage_id = age_sys.get_stage_id()
-			var stage_config: Dictionary = _get_stage_config(stage_id)
-			wave_manager.start_battle(stage_config)
-			Global.debug_log("WaveManager 启动战斗，阶段：%s" % stage_id)
+		var stage_id: String = session.current_stage
+		if stage_id == "":
+			var age_sys: Node = get_node_or_null("/root/AgeSystem")
+			if age_sys and age_sys.has_method("get_stage_id"):
+				stage_id = age_sys.get_stage_id()
+		var stage_config: Dictionary = _get_stage_config(stage_id)
+		var extra_waves: int = _apply_battle_modifiers()
+		if map_config:
+			extra_waves += map_config.wave_count_modifier
+		stage_config = stage_config.duplicate()
+		stage_config["extra_waves"] = extra_waves
+		wave_manager.start_battle(stage_config)
+		Global.debug_log("WaveManager 启动战斗，阶段：%s" % stage_id)
 	else:
 		Global.debug_log("WaveManager 不可用，战斗无法启动")
 
@@ -241,11 +262,6 @@ func _on_enemy_spawn_requested(enemy_id: String) -> void:
 
 func _on_wave_completed(wave_number: int) -> void:
 	Global.debug_log("波次 %d 完成" % wave_number)
-	var es: Node = get_node_or_null("/root/EconomySystem")
-	if es and es.has_method("apply_interest"):
-		var interest: int = es.apply_interest()
-		if interest > 0 and game_hud:
-			game_hud.add_gold(interest)
 
 func _on_all_waves_completed() -> void:
 	_all_enemies_spawned = true
@@ -256,6 +272,7 @@ func _on_boss_wave_started(boss_id: String) -> void:
 
 var _victory_scheduled: bool = false
 
+## 战斗结束检测：基地血量归零 → 失败，所有敌人消灭 → 延迟后胜利
 func _check_battle_end() -> void:
 	if not _battle_active:
 		return
@@ -277,6 +294,7 @@ func _check_battle_end() -> void:
 		if _battle_active:
 			_end_battle(true)
 
+## 结束战斗：计算评级、发放奖励、退还塔款、检查终局条件、切换到结果场景
 func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 	_battle_active = false
 	_reset_battle_speed()
@@ -285,6 +303,10 @@ func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 	if game_hud:
 		session.home_health = float(game_hud.base_hp)
 		session.gold = game_hud.gold
+	var tower_refund: int = _calculate_tower_refund()
+	if tower_refund > 0:
+		session.gold += tower_refund
+		Global.debug_log("[战斗结算] 防御塔出售返还：%d 金币" % tower_refund)
 	var rating: String = "D"
 	if victory and not base_fallen:
 		var br: Node = get_node_or_null("/root/BattleRating")
@@ -307,18 +329,43 @@ func _end_battle(victory: bool, base_fallen: bool = false) -> void:
 	var es: Node = get_node_or_null("/root/EconomySystem")
 	if es and es.has_method("apply_battle_rewards"):
 		rewards = es.apply_battle_rewards(rating)
+	if tower_refund > 0:
+		rewards["tower_refund"] = tower_refund
 	session.last_battle_rewards = rewards
 	if wave_manager and wave_manager.has_method("stop_battle"):
 		wave_manager.stop_battle()
 	var result_text: String = tr("BATTLE_VICTORY") if victory else tr("BATTLE_DEFEAT")
 	Global.debug_log("战斗结束：%s，评级：%s" % [result_text, rating])
 	var es_node: Node = get_node_or_null("/root/EventSystem")
+	session.attributes["health"] = int(session.home_health)
+	if session.attributes.get("health", 0) <= 0:
+		session.ending_reason = "health_depleted"
+		Global.debug_log("战斗结算后健康归零，触发终局（健康=%d）" % session.attributes.get("health", 0))
+		GameState.change_state(GameState.State.ENDING)
+		return
 	if es_node and es_node.has_method("_check_stage_transition"):
 		es_node._check_stage_transition()
 	_show_battle_result(rating, victory)
 
 func _show_battle_result(_rating: String, _victory: bool) -> void:
 	GameState.change_state(GameState.State.RESULT)
+
+## 计算所有已建塔的卖出退款总额（含特质加成和等级系数）
+func _calculate_tower_refund() -> int:
+	var total: int = 0
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	var sell_bonus: float = 0.0
+	if ts and ts.has_method("get_tower_sell_ratio_bonus"):
+		sell_bonus = ts.get_tower_sell_ratio_bonus()
+	var towers: Array[Node] = get_tree().get_nodes_in_group("towers")
+	for tower_node: Node in towers:
+		if tower_node is Tower:
+			var tower: Tower = tower_node as Tower
+			if tower.config and tower.config.sell_ratio > 0.0:
+				var base_cost: int = tower.config.cost
+				var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.5
+				total += int(float(base_cost) * tower.config.sell_ratio * (1.0 + sell_bonus) * level_bonus)
+	return total
 
 func _create_tile_map() -> void:
 	if not ground_layer:
@@ -501,6 +548,7 @@ func _on_tower_slot_pressed(slot_index: int) -> void:
 	var world_pos: Vector2 = _get_tile_center_position(tower_positions[slot_index])
 	tower_select_ui.show_at_position(world_pos)
 
+## 在指定槽位建造防御塔，扣除金币并连接交互信号
 func build_tower(slot_index: int, tower_type: String) -> void:
 	var tower_config: TowerBean = TowerConfig.get_config(tower_type)
 	if not tower_config:
@@ -530,6 +578,7 @@ func build_tower(slot_index: int, tower_type: String) -> void:
 	_hide_tower_slot(slot_index)
 	game_hud.spend_gold(actual_cost)
 
+## 检查该塔类型是否还能放置（受 session.towers 上限约束）
 func _can_place_tower(tower_type: String, session: GameSessionData) -> bool:
 	if not session.towers.has(tower_type):
 		return false
@@ -572,12 +621,20 @@ func _show_tower_limit_warning(tower_type: String) -> void:
 		shake_tween.tween_property(self, "position", orig_pos + offset, 0.03)
 	shake_tween.tween_property(self, "position", orig_pos, 0.03)
 
+## 计算最终建造费用（应用时代折扣和特质折扣）
 func _get_modified_cost(base_cost: int) -> int:
+	var cost: int = base_cost
 	var era_sys: Node = get_node_or_null("/root/EraSystem")
 	if era_sys and era_sys.has_method("get_modified_tower_cost"):
-		return era_sys.get_modified_tower_cost(base_cost)
-	return base_cost
+		cost = era_sys.get_modified_tower_cost(base_cost)
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_tower_build_discount"):
+		var discount: float = ts.get_tower_build_discount()
+		if discount > 0.0:
+			cost = maxi(1, int(float(cost) * (1.0 - discount)))
+	return cost
 
+## 获取难度倍率：全局难度预设 × 地图属性倍率，两层乘法叠加
 func _get_difficulty_multipliers() -> Dictionary:
 	var session: GameSessionData = Global.get_game_session()
 	var global_health: float = 1.0
@@ -605,6 +662,27 @@ func _apply_battle_modifiers() -> int:
 			extra_waves += int(mod.get("value", 0))
 	session.pending_battle_modifiers.clear()
 	return extra_waves
+
+## 应用阶段金币加成：难度初始金币 + 阶段奖励金币
+func _apply_stage_gold_bonus() -> void:
+	var session: GameSessionData = Global.get_game_session()
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	if not cm or not cm.has_method("load_json"):
+		return
+	var config_data = cm.load_json("res://data/game_config.json")
+	if config_data is Dictionary and config_data.has("difficulty_presets"):
+		var presets: Dictionary = config_data.difficulty_presets
+		var preset: Dictionary = presets.get(session.global_difficulty, {})
+		var gold_bonus: int = int(preset.get("starting_gold_bonus", 0))
+		if gold_bonus != 0:
+			session.gold = maxi(session.gold + gold_bonus, 0)
+	var eco_data = cm.load_json("res://data/economy_balance.json")
+	if eco_data is Dictionary and eco_data.has("stage_gold_bonus"):
+		var stage_bonuses: Dictionary = eco_data.stage_gold_bonus
+		var stage: String = session.current_stage if session.current_stage != "" else "childhood"
+		var stage_gold: int = int(stage_bonuses.get(stage, 0))
+		if stage_gold > 0:
+			session.gold += stage_gold
 
 func _hide_tower_slot(slot_index: int) -> void:
 	if slot_index < tower_slot_rects.size():
@@ -666,7 +744,11 @@ func _on_tower_sold(tower: Tower) -> void:
 		damage_tracker.mark_tower_sold(tower)
 	var base_cost: int = tower.config.cost
 	var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.1
-	var sell_price: int = int(float(base_cost) * tower.config.sell_ratio * level_bonus)
+	var sell_ratio: float = tower.config.sell_ratio
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_tower_sell_ratio_bonus"):
+		sell_ratio *= (1.0 + ts.get_tower_sell_ratio_bonus())
+	var sell_price: int = int(float(base_cost) * sell_ratio * level_bonus)
 	if game_hud and game_hud.has_method("add_gold"):
 		game_hud.add_gold(sell_price)
 	var session: GameSessionData = Global.get_game_session()
@@ -873,6 +955,7 @@ func _resume_soft_pause() -> void:
 		_pause_label.visible = false
 	Global.debug_log("[软暂停] 游戏已恢复")
 
+## 在指定槽位创建废墟塔（塔被摧毁后的占位符）
 func build_ruins_at_slot(slot_index: int) -> void:
 	var tower_config: TowerBean = TowerConfig.get_config("tower_ruins")
 	if not tower_config:
@@ -992,23 +1075,6 @@ func _on_enemy_reached_base(_enemy: Node2D) -> void:
 		wave_manager._on_enemy_reached_base(_enemy as Enemy)
 
 func _on_enemy_killed(enemy: Node2D) -> void:
-	var base_reward: int = 0
-	if enemy is Enemy:
-		var enemy_unit: Enemy = enemy as Enemy
-		if enemy_unit.config and enemy_unit.config.gold_drop > 0:
-			base_reward = enemy_unit.config.gold_drop
-	if base_reward <= 0:
-		base_reward = 5
-	var gold_bonus: float = 0.0
-	var es: Node = get_node_or_null("/root/EraSystem")
-	if es and es.has_method("get_family_modifier"):
-		gold_bonus = es.get_family_modifier("gold_bonus")
-	var final_reward: int = int(float(base_reward) * (1.0 + gold_bonus))
-	_kill_gold_earned += final_reward
-	if game_hud:
-		game_hud.add_gold(final_reward)
-	if gold_bonus > 0.0:
-		Global.debug_log("[金币分配] 击杀奖励 %d×(1+%.0f%%)=%d" % [base_reward, gold_bonus * 100.0, final_reward])
 	if wave_manager and wave_manager.has_method("_on_enemy_died"):
 		wave_manager._on_enemy_died(enemy as Enemy)
 
@@ -1021,12 +1087,12 @@ func _create_battle_hud() -> void:
 	_summon_button.custom_minimum_size = Vector2(140, 50)
 	_summon_button.add_theme_font_size_override("font_size", 18)
 	_summon_button.visible = false
-	_summon_button.position = Vector2(20, 200)
+	_summon_button.position = Vector2(20, 280)
 	_summon_button.pressed.connect(_on_summon_pressed)
 	_summon_canvas.add_child(_summon_button)
 	_summon_progress = ProgressBar.new()
 	_summon_progress.custom_minimum_size = Vector2(140, 12)
-	_summon_progress.position = Vector2(20, 255)
+	_summon_progress.position = Vector2(20, 335)
 	_summon_progress.max_value = 100.0
 	_summon_progress.value = 100.0
 	_summon_progress.visible = false
@@ -1042,7 +1108,7 @@ func _create_battle_hud() -> void:
 	_summon_canvas.add_child(_battle_timer_label)
 
 	var speed_container: HBoxContainer = HBoxContainer.new()
-	speed_container.position = Vector2(20, 270)
+	speed_container.position = Vector2(20, 190)
 	speed_container.add_theme_constant_override("separation", 4)
 	var speeds: Array[float] = [1.0, 2.0, 4.0]
 	var speed_labels: Array[String] = ["1x", "2x", "4x"]
@@ -1132,6 +1198,7 @@ func _update_wave_announcement(delta: float) -> void:
 	if _wave_announcement_timer <= 0 and _wave_announcement:
 		_wave_announcement.visible = false
 
+## 临时召唤一座塔（事件效果），到期后自动销毁
 func summon_temp_tower(position: Vector2, stats: Dictionary, duration: float) -> void:
 	var tower_id: String = stats.get("tower_id", "tower_math_basic")
 	var tower_config: TowerBean = TowerConfig.get_config(tower_id)

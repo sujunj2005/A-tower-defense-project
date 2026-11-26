@@ -50,12 +50,13 @@ func test_session_data_traits_array() -> void:
 	assert_eq(session.traits.size(), 2, "应能添加特质")
 	assert_true(session.traits.has("math_talent"), "应包含已添加的特质")
 
-func test_session_data_towers_array() -> void:
+func test_session_data_tower_counts() -> void:
 	var session: GameSessionData = GameSessionData.new()
-	session.towers.append({"tower_id": "tower_math_basic", "level": 1})
-	session.towers.append({"tower_id": "tower_chinese_basic", "level": 2})
+	session.add_tower("tower_math_basic", 1)
+	session.add_tower("tower_chinese_basic", 2)
 	assert_eq(session.towers.size(), 2, "应能添加塔数据")
-	assert_eq(session.towers[1]["tower_id"], "tower_chinese_basic", "塔 ID 应正确")
+	assert_eq(session.towers.get("tower_math_basic"), 1, "数学塔数量应正确")
+	assert_eq(session.towers.get("tower_chinese_basic"), 2, "语文塔数量应正确")
 
 func test_session_data_completed_events() -> void:
 	var session: GameSessionData = GameSessionData.new()

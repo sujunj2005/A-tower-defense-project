@@ -1,8 +1,10 @@
+## 选项系统。管理选项数据的加载、需求检查和需求文本格式化。
+## 选项数据从 events.json 的内嵌 options 数组加载，按 event_id 分组索引。
+## 作为 Autoload 全局单例运行，供 EventUI 和 EventSystem 消费。
 extends Node
 
 signal option_selected(event_id: String, option: OptionData)
 
-var _options_data: Dictionary = {}
 var _options_by_event: Dictionary = {}
 
 func _ready() -> void:
@@ -12,18 +14,19 @@ func _load_options() -> void:
 	var cm: Node = get_node_or_null("/root/ConfigManager")
 	if not cm or not cm.has_method("load_json"):
 		return
-	var data = cm.load_json("res://data/options.json")
-	if not data is Dictionary or not data.has("options"):
+	var data = cm.load_json("res://data/events.json")
+	if not data is Dictionary or not data.has("events"):
 		return
-	_options_data = data
 	_options_by_event.clear()
-	for opt_raw: Dictionary in data.options:
-		var opt := OptionData.from_dict(opt_raw)
-		var eid: String = opt.event_id
-		if not _options_by_event.has(eid):
-			var arr: Array[OptionData] = []
-			_options_by_event[eid] = arr
-		(_options_by_event[eid] as Array[OptionData]).append(opt)
+	for event_raw: Dictionary in data.events:
+		var eid: String = str(event_raw.get("event_id", ""))
+		var raw_options: Array = event_raw.get("options", [])
+		var arr: Array[OptionData] = []
+		for opt_raw: Dictionary in raw_options:
+			var opt := OptionData.from_dict(opt_raw)
+			opt.event_id = eid
+			arr.append(opt)
+		_options_by_event[eid] = arr
 
 func reload_options() -> void:
 	_load_options()

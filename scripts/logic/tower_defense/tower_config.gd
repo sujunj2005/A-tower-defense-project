@@ -10,7 +10,8 @@ static func _static_init():
 static func _load_json_registry() -> void:
 	if not _json_cache.is_empty():
 		return
-	var file: FileAccess = FileAccess.open("res://data/towers.json", FileAccess.READ)
+	var path: String = ConfigPath.resolve("res://data/towers.json")
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if not file:
 		return
 	var json: JSON = JSON.new()

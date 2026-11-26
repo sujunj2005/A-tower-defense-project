@@ -23,5 +23,5 @@ func test_game_session_data_default_values():
 	
 	assert_eq(session.current_age, 6, "默认起始年龄为 6 岁")
 	assert_eq(session.current_stage, "childhood", "默认阶段为童年")
-	assert_eq(session.gold, 50, "默认金币为 50")
-	assert_eq(session.home_health, 100, "默认老家生命值为 100")
+	assert_eq(session.gold, 100, "默认金币为 100")
+	assert_eq(session.home_health, 100.0, "默认老家生命值为 100")

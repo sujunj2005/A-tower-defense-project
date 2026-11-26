@@ -2,8 +2,18 @@ extends GutTest
 
 ## BattleManager 单元测试
 
+var _previous_session: GameSessionData
+
+func before_each() -> void:
+	_previous_session = Global.game_session
+	Global.game_session = GameSessionData.new()
+
+func after_each() -> void:
+	Global.game_session = _previous_session
+
 func test_battle_manager_initialization():
 	var battle_manager = BattleManager.new()
+	autofree(battle_manager)
 	
 	assert_eq(battle_manager.battle_state, BattleManager.BattleState.WAITING, "初始状态应为 WAITING")
 	assert_eq(battle_manager.home_health, 100.0, "默认老家生命值应为 100")
@@ -13,6 +23,7 @@ func test_battle_manager_initialization():
 
 func test_home_health_damage():
 	var battle_manager = BattleManager.new()
+	add_child_autofree(battle_manager)
 	
 	# 测试受到伤害
 	battle_manager.home_take_damage(10.0)
@@ -24,6 +35,7 @@ func test_home_health_damage():
 
 func test_gold_system():
 	var battle_manager = BattleManager.new()
+	autofree(battle_manager)
 	
 	# 测试金币消耗
 	var success = battle_manager.spend_gold(30)
@@ -37,6 +49,7 @@ func test_gold_system():
 
 func test_battle_state_transitions():
 	var battle_manager = BattleManager.new()
+	autofree(battle_manager)
 	
 	# 开始战斗
 	battle_manager.start_battle()
@@ -49,6 +62,7 @@ func test_battle_state_transitions():
 
 func test_home_health_percent():
 	var battle_manager = BattleManager.new()
+	add_child_autofree(battle_manager)
 	
 	var percent = battle_manager.get_home_health_percent()
 	assert_eq(percent, 1.0, "满血时百分比应为 1.0")

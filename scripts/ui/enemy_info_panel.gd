@@ -11,7 +11,7 @@ var _effect_timer_items: Dictionary = {}
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		if visible and _current_enemy and is_instance_valid(_current_enemy):
-			_title_label.text = "👹 " + _current_enemy.config.get_display_name()
+			_title_label.text = tr("ENEMY_INFO_TITLE_FMT") % _current_enemy.config.get_display_name()
 			_info_label.text = _build_enemy_info_text(_current_enemy)
 
 func _ready() -> void:
@@ -78,7 +78,7 @@ func show_enemy_info(enemy: Enemy) -> void:
 	if not enemy or not enemy.config:
 		return
 	_current_enemy = enemy
-	_title_label.text = "👹 " + enemy.config.get_display_name()
+	_title_label.text = tr("ENEMY_INFO_TITLE_FMT") % enemy.config.get_display_name()
 	_info_label.text = _build_enemy_info_text(enemy)
 	visible = true
 
@@ -98,7 +98,6 @@ func _build_enemy_info_text(enemy: Enemy) -> String:
 	if enemy.is_slowed and eff_speed < enemy.base_move_speed:
 		text += " (%.0f%%)" % (eff_speed / enemy.base_move_speed * 100.0)
 	text += "    " + tr("ENEMY_DAMAGE") % cfg.damage
-	text += "    " + tr("ENEMY_GOLD") % cfg.gold_drop
 	var phys_res: float = cfg.physical_resistance * 100.0
 	var mag_res: float = cfg.magical_resistance * 100.0
 	text += "\n" + tr("ENEMY_PHYS_RES") % phys_res

@@ -75,4 +75,4 @@ func add_exp(amount: int) -> void:
 	# 简单升级逻辑：每 100 经验升一级
 	while exp >= 100:
 		exp -= 100
-		level_up()
+		level += 1

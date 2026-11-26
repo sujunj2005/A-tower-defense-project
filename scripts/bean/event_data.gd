@@ -19,6 +19,8 @@ extends Resource
 @export var is_deadly: bool = false
 ## 事件链前置条件：flag:xxx 表示需要 chain_flag，否则需要已完成事件 ID
 @export var chain_prerequisites: Array[String] = []
+## 可选的前置组：至少满足其中一项。事件 ID 和 flag:xxx 与必选组使用相同格式。
+@export var chain_prerequisites_any: Array[String] = []
 ## 事件链互斥：已完成这些事件中的任一个则不触发
 @export var chain_excludes: Array[String] = []
 ## 条件列表，统一承载所有触发条件：
@@ -27,8 +29,8 @@ extends Resource
 ## - family_member: {"type":"family_member","member":"father"}
 ## - required_family: {"type":"required_family","families":["family_farmer"]}
 @export var conditions: Array[Dictionary] = []
-## 基础权重，用于加权随机选取
-@export var event_weight: float = 1.0
+## 基础权重（整数值，用于加权随机选取的入队槽位数）
+@export var weight: int = 1
 @export var karma_type: String = "neutral"
 @export var personality_checks: Dictionary = {}
 @export var related_npcs: Array[String] = []
@@ -50,9 +52,10 @@ func to_dict() -> Dictionary:
 		"options": opts,
 		"is_deadly": is_deadly,
 		"chain_prerequisites": chain_prerequisites,
+		"chain_prerequisites_any": chain_prerequisites_any,
 		"chain_excludes": chain_excludes,
 		"conditions": conditions,
-		"event_weight": event_weight,
+		"weight": weight,
 		"karma_type": karma_type,
 		"personality_checks": personality_checks,
 		"related_npcs": related_npcs,
@@ -81,6 +84,8 @@ static func from_dict(data: Dictionary) -> EventData:
 	var raw_prereqs = data.get("chain_prerequisites", [])
 	for p in raw_prereqs:
 		event.chain_prerequisites.append(str(p))
+	for p in data.get("chain_prerequisites_any", []):
+		event.chain_prerequisites_any.append(str(p))
 	var raw_excludes = data.get("chain_excludes", [])
 	for e in raw_excludes:
 		event.chain_excludes.append(str(e))
@@ -88,7 +93,7 @@ static func from_dict(data: Dictionary) -> EventData:
 	event.conditions.clear()
 	for c: Dictionary in raw_conditions:
 		event.conditions.append(c)
-	event.event_weight = float(data.get("event_weight", 1.0))
+	event.weight = int(max(data.get("weight", 1), 1))
 	event.karma_type = str(data.get("karma_type", "neutral"))
 	event.personality_checks = Dictionary(data.get("personality_checks", {}))
 	event.related_npcs.clear()
@@ -100,12 +105,26 @@ static func from_dict(data: Dictionary) -> EventData:
 	event.tension_duration = int(data.get("tension_duration", 0))
 	return event
 
-## 从 conditions 中提取触发概率，默认 1.0
-func get_trigger_chance() -> float:
-	for cond: Dictionary in conditions:
-		if cond.get("type", "") == "trigger_chance":
-			return float(cond.get("value", 1.0))
-	return 1.0
+func matches_event_chain(session: GameSessionData) -> bool:
+	if event_id in session.completed_events or event_id in session.locked_events:
+		return false
+	for prerequisite: String in chain_prerequisites:
+		if not _matches_chain_entry(prerequisite, session):
+			return false
+	for exclusion: String in chain_excludes:
+		if _matches_chain_entry(exclusion, session):
+			return false
+	if chain_prerequisites_any.is_empty():
+		return true
+	for prerequisite: String in chain_prerequisites_any:
+		if _matches_chain_entry(prerequisite, session):
+			return true
+	return false
+
+func _matches_chain_entry(entry: String, session: GameSessionData) -> bool:
+	if entry.begins_with("flag:"):
+		return entry.substr(5) in session.chain_flags
+	return entry in session.completed_events
 
 ## 从 conditions 中提取关联家庭成员
 func get_family_member() -> String:

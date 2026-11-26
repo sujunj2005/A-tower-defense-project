@@ -14,7 +14,7 @@ var _attack_toggle_container: HBoxContainer
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		if visible and _current_tower and is_instance_valid(_current_tower):
-			_title_label.text = "🏰 " + _current_tower.config.get_display_name() + "  Lv." + str(_current_tower.current_level)
+			_title_label.text = tr("TOWER_INFO_TITLE_FMT") % [_current_tower.config.get_display_name(), _current_tower.current_level]
 			_info_label.text = _build_tower_info_text(_current_tower)
 
 func _ready() -> void:
@@ -111,7 +111,7 @@ func show_tower_info(tower: Tower) -> void:
 	_current_tower = tower
 	_last_tower_level = tower.current_level
 	_last_tower_exp = tower.current_experience
-	_title_label.text = "🏰 " + tower.config.get_display_name() + "  Lv." + str(tower.current_level)
+	_title_label.text = tr("TOWER_INFO_TITLE_FMT") % [tower.config.get_display_name(), tower.current_level]
 	_info_label.text = _build_tower_info_text(tower)
 	if tower.config.sell_ratio > 0.0:
 		var sell_price: int = _calculate_sell_price(tower)
@@ -170,7 +170,11 @@ func _calculate_sell_price(tower: Tower) -> int:
 		return 0
 	var base_cost: int = tower.config.cost
 	var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.1
-	return int(float(base_cost) * tower.config.sell_ratio * level_bonus)
+	var sell_ratio: float = tower.config.sell_ratio
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_tower_sell_ratio_bonus"):
+		sell_ratio *= (1.0 + ts.get_tower_sell_ratio_bonus())
+	return int(float(base_cost) * sell_ratio * level_bonus)
 
 func _on_sell_pressed() -> void:
 	if _current_tower and is_instance_valid(_current_tower):
@@ -195,7 +199,7 @@ func _process(_delta: float) -> void:
 		if tower.current_level != _last_tower_level or tower.current_experience != _last_tower_exp:
 			_last_tower_level = tower.current_level
 			_last_tower_exp = tower.current_experience
-			_title_label.text = "🏰 " + tower.config.get_display_name() + "  Lv." + str(tower.current_level)
+			_title_label.text = tr("TOWER_INFO_TITLE_FMT") % [tower.config.get_display_name(), tower.current_level]
 			_info_label.text = _build_tower_info_text(tower)
 		if _sell_button.visible and tower.config.sell_ratio > 0.0:
 			_sell_button.text = tr("SELL_RETURN") % _calculate_sell_price(tower)
