@@ -12,7 +12,8 @@
 docs/
 node_modules/
 stable/
-addons/
+/addons/*
+!/addons/godot_ai/
 images/
 xlsx/
 w64devkit/
@@ -41,6 +42,8 @@ gsd-file-manifest.json
 
 # Reproducible Godot development and CI entry points
 !/README.md
+!/.gitattributes
+!/addons/godot_ai/README.md
 /AGENTS.md
 /TODO.md
 /.codex/

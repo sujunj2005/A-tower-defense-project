@@ -16,6 +16,12 @@ pwsh -NoProfile -File tools/test.ps1
 
 测试脚本运行单元与集成测试，并把日志和 JUnit XML 写入 `.godot/test-results/`。[GitHub Actions](.github/workflows/godot-tests.yml) 使用相同的初始化与测试入口。
 
+## Godot AI MCP
+
+项目随附 MIT 许可的 Godot AI 4.4.2，使用上面的编辑器命令启动。首次连接时，在编辑器的 Godot AI 面板中通过 **Configure** 配置自己的 MCP 客户端。Codex 的项目配置 `.codex/config.toml` 由每位开发者本机维护。
+
+插件缺失时，从 [Godot AI 4.4.2 发布页](https://github.com/hi-godot/godot-ai/releases/tag/v4.4.2) 下载 `godot-ai-v4-plugin.zip`，将其中的 `addons/godot_ai/` 解压到项目根目录下。
+
 ## Windows 导出
 
 ```powershell
