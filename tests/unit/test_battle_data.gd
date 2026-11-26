@@ -46,6 +46,9 @@ func test_tower_exp_and_leveling():
 	tower.add_exp(100)
 	assert_eq(tower.level, 2, "应升到 2 级")
 	assert_eq(tower.exp, 50, "剩余经验应为 50")
+	tower.add_exp(250)
+	assert_eq(tower.level, 5, "一次获得的经验应支持连续升级")
+	assert_eq(tower.exp, 0, "累计 300 经验应正好消耗")
 
 func test_enemy_data_creation():
 	var enemy = EnemyData.new()
@@ -68,17 +71,17 @@ func test_enemy_armor_system():
 	var damage = enemy.take_damage(20.0)
 	assert_eq(damage, 20.0, "无护甲应受全额伤害")
 	
-	# 轻甲（20% 减伤）
+	# 轻甲（10% 减伤）
 	enemy.current_health = 100.0
 	enemy.armor_type = "light"
 	damage = enemy.take_damage(20.0)
-	assert_eq(damage, 16.0, "轻甲应减少 20% 伤害")
+	assert_eq(damage, 18.0, "轻甲应减少 10% 伤害")
 	
-	# 重甲（40% 减伤）
+	# 重甲（35% 减伤）
 	enemy.current_health = 100.0
 	enemy.armor_type = "heavy"
 	damage = enemy.take_damage(20.0)
-	assert_eq(damage, 12.0, "重甲应减少 40% 伤害")
+	assert_eq(damage, 13.0, "重甲应减少 35% 伤害")
 
 func test_enemy_death_and_reset():
 	var enemy = EnemyData.new()

@@ -1,3 +1,5 @@
+## 塔攻击组件。管理索敌状态机、攻击定时器、弹道发射和特效触发。
+## 作为 Tower 的子节点挂载，通过组合方式解耦攻击逻辑。
 extends Node
 class_name TowerAttackComponent
 
@@ -243,7 +245,7 @@ func perform_ranged_attack(attack_target: Node2D):
 	var final_damage: float = config.damage * (1.0 + trait_bonus) * _crit_multiplier
 	var is_crit: bool = _crit_multiplier > 1.0
 	var pbean: ProjectileBean = TowerConfig.create_projectile_bean(config)
-	if pbean and pbean.projectile_type == GameConfig.ProjectileType.TARGET_LOCKED:
+	if pbean:
 		var projectile = create_projectile_from_bean(pbean, attack_target, final_damage)
 		if projectile:
 			projectile.is_crit = is_crit
@@ -327,7 +329,8 @@ func execute_effects(primary_target: Node2D):
 	if config.effect_type == EffectType.CRIT:
 		return
 	var es: Node = get_node_or_null("/root/EffectSystem")
-	if config.effect_type != EffectType.NONE:
+	var splash_on_impact: bool = config.attack_mode == AttackMode.RANGED and config.effect_type == EffectType.SPLASH
+	if config.effect_type != EffectType.NONE and not splash_on_impact:
 		if es:
 			es.apply_effect(config.effect_type, config.effect_params, tower, primary_target)
 		else:

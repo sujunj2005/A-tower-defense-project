@@ -114,9 +114,9 @@
 		{
 			"ending_id": "lonely_end",
 			"ending_name": "ENDING_LONELY_END_NAME",
+			"rating": "D",
 			"description": "ENDING_LONELY_END_DESC",
 			"ending_phrase": "ENDING_LONELY_END_PHRASE",
-			"rating": "D",
 			"reward": {
 				"life_wisdom": 50,
 				"destiny_points": 0
@@ -125,9 +125,9 @@
 		{
 			"ending_id": "fulfilled_life",
 			"ending_name": "ENDING_FULFILLED_LIFE_NAME",
+			"rating": "S",
 			"description": "ENDING_FULFILLED_LIFE_DESC",
 			"ending_phrase": "ENDING_FULFILLED_LIFE_PHRASE",
-			"rating": "S",
 			"reward": {
 				"life_wisdom": 800,
 				"destiny_points": 4

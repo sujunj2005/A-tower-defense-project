@@ -1,0 +1,47 @@
+{
+	"version": "1.0",
+	"skills": [
+		{
+			"skill_id": "skill_inspire",
+			"skill_name_key": "SKILL_INSPIRE_NAME",
+			"skill_desc_key": "SKILL_INSPIRE_DESC",
+			"skill_type": "tower_buff",
+			"npc_id": "npc_mother",
+			"required_affection": 75,
+			"cooldown": 30.0,
+			"duration": 8.0,
+			"params": {
+				"damage_bonus": 0.5,
+				"attack_speed_bonus": 0.2
+			},
+			"icon_color": {"r": 1.0, "g": 0.85, "b": 0.2, "a": 1.0}
+		},
+		{
+			"skill_id": "skill_time_freeze",
+			"skill_name_key": "SKILL_TIME_FREEZE_NAME",
+			"skill_desc_key": "SKILL_TIME_FREEZE_DESC",
+			"skill_type": "global_freeze",
+			"npc_id": "npc_friend",
+			"required_affection": 80,
+			"cooldown": 45.0,
+			"duration": 3.0,
+			"params": {},
+			"icon_color": {"r": 0.4, "g": 0.7, "b": 1.0, "a": 1.0}
+		},
+		{
+			"skill_id": "skill_poison_zone",
+			"skill_name_key": "SKILL_POISON_ZONE_NAME",
+			"skill_desc_key": "SKILL_POISON_ZONE_DESC",
+			"skill_type": "poison_zone",
+			"npc_id": "npc_grandma_p",
+			"required_affection": 80,
+			"cooldown": 40.0,
+			"duration": 10.0,
+			"params": {
+				"radius": 120.0,
+				"dps": 8.0
+			},
+			"icon_color": {"r": 0.4, "g": 0.9, "b": 0.3, "a": 1.0}
+		}
+	]
+}

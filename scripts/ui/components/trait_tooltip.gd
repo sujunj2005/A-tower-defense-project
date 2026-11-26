@@ -38,7 +38,7 @@ func _build_ui() -> void:
 	_desc_label.add_theme_font_size_override("font_size", 14)
 	_desc_label.add_theme_color_override("font_color", Color(0.85, 0.85, 0.85, 1.0))
 	_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_desc_label.custom_minimum_size = Vector2(200, 0)
+	_desc_label.custom_minimum_size = Vector2(340, 0)
 	_desc_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.add_child(_desc_label)
 

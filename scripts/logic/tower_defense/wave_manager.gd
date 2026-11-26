@@ -1,3 +1,5 @@
+## 波次管理器。控制敌人波次的生成节奏、难度缩放和召唤按钮逻辑。
+## 支持两种模式：标准(STANDARD)、生存(SURVIVAL)。
 extends Node
 
 signal wave_started(wave_number: int, total_waves: int)
@@ -8,7 +10,7 @@ signal enemy_spawn_requested(enemy_id: String)
 signal survival_wave_started(wave_number: int)
 signal summon_button_requested(show: bool, countdown: float, is_first_wave: bool)
 
-enum WaveMode {STANDARD, SURVIVAL, EVENT}
+enum WaveMode {STANDARD, SURVIVAL}
 
 const WAVE_DELAY_SECONDS: float = 2.0
 const SUMMON_COUNTDOWN_SECONDS: float = 20.0
@@ -29,9 +31,6 @@ var _enemies_to_spawn: int = 0
 var _spawn_timer: Timer
 var _wave_delay_timer: Timer
 var _survival_wave_count: int = 0
-var _event_waves: Array[Dictionary] = []
-var _current_wave_enemy_queue: Array[Dictionary] = []
-var _current_spawn_interval: float = 1.5
 var _waiting_for_summon: bool = false
 var _summon_countdown: float = 0.0
 var _is_first_wave: bool = true
@@ -66,48 +65,22 @@ func _process(delta: float) -> void:
 
 func start_battle(stage_config: Dictionary, mode: WaveMode = WaveMode.STANDARD) -> void:
 	_stage_config = stage_config
-	var raw_pool: Array = stage_config.get("enemy_pool", [])
-	_enemy_pool.clear()
-	for item: Dictionary in raw_pool:
-		_enemy_pool.append(item)
+	_enemy_pool = EnemyConfig.normalize_enemy_pool(stage_config.get("enemy_pool", {}))
 	_difficulty_multiplier = float(stage_config.get("battle_difficulty", 1.0))
 	_gold_multiplier = float(stage_config.get("gold_multiplier", 1.0))
 	current_mode = mode
 	current_wave = 0
 	is_active = true
 	_survival_wave_count = 0
-	_event_waves.clear()
 	_waiting_for_summon = false
 	_summon_countdown = 0.0
 	_is_first_wave = true
 
 	if mode == WaveMode.STANDARD:
-		total_waves = 10
-	elif mode == WaveMode.EVENT:
-		total_waves = _event_waves.size()
+		total_waves = maxi(1, 10 + int(stage_config.get("extra_waves", 0)))
 	else:
 		total_waves = -1
 
-	_show_summon_button()
-
-func start_event_battle(waves: Array[Dictionary], extra_waves: int = 0) -> void:
-	_event_waves.clear()
-	for wave_data: Dictionary in waves:
-		_event_waves.append(wave_data)
-	for i: int in range(extra_waves):
-		if not _event_waves.is_empty():
-			_event_waves.append(_event_waves[-1].duplicate(true))
-	current_mode = WaveMode.EVENT
-	current_wave = 0
-	total_waves = _event_waves.size()
-	is_active = true
-	is_boss_wave = false
-	_enemy_pool.clear()
-	_difficulty_multiplier = 1.0
-	_gold_multiplier = 1.0
-	_waiting_for_summon = false
-	_summon_countdown = 0.0
-	_is_first_wave = true
 	_show_summon_button()
 
 func _show_summon_button() -> void:
@@ -141,11 +114,6 @@ func start_next_wave() -> void:
 		is_active = false
 		return
 
-	if current_mode == WaveMode.EVENT and current_wave > total_waves:
-		all_waves_completed.emit()
-		is_active = false
-		return
-
 	if current_mode == WaveMode.SURVIVAL:
 		_survival_wave_count += 1
 		survival_wave_started.emit(_survival_wave_count)
@@ -153,17 +121,8 @@ func start_next_wave() -> void:
 	is_boss_wave = false
 	if current_mode == WaveMode.STANDARD and current_wave == total_waves:
 		is_boss_wave = true
-	if current_mode == WaveMode.EVENT and current_wave == total_waves:
-		var last_wave: Dictionary = _event_waves[total_waves - 1] if total_waves > 0 else {}
-		var enemies: Array = last_wave.get("enemies", [])
-		for e: Dictionary in enemies:
-			if e.get("id", "").begins_with("boss_"):
-				is_boss_wave = true
-				break
 
-	if current_mode == WaveMode.EVENT:
-		_start_event_wave()
-	elif is_boss_wave:
+	if is_boss_wave:
 		_start_boss_wave()
 	else:
 		_start_normal_wave()
@@ -194,25 +153,6 @@ func _start_boss_wave() -> void:
 	_spawn_timer.wait_time = 2.0
 	_spawn_timer.start()
 
-func _start_event_wave() -> void:
-	var wave_index: int = current_wave - 1
-	if wave_index < 0 or wave_index >= _event_waves.size():
-		return
-	var wave_data: Dictionary = _event_waves[wave_index]
-	_current_wave_enemy_queue.clear()
-	var enemies: Array = wave_data.get("enemies", [])
-	for enemy_entry: Dictionary in enemies:
-		var eid: String = enemy_entry.get("id", "enemy_homework")
-		var count: int = int(enemy_entry.get("count", 1))
-		for _i: int in range(count):
-			_current_wave_enemy_queue.append({"id": eid})
-	_current_spawn_interval = float(wave_data.get("spawn_interval", 1.5))
-	_enemies_to_spawn = _current_wave_enemy_queue.size()
-	_enemies_spawned = 0
-	_enemies_alive = _enemies_to_spawn
-	_spawn_timer.wait_time = _current_spawn_interval
-	_spawn_timer.start()
-
 func _on_spawn_timer_timeout() -> void:
 	if Global.soft_paused:
 		return
@@ -222,10 +162,7 @@ func _on_spawn_timer_timeout() -> void:
 		return
 
 	var enemy_id: String = ""
-	if current_mode == WaveMode.EVENT and not _current_wave_enemy_queue.is_empty():
-		var entry: Dictionary = _current_wave_enemy_queue.pop_front()
-		enemy_id = entry.get("id", "enemy_homework")
-	elif is_boss_wave and _enemies_spawned == 0:
+	if is_boss_wave and _enemies_spawned == 0:
 		enemy_id = _get_boss_id()
 		if enemy_id == "":
 			enemy_id = _pick_enemy_from_pool()

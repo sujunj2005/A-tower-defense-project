@@ -71,13 +71,21 @@ func setup(points_display: Node) -> void:
 	_points_display = points_display
 
 func _load_families_data() -> void:
-	var file: FileAccess = FileAccess.open("res://data/family_backgrounds.json", FileAccess.READ)
-	var json: JSON = JSON.new()
-	json.parse(file.get_as_text())
-	file.close()
-	var families_json: Dictionary = json.data
+	var cm: Node = get_node_or_null("/root/ConfigManager")
+	var families_json: Dictionary = {}
+	if cm and cm.has_method("load_json"):
+		families_json = cm.load_json("res://data/family_backgrounds.json")
+	else:
+		var path: String = ConfigPath.resolve("res://data/family_backgrounds.json")
+		var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+		if not file:
+			return
+		var json: JSON = JSON.new()
+		json.parse(file.get_as_text())
+		file.close()
+		families_json = json.data
 	_families_data.clear()
-	for fam: Dictionary in families_json.family_backgrounds:
+	for fam: Dictionary in families_json.get("family_backgrounds", []):
 		_families_data.append(fam)
 	_selected_index = randi() % _families_data.size()
 	_update_display()
@@ -132,8 +140,10 @@ func _update_display() -> void:
 	for tower_entry: Dictionary in towers_config:
 		for tid: String in tower_entry:
 			var count: int = int(tower_entry[tid])
-			var loc_key: String = String(tid).to_upper() + "_NAME"
-			var display_name: String = tr(loc_key)
+			var display_name: String = tid
+			var cfg: TowerBean = TowerConfig.get_bean(tid)
+			if cfg:
+				display_name = cfg.get_display_name()
 			var count_text: String = "×∞" if count < 0 else "×%d" % count
 			tower_names.append(display_name + count_text)
 	_family_towers_label.text = tr("LIFE_CHOICE_FAMILY_INITIAL_TOWERS") + "：" + (tr("SEPARATOR_DUN").join(tower_names) if not tower_names.is_empty() else tr("TRAITS_NONE"))

@@ -1,5 +1,5 @@
 {
-	"version": "1.0",
+	"version": "2.0",
 	"enemies": [
 		{
 			"enemy_id": "enemy_homework",
@@ -8,61 +8,12 @@
 			"tier": "basic",
 			"stats": {
 				"health": 30,
-				"speed": 50,
-				"armor": 0,
-				"armor_type": "none",
-				"damage": 5,
-				"attack_speed": 1,
-				"attack_range": 20
+				"speed": 55,
+				"armor": "none",
+				"damage": 5
 			},
-			"kill_reward_gold": 5,
-			"special_abilities": [],
-			"spawn_stages": [
-				"childhood",
-				"youth"
-			],
-			"spawn_waves": [
-				1,
-				2,
-				3,
-				4
-			],
-			"texture_path": "res://images/enemies/marble_0_0.png"
-		},
-		{
-			"enemy_id": "enemy_exam",
-			"enemy_name": "ENEMY_EXAM_NAME",
-			"enemy_type": "academic",
-			"tier": "elite",
-			"stats": {
-				"health": 60,
-				"speed": 35,
-				"armor": 15,
-				"armor_type": "light",
-				"damage": 8,
-				"attack_speed": 0.8,
-				"attack_range": 20
-			},
-			"kill_reward_gold": 12,
-			"spawn_stages": [
-				"childhood",
-				"youth"
-			],
-			"spawn_waves": [
-				3,
-				4,
-				5,
-				6
-			],
-			"texture_path": "res://images/enemies/marble_0_1.png",
-			"special_abilities": [
-				{
-					"ability_id": "dodge",
-					"ability_name": "概率闪避",
-					"dodge_probability": 0.15,
-					"trigger_on": "physical_damage"
-				}
-			]
+			"special_ability": {},
+			"kill_reward": 5
 		},
 		{
 			"enemy_id": "enemy_bill",
@@ -71,65 +22,21 @@
 			"tier": "basic",
 			"stats": {
 				"health": 40,
-				"speed": 70,
-				"armor": 0,
-				"armor_type": "none",
-				"damage": 6,
-				"attack_speed": 1.2,
-				"attack_range": 20
+				"speed": 75,
+				"armor": "none",
+				"damage": 6
 			},
-			"kill_reward_gold": 8,
-			"special_abilities": [],
-			"spawn_stages": [
-				"youth",
-				"middle_age"
-			],
-			"spawn_waves": [
-				1,
-				2,
-				3,
-				4,
-				5,
-				6
-			],
-			"texture_path": "res://images/enemies/marble_0_2.png"
-		},
-		{
-			"enemy_id": "enemy_996",
-			"enemy_name": "ENEMY_996_NAME",
-			"enemy_type": "social",
-			"tier": "elite",
-			"stats": {
-				"health": 70,
-				"speed": 45,
-				"armor": 10,
-				"armor_type": "light",
-				"damage": 10,
-				"attack_speed": 1,
-				"attack_range": 20
-			},
-			"kill_reward_gold": 15,
-			"spawn_stages": [
-				"youth",
-				"middle_age"
-			],
-			"spawn_waves": [
-				4,
-				5,
-				6,
-				7,
-				8
-			],
-			"texture_path": "res://images/enemies/marble_0_3.png",
-			"special_abilities": [
-				{
-					"ability_id": "split",
-					"ability_name": "死亡分裂",
-					"trigger_on": "death",
-					"split_enemy_id": "enemy_bill",
-					"split_count": 2
-				}
-			]
+			"kill_reward": 8,
+			"special_ability": {
+				"ability_id": "speed_burst",
+				"trigger": "health_below",
+				"trigger_value": 0.3,
+				"effect": {
+					"speed_multiplier": 1.4,
+					"duration": 3
+				},
+				"max_triggers": 1
+			}
 		},
 		{
 			"enemy_id": "enemy_chronic_disease",
@@ -137,28 +44,19 @@
 			"enemy_type": "health",
 			"tier": "basic",
 			"stats": {
-				"health": 50,
-				"speed": 30,
-				"armor": 5,
-				"armor_type": "light",
-				"damage": 8,
-				"attack_speed": 0.8,
-				"attack_range": 20
+				"health": 55,
+				"speed": 28,
+				"armor": "light",
+				"damage": 8
 			},
-			"kill_reward_gold": 10,
-			"special_abilities": [],
-			"spawn_stages": [
-				"old_age"
-			],
-			"spawn_waves": [
-				1,
-				2,
-				3,
-				4,
-				5,
-				6
-			],
-			"texture_path": "res://images/enemies/marble_1_0.png"
+			"kill_reward": 10,
+			"special_ability": {
+				"ability_id": "regen",
+				"interval": 2,
+				"effect": {
+					"health_percent": 0.03
+				}
+			}
 		},
 		{
 			"enemy_id": "enemy_loneliness",
@@ -168,132 +66,54 @@
 			"stats": {
 				"health": 35,
 				"speed": 60,
-				"armor": 0,
-				"armor_type": "none",
-				"damage": 6,
-				"attack_speed": 1,
-				"attack_range": 20
+				"armor": "none",
+				"damage": 4
 			},
-			"kill_reward_gold": 8,
-			"special_abilities": [],
-			"spawn_stages": [
-				"old_age"
-			],
-			"spawn_waves": [
-				1,
-				2,
-				3,
-				4,
-				5
-			],
-			"texture_path": "res://images/enemies/marble_1_1.png"
+			"kill_reward": 8,
+			"special_ability": {
+				"ability_id": "phase_shift",
+				"effect": {
+					"duration": 1.5,
+					"invisible": true
+				},
+				"interval": 8
+			}
 		},
 		{
-			"enemy_id": "enemy_recession",
-			"enemy_name": "ENEMY_RECESSION_NAME",
-			"enemy_type": "economic",
-			"tier": "elite",
-			"stats": {
-				"health": 90,
-				"speed": 35,
-				"armor": 15,
-				"armor_type": "light",
-				"damage": 12,
-				"attack_speed": 0.8,
-				"attack_range": 20
-			},
-			"kill_reward_gold": 25,
-			"spawn_stages": [
-				"old_age"
-			],
-			"spawn_waves": [
-				5,
-				6,
-				7,
-				8,
-				9
-			],
-			"texture_path": "res://images/enemies/marble_1_2.png",
-			"special_abilities": [
-				{
-					"ability_id": "split",
-					"ability_name": "死亡分裂",
-					"trigger_on": "death",
-					"split_enemy_id": "enemy_bill",
-					"split_count": 2
-				}
-			]
-		},
-		{
-			"enemy_id": "enemy_memory_loss",
-			"enemy_name": "ENEMY_MEMORY_LOSS_NAME",
-			"enemy_type": "health",
-			"tier": "elite",
-			"stats": {
-				"health": 80,
-				"speed": 25,
-				"armor": 20,
-				"armor_type": "light",
-				"damage": 10,
-				"attack_speed": 0.7,
-				"attack_range": 20
-			},
-			"kill_reward_gold": 20,
-			"spawn_stages": [
-				"old_age"
-			],
-			"spawn_waves": [
-				6,
-				7,
-				8,
-				9
-			],
-			"texture_path": "res://images/enemies/marble_2_0.png",
-			"special_abilities": [
-				{
-					"ability_id": "spawn_loneliness",
-					"ability_name": "召唤孤独",
-					"spawn_enemy_id": "enemy_loneliness",
-					"spawn_count": 2,
-					"cooldown": 6
-				}
-			]
-		},
-		{
-			"enemy_id": "enemy_pressure_school",
-			"enemy_name": "ENEMY_PRESSURE_SCHOOL_NAME",
+			"enemy_id": "enemy_exam",
+			"enemy_name": "ENEMY_EXAM_NAME",
 			"enemy_type": "academic",
 			"tier": "elite",
 			"stats": {
-				"health": 120,
-				"speed": 30,
-				"armor": 20,
-				"armor_type": "light",
-				"damage": 12,
-				"attack_speed": 0.7,
-				"attack_range": 20
+				"health": 65,
+				"speed": 35,
+				"armor": "light",
+				"damage": 8
 			},
-			"kill_reward_gold": 25,
-			"spawn_stages": [
-				"childhood",
-				"youth"
-			],
-			"spawn_waves": [
-				6,
-				7,
-				8,
-				9
-			],
-			"texture_path": "res://images/enemies/marble_2_1.png",
-			"special_abilities": [
-				{
-					"ability_id": "spawn_homework",
-					"ability_name": "召唤作业",
-					"spawn_enemy_id": "enemy_homework",
-					"spawn_count": 1,
-					"cooldown": 5
-				}
-			]
+			"kill_reward": 12,
+			"special_ability": {
+				"ability_id": "dodge",
+				"dodge_probability": 0.15,
+				"dodge_damage_type": "physical"
+			}
+		},
+		{
+			"enemy_id": "enemy_996",
+			"enemy_name": "ENEMY_996_NAME",
+			"enemy_type": "social",
+			"tier": "elite",
+			"stats": {
+				"health": 75,
+				"speed": 45,
+				"armor": "light",
+				"damage": 10
+			},
+			"kill_reward": 15,
+			"special_ability": {
+				"ability_id": "split_on_death",
+				"split_count": 2,
+				"split_into": "enemy_bill"
+			}
 		},
 		{
 			"enemy_id": "enemy_involution",
@@ -303,130 +123,160 @@
 			"stats": {
 				"health": 100,
 				"speed": 40,
-				"armor": 15,
-				"armor_type": "light",
-				"damage": 11,
-				"attack_speed": 0.9,
-				"attack_range": 20
+				"armor": "light",
+				"damage": 11
 			},
-			"kill_reward_gold": 30,
-			"spawn_stages": [
-				"youth",
-				"middle_age"
-			],
-			"spawn_waves": [
-				5,
-				6,
-				7,
-				8,
-				9
-			],
-			"texture_path": "res://images/enemies/marble_2_2.png",
-			"special_abilities": [
-				{
-					"ability_id": "self_buff",
-					"ability_name": "自我强化",
-					"buff_interval": 3,
-					"damage_increase_per_buff": 0.05,
-					"speed_increase_per_buff": 0.03,
-					"max_stacks": 10
-				}
-			]
+			"kill_reward": 30,
+			"special_ability": {
+				"ability_id": "self_buff",
+				"interval": 3,
+				"effect": {
+					"damage_bonus": 0.05,
+					"speed_bonus": 0.03
+				},
+				"max_stacks": 10
+			}
+		},
+		{
+			"enemy_id": "enemy_recession",
+			"enemy_name": "ENEMY_RECESSION_NAME",
+			"enemy_type": "economic",
+			"tier": "elite",
+			"stats": {
+				"health": 90,
+				"speed": 35,
+				"armor": "light",
+				"damage": 12
+			},
+			"kill_reward": 25,
+			"special_ability": {
+				"ability_id": "gold_drain",
+				"interval": 3,
+				"effect": {
+					"gold_steal": 5
+				},
+				"kill_refund_ratio": 0.5
+			}
+		},
+		{
+			"enemy_id": "enemy_memory_loss",
+			"enemy_name": "ENEMY_MEMORY_LOSS_NAME",
+			"enemy_type": "health",
+			"tier": "elite",
+			"stats": {
+				"health": 80,
+				"speed": 25,
+				"armor": "medium",
+				"damage": 10
+			},
+			"kill_reward": 20,
+			"special_ability": {
+				"ability_id": "summon",
+				"interval": 6,
+				"summon_id": "enemy_loneliness",
+				"summon_count": 1
+			}
+		},
+		{
+			"enemy_id": "enemy_pressure_school",
+			"enemy_name": "ENEMY_PRESSURE_SCHOOL_NAME",
+			"enemy_type": "academic",
+			"tier": "elite",
+			"stats": {
+				"health": 120,
+				"speed": 30,
+				"armor": "light",
+				"damage": 12
+			},
+			"kill_reward": 25,
+			"special_ability": {
+				"ability_id": "shield_burst",
+				"effect": {
+					"duration": 4,
+					"shield_percent": 0.15
+				},
+				"interval": 8
+			}
 		},
 		{
 			"enemy_id": "boss_midlife_crisis",
-			"enemy_name": "ENEMY_BOSS_MIDLIFE_CRISIS_NAME",
-			"enemy_type": "BOSS",
-			"tier": "BOSS",
+			"enemy_name": "BOSS_MIDLIFE_CRISIS_NAME",
+			"enemy_type": "social",
+			"tier": "boss",
 			"stats": {
-				"health": 500,
+				"health": 450,
 				"speed": 25,
-				"armor": 35,
-				"armor_type": "heavy",
-				"damage": 20,
-				"attack_speed": 0.6,
-				"attack_range": 25
+				"armor": "heavy",
+				"damage": 18
 			},
-			"kill_reward_gold": 100,
-			"spawn_stages": [
-				"middle_age"
-			],
-			"spawn_waves": [
-				10
-			],
-			"texture_path": "res://images/enemies/marble_3_0.png",
-			"special_abilities": [
-				{
-					"ability_id": "destroy_tower",
-					"ability_name": "随机消灭",
-					"cooldown": 15,
-					"target_count": 1
+			"kill_reward": 100,
+			"special_ability": {
+				"phase_2": {
+					"trigger": "health_below",
+					"trigger_value": 0.5,
+					"effects": {
+						"speed_multiplier": 1.3,
+						"damage_multiplier": 1.5,
+						"armor_change": "medium"
+					}
 				},
-				{
-					"ability_id": "summon_stress",
-					"ability_name": "召唤压力",
-					"spawn_enemies": [
+				"summon_stress": {
+					"interval": 12,
+					"summons": [
 						{
 							"id": "enemy_996",
-							"count": 2
+							"count": 1
 						},
 						{
 							"id": "enemy_bill",
-							"count": 3
+							"count": 2
 						}
-					],
-					"cooldown": 10
+					]
+				},
+				"rage_slam": {
+					"interval": 8,
+					"effect": {
+						"damage": 15,
+						"range": 120,
+						"target": "towers"
+					}
 				}
-			]
+			}
 		},
 		{
 			"enemy_id": "boss_final_judgment",
-			"enemy_name": "ENEMY_BOSS_FINAL_JUDGMENT_NAME",
-			"enemy_type": "BOSS",
-			"tier": "ultimate_boss",
+			"enemy_name": "BOSS_FINAL_JUDGMENT_NAME",
+			"enemy_type": "social",
+			"tier": "ultimate",
 			"stats": {
-				"health": 800,
+				"health": 700,
 				"speed": 20,
-				"armor": 40,
-				"armor_type": "heavy",
-				"damage": 25,
-				"attack_speed": 0.5,
-				"attack_range": 30
+				"armor": "heavy",
+				"damage": 22
 			},
-			"kill_reward_gold": 200,
-			"spawn_stages": [
-				"old_age"
-			],
-			"spawn_waves": [
-				10
-			],
-			"texture_path": "res://images/enemies/marble_3_1.png",
-			"special_abilities": [
-				{
-					"ability_id": "memory_attack",
-					"ability_name": "回忆杀",
-					"spawn_count": 5,
-					"cooldown": 12,
-					"spawn_enemy_pool": [
-						"enemy_chronic_disease",
-						"enemy_loneliness",
-						"enemy_bill",
-						"enemy_involution"
-					]
+			"kill_reward": 200,
+			"special_ability": {
+				"memory_attack": {
+					"interval": 10,
+					"summon_count": 3,
+					"summon_pool": "random"
 				},
-				{
-					"ability_id": "regret_damage",
-					"ability_name": "遗憾攻击",
-					"bonus_damage": 2,
-					"target_condition": "incomplete_events"
+				"regret_storm": {
+					"interval": 15,
+					"effect": {
+						"damage": 10,
+						"target": "all_towers"
+					}
 				},
-				{
-					"ability_id": "achievement_shield",
-					"ability_name": "成就护盾",
-					"damage_reduction_per_achievement": 0.02,
-					"max_reduction": 0.5
+				"judgment": {
+					"trigger": "health_below",
+					"trigger_value": 0.3,
+					"effect": {
+						"destroy_tower_interval": 5,
+						"max_destroys": 3
+					}
 				}
-			]
+			}
 		}
 	]
 }

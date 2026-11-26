@@ -29,3 +29,10 @@ func get_display_with_icon(attr_id: String) -> String:
 	if icon != "":
 		return "%s %s" % [icon, display_name]
 	return display_name
+
+func get_description(attr_id: String) -> String:
+	var desc_key: String = "ATTR_DESC_" + attr_id.to_upper()
+	var desc: String = tr(desc_key)
+	if desc != desc_key:
+		return desc
+	return ""

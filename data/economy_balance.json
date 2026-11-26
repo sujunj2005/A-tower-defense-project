@@ -50,7 +50,7 @@
 	"interest": {
 		"divisor": 10,
 		"formula": "floor(gold / 10) * 5",
-		"max_interest": 50,
+		"max_interest": 80,
 		"multiplier": 5,
 		"timing": "每波结束时"
 	},
@@ -59,10 +59,14 @@
 		"boss_midlife_crisis": 100,
 		"enemy_996": 15,
 		"enemy_bill": 8,
+		"enemy_chronic_disease": 10,
 		"enemy_exam": 12,
 		"enemy_homework": 5,
 		"enemy_involution": 30,
-		"enemy_pressure_school": 25
+		"enemy_loneliness": 8,
+		"enemy_memory_loss": 20,
+		"enemy_pressure_school": 25,
+		"enemy_recession": 25
 	},
 	"meta_currency_projection": {
 		"description": "基于平均B级结局（300智慧/局）的预估解锁进度",
@@ -83,6 +87,12 @@
 		"C": 0,
 		"D": 0,
 		"S": 1
+	},
+	"stage_gold_bonus": {
+		"childhood": 0,
+		"middle_age": 20,
+		"old_age": 40,
+		"youth": 0
 	},
 	"unlock_costs": {
 		"buff_gold_bonus": {

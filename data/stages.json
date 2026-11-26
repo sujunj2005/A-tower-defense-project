@@ -1,234 +1,94 @@
 {
 	"stages": {
 		"childhood": {
-			"age_range": {
-				"end": 14,
-				"start": 6
-			},
-			"attribute_growth": {
-				"charm": 2,
-				"courage": 3,
-				"health": 10,
-				"intelligence": 5
-			},
 			"available_towers": [
-				"tower_chinese_basic",
+				"tower_scholarship_basic",
 				"tower_math_basic",
-				"tower_english_basic",
 				"tower_sports_basic",
-				"tower_artist_basic"
+				"tower_programming_basic",
+				"tower_engineer_basic"
 			],
 			"battle_difficulty": 1,
-			"description": "STAGE_CHILDHOOD_DESC",
-			"enemy_pool": [
-				{
-					"id": "enemy_homework",
-					"weight": 60
-				},
-				{
-					"id": "enemy_exam",
-					"weight": 30
-				},
-				{
-					"id": "enemy_pressure_school",
-					"weight": 10
-				}
-			],
-			"era_id": "china_modern",
-			"event_count": {
-				"max": 4,
-				"min": 3
+			"display_name": "STAGE_CHILDHOOD_NAME",
+			"enemy_pool": {
+				"enemy_exam": 30,
+				"enemy_homework": 55,
+				"enemy_pressure_school": 15
 			},
-			"event_trigger_rate": 0.8,
-			"gold_multiplier": 1,
-			"stage_name": "STAGE_CHILDHOOD_NAME"
+			"event_trigger_rate": 1,
+			"gold_multiplier": 1
 		},
 		"middle_age": {
-			"age_range": {
-				"end": 49,
-				"start": 35
-			},
-			"attribute_growth": {
-				"charm": 1,
-				"courage": 2,
-				"health": -5,
-				"intelligence": 3,
-				"work_ability": 5
-			},
 			"available_towers": [
-				"tower_chinese_advanced",
-				"tower_math_advanced",
-				"tower_math_master",
 				"tower_science_advanced",
-				"tower_programming_advanced",
 				"tower_communication_advanced",
+				"tower_finance_advanced",
 				"tower_time_advanced",
-				"tower_network_basic",
-				"tower_finance_basic",
 				"tower_leadership_advanced",
-				"tower_business_advanced",
-				"tower_business_basic"
+				"tower_philosophy_master",
+				"tower_fate_master"
 			],
 			"battle_difficulty": 2,
-			"description": "STAGE_MIDDLE_AGE_DESC",
-			"enemy_pool": [
-				{
-					"id": "enemy_bill",
-					"weight": 30
-				},
-				{
-					"id": "enemy_996",
-					"weight": 25
-				},
-				{
-					"id": "enemy_involution",
-					"weight": 25
-				},
-				{
-					"id": "boss_midlife_crisis",
-					"weight": 5
-				}
-			],
-			"era_id": "china_modern",
-			"event_count": {
-				"max": 3,
-				"min": 2
+			"display_name": "STAGE_MIDDLE_AGE_NAME",
+			"enemy_pool": {
+				"boss_midlife_crisis": 5,
+				"enemy_996": 25,
+				"enemy_bill": 30,
+				"enemy_involution": 25
 			},
-			"event_trigger_rate": 0.65,
-			"gold_multiplier": 1.5,
-			"stage_name": "STAGE_MIDDLE_AGE_NAME"
+			"event_trigger_rate": 1,
+			"gold_multiplier": 1.5
 		},
 		"old_age": {
-			"age_range": {
-				"end": 80,
-				"start": 50
-			},
-			"attribute_growth": {
-				"charm": -1,
-				"courage": -2,
-				"health": -10,
-				"intelligence": -3,
-				"work_ability": -5
-			},
 			"available_towers": [
-				"tower_chinese_advanced",
-				"tower_math_advanced",
 				"tower_science_advanced",
 				"tower_communication_advanced",
-				"tower_finance_basic",
-				"tower_business_advanced",
-				"tower_history_advanced",
-				"tower_history_master"
+				"tower_finance_advanced",
+				"tower_time_advanced",
+				"tower_leadership_advanced",
+				"tower_philosophy_master",
+				"tower_fate_master"
 			],
 			"battle_difficulty": 3,
-			"description": "STAGE_OLD_AGE_DESC",
-			"enemy_pool": [
-				{
-					"id": "enemy_chronic_disease",
-					"weight": 35
-				},
-				{
-					"id": "enemy_loneliness",
-					"weight": 30
-				},
-				{
-					"id": "enemy_bill",
-					"weight": 15
-				},
-				{
-					"id": "enemy_recession",
-					"weight": 10
-				},
-				{
-					"id": "enemy_memory_loss",
-					"weight": 5
-				},
-				{
-					"id": "boss_final_judgment",
-					"weight": 5
-				}
-			],
-			"era_id": "china_modern",
-			"event_count": {
-				"max": 2,
-				"min": 1
+			"display_name": "STAGE_OLD_AGE_NAME",
+			"enemy_pool": {
+				"boss_final_judgment": 5,
+				"enemy_bill": 15,
+				"enemy_chronic_disease": 30,
+				"enemy_loneliness": 25,
+				"enemy_memory_loss": 10,
+				"enemy_recession": 10
 			},
-			"event_trigger_rate": 0.6,
-			"gold_multiplier": 1,
-			"penalty_rate_per_year": 0.01,
-			"stage_name": "STAGE_OLD_AGE_NAME"
+			"event_trigger_rate": 1,
+			"gold_multiplier": 1.5
 		},
 		"youth": {
-			"age_range": {
-				"end": 34,
-				"start": 15
-			},
-			"attribute_growth": {
-				"charm": 3,
-				"courage": 5,
-				"health": 5,
-				"intelligence": 8,
-				"work_ability": 5
-			},
 			"available_towers": [
-				"tower_chinese_basic",
-				"tower_chinese_advanced",
+				"tower_scholarship_basic",
 				"tower_math_basic",
-				"tower_math_advanced",
-				"tower_math_master",
-				"tower_science_basic",
-				"tower_science_advanced",
-				"tower_english_basic",
+				"tower_sports_basic",
 				"tower_programming_basic",
-				"tower_programming_advanced",
-				"tower_communication_basic",
-				"tower_communication_advanced",
-				"tower_time_basic",
-				"tower_network_basic",
-				"tower_finance_basic",
-				"tower_profession_basic",
-				"tower_business_basic",
 				"tower_engineer_basic",
-				"tower_history_advanced",
-				"tower_history_master"
+				"tower_science_advanced",
+				"tower_communication_advanced",
+				"tower_finance_advanced",
+				"tower_time_advanced",
+				"tower_leadership_advanced",
+				"tower_philosophy_master"
 			],
 			"battle_difficulty": 1.5,
-			"description": "STAGE_YOUTH_DESC",
-			"enemy_pool": [
-				{
-					"id": "enemy_homework",
-					"weight": 30
-				},
-				{
-					"id": "enemy_exam",
-					"weight": 25
-				},
-				{
-					"id": "enemy_bill",
-					"weight": 20
-				},
-				{
-					"id": "enemy_996",
-					"weight": 15
-				},
-				{
-					"id": "enemy_pressure_school",
-					"weight": 5
-				},
-				{
-					"id": "enemy_involution",
-					"weight": 5
-				}
-			],
-			"era_id": "china_modern",
-			"event_count": {
-				"max": 5,
-				"min": 4
+			"display_name": "STAGE_YOUTH_NAME",
+			"enemy_pool": {
+				"enemy_996": 15,
+				"enemy_bill": 20,
+				"enemy_exam": 20,
+				"enemy_homework": 25,
+				"enemy_involution": 10,
+				"enemy_pressure_school": 10
 			},
-			"event_trigger_rate": 0.7,
-			"gold_multiplier": 1.2,
-			"stage_name": "STAGE_YOUTH_NAME"
+			"event_trigger_rate": 1,
+			"gold_multiplier": 1.2
 		}
 	},
-	"version": "1.2"
+	"version": "2.0"
 }

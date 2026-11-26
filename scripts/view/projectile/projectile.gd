@@ -204,9 +204,7 @@ func update_target_locked_movement(delta: float):
 	# 🎯 动态计算方向向量（每帧更新！）
 	var direction = (actual_target.global_position - global_position).normalized()
 
-	# 移动弹道
-	var previous_position = global_position
-	global_position += direction * speed * delta
+	global_position = global_position.move_toward(actual_target.global_position, speed * delta)
 
 	# 更新朝向（可选：让弹道面向移动方向）
 	rotation = direction.angle()
@@ -221,42 +219,16 @@ func update_position_fixed_movement(delta: float):
 	var direction = (target_position - start_position).normalized()
 
 	# 移动弹道
-	var previous_position = global_position
-	global_position += direction * speed * delta
+	var previous_position: Vector2 = global_position
+	global_position = global_position.move_toward(target_position, speed * delta)
 
 	# 更新朝向
 	rotation = direction.angle()
 
-	# 🆕 检测是否命中路径上的敌人（使用 Area2D 的碰撞检测）
-	check_enemy_collision()
+	check_enemy_collision(previous_position, global_position)
 
-	# 检测是否到达目标点
-	if global_position.distance_to(target_position) < HIT_THRESHOLD:
+	if is_active and global_position.distance_to(target_position) < HIT_THRESHOLD:
 		on_reach_target()
-		return
-
-	# 🆕 PIERCE 检测（射线检测路径上的敌人）
-	if pierce_enabled and current_pierce_count < pierce_count:
-		check_pierce_collision(previous_position, global_position)
-
-## 检测敌人碰撞（POSITION_FIXED 模式使用）
-func check_enemy_collision():
-	# 获取重叠的敌人
-	var enemies = get_overlapping_bodies()
-	for enemy in enemies:
-		if enemy.is_in_group("enemies"):
-			on_hit_target(enemy)
-			return
-	
-	# 也检查 Area2D 类型的敌人
-	var areas = get_overlapping_areas()
-	for area in areas:
-		if area.is_in_group("enemies"):
-			# 从 Area2D 获取敌人节点（通常是父节点）
-			var enemy = area if area is Node2D else area.get_parent()
-			if enemy and enemy.is_in_group("enemies"):
-				on_hit_target(enemy)
-				return
 
 ## 信号处理：Area2D 进入
 func _on_area_entered(area: Area2D):
@@ -276,9 +248,14 @@ func get_actual_target() -> Node2D:
 		return null
 	return target_ref.get_ref() if target_ref.get_ref() else null
 
-## 命中目标处理（TARGET_LOCKED使用）
+## 命中单个目标，或将固定穿透弹道交给穿透处理。
 func on_hit_target(target: Node2D):
-	if has_hit_target or not is_instance_valid(target):
+	if not is_active or not is_instance_valid(target):
+		return
+	if pierce_enabled and projectile_type == ProjectileType.POSITION_FIXED:
+		on_pierce_hit(target, target.global_position)
+		return
+	if has_hit_target:
 		return
 
 	has_hit_target = true
@@ -304,33 +281,32 @@ func on_reach_target():
 	# 销毁弹道
 	destroy()
 
-## PIERCE穿透碰撞检测
-func check_pierce_collision(from_pos: Vector2, to_pos: Vector2):
-	if not pierce_enabled or current_pierce_count >= pierce_count:
-		return
-
-	# 使用物理空间进行射线检测
-	var space_state = get_world_2d().direct_space_state
-	if not space_state:
-		return
-
-	# 设置射线查询参数
-	var query = PhysicsRayQueryParameters2D.create(from_pos, to_pos)
-	query.collision_mask = 2  # 假设敌人在第2层（根据项目实际情况调整）
-	query.exclude = [self]  # 排除自身
-
-	var result = space_state.intersect_ray(query)
-	if result:
-		var hit_enemy = result.collider as Node2D
-		if hit_enemy and is_instance_valid(hit_enemy):
-			# 检查是否已命中过该敌人
-			if not hit_enemy in hit_enemies:
-				# 命中新敌人
-				on_pierce_hit(hit_enemy, result.position)
+## 固定弹道按飞行顺序处理命中，普通弹道在首个目标处销毁。
+func check_enemy_collision(from_pos: Vector2, to_pos: Vector2):
+	# 敌人是 Node2D，用当前帧扫过的线段检查其位置。
+	var radius: float = bean.collision_radius if bean else HIT_THRESHOLD
+	var hits: Array[Dictionary] = []
+	for enemy: Node2D in get_tree().get_nodes_in_group("enemies"):
+		if not is_instance_valid(enemy) or enemy.is_queued_for_deletion() or enemy in hit_enemies:
+			continue
+		var point: Vector2 = Geometry2D.get_closest_point_to_segment(enemy.global_position, from_pos, to_pos)
+		if point.distance_squared_to(enemy.global_position) <= radius * radius:
+			hits.append({"enemy": enemy, "point": point, "distance": from_pos.distance_squared_to(point)})
+	hits.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.distance < b.distance)
+	for hit: Dictionary in hits:
+		if not is_active:
+			break
+		if pierce_enabled:
+			on_pierce_hit(hit.enemy, hit.point)
+		else:
+			on_hit_target(hit.enemy)
 
 ## 处理穿透命中
 func on_pierce_hit(enemy: Node2D, hit_position: Vector2):
+	if not is_instance_valid(enemy) or enemy in hit_enemies or current_pierce_count >= pierce_count:
+		return
 	# 记录已命中的敌人
+	has_hit_target = true
 	hit_enemies.append(enemy)
 	current_pierce_count += 1
 
@@ -345,6 +321,8 @@ func on_pierce_hit(enemy: Node2D, hit_position: Vector2):
 
 	# 播放穿透特效（可在 hit_position 处生成粒子效果）
 	play_pierce_effect(hit_position)
+	if current_pierce_count >= pierce_count:
+		destroy()
 
 ## ==================== 伤害计算 ====================
 
@@ -379,17 +357,21 @@ func calculate_pierce_damage(base_damage: float, current_hit_index: int) -> floa
 ## ==================== 特效处理 ====================
 
 ## 触发命中特效
-func trigger_effects(_primary_target: Node2D):
+func trigger_effects(primary_target: Node2D):
 	match effect_type:
 		EffectType.SPLASH:
-			apply_splash_effect_at(_primary_target.global_position)
+			var effects: Node = get_node_or_null("/root/EffectSystem")
+			if effects and is_instance_valid(source_tower) and source_tower.config:
+				effects.apply_effect(effect_type, source_tower.config.effect_params, source_tower, primary_target)
+			else:
+				apply_splash_effect_at(primary_target.global_position, primary_target)
 		EffectType.PIERCE:
-			pass  # PIERCE已在check_pierce_collision中处理
+			pass  # 穿透伤害在 on_pierce_hit 中计算。
 		_:
 			pass  # 其他特效由TowerAttackComponent处理
 
 ## 在指定位置应用 AOE 爆炸效果
-func apply_splash_effect_at(center_pos: Vector2):
+func apply_splash_effect_at(center_pos: Vector2, primary_target: Node2D = null):
 	var splash_damage = damage * effect_damage_ratio
 	var enemies_hit = 0
 	
@@ -398,7 +380,7 @@ func apply_splash_effect_at(center_pos: Vector2):
 
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in all_enemies:
-		if not is_instance_valid(enemy):
+		if not is_instance_valid(enemy) or enemy == primary_target:
 			continue
 		
 		var distance = center_pos.distance_to(enemy.global_position)

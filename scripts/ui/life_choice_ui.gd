@@ -24,15 +24,8 @@ func _ready() -> void:
 	root_margin.add_theme_constant_override("margin_top", 16)
 	root_margin.add_theme_constant_override("margin_bottom", 16)
 	add_child(root_margin)
-	_setup_background(root_margin)
 	_setup_content(root_margin)
 	_connect_signals()
-
-func _setup_background(parent: Control) -> void:
-	var bg: ColorRect = ColorRect.new()
-	bg.color = Color(0.06, 0.06, 0.1, 1.0)
-	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _setup_content(parent: Control) -> void:
 	var outer: VBoxContainer = VBoxContainer.new()

@@ -29,6 +29,12 @@ func _load_trait_configs() -> void:
 ## 授予词条
 func grant_trait(trait_id: String) -> void:
 	if not trait_id in session.traits:
+		var config: Dictionary = trait_configs.get(trait_id, {})
+		if config.has("requires_trait"):
+			var req: String = config.get("requires_trait", "")
+			if req != "" and not req in session.traits:
+				Global.debug_log("词条前置条件不满足：%s 需要 %s" % [trait_id, req])
+				return
 		session.traits.append(trait_id)
 		_apply_trait_effect(trait_id)
 		Global.debug_log("获得词条：%s" % trait_id)
@@ -61,6 +67,10 @@ func _apply_single_effect(effect: Dictionary) -> void:
 			Global.debug_log("词条效果：每波金币 %+d（被动，由波次系统自动发放）" % effect.get("value", 0))
 		"damage_reduction":
 			Global.debug_log("词条效果：伤害减免 %+.0f%%（被动，由战斗系统自动应用）" % [effect.get("value", 0.0) * 100.0])
+		"tower_sell_ratio_bonus":
+			Global.debug_log("词条效果：防御塔出售价格 %+.0f%%（被动，由出售系统自动应用）" % [effect.get("value", 0.0) * 100.0])
+		"tower_build_discount":
+			Global.debug_log("词条效果：防御塔建造费用 %-.0f%%（被动，由建造系统自动应用）" % [effect.get("value", 0.0) * 100.0])
 		"event_trigger_bonus":
 			Global.debug_log("词条效果：事件触发率 %+.0f%%（被动，由事件系统自动应用）" % [effect.get("value", 0.0) * 100.0])
 		_:
@@ -179,6 +189,22 @@ func get_event_trigger_bonus() -> float:
 			if effect.get("type", "") == "event_trigger_bonus":
 				total_bonus += effect.get("value", 0.0)
 	return total_bonus
+
+func get_tower_sell_ratio_bonus() -> float:
+	var total_bonus: float = 0.0
+	for trait_id: String in session.traits:
+		for effect: Dictionary in _get_all_effects_for_trait(trait_id):
+			if effect.get("type", "") == "tower_sell_ratio_bonus":
+				total_bonus += effect.get("value", 0.0)
+	return total_bonus
+
+func get_tower_build_discount() -> float:
+	var total_discount: float = 0.0
+	for trait_id: String in session.traits:
+		for effect: Dictionary in _get_all_effects_for_trait(trait_id):
+			if effect.get("type", "") == "tower_build_discount":
+				total_discount += effect.get("value", 0.0)
+	return minf(total_discount, 0.5)
 
 ## 移除词条
 func remove_trait(trait_id: String) -> void:

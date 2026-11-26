@@ -155,7 +155,11 @@ func show_for_tower(tower: Tower):
 func _calculate_sell_price(tower: Tower) -> int:
 	var base_cost: int = tower.config.cost
 	var level_bonus: float = 1.0 + float(tower.current_level - 1) * 0.1
-	return int(float(base_cost) * tower.config.sell_ratio * level_bonus)
+	var sell_ratio: float = tower.config.sell_ratio
+	var ts: Node = get_node_or_null("/root/TraitSystem")
+	if ts and ts.has_method("get_tower_sell_ratio_bonus"):
+		sell_ratio *= (1.0 + ts.get_tower_sell_ratio_bonus())
+	return int(float(base_cost) * sell_ratio * level_bonus)
 
 func hide_ui():
 	visible = false

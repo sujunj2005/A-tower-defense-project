@@ -7,11 +7,13 @@ var _month_option: OptionButton
 var _day_option: OptionButton
 var _season_label: Label
 var _zodiac_label: Label
+var _moon_zodiac_label: Label
 var _selected_year: int = 1990
 var _selected_month: int = 1
 var _selected_day: int = 1
 
 const _MONTH_DAYS: Array[int] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
 const _ZODIAC_DATES: Array[Dictionary] = [
 	{"name": "CAPRICORN", "month": 1, "day": 20},
 	{"name": "AQUARIUS", "month": 2, "day": 19},
@@ -26,6 +28,11 @@ const _ZODIAC_DATES: Array[Dictionary] = [
 	{"name": "SCORPIO", "month": 11, "day": 22},
 	{"name": "SAGITTARIUS", "month": 12, "day": 21},
 	{"name": "CAPRICORN", "month": 12, "day": 32},
+]
+
+const _MOON_SIGNS: Array[String] = [
+	"ARIES", "TAURUS", "GEMINI", "CANCER", "LEO", "VIRGO",
+	"LIBRA", "SCORPIO", "SAGITTARIUS", "CAPRICORN", "AQUARIUS", "PISCES"
 ]
 
 func _ready() -> void:
@@ -71,8 +78,15 @@ func _ready() -> void:
 	_zodiac_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.3, 1.0))
 	_zodiac_label.text = ""
 	add_child(_zodiac_label)
+	_moon_zodiac_label = Label.new()
+	_moon_zodiac_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_moon_zodiac_label.add_theme_font_size_override("font_size", 14)
+	_moon_zodiac_label.add_theme_color_override("font_color", Color(0.6, 0.8, 1.0, 1.0))
+	_moon_zodiac_label.text = ""
+	add_child(_moon_zodiac_label)
 	_update_season()
 	_update_zodiac()
+	_update_moon_zodiac()
 
 func get_birthday() -> String:
 	return "%d-%02d-%02d" % [_selected_year, _selected_month, _selected_day]
@@ -106,6 +120,7 @@ func _on_year_changed(value: float) -> void:
 	_selected_year = int(value)
 	_rebuild_day_options()
 	_update_zodiac()
+	_update_moon_zodiac()
 	birthday_selected.emit(_selected_year, _selected_month, _selected_day)
 
 func _on_month_selected(index: int) -> void:
@@ -113,11 +128,13 @@ func _on_month_selected(index: int) -> void:
 	_rebuild_day_options()
 	_update_season()
 	_update_zodiac()
+	_update_moon_zodiac()
 	birthday_selected.emit(_selected_year, _selected_month, _selected_day)
 
 func _on_day_selected(index: int) -> void:
 	_selected_day = _day_option.get_item_id(index)
 	_update_zodiac()
+	_update_moon_zodiac()
 	birthday_selected.emit(_selected_year, _selected_month, _selected_day)
 
 func _update_season() -> void:
@@ -138,3 +155,27 @@ func _update_zodiac() -> void:
 			_zodiac_label.text = tr("BIRTHDAY_ZODIAC_PREFIX") + tr("ZODIAC_" + z.name)
 			return
 	_zodiac_label.text = tr("BIRTHDAY_ZODIAC_PREFIX") + tr("ZODIAC_CAPRICORN")
+
+func _days_since_ref() -> int:
+	var days: int = 0
+	for y: int in range(1990, _selected_year):
+		days += 366 if _is_leap_year(y) else 365
+	for m: int in range(1, _selected_month):
+		if m == 2 and _is_leap_year(_selected_year):
+			days += 29
+		else:
+			days += _MONTH_DAYS[m - 1]
+	days += _selected_day - 1
+	return days
+
+func _update_moon_zodiac() -> void:
+	var days_since: int = _days_since_ref()
+	var ref_moon_long: float = 200.0
+	var moon_long: float = ref_moon_long + (days_since * 360.0 / 27.321661)
+	moon_long = fmod(moon_long, 360.0)
+	if moon_long < 0:
+		moon_long += 360.0
+	var sign_idx: int = int(moon_long / 30.0)
+	if sign_idx >= 12:
+		sign_idx = 11
+	_moon_zodiac_label.text = tr("BIRTHDAY_MOON_ZODIAC_PREFIX") + tr("ZODIAC_" + _MOON_SIGNS[sign_idx])

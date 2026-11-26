@@ -8,15 +8,35 @@ signal event_completed(event_id: String, selected_option: String)
 signal battle_triggered(battle_trigger: Dictionary)
 
 var session: GameSessionData
+var _modifiers: Dictionary = {}
 
 func _ready() -> void:
 	session = Global.get_game_session()
 	Global.session_reset.connect(_on_session_reset)
+	_load_modifiers()
 
 func _on_session_reset() -> void:
 	session = Global.get_game_session()
 	if session.npcs.is_empty():
 		_initialize_npcs()
+	_load_modifiers()
+
+func _load_modifiers() -> void:
+	var cm: Node = _get_config_manager()
+	if not cm or not cm.has_method("load_json"):
+		push_error("[EventSystem] ConfigManager 不可用，无法加载事件修饰器")
+		return
+	var raw_events = cm.load_json("res://data/events.json")
+	if not raw_events is Dictionary or not raw_events.has("_system_modifiers"):
+		push_error("[EventSystem] events.json 中缺少 _system_modifiers 配置节，请重启 Godot 编辑器清除缓存")
+		return
+	_modifiers.clear()
+	for k: String in raw_events._system_modifiers:
+		_modifiers[k] = float(raw_events._system_modifiers[k])
+	Global.debug_log("[EventSystem] 修饰器加载完成: %s" % str(_modifiers))
+
+func get_system_modifiers() -> Dictionary:
+	return _modifiers
 
 func _get_config_manager() -> Node:
 	return get_node_or_null("/root/ConfigManager")
@@ -101,8 +121,6 @@ func get_events_for_current_age() -> EventData:
 					reason = "阶段不匹配(event=%s, session=%s)" % [event.stage, session.current_stage]
 				elif event.event_id in session.completed_events:
 					reason = "已完成"
-				elif event.get_trigger_chance() < 1.0:
-					reason = "概率未通过(%.0f%%)" % (event.get_trigger_chance() * 100.0)
 				else:
 					reason = "前置/互斥/条件不满足"
 				skipped_details.append("%s(%s): %s" % [event.event_id, event.event_name, reason])
@@ -111,7 +129,7 @@ func get_events_for_current_age() -> EventData:
 		Global.debug_log("[事件系统]   跳过: %s" % detail)
 	if available_events.is_empty():
 		return null
-	var weights: Array[float] = []
+	var weights: Array[int] = []
 	for ev: EventData in available_events:
 		weights.append(_calculate_dynamic_weight(ev))
 	return _weighted_random_select(available_events, weights)
@@ -166,8 +184,9 @@ func _compare_op(current: int, op: String, value: int) -> bool:
 		"!=": return current != value
 		_: return current >= value
 
-func _calculate_dynamic_weight(event: EventData) -> float:
-	var weight: float = event.event_weight
+func _calculate_dynamic_weight(event: EventData) -> int:
+	var base: int = event.weight
+	var modifier: float = 1.0
 	if session.current_profession != "":
 		var cm: Node = _get_config_manager()
 		if cm and cm.has_method("load_json"):
@@ -177,7 +196,7 @@ func _calculate_dynamic_weight(event: EventData) -> float:
 					if prof.get("profession_id", "") == session.current_profession:
 						var event_pool: Array = prof.get("event_pool", [])
 						if event.event_id in event_pool:
-							weight *= 1.5
+							modifier *= _modifiers.get("profession_match", 1.5)
 						break
 	var family_member: String = event.get_family_member()
 	var required_family: Array[String] = event.get_required_family()
@@ -186,41 +205,95 @@ func _calculate_dynamic_weight(event: EventData) -> float:
 			continue
 		if family_member == npc.npc_id or npc.npc_id in required_family:
 			if npc.affection > 70:
-				weight *= 1.3
+				modifier *= _modifiers.get("npc_affection_high", 1.3)
 			elif npc.affection < 30:
-				weight *= 0.5
+				modifier *= _modifiers.get("npc_affection_low", 0.5)
 	if not event.conditions.is_empty():
 		for cond: Dictionary in event.conditions:
 			if cond.get("type", "") == "trait" and str(cond.get("key", "")) in session.traits:
-				weight *= 1.2
+				modifier *= _modifiers.get("trait_match", 1.2)
 	if session.gold > 10000:
 		for cond: Dictionary in event.conditions:
 			if cond.get("type", "") == "attribute" and str(cond.get("key", "")) == "gold":
-				weight *= 1.1
+				modifier *= 1.1
 	if session.attributes.get("health", 0) > 200:
 		for cond: Dictionary in event.conditions:
 			if cond.get("type", "") == "attribute" and str(cond.get("key", "")) == "health":
-				weight *= 1.1
+				modifier *= 1.1
 	if event.event_id in session.locked_events:
-		weight = 0.0
+		return 0
 	if event.event_id in session.unlocked_events:
-		weight *= 1.5
-	weight *= _karma_weight_multiplier(event.karma_type)
-	weight *= _personality_weight_modifier(event)
-	weight *= _npc_personality_modifier(event)
-	weight *= _tension_weight_modifier(event)
-	weight *= _trait_boost_modifier(event)
-	weight *= _freshness_modifier(event)
-	weight *= _rarity_modifier(event.rarity)
-	return weight
+		modifier *= _modifiers.get("unlock_bonus", 1.5)
+	modifier *= _karma_weight_multiplier(event.karma_type)
+	modifier *= _personality_weight_modifier(event)
+	modifier *= _npc_personality_modifier(event)
+	modifier *= _tension_weight_modifier(event)
+	modifier *= _trait_boost_modifier(event)
+	modifier *= _freshness_modifier(event)
+	return maxi(ceili(float(base) * modifier), 0)
+
+func _get_weight_chain(event: EventData) -> String:
+	var parts: Array[String] = [str(event.weight)]
+	var active: float = 1.0
+	if session.current_profession != "":
+		var cm: Node = _get_config_manager()
+		if cm and cm.has_method("load_json"):
+			var prof_data = cm.load_json("res://data/professions.json")
+			if prof_data is Dictionary and prof_data.has("professions"):
+				for prof: Dictionary in prof_data.professions:
+					if prof.get("profession_id", "") == session.current_profession:
+						if event.event_id in prof.get("event_pool", []):
+							var v: float = _modifiers.get("profession_match", 1.5)
+							parts.append(str(v))
+							active *= v
+						break
+	var family_member: String = event.get_family_member()
+	var required_family: Array[String] = event.get_required_family()
+	for npc: NPCData in session.npcs:
+		if not npc.is_active:
+			continue
+		if family_member == npc.npc_id or npc.npc_id in required_family:
+			if npc.affection > 70:
+				var v: float = _modifiers.get("npc_affection_high", 1.3)
+				parts.append(str(v))
+			elif npc.affection < 30:
+				var v: float = _modifiers.get("npc_affection_low", 0.5)
+				parts.append(str(v))
+	if not event.conditions.is_empty():
+		for cond: Dictionary in event.conditions:
+			if cond.get("type", "") == "trait" and str(cond.get("key", "")) in session.traits:
+				var v: float = _modifiers.get("trait_match", 1.2)
+				parts.append(str(v))
+	if event.event_id in session.unlocked_events:
+		var v: float = _modifiers.get("unlock_bonus", 1.5)
+		parts.append(str(v))
+	var km: float = _karma_weight_multiplier(event.karma_type)
+	if km != 1.0:
+		parts.append(str(km))
+	var pm: float = _personality_weight_modifier(event)
+	if pm != 1.0:
+		parts.append(str(pm))
+	var nm: float = _npc_personality_modifier(event)
+	if nm != 1.0:
+		parts.append(str(nm))
+	var tm: float = _tension_weight_modifier(event)
+	if tm != 1.0:
+		parts.append(str(tm))
+	var tbm: float = _trait_boost_modifier(event)
+	if tbm != 1.0:
+		parts.append(str(tbm))
+	var fm: float = _freshness_modifier(event)
+	if fm != 1.0:
+		parts.append(str(fm))
+	return "×".join(parts)
 
 func _karma_weight_multiplier(karma_type: String) -> float:
 	var k: int = session.karma
 	match karma_type:
 		"positive":
-			return 1.0 + (k / 100.0) * 0.3
+			return 1.0 + (k / 100.0) * _modifiers.get("karma_positive", 0.3)
 		"negative":
-			return 1.0 - (k / 100.0) * 0.5
+			return 1.0 - (k / 100.0) * _modifiers.get("karma_negative", 0.5)
 		_:
 			return 1.0
 
@@ -274,25 +347,12 @@ func _trait_boost_modifier(event: EventData) -> float:
 
 func _freshness_modifier(event: EventData) -> float:
 	if event.event_id in session.recent_events:
-		return 0.3
+		return _modifiers.get("freshness_penalty", 0.3)
 	return 1.0
-
-func _rarity_modifier(rarity: String) -> float:
-	match rarity:
-		"common":
-			return 1.0
-		"uncommon":
-			return 0.5
-		"rare":
-			return 0.1
-		"legendary":
-			return 0.03
-		_:
-			return 1.0
 
 func get_weight_debug_info(event: EventData) -> Dictionary:
 	var info: Dictionary = {}
-	var base: float = event.event_weight
+	var base: int = event.weight
 	info["基础权重"] = base
 
 	var prof_mult: float = 1.0
@@ -338,32 +398,109 @@ func get_weight_debug_info(event: EventData) -> Dictionary:
 	if fresh_mult != 1.0:
 		info["  (近期事件)"] = 0
 
-	var rarity_mult: float = _rarity_modifier(event.rarity)
-	info["⑦ 稀有度"] = rarity_mult
-	info["  (rarity=%s)" % event.rarity] = 0
-
-	var final: float = base
+	var final: float = float(base)
 	for k: String in info:
-		if k.begins_with("①") or k.begins_with("②") or k.begins_with("③") or k.begins_with("④") or k.begins_with("⑤") or k.begins_with("⑥") or k.begins_with("⑦"):
+		if k.begins_with("①") or k.begins_with("②") or k.begins_with("③") or k.begins_with("④") or k.begins_with("⑤") or k.begins_with("⑥"):
 			final *= info[k]
 	if prof_mult != 1.0:
 		final *= prof_mult
 	info["最终权重"] = final
 	return info
 
-func _weighted_random_select(events: Array[EventData], weights: Array[float]) -> EventData:
-	var total: float = 0.0
-	for w: float in weights:
-		total += maxf(w, 0.0)
-	if total <= 0.0:
-		return events[randi() % events.size()]
-	var roll: float = randf() * total
-	var cumulative: float = 0.0
+func _weighted_random_select(events: Array[EventData], weights: Array[int]) -> EventData:
+	var total: int = 0
+	for w: int in weights:
+		total += w
+	if total <= 0:
+		return events[0]
+
+	var common_w: int = 0
+	for w: int in weights:
+		common_w = maxi(common_w, w)
+
+	var compressed_size: int = ceili(float(total) / float(common_w))
+
+	var tier1: Array[EventData] = []
+	var secondary_items: Array[Dictionary] = []
+
 	for i: int in range(events.size()):
-		cumulative += maxf(weights[i], 0.0)
-		if roll <= cumulative:
-			return events[i]
-	return events[-1]
+		if weights[i] >= common_w:
+			var slots: int = maxi(weights[i] / common_w, 1)
+			for s: int in range(slots):
+				tier1.append(events[i])
+		elif weights[i] > 0:
+			secondary_items.append({"event": events[i], "weight": weights[i]})
+
+	var mixed_buckets: Array[Dictionary] = []
+	var current_bucket: Array[Dictionary] = []
+	var bucket_weight: int = 0
+
+	for item: Dictionary in secondary_items:
+		var w: int = item.weight
+		if bucket_weight + w > common_w and not current_bucket.is_empty():
+			mixed_buckets.append({"items": current_bucket, "total": bucket_weight})
+			current_bucket = []
+			bucket_weight = 0
+		current_bucket.append(item)
+		bucket_weight += w
+
+	if not current_bucket.is_empty():
+		mixed_buckets.append({"items": current_bucket, "total": bucket_weight})
+
+	for bucket: Dictionary in mixed_buckets:
+		tier1.append(null)
+
+	var roll: int = randi() % tier1.size()
+	var selected: EventData = tier1[roll]
+	if selected != null:
+		return selected
+
+	var hit_idx: int = roll - (tier1.size() - mixed_buckets.size())
+	if hit_idx < 0 or hit_idx >= mixed_buckets.size():
+		return events[0]
+
+	var bucket: Dictionary = mixed_buckets[hit_idx]
+	var tier2: Array[EventData] = []
+	for item: Dictionary in bucket.items:
+		for w: int in range(item.weight):
+			tier2.append(item.event)
+	if tier2.is_empty():
+		return events[0]
+	return tier2[randi() % tier2.size()]
+
+func get_event_overview() -> Dictionary:
+	var result: Dictionary = {"total": 0, "triggerable": 0, "blocked": 0, "triggerable_list": [], "blocked_list": []}
+	var cm: Node = _get_config_manager()
+	if not cm or not cm.has_method("load_json"):
+		return result
+	var events_data = cm.load_json("res://data/events.json")
+	if not events_data is Dictionary or not events_data.has("events"):
+		return result
+	var age_sys: Node = _get_age_system()
+	if not age_sys:
+		return result
+	for event_raw: Dictionary in events_data.events:
+		var event := EventData.from_dict(event_raw)
+		if not age_sys.current_age in event.ages:
+			continue
+		result.total += 1
+		var can: bool = _can_trigger(event, age_sys)
+		if can:
+			result.triggerable += 1
+			var dynamic_w: int = _calculate_dynamic_weight(event)
+			var chain: String = _get_weight_chain(event)
+			result.triggerable_list.append({"id": event.event_id, "name": event.get_display_name(), "desc": event.get_display_desc(), "weight": dynamic_w, "base_weight": event.weight, "chain": chain, "rarity": event.rarity, "stage": event.stage})
+		else:
+			result.blocked += 1
+			var reason: String = ""
+			if event.stage != session.current_stage:
+				reason = "阶段不匹配"
+			elif event.event_id in session.completed_events:
+				reason = "已完成"
+			else:
+				reason = "前置/互斥/条件不满足"
+			result.blocked_list.append({"id": event.event_id, "name": event.get_display_name(), "reason": reason, "stage": event.stage})
+	return result
 
 func _can_trigger(event: EventData, age_sys: Node) -> bool:
 	if not age_sys.current_age in event.ages:
@@ -371,23 +508,8 @@ func _can_trigger(event: EventData, age_sys: Node) -> bool:
 	if event.stage != session.current_stage:
 		Global.debug_log("[事件系统] %s 阶段不匹配: event.stage=%s, session=%s" % [event.event_id, event.stage, session.current_stage])
 		return false
-	if event.event_id in session.completed_events:
+	if not event.matches_event_chain(session):
 		return false
-	var chain_prerequisites: Array = event.chain_prerequisites
-	for prereq_id: String in chain_prerequisites:
-		if prereq_id.begins_with("flag:"):
-			var flag_id: String = prereq_id.substr(5)
-			if not flag_id in session.chain_flags:
-				Global.debug_log("[事件系统] %s 前置标记未满足: %s" % [event.event_id, flag_id])
-				return false
-		elif not prereq_id in session.completed_events:
-			Global.debug_log("[事件系统] %s 前置未满足: %s" % [event.event_id, prereq_id])
-			return false
-	var chain_excludes: Array = event.chain_excludes
-	for exclude_id: String in chain_excludes:
-		if exclude_id in session.completed_events:
-			Global.debug_log("[事件系统] %s 互斥事件已完成: %s" % [event.event_id, exclude_id])
-			return false
 	var required_family: Array[String] = event.get_required_family()
 	if not required_family.is_empty():
 		var session_bg: String = session.family_background.replace("family_", "")
@@ -399,10 +521,6 @@ func _can_trigger(event: EventData, age_sys: Node) -> bool:
 		if not family_match:
 			Global.debug_log("[事件系统] %s 家庭背景不满足: 需要%s, 当前%s" % [event.event_id, str(required_family), session.family_background])
 			return false
-	var trigger_chance: float = event.get_trigger_chance()
-	if trigger_chance < 1.0 and randf() > trigger_chance:
-		Global.debug_log("[事件系统] %s 概率未通过: %.0f%%" % [event.event_id, trigger_chance * 100.0])
-		return false
 	if not event.conditions.is_empty():
 		if not _check_conditions(event.conditions):
 			Global.debug_log("[事件系统] %s 条件不满足" % event.event_id)

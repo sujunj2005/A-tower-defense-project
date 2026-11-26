@@ -3,7 +3,10 @@ class_name GameHUD
 
 signal gold_changed(new_gold: int)
 signal hp_changed(new_hp: int, max_hp: int)
+
 signal tower_experience_changed(tower: Tower, new_exp: int)
+
+const CooldownOverlayScript = preload("res://scripts/ui/components/cooldown_overlay.gd")
 
 @export_group("Game State")
 @export var base_hp: int = 20
@@ -18,12 +21,18 @@ var wave_label: Label
 
 func _ready():
 	setup_ui()
+	_setup_skill_panel()
 	add_to_group("game_hud")
 
 var _hp_icon: Label
 var _gold_icon: Label
 var _wave_icon: Label
 var _attr_button: Button
+
+var _skill_panel: VBoxContainer
+var _skill_buttons: Dictionary = {}
+var _skill_cooldown_overlays: Dictionary = {}
+var _pending_poison_zone_skill: String = ""
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
@@ -166,18 +175,25 @@ func _show_attributes_popup() -> void:
 
 	var attrs: Dictionary = session.attributes
 	var ac: Node = get_node_or_null("/root/AttributeConfig")
-	var attr_text: String = ""
+	var attr_grid: GridContainer = GridContainer.new()
+	attr_grid.columns = 2
+	attr_grid.add_theme_constant_override("h_separation", 20)
+	attr_grid.add_theme_constant_override("v_separation", 4)
+	outer_vbox.add_child(attr_grid)
 	for attr_name: String in attrs:
 		var display: String = attr_name
 		if ac and ac.has_method("get_display_with_icon"):
 			display = ac.get_display_with_icon(attr_name)
-		if attr_text != "":
-			attr_text += "  "
-		attr_text += tr("ATTR_FORMAT") % [display, attrs[attr_name]]
-	var attr_label: Label = Label.new()
-	attr_label.text = attr_text
-	attr_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	outer_vbox.add_child(attr_label)
+		var attr_lbl: Label = Label.new()
+		attr_lbl.text = tr("ATTR_FORMAT") % [display, attrs[attr_name]]
+		attr_lbl.add_theme_font_size_override("font_size", 15)
+		var desc: String = ""
+		if ac and ac.has_method("get_description"):
+			desc = ac.get_description(attr_name)
+		if desc != "":
+			attr_lbl.tooltip_text = desc
+		attr_lbl.mouse_filter = Control.MOUSE_FILTER_PASS
+		attr_grid.add_child(attr_lbl)
 
 	var sep0: HSeparator = HSeparator.new()
 	outer_vbox.add_child(sep0)
@@ -361,3 +377,134 @@ func add_tower_experience(tower: Tower, amount: int) -> void:
 	if tower and is_instance_valid(tower):
 		tower.add_experience(amount)
 		tower_experience_changed.emit(tower, tower.current_experience)
+
+func _setup_skill_panel() -> void:
+	var skill_margin: MarginContainer = MarginContainer.new()
+	skill_margin.anchor_left = 0.0
+	skill_margin.anchor_top = 0.48
+	skill_margin.anchor_right = 0.0
+	skill_margin.anchor_bottom = 0.78
+	skill_margin.offset_left = 15.0
+	skill_margin.offset_right = 85.0
+	add_child(skill_margin)
+
+	_skill_panel = VBoxContainer.new()
+	_skill_panel.add_theme_constant_override("separation", 6)
+	skill_margin.add_child(_skill_panel)
+
+	var title: Label = Label.new()
+	title.text = tr("SKILL_PANEL_TITLE")
+	title.add_theme_font_size_override("font_size", 12)
+	title.add_theme_color_override("font_color", Color(0.8, 0.85, 1.0, 1.0))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_skill_panel.add_child(title)
+
+	var ss: Node = get_node_or_null("/root/SkillSystem")
+	if ss:
+		ss.skill_unlocked.connect(_on_skill_unlocked)
+		ss.skill_cooldown_updated.connect(_on_skill_cooldown_updated)
+		ss.check_and_unlock_skills()
+		_refresh_skill_buttons()
+
+func _refresh_skill_buttons() -> void:
+	for child: Node in _skill_panel.get_children():
+		if child is Button:
+			_skill_panel.remove_child(child)
+			child.queue_free()
+	_skill_buttons.clear()
+	_skill_cooldown_overlays.clear()
+
+	var ss: Node = get_node_or_null("/root/SkillSystem")
+	if not ss:
+		return
+	var unlocked: Dictionary = ss.get_unlocked_skills()
+	var all_configs: Dictionary = ss.get_all_skill_configs()
+	for skill_id: String in all_configs:
+		var sb: SkillBean = all_configs[skill_id]
+		var btn: Button = Button.new()
+		btn.custom_minimum_size = Vector2(60, 60)
+		btn.add_theme_font_size_override("font_size", 14)
+		if unlocked.has(skill_id):
+			btn.text = sb.get_display_name().substr(0, 2)
+			btn.add_theme_color_override("font_color", sb.icon_color)
+			btn.tooltip_text = sb.get_display_name() + "\n" + sb.get_display_desc()
+			btn.pressed.connect(_on_skill_button_pressed.bind(skill_id))
+			var overlay: Node = CooldownOverlayScript.new()
+			btn.add_child(overlay)
+			_skill_cooldown_overlays[skill_id] = overlay
+		else:
+			btn.text = "🔒"
+			btn.disabled = true
+			btn.modulate = Color(0.5, 0.5, 0.5, 0.6)
+			var npc_name: String = _get_npc_display_name(sb.npc_id)
+			btn.tooltip_text = sb.get_display_name() + "\n" + tr("SKILL_LOCKED_HINT") % [npc_name, sb.required_affection]
+		_skill_panel.add_child(btn)
+		_skill_buttons[skill_id] = btn
+
+func _get_npc_display_name(npc_id: String) -> String:
+	var names: Dictionary = {
+		"npc_father": tr("NPC_FATHER"),
+		"npc_mother": tr("NPC_MOTHER"),
+		"npc_friend": tr("NPC_FRIEND"),
+		"npc_mentor": tr("NPC_MENTOR"),
+		"npc_colleague": tr("NPC_COLLEAGUE"),
+		"npc_spouse": tr("NPC_SPOUSE"),
+		"npc_grandpa_p": tr("NPC_GRANDPA_P"),
+		"npc_grandma_p": tr("NPC_GRANDMA_P"),
+		"npc_grandma_m": tr("NPC_GRANDMA_M"),
+		"npc_first_child": tr("NPC_FIRST_CHILD"),
+		"npc_second_child": tr("NPC_SECOND_CHILD"),
+	}
+	return names.get(npc_id, npc_id)
+
+func _on_skill_unlocked(skill_id: String) -> void:
+	_refresh_skill_buttons()
+
+func _on_skill_cooldown_updated(skill_id: String, remaining: float, total: float) -> void:
+	if not _skill_buttons.has(skill_id):
+		return
+	var btn: Button = _skill_buttons[skill_id]
+	var ss: Node = get_node_or_null("/root/SkillSystem")
+	var sb: SkillBean = ss.get_skill_config(skill_id) if ss else null
+	var display_name: String = sb.get_display_name().substr(0, 2) if sb else "??"
+	if remaining <= 0.0:
+		btn.disabled = false
+		btn.text = display_name
+		btn.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		if _skill_cooldown_overlays.has(skill_id):
+			var overlay: Node = _skill_cooldown_overlays[skill_id]
+			if is_instance_valid(overlay) and overlay.has_method("hide_cooldown"):
+				overlay.hide_cooldown()
+	else:
+		btn.disabled = true
+		btn.modulate = Color(0.7, 0.7, 0.7, 0.9)
+		if _skill_cooldown_overlays.has(skill_id):
+			var overlay: Node = _skill_cooldown_overlays[skill_id]
+			if is_instance_valid(overlay) and overlay.has_method("set_cooldown"):
+				overlay.set_cooldown(remaining, total)
+
+func _on_skill_button_pressed(skill_id: String) -> void:
+	var ss: Node = get_node_or_null("/root/SkillSystem")
+	if not ss:
+		return
+	var sb: SkillBean = ss.get_skill_config(skill_id)
+	if not sb:
+		return
+	if sb.skill_type == "poison_zone":
+		_pending_poison_zone_skill = skill_id
+		Global.debug_log("SkillUI: click map to place poison zone")
+		return
+	ss.use_skill(skill_id)
+
+func _input(event: InputEvent) -> void:
+	if _pending_poison_zone_skill == "":
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var ss: Node = get_node_or_null("/root/SkillSystem")
+		if ss:
+			var world_pos: Vector2 = get_viewport().get_canvas_transform().affine_inverse() * event.global_position
+			ss.use_skill(_pending_poison_zone_skill, world_pos)
+		_pending_poison_zone_skill = ""
+		get_viewport().set_input_as_handled()
+	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		_pending_poison_zone_skill = ""

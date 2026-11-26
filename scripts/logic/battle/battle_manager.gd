@@ -19,6 +19,7 @@ signal enemy_died(enemy: Enemy, reward_gold: int)
 signal home_health_changed(current: float, max_value: float)
 
 var battle_state: BattleState = BattleState.WAITING
+var _victory_pending: bool = false
 
 ## 老家生命值
 var home_health: float = 100.0
@@ -49,8 +50,8 @@ func _on_session_reset() -> void:
 
 func _initialize_battle() -> void:
 	if session:
-		home_health = session.home_health
 		max_home_health = session.max_home_health
+		home_health = maxf(max_home_health - session.accumulated_damage, 0.0)
 		gold = session.gold
 		session.battle_start_health = home_health
 	
@@ -95,6 +96,7 @@ func home_take_damage(amount: float) -> void:
 	
 	if session:
 		session.home_health = home_health
+		session.accumulated_damage += actual_damage
 	
 	Global.debug_log("Base attacked! Dmg: %.1f (reduced %.0f%%), HP: %d/%d" % [actual_damage, reduction * 100.0, int(home_health), int(max_home_health)])
 	
@@ -120,9 +122,9 @@ func _check_wave_completion() -> void:
 				_schedule_victory()
 
 func _schedule_victory() -> void:
-	if battle_state != BattleState.IN_PROGRESS:
+	if battle_state != BattleState.IN_PROGRESS or _victory_pending:
 		return
-	battle_state = BattleState.WAITING
+	_victory_pending = true
 	var delay: float = victory_delay_seconds
 	var cm: Node = get_node_or_null("/root/ConfigManager")
 	if cm and cm.has_method("load_json"):
@@ -134,9 +136,10 @@ func _schedule_victory() -> void:
 
 ## 胜利
 func _on_victory() -> void:
-	if battle_state != BattleState.WAITING:
+	if battle_state != BattleState.IN_PROGRESS or not _victory_pending:
 		return
-	
+
+	_victory_pending = false
 	battle_state = BattleState.VICTORY
 	Global.debug_log("战斗胜利！")
 	
@@ -151,6 +154,7 @@ func _on_defeat() -> void:
 	if battle_state != BattleState.IN_PROGRESS:
 		return
 	
+	_victory_pending = false
 	battle_state = BattleState.DEFEAT
 	Global.debug_log("战斗失败！")
 	

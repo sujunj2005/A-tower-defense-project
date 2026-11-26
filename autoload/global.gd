@@ -12,6 +12,8 @@ var debug_map_id: String = ""
 
 var soft_paused: bool = false
 
+var god_mode_visible: bool = false
+
 func _ready() -> void:
 	if OS.is_debug_build():
 		print("[Global] 全局单例初始化完成")

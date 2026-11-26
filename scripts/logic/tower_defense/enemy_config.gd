@@ -43,7 +43,8 @@ static func _static_init():
 static func _load_json_registry() -> void:
 	if not _json_cache.is_empty():
 		return
-	var file: FileAccess = FileAccess.open("res://data/enemies.json", FileAccess.READ)
+	var path: String = ConfigPath.resolve("res://data/enemies.json")
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if not file:
 		return
 	var json: JSON = JSON.new()
@@ -136,8 +137,18 @@ static func get_enemies_for_stage(stage_id: String) -> Array[Dictionary]:
 		return []
 	var stages: Dictionary = stages_data.stages
 	if stages.has(stage_id):
-		return stages[stage_id].get("enemy_pool", [])
+		return normalize_enemy_pool(stages[stage_id].get("enemy_pool", {}))
 	return []
+
+static func normalize_enemy_pool(raw_pool: Variant) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if raw_pool is Dictionary:
+		for enemy_id: String in raw_pool:
+			result.append({"id": enemy_id, "weight": int(raw_pool[enemy_id])})
+	elif raw_pool is Array:
+		for entry: Dictionary in raw_pool:
+			result.append(entry.duplicate())
+	return result
 
 static func register_enemy(reg_id: String, path: String):
 	_registry[reg_id] = path

@@ -1,11 +1,16 @@
+## 敌人视图节点。管理敌人的移动、状态效果（减速/DOT/眩晕等）、伤害计算和死亡处理。
+## 由 MapManager._on_enemy_spawn_requested() 创建，沿 waypoints 移动至基地。
 extends Node2D
 class_name Enemy
 
 const _AbilityComponent = preload("res://scripts/view/enemy/enemy_ability_component.gd")
 
 
+## 敌人死亡时发射
 signal died(enemy: Enemy)
+## 敌人到达基地时发射
 signal reached_base(enemy: Enemy)
+## 鼠标点击敌人
 signal mouse_clicked(enemy: Enemy)
 
 var config: EnemyConfig
@@ -88,6 +93,7 @@ func set_selected(selected: bool) -> void:
 		if _selection_indicator:
 			_selection_indicator.visible = false
 
+## 用 EnemyConfig 初始化敌人：设置属性、创建精灵/血条/状态图标、延迟加载能力组件
 func initialize(enemy_config: EnemyConfig) -> void:
 	config = enemy_config
 	current_health = config.max_health
@@ -215,6 +221,7 @@ func _rebuild_path_from_waypoints() -> void:
 
 
 
+## 每帧：更新状态效果 → 处理移动 → 检查到达基地
 func _process(delta: float) -> void:
 	if Global.soft_paused:
 		return
@@ -420,6 +427,7 @@ func update_debuff_effect(delta: float) -> void:
 func show_crit_number(damage: float) -> void:
 	_show_damage_number(damage, Color(1.0, 0.85, 0.0, 1.0))
 
+## 受到伤害：计算抗性（含护甲破坏/减益/成就护盾/悔恨增伤）、记录伤害来源、触发死亡
 func take_damage(damage_amount: float, damage_type: int, attacker: Node2D = null, is_crit: bool = false) -> void:
 	if not config:
 		return
@@ -564,23 +572,17 @@ func _spawn_gold_particles() -> void:
 		add_child(particles)
 	get_tree().create_timer(1.0).timeout.connect(particles.queue_free)
 
+## 死亡处理：触发分裂/召唤、分配经验、发射 died 信号、释放节点
 func die() -> void:
 	if ability_component:
 		ability_component.trigger_death_split()
-	if config and config.gold_drop > 0:
+	if config:
 		var game_hud: Node = get_node_or_null("/root/MapManager/GameHUD")
 		if not game_hud:
 			game_hud = get_tree().get_first_node_in_group("game_hud")
 
 		if game_hud:
 			var es: Node = get_node_or_null("/root/EffectSystem")
-			if game_hud.has_method("add_gold"):
-				var gold: int = config.gold_drop
-				if es and es.has_method("get_global_gold_bonus"):
-					var bonus: float = es.get_global_gold_bonus()
-					if bonus > 0.0:
-						gold += maxi(1, int(ceilf(config.gold_drop * bonus)))
-				game_hud.add_gold(gold)
 			if es and last_hit_tower and last_hit_tower is Tower and last_hit_tower.config:
 				if last_hit_tower.config.effect_type == GameConfig.EffectType.GOLD_BONUS:
 					es.apply_on_kill_effect(last_hit_tower.config.effect_type, last_hit_tower.config.effect_params, last_hit_tower, self)
@@ -599,6 +601,7 @@ func die() -> void:
 	died.emit(self)
 	queue_free()
 
+## 按伤害占比分配经验：80%按伤害池分配 + 20%击杀奖励 + 10%参与奖励
 func distribute_experience(game_hud: Node) -> void:
 	if not game_hud or not game_hud.has_method("add_tower_experience"):
 		return

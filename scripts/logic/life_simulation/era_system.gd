@@ -72,17 +72,50 @@ func initialize_session(
 	for trait_id: String in selected_traits:
 		session.traits.append(trait_id)
 		_apply_congenital_trait_effect(trait_id)
-	Global.debug_log("[EraSystem] 初始化完成 - 家庭：%s，金币：%d，生命：%.0f/%.0f，塔：%s，金币加成：%.0f%%，塔价格修正：%.0f%%，先天特质：%s" % [
+	_initialize_family_npcs()
+	Global.debug_log("[EraSystem] 初始化完成 - 家庭：%s，金币：%d，生命：%.0f/%.0f，塔：%s，金币加成：%.0f%%，塔价格修正：%.0f%%，先天特质：%s，亲友：%d" % [
 		session.family_background, session.gold,
 		session.home_health, session.max_home_health,
 		str(session.towers),
 		get_family_modifier("gold_bonus") * 100.0,
 		get_family_modifier("tower_cost_modifier") * 100.0,
-		str(selected_traits)
+		str(selected_traits),
+		session.npcs.size()
 	])
 
 func _apply_congenital_trait_effect(trait_id: String) -> void:
 	get_node("/root/TraitSystem").grant_trait(trait_id)
+
+func _initialize_family_npcs() -> void:
+	session.npcs.clear()
+	if not current_family.has("family_npcs"):
+		return
+	var npc_defs: Array = current_family.family_npcs
+	for npc_def: Dictionary in npc_defs:
+		var npc: NPCData = NPCData.new()
+		npc.npc_id = str(npc_def.get("npc_id", ""))
+		npc.name = str(npc_def.get("name", ""))
+		npc.relation_type = str(npc_def.get("relation_type", ""))
+		npc.affection = int(npc_def.get("affection", 50))
+		npc.health = int(npc_def.get("health", 100))
+		var age_offset: int = int(npc_def.get("age_offset", 25))
+		npc.age = session.current_age + age_offset
+		npc.life_stage = _get_life_stage_for_age(npc.age)
+		npc.is_active = true
+		session.npcs.append(npc)
+		Global.debug_log("[EraSystem] 初始化亲友：%s（%s，年龄%d，好感%d）" % [tr(npc.name), npc.relation_type, npc.age, npc.affection])
+
+func _get_life_stage_for_age(age: int) -> String:
+	if age < 7:
+		return "child"
+	elif age < 18:
+		return "youth"
+	elif age < 40:
+		return "adult"
+	elif age < 60:
+		return "middle_age"
+	else:
+		return "elderly"
 
 func get_family_modifier(modifier_type: String) -> float:
 	if current_family.has("modifiers"):

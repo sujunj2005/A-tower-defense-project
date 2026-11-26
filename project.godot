@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="TestMCP"
 run/main_scene="res://scenes/core/main_menu.tscn"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -45,6 +45,8 @@ WaveManager="*res://scripts/logic/tower_defense/wave_manager.gd"
 OptionSystem="*res://scripts/logic/life_simulation/option_system.gd"
 I18nManager="*res://autoload/i18n_manager.gd"
 EffectSystem="*res://scripts/logic/tower_defense/effect_system.gd"
+SkillSystem="*res://scripts/logic/battle/skill_system.gd"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
 
@@ -54,11 +56,11 @@ window/stretch/mode="canvas_items"
 
 [editor]
 
-version="4.6"
+version="4.7"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/godot_ai/plugin.cfg")
 
 [file_customization]
 

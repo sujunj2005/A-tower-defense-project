@@ -13,6 +13,7 @@ var _title_label: Label
 var _desc_label: Label
 var _options_container: VBoxContainer
 var _debug_weight_container: VBoxContainer
+var _debug_event_overview: VBoxContainer
 
 func _get_quiet_year_texts() -> Array[String]:
 	return [
@@ -82,15 +83,38 @@ func _build_ui() -> void:
 		wsep.custom_minimum_size = Vector2(0, 6)
 		vbox.add_child(wsep)
 
+		var debug_columns: HBoxContainer = HBoxContainer.new()
+		debug_columns.add_theme_constant_override("separation", 10)
+		debug_columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		vbox.add_child(debug_columns)
+
+		var left_col: VBoxContainer = VBoxContainer.new()
+		left_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		debug_columns.add_child(left_col)
+
 		var wtitle: Label = Label.new()
-		wtitle.text = "⚖ 权重分解"
+		wtitle.text = tr("DEBUG_WEIGHT_BREAKDOWN")
 		wtitle.add_theme_font_size_override("font_size", 12)
 		wtitle.add_theme_color_override("font_color", Color(0.7, 0.7, 1.0, 1.0))
-		vbox.add_child(wtitle)
+		left_col.add_child(wtitle)
 
 		_debug_weight_container = VBoxContainer.new()
 		_debug_weight_container.add_theme_constant_override("separation", 1)
-		vbox.add_child(_debug_weight_container)
+		left_col.add_child(_debug_weight_container)
+
+		var right_col: VBoxContainer = VBoxContainer.new()
+		right_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		debug_columns.add_child(right_col)
+
+		var otitle: Label = Label.new()
+		otitle.text = tr("EVENT_OVERVIEW_TITLE")
+		otitle.add_theme_font_size_override("font_size", 12)
+		otitle.add_theme_color_override("font_color", Color(0.6, 1.0, 0.7, 1.0))
+		right_col.add_child(otitle)
+
+		_debug_event_overview = VBoxContainer.new()
+		_debug_event_overview.add_theme_constant_override("separation", 1)
+		right_col.add_child(_debug_event_overview)
 
 	var spacer2: Control = Control.new()
 	spacer2.custom_minimum_size = Vector2(0, 10)
@@ -132,27 +156,7 @@ func _get_events_for_stage() -> Array[EventData]:
 	var stage_matched: Array[EventData] = []
 	for event_raw: Dictionary in events_data.events:
 		var event := EventData.from_dict(event_raw)
-		var event_id: String = event.event_id
-		if event_id in session.completed_events:
-			continue
-		var prereq_met: bool = true
-		for prereq_id: String in event.chain_prerequisites:
-			if prereq_id.begins_with("flag:"):
-				var flag_id: String = prereq_id.substr(5)
-				if not flag_id in session.chain_flags:
-					prereq_met = false
-					break
-			elif not prereq_id in session.completed_events:
-				prereq_met = false
-				break
-		if not prereq_met:
-			continue
-		var excluded: bool = false
-		for exclude_id: String in event.chain_excludes:
-			if exclude_id in session.completed_events:
-				excluded = true
-				break
-		if excluded:
+		if not event.matches_event_chain(session):
 			continue
 		if event.is_deadly:
 			continue
@@ -244,6 +248,7 @@ func display_event(event: EventData) -> void:
 		_option_buttons.append(btn)
 
 	_update_weight_debug()
+	_update_event_overview()
 
 func _update_weight_debug() -> void:
 	if not _debug_weight_container:
@@ -261,7 +266,7 @@ func _update_weight_debug() -> void:
 		"① Karma修正", "  (karma=", "② 人格修正", "  (checks=",
 		"③ NPC修正", "  (npcs=", "④ 张力修正", "  (category=",
 		"⑤ 特质加成", "  (boosts=", "⑥ 新鲜度", "  (近期事件)",
-		"⑦ 稀有度", "  (rarity=", "最终权重"
+		"最终权重"
 	]
 	for prefix: String in ordered_keys:
 		for k: String in info:
@@ -291,6 +296,79 @@ func _update_weight_debug() -> void:
 						line.add_theme_color_override("font_color", lc)
 						_debug_weight_container.add_child(line)
 				break
+
+func _update_event_overview() -> void:
+	if not _debug_event_overview:
+		return
+	for child: Node in _debug_event_overview.get_children():
+		child.queue_free()
+	var es: Node = get_node_or_null("/root/EventSystem")
+	if not es or not es.has_method("get_event_overview"):
+		return
+	var overview: Dictionary = es.get_event_overview()
+	var total_line: Label = Label.new()
+	total_line.text = tr("EVENT_OVERVIEW_TOTAL") % overview.total
+	total_line.add_theme_font_size_override("font_size", 11)
+	total_line.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8, 1.0))
+	_debug_event_overview.add_child(total_line)
+	var trig_line: Label = Label.new()
+	trig_line.text = tr("EVENT_OVERVIEW_TRIGGERABLE") % overview.triggerable
+	trig_line.add_theme_font_size_override("font_size", 11)
+	trig_line.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4, 1.0))
+	_debug_event_overview.add_child(trig_line)
+	for ev: Dictionary in overview.triggerable_list:
+		var ev_lbl: Label = Label.new()
+		var rarity_tag: String = _rarity_tag(ev.get("rarity", "common"))
+		var chain_str: String = ev.get("chain", str(ev.weight))
+		ev_lbl.text = "  🟢 %s  %s(%s)" % [ev.name, rarity_tag, chain_str]
+		ev_lbl.add_theme_font_size_override("font_size", 10)
+		ev_lbl.add_theme_color_override("font_color", Color(0.5, 0.9, 0.5, 1.0))
+		ev_lbl.mouse_filter = Control.MOUSE_FILTER_STOP
+		var modifiers: Dictionary = {}
+		var es_node: Node = get_node_or_null("/root/EventSystem")
+		if es_node and es_node.has_method("get_system_modifiers"):
+			modifiers = es_node.get_system_modifiers()
+		var tip: String = "%s\n%s\n阶段: %s  稀有度: %s\n权重: %s → %d\n修饰器:\n  NPC好感: 高×%.1f  低×%.1f\n  新鲜度: ×%.1f\n  职业匹配: ×%.1f  特质匹配: ×%.1f  解锁: ×%.1f\n  Karma: 正×%.1f  负×%.1f" % [
+			ev.name, ev.desc, ev.stage, ev.get("rarity", "?"),
+			chain_str, ev.weight,
+			modifiers.get("npc_affection_high", 1.3), modifiers.get("npc_affection_low", 0.5),
+			modifiers.get("freshness_penalty", 0.3),
+			modifiers.get("profession_match", 1.5), modifiers.get("trait_match", 1.2), modifiers.get("unlock_bonus", 1.5),
+			modifiers.get("karma_positive", 0.3), modifiers.get("karma_negative", 0.5)
+		]
+		ev_lbl.mouse_entered.connect(func() -> void:
+			var tm: Node = get_node_or_null("/root/TooltipManager")
+			if tm and tm.has_method("show_static_tooltip"):
+				tm.show_static_tooltip(ev.name, tip, ev_lbl.global_position + Vector2(10, -100))
+		)
+		ev_lbl.mouse_exited.connect(func() -> void:
+			var tm: Node = get_node_or_null("/root/TooltipManager")
+			if tm and tm.has_method("hide_tooltip"):
+				tm.hide_tooltip()
+		)
+		_debug_event_overview.add_child(ev_lbl)
+	var block_line: Label = Label.new()
+	block_line.text = tr("EVENT_OVERVIEW_BLOCKED") % overview.blocked
+	block_line.add_theme_font_size_override("font_size", 11)
+	block_line.add_theme_color_override("font_color", Color(1.0, 0.5, 0.5, 1.0))
+	_debug_event_overview.add_child(block_line)
+	for ev: Dictionary in overview.blocked_list:
+		var ev_lbl: Label = Label.new()
+		ev_lbl.text = "  🔴 %s — %s" % [ev.name, ev.reason]
+		ev_lbl.add_theme_font_size_override("font_size", 10)
+		ev_lbl.add_theme_color_override("font_color", Color(0.8, 0.4, 0.4, 1.0))
+		ev_lbl.mouse_filter = Control.MOUSE_FILTER_STOP
+		ev_lbl.mouse_entered.connect(func() -> void:
+			var tm: Node = get_node_or_null("/root/TooltipManager")
+			if tm and tm.has_method("show_static_tooltip"):
+				tm.show_static_tooltip(ev.name, "%s\n原因: %s" % [ev.stage, ev.reason], ev_lbl.global_position + Vector2(10, -60))
+		)
+		ev_lbl.mouse_exited.connect(func() -> void:
+			var tm: Node = get_node_or_null("/root/TooltipManager")
+			if tm and tm.has_method("hide_tooltip"):
+				tm.hide_tooltip()
+		)
+		_debug_event_overview.add_child(ev_lbl)
 
 func _format_event_conditions(conditions: Array[Dictionary], os: Node) -> String:
 	var parts: Array[String] = []
@@ -1010,6 +1088,13 @@ func _on_badge_unhovered() -> void:
 	var tm: Node = get_node_or_null("/root/TooltipManager")
 	if tm and tm.has_method("hide_tooltip"):
 		tm.hide_tooltip()
+
+func _rarity_tag(rarity: String) -> String:
+	match rarity:
+		"legendary": return "🌟"
+		"rare": return "✨"
+		"uncommon": return "🔷"
+		_: return ""
 
 func _roll_event_trigger() -> bool:
 	var cm: Node = get_node_or_null("/root/ConfigManager")

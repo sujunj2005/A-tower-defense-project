@@ -1,3 +1,5 @@
+## 敌人能力组件。管理敌人特殊能力的冷却、触发和效果执行。
+## 能力定义来自 enemies.json 的 special_abilities 数组，由 Enemy._setup_abilities() 创建。
 extends Node
 
 var enemy: Node2D
