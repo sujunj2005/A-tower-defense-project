@@ -1,5 +1,14 @@
 extends GutTest
 
+var _original_locale: String
+
+func before_each() -> void:
+	_original_locale = TranslationServer.get_locale()
+	TranslationServer.set_locale("zh")
+
+func after_each() -> void:
+	TranslationServer.set_locale(_original_locale)
+
 func test_get_stage_name_childhood() -> void:
 	var old_stage: int = AgeSystem.current_stage
 	AgeSystem.current_stage = 0
