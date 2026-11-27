@@ -5,8 +5,9 @@
 """
 import json, shutil, csv, os
 from datetime import datetime
+from pathlib import Path
 
-BASE_DIR = r"E:\Test_MCP\first\TestMCP"
+BASE_DIR = Path(__file__).resolve().parent.parent
 EVENTS_PATH = os.path.join(BASE_DIR, "data", "events.json")
 CSV_PATH = os.path.join(BASE_DIR, "locale", "translations.csv")
 BACKUP_PATH = EVENTS_PATH.replace(".json", ".bak." + datetime.now().strftime("%Y%m%d_%H%M%S"))

@@ -3,8 +3,9 @@
 """
 import json, shutil, os
 from datetime import datetime
+from pathlib import Path
 
-BASE = r"E:\Test_MCP\first\TestMCP"
+BASE = Path(__file__).resolve().parent.parent
 EVT = os.path.join(BASE, "data", "events.json")
 NEW = os.path.join(BASE, "data", "new_events_v2.json")
 CSV = os.path.join(BASE, "locale", "translations.csv")
